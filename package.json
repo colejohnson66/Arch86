@@ -1,7 +1,16 @@
 {
   "name": "80x86",
   "version": "0.1.0",
+  "author": "Cole Johnson",
+  "license": "AGPL-3.0-or-later",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:colejohnson66/80x86.git"
+  },
+  "bugs": {
+    "url": "https://github.com/colejohnson66/80x86/issues"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -11,5 +20,10 @@
     "next": "10.0.4",
     "react": "17.0.1",
     "react-dom": "17.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^14.14.16",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0"
   }
 }
