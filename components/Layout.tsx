@@ -48,7 +48,7 @@ const Layout = (props: LayoutProps) => {
                 <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
             </Head>
             <header>
-                <Navbar bg="light" expand="xl">
+                <Navbar bg="light" expand="md">
                     <Link href="/">
                         <a className="navbar-brand">
                             <img src="/img/logo@32.png" width="32" height="32" alt="" />
