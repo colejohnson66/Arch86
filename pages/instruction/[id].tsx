@@ -15,12 +15,13 @@
  *   with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {Breadcrumb, Col, Container, Row, Table} from "react-bootstrap";
-import {GetStaticPaths, GetStaticProps} from "next";
-import {getAllInstructions, getInstructionData} from "../../lib/instruction";
+import { Breadcrumb, Col, Container, Row, Table } from "react-bootstrap";
+import { GetStaticPaths, GetStaticProps } from "next";
+import { getAllInstructions, getInstructionData } from "../../lib/instruction";
 
 import Layout from "../../components/Layout";
 import Link from "next/link";
+import SyntaxHighlighter from "react-syntax-highlighter";
 import TOC from "../../components/TOC";
 import constants from "../../constants";
 
@@ -182,9 +183,9 @@ const Page = (props: InstructionProps) => {
                         {buildParagraph(props.description)}
 
                         <h2 id="headingOperation">Operation</h2>
-                        <pre>
+                        <SyntaxHighlighter language="c-like">
                             {props.operation}
-                        </pre>
+                        </SyntaxHighlighter>
 
                         <h2 id="headingFlags">Flags</h2>
                         {buildParagraph(props.flags)}
