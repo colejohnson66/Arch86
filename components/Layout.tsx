@@ -29,7 +29,7 @@ type LayoutProps = {
     children?: React.ReactNode,
 }
 
-export default (props: LayoutProps) => {
+const Layout = (props: LayoutProps) => {
     return (
         <>
             <Head>
@@ -110,3 +110,5 @@ export default (props: LayoutProps) => {
         </>
     );
 };
+
+export default Layout;

@@ -21,7 +21,7 @@ type TOCRootProps = {
     children: React.ReactNode,
 };
 
-export default (props: TOCRootProps) => {
+const Root = (props: TOCRootProps) => {
     const newChildren = React.Children.map(props.children, (child, idx) => {
         if (React.isValidElement(child))
             return React.cloneElement(child, { tocIndex: idx + 1 });
@@ -36,3 +36,5 @@ export default (props: TOCRootProps) => {
         </div>
     );
 };
+
+export default Root;

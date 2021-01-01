@@ -24,7 +24,7 @@ type TOCEntryProps = {
     children?: React.ReactNode,
 };
 
-export default (props: TOCEntryProps) => {
+const Entry = (props: TOCEntryProps) => {
     const newChildren = React.Children.map(props.children, (child, idx) => {
         if (React.isValidElement(child))
             return React.cloneElement(child, { tocIndex: `${props.tocIndex}.${idx + 1}` });
@@ -40,3 +40,5 @@ export default (props: TOCEntryProps) => {
         </li>
     );
 };
+
+export default Entry;
