@@ -95,7 +95,9 @@ const Layout = (props: LayoutProps) => {
                     </Navbar.Collapse>
                 </Navbar>
             </header>
-            {props.children}
+            <main>
+                {props.children}
+            </main>
             <hr />
             <footer>
                 <Container className="small-print">
