@@ -1,3 +1,7 @@
 {
-    "files.insertFinalNewline": true
+    "files.insertFinalNewline": true,
+    "cSpell.words": [
+        "AGPL",
+        "Affero"
+    ]
 }
