@@ -21,7 +21,8 @@
     "next": "10.0.4",
     "react": "17.0.1",
     "react-bootstrap": "^1.4.0",
-    "react-dom": "17.0.1"
+    "react-dom": "17.0.1",
+    "yaml": "^1.10.0"
   },
   "devDependencies": {
     "@types/bootstrap": "^5.0.1",
