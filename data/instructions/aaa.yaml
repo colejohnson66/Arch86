@@ -26,18 +26,20 @@ description: >-
   This instruction executes as described in compatibility mode and legacy mode.
   It is not valid in 64-bit mode.
 operation: >-
-  if (MODE == 64) {
-    #UD;
-  } else {
-    if (((AL & 0xF) > 9) || (AF == 1)) {
-      AX = AX + 0x106;
-      AF = 1;
-      CF = 1;
+  fn aaa() {
+    if (MODE == 64) {
+      #UD;
     } else {
-      AF = 0;
-      CF = 0;
+      if (((AL & 0xF) > 9) || (AF == 1)) {
+        AX = AX + 0x106;
+        AF = 1;
+        CF = 1;
+      } else {
+        AF = 0;
+        CF = 0;
+      }
+      AL = AL & 0xF;
     }
-    AL = AL & 0xF;
   }
 flags: >-
   The AF and CF flags are set to 1 if the adjustment results in a decimal carry; otherwise they are set to 0.
