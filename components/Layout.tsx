@@ -1,5 +1,5 @@
 /* This file is part of 80x86.
- * Copyright (c) 2020 Cole Johnson
+ * Copyright (c) 2020-2021 Cole Johnson
  * 
  * This program is free software: you can redistribute it and/or modify it under
  *   the terms of the GNU Affero General Public License as published by the Free
@@ -25,11 +25,27 @@ type LayoutProps = {
     title?: string,
     description?: string,
     keywords?: string,
-    navGroup?: string,
+    navGroup?: "home" | "about" | "instruction",
     children?: React.ReactNode,
 }
 
 const Layout = (props: LayoutProps) => {
+    function navItem(group: "home" | "about" | "instruction", href: string, text: string) {
+        return (
+            <Nav.Item className={props.navGroup == group ? "active" : ""}>
+                <Link href={href}>
+                    <a className="nav-link">
+                        {text}
+                        {props.navGroup == group ?
+                            <span className="sr-only">(current)</span> :
+                            null
+                        }
+                    </a>
+                </Link>
+            </Nav.Item>
+        );
+    }
+
     return (
         <>
             <Head>
@@ -58,39 +74,9 @@ const Layout = (props: LayoutProps) => {
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="mr-auto">
-                            <Nav.Item className={props.navGroup == "home" ? "active" : ""}>
-                                <Link href="/">
-                                    <a className="nav-link">
-                                        Home
-                                        {props.navGroup == "home" ?
-                                            <span className="sr-only">(current)</span> :
-                                            false
-                                        }
-                                    </a>
-                                </Link>
-                            </Nav.Item>
-                            <Nav.Item className={props.navGroup == "about" ? "active" : ""}>
-                                <Link href="/about">
-                                    <a className="nav-link">
-                                        About
-                                        {props.navGroup == "about" ?
-                                            <span className="sr-only">(current)</span> :
-                                            false
-                                        }
-                                    </a>
-                                </Link>
-                            </Nav.Item>
-                            <Nav.Item className={props.navGroup == "instruction" ? "active" : ""}>
-                                <Link href="/instruction">
-                                    <a className="nav-link">
-                                        Instructions
-                                        {props.navGroup == "instruction" ?
-                                            <span className="sr-only">(current)</span> :
-                                            false
-                                        }
-                                    </a>
-                                </Link>
-                            </Nav.Item>
+                            {navItem("home", "/", "Home")}
+                            {navItem("about", "/about", "About")}
+                            {navItem("instruction", "/instruction", "Instructions")}
                         </Nav>
                     </Navbar.Collapse>
                 </Navbar>
@@ -105,7 +91,7 @@ const Layout = (props: LayoutProps) => {
                         <Link href="/contact"><a>Contact</a></Link>
                     </p>
                     <p>
-                        Website copyright &copy; Cole Johnson 2020.
+                        Website copyright &copy; Cole Johnson 2020-2021.
                     </p>
                 </Container>
             </footer>
