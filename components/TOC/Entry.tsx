@@ -25,9 +25,13 @@ type TOCEntryProps = {
 };
 
 const Entry = (props: TOCEntryProps) => {
+    // Set `tocIndex`, but only on valid TOC entries (filter out nulls)
+    let count = 0;
     const newChildren = React.Children.map(props.children, (child, idx) => {
-        if (React.isValidElement(child))
-            return React.cloneElement(child, { tocIndex: `${props.tocIndex}.${idx + 1}` });
+        if (React.isValidElement(child)) {
+            count++;
+            return React.cloneElement(child, { tocIndex: `${props.tocIndex}.${count}` });
+        }
         return child;
     });
     return (

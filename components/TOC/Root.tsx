@@ -22,9 +22,13 @@ type TOCRootProps = {
 };
 
 const Root = (props: TOCRootProps) => {
+    // Set `tocIndex`, but only on valid TOC entries (filter out nulls)
+    let count = 0;
     const newChildren = React.Children.map(props.children, (child, idx) => {
-        if (React.isValidElement(child))
-            return React.cloneElement(child, { tocIndex: idx + 1 });
+        if (React.isValidElement(child)) {
+            count++;
+            return React.cloneElement(child, { tocIndex: count.toString() });
+        }
         return child;
     });
     return (
