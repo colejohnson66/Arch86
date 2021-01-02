@@ -41,76 +41,17 @@ type Encoding = {
     op4: string,
 };
 type Exception = {
-    UD?: string,
+    [id: string]: string | string[],
 };
 type Exceptions = {
-    protected: string | Exception,
-    real: string | Exception,
-    virtual: string | Exception,
-    compatibility: string | Exception,
-    long: string | Exception,
+    protected?: string | Exception,
+    real?: string | Exception,
+    virtual?: string | Exception,
+    compatibility?: string | Exception,
+    long?: string | Exception,
+    floating?: string,
+    other?: string,
 };
-
-function capitalizeFirstLetter(str: string): string {
-    return str.charAt(0).toUpperCase() + str.slice(1);
-}
-
-function buildOpcodeTableRows(rows: Opcode[]): JSX.Element[] {
-    return rows.map((row, idx) => {
-        return (
-            <tr key={idx}>
-                <td><code>{row.opcode}</code></td>
-                <td><code>{row.mnemonic}</code></td>
-                <td><code>{row.encoding}</code></td>
-                <td>{capitalizeFirstLetter(row.long)}</td>
-                <td>{capitalizeFirstLetter(row.notLong)}</td>
-                <td>{row.description}</td>
-            </tr>
-        )
-    })
-}
-
-function buildEncodingTableRows(rows: Encoding[]): JSX.Element[] {
-    return rows.map((row, idx) => {
-        return (
-            <tr key={idx}>
-                <td><code>{row.encoding}</code></td>
-                <td>{row.op1}</td>
-                <td>{row.op2}</td>
-                <td>{row.op3}</td>
-                <td>{row.op4}</td>
-            </tr>
-        )
-    });
-}
-
-function buildParagraph(str: string): JSX.Element[] {
-    let ret: JSX.Element[] = [];
-
-    str.split("\n").forEach((line) => {
-        ret.push(<p key={ret.length}>{line}</p>);
-    });
-
-    return ret;
-}
-
-function buildException(ex: string | Exception): JSX.Element {
-    if (typeof ex === "string")
-        return <p>Same exceptions as {ex} mode.</p>
-
-    let rows: JSX.Element[] = [];
-    if (ex.UD)
-        rows.push(<tr><td><code>#UD</code></td><td>{ex.UD}</td></tr>)
-    
-    return (
-        <Table borderless size="sm">
-            <tbody>
-                {rows}
-            </tbody>
-        </Table>
-    );
-}
-
 type InstructionProps = {
     id: string,
     opcode: Opcode[],
@@ -118,7 +59,55 @@ type InstructionProps = {
     description: string,
     operation: string,
     flags: string,
+    intrinsics?: string[],
     exceptions: Exceptions,
+}
+
+function capitalizeFirstLetter(str: string): string {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+function paragraphFromString(str: string): JSX.Element[] {
+    return str.split("\n").map((line, idx) => {
+        return (
+            <p key={idx}>{line}</p>
+        );
+    });
+}
+
+function regularExceptionTable(ex: string | Exception): JSX.Element {
+    if (typeof ex === "string")
+        return <p>{ex}</p>;
+
+    let rows: JSX.Element[] = [];
+    Object.keys(ex).forEach((key, idx) => {
+        let val = ex[key];
+
+        if (typeof val === "string") {
+            rows.push(
+                <tr key={idx}>
+                    <td><code>{key}</code></td>
+                    <td>{val}</td>
+                </tr>
+            );
+            return;
+        }
+
+        rows.push(
+            <tr key={idx}>
+                <td><code>{key}</code></td>
+                <td>{paragraphFromString(val.join("\n"))}</td>
+            </tr>
+        );
+    });
+
+    return (
+        <Table borderless size="sm">
+            <tbody>
+                {rows}
+            </tbody>
+        </Table>
+    );
 }
 
 const Page = (props: InstructionProps) => {
@@ -135,13 +124,24 @@ const Page = (props: InstructionProps) => {
                             <TOC.Entry href="#headingEncoding" text="Encoding" />
                             <TOC.Entry href="#headingDescription" text="Description" />
                             <TOC.Entry href="#headingOperation" text="Operation" />
-                            <TOC.Entry href="#headingFlags" text="Flags" />
+                            <TOC.Entry href="#headingFlags" text="Flags Affected" />
+                            {props.intrinsics ?
+                                <TOC.Entry href="#headingIntrinsics" text="Intrinsics" /> : null}
                             <TOC.Entry href="#headingExceptions" text="Exceptions">
-                                <TOC.Entry href="#headingExceptionsProtected" text="Protected Mode" />
-                                <TOC.Entry href="#headingExceptionsReal" text="Real-Address Mode" />
-                                <TOC.Entry href="#headingExceptionsVirtual" text="Virtual-8086 Mode" />
-                                <TOC.Entry href="#headingExceptionsCompatibility" text="Compatibility Mode" />
-                                <TOC.Entry href="#headingExceptionsLong" text="64-Bit Mode" />
+                                {props.exceptions.protected ?
+                                    <TOC.Entry href="#headingExceptionsProtected" text="Protected Mode" /> : null}
+                                {props.exceptions.real ?
+                                    <TOC.Entry href="#headingExceptionsReal" text="Real-Address Mode" /> : null}
+                                {props.exceptions.virtual ?
+                                    <TOC.Entry href="#headingExceptionsVirtual" text="Virtual-8086 Mode" /> : null}
+                                {props.exceptions.compatibility ?
+                                    <TOC.Entry href="#headingExceptionsCompatibility" text="Compatibility Mode" /> : null}
+                                {props.exceptions.long ?
+                                    <TOC.Entry href="#headingExceptionsLong" text="64-Bit Mode" /> : null}
+                                {props.exceptions.floating ?
+                                    <TOC.Entry href="#headingExceptionsFloating" text="SIMD Floating-Point" /> : null}
+                                {props.exceptions.other ?
+                                    <TOC.Entry href="#headingExceptionsOther" text="Other" /> : null}
                             </TOC.Entry>
                         </TOC.Root>
                     </Col>
@@ -159,7 +159,16 @@ const Page = (props: InstructionProps) => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {buildOpcodeTableRows(props.opcode)}
+                                {props.opcode.map((row, idx) => (
+                                    <tr key={idx}>
+                                        <td><code>{row.opcode}</code></td>
+                                        <td><code>{row.mnemonic}</code></td>
+                                        <td><code>{row.encoding}</code></td>
+                                        <td>{capitalizeFirstLetter(row.long)}</td>
+                                        <td>{capitalizeFirstLetter(row.notLong)}</td>
+                                        <td>{row.description}</td>
+                                    </tr>
+                                ))}
                             </tbody>
                         </Table>
 
@@ -175,32 +184,82 @@ const Page = (props: InstructionProps) => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {buildEncodingTableRows(props.encoding)}
+                                {props.encoding.map((row, idx) => (
+                                    <tr key={idx}>
+                                        <td><code>{row.encoding}</code></td>
+                                        <td>{row.op1}</td>
+                                        <td>{row.op2}</td>
+                                        <td>{row.op3}</td>
+                                        <td>{row.op4}</td>
+                                    </tr>
+                                ))}
                             </tbody>
                         </Table>
 
                         <h2 id="headingDescription">Description</h2>
-                        {buildParagraph(props.description)}
+                        {paragraphFromString(props.description)}
 
                         <h2 id="headingOperation">Operation</h2>
                         <SyntaxHighlighter language="c-like">
                             {props.operation}
                         </SyntaxHighlighter>
 
-                        <h2 id="headingFlags">Flags</h2>
-                        {buildParagraph(props.flags)}
+                        <h2 id="headingFlags">Flags Affected</h2>
+                        {paragraphFromString(props.flags)}
+
+                        {props.intrinsics ?
+                            <>
+                                <h2 id="headingIntrinsics">Intrinsics</h2>
+                                <SyntaxHighlighter language="c-like">
+                                    {props.intrinsics}
+                                </SyntaxHighlighter>
+                            </>
+                            : null}
+
 
                         <h2 id="headingExceptions">Exceptions</h2>
-                        <h3 id="headingExceptionsProtected">Protected Mode</h3>
-                        {buildException(props.exceptions.protected)}
-                        <h3 id="headingExceptionsReal">Real-Address Mode</h3>
-                        {buildException(props.exceptions.real)}
-                        <h3 id="headingExceptionsVirtual">Virtual-8086 Mode</h3>
-                        {buildException(props.exceptions.virtual)}
-                        <h3 id="headingExceptionsCompatibility">Compatibility Mode</h3>
-                        {buildException(props.exceptions.compatibility)}
-                        <h3 id="headingExceptionsLong">64-Bit Mode</h3>
-                        {buildException(props.exceptions.protected)}
+                        {props.exceptions.protected ?
+                            <>
+                                <h3 id="headingExceptionsProtected">Protected Mode</h3>
+                                {regularExceptionTable(props.exceptions.protected)}
+                            </>
+                            : null}
+                        {props.exceptions.real ?
+                            <>
+                                <h3 id="headingExceptionsReal">Real-Address Mode</h3>
+                                {regularExceptionTable(props.exceptions.real)}
+                            </>
+                            : null}
+                        {props.exceptions.virtual ?
+                            <>
+                                <h3 id="headingExceptionsVirtual">Virtual-8086 Mode</h3>
+                                {regularExceptionTable(props.exceptions.virtual)}
+                            </>
+                            : null}
+                        {props.exceptions.compatibility ?
+                            <>
+                                <h3 id="headingExceptionsCompatibility">Compatibility Mode</h3>
+                                {regularExceptionTable(props.exceptions.compatibility)}
+                            </>
+                            : null}
+                        {props.exceptions.long ?
+                            <>
+                                <h3 id="headingExceptionsLong">64-Bit Mode</h3>
+                                {regularExceptionTable(props.exceptions.long)}
+                            </>
+                            : null}
+                        {props.exceptions.floating ?
+                            <>
+                                <h3 id="headingExceptionsFloating">SIMD Floating-Point</h3>
+                                {paragraphFromString(props.exceptions.floating)}
+                            </>
+                            : null}
+                        {props.exceptions.other ?
+                            <>
+                                <h3 id="headingExceptionsOther">Other</h3>
+                                {paragraphFromString(props.exceptions.other)}
+                            </>
+                            : null}
                     </Col>
                 </Row>
             </Container>
