@@ -25,7 +25,7 @@ export function getAllInstructionsArray() {
     return fs.readdirSync(dataDirectory).map((fileName) => (fileName.replace(/\.yaml$/, "")));
 }
 
-export function getAllInstructions() {
+export function getAllInstructionsAsParams() {
     return getAllInstructionsArray().map((fileName) => {
         return {
             params: {

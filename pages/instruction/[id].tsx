@@ -17,7 +17,7 @@
 
 import { Breadcrumb, Col, Container, Row, Table } from "react-bootstrap";
 import { GetStaticPaths, GetStaticProps } from "next";
-import { getAllInstructions, getInstructionData } from "../../lib/instruction";
+import { getAllInstructionsAsParams, getInstructionData } from "../../lib/instruction";
 
 import Layout from "../../components/Layout";
 import Link from "next/link";
@@ -275,7 +275,7 @@ const Page = (props: InstructionProps) => {
 export default Page;
 
 export const getStaticPaths: GetStaticPaths = async () => {
-    const paths = getAllInstructions();
+    const paths = getAllInstructionsAsParams();
     return {
         paths,
         fallback: false,
