@@ -1,5 +1,5 @@
 /* This file is part of 80x86.
- * Copyright (c) 2020 Cole Johnson
+ * Copyright (c) 2020-2021 Cole Johnson
  * 
  * This program is free software: you can redistribute it and/or modify it under
  *   the terms of the GNU Affero General Public License as published by the Free
@@ -21,11 +21,15 @@ import path from "path";
 
 const dataDirectory = path.join(process.cwd(), "data", "instructions");
 
+export function getAllInstructionsArray() {
+    return fs.readdirSync(dataDirectory).map((fileName) => (fileName.replace(/\.yaml$/, "")));
+}
+
 export function getAllInstructions() {
-    return fs.readdirSync(dataDirectory).map((fileName) => {
+    return getAllInstructionsArray().map((fileName) => {
         return {
             params: {
-                id: fileName.replace(/\.yaml$/, "")
+                id: fileName
             }
         };
     });
