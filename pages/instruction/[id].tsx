@@ -58,7 +58,7 @@ type InstructionProps = {
     encoding: Encoding[],
     description: string,
     operation: string,
-    flags: string,
+    flags?: string,
     intrinsics?: string[],
     exceptions: Exceptions,
 }
@@ -124,7 +124,8 @@ const Page = (props: InstructionProps) => {
                             <TOC.Entry href="#headingEncoding" text="Encoding" />
                             <TOC.Entry href="#headingDescription" text="Description" />
                             <TOC.Entry href="#headingOperation" text="Operation" />
-                            <TOC.Entry href="#headingFlags" text="Flags Affected" />
+                            {props.flags ?
+                                <TOC.Entry href="#headingFlags" text="Flags Affected" /> : null}
                             {props.intrinsics ?
                                 <TOC.Entry href="#headingIntrinsics" text="Intrinsics" /> : null}
                             <TOC.Entry href="#headingExceptions" text="Exceptions">
@@ -204,8 +205,12 @@ const Page = (props: InstructionProps) => {
                             {props.operation}
                         </SyntaxHighlighter>
 
-                        <h2 id="headingFlags">Flags Affected</h2>
-                        {paragraphFromString(props.flags)}
+                        {props.flags ?
+                            <>
+                                <h2 id="headingFlags">Flags Affected</h2>
+                                {paragraphFromString(props.flags)}
+                            </>
+                            : null}
 
                         {props.intrinsics ?
                             <>
