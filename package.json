@@ -30,7 +30,6 @@
     "@types/bootstrap": "^5.0.1",
     "@types/node": "^14.14.19",
     "@types/react": "^17.0.0",
-    "@types/react-bootstrap": "^0.32.25",
     "@types/react-dom": "^17.0.0",
     "@types/react-syntax-highlighter": "^13.5.0",
     "@types/yaml": "^1.9.7",
