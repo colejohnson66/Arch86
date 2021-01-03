@@ -22,6 +22,7 @@ import { getAllInstructionsAsParams, getInstructionData } from "../../lib/instru
 import IDictionary from "../../types/IDictionary";
 import Layout from "../../components/Layout";
 import Link from "next/link";
+import React from "react";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import TOC from "../../components/TOC";
 import constants from "../../constants";
@@ -66,47 +67,40 @@ function capitalizeFirstLetter(str: string): string {
     return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
-function paragraphFromString(str: string): JSX.Element[] {
-    return str.split("\n").map((line, idx) => {
-        return (
-            <p key={idx}>{line}</p>
-        );
-    });
+function brTagsFromArray(str: string[]): JSX.Element[] {
+    return str.map((line, idx) => (
+        <React.Fragment key={idx}>
+            {line}
+            {idx !== str.length - 1 ? <br /> : null}
+        </React.Fragment>
+    ));
 }
 
-function regularExceptionTable(ex: string | ExceptionList): JSX.Element {
+function paragraphsFromArray(str: string[]): JSX.Element[] {
+    return str.map((par, idx) => (<p key={idx}>{par}</p>));
+}
+
+function paragraphsFromString(str: string): JSX.Element[] {
+    return paragraphsFromArray(str.split("\n"));
+}
+
+function regularExceptionList(ex: string | ExceptionList): JSX.Element {
     if (typeof ex === "string")
         return <p>{ex}</p>;
 
-    let rows: JSX.Element[] = [];
-    Object.keys(ex).forEach((key, idx) => {
+    let rows = Object.keys(ex).map((key, idx) => {
         let val = ex[key];
 
-        if (typeof val === "string") {
-            rows.push(
-                <tr key={idx}>
-                    <td><code>{key}</code></td>
-                    <td>{val}</td>
-                </tr>
-            );
-            return;
-        }
-
-        rows.push(
-            <tr key={idx}>
-                <td><code>{key}</code></td>
-                <td>{paragraphFromString(val.join("\n"))}</td>
-            </tr>
+        return (
+            <React.Fragment key={idx}>
+                <Col sm={2} as="dt"><code>{key}</code></Col>
+                <Col sm={10} as="dd">{
+                    Array.isArray(val) ? brTagsFromArray(val) : <>{val}</>
+                }</Col>
+            </React.Fragment>
         );
     });
-
-    return (
-        <Table borderless size="sm">
-            <tbody>
-                {rows}
-            </tbody>
-        </Table>
-    );
+    return <Row as="dl">{rows}</Row>;
 }
 
 const Page = (props: PageProps) => {
@@ -197,7 +191,7 @@ const Page = (props: PageProps) => {
                         </Table>
 
                         <h2 id="headingDescription">Description</h2>
-                        {paragraphFromString(props.description)}
+                        {paragraphsFromString(props.description)}
 
                         <h2 id="headingOperation">Operation</h2>
                         <SyntaxHighlighter language="rust">
@@ -207,7 +201,7 @@ const Page = (props: PageProps) => {
                         {props.flags ?
                             <>
                                 <h2 id="headingFlags">Flags Affected</h2>
-                                {paragraphFromString(props.flags)}
+                                {paragraphsFromString(props.flags)}
                             </>
                             : null}
 
@@ -225,43 +219,43 @@ const Page = (props: PageProps) => {
                         {props.exceptions.protected ?
                             <>
                                 <h3 id="headingExceptionsProtected">Protected Mode</h3>
-                                {regularExceptionTable(props.exceptions.protected)}
+                                {regularExceptionList(props.exceptions.protected)}
                             </>
                             : null}
                         {props.exceptions.real ?
                             <>
                                 <h3 id="headingExceptionsReal">Real-Address Mode</h3>
-                                {regularExceptionTable(props.exceptions.real)}
+                                {regularExceptionList(props.exceptions.real)}
                             </>
                             : null}
                         {props.exceptions.virtual ?
                             <>
                                 <h3 id="headingExceptionsVirtual">Virtual-8086 Mode</h3>
-                                {regularExceptionTable(props.exceptions.virtual)}
+                                {regularExceptionList(props.exceptions.virtual)}
                             </>
                             : null}
                         {props.exceptions.compatibility ?
                             <>
                                 <h3 id="headingExceptionsCompatibility">Compatibility Mode</h3>
-                                {regularExceptionTable(props.exceptions.compatibility)}
+                                {regularExceptionList(props.exceptions.compatibility)}
                             </>
                             : null}
                         {props.exceptions.long ?
                             <>
                                 <h3 id="headingExceptionsLong">64-Bit Mode</h3>
-                                {regularExceptionTable(props.exceptions.long)}
+                                {regularExceptionList(props.exceptions.long)}
                             </>
                             : null}
                         {props.exceptions.floating ?
                             <>
                                 <h3 id="headingExceptionsFloating">SIMD Floating-Point</h3>
-                                {paragraphFromString(props.exceptions.floating)}
+                                {paragraphsFromString(props.exceptions.floating)}
                             </>
                             : null}
                         {props.exceptions.other ?
                             <>
                                 <h3 id="headingExceptionsOther">Other</h3>
-                                {paragraphFromString(props.exceptions.other)}
+                                {paragraphsFromString(props.exceptions.other)}
                             </>
                             : null}
                     </Col>
