@@ -58,8 +58,8 @@ const Page = (props: PageProps) => {
                         </Alert>
                         <ul>
                             {props.instructions.map((instr) => (
-                                <li>
-                                    <Link key={instr} href={`/instruction/${instr}`}><a>{instr.toUpperCase()}</a></Link>
+                                <li key={instr}>
+                                    <Link href={`/instruction/${instr}`}><a>{instr.toUpperCase()}</a></Link>
                                 </li>
                             ))}
                         </ul>
