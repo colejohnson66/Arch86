@@ -67,7 +67,7 @@ const Layout = (props: LayoutProps) => {
                 <Navbar bg="light" expand="md">
                     <Link href="/">
                         <a className="navbar-brand">
-                            <img src="/img/logo@32.png" width="32" height="32" alt="" />
+                            <img src="/img/icon@32.png" width="32" height="32" alt="" />
                             80x86
                         </a>
                     </Link>
