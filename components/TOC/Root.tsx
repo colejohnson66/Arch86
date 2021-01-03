@@ -1,5 +1,5 @@
 /* This file is part of 80x86.
- * Copyright (c) 2020 Cole Johnson
+ * Copyright (c) 2020-2021 Cole Johnson
  * 
  * This program is free software: you can redistribute it and/or modify it under
  *   the terms of the GNU Affero General Public License as published by the Free
@@ -24,7 +24,7 @@ type TOCRootProps = {
 const Root = (props: TOCRootProps) => {
     // Set `tocIndex`, but only on valid TOC entries (filter out nulls)
     let count = 0;
-    const newChildren = React.Children.map(props.children, (child, idx) => {
+    const newChildren = React.Children.map(props.children, (child) => {
         if (React.isValidElement(child)) {
             count++;
             return React.cloneElement(child, { tocIndex: count.toString() });
