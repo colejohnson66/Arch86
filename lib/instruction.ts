@@ -30,7 +30,7 @@ export function getAllInstructionsAsParams() {
     return getAllInstructionsArray().map((fileName) => {
         return {
             params: {
-                id: fileName
+                slug: fileName
             }
         };
     });

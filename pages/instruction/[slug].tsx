@@ -276,7 +276,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 }
 
 export const getStaticProps: GetStaticProps = async (context) => {
-    const data = await getInstructionData(context.params["id"] as string);
+    const data = await getInstructionData(context.params["slug"] as string);
     return {
         props: data
     };
