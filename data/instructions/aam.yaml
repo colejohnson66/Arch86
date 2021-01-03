@@ -1,0 +1,55 @@
+%YAML 1.2
+---
+opcode:
+  - opcode: "D4 0A"
+    mnemonic: "AAM"
+    encoding: "ZO"
+    long: "invalid"
+    notLong: "valid"
+    description: "ASCII adjust AX after multiply."
+  - opcode: "D4 ib"
+    mnemonic: "AAM imm8"
+    encoding: "ZO"
+    long: "invalid"
+    notLong: "valid"
+    description: "Adjust AX after multiply to number base imm8."
+encoding:
+  - encoding: "ZO"
+    op1: "N/A"
+    op2: "N/A"
+    op3: "N/A"
+    op4: "N/A"
+description: >-
+  Adjusts the result of the multiplication of two unpacked BCD values to create a pair of unpacked (base 10) BCD values.
+  The AX register is the implied source and destination operand for the instruction.
+  The AAM instruction is only useful when it follows a MUL instruction that multiplies (binary multiplication) two unpacked BCD values and stores a word in the AX register.
+  The AAM instruction then adjusts the contents of the AX register to contain the correct 2-digit unpacked (base 10) BCD result.
+
+  The generalized version of this instruction allows adjustment of the contents of the AX to create two unpacked digits of any number base (see the "Operation" section below).
+  Here, the imm8 byte is set to the selected number base (for example, 08h for octal, 0Ah for decimal, or 0Ch for base 12 numbers).
+  The AAM mnemonic is interpreted by all assemblers to mean adjust to ASCII (base 10) values.
+  To adjust to values in another number base, the instruction must be hand coded in machine code (D4 imm8).
+
+  This instruction executes as described in compatibility mode and legacy mode.
+  It is not valid in 64-bit mode.
+operation: >-
+  fn aad(imm8: u8) {
+    if (MODE == 64) {
+      #UD;
+    } else {
+      AH = AL / imm8;
+      AL = AL % imm8;
+    }
+  }
+flags: >-
+  The SF, ZF, and PF flags are set according to the resulting binary value in the AL register.
+  The OF, AF, and CF flags are undefined.
+exceptions:
+  protected:
+    "#DE": "If an immediate value of 0 is used."
+    "#UD": "If the LOCK prefix is used."
+  real: "Same exceptions as protected mode."
+  virtual: "Same exceptions as protected mode."
+  compatibility: "Same exceptions as protected mode."
+  long:
+    "#UD": "If in 64-bit mode."
