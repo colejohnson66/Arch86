@@ -21,16 +21,17 @@ import Head from "next/head";
 import Link from "next/link";
 import React from "react";
 
+type NavGroup = "home" | "about" | "instruction";
 type LayoutProps = {
     title?: string,
     description?: string,
     keywords?: string,
-    navGroup?: "home" | "about" | "instruction",
+    navGroup?: NavGroup,
     children?: React.ReactNode,
 }
 
 const Layout = (props: LayoutProps) => {
-    function navItem(group: "home" | "about" | "instruction", href: string, text: string) {
+    function navItem(group: NavGroup, href: string, text: string) {
         return (
             <Nav.Item className={props.navGroup == group ? "active" : ""}>
                 <Link href={href}>
