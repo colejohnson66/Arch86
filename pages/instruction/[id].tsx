@@ -19,6 +19,7 @@ import { Breadcrumb, Col, Container, Row, Table } from "react-bootstrap";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { getAllInstructionsAsParams, getInstructionData } from "../../lib/instruction";
 
+import IDictionary from "../../types/IDictionary";
 import Layout from "../../components/Layout";
 import Link from "next/link";
 import SyntaxHighlighter from "react-syntax-highlighter";
@@ -40,15 +41,13 @@ type Encoding = {
     op3: string,
     op4: string,
 };
-type Exception = {
-    [id: string]: string | string[],
-};
+type ExceptionList = IDictionary<string | string[]>;
 type Exceptions = {
-    protected?: string | Exception,
-    real?: string | Exception,
-    virtual?: string | Exception,
-    compatibility?: string | Exception,
-    long?: string | Exception,
+    protected?: string | ExceptionList,
+    real?: string | ExceptionList,
+    virtual?: string | ExceptionList,
+    compatibility?: string | ExceptionList,
+    long?: string | ExceptionList,
     floating?: string,
     other?: string,
 };
@@ -75,7 +74,7 @@ function paragraphFromString(str: string): JSX.Element[] {
     });
 }
 
-function regularExceptionTable(ex: string | Exception): JSX.Element {
+function regularExceptionTable(ex: string | ExceptionList): JSX.Element {
     if (typeof ex === "string")
         return <p>{ex}</p>;
 
