@@ -21,7 +21,7 @@ import Head from "next/head";
 import Link from "next/link";
 import React from "react";
 
-type NavGroup = "home" | "about" | "instruction";
+type NavGroup = "home" | "about" | "architecture" | "instruction";
 type LayoutProps = {
     title?: string,
     description?: string,
@@ -77,6 +77,7 @@ const Layout = (props: LayoutProps) => {
                         <Nav className="mr-auto">
                             {navItem("home", "/", "Home")}
                             {navItem("about", "/about", "About")}
+                            {navItem("architecture", "/architecture", "Microarchitecture")}
                             {navItem("instruction", "/instruction", "Instructions")}
                         </Nav>
                     </Navbar.Collapse>
