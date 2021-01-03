@@ -15,7 +15,7 @@
  *   with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 type IDictionary<T> = {
-    [id: string]: T
+    [key: string]: T
 }
 
 export default IDictionary;
