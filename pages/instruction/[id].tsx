@@ -201,7 +201,7 @@ const Page = (props: PageProps) => {
                         {paragraphFromString(props.description)}
 
                         <h2 id="headingOperation">Operation</h2>
-                        <SyntaxHighlighter language="c-like">
+                        <SyntaxHighlighter language="rust">
                             {props.operation}
                         </SyntaxHighlighter>
 

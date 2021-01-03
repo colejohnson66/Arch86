@@ -63,9 +63,6 @@ const Page = (props: PageProps) => {
                                 </li>
                             ))}
                         </ul>
-                        <pre>
-                            {JSON.stringify(props, null, 2)}
-                        </pre>
                     </Col>
                 </Row>
             </Container>
