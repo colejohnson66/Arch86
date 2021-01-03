@@ -1,5 +1,5 @@
 /* This file is part of 80x86.
- * Copyright (c) 2020 Cole Johnson
+ * Copyright (c) 2020-2021 Cole Johnson
  * 
  * This program is free software: you can redistribute it and/or modify it under
  *   the terms of the GNU Affero General Public License as published by the Free
@@ -31,6 +31,7 @@ const Index = () => {
                         <h1>80x86 Website</h1>
                         <p>
                             Welcome to the 80x86 website.
+                            This website is designed to be a digital reference version of the x86 (and x86-64) processor architecture.
                         </p>
                     </Col>
                 </Row>
