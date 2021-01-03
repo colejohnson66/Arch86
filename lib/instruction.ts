@@ -22,7 +22,8 @@ import path from "path";
 const dataDirectory = path.join(process.cwd(), "data", "instructions");
 
 export function getAllInstructionsArray() {
-    return fs.readdirSync(dataDirectory).map((fileName) => (fileName.replace(/\.yaml$/, "")));
+    const list = fs.readdirSync(dataDirectory).map((fileName) => (fileName.replace(/\.yaml$/, "")));
+    return list.filter((instr) => (instr !== "template"));
 }
 
 export function getAllInstructionsAsParams() {

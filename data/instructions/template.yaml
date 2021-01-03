@@ -1,0 +1,26 @@
+%YAML 1.2
+---
+opcode:
+  - opcode: ""
+    mnemonic: ""
+    encoding: ""
+    long: ""
+    notLong: ""
+    description: ""
+encoding:
+  - encoding: ""
+    op1: ""
+    op2: ""
+    op3: ""
+    op4: ""
+description: >-
+operation: >-
+flags: >-
+exceptions:
+  protected: ""
+  real: ""
+  virtual: ""
+  compatibility: ""
+  long: ""
+  floating: ""
+  other: ""
