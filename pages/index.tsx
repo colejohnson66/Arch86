@@ -19,7 +19,7 @@ import { Col, Container, Row } from "react-bootstrap";
 import Layout from "../components/Layout";
 import constants from "../constants";
 
-const Index = () => {
+const Page = () => {
     return (
         <Layout navGroup="home">
             <Container fluid>
@@ -39,4 +39,5 @@ const Index = () => {
         </Layout>
     );
 };
-export default Index;
+
+export default Page;

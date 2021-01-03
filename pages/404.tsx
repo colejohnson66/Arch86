@@ -1,5 +1,5 @@
 /* This file is part of 80x86.
- * Copyright (c) 2020 Cole Johnson
+ * Copyright (c) 2020-2021 Cole Johnson
  * 
  * This program is free software: you can redistribute it and/or modify it under
  *   the terms of the GNU Affero General Public License as published by the Free
@@ -21,7 +21,7 @@ import Layout from "../components/Layout";
 import Link from "next/link";
 import constants from "../constants";
 
-const FourOhFour = () => {
+const Page = () => {
     return (
         <Layout title="404">
             <Container fluid>
@@ -44,4 +44,5 @@ const FourOhFour = () => {
         </Layout>
     );
 };
-export default FourOhFour;
+
+export default Page;

@@ -1,5 +1,5 @@
 /* This file is part of 80x86.
- * Copyright (c) 2020 Cole Johnson
+ * Copyright (c) 2020-2021 Cole Johnson
  * 
  * This program is free software: you can redistribute it and/or modify it under
  *   the terms of the GNU Affero General Public License as published by the Free
@@ -23,4 +23,5 @@ import { AppProps } from "next/app";
 const App = ({ Component, pageProps }: AppProps) => {
     return <Component {...pageProps} />;
 };
+
 export default App;

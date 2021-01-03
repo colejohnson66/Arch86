@@ -1,5 +1,5 @@
 /* This file is part of 80x86.
- * Copyright (c) 2020 Cole Johnson
+ * Copyright (c) 2020-2021 Cole Johnson
  * 
  * This program is free software: you can redistribute it and/or modify it under
  *   the terms of the GNU Affero General Public License as published by the Free
@@ -20,7 +20,7 @@ import { Breadcrumb, Col, Container, Row } from "react-bootstrap";
 import Layout from "../components/Layout";
 import constants from "../constants";
 
-export default () => {
+const Page = () => {
     return (
         <Layout title="Contact">
             <Container fluid>
@@ -45,3 +45,5 @@ export default () => {
         </Layout>
     );
 };
+
+export default Page;

@@ -1,5 +1,5 @@
 /* This file is part of 80x86.
- * Copyright (c) 2020 Cole Johnson
+ * Copyright (c) 2020-2021 Cole Johnson
  * 
  * This program is free software: you can redistribute it and/or modify it under
  *   the terms of the GNU Affero General Public License as published by the Free
@@ -52,7 +52,7 @@ type Exceptions = {
     floating?: string,
     other?: string,
 };
-type InstructionProps = {
+type PageProps = {
     id: string,
     opcode: Opcode[],
     encoding: Encoding[],
@@ -110,7 +110,7 @@ function regularExceptionTable(ex: string | Exception): JSX.Element {
     );
 }
 
-const Page = (props: InstructionProps) => {
+const Page = (props: PageProps) => {
     return (
         <Layout navGroup="instruction" title="Instructions">
             <Container fluid>
