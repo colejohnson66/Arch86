@@ -108,7 +108,7 @@ const Page = (props: PageProps) => {
         <Layout navGroup="instruction" title="Instructions">
             <Container fluid>
                 <Breadcrumb>
-                    <Breadcrumb.Item><Link href="/instruction"><a>Instruction</a></Link></Breadcrumb.Item>
+                    <Breadcrumb.Item><Link href="/instruction"><a>Instructions</a></Link></Breadcrumb.Item>
                     <Breadcrumb.Item active>{props.id.toUpperCase()}</Breadcrumb.Item>
                 </Breadcrumb>
                 <Row>
