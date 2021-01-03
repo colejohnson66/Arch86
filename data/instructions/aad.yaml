@@ -42,8 +42,8 @@ operation: >-
     }
   }
 flags: >-
-  The SF, ZF, and PF flags are set according to the resulting binary value in the AL register;
-  the OF, AF, and CF flags are undefined.
+  The SF, ZF, and PF flags are set according to the resulting binary value in the AL register.
+  The OF, AF, and CF flags are undefined.
 exceptions:
   protected:
     "#UD": "If the LOCK prefix is used."
