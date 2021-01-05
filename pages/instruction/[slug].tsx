@@ -26,6 +26,7 @@ import React from "react";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import TOC from "../../components/TOC";
 import constants from "../../constants";
+import { useRouter } from "next/router";
 
 type Opcode = {
     opcode: string,
@@ -104,6 +105,29 @@ function regularExceptionList(ex: string | ExceptionList): JSX.Element {
 }
 
 const Page = (props: PageProps) => {
+    const router = useRouter();
+
+    if (router.isFallback) {
+        return (
+            <Layout navGroup="instruction" title="Instructions">
+                <Container fluid>
+                    <Breadcrumb>
+                        <Breadcrumb.Item><Link href="/instruction"><a>Instructions</a></Link></Breadcrumb.Item>
+                        <Breadcrumb.Item active>Loading...</Breadcrumb.Item>
+                    </Breadcrumb>
+                    <Row>
+                        <Col {...constants.columns.toc}>
+                            {/* No TOC for fallbacks */}
+                        </Col>
+                        <Col {...constants.columns.content}>
+                            <h1>Loading...</h1>
+                        </Col>
+                    </Row>
+                </Container>
+            </Layout>
+        );
+    }
+
     return (
         <Layout navGroup="instruction" title="Instructions">
             <Container fluid>
@@ -271,7 +295,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     const paths = getAllInstructionsAsParams();
     return {
         paths,
-        fallback: false,
+        fallback: true,
     };
 }
 
