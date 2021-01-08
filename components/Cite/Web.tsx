@@ -55,7 +55,7 @@ const CiteWeb = (props: CiteWebProps) => {
         <span className="citation-web">
             {author}
             {date}
-            {(props.author || props.date) ? ". " : null}
+            {(props.author || props.date) && ". "}
             {titleAndLink}{". "}
             {website}
             {accessDate}

@@ -37,10 +37,7 @@ const Entry = (props: TOCEntryProps) => {
     return (
         <li>
             {props.tocIndex}. <a href={props.href}>{props.text}</a>
-            {(newChildren && newChildren.length != 0) ?
-                <ul>{newChildren}</ul> :
-                null
-            }
+            {(newChildren && newChildren.length !== 0) && <ul>{newChildren}</ul>}
         </li>
     );
 };

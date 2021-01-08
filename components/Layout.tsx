@@ -37,10 +37,7 @@ const Layout = (props: LayoutProps) => {
                 <Link href={href}>
                     <a className="nav-link">
                         {text}
-                        {props.navGroup == group ?
-                            <span className="sr-only">(current)</span> :
-                            null
-                        }
+                        {props.navGroup == group && <span className="sr-only">(current)</span>}
                     </a>
                 </Link>
             </Nav.Item>
@@ -54,14 +51,8 @@ const Layout = (props: LayoutProps) => {
                     <title>80x86 - {props.title}</title> :
                     <title>80x86</title>
                 }
-                {props.description ?
-                    <meta name="description" content={props.description} /> :
-                    null
-                }
-                {props.keywords ?
-                    <meta name="keywords" content={props.keywords} /> :
-                    null
-                }
+                {props.description && <meta name="description" content={props.description} />}
+                {props.keywords && <meta name="keywords" content={props.keywords} />}
                 <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
             </Head>
             <header>

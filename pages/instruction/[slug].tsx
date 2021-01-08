@@ -72,7 +72,7 @@ function brTagsFromArray(str: string[]): JSX.Element[] {
     return str.map((line, idx) => (
         <React.Fragment key={idx}>
             {line}
-            {idx !== str.length - 1 ? <br /> : null}
+            {idx !== str.length - 1 && <br />}
         </React.Fragment>
     ));
 }
@@ -96,7 +96,7 @@ function regularExceptionList(ex: string | ExceptionList): JSX.Element {
             <React.Fragment key={idx}>
                 <Col sm={2} as="dt"><code>{key}</code></Col>
                 <Col sm={10} as="dd">{
-                    Array.isArray(val) ? brTagsFromArray(val) : <>{val}</>
+                    Array.isArray(val) ? brTagsFromArray(val) : val
                 }</Col>
             </React.Fragment>
         );
@@ -141,25 +141,25 @@ const Page = (props: PageProps) => {
                             <TOC.Entry href="#headingEncoding" text="Encoding" />
                             <TOC.Entry href="#headingDescription" text="Description" />
                             <TOC.Entry href="#headingOperation" text="Operation" />
-                            {props.flags ?
-                                <TOC.Entry href="#headingFlags" text="Flags Affected" /> : null}
-                            {props.intrinsics ?
-                                <TOC.Entry href="#headingIntrinsics" text="Intrinsics" /> : null}
+                            {props.flags &&
+                                <TOC.Entry href="#headingFlags" text="Flags Affected" />}
+                            {props.intrinsics &&
+                                <TOC.Entry href="#headingIntrinsics" text="Intrinsics" />}
                             <TOC.Entry href="#headingExceptions" text="Exceptions">
-                                {props.exceptions.protected ?
-                                    <TOC.Entry href="#headingExceptionsProtected" text="Protected Mode" /> : null}
-                                {props.exceptions.real ?
-                                    <TOC.Entry href="#headingExceptionsReal" text="Real-Address Mode" /> : null}
-                                {props.exceptions.virtual ?
-                                    <TOC.Entry href="#headingExceptionsVirtual" text="Virtual-8086 Mode" /> : null}
-                                {props.exceptions.compatibility ?
-                                    <TOC.Entry href="#headingExceptionsCompatibility" text="Compatibility Mode" /> : null}
-                                {props.exceptions.long ?
-                                    <TOC.Entry href="#headingExceptionsLong" text="64-Bit Mode" /> : null}
-                                {props.exceptions.floating ?
-                                    <TOC.Entry href="#headingExceptionsFloating" text="SIMD Floating-Point" /> : null}
-                                {props.exceptions.other ?
-                                    <TOC.Entry href="#headingExceptionsOther" text="Other" /> : null}
+                                {props.exceptions.protected &&
+                                    <TOC.Entry href="#headingExceptionsProtected" text="Protected Mode" />}
+                                {props.exceptions.real &&
+                                    <TOC.Entry href="#headingExceptionsReal" text="Real-Address Mode" />}
+                                {props.exceptions.virtual &&
+                                    <TOC.Entry href="#headingExceptionsVirtual" text="Virtual-8086 Mode" />}
+                                {props.exceptions.compatibility &&
+                                    <TOC.Entry href="#headingExceptionsCompatibility" text="Compatibility Mode" />}
+                                {props.exceptions.long &&
+                                    <TOC.Entry href="#headingExceptionsLong" text="64-Bit Mode" />}
+                                {props.exceptions.floating &&
+                                    <TOC.Entry href="#headingExceptionsFloating" text="SIMD Floating-Point" />}
+                                {props.exceptions.other &&
+                                    <TOC.Entry href="#headingExceptionsOther" text="Other" />}
                             </TOC.Entry>
                         </TOC.Root>
                     </Col>
@@ -222,66 +222,57 @@ const Page = (props: PageProps) => {
                             {props.operation}
                         </SyntaxHighlighter>
 
-                        {props.flags ?
+                        {props.flags &&
                             <>
                                 <h2 id="headingFlags">Flags Affected</h2>
                                 {paragraphsFromString(props.flags)}
-                            </>
-                            : null}
+                            </>}
 
-                        {props.intrinsics ?
+                        {props.intrinsics &&
                             <>
                                 <h2 id="headingIntrinsics">Intrinsics</h2>
                                 <SyntaxHighlighter language="c-like">
                                     {props.intrinsics}
                                 </SyntaxHighlighter>
-                            </>
-                            : null}
+                            </>}
 
 
                         <h2 id="headingExceptions">Exceptions</h2>
-                        {props.exceptions.protected ?
+                        {props.exceptions.protected &&
                             <>
                                 <h3 id="headingExceptionsProtected">Protected Mode</h3>
                                 {regularExceptionList(props.exceptions.protected)}
-                            </>
-                            : null}
-                        {props.exceptions.real ?
+                            </>}
+                        {props.exceptions.real &&
                             <>
                                 <h3 id="headingExceptionsReal">Real-Address Mode</h3>
                                 {regularExceptionList(props.exceptions.real)}
-                            </>
-                            : null}
-                        {props.exceptions.virtual ?
+                            </>}
+                        {props.exceptions.virtual &&
                             <>
                                 <h3 id="headingExceptionsVirtual">Virtual-8086 Mode</h3>
                                 {regularExceptionList(props.exceptions.virtual)}
-                            </>
-                            : null}
-                        {props.exceptions.compatibility ?
+                            </>}
+                        {props.exceptions.compatibility &&
                             <>
                                 <h3 id="headingExceptionsCompatibility">Compatibility Mode</h3>
                                 {regularExceptionList(props.exceptions.compatibility)}
-                            </>
-                            : null}
-                        {props.exceptions.long ?
+                            </>}
+                        {props.exceptions.long &&
                             <>
                                 <h3 id="headingExceptionsLong">64-Bit Mode</h3>
                                 {regularExceptionList(props.exceptions.long)}
-                            </>
-                            : null}
-                        {props.exceptions.floating ?
+                            </>}
+                        {props.exceptions.floating &&
                             <>
                                 <h3 id="headingExceptionsFloating">SIMD Floating-Point</h3>
                                 {paragraphsFromString(props.exceptions.floating)}
-                            </>
-                            : null}
-                        {props.exceptions.other ?
+                            </>}
+                        {props.exceptions.other &&
                             <>
                                 <h3 id="headingExceptionsOther">Other</h3>
                                 {paragraphsFromString(props.exceptions.other)}
-                            </>
-                            : null}
+                            </>}
                     </Col>
                 </Row>
             </Container>
