@@ -30,7 +30,7 @@ operation: >-
     if (MODE == 64) {
       #UD;
     } else {
-      if (((AL & 0xF) > 9) || (AF == 1)) {
+      if (((AL & 0xF) > 9) || AF) {
         AX = AX + 0x106;
         AF = 1;
         CF = 1;
