@@ -1,17 +1,20 @@
 %YAML 1.2
 ---
+validity: "1632,64"
 opcode:
   - opcode: "D4 0A"
     mnemonic: "AAM"
     encoding: "ZO"
-    long: "invalid"
-    notLong: "valid"
+    validity:
+      1632: "valid"
+      64: "invalid"
     description: "ASCII adjust AX after multiply."
   - opcode: "D4 ib"
     mnemonic: "AAM imm8"
     encoding: "ZO"
-    long: "invalid"
-    notLong: "valid"
+    validity:
+      1632: "valid"
+      64: "invalid"
     description: "Adjust AX after multiply to number base imm8."
 encoding:
   - encoding: "ZO"

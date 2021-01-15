@@ -1,11 +1,13 @@
 %YAML 1.2
 ---
+validity: ""
 opcode:
   - opcode: ""
     mnemonic: ""
     encoding: ""
-    long: ""
-    notLong: ""
+    validity:
+      1632: ""
+      64: ""
     description: ""
 encoding:
   - encoding: ""

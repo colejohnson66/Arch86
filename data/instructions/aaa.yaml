@@ -1,11 +1,13 @@
 %YAML 1.2
 ---
+validity: "1632,64"
 opcode:
   - opcode: "37"
     mnemonic: "AAA"
     encoding: "ZO"
-    long: "invalid"
-    notLong: "valid"
+    validity:
+      1632: "valid"
+      64: "invalid"
     description: "ASCII adjust AL after addition."
 encoding:
   - encoding: "ZO"

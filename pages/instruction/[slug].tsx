@@ -27,19 +27,31 @@ import SyntaxHighlighter from "react-syntax-highlighter";
 import TOC from "../../components/TOC";
 import constants from "../../constants";
 
-type OpcodeValidity = "valid" | "valid*" | "invalid" | "n/e";
-const OpcodeValidityMap: { [T in OpcodeValidity]: string } = {
+type OpcodeValidityValues = "valid" | "valid*" | "invalid" | "n/e";
+const OpcodeValidityMap: { [T in OpcodeValidityValues]: string } = {
     "valid": "Valid",
     "valid*": "Valid*",
     "invalid": "Invalid",
     "n/e": "Not Encodable"
 };
+type OpcodeValidity = {
+    16?: OpcodeValidityValues,
+    1632?: OpcodeValidityValues,
+    32?: OpcodeValidityValues,
+    64: OpcodeValidityValues,
+};
+// TODO: use <abbr>?
+const OpcodeValidityKeyMap: { [T in keyof OpcodeValidity]: string } = {
+    16: "16-bit Mode",
+    1632: "16- and 32-bit Mode",
+    32: "32-bit Mode",
+    64: "64-bit Mode",
+};
 type Opcode = {
     opcode: string,
     mnemonic: string,
     encoding: string,
-    long: OpcodeValidity,
-    notLong: OpcodeValidity,
+    validity: OpcodeValidity,
     cpuid?: string | string[],
     description: string,
 };
@@ -62,6 +74,7 @@ type Exceptions = {
 };
 type PageProps = {
     id: string,
+    validity: string,
     opcode: Opcode[],
     encoding: Encoding[],
     description: string,
@@ -150,9 +163,10 @@ const Page = (props: PageProps) => {
                                 <tr>
                                     <th>Opcode</th>
                                     <th>Mnemonic</th>
-                                    <th>Op/En</th>
-                                    <th>64-bit Mode</th>
-                                    <th>Compat/Legacy Mode</th>
+                                    <th><a href="#headingEncoding">Encoding</a></th>
+                                    {props.validity.split(",").map((entry) =>
+                                        <th key={entry}>{OpcodeValidityKeyMap[entry]}</th>
+                                    )}
                                     {props.opcode[0].cpuid &&
                                         <th><Link href="/instruction/cpuid"><a>CPUID</a></Link> Feature Flag</th>}
                                     <th>Description</th>
@@ -164,8 +178,10 @@ const Page = (props: PageProps) => {
                                         <td><code>{row.opcode}</code></td>
                                         <td><code>{row.mnemonic}</code></td>
                                         <td><code>{row.encoding}</code></td>
-                                        <td>{OpcodeValidityMap[row.long]}</td>
-                                        <td>{OpcodeValidityMap[row.notLong]}</td>
+                                        {props.validity.split(",").map((entry) =>
+                                            // This ensures that they are displayed in the same order as the heading
+                                            <td key={entry}>{OpcodeValidityMap[row.validity[entry]]}</td>
+                                        )}
                                         {row.cpuid &&
                                             <td>
                                                 {Array.isArray(row.cpuid) ? brTagsFromArray(row.cpuid) : row.cpuid}
