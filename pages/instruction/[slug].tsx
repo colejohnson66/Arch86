@@ -27,12 +27,20 @@ import SyntaxHighlighter from "react-syntax-highlighter";
 import TOC from "../../components/TOC";
 import constants from "../../constants";
 
+type OpcodeValidity = "valid" | "valid*" | "invalid" | "n/e";
+const OpcodeValidityMap: { [T in OpcodeValidity]: string } = {
+    "valid": "Valid",
+    "valid*": "Valid*",
+    "invalid": "Invalid",
+    "n/e": "Not Encodable"
+};
 type Opcode = {
     opcode: string,
     mnemonic: string,
     encoding: string,
-    long: string,
-    notLong: string,
+    long: OpcodeValidity,
+    notLong: OpcodeValidity,
+    cpuid?: string | string[],
     description: string,
 };
 type Encoding = {
@@ -61,10 +69,6 @@ type PageProps = {
     flags?: string,
     intrinsics?: string[],
     exceptions: Exceptions,
-}
-
-function capitalizeFirstLetter(str: string): string {
-    return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
 function brTagsFromArray(str: string[]): JSX.Element[] {
@@ -149,6 +153,8 @@ const Page = (props: PageProps) => {
                                     <th>Op/En</th>
                                     <th>64-bit Mode</th>
                                     <th>Compat/Legacy Mode</th>
+                                    {props.opcode[0].cpuid &&
+                                        <th><Link href="/instruction/cpuid"><a>CPUID</a></Link> Feature Flag</th>}
                                     <th>Description</th>
                                 </tr>
                             </thead>
@@ -158,8 +164,12 @@ const Page = (props: PageProps) => {
                                         <td><code>{row.opcode}</code></td>
                                         <td><code>{row.mnemonic}</code></td>
                                         <td><code>{row.encoding}</code></td>
-                                        <td>{capitalizeFirstLetter(row.long)}</td>
-                                        <td>{capitalizeFirstLetter(row.notLong)}</td>
+                                        <td>{OpcodeValidityMap[row.long]}</td>
+                                        <td>{OpcodeValidityMap[row.notLong]}</td>
+                                        {row.cpuid &&
+                                            <td>
+                                                {Array.isArray(row.cpuid) ? brTagsFromArray(row.cpuid) : row.cpuid}
+                                            </td>}
                                         <td>{row.description}</td>
                                     </tr>
                                 ))}

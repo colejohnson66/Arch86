@@ -4,6 +4,8 @@
         "AGPL",
         "Affero",
         "borderless",
+        "cpuid",
+        "encodable",
         "intrinsics",
         "microarchitecture",
         "microarchitectures"
