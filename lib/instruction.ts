@@ -22,15 +22,15 @@ import path from "path";
 const dataDirectory = path.join(process.cwd(), "data", "instructions");
 
 export function getAllInstructionsArray() {
-    const list = fs.readdirSync(dataDirectory).map((fileName) => (fileName.replace(/\.yaml$/, "")));
-    return list.filter((instr) => (instr !== "template"));
+    // gets all filenames in `data/instructions`, then removes `.yaml` from the end
+    return fs.readdirSync(dataDirectory).map((filename) => (filename.replace(/\.yaml$/, "")));
 }
 
 export function getAllInstructionsAsParams() {
-    return getAllInstructionsArray().map((fileName) => {
+    return getAllInstructionsArray().map((filename) => {
         return {
             params: {
-                slug: fileName
+                slug: filename
             }
         };
     });
