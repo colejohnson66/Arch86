@@ -21,7 +21,7 @@ type UnitProps = {
 
 const Unit = (props: UnitProps) => {
     return (
-        <span className="text-nowrap">{props.value} {props.unit}</span>
+        <span className="Unit">{props.value} {props.unit}</span>
     );
 };
 

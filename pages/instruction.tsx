@@ -15,15 +15,19 @@
  *   with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { Alert, Breadcrumb, Col, Container, Row } from "react-bootstrap";
+import { Breadcrumbs, Callout, Card, H1, H2, IBreadcrumbProps, UL } from "@blueprintjs/core";
 
 import { GetStaticProps } from "next";
 import Layout from "../components/Layout";
 import Link from "next/link";
 import TOC from "../components/TOC";
 import WIP from "../components/WIP";
-import constants from "../constants";
 import { getAllInstructionsArray } from "../lib/instruction";
+import renderBreadcrumbs from "../lib/renderBreadcrumbs";
+
+const PageBreadcrumbs: IBreadcrumbProps[] = [
+    { text: "Instructions" },
+];
 
 type PageProps = {
     instructions: string[],
@@ -32,40 +36,36 @@ type PageProps = {
 const Page = (props: PageProps) => {
     return (
         <Layout navGroup="instruction" title="Instructions">
-            <Container fluid>
-                <Breadcrumb>
-                    <Breadcrumb.Item active>Instructions</Breadcrumb.Item>
-                </Breadcrumb>
-                <Row>
-                    <Col {...constants.columns.toc}>
-                        <TOC.Root>
-                            <TOC.Entry href="#headingList" text="List" />
-                        </TOC.Root>
-                    </Col>
-                    <Col {...constants.columns.content}>
-                        <h1>x86 Instructions</h1>
-                        <p>
-                            x86 is home to a few hundred instructions with over 3,000 different encodings.
-                            An up-to-date list is available in PDF form on <a href="https://software.intel.com/content/www/us/en/develop/articles/intel-sdm.html" className="external">Intel's website</a> (see volume 2).
-                        </p>
+            <Card className="breadcrumbs" interactive={true}>
+                <Breadcrumbs breadcrumbRenderer={renderBreadcrumbs} items={PageBreadcrumbs} />
+            </Card>
+            <div id="main">
+                <TOC.Root>
+                    <TOC.Entry href="#headingList" text="List" />
+                </TOC.Root>
+                <div id="content">
+                    <H1>x86 Instructions</H1>
+                    <p>
+                        x86 is home to a few hundred instructions with over 3,000 different encodings.
+                        An up-to-date list is available in PDF form on <a href="https://software.intel.com/content/www/us/en/develop/articles/intel-sdm.html" className="external">Intel's website</a> (see volume 2).
+                    </p>
 
-                        <h2 id="headingList">List</h2>
-                        <WIP type="section" />
-                        <Alert variant="primary">
-                            This list is updated manually, and, as such, may not be current;
-                            It is current as of version 073 of the <a href="https://software.intel.com/content/www/us/en/develop/articles/intel-sdm.html" className="external">Intel SDM</a>.
-                            In addition to the documented instructions in the software developer manual (SDM), undocumented and AMD-exclusive instructions are included here.
-                        </Alert>
-                        <ul>
-                            {props.instructions.map((instr) => (
-                                <li key={instr}>
-                                    <Link href={`/instruction/${instr}`}><a>{instr.toUpperCase()}</a></Link>
-                                </li>
-                            ))}
-                        </ul>
-                    </Col>
-                </Row>
-            </Container>
+                    <H2 id="headingList">List</H2>
+                    <WIP type="section" />
+                    <Callout intent="primary">
+                        This list is updated manually, and, as such, may not be current;
+                        It is current as of version 073 of the <a href="https://software.intel.com/content/www/us/en/develop/articles/intel-sdm.html" className="external">Intel SDM</a>.
+                        In addition to the documented instructions in the software developer manual (SDM), undocumented and AMD-exclusive instructions are included here.
+                    </Callout>
+                    <UL>
+                        {props.instructions.map((instr) => (
+                            <li key={instr}>
+                                <Link href={`/instruction/${instr}`}><a>{instr.toUpperCase()}</a></Link>
+                            </li>
+                        ))}
+                    </UL>
+                </div>
+            </div>
         </Layout>
     );
 };

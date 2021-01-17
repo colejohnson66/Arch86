@@ -14,8 +14,7 @@
  * You should have received a copy of the GNU Affero General Public License along
  *   with this program. If not, see <https://www.gnu.org/licenses/>.
  */
-
-import { Alert } from "react-bootstrap";
+import { Callout } from "@blueprintjs/core";
 
 type WipProps = {
     type: "page" | "section"
@@ -23,10 +22,10 @@ type WipProps = {
 
 const WIP = (props: WipProps) => {
     return (
-        <Alert variant="info">
+        <Callout intent="warning">
             This {props.type} is a work in progress.
             It is incomplete, and may not be completely accurate or up to date.
-        </Alert>
+        </Callout>
     );
 };
 

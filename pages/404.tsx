@@ -15,32 +15,25 @@
  *   with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { Col, Container, Row } from "react-bootstrap";
-
+import { H1 } from "@blueprintjs/core";
 import Layout from "../components/Layout";
 import Link from "next/link";
-import constants from "../constants";
 
 const Page = () => {
     return (
         <Layout title="404">
-            <Container fluid>
-                <Row>
-                    <Col {...constants.columns.toc}>
-                        {/* No TOC */}
-                    </Col>
-                    <Col {...constants.columns.content}>
-                        <h1>404</h1>
-                        <p>
-                            That means whatever you were trying to reach doesn't exist.
-                        </p>
-                        <p>
-                            This site is currently under active development, so many pages may not exist yet.
-                            If you believe you were linked here <em>in error</em>, please <Link href="/contact"><a>contact me</a></Link> to report the problem.
-                        </p>
-                    </Col>
-                </Row>
-            </Container>
+            <div id="main">
+                <div id="content">
+                    <H1>404</H1>
+                    <p>
+                        That means whatever you were trying to reach doesn't exist.
+                    </p>
+                    <p>
+                        This site is currently under active development, so many pages may not exist yet.
+                        If you believe you were linked here <em>in error</em>, please <Link href="/contact"><a>contact me</a></Link> to report the problem.
+                    </p>
+                </div>
+            </div>
         </Layout>
     );
 };

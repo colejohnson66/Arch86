@@ -14,14 +14,15 @@
  * You should have received a copy of the GNU Affero General Public License along
  *   with this program. If not, see <https://www.gnu.org/licenses/>.
  */
-
-import "bootstrap/dist/css/bootstrap.min.css";
+import "normalize.css/normalize.css";
+import "@blueprintjs/core/lib/css/blueprint.css";
+import "@blueprintjs/icons/lib/css/blueprint-icons.css";
 import "../css/global.css";
 
 import { AppProps } from "next/app";
 
 const App = ({ Component, pageProps }: AppProps) => {
-    return <Component {...pageProps} />;
+    return <div className=""><Component {...pageProps} /></div>;
 };
 
 export default App;

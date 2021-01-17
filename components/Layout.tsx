@@ -15,7 +15,7 @@
  *   with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { Container, Nav, Navbar } from "react-bootstrap";
+import { Button, Navbar } from "@blueprintjs/core";
 
 import Head from "next/head";
 import Link from "next/link";
@@ -33,14 +33,13 @@ type LayoutProps = {
 const Layout = (props: LayoutProps) => {
     function navItem(group: NavGroup, href: string, text: string) {
         return (
-            <Nav.Item className={props.navGroup == group ? "active" : ""}>
-                <Link href={href}>
-                    <a className="nav-link">
-                        {text}
-                        {props.navGroup == group && <span className="sr-only">(current)</span>}
-                    </a>
-                </Link>
-            </Nav.Item>
+            <Link href={href}>
+                <a>
+                    <Button
+                        className="bp3-minimal"
+                        text={text} />
+                </a>
+            </Link>
         );
     }
 
@@ -56,22 +55,20 @@ const Layout = (props: LayoutProps) => {
                 <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
             </Head>
             <header>
-                <Navbar bg="light" expand="md">
-                    <Link href="/">
-                        <a className="navbar-brand">
-                            <img src="/img/icon@32.png" width="32" height="32" alt="" />
-                            80x86
-                        </a>
-                    </Link>
-                    <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-                    <Navbar.Collapse id="responsive-navbar-nav">
-                        <Nav className="mr-auto">
-                            {navItem("home", "/", "Home")}
-                            {navItem("about", "/about", "About")}
-                            {navItem("architecture", "/architecture", "Microarchitecture")}
-                            {navItem("instruction", "/instruction", "Instructions")}
-                        </Nav>
-                    </Navbar.Collapse>
+                <Navbar>
+                    <Navbar.Group>
+                        <Navbar.Heading>
+                            <Link href="/">
+                                <a>
+                                    <img className="navbarLogo" src="/img/icon@32.png" width="32" height="32" alt="" />
+                                    80x86
+                                </a>
+                            </Link>
+                        </Navbar.Heading>
+                        {navItem("about", "/about", "About")}
+                        {navItem("instruction", "/instruction", "Instructions")}
+                        {navItem("architecture", "/architecture", "Microarchitecture")}
+                    </Navbar.Group>
                 </Navbar>
             </header>
             <main>
@@ -79,14 +76,14 @@ const Layout = (props: LayoutProps) => {
             </main>
             <hr />
             <footer>
-                <Container className="small-print">
+                <div className="bp3-text-small">
                     <p>
                         <Link href="/contact"><a>Contact</a></Link>
                     </p>
                     <p>
                         Website copyright &copy; Cole Johnson 2020-2021.
                     </p>
-                </Container>
+                </div>
             </footer>
         </>
     );

@@ -15,6 +15,8 @@
  *   with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
+import { H2, UL } from "@blueprintjs/core";
+
 import React from "react";
 
 type RootProps = {
@@ -25,10 +27,10 @@ const RefRoot = (props: RootProps) => {
     // TODO: support columns
     return (
         <>
-            <h2 id="headingReferences">References</h2>
-            <ul className="referenceList">
+            <H2 id="headingReferences">References</H2>
+            <UL className="referenceList">
                 {props.children}
-            </ul>
+            </UL>
         </>
     );
 }

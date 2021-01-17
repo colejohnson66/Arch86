@@ -15,59 +15,59 @@
  *   with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { Breadcrumb, Col, Container, Row } from "react-bootstrap";
+import { Breadcrumbs, Card, H1, H2, IBreadcrumbProps, UL } from "@blueprintjs/core";
 
 import Layout from "../components/Layout";
 import TOC from "../components/TOC";
-import constants from "../constants";
+import renderBreadcrumbs from "../lib/renderBreadcrumbs";
+
+const PageBreadcrumbs: IBreadcrumbProps[] = [
+    { text: "About" },
+];
 
 const Page = () => {
     return (
         <Layout navGroup="about" title="About">
-            <Container fluid>
-                <Breadcrumb>
-                    <Breadcrumb.Item active>About</Breadcrumb.Item>
-                </Breadcrumb>
-                <Row>
-                    <Col {...constants.columns.toc}>
-                        <TOC.Root>
-                            <TOC.Entry href="#headingStack" text="Software Stack" />
-                            <TOC.Entry href="#headingSource" text="Open Source" />
-                        </TOC.Root>
-                    </Col>
-                    <Col {...constants.columns.content}>
-                        <h1>About</h1>
-                        <p>
-                            This website is designed to be a digital reference version of the x86 (and x86-64) processor architecture.
-                        </p>
+            <Card className="breadcrumbs" interactive={true}>
+                <Breadcrumbs breadcrumbRenderer={renderBreadcrumbs} items={PageBreadcrumbs} />
+            </Card>
+            <div id="main">
+                <TOC.Root>
+                    <TOC.Entry href="#headingStack" text="Software Stack" />
+                    <TOC.Entry href="#headingSource" text="Open Source" />
+                </TOC.Root>
+                <div id="content">
+                    <H1>About</H1>
+                    <p>
+                        This website is designed to be a digital reference version of the x86 (and x86-64) processor architecture.
+                    </p>
 
-                        <h2 id="headingStack">Software Stack</h2>
-                        <p>
-                            This site is build using <a href="https://nextjs.org/" className="external">Next.js</a> and deployed on <a href="https://vercel.com/" className="external">Vercel</a>.
-                            {" "}<a href="https://react-bootstrap.github.io/" className="external">React Bootstrap</a> is used for theming and layout.
-                        </p>
-                        <p>
-                            Additionally, the following npm packages are used:
-                        </p>
-                        <ul>
-                            <li>
-                                <a href="https://www.npmjs.com/package/react-syntax-highlighter" className="external"><code>react-syntax-highlighter</code></a>
-                                {": "}Any syntax highlighting used here.
-                            </li>
-                            <li>
-                                <a href="https://www.npmjs.com/package/yaml" className="external"><code>yaml</code></a>
-                                {": "}Parsing YAML files used for data storage.
-                            </li>
-                        </ul>
+                    <H2 id="headingStack">Software Stack</H2>
+                    <p>
+                        This site is build using <a href="https://nextjs.org/" className="external">Next.js</a> and deployed on <a href="https://vercel.com/" className="external">Vercel</a>.
+                        {" "}<a href="https://react-bootstrap.github.io/" className="external">React Bootstrap</a> is used for theming and layout.
+                    </p>
+                    <p>
+                        Additionally, the following npm packages are used:
+                    </p>
+                    <UL>
+                        <li>
+                            <a href="https://www.npmjs.com/package/react-syntax-highlighter" className="external"><code>react-syntax-highlighter</code></a>
+                            {": "}Any syntax highlighting used here.
+                        </li>
+                        <li>
+                            <a href="https://www.npmjs.com/package/yaml" className="external"><code>yaml</code></a>
+                            {": "}Parsing YAML files used for data storage.
+                        </li>
+                    </UL>
 
-                        <h2 id="headingSource">Open Source</h2>
-                        <p>
-                            This site is open source and released under the <a href="https://opensource.org/licenses/AGPL-3.0" className="external">GNU AGPL 3.0 or later</a> license.
-                            The source code is available on <a href="https://github.com/colejohnson66/80x86" className="external">GitHub</a>.
-                        </p>
-                    </Col>
-                </Row>
-            </Container>
+                    <H2 id="headingSource">Open Source</H2>
+                    <p>
+                        This site is open source and released under the <a href="https://opensource.org/licenses/AGPL-3.0" className="external">GNU AGPL 3.0 or later</a> license.
+                        The source code is available on <a href="https://github.com/colejohnson66/80x86" className="external">GitHub</a>.
+                    </p>
+                </div>
+            </div>
         </Layout>
     );
 };

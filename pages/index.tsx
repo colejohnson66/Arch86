@@ -14,28 +14,21 @@
  * You should have received a copy of the GNU Affero General Public License along
  *   with this program. If not, see <https://www.gnu.org/licenses/>.
  */
-import { Col, Container, Row } from "react-bootstrap";
-
+import { H1 } from "@blueprintjs/core";
 import Layout from "../components/Layout";
-import constants from "../constants";
 
 const Page = () => {
     return (
         <Layout navGroup="home">
-            <Container fluid>
-                <Row>
-                    <Col {...constants.columns.toc}>
-                        {/* No TOC...yet */}
-                    </Col>
-                    <Col {...constants.columns.content}>
-                        <h1>80x86 Website</h1>
-                        <p>
-                            Welcome to the 80x86 website.
-                            This website is designed to be a digital reference version of the x86 (and x86-64) processor architecture.
-                        </p>
-                    </Col>
-                </Row>
-            </Container>
+            <div id="main">
+                <div id="content">
+                    <H1>80x86 Website</H1>
+                    <p>
+                        Welcome to the 80x86 website.
+                        This website is designed to be a digital reference version of the x86 (and x86-64) processor architecture.
+                    </p>
+                </div>
+            </div>
         </Layout>
     );
 };

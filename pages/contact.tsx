@@ -14,34 +14,32 @@
  * You should have received a copy of the GNU Affero General Public License along
  *   with this program. If not, see <https://www.gnu.org/licenses/>.
  */
-
-import { Breadcrumb, Col, Container, Row } from "react-bootstrap";
+import { Breadcrumbs, Card, H1, IBreadcrumbProps, UL } from "@blueprintjs/core";
 
 import Layout from "../components/Layout";
-import constants from "../constants";
+import renderBreadcrumbs from "../lib/renderBreadcrumbs";
+
+const PageBreadcrumbs: IBreadcrumbProps[] = [
+    { text: "Contact" },
+];
 
 const Page = () => {
     return (
         <Layout title="Contact">
-            <Container fluid>
-                <Breadcrumb>
-                    <Breadcrumb.Item active>Contact</Breadcrumb.Item>
-                </Breadcrumb>
-                <Row>
-                    <Col {...constants.columns.toc}>
-                        {/* No TOC */}
-                    </Col>
-                    <Col {...constants.columns.content}>
-                        <h1>Contact</h1>
-                        <p>
-                            To contact me, Cole Johnson, please use the following method:
-                        </p>
-                        <ul>
-                            <li>Email: <i>coleharrisjohnson at gmail dot com</i></li>
-                        </ul>
-                    </Col>
-                </Row>
-            </Container>
+            <Card className="breadcrumbs" interactive={true}>
+                <Breadcrumbs breadcrumbRenderer={renderBreadcrumbs} items={PageBreadcrumbs} />
+            </Card>
+            <div id="main">
+                <div id="content">
+                    <H1>Contact</H1>
+                    <p>
+                        To contact me, please use the following method:
+                    </p>
+                    <UL>
+                        <li>Email: <i>coleharrisjohnson at gmail dot com</i></li>
+                    </UL>
+                </div>
+            </div>
         </Layout>
     );
 };

@@ -1,5 +1,5 @@
 /* This file is part of 80x86.
- * Copyright (c) 2020 Cole Johnson
+ * Copyright (c) 2021 Cole Johnson
  * 
  * This program is free software: you can redistribute it and/or modify it under
  *   the terms of the GNU Affero General Public License as published by the Free
@@ -14,15 +14,17 @@
  * You should have received a copy of the GNU Affero General Public License along
  *   with this program. If not, see <https://www.gnu.org/licenses/>.
  */
-export default {
-    columns: {
-        toc: {
-            lg: 2,
-            md: 3,
-        },
-        content: {
-            lg: 10,
-            md: 9,
-        },
-    }
-};
+
+import { Breadcrumb, IBreadcrumbProps } from "@blueprintjs/core";
+
+import Link from "next/link";
+
+export default function renderBreadcrumbs({ text, href, ...restProps }: IBreadcrumbProps): JSX.Element {
+    return (
+        <Breadcrumb {...restProps}>
+            {href
+                ? <Link href={href}><a>{text}</a></Link>
+                : <>{text}</>}
+        </Breadcrumb>
+    );
+}

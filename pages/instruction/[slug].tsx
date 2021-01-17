@@ -15,7 +15,7 @@
  *   with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { Breadcrumb, Col, Container, Row, Table } from "react-bootstrap";
+import { Breadcrumbs, Card, Code, H1, H2, H3, HTMLTable, IBreadcrumbProps, UL } from "@blueprintjs/core";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { getAllInstructionsAsParams, getInstructionData } from "../../lib/instruction";
 
@@ -25,7 +25,7 @@ import Link from "next/link";
 import React from "react";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import TOC from "../../components/TOC";
-import constants from "../../constants";
+import renderBreadcrumbs from "../../lib/renderBreadcrumbs";
 
 type OpcodeValidityValues = "valid" | "valid*" | "invalid" | "n/e";
 const OpcodeValidityMap: { [T in OpcodeValidityValues]: string } = {
@@ -84,17 +84,17 @@ type PageProps = {
     exceptions: Exceptions,
 }
 
-function brTagsFromArray(str: string[]): JSX.Element[] {
-    return str.map((line, idx) => (
+function brTagsFromArray(arr: string[]): JSX.Element[] {
+    return arr.map((line, idx) => (
         <React.Fragment key={idx}>
             {line}
-            {idx !== str.length - 1 && <br />}
+            {idx !== arr.length - 1 && <br />}
         </React.Fragment>
     ));
 }
 
-function paragraphsFromArray(str: string[]): JSX.Element[] {
-    return str.map((par, idx) => (<p key={idx}>{par}</p>));
+function paragraphsFromArray(arr: string[]): JSX.Element[] {
+    return arr.map((par, idx) => (<p key={idx}>{par}</p>));
 }
 
 function paragraphsFromString(str: string): JSX.Element[] {
@@ -105,181 +105,185 @@ function regularExceptionList(ex: string | ExceptionList): JSX.Element {
     if (typeof ex === "string")
         return <p>{ex}</p>;
 
-    let rows = Object.keys(ex).map((key, idx) => {
+    let rows = Object.keys(ex).map((key) => {
         let val = ex[key];
 
         return (
-            <React.Fragment key={idx}>
-                <Col sm={2} as="dt"><code>{key}</code></Col>
-                <Col sm={10} as="dd">{
-                    Array.isArray(val) ? brTagsFromArray(val) : val
-                }</Col>
+            <React.Fragment key={key}>
+                <dt><Code>{key}</Code></dt>
+                <dd>{Array.isArray(val) ? brTagsFromArray(val) : val}</dd>
             </React.Fragment>
         );
     });
-    return <Row as="dl">{rows}</Row>;
+    return <dl>{rows}</dl>;
 }
 
 const Page = (props: PageProps) => {
+    const PageBreadcrumbs: IBreadcrumbProps[] = [
+        { text: "Instructions", href: "/instruction" },
+        { text: props.id.toUpperCase() },
+    ];
+
     return (
-        <Layout navGroup="instruction" title="Instructions">
-            <Container fluid>
-                <Breadcrumb>
-                    <Breadcrumb.Item><Link href="/instruction"><a>Instructions</a></Link></Breadcrumb.Item>
-                    <Breadcrumb.Item active>{props.id.toUpperCase()}</Breadcrumb.Item>
-                </Breadcrumb>
-                <Row>
-                    <Col {...constants.columns.toc}>
-                        <TOC.Root>
-                            <TOC.Entry href="#headingEncoding" text="Encoding" />
-                            <TOC.Entry href="#headingDescription" text="Description" />
-                            <TOC.Entry href="#headingOperation" text="Operation" />
-                            {props.flags &&
-                                <TOC.Entry href="#headingFlags" text="Flags Affected" />}
-                            {props.intrinsics &&
-                                <TOC.Entry href="#headingIntrinsics" text="Intrinsics" />}
-                            <TOC.Entry href="#headingExceptions" text="Exceptions">
-                                {props.exceptions.protected &&
-                                    <TOC.Entry href="#headingExceptionsProtected" text="Protected Mode" />}
-                                {props.exceptions.real &&
-                                    <TOC.Entry href="#headingExceptionsReal" text="Real-Address Mode" />}
-                                {props.exceptions.virtual &&
-                                    <TOC.Entry href="#headingExceptionsVirtual" text="Virtual-8086 Mode" />}
-                                {props.exceptions.compatibility &&
-                                    <TOC.Entry href="#headingExceptionsCompatibility" text="Compatibility Mode" />}
-                                {props.exceptions.long &&
-                                    <TOC.Entry href="#headingExceptionsLong" text="64-Bit Mode" />}
-                                {props.exceptions.floating &&
-                                    <TOC.Entry href="#headingExceptionsFloating" text="SIMD Floating-Point" />}
-                                {props.exceptions.other &&
-                                    <TOC.Entry href="#headingExceptionsOther" text="Other" />}
-                            </TOC.Entry>
-                        </TOC.Root>
-                    </Col>
-                    <Col {...constants.columns.content}>
-                        <h1><code>{props.id.toUpperCase()}</code></h1>
-                        <Table striped bordered>
-                            <thead>
-                                <tr>
-                                    <th>Opcode</th>
-                                    <th>Mnemonic</th>
-                                    <th><a href="#headingEncoding">Encoding</a></th>
-                                    {props.validity.split(",").map((entry) =>
-                                        <th key={entry}>{OpcodeValidityKeyMap[entry]}</th>
-                                    )}
-                                    {props.opcode[0].cpuid &&
-                                        <th><Link href="/instruction/cpuid"><a>CPUID</a></Link> Feature Flag</th>}
-                                    <th>Description</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {props.opcode.map((row, idx) => (
-                                    <tr key={idx}>
-                                        <td><code>{row.opcode}</code></td>
-                                        <td><code>{row.mnemonic}</code></td>
-                                        <td><code>{row.encoding}</code></td>
-                                        {props.validity.split(",").map((entry) =>
-                                            // This ensures that they are displayed in the same order as the heading
-                                            <td key={entry}>{OpcodeValidityMap[row.validity[entry]]}</td>
-                                        )}
-                                        {row.cpuid &&
-                                            <td>
-                                                {Array.isArray(row.cpuid) ? brTagsFromArray(row.cpuid) : row.cpuid}
-                                            </td>}
-                                        <td>{row.description}</td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </Table>
-
-                        <h2 id="headingEncoding">Encoding</h2>
-                        <Table striped bordered>
-                            <thead>
-                                <tr>
-                                    <th>Op/En</th>
-                                    <th>Operand 1</th>
-                                    <th>Operand 2</th>
-                                    <th>Operand 3</th>
-                                    <th>Operand 4</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {props.encoding.map((row, idx) => (
-                                    <tr key={idx}>
-                                        <td><code>{row.encoding}</code></td>
-                                        <td>{row.op1}</td>
-                                        <td>{row.op2}</td>
-                                        <td>{row.op3}</td>
-                                        <td>{row.op4}</td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </Table>
-
-                        <h2 id="headingDescription">Description</h2>
-                        {paragraphsFromString(props.description)}
-
-                        <h2 id="headingOperation">Operation</h2>
-                        <SyntaxHighlighter language="rust">
-                            {props.operation}
-                        </SyntaxHighlighter>
-
-                        {props.flags &&
-                            <>
-                                <h2 id="headingFlags">Flags Affected</h2>
-                                {paragraphsFromString(props.flags)}
-                            </>}
-
-                        {props.intrinsics &&
-                            <>
-                                <h2 id="headingIntrinsics">Intrinsics</h2>
-                                <SyntaxHighlighter language="c-like">
-                                    {props.intrinsics}
-                                </SyntaxHighlighter>
-                            </>}
-
-
-                        <h2 id="headingExceptions">Exceptions</h2>
+        <Layout navGroup="instruction" title={`${props.id.toUpperCase()} Instruction`}>
+            <Card className="breadcrumbs" interactive>
+                <Breadcrumbs breadcrumbRenderer={renderBreadcrumbs} items={PageBreadcrumbs} />
+            </Card>
+            <div id="main">
+                <TOC.Root>
+                    <TOC.Entry href="#headingEncoding" text="Encoding" />
+                    <TOC.Entry href="#headingDescription" text="Description" />
+                    <TOC.Entry href="#headingOperation" text="Operation" />
+                    {props.flags &&
+                        <TOC.Entry href="#headingFlags" text="Flags Affected" />}
+                    {props.intrinsics &&
+                        <TOC.Entry href="#headingIntrinsics" text="Intrinsics" />}
+                    <TOC.Entry href="#headingExceptions" text="Exceptions">
                         {props.exceptions.protected &&
-                            <>
-                                <h3 id="headingExceptionsProtected">Protected Mode</h3>
-                                {regularExceptionList(props.exceptions.protected)}
-                            </>}
+                            <TOC.Entry href="#headingExceptionsProtected" text="Protected Mode" />}
                         {props.exceptions.real &&
-                            <>
-                                <h3 id="headingExceptionsReal">Real-Address Mode</h3>
-                                {regularExceptionList(props.exceptions.real)}
-                            </>}
+                            <TOC.Entry href="#headingExceptionsReal" text="Real-Address Mode" />}
                         {props.exceptions.virtual &&
-                            <>
-                                <h3 id="headingExceptionsVirtual">Virtual-8086 Mode</h3>
-                                {regularExceptionList(props.exceptions.virtual)}
-                            </>}
+                            <TOC.Entry href="#headingExceptionsVirtual" text="Virtual-8086 Mode" />}
                         {props.exceptions.compatibility &&
-                            <>
-                                <h3 id="headingExceptionsCompatibility">Compatibility Mode</h3>
-                                {regularExceptionList(props.exceptions.compatibility)}
-                            </>}
+                            <TOC.Entry href="#headingExceptionsCompatibility" text="Compatibility Mode" />}
                         {props.exceptions.long &&
-                            <>
-                                <h3 id="headingExceptionsLong">64-Bit Mode</h3>
-                                {regularExceptionList(props.exceptions.long)}
-                            </>}
+                            <TOC.Entry href="#headingExceptionsLong" text="64-Bit Mode" />}
                         {props.exceptions.floating &&
-                            <>
-                                <h3 id="headingExceptionsFloating">SIMD Floating-Point</h3>
-                                {paragraphsFromString(props.exceptions.floating)}
-                            </>}
+                            <TOC.Entry href="#headingExceptionsFloating" text="SIMD Floating-Point" />}
                         {props.exceptions.other &&
-                            <>
-                                <h3 id="headingExceptionsOther">Other</h3>
-                                {paragraphsFromString(props.exceptions.other)}
-                            </>}
+                            <TOC.Entry href="#headingExceptionsOther" text="Other" />}
+                    </TOC.Entry>
+                </TOC.Root>
+                <div id="content">
+                    <H1><Code>{props.id.toUpperCase()}</Code> Instruction</H1>
+                    <HTMLTable striped bordered interactive>
+                        <thead>
+                            <tr>
+                                <th>Opcode</th>
+                                <th>Mnemonic</th>
+                                <th><a href="#headingEncoding">Encoding</a></th>
+                                {props.validity.split(",").map((entry) =>
+                                    <th key={entry}>{OpcodeValidityKeyMap[entry]}</th>
+                                )}
+                                {props.opcode[0].cpuid &&
+                                    <th><Link href="/instruction/cpuid"><a>CPUID</a></Link> Feature Flag</th>}
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {props.opcode.map((row, idx) => (
+                                <tr key={idx}>
+                                    <td><Code>{row.opcode}</Code></td>
+                                    <td><Code>{row.mnemonic}</Code></td>
+                                    <td><Code>{row.encoding}</Code></td>
+                                    {props.validity.split(",").map((entry) =>
+                                        // This ensures that they are displayed in the same order as the heading
+                                        <td key={entry}>{OpcodeValidityMap[row.validity[entry]]}</td>
+                                    )}
+                                    {row.cpuid &&
+                                        <td>
+                                            {Array.isArray(row.cpuid) ? brTagsFromArray(row.cpuid) : row.cpuid}
+                                        </td>}
+                                    <td>{row.description}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </HTMLTable>
+
+                    <H2 id="headingEncoding">Encoding</H2>
+                    <HTMLTable striped bordered interactive>
+                        <thead>
+                            <tr>
+                                <th>Op/En</th>
+                                <th>Operand 1</th>
+                                <th>Operand 2</th>
+                                <th>Operand 3</th>
+                                <th>Operand 4</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {props.encoding.map((row, idx) => (
+                                <tr key={idx}>
+                                    <td><Code>{row.encoding}</Code></td>
+                                    <td>{row.op1}</td>
+                                    <td>{row.op2}</td>
+                                    <td>{row.op3}</td>
+                                    <td>{row.op4}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </HTMLTable>
+
+                    <H2 id="headingDescription">Description</H2>
+                    {paragraphsFromString(props.description)}
+
+                    <H2 id="headingOperation">Operation</H2>
+                    <SyntaxHighlighter language="rust">
+                        {props.operation}
+                    </SyntaxHighlighter>
+
+                    {props.flags &&
+                        <>
+                            <H2 id="headingFlags">Flags Affected</H2>
+                            {paragraphsFromString(props.flags)}
+                        </>}
+
+                    {props.intrinsics &&
+                        <>
+                            <H2 id="headingIntrinsics">Intrinsics</H2>
+                            <SyntaxHighlighter language="c-like">
+                                {props.intrinsics}
+                            </SyntaxHighlighter>
+                        </>}
+
+
+                    <H2 id="headingExceptions">Exceptions</H2>
+                    {props.exceptions.protected &&
+                        <>
+                            <H3 id="headingExceptionsProtected">Protected Mode</H3>
+                            {regularExceptionList(props.exceptions.protected)}
+                        </>}
+                    {props.exceptions.real &&
+                        <>
+                            <H3 id="headingExceptionsReal">Real-Address Mode</H3>
+                            {regularExceptionList(props.exceptions.real)}
+                        </>}
+                    {props.exceptions.virtual &&
+                        <>
+                            <H3 id="headingExceptionsVirtual">Virtual-8086 Mode</H3>
+                            {regularExceptionList(props.exceptions.virtual)}
+                        </>}
+                    {props.exceptions.compatibility &&
+                        <>
+                            <H3 id="headingExceptionsCompatibility">Compatibility Mode</H3>
+                            {regularExceptionList(props.exceptions.compatibility)}
+                        </>}
+                    {props.exceptions.long &&
+                        <>
+                            <H3 id="headingExceptionsLong">64-Bit Mode</H3>
+                            {regularExceptionList(props.exceptions.long)}
+                        </>}
+                    {props.exceptions.floating &&
+                        <>
+                            <H3 id="headingExceptionsFloating">SIMD Floating-Point</H3>
+                            {paragraphsFromString(props.exceptions.floating)}
+                        </>}
+                    {props.exceptions.other &&
+                        <>
+                            <H3 id="headingExceptionsOther">Other</H3>
+                            {paragraphsFromString(props.exceptions.other)}
+                        </>}
+                </div>
+            </div>
+        </Layout>
+    );
+    /*
                     </Col>
                 </Row>
             </Container>
         </Layout>
-    );
+    );*/
 };
 
 export default Page;

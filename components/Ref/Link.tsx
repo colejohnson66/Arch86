@@ -25,9 +25,7 @@ const RefLink = (props: RefLinkProps) => {
     return (
         <sup>
             <Link href={`#reference-${props.name}`}>
-                <a>
-                    [{props.name}]
-                </a>
+                <a>[{props.name}]</a>
             </Link>
         </sup>
     );

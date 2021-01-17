@@ -1,5 +1,5 @@
 /* This file is part of 80x86.
- * Copyright (c) 2020 Cole Johnson
+ * Copyright (c) 2021 Cole Johnson
  * 
  * This program is free software: you can redistribute it and/or modify it under
  *   the terms of the GNU Affero General Public License as published by the Free
@@ -14,19 +14,34 @@
  * You should have received a copy of the GNU Affero General Public License along
  *   with this program. If not, see <https://www.gnu.org/licenses/>.
  */
+html, body {
+    height: 100%;
+    width: 100%;
+}
 
-nav {
+header {
     margin-bottom: 20px;
 }
 
-footer {
-    margin-top: 20px;
+.navbarLogo {
+    margin-right: 0.5ch;
 }
 
-/* Add just a /tiny/ bit of space between the icon and text */
+.breadcrumbs {
+    margin: 0 2em 1em 2em;
+    padding: 10px;
+}
 
-.navbar-brand>img {
-    margin-right: 0.5ch;
+#main {
+    margin: 0 2em;
+    display: flex;
+    flex-flow: row;
+    height: 100%;
+}
+
+#toc {
+    flex: 1;
+    padding-right: 2em;
 }
 
 #tocTitle {
@@ -38,74 +53,30 @@ footer {
     padding-left: 1rem;
 }
 
+#content {
+    flex: 4;
+}
+
 .external {
     background: url(/img/external-ltr.png) center right no-repeat;
     padding-right: 15px;
 }
 
-/* Bootstrap's default pink like color reminds me of a MediaWiki link to a
- * non-existent page */
-
-/*code {
-    color: #212529;
-}*/
-
 h2 {
     border-width: 0 0 1px 0;
     border-style: solid;
+    margin-top: 0.5em !important;
 }
 
-time {
+time,
+.Unit {
     white-space: nowrap;
 }
 
-.hex pre {
-    border: 1px;
-    border-style: solid;
-    padding: 1rem;
-    width: fit-content;
+.bp3-callout {
+    margin-bottom: 0.5em;
 }
 
-.hex table code {
-    color: #212529;
-}
-
-.hex pre .color-red, .hex table .color-red {
-    background-color: #f44336;
-    color: white;
-}
-
-.hex pre .color-orange, .hex table .color-orange {
-    background-color: #ff9800;
-    color: #212529;
-}
-
-.hex pre .color-yellow, .hex table .color-yellow {
-    background-color: #ffeb3b;
-    color: #212529;
-}
-
-.hex pre .color-green, .hex table .color-green {
-    background-color: #4caf50;
-    color: #212529;
-}
-
-.hex pre .color-blue, .hex table .color-blue {
-    background-color: #03a9f4;
-    color: #212529;
-}
-
-.hex pre .color-indigo, .hex table .color-indigo {
-    background-color: #3f51b5;
-    color: white;
-}
-
-.hex pre .color-purple, .hex table .color-purple {
-    background-color: #9c27b0;
-    color: white;
-}
-
-.referenceList {
-    list-style-type: none;
-    padding-left: 0;
+footer {
+    margin: 0 0 0 10em;
 }
