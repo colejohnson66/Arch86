@@ -172,10 +172,10 @@
     lodash "^4.17.20"
     lodash-es "^4.17.20"
 
-"@types/bootstrap@^5.0.3":
-  version "5.0.3"
-  resolved "https://registry.yarnpkg.com/@types/bootstrap/-/bootstrap-5.0.3.tgz#b7c6f575a4545be9f34cce3807944a15972d0699"
-  integrity sha512-9cRXS7/kOfj2O3VpVNqPE+g46BHpWYepVL4/y9khyJ8GhaUvSXlvrtO5fjNCrglakuHKk6obKLvgVc77T3GAjQ==
+"@types/bootstrap@^5.0.4":
+  version "5.0.4"
+  resolved "https://registry.yarnpkg.com/@types/bootstrap/-/bootstrap-5.0.4.tgz#412d5d0c608cd00cf9f46bffb7ac416bb9864288"
+  integrity sha512-Awa1onTcDziszyFDAAa2AawwYCQamGBLqR3YuRhJHJNlAFKwpfzsE+lfSyKtwxRNEImpkWevhOuwo0yPadd3hA==
   dependencies:
     "@popperjs/core" "^2.6.0"
     "@types/jquery" "*"
@@ -209,10 +209,10 @@
   resolved "https://registry.yarnpkg.com/@types/json-schema/-/json-schema-7.0.6.tgz#f4c7ec43e81b319a9815115031709f26987891f0"
   integrity sha512-3c+yGKvVP5Y9TYBEibGNR+kLtijnj7mYrXRg+WpFb2X9xm04g/DXYkfg4hmzJQosc9snFNUPkbYIhu+KAm6jJw==
 
-"@types/node@^14.14.20":
-  version "14.14.20"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.14.20.tgz#f7974863edd21d1f8a494a73e8e2b3658615c340"
-  integrity sha512-Y93R97Ouif9JEOWPIUyU+eyIdyRqQR0I8Ez1dzku4hDx34NWh4HbtIc3WNzwB1Y9ULvNGeu5B8h8bVL5cAk4/A==
+"@types/node@^14.14.21":
+  version "14.14.21"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.14.21.tgz#d934aacc22424fe9622ebf6857370c052eae464e"
+  integrity sha512-cHYfKsnwllYhjOzuC5q1VpguABBeecUp24yFluHpn/BQaVxB1CuQ1FSRZCzrPxrkIfWISXV2LbeoBthLWg0+0A==
 
 "@types/prop-types@*", "@types/prop-types@^15.7.3":
   version "15.7.3"
