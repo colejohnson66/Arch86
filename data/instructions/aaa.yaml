@@ -1,5 +1,7 @@
 %YAML 1.2
 ---
+# Intel's manual (v73) doesn't say "AL"
+title: "ASCII Adjust AL After Addition"
 validity: "1632,64"
 opcode:
   - opcode: "37"

@@ -1,5 +1,6 @@
 %YAML 1.2
 ---
+title: "ASCII Adjust AL After Subtraction"
 validity: "1632,64"
 opcode:
   - opcode: "3F"

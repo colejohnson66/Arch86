@@ -74,6 +74,7 @@ type Exceptions = {
 };
 type PageProps = {
     id: string,
+    title: string,
     validity: string,
     opcode: Opcode[],
     encoding: Encoding[],
@@ -156,7 +157,7 @@ const Page = (props: PageProps) => {
                     </TOC.Entry>
                 </TOC.Root>
                 <div id="content">
-                    <H1><Code>{props.id.toUpperCase()}</Code> Instruction</H1>
+                    <H1><Code>{props.id.toUpperCase()}</Code>: {props.title}</H1>
                     <HTMLTable striped bordered interactive>
                         <thead>
                             <tr>

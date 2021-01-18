@@ -1,5 +1,6 @@
 %YAML 1.2
 ---
+title: "ASCII Adjust AX After Multiply"
 validity: "1632,64"
 opcode:
   - opcode: "D4 0A"
