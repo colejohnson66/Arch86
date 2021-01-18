@@ -15,7 +15,7 @@
  *   with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { Breadcrumbs, Card, Code, H1, H2, H3, HTMLTable, IBreadcrumbProps, UL } from "@blueprintjs/core";
+import { Breadcrumbs, Callout, Card, Code, H1, H2, H3, HTMLTable, IBreadcrumbProps, UL } from "@blueprintjs/core";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { getAllInstructionsAsParams, getInstructionData } from "../../lib/instruction";
 
@@ -81,7 +81,8 @@ type PageProps = {
     description: string,
     operation: string,
     flags?: string,
-    intrinsics?: string[],
+    intrinsicsC?: string[],
+    intrinsicsRust?: string[],
     exceptions: Exceptions,
 }
 
@@ -137,8 +138,10 @@ const Page = (props: PageProps) => {
                     <TOC.Entry href="#headingOperation" text="Operation" />
                     {props.flags &&
                         <TOC.Entry href="#headingFlags" text="Flags Affected" />}
-                    {props.intrinsics &&
-                        <TOC.Entry href="#headingIntrinsics" text="Intrinsics" />}
+                    {props.intrinsicsC &&
+                        <TOC.Entry href="#headingIntrinsicsC" text="Intrinsics (C)" />}
+                    {props.intrinsicsRust &&
+                        <TOC.Entry href="#headingIntrinsicsRust" text="Intrinsics (Rust)" />}
                     <TOC.Entry href="#headingExceptions" text="Exceptions">
                         {props.exceptions.protected &&
                             <TOC.Entry href="#headingExceptionsProtected" text="Protected Mode" />}
@@ -230,14 +233,28 @@ const Page = (props: PageProps) => {
                             {paragraphsFromString(props.flags)}
                         </>}
 
-                    {props.intrinsics &&
+                    {props.intrinsicsC &&
                         <>
-                            <H2 id="headingIntrinsics">Intrinsics</H2>
+                            <H2 id="headingIntrinsicsC">Intrinsics (C)</H2>
+                            <Callout intent="primary">
+                                The official intrinsics use the full definition from the header file.
+                                These intrinsics are shorter definitions of those using fixed-width integer types.
+                            </Callout>
                             <SyntaxHighlighter language="c-like">
-                                {props.intrinsics}
+                                {props.intrinsicsC.join("\n")}
                             </SyntaxHighlighter>
                         </>}
 
+                    {props.intrinsicsRust &&
+                        <>
+                            <H2 id="headingIntrinsicsRust">Intrinsics (Rust)</H2>
+                            <Callout intent="primary">
+                                These intrinsics are from an upcoming crate and may change.
+                            </Callout>
+                            <SyntaxHighlighter language="rust">
+                                {props.intrinsicsRust.join("\n")}
+                            </SyntaxHighlighter>
+                        </>}
 
                     <H2 id="headingExceptions">Exceptions</H2>
                     {props.exceptions.protected &&
