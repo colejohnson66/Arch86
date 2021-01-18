@@ -14,14 +14,21 @@
  * You should have received a copy of the GNU Affero General Public License along
  *   with this program. If not, see <https://www.gnu.org/licenses/>.
  */
+
+import { CSSProperties } from "react";
 import { H1 } from "@blueprintjs/core";
 import Layout from "../components/Layout";
 
 const Page = () => {
+    const IconStyle: CSSProperties = {
+        float: "left",
+        marginRight: "8px",
+    };
     return (
         <Layout navGroup="home">
             <div id="main">
                 <div id="content">
+                    <img src="/img/icon.svg" width="64" height="64" style={IconStyle} />
                     <H1>80x86 Website</H1>
                     <p>
                         Welcome to the 80x86 website.

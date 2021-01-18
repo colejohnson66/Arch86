@@ -15,7 +15,7 @@
  *   with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { Button, Navbar } from "@blueprintjs/core";
+import { Button, Icon, Navbar } from "@blueprintjs/core";
 
 import Head from "next/head";
 import Link from "next/link";
@@ -35,9 +35,7 @@ const Layout = (props: LayoutProps) => {
         return (
             <Link href={href}>
                 <a>
-                    <Button
-                        className="bp3-minimal"
-                        text={text} />
+                    <Button className="bp3-minimal" text={text} />
                 </a>
             </Link>
         );
@@ -57,14 +55,12 @@ const Layout = (props: LayoutProps) => {
             <header>
                 <Navbar>
                     <Navbar.Group>
-                        <Navbar.Heading>
-                            <Link href="/">
-                                <a>
-                                    <img className="navbarLogo" src="/img/icon@32.png" width="32" height="32" alt="" />
-                                    80x86
-                                </a>
-                            </Link>
-                        </Navbar.Heading>
+                        <Link href="/">
+                            <a>
+                                <Button className="bp3-minimal" text="80x86" />
+                            </a>
+                        </Link>
+                        <Navbar.Divider />
                         {navItem("about", "/about", "About")}
                         {navItem("instruction", "/instruction", "Instructions")}
                         {navItem("architecture", "/architecture", "Microarchitecture")}
