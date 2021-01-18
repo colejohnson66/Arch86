@@ -278,12 +278,6 @@ const Page = (props: PageProps) => {
             </div>
         </Layout>
     );
-    /*
-                    </Col>
-                </Row>
-            </Container>
-        </Layout>
-    );*/
 };
 
 export default Page;
