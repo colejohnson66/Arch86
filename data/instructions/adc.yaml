@@ -58,7 +58,6 @@ opcode:
     validity:
       1632: "valid"
       64: "valid"
-    # Intel's manual (v73) uses "CF"
     description: "Add with carry imm32 to r/m32."
   - opcode: "REX.W 81 /2 id"
     mnemonic: "ADC r/m64, imm32"
@@ -66,7 +65,6 @@ opcode:
     validity:
       1632: "n/e"
       64: "valid"
-    # Intel's manual (v73) uses "CF"
     description: "Add with carry imm32 sign extended to 64 bits too r/m64."
   - opcode: "83 /2 ib"
     mnemonic: "ADC r/m16, imm8"
@@ -74,7 +72,6 @@ opcode:
     validity:
       1632: "valid"
       64: "valid"
-    # Intel's manual (v73) uses "CF" and "sign extended imm8"
     description: "Add with carry imm8 sign extended to 16 bits to r/m16."
   - opcode: "83 /2 ib"
     mnemonic: "ADC r/m32, imm8"
@@ -82,7 +79,6 @@ opcode:
     validity:
       1632: "valid"
       64: "valid"
-    # Intel's manual (v73) uses "CF" and "sign extended imm8"
     description: "Add with carry imm8 sign extended to 32 bits to r/m32."
   - opcode: "REX.W 83 /2 ib"
     mnemonic: "ADC r/m64, imm8"
@@ -90,7 +86,6 @@ opcode:
     validity:
       1632: "n/e"
       64: "valid"
-    # Intel's manual (v73) uses "CF" and "sign extended imm8"
     description: "Add with carry imm8 sign extended to 64 bits to r/m64."
   - opcode: "10 /r"
     mnemonic: "ADC r/m8, r8"
@@ -98,7 +93,6 @@ opcode:
     validity:
       1632: "valid"
       64: "valid"
-    # Intel's manual (v73) uses "byte register"
     description: "Add with carry r8 to r/m8."
   - opcode: "REX 10 /r"
     mnemonic: "ADC r/m8*, r8*"
@@ -106,7 +100,6 @@ opcode:
     validity:
       1632: "n/e"
       64: "valid"
-    # Intel's manual (v73) uses "byte register"
     description: "Add with carry r8 to r/m8."
   - opcode: "11 /r"
     mnemonic: "ADC r/m16, r16"
@@ -121,7 +114,6 @@ opcode:
     validity:
       1632: "valid"
       64: "valid"
-    # Intel's manual (v73) uses "CF"
     description: "Add with carry r32 to r/m32."
   - opcode: "REX.W 11 /r"
     mnemonic: "ADC r/m64, r64"
@@ -129,7 +121,6 @@ opcode:
     validity:
       1632: "n/e"
       64: "valid"
-    # Intel's manual (v73) uses "CF"
     description: "Add with carry r64 to r/m64."
   - opcode: "12 /r"
     mnemonic: "ADC r8, r/m8"
@@ -137,7 +128,6 @@ opcode:
     validity:
       1632: "valid"
       64: "valid"
-    # Intel's manual (v73) uses "byte register"
     description: "Add with carry r/m8 to r8."
   - opcode: "REX 12 /r"
     mnemonic: "ADC r8*, r/m8*"
@@ -145,7 +135,6 @@ opcode:
     validity:
       1632: "n/e"
       64: "valid"
-    # Intel's manual (v73) uses "r/m64" and "byte register"
     description: "Add with carry r/m8 to r8."
   - opcode: "13 /r"
     mnemonic: "ADC r16, r/m16"
@@ -160,7 +149,6 @@ opcode:
     validity:
       1632: "valid"
       64: "valid"
-    # Intel's manual (v73) uses "CF"
     description: "Add with carry r/m32 to r32."
   - opcode: "REX.W 13 /r"
     mnemonic: "ADC r64, r/m64"
@@ -168,7 +156,6 @@ opcode:
     validity:
       1632: "n/e"
       64: "valid"
-    # Intel's manual (v73) uses "CF"
     description: "Add with carry r/m64 to r64."
 encoding:
   operands: 2
@@ -249,3 +236,13 @@ exceptions:
     "#PF(fault-code)": "If a page fault occurs."
     "#AC(0)": "If alignment checking is enabled and an unaligned memory reference is made while the current privilege level is 3."
     "#UD": "If the LOCK prefix is used but the destination is not a memory operand."
+changes:
+  version: 73
+  date: "2020-11"
+  list:
+    - "In the overview table, various uses of 'Add with CF...' were changed to 'Add with carry'."
+    - "In the overview table, a few uses of '...sign extended imm8...' were changed to '...imm8 sign extended to n-bits...'"
+    - "In the overview table, a few uses of '...byte register' were changed to '...r8'."
+    - >-
+      In the overview table, the entry for 'REX 12 /r' (ADC r8*, r/m8*) erroneously used 'r/m64' in the description.
+      This has been corrected to 'r/m8'.

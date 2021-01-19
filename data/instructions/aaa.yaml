@@ -1,6 +1,5 @@
 %YAML 1.2
 ---
-# Intel's manual (v73) doesn't say "AL"
 title: "ASCII Adjust AL After Addition"
 validity: "1632,64"
 opcode:
@@ -55,3 +54,8 @@ exceptions:
   compatibility: "Same exceptions as protected mode."
   long:
     "#UD": "If in 64-bit mode."
+changes:
+  version: 73
+  date: "2020-11"
+  list:
+    - "In the instruction title, 'AL' was added."

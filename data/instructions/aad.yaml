@@ -44,7 +44,6 @@ operation: >-
       AH = 0;
     }
   }
-# Intel's manual (v73) uses a semicolon
 flags: >-
   The SF, ZF, and PF flags are set according to the resulting binary value in the AL register.
   The OF, AF, and CF flags are undefined.
@@ -56,3 +55,8 @@ exceptions:
   compatibility: "Same exceptions as protected mode."
   long:
     "#UD": "If in 64-bit mode."
+changes:
+  version: 73
+  date: "2020-11"
+  list:
+    - "In the 'Flags Changed' section, a semicolon was changed to a period."

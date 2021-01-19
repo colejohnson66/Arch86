@@ -10,7 +10,6 @@ opcode:
       32: "valid"
       64: "valid"
     cpuid: "ADX"
-    # Intel's manual (v73) uses "CF"
     description: "Unsigned addition of r32 with carry flag and r/m32 to r32. Writes carry flag."
   - opcode: "66 REX.W 0F 38 F6 /r"
     mnemonic: "ADCX r64, r/m64"
@@ -19,7 +18,6 @@ opcode:
       32: "n/e"
       64: "valid"
     cpuid: "ADX"
-    # Intel's manual (v73) uses "CF"
     description: "Unsigned addition of r64 with carry flag and r/m64 to r64. Writes carry flag."
 encoding:
   operands: 2
@@ -94,3 +92,8 @@ exceptions:
     "#GP(0)": "If the memory address is in a non-canonical form."
     "#PF(fault-code)": "If a page fault occurs."
     "#AC(0)": "If alignment checking is enabled and an unaligned memory reference is made while the current privilege level is 3."
+changes:
+  version: 73
+  date: "2020-11"
+  list:
+    - "In the overview table, both description cells use '...with CF and...'. This has been changed to '...with carry flag and...'."
