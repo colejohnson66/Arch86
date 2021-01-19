@@ -160,6 +160,14 @@ const Page = (props: PageProps) => {
                 </TOC.Root>
                 <div id="content">
                     <H1><Code>{props.id.toUpperCase()}</Code>: {props.title}</H1>
+                    <Callout intent="primary">
+                        Almost all the information on this page is copied from the <a
+                            href="https://software.intel.com/content/www/us/en/develop/articles/intel-sdm.html" className="external">
+                            <i>Intel® 64 and IA-32 Architectures Software Developer’s Manual</i></a> copyright &copy; 1997-2020 Intel Corporation.
+                        Any changes to the content from the manual will be in the "Manual Changes" section (if any).
+                        <br />
+                        The only exception to this is the "Examples" section (if present).
+                    </Callout>
                     <HTMLTable striped bordered interactive>
                         <thead>
                             <tr>
