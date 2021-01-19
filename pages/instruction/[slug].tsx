@@ -19,6 +19,7 @@ import { Breadcrumbs, Callout, Card, Code, H1, H2, H3, HTMLTable, IBreadcrumbPro
 import { GetStaticPaths, GetStaticProps } from "next";
 import { getAllInstructionsAsParams, getInstructionData } from "../../lib/instruction";
 
+import DateTime from "../../components/DateTime";
 import IDictionary from "../../types/IDictionary";
 import Layout from "../../components/Layout";
 import Link from "next/link";
@@ -70,6 +71,11 @@ type Exceptions = {
     floating?: string,
     other?: string,
 };
+type Changes = {
+    version: number,
+    date: string,
+    list: string | string[],
+};
 type PageProps = {
     id: string,
     title: string,
@@ -83,7 +89,7 @@ type PageProps = {
     intrinsicsC?: string[],
     intrinsicsRust?: string[],
     exceptions: Exceptions,
-    changes?: string | string[],
+    changes?: Changes,
 };
 
 function plural<T>(arr: T | T[], singular: string, plural: string): string {
@@ -354,9 +360,10 @@ const Page = (props: PageProps) => {
                             <H2 id="headingChanges">Manual Changes</H2>
                             <p>
                                 This is a list of changes that have been made from the {sdmTitleWithLink}.
+                                These changes were against version {props.changes.version} (dated <DateTime dateTime={props.changes.date} />).
                             </p>
                             <UL>
-                                {coerceArray(props.changes).map((change, idx) => (
+                                {coerceArray(props.changes.list).map((change, idx) => (
                                     <li key={idx}>{brTagsFromString(change)}</li>
                                 ))}
                             </UL>

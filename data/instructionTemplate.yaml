@@ -35,4 +35,7 @@ exceptions:
   floating:
   other:
 changes:
-  -
+  version: 73
+  date: "2020-11"
+  list:
+    -
