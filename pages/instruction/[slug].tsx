@@ -26,7 +26,6 @@ import React from "react";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import TOC from "../../components/TOC";
 import renderBreadcrumbs from "../../lib/renderBreadcrumbs";
-import { route } from "next/dist/next-server/server/router";
 
 type OpcodeValidityValues = "valid" | "valid*" | "invalid" | "n/e";
 const OpcodeValidityMap: { [T in OpcodeValidityValues]: string } = {
@@ -79,10 +78,24 @@ type PageProps = {
     encoding: Encoding,
     description: string,
     operation: string,
+    examples?: string | string[]
     flags?: string,
     intrinsicsC?: string[],
     intrinsicsRust?: string[],
     exceptions: Exceptions,
+    changes?: string | string[],
+};
+
+function plural<T>(arr: T | T[], singular: string, plural: string): string {
+    if (Array.isArray(arr) && arr.length !== 0)
+        return plural;
+    return singular;
+}
+
+function coerceArray<T>(arr: T | T[]): T[] {
+    if (Array.isArray(arr))
+        return arr;
+    return [arr];
 }
 
 function brTagsFromArray(arr: string[]): JSX.Element[] {
@@ -92,6 +105,10 @@ function brTagsFromArray(arr: string[]): JSX.Element[] {
             {idx !== arr.length - 1 && <br />}
         </React.Fragment>
     ));
+}
+
+function brTagsFromString(str: string): JSX.Element[] {
+    return brTagsFromArray(str.split("\n"));
 }
 
 function paragraphsFromArray(arr: string[]): JSX.Element[] {
@@ -125,6 +142,11 @@ const Page = (props: PageProps) => {
         { text: props.id.toUpperCase() },
     ];
 
+    const sdmTitleWithLink = (
+        <a href="https://software.intel.com/content/www/us/en/develop/articles/intel-sdm.html" className="external">
+            <i>Intel® 64 and IA-32 Architectures Software Developer’s Manual</i>
+        </a>);
+
     return (
         <Layout navGroup="instruction" title={`${props.id.toUpperCase()} Instruction`}>
             <Card className="breadcrumbs" interactive>
@@ -135,12 +157,14 @@ const Page = (props: PageProps) => {
                     <TOC.Entry href="#headingEncoding" text="Encoding" />
                     <TOC.Entry href="#headingDescription" text="Description" />
                     <TOC.Entry href="#headingOperation" text="Operation" />
+                    {props.examples &&
+                        <TOC.Entry href="#headingExamples" text={plural(props.examples, "Example", "Examples")} />}
                     {props.flags &&
                         <TOC.Entry href="#headingFlags" text="Flags Affected" />}
                     {props.intrinsicsC &&
-                        <TOC.Entry href="#headingIntrinsicsC" text="Intrinsics (C)" />}
+                        <TOC.Entry href="#headingIntrinsicsC" text="Intrinsics - C" />}
                     {props.intrinsicsRust &&
-                        <TOC.Entry href="#headingIntrinsicsRust" text="Intrinsics (Rust)" />}
+                        <TOC.Entry href="#headingIntrinsicsRust" text="Intrinsics - Rust" />}
                     <TOC.Entry href="#headingExceptions" text="Exceptions">
                         {props.exceptions.protected &&
                             <TOC.Entry href="#headingExceptionsProtected" text="Protected Mode" />}
@@ -157,16 +181,21 @@ const Page = (props: PageProps) => {
                         {props.exceptions.other &&
                             <TOC.Entry href="#headingExceptionsOther" text="Other" />}
                     </TOC.Entry>
+                    {props.changes &&
+                        <TOC.Entry href="#headingChanges" text="Manual Changes" />}
                 </TOC.Root>
                 <div id="content">
                     <H1><Code>{props.id.toUpperCase()}</Code>: {props.title}</H1>
                     <Callout intent="primary">
-                        Almost all the information on this page is copied from the <a
-                            href="https://software.intel.com/content/www/us/en/develop/articles/intel-sdm.html" className="external">
-                            <i>Intel® 64 and IA-32 Architectures Software Developer’s Manual</i></a> copyright &copy; 1997-2020 Intel Corporation.
-                        Any changes to the content from the manual will be in the "Manual Changes" section (if any).
-                        <br />
-                        The only exception to this is the "Examples" section (if present).
+                        Almost all the information on this page is copied from the {sdmTitleWithLink} copyright &copy; 1997-2020 Intel Corporation.
+                        {props.changes &&
+                            <>
+                                {" "}Any changes to the content from the manual will be in the <a href="#headingChanges">Manual Changes</a> section.
+                            </>}
+                        {props.examples &&
+                            <>
+                                {" "}The only exception to this is the <a href="#headingExamples">{plural(props.examples, "Example", "Examples")}</a> section.
+                            </>}
                     </Callout>
                     <HTMLTable striped bordered interactive>
                         <thead>
@@ -233,9 +262,26 @@ const Page = (props: PageProps) => {
                     {paragraphsFromString(props.description)}
 
                     <H2 id="headingOperation">Operation</H2>
+                    <Callout intent="primary">
+                        The {sdmTitleWithLink} uses a pseudo-code style syntax.
+                        Due to my own personal preference, they have been converted to a Rust-like syntax.
+                    </Callout>
                     <SyntaxHighlighter language="rust">
                         {props.operation}
                     </SyntaxHighlighter>
+
+                    {props.examples &&
+                        <>
+                            <H2 id="headingExamples">{plural(props.examples, "Example", "Examples")}</H2>
+                            <Callout intent="primary">
+                                {plural(props.examples, "This example uses", "These examples use")} NASM syntax.
+                            </Callout>
+                            {coerceArray(props.examples).map((example, idx) => (
+                                <SyntaxHighlighter key={idx} language="nasm">
+                                    {example}
+                                </SyntaxHighlighter>
+                            ))}
+                        </>}
 
                     {props.flags &&
                         <>
@@ -245,7 +291,7 @@ const Page = (props: PageProps) => {
 
                     {props.intrinsicsC &&
                         <>
-                            <H2 id="headingIntrinsicsC">Intrinsics (C)</H2>
+                            <H2 id="headingIntrinsicsC">Intrinsics - C</H2>
                             <Callout intent="primary">
                                 The official intrinsics use the full definition from the header file.
                                 These intrinsics are shorter definitions of those using fixed-width integer types.
@@ -257,7 +303,7 @@ const Page = (props: PageProps) => {
 
                     {props.intrinsicsRust &&
                         <>
-                            <H2 id="headingIntrinsicsRust">Intrinsics (Rust)</H2>
+                            <H2 id="headingIntrinsicsRust">Intrinsics - Rust</H2>
                             <Callout intent="primary">
                                 These intrinsics are from an upcoming crate and may change.
                             </Callout>
@@ -301,6 +347,19 @@ const Page = (props: PageProps) => {
                         <>
                             <H3 id="headingExceptionsOther">Other</H3>
                             {paragraphsFromString(props.exceptions.other)}
+                        </>}
+
+                    {props.changes &&
+                        <>
+                            <H2 id="headingChanges">Manual Changes</H2>
+                            <p>
+                                This is a list of changes that have been made from the {sdmTitleWithLink}.
+                            </p>
+                            <UL>
+                                {coerceArray(props.changes).map((change, idx) => (
+                                    <li key={idx}>{brTagsFromString(change)}</li>
+                                ))}
+                            </UL>
                         </>}
                 </div>
             </div>

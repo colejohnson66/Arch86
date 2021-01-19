@@ -1,36 +1,38 @@
 %YAML 1.2
 ---
-title: ""
-validity: ""
+title:
+validity: "1632,64"
 opcode:
-  - opcode: ""
-    mnemonic: ""
-    encoding: ""
+  - opcode:
+    mnemonic:
+    encoding:
     validity:
-      1632: ""
-      64: ""
-    cpuid: ""
-    description: ""
+      1632:
+      64:
+    cpuid:
+    description:
 encoding:
-  ops: 4
+  ops: 2
   encodings:
     MI:
-      - ""
-      - ""
-      - ""
-      - ""
+      -
+      -
 description: >-
 operation: >-
+examples:
+  - >-
 flags: >-
 intrinsicsC:
   - ""
 intrinsicsRust:
   - ""
 exceptions:
-  protected: ""
-  real: ""
-  virtual: ""
-  compatibility: ""
-  long: ""
-  floating: ""
-  other: ""
+  protected: 
+  real:
+  virtual:
+  compatibility:
+  long:
+  floating:
+  other:
+changes:
+  -
