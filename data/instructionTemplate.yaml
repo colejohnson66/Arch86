@@ -9,6 +9,7 @@ opcode:
     validity:
       1632: ""
       64: ""
+    cpuid: ""
     description: ""
 encoding:
   - encoding: ""
@@ -19,6 +20,10 @@ encoding:
 description: >-
 operation: >-
 flags: >-
+intrinsicsC:
+  - ""
+intrinsicsRust:
+  - ""
 exceptions:
   protected: ""
   real: ""
