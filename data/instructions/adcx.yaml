@@ -50,6 +50,7 @@ description: >-
 operation: >-
   fn adcx<D, S>(dest: D, src: S) {
     dest = dest + src + CF;
+    setCF(dest);
   }
 flags: >-
   CF is updated based on the result. OF, SF, ZF, AF, and PF flags are unmodified.

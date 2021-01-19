@@ -214,6 +214,7 @@ description: >-
 operation: >-
   fn adc<D, S>(dest: D, src: S) {
     dest = dest + src + CF;
+    setFlags(dest);
   }
 flags: >-
   The OF, SF, ZF, CF, and PF flags are set according to the result.
