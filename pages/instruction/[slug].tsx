@@ -202,7 +202,9 @@ const Page = (props: PageProps) => {
                                 {props.encoding.hasTuple &&
                                     <th>Tuple Type</th>}
                                 {[...Array(props.encoding.operands)].map((_, idx) => (
-                                    <th key={idx}>Operand {idx + 1}</th>
+                                    props.encoding.operands === 1
+                                        ? <th key={idx}>Operand</th>
+                                        : <th key={idx}>Operand {idx + 1}</th>
                                 ))}
                             </tr>
                         </thead>
