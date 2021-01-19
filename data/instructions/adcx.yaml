@@ -22,11 +22,11 @@ opcode:
     # Intel's manual (v73) uses "CF"
     description: "Unsigned addition of r64 with carry flag and r/m64 to r64. Writes carry flag."
 encoding:
-  - encoding: "RM"
-    op1: "ModRM:reg[rw]"
-    op2: "ModRM.r/m[r]"
-    op3: "N/A"
-    op4: "N/A"
+  operands: 2
+  encodings:
+    RM:
+      - "ModRM:reg[rw]"
+      - "ModRM:r/w[r]"
 description: >-
   Performs an unsigned addition of the destination operand (first operand), the source operand (second operand), and the carry flag (CF) and stores the result in the destination operand.
   The destination operand can be a general purpose register or memory location.

@@ -26,6 +26,7 @@ import React from "react";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import TOC from "../../components/TOC";
 import renderBreadcrumbs from "../../lib/renderBreadcrumbs";
+import { route } from "next/dist/next-server/server/router";
 
 type OpcodeValidityValues = "valid" | "valid*" | "invalid" | "n/e";
 const OpcodeValidityMap: { [T in OpcodeValidityValues]: string } = {
@@ -56,11 +57,9 @@ type Opcode = {
     description: string,
 };
 type Encoding = {
-    encoding: string,
-    op1: string,
-    op2: string,
-    op3: string,
-    op4: string,
+    operands: number,
+    hasTuple?: boolean,
+    encodings: IDictionary<string[]>,
 };
 type ExceptionList = IDictionary<string | string[]>;
 type Exceptions = {
@@ -77,7 +76,7 @@ type PageProps = {
     title: string,
     validity: string,
     opcode: Opcode[],
-    encoding: Encoding[],
+    encoding: Encoding,
     description: string,
     operation: string,
     flags?: string,
@@ -200,22 +199,23 @@ const Page = (props: PageProps) => {
                         <thead>
                             <tr>
                                 <th>Op/En</th>
-                                <th>Operand 1</th>
-                                <th>Operand 2</th>
-                                <th>Operand 3</th>
-                                <th>Operand 4</th>
+                                {props.encoding.hasTuple &&
+                                    <th>Tuple Type</th>}
+                                {[...Array(props.encoding.operands)].map((_, idx) => (
+                                    <th key={idx}>Operand {idx + 1}</th>
+                                ))}
                             </tr>
                         </thead>
                         <tbody>
-                            {props.encoding.map((row, idx) => (
-                                <tr key={idx}>
-                                    <td><Code>{row.encoding}</Code></td>
-                                    <td>{row.op1}</td>
-                                    <td>{row.op2}</td>
-                                    <td>{row.op3}</td>
-                                    <td>{row.op4}</td>
-                                </tr>
-                            ))}
+                            {Object.keys(props.encoding.encodings).map((key) => {
+                                const val = props.encoding.encodings[key];
+                                return (
+                                    <tr key={key}>
+                                        <td><Code>{key}</Code></td>
+                                        {val.map((value, idx) => (<td key={idx}>{value}</td>))}
+                                    </tr>
+                                );
+                            })}
                         </tbody>
                     </HTMLTable>
 

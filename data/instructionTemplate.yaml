@@ -12,11 +12,13 @@ opcode:
     cpuid: ""
     description: ""
 encoding:
-  - encoding: ""
-    op1: ""
-    op2: ""
-    op3: ""
-    op4: ""
+  ops: 4
+  encodings:
+    MI:
+      - ""
+      - ""
+      - ""
+      - ""
 description: >-
 operation: >-
 flags: >-

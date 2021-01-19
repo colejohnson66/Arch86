@@ -11,12 +11,9 @@ opcode:
       64: "invalid"
     description: "ASCII adjust AL after subtraction."
 encoding:
-  # Intel's manual (v73) says "NA"
-  - encoding: "ZO"
-    op1: "N/A"
-    op2: "N/A"
-    op3: "N/A"
-    op4: "N/A"
+  operands: 0
+  encodings:
+    ZO: []
 # Intel's manual (v73) says "The AAA instruction then adjusts..."
 description: >-
   Adjusts the result of the subtraction of two unpacked BCD values to create an unpacked BCD result.

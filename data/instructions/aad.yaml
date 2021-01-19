@@ -18,11 +18,9 @@ opcode:
       64: "invalid"
     description: "Adjust AX before division to number base imm8."
 encoding:
-  - encoding: "ZO"
-    op1: "N/A"
-    op2: "N/A"
-    op3: "N/A"
-    op4: "N/A"
+  operands: 0
+  encodings:
+    ZO: []
 description: >-
   Adjusts two unpacked BCD digits (the least-significant digit in the AL register and the most-significant digit in the AH register) so that a division operation performed on the result will yield a correct unpacked BCD value.
   The AAD instruction is only useful when it precedes a DIV instruction that divides (binary division) the adjusted vale in the AX register by an unpacked BCD value.

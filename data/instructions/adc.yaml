@@ -171,26 +171,20 @@ opcode:
     # Intel's manual (v73) uses "CF"
     description: "Add with carry r/m64 to r64."
 encoding:
-  - encoding: "I"
-    op1: "AL/AX/EAX/RAX"
-    op2: "imm8/16/32"
-    op3: "N/A"
-    op4: "N/A"
-  - encoding: "MI"
-    op1: "ModRM:r/m[rw]"
-    op2: "imm8/16/32"
-    op3: "N/A"
-    op4: "N/A"
-  - encoding: "MR"
-    op1: "ModRM:r/m[rw]"
-    op2: "ModRM:reg[r]"
-    op3: "N/A"
-    op4: "N/A"
-  - encoding: "RM"
-    op1: "ModRM:reg[rw]"
-    op2: "ModRM:r/m[r]"
-    op3: "N/A"
-    op4: "N/A"
+  operands: 2
+  encodings:
+    I:
+      - "AL/AX/EAX/RAX"
+      - "imm8/16/32"
+    MI:
+      - "ModRM:r/m[rw]"
+      - "imm8/16/32"
+    MR:
+      - "ModRM:r/m[rw]"
+      - "ModRM:reg[r]"
+    RM:
+      - "ModRM:reg[rw]"
+      - "ModRM:r/m[r]"
 description: >-
   Adds the destination operand (first operand), the source operand (second operand), and the carry (CF) flag and stores the result in the destination operand.
   The destination operand can be a register or a memory location;
