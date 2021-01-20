@@ -15,7 +15,7 @@
  *   with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { Breadcrumbs, Callout, Card, Code, H1, H2, H3, HTMLTable, IBreadcrumbProps, UL } from "@blueprintjs/core";
+import { Breadcrumbs, Callout, Card, Code, H1, H2, H3, HTMLTable, IBreadcrumbProps, OL, UL } from "@blueprintjs/core";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { getAllInstructionsAsParams, getInstructionData } from "../../lib/instruction";
 
@@ -85,6 +85,7 @@ type PageProps = {
     encoding: Encoding,
     description: string,
     operation: string,
+    operationNotes: string[],
     examples?: string | string[]
     flags?: string,
     intrinsicsC?: string[],
@@ -171,7 +172,11 @@ const Page = (props: PageProps) => {
                 <TOC.Root>
                     <TOC.Entry href="#headingEncoding" text="Encoding" />
                     <TOC.Entry href="#headingDescription" text="Description" />
-                    <TOC.Entry href="#headingOperation" text="Operation" />
+                    {props.operationNotes
+                        ? <TOC.Entry href="#headingOperation" text="Operation">
+                            <TOC.Entry href="#headingOperationNotes" text="Notes" />
+                        </TOC.Entry>
+                        : <TOC.Entry href="#headingOperation" text="Operation" />}
                     {props.examples &&
                         <TOC.Entry href="#headingExamples" text={plural(props.examples, "Example", "Examples")} />}
                     {props.flags &&
@@ -284,6 +289,15 @@ const Page = (props: PageProps) => {
                     <SyntaxHighlighter language="rust">
                         {props.operation}
                     </SyntaxHighlighter>
+                    {props.operationNotes &&
+                        <>
+                            <H3 id="headingOperationNotes">Notes</H3>
+                            <OL>
+                                {props.operationNotes.map((note, idx) => (
+                                    <li key={idx}>{brTagsFromString(note)}</li>
+                                ))}
+                            </OL>
+                        </>}
 
                     {props.examples &&
                         <>

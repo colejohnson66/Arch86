@@ -1,9 +1,9 @@
 %YAML 1.2
 ---
 title:
-validity: "1632,64"
+validity: 1632,64
 opcode:
-  - opcode:
+  - opcode: ""
     mnemonic:
     encoding:
     validity:
@@ -19,6 +19,8 @@ encoding:
       -
 description: >-
 operation: >-
+operationNotes:
+  - >-
 examples:
   - >-
 flags: >-
@@ -36,6 +38,6 @@ exceptions:
   other:
 changes:
   version: 73
-  date: "2020-11"
+  date: 2020-11
   list:
     -
