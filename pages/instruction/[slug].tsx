@@ -206,17 +206,6 @@ const Page = (props: PageProps) => {
                 </TOC.Root>
                 <div id="content">
                     <H1><Code>{props.id.toUpperCase()}</Code>: {props.title}</H1>
-                    <Callout intent="primary">
-                        Almost all the information on this page is copied from the {sdmTitleWithLink} copyright &copy; 1997-2020 Intel Corporation.
-                        {props.changes &&
-                            <>
-                                {" "}Any changes to the content from the manual will be in the <a href="#headingChanges">Manual Changes</a> section.
-                            </>}
-                        {props.examples &&
-                            <>
-                                {" "}The only exception to this is the <a href="#headingExamples">{plural(props.examples, "Example", "Examples")}</a> section.
-                            </>}
-                    </Callout>
                     <HTMLTable striped bordered interactive>
                         <thead>
                             <tr>
@@ -283,8 +272,7 @@ const Page = (props: PageProps) => {
 
                     <H2 id="headingOperation">Operation</H2>
                     <Callout intent="primary">
-                        The {sdmTitleWithLink} uses a pseudo-code style syntax.
-                        Due to my own personal preference, they have been converted to a Rust-like syntax.
+                        This pseudo-code uses a Rust-like syntax.
                     </Callout>
                     <SyntaxHighlighter language="rust">
                         {props.operation}

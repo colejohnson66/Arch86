@@ -1,39 +1,49 @@
 %YAML 1.2
 ---
-title: "ASCII Adjust AL After Addition"
-validity: "1632,64"
+title: ASCII Adjust AL After Addition
+validity: 1632,64
 opcode:
   - opcode: "37"
-    mnemonic: "AAA"
-    encoding: "ZO"
+    mnemonic: AAA
+    encoding: ZO
     validity:
-      1632: "valid"
-      64: "invalid"
-    description: "ASCII adjust AL after addition."
+      1632: valid
+      64: invalid
+    description: ASCII adjust AL after addition.
 encoding:
   operands: 1
   encodings:
     ZO:
       - "None"
 description: >-
-  Adjusts the sum of two unpacked BCD values to create an unpacked BCD result.
-  The AL register is the implied source and destination operand for this instruction.
-  The AAA instruction is only useful when it follows an ADD instruction that adds (binary addition) two unpacked BCD values and stores a byte result in the AL register.
-  The AAA instruction then adjusts the contents of the AL register to contain the correct 1-digit unpacked BCD result.
+  The \c{AAA} instruction converts the result of an addition of two BCD digits to a valid 2-digit BCD number.
 
-  If the instruction produces a decimal carry, the AH register increments by 1, and the CF and AF flags are set.
-  If there was no decimal carry, the CF and AF flags are cleared and the AH register is unchanged.
-  In either case, bits 4 through 7 of the AL register are set to 0.
+  This instruction will not be useful unless it immediately follows an \instr{ADD} instruction using the \reg{AL} register and a single digit operand (either register or immediate).
+  An example of such usage is below.
 
-  This instruction executes as described in compatibility mode and legacy mode.
-  It is not valid in 64-bit mode.
-operation: >-
+  Traditionally, this instruction is "ASCII Adjust After Addition".
+  This would lead one to believe that it works on ASCII digits (\c{030h} (\c{0}) through \c{039h} (\c{9})), however this would be incorrect.
+  This instruction \i{actually} operates on BCD digits (\c{00h} (\c{0}) through \c{09h} (\c{9})).
+
+  This instruction operates on only the lower 4 bits of \reg{AL}.
+  This instruction will only execute if the lower 4 bits of \reg{AL} are greater than 9, or if the \reg{AF} flag is set.
+
+  This instruction is not valid in 64-bit mode, and if encountered, the processor will raise a \c{#UD} exception.
+  In 16- or 32-bit mode, this instruction will only modify the \reg{AF} and \reg{CF} flags.
+  The other arithmetic flags are undefined and undocumented.
+operation: |-
   fn aaa() {
     if (MODE == 64) {
       #UD;
     } else {
       if (((AL & 0xF) > 9) || AF) {
-        AX = AX + 0x106;
+        match PROCESSOR {
+          8086 | 8088 | 80186 => {
+            AH = AH + 1; // see note 1
+            AL = AL + 6;
+          },
+          _ => AX = AX + 0x106;
+        };
         AF = 1;
         CF = 1;
       } else {
@@ -43,19 +53,28 @@ operation: >-
       AL = AL & 0xF;
     }
   }
+operationNotes:
+  - >-
+    According to the source code for Bochs' (\c{/cpu/bcd.cc}), this instruction is implemented differently on the 80186 and prior.
+    This different operation is shown above.
+examples:
+  - |-
+    mov ax, 0x106 ; 16 (decimal) in BCD
+    add al, 5     ; AX == 0x10B
+    aaa           ; AX == 0x202 (22 (decimal)) in BCD
+  - |-
+    # Also handles overflow into the upper 4 bits of AL
+    mov ax, 0x109 ; 19 (decimal) in BCD
+    add al, 9     ; AX == 0x112; AF == 1
+    aaa           ; AX == 0x208 (28 (decimal)) in BCD
 flags: >-
-  The AF and CF flags are set to 1 if the adjustment results in a decimal carry; otherwise they are set to 0.
-  The OF, SF, ZF, and PF flags are undefined.
+  The \reg{AF} and \reg{CF} flags are set to 1 if the adjustment results in a decimal carry; otherwise they are set to 0.
+  The \reg{OF}, \reg{SF}, \reg{ZF}, and \reg{PF} flags are undefined.
 exceptions:
   protected:
-    "#UD": "If the LOCK prefix is used."
-  real: "Same exceptions as protected mode."
-  virtual: "Same exceptions as protected mode."
-  compatibility: "Same exceptions as protected mode."
+    "#UD": If the \instr{LOCK} prefix is used.
+  real: Same exceptions as protected mode.
+  virtual: Same exceptions as protected mode.
+  compatibility: Same exceptions as protected mode.
   long:
-    "#UD": "If in 64-bit mode."
-changes:
-  version: 73
-  date: "2020-11"
-  list:
-    - "In the instruction title, 'AL' was added."
+    "#UD": If in 64-bit mode.

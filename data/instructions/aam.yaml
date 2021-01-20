@@ -1,42 +1,45 @@
 %YAML 1.2
 ---
-title: "ASCII Adjust AX After Multiply"
-validity: "1632,64"
+title: ASCII Adjust AX After Multiplication
+validity: 1632,64
 opcode:
-  - opcode: "D4 0A"
-    mnemonic: "AAM"
-    encoding: "ZO"
+  - opcode: D4 0A
+    mnemonic: AAM
+    encoding: ZO
     validity:
-      1632: "valid"
-      64: "invalid"
-    description: "ASCII adjust AX after multiply."
-  - opcode: "D4 ib"
-    mnemonic: "AAM imm8"
-    encoding: "ZO"
+      1632: valid
+      64: invalid
+    description: ASCII adjust AX after multiply.
+  - opcode: D4 \i{ib}
+    mnemonic: AAM \i{imm8}
+    encoding: I
     validity:
-      1632: "valid"
-      64: "invalid"
-    description: "Adjust AX after multiply to number base imm8."
+      1632: valid
+      64: invalid
+    description: ASCII adjust AX after multiply to number base \abbr{imm8}.
 encoding:
   operands: 1
   encodings:
     ZO:
-      - "None"
+      - None (implicitly 10)
+    I:
+      - imm8
 description: >-
-  Adjusts the result of the multiplication of two unpacked BCD values to create a pair of unpacked (base 10) BCD values.
-  The AX register is the implied source and destination operand for the instruction.
-  The AAM instruction is only useful when it follows a MUL instruction that multiplies (binary multiplication) two unpacked BCD values and stores a word in the AX register.
-  The AAM instruction then adjusts the contents of the AX register to contain the correct 2-digit unpacked (base 10) BCD result.
+  The \c{AAM} instruction converts the result of a multiplication of two BCD digits to a valid 2-digit BCD number.
 
-  The generalized version of this instruction allows adjustment of the contents of the AX to create two unpacked digits of any number base (see the "Operation" section below).
-  Here, the imm8 byte is set to the selected number base (for example, 08h for octal, 0Ah for decimal, or 0Ch for base 12 numbers).
-  The AAM mnemonic is interpreted by all assemblers to mean adjust to ASCII (base 10) values.
-  To adjust to values in another number base, the instruction must be hand coded in machine code (D4 imm8).
+  This instruction will not be useful unless it immediately follows an \instr{MUL} instruction.
 
-  This instruction executes as described in compatibility mode and legacy mode.
-  It is not valid in 64-bit mode.
+  Traditionally, this instruction is called "ASCII Adjust After Multiplication".
+  This would lead one to believe that it works on ASCII digits (\c{030h} (\c{0}) through \c{039h} (\c{9})), however this would be incorrect.
+  This instruction \i{actually} operates on BCD digits (\c{00h} (\c{0}) through \c{09h} (\c{9})).
+
+  Due to a quirk of history, this instruction encodes the base of the result in the instruction (the second byte).
+  As such, it is possible to have this instruction work on other bases through an immediate 8 bit operand.
+  Such methods are not guaranteed to be supported by your assembler, and in such situations, one must encode the instruction directly.
+
+  This instruction is not valid in 64-bit mode, and if encountered, the processor will raise a \c{#UD} exception.
 operation: >-
-  fn aad(imm8: u8) {
+  fn aam(imm8: u8) {
     if (MODE == 64) {
       #UD;
     } else {
@@ -45,14 +48,14 @@ operation: >-
     }
   }
 flags: >-
-  The SF, ZF, and PF flags are set according to the resulting binary value in the AL register.
-  The OF, AF, and CF flags are undefined.
+  The \reg{SF}, \reg{ZF}, and \reg{PF} flags are set according to the resulting binary value in the AL register.
+  The \reg{OF}, \reg{AF}, and \reg{CF} flags are undefined.
 exceptions:
   protected:
-    "#DE": "If an immediate value of 0 is used."
-    "#UD": "If the LOCK prefix is used."
-  real: "Same exceptions as protected mode."
-  virtual: "Same exceptions as protected mode."
-  compatibility: "Same exceptions as protected mode."
+    "#DE": If an immediate value of 0 is used.
+    "#UD": If the \instr{LOCK} prefix is used.
+  real: Same exceptions as protected mode.
+  virtual: Same exceptions as protected mode.
+  compatibility: Same exceptions as protected mode.
   long:
-    "#UD": "If in 64-bit mode."
+    "#UD": If in 64-bit mode.

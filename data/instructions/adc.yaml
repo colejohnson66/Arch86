@@ -1,209 +1,197 @@
 %YAML 1.2
 ---
-title: "Add With Carry"
-validity: "1632,64"
+title: Add With Carry
+validity: 1632,64
 opcode:
-  - opcode: "14 ib"
-    mnemonic: "ADC AL, imm8"
-    encoding: "I"
+  - opcode: 14 \i{ib}
+    mnemonic: ADC AL, \i{imm8}
+    encoding: I
     validity:
-      1632: "valid"
-      64: "valid"
-    description: "Add with carry imm8 to AL."
-  - opcode: "15 iw"
-    mnemonic: "ADC AX, imm16"
-    encoding: "I"
+      1632: valid
+      64: valid
+    description: Add with carry \abbr{imm8} to AL.
+  - opcode: 15 \i{iw}
+    mnemonic: ADC AX, \i{imm16}
+    encoding: I
     validity:
-      1632: "valid"
-      64: "valid"
-    description: "Add with carry imm16 to AX."
-  - opcode: "15 id"
-    mnemonic: "ADC EAX, imm32"
-    encoding: "I"
+      1632: valid
+      64: valid
+    description: Add with carry \abbr{imm16} to AX.
+  - opcode: 15 \i{id}
+    mnemonic: ADC EAX, \i{imm32}
+    encoding: I
     validity:
-      1632: "valid"
-      64: "valid"
-    description: "Add with carry imm32 to EAX."
-  - opcode: "REX.W 15 id"
-    mnemonic: "ADC RAX, imm32"
-    encoding: "I"
+      1632: valid
+      64: valid
+    description: Add with carry \abbr{imm32} to EAX.
+  - opcode: REX.W 15 \i{id}
+    mnemonic: ADC RAX, \i{imm32}
+    encoding: I
     validity:
-      1632: "n/e"
-      64: "valid"
-    description: "Add with carry imm32 sign extended to 64 bits to RAX"
-  - opcode: "80 /2 ib"
-    mnemonic: "ADC r/m8, imm8"
-    encoding: "MI"
+      1632: n/e
+      64: valid
+    description: Add with carry \abbr{imm32} sign extended to 64 bits to RAX
+  - opcode: 80 /2 \i{ib}
+    mnemonic: ADC \i{r/m8}, \i{imm8}
+    encoding: MI
     validity:
-      1632: "valid"
-      64: "valid"
-    description: "Add with carry imm8 to r/m8."
-  - opcode: "REX 80 /2 ib"
-    mnemonic: "ADC r/m8*, imm8"
-    encoding: "MI"
+      1632: valid
+      64: valid
+    description: Add with carry \abbr{imm8} to \abbr{r/m8}.
+  - opcode: REX 80 /2 \i{ib}
+    mnemonic: ADC \i{r/m8*}, \i{imm8}
+    encoding: MI
     validity:
-      1632: "n/e"
-      64: "valid"
-    description: "Add with carry imm8 to r/m8."
-  - opcode: "81 /2 iw"
-    mnemonic: "ADC r/m16, imm16"
-    encoding: "MI"
+      1632: n/e
+      64: valid
+    description: Add with carry \abbr{imm8} to \abbr{r/m8}.
+  - opcode: 81 /2 \i{iw}
+    mnemonic: ADC \i{r/m16}, \i{imm16}
+    encoding: MI
     validity:
-      1632: "valid"
-      64: "valid"
-    description: "Add with carry imm16 to r/m16."
-  - opcode: "81 /2 id"
-    mnemonic: "ADC r/m32, imm32"
-    encoding: "MI"
+      1632: valid
+      64: valid
+    description: Add with carry \abbr{imm16} to \abbr{r/m16}.
+  - opcode: 81 /2 \i{id}
+    mnemonic: ADC \i{r/m32}, \i{imm32}
+    encoding: MI
     validity:
-      1632: "valid"
-      64: "valid"
-    description: "Add with carry imm32 to r/m32."
-  - opcode: "REX.W 81 /2 id"
-    mnemonic: "ADC r/m64, imm32"
-    encoding: "MI"
+      1632: valid
+      64: valid
+    description: Add with carry \abbr{imm32} to \abbr{r/m32}.
+  - opcode: REX.W 81 /2 \i{id}
+    mnemonic: ADC \i{r/m64}, \i{imm32}
+    encoding: MI
     validity:
-      1632: "n/e"
-      64: "valid"
-    description: "Add with carry imm32 sign extended to 64 bits too r/m64."
-  - opcode: "83 /2 ib"
-    mnemonic: "ADC r/m16, imm8"
-    encoding: "MI"
+      1632: n/e
+      64: valid
+    description: Add with carry \abbr{imm32} sign extended to 64 bits too \abbr{r/m64}.
+  - opcode: 83 /2 \i{ib}
+    mnemonic: ADC \i{r/m16}, \i{imm8}
+    encoding: MI
     validity:
-      1632: "valid"
-      64: "valid"
-    description: "Add with carry imm8 sign extended to 16 bits to r/m16."
-  - opcode: "83 /2 ib"
-    mnemonic: "ADC r/m32, imm8"
-    encoding: "MI"
+      1632: valid
+      64: valid
+    description: Add with carry \abbr{imm8} sign extended to 16 bits to \abbr{r/m16}.
+  - opcode: 83 /2 \i{ib}
+    mnemonic: ADC \i{r/m32}, \i{imm8}
+    encoding: MI
     validity:
-      1632: "valid"
-      64: "valid"
-    description: "Add with carry imm8 sign extended to 32 bits to r/m32."
-  - opcode: "REX.W 83 /2 ib"
-    mnemonic: "ADC r/m64, imm8"
-    encoding: "MI"
+      1632: valid
+      64: valid
+    description: Add with carry \abbr{imm8} sign extended to 32 bits to \abbr{r/m32}.
+  - opcode: REX.W 83 /2 \i{ib}
+    mnemonic: ADC \i{r/m64}, \i{imm8}
+    encoding: MI
     validity:
-      1632: "n/e"
-      64: "valid"
-    description: "Add with carry imm8 sign extended to 64 bits to r/m64."
-  - opcode: "10 /r"
-    mnemonic: "ADC r/m8, r8"
-    encoding: "MR"
+      1632: n/e
+      64: valid
+    description: Add with carry \abbr{imm8} sign extended to 64 bits to \abbr{r/m64}.
+  - opcode: 10 /r
+    mnemonic: ADC \i{r/m8}, \i{r8}
+    encoding: MR
     validity:
-      1632: "valid"
-      64: "valid"
-    description: "Add with carry r8 to r/m8."
-  - opcode: "REX 10 /r"
-    mnemonic: "ADC r/m8*, r8*"
-    encoding: "MR"
+      1632: valid
+      64: valid
+    description: Add with carry \abbr{r8} to \abbr{r/m8}.
+  - opcode: REX 10 /r
+    mnemonic: ADC \i{r/m8*}, \i{r8*}
+    encoding: MR
     validity:
-      1632: "n/e"
-      64: "valid"
-    description: "Add with carry r8 to r/m8."
-  - opcode: "11 /r"
-    mnemonic: "ADC r/m16, r16"
-    encoding: "MR"
+      1632: n/e
+      64: valid
+    description: Add with carry \abbr{r8} to \abbr{r/m8}.
+  - opcode: 11 /r
+    mnemonic: ADC \i{r/m16}, \i{r16}
+    encoding: MR
     validity:
-      1632: "valid"
-      64: "valid"
-    description: "Add with carry r16 to r/m16."
-  - opcode: "11 /r"
-    mnemonic: "ADC r/m32, r32"
-    encoding: "MR"
+      1632: valid
+      64: valid
+    description: Add with carry \abbr{r16} to \abbr{r/m16}.
+  - opcode: 11 /r
+    mnemonic: ADC \i{r/m32}, \i{r32}
+    encoding: MR
     validity:
-      1632: "valid"
-      64: "valid"
-    description: "Add with carry r32 to r/m32."
-  - opcode: "REX.W 11 /r"
-    mnemonic: "ADC r/m64, r64"
-    encoding: "MR"
+      1632: valid
+      64: valid
+    description: Add with carry \abbr{r32} to \abbr{r/m32}.
+  - opcode: REX.W 11 /r
+    mnemonic: ADC \i{r/m64}, \i{r64}
+    encoding: MR
     validity:
-      1632: "n/e"
-      64: "valid"
-    description: "Add with carry r64 to r/m64."
-  - opcode: "12 /r"
-    mnemonic: "ADC r8, r/m8"
-    encoding: "RM"
+      1632: n/e
+      64: valid
+    description: Add with carry \abbr{r64} to \abbr{r/m64}.
+  - opcode: 12 /r
+    mnemonic: ADC \i{r8}, \i{r/m8}
+    encoding: RM
     validity:
-      1632: "valid"
-      64: "valid"
-    description: "Add with carry r/m8 to r8."
-  - opcode: "REX 12 /r"
-    mnemonic: "ADC r8*, r/m8*"
-    encoding: "RM"
+      1632: valid
+      64: valid
+    description: Add with carry \abbr{r/m8} to \abbr{r8}.
+  - opcode: REX 12 /r
+    mnemonic: ADC \i{r8*}, \i{r/m8*}
+    encoding: RM
     validity:
-      1632: "n/e"
-      64: "valid"
-    description: "Add with carry r/m8 to r8."
-  - opcode: "13 /r"
-    mnemonic: "ADC r16, r/m16"
-    encoding: "RM"
+      1632: n/e
+      64: valid
+    description: Add with carry \abbr{r/m8} to \abbr{r8}.
+  - opcode: 13 /r
+    mnemonic: ADC \i{r16}, \i{r/m16}
+    encoding: RM
     validity:
-      1632: "valid"
-      64: "valid"
-    description: "Add with carry r/m16 to r16."
-  - opcode: "13 /r"
-    mnemonic: "ADC r32, r/m32"
-    encoding: "RM"
+      1632: valid
+      64: valid
+    description: Add with carry \abbr{r/m16} to \abbr{r16}.
+  - opcode: 13 /r
+    mnemonic: ADC \i{r32}, \i{r/m32}
+    encoding: RM
     validity:
-      1632: "valid"
-      64: "valid"
-    description: "Add with carry r/m32 to r32."
-  - opcode: "REX.W 13 /r"
-    mnemonic: "ADC r64, r/m64"
-    encoding: "RM"
+      1632: valid
+      64: valid
+    description: Add with carry \abbr{r/m32} to \abbr{r32}.
+  - opcode: REX.W 13 /r
+    mnemonic: ADC \i{r64}, \i{r/m64}
+    encoding: RM
     validity:
-      1632: "n/e"
-      64: "valid"
-    description: "Add with carry r/m64 to r64."
+      1632: n/e
+      64: valid
+    description: Add with carry \abbr{r/m64} to \abbr{r64}.
 encoding:
   operands: 2
   encodings:
     I:
-      - "AL/AX/EAX/RAX"
-      - "imm8/16/32"
+      - AL/AX/EAX/RAX
+      - imm8/16/32
     MI:
-      - "ModRM:r/m[rw]"
-      - "imm8/16/32"
+      - ModRM:r/m[rw]
+      - imm8/16/32
     MR:
-      - "ModRM:r/m[rw]"
-      - "ModRM:reg[r]"
+      - ModRM:r/m[rw]
+      - ModRM:reg[r]
     RM:
-      - "ModRM:reg[rw]"
-      - "ModRM:r/m[r]"
+      - ModRM:reg[rw]
+      - ModRM:r/m[r]
 description: >-
-  Adds the destination operand (first operand), the source operand (second operand), and the carry (CF) flag and stores the result in the destination operand.
-  The destination operand can be a register or a memory location;
-  The source operand can be an immediate, a register, or a memory location.
-  (However, two memory operands cannot be used in one instruction.)
-  The state of the CF flag represents a state from a previous addition.
-  When an immediate value is used as an operand, it is sign extended to the length of the destination operand format.
+  The \c{ADC} instruction adds the destination operand, the source operand, and the \c{CF} flag and stores the result in the destination operand.
 
-  The ADC instruction does not distinguish between signed and unsigned operands.
-  Instead, the processor evaluates the result for both data types and sets the OF and CF flags to indicate a carry in the signed or unsigned result, respectively.
-  The SF flag indicates the sign of a signed result.
+  This instruction is designed for use in multibyte additions such as in arbitrary precision arithmetic.
+  It does not differentiate between signed and unsigned operands, but will set the \c{OF} and \c{CF} to indicate a carry for signed and unsigned results (respectively).
 
-  The ADC instruction is usually executed as part of a multibyte or multiword addition in which an ADD instruction is followed by an ADC instruction.
+  This instruction can be used with the \instr{LOCK} prefix to allow atomic execution.
 
-  This instruction can be used with a LOCK prefix to allow the instruction to be executed atomically.
-
-  In 64-bit mode, the instruction's default operand size is 32 bits.
-  Using the REX prefix in the form of REX.R permits access to addition registers (R8-R15).
-  Using a REX prefix in the form of REX.W promotes operation to 64 bits.
-  See the summary chart at the beginning of this section for encoding data and limits.
+  In 64-bit mode, the default operand size is 32 bits, but \c{REX.W} will change it to 64 bits.
 operation: >-
   fn adc<D, S>(dest: D, src: S) {
     dest = dest + src + CF;
-    setFlags(dest);
   }
 flags: >-
   The OF, SF, ZF, CF, and PF flags are set according to the result.
 intrinsicsC:
-  - "uint8_t _addcarry_u8(uint8_t c_in, uint8_t src1, uint8_t src2, uint8_t *sum_out)"
-  - "uint8_t _addcarry_u16(uint8_t c_in, uint16_t src1, uint16_t src2, uint16_t *sum_out)"
-  - "uint8_t _addcarry_u32(uint8_t c_in, uint32_t src1, uint32_t src2, uint32_t *sum_out)"
-  - "uint8_t _addcarry_u64(uint8_t c_in, uint64_t src1, uint64_t src2, uint64_t *sum_out)"
+  - uint8_t _addcarry_u8(uint8_t c_in, uint8_t src1, uint8_t src2, uint8_t *sum_out)
+  - uint8_t _addcarry_u16(uint8_t c_in, uint16_t src1, uint16_t src2, uint16_t *sum_out)
+  - uint8_t _addcarry_u32(uint8_t c_in, uint32_t src1, uint32_t src2, uint32_t *sum_out)
+  - uint8_t _addcarry_u64(uint8_t c_in, uint64_t src1, uint64_t src2, uint64_t *sum_out)
 intrinsicsRust:
   - "addcarry::u8(c: u8, src1: u8, src2: u8, sum: &mut [u8]) -> u8"
   - "addcarry::u16(c: u8, src1: u16, src2: u16, sum: &mut [u16]) -> u8"
@@ -212,37 +200,27 @@ intrinsicsRust:
 exceptions:
   protected:
     "#GP(0)":
-      - "If the destination is located in a non-writable segment."
-      - "If a memory operand effective address is outside the CS, DS, ES, FS, or GS segment limit."
-      - "If the DS, ES, FS, or GS register is used to access memory and it contains a NULL segment selector."
-    "#SS(0)": "If a memory operand effective address is outside the SS segment limit."
-    "#PF(fault-code)": "If a page fault occurs."
-    "#AC(0)": "If alignment checking is enabled and an unaligned memory reference is made while the current privilege level is 3."
-    "#UD": "If the LOCK prefix is used but the destination is not a memory operand."
+      - If the destination is located in a non-writable segment.
+      - If a memory operand effective address is outside the \reg{CS}, \reg{DS}, \reg{ES}, \reg{FS}, or \reg{GS} segment limit.
+      - If the \reg{DS}, \reg{ES}, \reg{FS}, or \reg{GS} register is used to access memory and it contains a \c{NULL} segment selector.
+    "#SS(0)": If a memory operand effective address is outside the \reg{SS} segment limit.
+    "#PF(fault-code)": If a page fault occurs.
+    "#AC(0)": If alignment checking is enabled and an unaligned memory reference is made while the current privilege level is 3.
+    "#UD": If the LOCK prefix is used but the destination is not a memory operand.
   real:
-    "#GP": "If a memory operand effective address is outside the CS, DS, ES, FS, or GS segment limit."
-    "#SS": "If a memory operand effective address is outside the SS segment limit."
-    "#UD": "If the LOCK prefix is used but the destination is not a memory operand."
+    "#GP": If a memory operand effective address is outside the \reg{CS}, \reg{DS}, \reg{ES}, \reg{FS}, or \reg{GS} segment limit.
+    "#SS": If a memory operand effective address is outside the \reg{SS} segment limit.
+    "#UD": If the LOCK prefix is used but the destination is not a memory operand.
   virtual:
-    "#GP(0)": "If a memory operand effective address is outside the CS, DS, ES, FS, or GS segment limit."
-    "#SS(0)": "If a memory operand effective address is outside the SS segment limit."
-    "#PF(fault-code)": "If a page fault occurs."
-    "#AC(0)": "If alignment checking is enabled and an unaligned memory reference is made."
-    "#UD": "If the LOCK prefix is used but the destination is not a memory operand."
-  compatibility: "Same exceptions as in protected mode."
+    "#GP(0)": If a memory operand effective address is outside the \reg{CS}, \reg{DS}, \reg{ES}, \reg{FS}, or \reg{GS} segment limit.
+    "#SS(0)": If a memory operand effective address is outside the \reg{SS} segment limit.
+    "#PF(fault-code)": If a page fault occurs.
+    "#AC(0)": If alignment checking is enabled and an unaligned memory reference is made.
+    "#UD": If the LOCK prefix is used but the destination is not a memory operand.
+  compatibility: Same exceptions as in protected mode.
   long:
-    "#SS(0)": "If a memory address referencing the SS segment is in a non-canonical form."
-    "#GP(0)": "If a memory operand address is in a non-canonical form."
-    "#PF(fault-code)": "If a page fault occurs."
-    "#AC(0)": "If alignment checking is enabled and an unaligned memory reference is made while the current privilege level is 3."
-    "#UD": "If the LOCK prefix is used but the destination is not a memory operand."
-changes:
-  version: 73
-  date: "2020-11"
-  list:
-    - "In the overview table, various uses of 'Add with CF...' were changed to 'Add with carry'."
-    - "In the overview table, a few uses of '...sign extended imm8...' were changed to '...imm8 sign extended to n-bits...'"
-    - "In the overview table, a few uses of '...byte register' were changed to '...r8'."
-    - >-
-      In the overview table, the entry for 'REX 12 /r' (ADC r8*, r/m8*) erroneously used 'r/m64' in the description.
-      This has been corrected to 'r/m8'.
+    "#SS(0)": If a memory address referencing the \reg{SS} segment is in a non-canonical form.
+    "#GP(0)": If a memory operand address is in a non-canonical form.
+    "#PF(fault-code)": If a page fault occurs.
+    "#AC(0)": If alignment checking is enabled and an unaligned memory reference is made while the current privilege level is 3.
+    "#UD": If the LOCK prefix is used but the destination is not a memory operand.

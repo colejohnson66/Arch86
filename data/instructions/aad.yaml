@@ -1,41 +1,47 @@
 %YAML 1.2
 ---
-title: "ASCII Adjust AX Before Division"
-validity: "1632,64"
+title: ASCII Adjust AX Before Division
+validity: 1632,64
 opcode:
-  - opcode: "D5 0A"
-    mnemonic: "AAD"
-    encoding: "ZO"
+  - opcode: D5 0A
+    mnemonic: AAD
+    encoding: ZO
     validity:
-      1632: "valid"
-      64: "invalid"
-    description: "ASCII adjust AX before division."
-  - opcode: "D5 ib"
-    mnemonic: "AAD imm8"
-    encoding: "ZO"
+      1632: valid
+      64: invalid
+    description: ASCII adjust AX before division.
+  - opcode: D5 \i{ib}
+    mnemonic: AAD \i{imm8}
+    encoding: I
     validity:
-      1632: "valid"
-      64: "invalid"
-    description: "Adjust AX before division to number base imm8."
+      1632: valid
+      64: invalid
+    description: ASCII adjust AX before division to number base \abbr{imm8}.
 encoding:
   operands: 1
   encodings:
     ZO:
-      - "None"
+      - None (implicitly 10)
+    I:
+      - imm8
 description: >-
-  Adjusts two unpacked BCD digits (the least-significant digit in the AL register and the most-significant digit in the AH register) so that a division operation performed on the result will yield a correct unpacked BCD value.
-  The AAD instruction is only useful when it precedes a DIV instruction that divides (binary division) the adjusted vale in the AX register by an unpacked BCD value.
+  The \c{AAD} instruction prepares a BCD number for division.
 
-  The AAD instruction sets the value in the AL register to (AL + (10 * AH)), and then clears the AH register to 00h.
-  The value in the AX register is then equal to the binary equivalent of the original unpacked two-digit (base 10) number in the registers AH and AL.
+  This instruction will not be useful unless it is immediately followed by a \instr{DIV} instruction.
+  Before executing either this instruction or the \instr{DIV} one, one should ensure that \reg{DX} is 0.
 
-  The generalized versions of this instruction allows adjustment of two unpacked digits of any number base (see the "Operation" section below), by setting the imm8 byte to the selected number base (for example, 08h for octal, 0Ah for decimal, or 0Ch for base 12 numbers).
-  The AAD mnemonic is interpreted by all assemblers to mean adjust ASCII (base 10) values.
-  To adjust values in another number base, the instruction must be hand coded in machine code (D5 imm8).
+  Traditionally, this instruction is "ASCII Adjust Before Division".
+  This would lead one to believe that it works on ASCII digits (\c{030h} (\c{0}) through \c{039h} (\c{9})), however this would be incorrect.
+  This instruction \i{actually} operates on BCD digits (\c{00h} (\c{0}) through \c{09h} (\c{9})).
 
-  This instruction executes as described in compatibility mode and legacy mode.
-  It is not valid in 64-bit mode.
-operation: >-
+  This instruction implicitly operates on the \reg{AH} and \reg{AL} registers.
+
+  Due to a quirk of history, this instruction encodes the base of the result in the instruction (the second byte).
+  As such, it is possible to have this instruction work on other bases through an immediate 8 bit operand.
+  Such methods are not guaranteed to be supported by your assembler, and in such situations, one must encode the instruction directly.
+
+  This instruction is not valid in 64-bit mode, and if encountered, the processor will raise a \c{#UD} exception.
+operation: |-
   fn aad(imm8: u8) {
     if (MODE == 64) {
       #UD;
@@ -44,19 +50,18 @@ operation: >-
       AH = 0;
     }
   }
+operationNotes:
+  - >-
+    According to the source code for Bochs' (\c{/cpu/bcd.cc}), this instruction actually performs the operation on the \reg{AX} register, not \reg{AL}.
+    This is currently untested.
 flags: >-
-  The SF, ZF, and PF flags are set according to the resulting binary value in the AL register.
-  The OF, AF, and CF flags are undefined.
+  The \reg{SF}, \reg{ZF}, and \reg{PF} flags are set according to the resulting binary value in the AL register.
+  The \reg{OF}, \reg{AF}, and \reg{CF} flags are undefined.
 exceptions:
   protected:
-    "#UD": "If the LOCK prefix is used."
-  real: "Same exceptions as protected mode."
-  virtual: "Same exceptions as protected mode."
-  compatibility: "Same exceptions as protected mode."
+    "#UD": If the \instr{LOCK} prefix is used.
+  real: Same exceptions as protected mode.
+  virtual: Same exceptions as protected mode.
+  compatibility: Same exceptions as protected mode.
   long:
-    "#UD": "If in 64-bit mode."
-changes:
-  version: 73
-  date: "2020-11"
-  list:
-    - "In the 'Flags Changed' section, a semicolon was changed to a period."
+    "#UD": If in 64-bit mode.
