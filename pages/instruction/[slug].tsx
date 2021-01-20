@@ -26,6 +26,7 @@ import Link from "next/link";
 import React from "react";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import TOC from "../../components/TOC";
+import { processStringToJsx } from "../../lib/processStringToJsx";
 import renderBreadcrumbs from "../../lib/renderBreadcrumbs";
 
 type OpcodeValidityValues = "valid" | "valid*" | "invalid" | "n/e";
@@ -104,28 +105,36 @@ function coerceArray<T>(arr: T | T[]): T[] {
     return [arr];
 }
 
-function brTagsFromArray(arr: string[]): JSX.Element[] {
+function brTagsFromArray(arr: string[], parse = true): JSX.Element[] {
     return arr.map((line, idx) => (
         <React.Fragment key={idx}>
-            {line}
+            {parse
+                ? processStringToJsx(line)
+                : line}
             {idx !== arr.length - 1 && <br />}
         </React.Fragment>
     ));
 }
 
-function brTagsFromString(str: string): JSX.Element[] {
-    return brTagsFromArray(str.split("\n"));
+function brTagsFromString(str: string, parse = true): JSX.Element[] {
+    return brTagsFromArray(str.split("\n"), parse);
 }
 
-function paragraphsFromArray(arr: string[]): JSX.Element[] {
-    return arr.map((par, idx) => (<p key={idx}>{par}</p>));
+function paragraphsFromArray(arr: string[], parse = true): JSX.Element[] {
+    return arr.map((par, idx) => (
+        <p key={idx}>
+            {parse
+                ? processStringToJsx(par)
+                : par}
+        </p>
+    ));
 }
 
-function paragraphsFromString(str: string): JSX.Element[] {
-    return paragraphsFromArray(str.split("\n"));
+function paragraphsFromString(str: string, parse = true): JSX.Element[] {
+    return paragraphsFromArray(str.split("\n"), parse);
 }
 
-function regularExceptionList(ex: string | ExceptionList): JSX.Element {
+function regularExceptionList(ex: string | ExceptionList, parse = true): JSX.Element {
     if (typeof ex === "string")
         return <p>{ex}</p>;
 
@@ -135,7 +144,7 @@ function regularExceptionList(ex: string | ExceptionList): JSX.Element {
         return (
             <React.Fragment key={key}>
                 <dt><Code>{key}</Code></dt>
-                <dd>{Array.isArray(val) ? brTagsFromArray(val) : val}</dd>
+                <dd>{brTagsFromArray(coerceArray(val), parse)}</dd>
             </React.Fragment>
         );
     });
@@ -229,7 +238,7 @@ const Page = (props: PageProps) => {
                                     )}
                                     {row.cpuid &&
                                         <td>
-                                            {Array.isArray(row.cpuid) ? brTagsFromArray(row.cpuid) : row.cpuid}
+                                            {brTagsFromArray(coerceArray(row.cpuid))}
                                         </td>}
                                     <td>{row.description}</td>
                                 </tr>
