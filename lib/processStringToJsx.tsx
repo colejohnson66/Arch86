@@ -6,6 +6,7 @@ import { strict as assert } from "assert";
 
 // `functions.reg` may change, so don't combine with `functions.c`
 const functions: IDictionary<(key: number, str: string) => JSX.Element> = {
+    abbr: (key, str) => (<i key={key}>{str}</i>),
     c: (key, str) => (<Code key={key}>{str}</Code>),
     i: (key, str) => (<i key={key}>{str}</i>),
     instr: (key, str) => (<Link key={key} href={`/instruction/${str}`}><a><Code>{str}</Code></a></Link>),

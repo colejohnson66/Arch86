@@ -137,7 +137,7 @@ function paragraphsFromString(str: string, parse = true): JSX.Element[] {
 
 function regularExceptionList(ex: string | ExceptionList, parse = true): JSX.Element {
     if (typeof ex === "string")
-        return <p>{ex}</p>;
+        return <p>{brTagsFromString(ex)}</p>;
 
     let rows = Object.keys(ex).map((key) => {
         let val = ex[key];
@@ -234,8 +234,8 @@ const Page = (props: PageProps) => {
                         <tbody>
                             {props.opcode.map((row, idx) => (
                                 <tr key={idx}>
-                                    <td><Code>{row.opcode}</Code></td>
-                                    <td><Code>{row.mnemonic}</Code></td>
+                                    <td><Code>{processStringToJsx(row.opcode)}</Code></td>
+                                    <td><Code>{processStringToJsx(row.mnemonic)}</Code></td>
                                     <td><Code>{row.encoding}</Code></td>
                                     {props.validity.split(",").map((entry) =>
                                         // This ensures that they are displayed in the same order as the heading
@@ -245,7 +245,7 @@ const Page = (props: PageProps) => {
                                         <td>
                                             {brTagsFromArray(coerceArray(row.cpuid))}
                                         </td>}
-                                    <td>{row.description}</td>
+                                    <td>{processStringToJsx(row.description)}</td>
                                 </tr>
                             ))}
                         </tbody>
