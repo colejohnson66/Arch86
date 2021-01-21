@@ -182,8 +182,8 @@ description: >-
 
   In 64-bit mode, the default operand size is 32 bits, but \c{REX.W} will change it to 64 bits.
 operation: >-
-  fn adc<D, S>(dest: D, src: S) {
-    dest = dest + src + CF;
+  fn adc<D, S>(dest: &mut D, src: S) {
+    *dest = *dest + src + CF;
   }
 flags: >-
   The \reg{OF}, \reg{SF}, \reg{ZF}, \reg{AF}, \reg{CF}, and \reg{PF} flags are set according to the result.
