@@ -38,12 +38,12 @@ operation: >-
   }
 flags: >-
   \reg{CF} is updated based on the result. The \reg{OF}, \reg{SF}, \reg{ZF}, \reg{AF}, and \reg{PF} flags are unmodified.
-intrinsicsC:
-  - uint8_t _addcarryx_u32(uint8_t c_in, uint32_t src1, uint32_t src2, uint32_t *sum_out)
-  - uint8_t _addcarryx_u64(uint8_t c_in, uint64_t src1, uint64_t src2, uint64_t *sum_out)
-intrinsicsRust:
-  - "addcarryx::u32(c: u8, src1: u32, src2: u32, sum: &mut [u32]) -> u8"
-  - "addcarryx::u64(c: u8, src1: u64, src2: u64, sum: &mut [u64]) -> u8"
+intrinsicsC: |-
+  uint8_t _addcarryx_u32(uint8_t c_in, uint32_t src1, uint32_t src2, uint32_t *sum_out)
+  uint8_t _addcarryx_u64(uint8_t c_in, uint64_t src1, uint64_t src2, uint64_t *sum_out)
+intrinsicsRust: |-
+  addcarryx::u32(c: bool, src1: u32, src2: u32, sum: &mut [u32])
+  addcarryx::u64(c: bool, src1: u64, src2: u64, sum: &mut [u64])
 exceptions:
   protected:
     "#UD":

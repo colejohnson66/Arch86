@@ -24,10 +24,8 @@ operationNotes:
 examples:
   - |-
 flags: >-
-intrinsicsC:
-  - ""
-intrinsicsRust:
-  - ""
+intrinsicsC: |-
+intrinsicsRust: |-
 exceptions:
   protected: 
   real:

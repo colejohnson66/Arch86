@@ -88,8 +88,8 @@ type PageProps = {
     operationNotes: string[],
     examples?: string | string[]
     flags?: string,
-    intrinsicsC?: string[],
-    intrinsicsRust?: string[],
+    intrinsicsC?: string,
+    intrinsicsRust?: string,
     exceptions: Exceptions,
     changes?: Changes,
 };
@@ -314,7 +314,7 @@ const Page = (props: PageProps) => {
                                 These intrinsics are shorter definitions of those using fixed-width integer types.
                             </Callout>
                             <SyntaxHighlighter language="c-like">
-                                {props.intrinsicsC.join("\n")}
+                                {props.intrinsicsC}
                             </SyntaxHighlighter>
                         </>}
 
@@ -325,7 +325,7 @@ const Page = (props: PageProps) => {
                                 These intrinsics are from an upcoming crate and may change.
                             </Callout>
                             <SyntaxHighlighter language="rust">
-                                {props.intrinsicsRust.join("\n")}
+                                {props.intrinsicsRust}
                             </SyntaxHighlighter>
                         </>}
 
