@@ -1,0 +1,217 @@
+%YAML 1.2
+---
+title: Add Packed Double-Precision Floating-Point Values
+validity: 32,64
+opcode:
+  - opcode: 66 0F 58 /r
+    mnemonic: ADDPD \i{xmm1}, \i{xmm2/m128}
+    encoding: LEGACY
+    validity:
+      32: valid
+      64: valid
+    cpuid: SSE2
+    description: >-
+      Adds packed double-precision floating-point values from \abbr{xmm2/m128} and \abbr{xmm1}.
+      Stores the result in \abbr{xmm1}.
+  - opcode: VEX.128.66.0F.WIG 58 /r
+    mnemonic: VADDPD \i{xmm1}, \i{xmm2}, \i{xmm3/m128}
+    encoding: VEX
+    validity:
+      32: valid
+      64: valid
+    cpuid: AVX
+    description: >-
+      Adds packed double-precision floating-point values from \abbr{xmm3/m128} and \abbr{xmm2}.
+      Stores the result in \abbr{xmm1}.
+  - opcode: VEX.256.66.0F.WIG 58 /r
+    mnemonic: VADDPD \i{ymm1}, \i{ymm2}, \i{ymm3/m256}
+    encoding: VEX
+    validity:
+      32: valid
+      64: valid
+    cpuid: AVX
+    description: >-
+      Adds packed double-precision floating-point values from \abbr{ymm3/m256} and \abbr{ymm2}.
+      Stores the result in \abbr{ymm1}.
+  - opcode: EVEX.128.66.0F.W1 58 /r
+    mnemonic: VADDPD \i{xmm1} {k1}{z}, \i{xmm2}, \i{xmm3/m128/m64bcst}
+    encoding: EVEX
+    validity:
+      32: valid
+      64: valid
+    cpuid:
+      - AVX512VL
+      - AVX512F
+    description: >-
+      Adds packed double-precision floating-point values from \abbr{xmm2/m128/m64bcst} and \abbr{xmm1}.
+      Stores the result in \abbr{xmm1} using writemask \abbr{k1}.
+  - opcode: EVEX.256.66.0F.W1 58 /r
+    mnemonic: VADDPD \i{ymm1} {k1}{z}, \i{ymm2}, \i{ymm3/m256/m64bcst}
+    encoding: EVEX
+    validity:
+      32: valid
+      64: valid
+    cpuid:
+      - AVX512VL
+      - AVX512F
+    description: >-
+      Adds packed double-precision floating-point values from \abbr{ymm3/m256/m64bcst} and \abbr{ymm2}.
+      Stores the result in \abbr{ymm1} using writemask \abbr{k1}.
+  - opcode: EVEX.512.66.0F.W1 58 /r
+    mnemonic: VADDPD \i{zmm1} {k1}{z}, \i{zmm2}, \i{zmm3/m512/m64bcst}
+    encoding: EVEX
+    validity:
+      32: valid
+      64: valid
+    cpuid: AVX512F
+    description: >-
+      Adds packed double-precision floating-point values from \abbr{zmm3/m512/m64bcst} and \abbr{zmm2}.
+      Stores the result in \abbr{zmm1} using writemask \abbr{k1}.
+encoding:
+  ops: 3
+  hasTuple: true
+  encodings:
+    LEGACY:
+      - N/A
+      - ModRM:reg[rw]
+      - ModRM:r/m[r]
+      - N/A
+    VEX:
+      - N/A
+      - ModRM:reg[w]
+      - VEX.vvvv[r]
+      - ModRM:r/m[r]
+    EVEX:
+      - Full
+      - ModRM:reg[w]
+      - EVEX.vvvv[r]
+      - ModRM:r/m[r]
+description: >-
+  The \c{(V)ADDPD} instruction adds two, four, or eight double-precision floating-point values from the first source operand to the second source operand and stores the result in the destination operand.
+
+  All versions \i{except} the legacy SSE version zero the unused upper SIMD register bits.
+operation: |-
+  pub fn addpd(dest: &mut Simd<f64>, src: Simd<f64>) {
+    dest[63..=0] = dest[63..=0] + src[63..=0];
+    dest[127..=64] = dest[127..=64] + src[127..=64];
+    // dest[Simd::max()..=128] (unmodified)
+  }
+
+  fn vaddpd_vex(dest: &mut Simd<f64>, src1: Simd<f64>, src2: Simd<f64>, kl: u32) {
+    for n in 0..kl {
+      let vi: u32 = n * 64;
+      let vi_next = vi + 63;
+
+      dest[vi_next..=vi] = src1[vi_next..=vi] + src2[vi_next..=vi];
+    }
+
+    let end = kl * 64;
+    dest[Simd::max()..=end] = 0;
+  }
+
+  pub fn vaddpd_vex128(dest: &mut Simd<f64>, src1: Simd<f64>, src2: Simd<f64>) {
+    vaddpd_vex(dest, src1, src2, 2);
+  }
+  pub fn vaddpd_vex256(dest: &mut Simd<f64>, src1: Simd<f64>, src2: Simd<f64>) {
+    vaddpd_vex(dest, src1, src2, 4);
+  }
+
+  fn vaddpd_evex_mem(dest: &mut Simd<f64>, src1: Simd<f64>, src2: Simd<f64>, k: KMask, kl: u8) {
+    for n in 0..kl {
+      let vi: u32 = n * 64;
+      let vi_next = vi + 63;
+
+      if k[n] {
+        // broadcast?
+        if (EVEX.b) {
+          dest[vi_next..=vi] = src1[vi_next..=vi] + src2[63..=0];
+        } else {
+          dest[vi_next..=vi] = src1[vi_next..=vi] + src2[vi_next..=vi];
+        }
+      } else {
+        // zero mask?
+        if (EVEX.z) {
+          dest[vi_next..=vi] = 0;
+        }
+      }
+    }
+
+    let end = kl * 64;
+    dest[Simd::max()..=end] = 0;
+  }
+
+  pub fn vaddpd_evex128_mem(dest: &mut Simd<f64>, src1: Simd<f64>, src2: Simd<f64>, k: KMask) {
+    vaddpd_evex_mem(dest, src1, src2, k, 2);
+  }
+  pub fn vaddpd_evex256_mem(dest: &mut Simd<f64>, src1: Simd<f64>, src2: Simd<f64>, k: KMask) {
+    vaddpd_evex_mem(dest, src1, src2, k, 4);
+  }
+  pub fn vaddpd_evex512_mem(dest: &mut Simd<f64>, src1: Simd<f64>, src2: Simd<f64>, k: KMask) {
+    vaddpd_evex_mem(dest, src1, src2, k, 8);
+  }
+
+  fn vaddpd_evex_vreg(dest: &mut Simd<f64>, src1: Simd<f64>, src2: Simd<f64>, k: KMask: kl: u8) {
+    set_rounding_for_this_instruction(if kl == 8 && EVEX.b { EVEX.RC } else { MXCSR.RC });
+
+    for n in 0..kl {
+      let vi: u32 = n * 64;
+      let vi_next = vi + 63;
+
+      if k[n] {
+        dest[vi_next..=vi] = src1[vi_next..=vi] + src2[vi_next..=vi];
+      } else {
+        // zero mask?
+        if EVEX.z {
+          dest[vi_next..=vi] = 0;
+        }
+      }
+    }
+
+    let end = kl * 64;
+    dest[Simd::max()..=end] = 0;
+  }
+
+  pub fn vaddpd_evex128_vreg(dest: &mut Simd<f64>, src1: Simd<f64>, src2: Simd<f64>, k: KMask) {
+    vaddpd_evex_vreg(dest, src1, src2, k, 2);
+  }
+  pub fn vaddpd_evex256_vreg(dest: &mut Simd<f64>, src1: Simd<f64>, src2: Simd<f64>, k: KMask) {
+    vaddpd_evex_vreg(dest, src1, src2, k, 4);
+  }
+  pub fn vaddpd_evex512_vreg(dest: &mut Simd<f64>, src1: Simd<f64>, src2: Simd<f64>, k: KMask) {
+    vaddpd_evex_vreg(dest, src1, src2, k, 8);
+  }
+intrinsicsC: |-
+  __m128d _mm_add_pd(__m128d a, __m128d b)
+  __m128d _mm_mask_add_pd(__m128d s, __mmask8 k, __m128d a, __m128d b)
+  __m128d _mm_maskz_add_pd(__mmask8 k, __m128d a, __m128d b)
+
+  __m256d _mm256_add_pd(__m256d a, __m256d b)
+  __m256d _mm256_mask_add_pd(__m256d s, __mmask8 k, __m256d a, __m256d b)
+  __m256d _mm256_maskz_add_pd(__mmask8 k, __m256d a, __m256d b)
+
+  __m512d _mm512_add_pd(__m512d a, __m512d b)
+  __m512d _mm512_add_round_pd(__m512d a, __m512d b, uint8_t rounding)
+  __m512d _mm512_mask_add_pd(__m512d s, __mmask8 k, __m512d a, __m512d b)
+  __m512d _mm512_mask_add_round_pd(__m512d s, __mmask8 k, __m512d a, __m512d b, uint8_t rounding)
+  __m512d _mm512_maskz_add_pd(__mmask8 k, __m512d a, __m512d b)
+  __m512d _mm512_maskz_add_round_pd(__mmask8 k, __m512d a, __m512d b, uint8_t rounding)
+intrinsicsRust: |-
+  addpd::m128(a: m128<f64>, b: m128<f64>) -> m128<f64>
+  addpd::m128_mask(src: m128<f64>, mask: u8, a: m128<f64>, b: m128<f64>) -> m128<f64>
+  addpd::m128_maskz(mask: u8, a: m128<f64>, b: m128<f64>) -> m128<f64>
+
+  addpd::m256(a: m256<f64>, b: m256<f64>) -> m256<f64>
+  addpd::m256_mask(src: m256<f64>, mask: u8, a: m256<f64>, b: m256<f64>) -> m256<f64>
+  addpd::m256_maskz(mask: u8, a: m256<f64>, b: m256<f64>) -> m256<f64>
+
+  addpd::m512(a: m512<f64>, b: m512<f64>) -> m512<f64>
+  addpd::m512_round(a: m512<f64>, b: m512<f64>, rounding: u8) -> m512<f64>
+  addpd::m512_mask(src: m512<f64>, mask: u8, a: m512<f64>, b: m512<f64>) -> m512<f64>
+  addpd::m512_mask_round(src: m512<f64>, mask: u8, a: m512<f64>, b: m512<f64>, rounding: u8) -> m512<f64>
+  addpd::m512_maskz(mask: u8, a: m512<f64>, b: m512<f64>) -> m512<f64>
+  addpd::m512_maskz_round(mask: u8, a: m512<f64>, b: m512<f64>) -> m512<f64>
+exceptions:
+  floating: Overflow, Underflow, Invalid, Precision, Denormal
+  other:
+    - "VEX encoded form: see Exceptions Type 2."
+    - "EVEX encoded form: see Exceptions Type E2."
