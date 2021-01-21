@@ -273,6 +273,7 @@ const Page = (props: PageProps) => {
                     <H2 id="headingOperation">Operation</H2>
                     <Callout intent="primary">
                         This pseudo-code uses a Rust-like syntax.
+                        A list of the types used is <Link href="/instruction/help#headingOperation"><a>available here</a></Link>.
                     </Callout>
                     <SyntaxHighlighter language="rust">
                         {props.operation}
