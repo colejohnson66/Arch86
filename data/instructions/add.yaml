@@ -1,0 +1,213 @@
+%YAML 1.2
+---
+title: Add
+validity: 1632,64
+opcode:
+  - opcode: 04 \i{ib}
+    mnemonic: ADD AL, \i{imm8}
+    encoding: I
+    validity:
+      1632: valid
+      64: valid
+    description: Adds \abbr{imm8} to \reg{AL}.
+  - opcode: 05 \i{iw}
+    mnemonic: ADD AX, \i{imm16}
+    encoding: I
+    validity:
+      1632: valid
+      64: valid
+    description: Adds \abbr{imm16} to \reg{AX}.
+  - opcode: 05 \i{id}
+    mnemonic: ADD EAX, \i{imm32}
+    encoding: I
+    validity:
+      1632: valid
+      64: valid
+    description: Adds \abbr{imm32} to \reg{EAX}.
+  - opcode: REX.W 05 \i{id}
+    mnemonic: ADD RAX, \i{imm32}
+    encoding: I
+    validity:
+      1632: n/e
+      64: valid
+    description: Adds \abbr{imm32} (sign extended to 64 bits) to \reg{RAX}.
+  - opcode: 80 /0 \i{ib}
+    mnemonic: ADD \i{r/m8}, \i{imm8}
+    encoding: MI
+    validity:
+      1632: valid
+      64: valid
+    description: Adds \abbr{imm8} to \abbr{r/m8}.
+  - opcode: REX 80 /0 \i{ib}
+    mnemonic: ADD \i{r/m8*}, \i{imm8}
+    encoding: MI
+    validity:
+      1632: n/e
+      64: valid
+    description: Adds \abbr{imm8} to \abbr{r/m8}.
+  - opcode: 81 /0 \i{iw}
+    mnemonic: ADD \i{r/m16}, \i{imm16}
+    encoding: MI
+    validity:
+      1632: valid
+      64: valid
+    description: Adds \abbr{imm16} to \abbr{r/m16}.
+  - opcode: 81 /0 \i{id}
+    mnemonic: ADD \i{r/m32}, \i{imm32}
+    encoding: MI
+    validity:
+      1632: valid
+      64: valid
+    description: Adds \abbr{imm32} to \abbr{r/m32}.
+  - opcode: REX.W 81 /0 \i{id}
+    mnemonic: ADD \i{r/m64}, \i{imm32}
+    encoding: MI
+    validity:
+      1632: n/e
+      64: valid
+    description: Adds \abbr{imm32} to \abbr{r/m64}.
+  - opcode: 83 /0 \i{ib}
+    mnemonic: ADD \i{r/m16}, \i{imm8}
+    encoding: MI
+    validity:
+      1632: valid
+      64: valid
+    description: Adds \abbr{imm8} (sign extended to 16 bits) to \abbr{r/m16}.
+  - opcode: 83 /0 \i{ib}
+    mnemonic: ADD \i{r/m32}, \i{imm8}
+    encoding: MI
+    validity:
+      1632: valid
+      64: valid
+    description: Adds \abbr{imm8} (sign extended to 32 bits) to \abbr{r/m32}.
+  - opcode: REX.W 83 /0 \i{ib}
+    mnemonic: ADD \i{r/m64}, \i{imm8}
+    encoding: MI
+    validity:
+      1632: n/e
+      64: valid
+    description: Adds \abbr{imm8} (sign extended to 64 bits) to \abbr{r/m64}.
+  - opcode: 00 /r
+    mnemonic: ADD \i{r/m8}, \i{r8}
+    encoding: MR
+    validity:
+      1632: valid
+      64: valid
+    description: Adds \abbr{r8} to \abbr{r/m8}.
+  - opcode: REX 00 /r
+    mnemonic: ADD \i{r/m8*}, \i{r8}
+    encoding: MR
+    validity:
+      1632: n/e
+      64: valid
+    description: Adds \abbr{r8} to \abbr{r/m8}.
+  - opcode: 01 /r
+    mnemonic: ADD \i{r/m16}, \i{r16}
+    encoding: MR
+    validity:
+      1632: valid
+      64: valid
+    description: Adds \abbr{r16} to \abbr{r/m16}.
+  - opcode: 01 /r
+    mnemonic: ADD \i{r/m32}, \i{r32}
+    encoding: MR
+    validity:
+      1632: valid
+      64: valid
+    description: Adds \abbr{r32} to \abbr{r/m32}.
+  - opcode: REX.W 01 /r
+    mnemonic: ADD \i{r/m64}, \i{r64}
+    encoding: MR
+    validity:
+      1632: n/e
+      64: valid
+    description: Adds \abbr{r64} to \abbr{r/m64}.
+  - opcode: 02 /r
+    mnemonic: ADD \i{r8}, \i{r/m8}
+    encoding: RM
+    validity:
+      1632: valid
+      64: valid
+    description: Adds \abbr{r/m8} to \abbr{r/8}.
+  - opcode: REX 02 /r
+    mnemonic: ADD \i{r8}, \i{r/m8*}
+    encoding: RM
+    validity:
+      1632: n/e
+      64: valid
+    description: Adds \abbr{r/m8} to \abbr{r8}.
+  - opcode: 03 /r
+    mnemonic: ADD \i{r16}, \i{r/m16}
+    encoding: RM
+    validity:
+      1632: valid
+      64: valid
+    description: Adds \abbr{r/m16} to \abbr{r16}.
+  - opcode: 03 /r
+    mnemonic: ADD \i{r32}, \i{r/m32}
+    encoding: RM
+    validity:
+      1632: valid
+      64: valid
+    description: Adds \abbr{r/m32} to \abbr{r32}.
+  - opcode: REX.W 03 /r
+    mnemonic: ADD \i{r64}, \i{r/m64}
+    encoding: RM
+    validity:
+      1632: n/e
+      64: valid
+    description: Adds \abbr{r/m64} to \abbr{r64}.
+encoding:
+  ops: 2
+  encodings:
+    I:
+      - AL/AX/EAX/RAX
+      - imm8/16/32
+    MI:
+      - ModRM:r/m[rw]
+      - imm8/16/32
+    MR:
+      - ModRM:r/m[rw]
+      - ModRM:reg[r]
+    RM:
+      - ModRM:reg[rw]
+      - ModRM:r/m[r]
+description: >-
+  The \c{ADD} instruction adds the destination operand with the source operand and stores the result in the destination operand.
+
+  This instruction can be used with the \instr{LOCK} prefix to allow atomic execution.
+
+  In 64-bit mode, the default operand size is 32 bits, but \c{REX.W} will change it to 64 bits.
+operation: |-
+  fn add<D, S>(dest: D, src: S) {
+    dest = dest + src;
+  }
+flags: >-
+  The \reg{OF}, \reg{SF}, \reg{ZF}, \reg{AF}, \reg{CF}, and \reg{PF} flags are set according to the result.
+exceptions:
+  protected:
+    "#GP(0)":
+      - If the destination is located in a non-writable segment.
+      - If a memory operand effective address is outside the \reg{CS}, \reg{DS}, \reg{ES}, \reg{FS}, or \reg{GS} segment limit.
+      - If the \reg{DS}, \reg{ES}, \reg{FS}, or \reg{GS} register is used to access memory and it contains a \c{NULL} segment selector.
+    "#SS(0)": If a memory operand effective address is outside the \reg{SS} segment limit.
+    "#PF(fault-code)": If a page fault occurs.
+    "#AC(0)": If alignment checking is enabled and an unaligned memory reference is made while the current privilege level is 3.
+    "#UD": If the \instr{LOCK} prefix is used but the destination is not a memory operand.
+  real:
+    "#GP": If a memory operand effective address is outside the \reg{CS}, \reg{DS}, \reg{ES}, \reg{FS}, or \reg{GS} segment limit.
+    "#SS": If a memory operand effective address is outside the \reg{SS} segment limit.
+    "#UD": If the \instr{LOCK} prefix is used but the destination is not a memory operand.
+  virtual:
+    "#GP(0)": If a memory operand effective address is outside the \reg{CS}, \reg{DS}, \reg{ES}, \reg{FS}, or \reg{GS} segment limit.
+    "#SS(0)": If a memory operand effective address is outside the \reg{SS} segment limit.
+    "#PF(fault-code)": If a page fault occurs.
+    "#AC(0)": If alignment checking is enabled and an unaligned memory reference is made.
+    "#UD": If the \instr{LOCK} prefix is used but the destination is not a memory operand.
+  compatibility: Same exceptions as in protected mode.
+  long:
+    "#SS(0)": If a memory address referencing the \reg{SS} segment is in a non-canonical form.
+    "#GP(0)": If a memory operand address is in a non-canonical form.
+    "#PF(fault-code)": If a page fault occurs.
+    "#AC(0)": If alignment checking is enabled and an unaligned memory reference is made while the current privilege level is 3.
+    "#UD": If the \instr{LOCK} prefix is used but the destination is not a memory operand.
