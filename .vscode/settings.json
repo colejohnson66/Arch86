@@ -4,15 +4,21 @@
         "AGPL",
         "Affero",
         "Bochs",
+        "EVEX",
         "Vercel",
+        "addpd",
+        "bcst",
         "blueprintjs",
         "borderless",
         "callout",
         "cpuid",
+        "denormal",
         "encodable",
         "intrinsics",
         "microarchitecture",
         "microarchitectures",
-        "nasm"
+        "nasm",
+        "vaddpd",
+        "writemask"
     ]
 }

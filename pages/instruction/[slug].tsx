@@ -69,8 +69,8 @@ type Exceptions = {
     virtual?: string | ExceptionList,
     compatibility?: string | ExceptionList,
     long?: string | ExceptionList,
-    floating?: string,
-    other?: string,
+    floating?: string | string[],
+    other?: string | string[],
 };
 type Changes = {
     version: number,
@@ -358,12 +358,12 @@ const Page = (props: PageProps) => {
                     {props.exceptions.floating &&
                         <>
                             <H3 id="headingExceptionsFloating">SIMD Floating-Point</H3>
-                            {paragraphsFromString(props.exceptions.floating)}
+                            {paragraphsFromArray(coerceArray(props.exceptions.floating))}
                         </>}
                     {props.exceptions.other &&
                         <>
                             <H3 id="headingExceptionsOther">Other</H3>
-                            {paragraphsFromString(props.exceptions.other)}
+                            {paragraphsFromArray(coerceArray(props.exceptions.other))}
                         </>}
 
                     {props.changes &&
