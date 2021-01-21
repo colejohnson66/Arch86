@@ -21,8 +21,9 @@ import Layout from "../components/Layout";
 
 const Page = () => {
     const IconStyle: CSSProperties = {
+        filter: "drop-shadow(0 0 0.33em white)",
         float: "left",
-        marginRight: "8px",
+        margin: "0.25em 0.75em 0.25em 0",
     };
     return (
         <Layout navGroup="home">
