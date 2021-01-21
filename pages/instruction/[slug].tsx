@@ -15,7 +15,7 @@
  *   with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { Breadcrumbs, Callout, Card, Code, H1, H2, H3, HTMLTable, IBreadcrumbProps, OL, UL } from "@blueprintjs/core";
+import { Breadcrumbs, Callout, Card, Code, Divider, H1, H2, H3, HTMLTable, IBreadcrumbProps, OL, UL } from "@blueprintjs/core";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { getAllInstructionsAsParams, getInstructionData } from "../../lib/instruction";
 
@@ -224,7 +224,7 @@ const Page = (props: PageProps) => {
                                 <tr key={idx}>
                                     <td>
                                         <Code>{processStringToJsx(row.opcode)}</Code>
-                                        <br />
+                                        <Divider />
                                         <Code>{processStringToJsx(row.mnemonic)}</Code>
                                     </td>
                                     <td><Code>{row.encoding}</Code></td>
