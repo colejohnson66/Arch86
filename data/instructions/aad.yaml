@@ -1,6 +1,6 @@
 %YAML 1.2
 ---
-title: ASCII Adjust AX Before Division
+title: ASCII Adjust \reg{AX} Before Division
 validity: 1632,64
 opcode:
   - opcode: D5 0A
@@ -9,14 +9,14 @@ opcode:
     validity:
       1632: valid
       64: invalid
-    description: ASCII adjust AX before division.
+    description: ASCII adjust \reg{AX} before division.
   - opcode: D5 \i{ib}
     mnemonic: AAD \i{imm8}
     encoding: I
     validity:
       1632: valid
       64: invalid
-    description: ASCII adjust AX before division to number base \abbr{imm8}.
+    description: ASCII adjust \reg{AX} before division to number base \abbr{imm8}.
 encoding:
   operands: 1
   encodings:

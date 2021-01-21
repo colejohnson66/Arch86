@@ -205,7 +205,7 @@ const Page = (props: PageProps) => {
                         <TOC.Entry href="#headingChanges" text="Manual Changes" />}
                 </TOC.Root>
                 <div id="content">
-                    <H1><Code>{props.id.toUpperCase()}</Code>: {props.title}</H1>
+                    <H1><Code>{props.id.toUpperCase()}</Code>: {processStringToJsx(props.title)}</H1>
                     <HTMLTable striped bordered interactive>
                         <thead>
                             <tr>

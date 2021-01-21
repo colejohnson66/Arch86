@@ -1,6 +1,6 @@
 %YAML 1.2
 ---
-title: ASCII Adjust AX After Multiplication
+title: ASCII Adjust \reg{AX} After Multiplication
 validity: 1632,64
 opcode:
   - opcode: D4 0A
@@ -9,14 +9,14 @@ opcode:
     validity:
       1632: valid
       64: invalid
-    description: ASCII adjust AX after multiply.
+    description: ASCII adjust \reg{AX} after multiply.
   - opcode: D4 \i{ib}
     mnemonic: AAM \i{imm8}
     encoding: I
     validity:
       1632: valid
       64: invalid
-    description: ASCII adjust AX after multiply to number base \abbr{imm8}.
+    description: ASCII adjust \reg{AX} after multiply to number base \abbr{imm8}.
 encoding:
   operands: 1
   encodings:

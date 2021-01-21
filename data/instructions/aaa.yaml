@@ -1,6 +1,6 @@
 %YAML 1.2
 ---
-title: ASCII Adjust AL After Addition
+title: ASCII Adjust \reg{AL} After Addition
 validity: 1632,64
 opcode:
   - opcode: "37"
@@ -9,7 +9,7 @@ opcode:
     validity:
       1632: valid
       64: invalid
-    description: ASCII adjust AL after addition.
+    description: ASCII adjust \reg{AL} after addition.
 encoding:
   operands: 1
   encodings:

@@ -1,6 +1,6 @@
 %YAML 1.2
 ---
-title: ASCII Adjust AL After Subtraction
+title: ASCII Adjust \reg{AL} After Subtraction
 validity: 1632,64
 opcode:
   - opcode: 3F
@@ -9,7 +9,7 @@ opcode:
     validity:
       1632: valid
       64: invalid
-    description: ASCII adjust AL after subtraction.
+    description: ASCII adjust \reg{AL} after subtraction.
 encoding:
   operands: 1
   encodings:

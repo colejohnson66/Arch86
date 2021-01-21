@@ -9,28 +9,28 @@ opcode:
     validity:
       1632: valid
       64: valid
-    description: Add with carry \abbr{imm8} to AL.
+    description: Add with carry \abbr{imm8} to \reg{AL}.
   - opcode: 15 \i{iw}
     mnemonic: ADC AX, \i{imm16}
     encoding: I
     validity:
       1632: valid
       64: valid
-    description: Add with carry \abbr{imm16} to AX.
+    description: Add with carry \abbr{imm16} to \reg{AX}.
   - opcode: 15 \i{id}
     mnemonic: ADC EAX, \i{imm32}
     encoding: I
     validity:
       1632: valid
       64: valid
-    description: Add with carry \abbr{imm32} to EAX.
+    description: Add with carry \abbr{imm32} to \reg{EAX}.
   - opcode: REX.W 15 \i{id}
     mnemonic: ADC RAX, \i{imm32}
     encoding: I
     validity:
       1632: n/e
       64: valid
-    description: Add with carry \abbr{imm32} sign extended to 64 bits to RAX
+    description: Add with carry \abbr{imm32} sign extended to 64 bits to \reg{RAX}
   - opcode: 80 /2 \i{ib}
     mnemonic: ADC \i{r/m8}, \i{imm8}
     encoding: MI
