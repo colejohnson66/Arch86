@@ -18,6 +18,7 @@
         "microarchitecture",
         "microarchitectures",
         "nasm",
+        "simd",
         "vaddpd",
         "writemask"
     ]
