@@ -30,7 +30,7 @@ opcode:
     validity:
       1632: n/e
       64: valid
-    description: Add with carry \abbr{imm32} sign extended to 64 bits to \reg{RAX}
+    description: Add with carry \abbr{imm32} (sign extended to 64 bits) to \reg{RAX}
   - opcode: 80 /2 \i{ib}
     mnemonic: ADC \i{r/m8}, \i{imm8}
     encoding: MI
@@ -65,28 +65,28 @@ opcode:
     validity:
       1632: n/e
       64: valid
-    description: Add with carry \abbr{imm32} sign extended to 64 bits too \abbr{r/m64}.
+    description: Add with carry \abbr{imm32} (sign extended to 64 bits) too \abbr{r/m64}.
   - opcode: 83 /2 \i{ib}
     mnemonic: ADC \i{r/m16}, \i{imm8}
     encoding: MI
     validity:
       1632: valid
       64: valid
-    description: Add with carry \abbr{imm8} sign extended to 16 bits to \abbr{r/m16}.
+    description: Add with carry \abbr{imm8} (sign extended to 16 bits) to \abbr{r/m16}.
   - opcode: 83 /2 \i{ib}
     mnemonic: ADC \i{r/m32}, \i{imm8}
     encoding: MI
     validity:
       1632: valid
       64: valid
-    description: Add with carry \abbr{imm8} sign extended to 32 bits to \abbr{r/m32}.
+    description: Add with carry \abbr{imm8} (sign extended to 32 bits) to \abbr{r/m32}.
   - opcode: REX.W 83 /2 \i{ib}
     mnemonic: ADC \i{r/m64}, \i{imm8}
     encoding: MI
     validity:
       1632: n/e
       64: valid
-    description: Add with carry \abbr{imm8} sign extended to 64 bits to \abbr{r/m64}.
+    description: Add with carry \abbr{imm8} (sign extended to 64 bits) to \abbr{r/m64}.
   - opcode: 10 /r
     mnemonic: ADC \i{r/m8}, \i{r8}
     encoding: MR
