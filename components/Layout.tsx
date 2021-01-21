@@ -35,7 +35,10 @@ const Layout = (props: LayoutProps) => {
         return (
             <Link href={href}>
                 <a>
-                    <Button className="bp3-minimal" text={text} />
+                    <Button
+                        active={props.navGroup == group}
+                        className="bp3-minimal"
+                        text={text} />
                 </a>
             </Link>
         );
@@ -57,7 +60,10 @@ const Layout = (props: LayoutProps) => {
                     <Navbar.Group>
                         <Link href="/">
                             <a>
-                                <Button className="bp3-minimal" text="80x86" />
+                                <Button
+                                    active={props.navGroup == "home"}
+                                    className="bp3-minimal"
+                                    text="80x86" />
                             </a>
                         </Link>
                         <Navbar.Divider />
