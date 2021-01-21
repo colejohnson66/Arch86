@@ -54,6 +54,7 @@ main {
 
 #toc {
     flex: 1;
+    min-width: 220px;
     padding-right: 2em;
 }
 
