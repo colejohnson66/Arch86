@@ -225,7 +225,7 @@ const Page = (props: PageProps) => {
                                     <td>
                                         <Code>{processStringToJsx(row.opcode)}</Code>
                                         <Divider />
-                                        <Code>{processStringToJsx(row.mnemonic)}</Code>
+                                        <Code className="mnemonic">{processStringToJsx(row.mnemonic)}</Code>
                                     </td>
                                     <td><Code>{row.encoding}</Code></td>
                                     {props.validity.split(",").map((entry) =>

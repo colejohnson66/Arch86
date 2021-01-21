@@ -57,6 +57,10 @@ header {
     flex: 4;
 }
 
+.mnemonic {
+    white-space: nowrap;
+}
+
 .external {
     background: url(/img/external-ltr.png) center right no-repeat;
     padding-right: 15px;
