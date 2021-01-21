@@ -25,6 +25,7 @@ import Layout from "../../components/Layout";
 import Link from "next/link";
 import React from "react";
 import SyntaxHighlighter from "react-syntax-highlighter";
+import SyntaxHighlighterDarkTheme from "react-syntax-highlighter/dist/cjs/styles/hljs/atom-one-dark";
 import TOC from "../../components/TOC";
 import { processStringToJsx } from "../../lib/processStringToJsx";
 import renderBreadcrumbs from "../../lib/renderBreadcrumbs";
@@ -277,7 +278,7 @@ const Page = (props: PageProps) => {
                         This pseudo-code uses a Rust-like syntax.
                         A list of the types used is <Link href="/instruction/help#headingOperation"><a>available here</a></Link>.
                     </Callout>
-                    <SyntaxHighlighter language="rust">
+                    <SyntaxHighlighter language="rust" style={SyntaxHighlighterDarkTheme}>
                         {props.operation}
                     </SyntaxHighlighter>
                     {props.operationNotes &&
@@ -297,7 +298,7 @@ const Page = (props: PageProps) => {
                                 {plural(props.examples, "This example uses", "These examples use")} NASM syntax.
                             </Callout>
                             {coerceArray(props.examples).map((example, idx) => (
-                                <SyntaxHighlighter key={idx} language="nasm">
+                                <SyntaxHighlighter key={idx} language="nasm" style={SyntaxHighlighterDarkTheme}>
                                     {example}
                                 </SyntaxHighlighter>
                             ))}
@@ -316,7 +317,7 @@ const Page = (props: PageProps) => {
                                 The official intrinsics use the full definition from the header file.
                                 These intrinsics are shorter definitions of those while also using fixed-width integer types.
                             </Callout>
-                            <SyntaxHighlighter language="c-like">
+                            <SyntaxHighlighter language="c-like" style={SyntaxHighlighterDarkTheme}>
                                 {props.intrinsicsC}
                             </SyntaxHighlighter>
                         </>}
@@ -327,7 +328,7 @@ const Page = (props: PageProps) => {
                             <Callout intent="primary">
                                 These intrinsics are from an upcoming crate and may change.
                             </Callout>
-                            <SyntaxHighlighter language="rust">
+                            <SyntaxHighlighter language="rust" style={SyntaxHighlighterDarkTheme}>
                                 {props.intrinsicsRust}
                             </SyntaxHighlighter>
                         </>}
