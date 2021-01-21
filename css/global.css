@@ -14,17 +14,30 @@
  * You should have received a copy of the GNU Affero General Public License along
  *   with this program. If not, see <https://www.gnu.org/licenses/>.
  */
-html, body {
+html,
+body,
+#__next {
     height: 100%;
-    width: 100%;
+    width: 100%
+}
+
+#mainCard {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
 }
 
 header {
+    flex: 0 1 auto;
     margin-bottom: 20px;
 }
 
 .navbarLogo {
     margin-right: 0.5ch;
+}
+
+main {
+    flex: 1 1 auto;
 }
 
 .breadcrumbs {
@@ -82,5 +95,6 @@ time,
 }
 
 footer {
-    margin: 0 0 0 10em;
+    flex: 0 1 auto;
+    margin: 1em 0 0 10em;
 }

@@ -22,7 +22,7 @@ import "../css/global.css";
 import { AppProps } from "next/app";
 
 const App = ({ Component, pageProps }: AppProps) => {
-    return <div className=""><Component {...pageProps} /></div>;
+    return <Component {...pageProps} />;
 };
 
 export default App;

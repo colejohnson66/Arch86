@@ -15,7 +15,7 @@
  *   with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { Button, Icon, Navbar } from "@blueprintjs/core";
+import { Button, Card, Divider, Icon, Navbar } from "@blueprintjs/core";
 
 import Head from "next/head";
 import Link from "next/link";
@@ -55,38 +55,40 @@ const Layout = (props: LayoutProps) => {
                 {props.keywords && <meta name="keywords" content={props.keywords} />}
                 <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
             </Head>
-            <header>
-                <Navbar>
-                    <Navbar.Group>
-                        <Link href="/">
-                            <a>
-                                <Button
-                                    active={props.navGroup == "home"}
-                                    className="bp3-minimal"
-                                    text="80x86" />
-                            </a>
-                        </Link>
-                        <Navbar.Divider />
-                        {navItem("about", "/about", "About")}
-                        {navItem("instruction", "/instruction", "Instructions")}
-                        {navItem("architecture", "/architecture", "Microarchitecture")}
-                    </Navbar.Group>
-                </Navbar>
-            </header>
-            <main>
-                {props.children}
-            </main>
-            <hr />
-            <footer>
-                <div className="bp3-text-small">
-                    <p>
-                        <Link href="/contact"><a>Contact</a></Link>
+            <Card id="mainCard" className="bp3-dark">
+                <header>
+                    <Navbar>
+                        <Navbar.Group>
+                            <Link href="/">
+                                <a>
+                                    <Button
+                                        active={props.navGroup == "home"}
+                                        className="bp3-minimal"
+                                        text="80x86" />
+                                </a>
+                            </Link>
+                            <Navbar.Divider />
+                            {navItem("about", "/about", "About")}
+                            {navItem("instruction", "/instruction", "Instructions")}
+                            {navItem("architecture", "/architecture", "Microarchitecture")}
+                        </Navbar.Group>
+                    </Navbar>
+                </header>
+                <main>
+                    {props.children}
+                </main>
+                <Divider />
+                <footer>
+                    <div className="bp3-text-small">
+                        <p>
+                            <Link href="/contact"><a>Contact</a></Link>
+                        </p>
+                        <p>
+                            Website copyright &copy; Cole Johnson 2020-2021.
                     </p>
-                    <p>
-                        Website copyright &copy; Cole Johnson 2020-2021.
-                    </p>
-                </div>
-            </footer>
+                    </div>
+                </footer>
+            </Card>
         </>
     );
 };
