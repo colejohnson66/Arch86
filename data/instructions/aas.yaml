@@ -28,7 +28,7 @@ description: >-
   In 16- or 32-bit mode, this instruction will only modify the \reg{AF} and \reg{CF} flags.
   The other arithmetic flags are undefined and undocumented.
 operation: >-
-  fn aas() {
+  pub fn aas() {
     if (MODE == 64) {
       #UD;
     } else {

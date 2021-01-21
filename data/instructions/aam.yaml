@@ -39,7 +39,7 @@ description: >-
 
   This instruction is not valid in 64-bit mode, and if encountered, the processor will raise a \c{#UD} exception.
 operation: >-
-  fn aam(imm8: u8) {
+  pub fn aam(imm8: u8) {
     if (MODE == 64) {
       #UD;
     } else {
