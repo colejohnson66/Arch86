@@ -209,8 +209,7 @@ const Page = (props: PageProps) => {
                     <HTMLTable striped bordered interactive>
                         <thead>
                             <tr>
-                                <th>Opcode</th>
-                                <th>Mnemonic</th>
+                                <th>Opcode and Mnemonic</th>
                                 <th><a href="#headingEncoding">Encoding</a></th>
                                 {props.validity.split(",").map((entry) =>
                                     <th key={entry}>{OpcodeValidityKeyMap[entry]}</th>
@@ -223,8 +222,11 @@ const Page = (props: PageProps) => {
                         <tbody>
                             {props.opcode.map((row, idx) => (
                                 <tr key={idx}>
-                                    <td><Code>{processStringToJsx(row.opcode)}</Code></td>
-                                    <td><Code>{processStringToJsx(row.mnemonic)}</Code></td>
+                                    <td>
+                                        <Code>{processStringToJsx(row.opcode)}</Code>
+                                        <br />
+                                        <Code>{processStringToJsx(row.mnemonic)}</Code>
+                                    </td>
                                     <td><Code>{row.encoding}</Code></td>
                                     {props.validity.split(",").map((entry) =>
                                         // This ensures that they are displayed in the same order as the heading
