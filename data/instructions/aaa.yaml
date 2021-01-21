@@ -14,7 +14,7 @@ encoding:
   operands: 1
   encodings:
     ZO:
-      - "None"
+      - None
 description: >-
   The \c{AAA} instruction converts the result of an addition of two BCD digits to a valid 2-digit BCD number.
 
