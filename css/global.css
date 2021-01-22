@@ -18,7 +18,8 @@ html,
 body,
 #__next {
     height: 100%;
-    width: 100%
+    width: 100%;
+    min-width: 1250px;
 }
 
 #mainCard {
@@ -26,6 +27,7 @@ body,
     display: flex;
     flex-direction: column;
     min-height: 100%;
+    min-width: 1250px;
 }
 
 header {
@@ -55,7 +57,7 @@ main {
 
 #toc {
     flex: 1;
-    min-width: 220px;
+    min-width: 200px;
     padding-right: 2em;
 }
 
@@ -69,7 +71,7 @@ main {
 }
 
 #content {
-    flex: 4;
+    flex: 5;
 }
 
 .mnemonic {
