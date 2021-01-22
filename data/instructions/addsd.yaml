@@ -57,7 +57,10 @@ encoding:
 description: >-
   The \c{(V)ADDSD} instruction adds a single double-precision floating-point from the first source operand and the second source operand and stores the result in the destination operand.
 
-  All versions \i{except} the legacy SSE version zero the unused upper SIMD register bits.
+  The legacy SSE version (\c{ADDSD}) works on the lowest 64 bits and leaves all others unchanged.
+
+  The AVX versions (\c{VADDSD}) work on the lowest 64 bits, but also copy the second 64 bits from the first source operand to the destination.
+  Afterwards, all unchanged bits in the destination are zeroed.
 
   Although this instruction works with \c{(E)VEX.LIG}, Intel recommends that assemblers set \c{(E)VEX.L} to 0.
   Encoding with \c{(E)VEX.L} being 1 may not be allowed in the future.
@@ -69,7 +72,7 @@ operation: |-
 
   pub fn vaddsd_vex(dest: &mut Simd<f64>, src1: Simd<f64>, src2: Simd<f64>) {
     dest[63..=0] = src1[63..=0] + src2[63..=0];
-    dest[127..=64] = src1[127..=64] + src2[127..=64];
+    dest[127..=64] = src1[127..=64];
     dest[Simd::max()..=128] = 0;
   }
 
@@ -85,7 +88,7 @@ operation: |-
       }
     }
 
-    dest[127..=64] = src1[127..=64] + src2[127..=64];
+    dest[127..=64] = src1[127..=64];
     dest[Simd::max()..=128] = 0;
   }
 intrinsicsC: |-
