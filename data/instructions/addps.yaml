@@ -43,7 +43,7 @@ opcode:
       - AVX512VL
       - AVX512F
     description: >-
-      Adds packed single-precision floating-point values from \abbr{xmm2/m128/m32bcst} and \abbr{xmm1}.
+      Adds packed single-precision floating-point values from \abbr{xmm3/m128/m32bcst} and \abbr{xmm2}.
       Stores the result in \abbr{xmm1} using writemask \abbr{k1}.
   - opcode: EVEX.256.0F.W0 58 /r
     mnemonic: VADDPS \i{ymm1} {k1}{z}, \i{ymm2}, \i{ymm3/m256/m32bcst}
@@ -197,7 +197,6 @@ intrinsicsC: |-
   __m512 _mm512_mask_add_round_ps(__m512 s, __mmask16 k, __m512 a, __m512 b, uint8_t rounding)
   __m512 _mm512_maskz_add_ps(__mmask16 k, __m512 a, __m512 b)
   __m512 _mm512_maskz_add_round_ps(__mmask16 k, __m512 a, __m512 b, uint8_t rounding)
-
 intrinsicsRust: |-
   addps::m128(a: m128<f32>, b: m128<f32>) -> m128<f32>
   addps::m128_mask(src: m128<f32>, mask: u8, a: m128<f32>, b: m128<f32>) -> m128<f32>

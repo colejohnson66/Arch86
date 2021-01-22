@@ -43,7 +43,7 @@ opcode:
       - AVX512VL
       - AVX512F
     description: >-
-      Adds packed double-precision floating-point values from \abbr{xmm2/m128/m64bcst} and \abbr{xmm1}.
+      Adds packed double-precision floating-point values from \abbr{xmm3/m128/m64bcst} and \abbr{xmm2}.
       Stores the result in \abbr{xmm1} using writemask \abbr{k1}.
   - opcode: EVEX.256.66.0F.W1 58 /r
     mnemonic: VADDPD \i{ymm1} {k1}{z}, \i{ymm2}, \i{ymm3/m256/m64bcst}
