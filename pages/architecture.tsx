@@ -23,13 +23,13 @@ import TOC from "../components/TOC";
 import WIP from "../components/WIP";
 import renderBreadcrumbs from "../lib/renderBreadcrumbs";
 
-const PageBreadcrumbs: IBreadcrumbProps[] = [
-    { text: "Microarchitecture" },
-];
-
 const Page = () => {
+    const PageBreadcrumbs: IBreadcrumbProps[] = [
+        { text: "Microarchitecture" },
+    ];
+
     return (
-        <Layout navGroup="architecture" title="Microarchitecture">
+        <Layout canonical="/architecture" navGroup="architecture" title="Microarchitecture">
             <Card className="breadcrumbs" interactive={true}>
                 <Breadcrumbs breadcrumbRenderer={renderBreadcrumbs} items={PageBreadcrumbs} />
             </Card>

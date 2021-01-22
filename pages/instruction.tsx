@@ -35,7 +35,7 @@ type PageProps = {
 
 const Page = (props: PageProps) => {
     return (
-        <Layout navGroup="instruction" title="Instructions">
+        <Layout canonical="/instruction" navGroup="instruction" title="Instructions">
             <Card className="breadcrumbs" interactive={true}>
                 <Breadcrumbs breadcrumbRenderer={renderBreadcrumbs} items={PageBreadcrumbs} />
             </Card>

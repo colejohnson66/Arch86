@@ -21,13 +21,13 @@ import Layout from "../components/Layout";
 import TOC from "../components/TOC";
 import renderBreadcrumbs from "../lib/renderBreadcrumbs";
 
-const PageBreadcrumbs: IBreadcrumbProps[] = [
-    { text: "About" },
-];
-
 const Page = () => {
+    const PageBreadcrumbs: IBreadcrumbProps[] = [
+        { text: "About" },
+    ];
+
     return (
-        <Layout navGroup="about" title="About">
+        <Layout canonical="/about" navGroup="about" title="About">
             <Card className="breadcrumbs" interactive={true}>
                 <Breadcrumbs breadcrumbRenderer={renderBreadcrumbs} items={PageBreadcrumbs} />
             </Card>

@@ -165,7 +165,7 @@ const Page = (props: PageProps) => {
         </a>);
 
     return (
-        <Layout navGroup="instruction" title={`${props.id.toUpperCase()} Instruction`}>
+        <Layout canonical={`/instruction/${props.id}`} navGroup="instruction" title={`${props.id.toUpperCase()} Instruction`}>
             <Card className="breadcrumbs" interactive>
                 <Breadcrumbs breadcrumbRenderer={renderBreadcrumbs} items={PageBreadcrumbs} />
             </Card>

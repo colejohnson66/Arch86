@@ -31,7 +31,7 @@ const Page = () => {
     ];
 
     return (
-        <Layout navGroup="instruction" title="Instruction Page Help">
+        <Layout canonical="/instruction/help" navGroup="instruction" title="Instruction Page Help">
             <Card className="breadcrumbs" interactive>
                 <Breadcrumbs breadcrumbRenderer={renderBreadcrumbs} items={PageBreadcrumbs} />
             </Card>

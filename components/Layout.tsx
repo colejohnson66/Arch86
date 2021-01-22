@@ -20,15 +20,17 @@ import { Button, Card, Divider, Icon, Navbar } from "@blueprintjs/core";
 import Head from "next/head";
 import Link from "next/link";
 import React from "react";
+import { strict as assert } from "assert";
 
 type NavGroup = "home" | "about" | "architecture" | "instruction";
 type LayoutProps = {
-    title?: string,
-    description?: string,
-    keywords?: string,
-    navGroup?: NavGroup,
-    children?: React.ReactNode,
-}
+    title?: string;
+    description?: string;
+    keywords?: string;
+    canonical?: string;
+    navGroup?: NavGroup;
+    children?: React.ReactNode;
+};
 
 const Layout = (props: LayoutProps) => {
     function navItem(group: NavGroup, href: string, text: string) {
@@ -44,15 +46,20 @@ const Layout = (props: LayoutProps) => {
         );
     }
 
+    if (props.canonical)
+        assert(props.canonical[0] === "/");
+
     return (
         <>
             <Head>
+                <meta name="viewport" content="min-width=1250" />
                 {props.title ?
                     <title>80x86 - {props.title}</title> :
                     <title>80x86</title>
                 }
                 {props.description && <meta name="description" content={props.description} />}
                 {props.keywords && <meta name="keywords" content={props.keywords} />}
+                {props.canonical && <link rel="canonical" href={`https://80x86.dev${props.canonical}`} />}
                 <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
             </Head>
             <Card id="mainCard" className="bp3-dark">

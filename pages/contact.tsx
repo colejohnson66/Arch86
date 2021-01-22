@@ -19,13 +19,13 @@ import { Breadcrumbs, Card, H1, IBreadcrumbProps, UL } from "@blueprintjs/core";
 import Layout from "../components/Layout";
 import renderBreadcrumbs from "../lib/renderBreadcrumbs";
 
-const PageBreadcrumbs: IBreadcrumbProps[] = [
-    { text: "Contact" },
-];
-
 const Page = () => {
+    const PageBreadcrumbs: IBreadcrumbProps[] = [
+        { text: "Contact" },
+    ];
+
     return (
-        <Layout title="Contact">
+        <Layout canonical="/contact" title="Contact">
             <Card className="breadcrumbs" interactive={true}>
                 <Breadcrumbs breadcrumbRenderer={renderBreadcrumbs} items={PageBreadcrumbs} />
             </Card>

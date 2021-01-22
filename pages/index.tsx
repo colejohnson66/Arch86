@@ -25,8 +25,9 @@ const Page = () => {
         float: "left",
         margin: "0.25em 0.75em 0.25em 0",
     };
+
     return (
-        <Layout navGroup="home">
+        <Layout canonical="/" navGroup="home">
             <div id="main">
                 <div id="content">
                     <img src="/img/icon.svg" width="64" height="64" style={IconStyle} />
