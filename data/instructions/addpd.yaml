@@ -58,7 +58,7 @@ opcode:
       Adds packed double-precision floating-point values from \abbr{ymm3/m256/m64bcst} and \abbr{ymm2}.
       Stores the result in \abbr{ymm1} using writemask \abbr{k1}.
   - opcode: EVEX.512.66.0F.W1 58 /r
-    mnemonic: VADDPD \i{zmm1} {k1}{z}, \i{zmm2}, \i{zmm3/m512/m64bcst}
+    mnemonic: VADDPD \i{zmm1} {k1}{z}, \i{zmm2}, \i{zmm3/m512/m64bcst} {er}
     encoding: EVEX
     validity:
       32: valid
