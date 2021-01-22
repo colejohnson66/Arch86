@@ -197,21 +197,6 @@ intrinsicsC: |-
   __m512 _mm512_mask_add_round_ps(__m512 s, __mmask16 k, __m512 a, __m512 b, uint8_t rounding)
   __m512 _mm512_maskz_add_ps(__mmask16 k, __m512 a, __m512 b)
   __m512 _mm512_maskz_add_round_ps(__mmask16 k, __m512 a, __m512 b, uint8_t rounding)
-intrinsicsRust: |-
-  addps::m128(a: m128<f32>, b: m128<f32>) -> m128<f32>
-  addps::m128_mask(src: m128<f32>, mask: u8, a: m128<f32>, b: m128<f32>) -> m128<f32>
-  addps::m128_maskz(mask: u8, a: m128<f32>, b: m128<f32>) -> m128<f32>
-
-  addps::m256(a: m256<f32>, b: m256<f32>) -> m256<f32>
-  addps::m256_mask(src: m256<f32>, mask: u8, a: m256<f32>, b: m256<f32>) -> m256<f32>
-  addps::m256_maskz(mask: u8, a: m256<f32>, b: m256<f32>) -> m256<f32>
-
-  addps::m512(a: m512<f32>, b: m512<f32>) -> m512<f32>
-  addps::m512_round(a: m512<f32>, b: m512<f32>, rounding: u8) -> m512<f32>
-  addps::m512_mask(src: m512<f32>, mask: u8, a: m512<f32>, b: m512<f32>) -> m512<f32>
-  addps::m512_mask_round(src: m512<f32>, mask: u8, a: m512<f32>, b: m512<f32>, rounding: u8) -> m512<f32>
-  addps::m512_maskz(mask: u8, a: m512<f32>, b: m512<f32>) -> m512<f32>
-  addps::m512_maskz_round(mask: u8, a: m512<f32>, b: m512<f32>) -> m512<f32>
 exceptions:
   floating: Overflow, Underflow, Invalid, Precision, Denormal
   other:
