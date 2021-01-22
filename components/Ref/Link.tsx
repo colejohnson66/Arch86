@@ -14,13 +14,14 @@
  * You should have received a copy of the GNU Affero General Public License along
  *   with this program. If not, see <https://www.gnu.org/licenses/>.
  */
-import Link from "../Link"
+import Link from "../Link";
+import React from "react";
 
 type RefLinkProps = {
     name: string,
 };
 
-const RefLink = (props: RefLinkProps) => {
+export default function RefLink(props: RefLinkProps): JSX.Element {
     return (
         <sup>
             <Link href={`#reference-${props.name}`}>
@@ -29,5 +30,3 @@ const RefLink = (props: RefLinkProps) => {
         </sup>
     );
 }
-
-export default RefLink;

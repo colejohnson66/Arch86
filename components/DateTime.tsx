@@ -14,17 +14,17 @@
  * You should have received a copy of the GNU Affero General Public License along
  *   with this program. If not, see <https://www.gnu.org/licenses/>.
  */
+import React from "react";
+
 type DateTimeProps = {
-    dateTime: string,
-    text?: string,
+    dateTime: string;
+    text?: string;
 };
 
-const DateTime = (props: DateTimeProps) => {
+export default function DateTime(props: DateTimeProps): JSX.Element {
     // TODO: verify if `props.dateTime` is valid
     // see: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/time
     return (
         <time dateTime={props.dateTime}>{props.text ? props.text : props.dateTime}</time>
     );
-};
-
-export default DateTime;
+}

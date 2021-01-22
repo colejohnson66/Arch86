@@ -25,7 +25,7 @@ type TOCEntryProps = {
     children?: React.ReactNode,
 };
 
-const Entry = (props: TOCEntryProps) => {
+export default function Entry(props: TOCEntryProps): JSX.Element {
     // Set `tocIndex`, but only on valid TOC entries (filter out nulls)
     let count = 0;
     const newChildren = React.Children.map(props.children, (child) => {
@@ -41,6 +41,4 @@ const Entry = (props: TOCEntryProps) => {
             {(newChildren && newChildren.length !== 0) && <ul>{newChildren}</ul>}
         </li>
     );
-};
-
-export default Entry;
+}

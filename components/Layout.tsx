@@ -1,21 +1,21 @@
 /* This file is part of 80x86.
  * Copyright (c) 2020-2021 Cole Johnson
- * 
+ *
  * This program is free software: you can redistribute it and/or modify it under
  *   the terms of the GNU Affero General Public License as published by the Free
  *   Software Foundation, either version 3 of the License, or (at your option)
  *   any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  *   ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
  *   FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License
  *   for more details.
- * 
+ *
  * You should have received a copy of the GNU Affero General Public License along
  *   with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { Button, Card, Divider, Icon, Navbar } from "@blueprintjs/core";
+import { Button, Card, Divider, Navbar } from "@blueprintjs/core";
 
 import Head from "next/head";
 import Link from "../components/Link";
@@ -32,12 +32,12 @@ type LayoutProps = {
     children?: React.ReactNode;
 };
 
-const Layout = (props: LayoutProps) => {
+export default function Layout(props: LayoutProps): JSX.Element {
     function navItem(group: NavGroup, href: string, text: string) {
         return (
             <Link href={href}>
                 <Button
-                    active={props.navGroup == group}
+                    active={props.navGroup === group}
                     className="bp3-minimal"
                     text={text} />
             </Link>
@@ -66,7 +66,7 @@ const Layout = (props: LayoutProps) => {
                         <Navbar.Group>
                             <Link href="/">
                                 <Button
-                                    active={props.navGroup == "home"}
+                                    active={props.navGroup === "home"}
                                     className="bp3-minimal"
                                     text="80x86" />
                             </Link>
@@ -88,12 +88,10 @@ const Layout = (props: LayoutProps) => {
                         </p>
                         <p>
                             Website copyright &copy; Cole Johnson 2020-2021.
-                    </p>
+                        </p>
                     </div>
                 </footer>
             </Card>
         </>
     );
-};
-
-export default Layout;
+}

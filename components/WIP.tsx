@@ -15,18 +15,17 @@
  *   with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 import { Callout } from "@blueprintjs/core";
+import React from "react";
 
 type WipProps = {
-    type: "page" | "section"
+    type: "page" | "section";
 };
 
-const WIP = (props: WipProps) => {
+export default function WIP(props: WipProps): JSX.Element {
     return (
         <Callout intent="warning">
             This {props.type} is a work in progress.
             It is incomplete, and may not be completely accurate or up to date.
         </Callout>
     );
-};
-
-export default WIP;
+}

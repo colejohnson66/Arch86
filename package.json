@@ -2,7 +2,7 @@
   "name": "80x86",
   "version": "0.1.0",
   "description": "Source code for 80x86.dev",
-  "author": "Cole Johnson",
+  "author": "Cole Johnson <coleharrisjohnson@gmail.com>",
   "license": "AGPL-3.0-or-later",
   "private": true,
   "repository": {
@@ -16,6 +16,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app"
+    ]
   },
   "dependencies": {
     "@blueprintjs/core": "^3.38.0",
@@ -31,7 +36,11 @@
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     "@types/react-syntax-highlighter": "^13.5.0",
+    "@typescript-eslint/eslint-plugin": "^4.14.0",
+    "@typescript-eslint/parser": "^4.14.0",
     "chalk": "^4.1.0",
+    "eslint": "^7.18.0",
+    "eslint-plugin-react": "^7.22.0",
     "globby": "^11.0.2",
     "typescript": "^4.1.3"
   }

@@ -1,16 +1,16 @@
 /* This file is part of 80x86.
  * Copyright (c) 2020-2021 Cole Johnson
- * 
+ *
  * This program is free software: you can redistribute it and/or modify it under
  *   the terms of the GNU Affero General Public License as published by the Free
  *   Software Foundation, either version 3 of the License, or (at your option)
  *   any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  *   ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
  *   FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License
  *   for more details.
- * 
+ *
  * You should have received a copy of the GNU Affero General Public License along
  *   with this program. If not, see <https://www.gnu.org/licenses/>.
  */
@@ -35,7 +35,7 @@ const OpcodeValidityMap: { [T in OpcodeValidityValues]: string } = {
     "valid": "Valid",
     "valid*": "Valid*",
     "invalid": "Invalid",
-    "n/e": "Not Encodable"
+    "n/e": "Not Encodable",
 };
 type OpcodeValidity = {
     16?: OpcodeValidityValues,
@@ -140,8 +140,8 @@ function regularExceptionList(ex: string | ExceptionList, parse = true): JSX.Ele
     if (typeof ex === "string")
         return <p>{brTagsFromString(ex)}</p>;
 
-    let rows = Object.keys(ex).map((key) => {
-        let val = ex[key];
+    const rows = Object.keys(ex).map((key) => {
+        const val = ex[key];
 
         return (
             <React.Fragment key={key}>
@@ -153,9 +153,12 @@ function regularExceptionList(ex: string | ExceptionList, parse = true): JSX.Ele
     return <dl>{rows}</dl>;
 }
 
-const Page = (props: PageProps) => {
+export default function Page(props: PageProps): JSX.Element {
     const PageBreadcrumbs: IBreadcrumbProps[] = [
-        { text: "Instructions", href: "/instruction" },
+        {
+            text: "Instructions",
+            href: "/instruction",
+        },
         { text: props.id.toUpperCase() },
     ];
 
@@ -212,8 +215,7 @@ const Page = (props: PageProps) => {
                             <tr>
                                 <th>Opcode and Mnemonic</th>
                                 <th><Link href="#headingEncoding">Encoding</Link></th>
-                                {props.validity.split(",").map((entry) =>
-                                    <th key={entry}>{OpcodeValidityKeyMap[entry]}</th>
+                                {props.validity.split(",").map((entry) => <th key={entry}>{OpcodeValidityKeyMap[entry]}</th>
                                 )}
                                 {props.opcode[0].cpuid &&
                                     <th><Link href="/instruction/cpuid">CPUID</Link> Feature Flag</th>}
@@ -229,10 +231,10 @@ const Page = (props: PageProps) => {
                                         <Code className="mnemonic">{processStringToJsx(row.mnemonic)}</Code>
                                     </td>
                                     <td><Code>{row.encoding}</Code></td>
-                                    {props.validity.split(",").map((entry) =>
+                                    {props.validity.split(",").map((entry) => (
                                         // This ensures that they are displayed in the same order as the heading
                                         <td key={entry}>{OpcodeValidityMap[row.validity[entry]]}</td>
-                                    )}
+                                    ))}
                                     {row.cpuid &&
                                         <td>
                                             {brTagsFromArray(coerceArray(row.cpuid))}
@@ -387,20 +389,18 @@ const Page = (props: PageProps) => {
             </div>
         </Layout>
     );
-};
-
-export default Page;
+}
 
 export const getStaticPaths: GetStaticPaths = async () => {
     return {
         paths: getAllInstructionsAsParams(),
         fallback: false,
     };
-}
+};
 
 export const getStaticProps: GetStaticProps = async (context) => {
     const data = await getInstructionData(context.params["slug"] as string);
     return {
-        props: data
+        props: data,
     };
-}
+};

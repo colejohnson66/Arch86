@@ -14,15 +14,16 @@
  * You should have received a copy of the GNU Affero General Public License along
  *   with this program. If not, see <https://www.gnu.org/licenses/>.
  */
+
+import React from "react";
+
 type UnitProps = {
-    value: string | number,
-    unit: string,
+    value: string | number;
+    unit: string;
 };
 
-const Unit = (props: UnitProps) => {
+export default function Unit(props: UnitProps): JSX.Element {
     return (
         <span className="Unit">{props.value} {props.unit}</span>
     );
-};
-
-export default Unit;
+}

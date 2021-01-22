@@ -1,16 +1,16 @@
 /* This file is part of 80x86.
  * Copyright (c) 2021 Cole Johnson
- * 
+ *
  * This program is free software: you can redistribute it and/or modify it under
  *   the terms of the GNU Affero General Public License as published by the Free
  *   Software Foundation, either version 3 of the License, or (at your option)
  *   any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  *   ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
  *   FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License
  *   for more details.
- * 
+ *
  * You should have received a copy of the GNU Affero General Public License along
  *   with this program. If not, see <https://www.gnu.org/licenses/>.
  */
@@ -20,20 +20,21 @@ import { Breadcrumbs, Callout, Card, H1, H2, IBreadcrumbProps, UL } from "@bluep
 import { GetStaticProps } from "next";
 import Layout from "../components/Layout";
 import Link from "../components/Link";
+import React from "react";
 import TOC from "../components/TOC";
 import WIP from "../components/WIP";
 import { getAllInstructionsArray } from "../lib/instruction";
 import renderBreadcrumbs from "../lib/renderBreadcrumbs";
 
-const PageBreadcrumbs: IBreadcrumbProps[] = [
-    { text: "Instructions" },
-];
-
 type PageProps = {
-    instructions: string[],
+    instructions: string[];
 };
 
-const Page = (props: PageProps) => {
+export default function Page(props: PageProps): JSX.Element {
+    const PageBreadcrumbs: IBreadcrumbProps[] = [
+        { text: "Instructions" },
+    ];
+
     return (
         <Layout canonical="/instruction" navGroup="instruction" title="Instructions">
             <Card className="breadcrumbs" interactive={true}>
@@ -47,7 +48,7 @@ const Page = (props: PageProps) => {
                     <H1>x86 Instructions</H1>
                     <p>
                         x86 is home to a few hundred instructions with over 3,000 different encodings.
-                        An up-to-date list is available in PDF form on <Link href="https://software.intel.com/content/www/us/en/develop/articles/intel-sdm.html">Intel's website</Link> (see volume 2).
+                        An up-to-date list is available in PDF form on <Link href="https://software.intel.com/content/www/us/en/develop/articles/intel-sdm.html">Intel&apos;s website</Link> (see volume 2).
                     </p>
 
                     <H2 id="headingList">List</H2>
@@ -68,9 +69,7 @@ const Page = (props: PageProps) => {
             </div>
         </Layout>
     );
-};
-
-export default Page;
+}
 
 export const getStaticProps: GetStaticProps = async () => {
     return {
@@ -78,4 +77,4 @@ export const getStaticProps: GetStaticProps = async () => {
             instructions: getAllInstructionsArray(),
         },
     };
-}
+};

@@ -17,18 +17,19 @@
 
 import DateTime from "../DateTime";
 import Link from "../Link";
+import React from "react";
 
 type CiteWebProps = {
-    author: string | string[],
-    date?: string,
-    url?: string,
-    title: string,
-    website?: string,
-    accessDate: string,
+    author: string | string[];
+    date?: string;
+    url?: string;
+    title: string;
+    website?: string;
+    accessDate: string;
 }
 
 // Web citation roughly following Wikipedia's style (Citation Style 1)
-const CiteWeb = (props: CiteWebProps) => {
+export default function CiteWeb(props: CiteWebProps): JSX.Element {
     let author: string;
     if (typeof props.author === "string")
         author = props.author;
@@ -39,18 +40,18 @@ const CiteWeb = (props: CiteWebProps) => {
     let date: JSX.Element | null = null;
     if (props.date)
         date = <>{" ("}<DateTime dateTime={props.date} />)</>;
-    
+
     let titleAndLink: JSX.Element;
     if (props.url)
         titleAndLink = <Link href={props.url}>{props.title}</Link>;
     else
-        titleAndLink = <>"{props.title}"</>;
-    
+        titleAndLink = <>&quot;{props.title}&quot;</>;
+
     let website: JSX.Element | null = null;
     if (props.website)
-        website = <><i>{props.website}.</i>{" "}</>
-    
-    let accessDate = <>Retrieved <DateTime dateTime={props.accessDate} />{". "}</>;
+        website = <><i>{props.website}.</i>{" "}</>;
+
+    const accessDate = <>Retrieved <DateTime dateTime={props.accessDate} />{". "}</>;
 
     return (
         <span className="citation-web">
@@ -63,5 +64,3 @@ const CiteWeb = (props: CiteWebProps) => {
         </span>
     );
 }
-
-export default CiteWeb;
