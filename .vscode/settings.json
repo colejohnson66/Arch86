@@ -1,5 +1,14 @@
 {
     "files.insertFinalNewline": true,
+    "cSpell.ignorePaths": [
+        "**/node_modules/**",
+        "**/.next/**",
+        "**/.vscode/**",
+        "**/.eslintrc.*",
+        "**/LICENSE",
+        "**/package.json",
+        "**/yarn.lock"
+    ],
     "cSpell.ignoreWords": [
         "aaa",
         "aad",
