@@ -18,6 +18,7 @@
 import { Breadcrumbs, Card, H1, H2, IBreadcrumbProps, UL } from "@blueprintjs/core";
 
 import Layout from "../components/Layout";
+import Link from "../components/Link";
 import TOC from "../components/TOC";
 import renderBreadcrumbs from "../lib/renderBreadcrumbs";
 
@@ -44,27 +45,27 @@ const Page = () => {
 
                     <H2 id="headingStack">Software Stack</H2>
                     <p>
-                        This site is build using <a href="https://nextjs.org/" className="external">Next.js</a> and deployed on <a href="https://vercel.com/" className="external">Vercel</a>.
-                        {" "}<a href="https://react-bootstrap.github.io/" className="external">React Bootstrap</a> is used for theming and layout.
+                        This site is build using <Link href="https://nextjs.org/">Next.js</Link> and deployed on <Link href="https://vercel.com/">Vercel</Link>.
+                        {" "}<Link href="https://react-bootstrap.github.io/">React Bootstrap</Link> is used for theming and layout.
                     </p>
                     <p>
                         Additionally, the following npm packages are used:
                     </p>
                     <UL>
                         <li>
-                            <a href="https://www.npmjs.com/package/react-syntax-highlighter" className="external"><code>react-syntax-highlighter</code></a>
+                            <Link href="https://www.npmjs.com/package/react-syntax-highlighter"><code>react-syntax-highlighter</code></Link>
                             {": "}Any syntax highlighting used here.
                         </li>
                         <li>
-                            <a href="https://www.npmjs.com/package/yaml" className="external"><code>yaml</code></a>
+                            <Link href="https://www.npmjs.com/package/yaml"><code>yaml</code></Link>
                             {": "}Parsing YAML files used for data storage.
                         </li>
                     </UL>
 
                     <H2 id="headingSource">Open Source</H2>
                     <p>
-                        This site is open source and released under the <a href="https://opensource.org/licenses/AGPL-3.0" className="external">GNU AGPL 3.0 or later</a> license.
-                        The source code is available on <a href="https://github.com/colejohnson66/80x86" className="external">GitHub</a>.
+                        This site is open source and released under the <Link href="https://opensource.org/licenses/AGPL-3.0">GNU AGPL 3.0 or later</Link> license.
+                        The source code is available on <Link href="https://github.com/colejohnson66/80x86">GitHub</Link>.
                     </p>
                 </div>
             </div>

@@ -22,7 +22,7 @@ import { getAllInstructionsAsParams, getInstructionData } from "../../lib/instru
 import DateTime from "../../components/DateTime";
 import IDictionary from "../../types/IDictionary";
 import Layout from "../../components/Layout";
-import Link from "next/link";
+import Link from "../../components/Link";
 import React from "react";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import SyntaxHighlighterDarkTheme from "react-syntax-highlighter/dist/cjs/styles/hljs/atom-one-dark";
@@ -160,9 +160,9 @@ const Page = (props: PageProps) => {
     ];
 
     const sdmTitleWithLink = (
-        <a href="https://software.intel.com/content/www/us/en/develop/articles/intel-sdm.html" className="external">
+        <Link href="https://software.intel.com/content/www/us/en/develop/articles/intel-sdm.html">
             <i>Intel® 64 and IA-32 Architectures Software Developer’s Manual</i>
-        </a>);
+        </Link>);
 
     return (
         <Layout canonical={`/instruction/${props.id}`} navGroup="instruction" title={`${props.id.toUpperCase()} Instruction`}>
@@ -211,12 +211,12 @@ const Page = (props: PageProps) => {
                         <thead>
                             <tr>
                                 <th>Opcode and Mnemonic</th>
-                                <th><a href="#headingEncoding">Encoding</a></th>
+                                <th><Link href="#headingEncoding">Encoding</Link></th>
                                 {props.validity.split(",").map((entry) =>
                                     <th key={entry}>{OpcodeValidityKeyMap[entry]}</th>
                                 )}
                                 {props.opcode[0].cpuid &&
-                                    <th><Link href="/instruction/cpuid"><a>CPUID</a></Link> Feature Flag</th>}
+                                    <th><Link href="/instruction/cpuid">CPUID</Link> Feature Flag</th>}
                                 <th>Description</th>
                             </tr>
                         </thead>
@@ -276,7 +276,7 @@ const Page = (props: PageProps) => {
                     <H2 id="headingOperation">Operation</H2>
                     <Callout intent="primary">
                         This pseudo-code uses a Rust-like syntax.
-                        A list of the types used is <Link href="/instruction/help#headingOperation"><a>available here</a></Link>.
+                        A list of the types used is <Link href="/instruction/help#headingOperation">available here</Link>.
                     </Callout>
                     <SyntaxHighlighter language="rust" style={SyntaxHighlighterDarkTheme}>
                         {props.operation}

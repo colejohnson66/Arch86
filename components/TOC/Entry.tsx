@@ -15,6 +15,7 @@
  *   with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
+import Link from "../Link";
 import React from "react";
 
 type TOCEntryProps = {
@@ -36,7 +37,7 @@ const Entry = (props: TOCEntryProps) => {
     });
     return (
         <li>
-            {props.tocIndex}. <a href={props.href}>{props.text}</a>
+            {props.tocIndex}. <Link href={props.href}>{props.text}</Link>
             {(newChildren && newChildren.length !== 0) && <ul>{newChildren}</ul>}
         </li>
     );

@@ -17,13 +17,13 @@
 
 import { Breadcrumb, IBreadcrumbProps } from "@blueprintjs/core";
 
-import Link from "next/link";
+import Link from "../components/Link";
 
 export default function renderBreadcrumbs({ text, href, ...restProps }: IBreadcrumbProps): JSX.Element {
     return (
         <Breadcrumb {...restProps}>
             {href
-                ? <Link href={href}><a>{text}</a></Link>
+                ? <Link href={href}>{text}</Link>
                 : <>{text}</>}
         </Breadcrumb>
     );

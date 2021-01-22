@@ -17,7 +17,7 @@
 
 import { H1 } from "@blueprintjs/core";
 import Layout from "../components/Layout";
-import Link from "next/link";
+import Link from "../components/Link";
 
 const Page = () => {
     return (
@@ -30,7 +30,7 @@ const Page = () => {
                     </p>
                     <p>
                         This site is currently under active development, so many pages may not exist yet.
-                        If you believe you were linked here <em>in error</em>, please <Link href="/contact"><a>contact me</a></Link> to report the problem.
+                        If you believe you were linked here <em>in error</em>, please <Link href="/contact">contact me</Link> to report the problem.
                     </p>
                 </div>
             </div>

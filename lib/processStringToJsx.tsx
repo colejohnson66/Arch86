@@ -17,7 +17,7 @@
 import { Code, Colors } from "@blueprintjs/core";
 
 import IDictionary from "../types/IDictionary";
-import Link from "next/link";
+import Link from "../components/Link";
 import React from "react";
 import { strict as assert } from "assert";
 
@@ -59,7 +59,7 @@ const functions: IDictionary<(key: number, arg: string) => JSX.Element> = {
     en: (key, arg) => (<React.Fragment key={key}>&ndash;</React.Fragment>),
     error: (key, arg) => (<b key={key} style={{ color: Colors.RED3 }}>{arg}</b>),
     i: (key, arg) => (<i key={key}>{arg}</i>),
-    instr: (key, arg) => (<Link key={key} href={`/instruction/${arg.toLowerCase()}`}><a><Code>{arg}</Code></a></Link>),
+    instr: (key, arg) => (<Link key={key} href={`/instruction/${arg.toLowerCase()}`}><Code>{arg}</Code></Link>),
     reg: (key, arg) => (<Code key={key}>{arg}</Code>),
 };
 

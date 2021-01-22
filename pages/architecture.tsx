@@ -18,7 +18,7 @@ import { Breadcrumbs, Card, H1, H2, IBreadcrumbProps, UL } from "@blueprintjs/co
 
 import DateTime from "../components/DateTime";
 import Layout from "../components/Layout";
-import Link from "next/link";
+import Link from "../components/Link";
 import TOC from "../components/TOC";
 import WIP from "../components/WIP";
 import renderBreadcrumbs from "../lib/renderBreadcrumbs";
@@ -42,19 +42,19 @@ const Page = () => {
                     <H1>Microarchitecture</H1>
                     <p>
                         Over the years, there have been many versions of the x86 microarchitecture.
-                        It began with the <Link href="/architecture/8086"><a>8086</a></Link> (released <DateTime dateTime="1979-06-08" />), and continues to this day with the various "Intel Core" microarchitectures.
+                        It began with the <Link href="/architecture/8086">8086</Link> (released <DateTime dateTime="1979-06-08" />), and continues to this day with the various "Intel Core" microarchitectures.
                     </p>
 
                     <H2 id="headingHistory">History</H2>
                     <WIP type="section" />
                     <UL>
-                        <li><Link href="/architecture/8086"><a>8086</a></Link></li>
-                        <li><Link href="/architecture/80186"><a>80186</a></Link></li>
-                        <li><Link href="/architecture/80286"><a>80286</a></Link></li>
-                        <li><Link href="/architecture/80386"><a>80386</a></Link></li>
-                        <li><Link href="/architecture/80486"><a>80486</a></Link></li>
-                        <li><Link href="/architecture/p5"><a>P5</a></Link></li>
-                        <li><Link href="/architecture/p5"><a>P6</a></Link></li>
+                        <li><Link href="/architecture/8086">8086</Link></li>
+                        <li><Link href="/architecture/80186">80186</Link></li>
+                        <li><Link href="/architecture/80286">80286</Link></li>
+                        <li><Link href="/architecture/80386">80386</Link></li>
+                        <li><Link href="/architecture/80486">80486</Link></li>
+                        <li><Link href="/architecture/p5">P5</Link></li>
+                        <li><Link href="/architecture/p5">P6</Link></li>
                         <li>...</li>
                     </UL>
                 </div>

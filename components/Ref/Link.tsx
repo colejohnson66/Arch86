@@ -14,8 +14,7 @@
  * You should have received a copy of the GNU Affero General Public License along
  *   with this program. If not, see <https://www.gnu.org/licenses/>.
  */
-
-import Link from "next/link";
+import Link from "../Link"
 
 type RefLinkProps = {
     name: string,
@@ -25,7 +24,7 @@ const RefLink = (props: RefLinkProps) => {
     return (
         <sup>
             <Link href={`#reference-${props.name}`}>
-                <a>[{props.name}]</a>
+                [{props.name}]
             </Link>
         </sup>
     );

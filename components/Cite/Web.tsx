@@ -16,6 +16,7 @@
  */
 
 import DateTime from "../DateTime";
+import Link from "../Link";
 
 type CiteWebProps = {
     author: string | string[],
@@ -41,7 +42,7 @@ const CiteWeb = (props: CiteWebProps) => {
     
     let titleAndLink: JSX.Element;
     if (props.url)
-        titleAndLink = <a href={props.url} className="external">{props.title}</a>;
+        titleAndLink = <Link href={props.url}>{props.title}</Link>;
     else
         titleAndLink = <>"{props.title}"</>;
     

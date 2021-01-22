@@ -18,7 +18,7 @@
 import { Button, Card, Divider, Icon, Navbar } from "@blueprintjs/core";
 
 import Head from "next/head";
-import Link from "next/link";
+import Link from "../components/Link";
 import React from "react";
 import { strict as assert } from "assert";
 
@@ -36,12 +36,10 @@ const Layout = (props: LayoutProps) => {
     function navItem(group: NavGroup, href: string, text: string) {
         return (
             <Link href={href}>
-                <a>
-                    <Button
-                        active={props.navGroup == group}
-                        className="bp3-minimal"
-                        text={text} />
-                </a>
+                <Button
+                    active={props.navGroup == group}
+                    className="bp3-minimal"
+                    text={text} />
             </Link>
         );
     }
@@ -67,12 +65,10 @@ const Layout = (props: LayoutProps) => {
                     <Navbar>
                         <Navbar.Group>
                             <Link href="/">
-                                <a>
-                                    <Button
-                                        active={props.navGroup == "home"}
-                                        className="bp3-minimal"
-                                        text="80x86" />
-                                </a>
+                                <Button
+                                    active={props.navGroup == "home"}
+                                    className="bp3-minimal"
+                                    text="80x86" />
                             </Link>
                             <Navbar.Divider />
                             {navItem("about", "/about", "About")}
@@ -88,7 +84,7 @@ const Layout = (props: LayoutProps) => {
                 <footer>
                     <div className="bp3-text-small">
                         <p>
-                            <Link href="/contact"><a>Contact</a></Link>
+                            <Link href="/contact">Contact</Link>
                         </p>
                         <p>
                             Website copyright &copy; Cole Johnson 2020-2021.

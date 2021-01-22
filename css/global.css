@@ -78,7 +78,7 @@ main {
     white-space: nowrap;
 }
 
-.external {
+[rel=external] {
     background: url(/img/external-ltr.png) center right no-repeat;
     padding-right: 15px;
 }
