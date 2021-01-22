@@ -1,8 +1,0 @@
-.eslintrc.*
-next.config.js
-
-css
-data
-node_modules
-public
-scripts

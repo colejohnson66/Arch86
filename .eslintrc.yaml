@@ -17,6 +17,14 @@ parserOptions:
 plugins:
   - react
   - "@typescript-eslint"
+ignorePatterns:
+  - /.eslintrc.yaml
+  - /next.config.js
+  - /.next/**
+  - /css/**
+  - /data/**
+  - /public/**
+  - /scripts/**
 rules:
   array-bracket-spacing: error
   arrow-parens: error
