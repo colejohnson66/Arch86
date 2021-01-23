@@ -4,7 +4,7 @@
     "dictionaryDefinitions": [
         {
             "name": "instructions",
-            "path": ".vscode/instructions.txt"
+            "path": "./.vscode/instructions.txt"
         }
     ],
     "dictionaries": [
@@ -15,6 +15,7 @@
         "**/.next/**",
         "**/.vscode/**",
         "**/.eslintrc.*",
+        "**/cspell.json",
         "**/LICENSE",
         "**/package.json",
         "**/yarn.lock"
