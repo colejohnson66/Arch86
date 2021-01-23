@@ -1,0 +1,53 @@
+{
+    "version": "0.1",
+    "language": "en",
+    "dictionaryDefinitions": [
+        {
+            "name": "instructions",
+            "path": ".vscode/instructions.txt"
+        }
+    ],
+    "dictionaries": [
+        "instructions"
+    ],
+    "ignorePaths": [
+        "**/node_modules/**",
+        "**/.next/**",
+        "**/.vscode/**",
+        "**/.eslintrc.*",
+        "**/LICENSE",
+        "**/package.json",
+        "**/yarn.lock"
+    ],
+    "ignoreWords": [
+        "bcst",
+        "blueprintjs",
+        "coleharrisjohnson",
+        "globby",
+        "gmail",
+        "linebreak",
+        "urlset",
+        "vreg"
+    ],
+    "words": [
+        "AGPL",
+        "Affero",
+        "Bochs",
+        "Vercel",
+        "borderless",
+        "callout",
+        "cpuid",
+        "denormal",
+        "encodable",
+        "evex",
+        "intrinsics",
+        "microarchitecture",
+        "microarchitectures",
+        "msr",
+        "mxcsr",
+        "nasm",
+        "simd",
+        "vex",
+        "writemask"
+    ]
+}
