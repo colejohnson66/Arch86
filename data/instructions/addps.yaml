@@ -192,11 +192,11 @@ intrinsicsC: |-
   __m256 _mm256_maskz_add_ps(__mmask8 k, __m256 a, __m256 b)
 
   __m512 _mm512_add_ps(__m512 a, __m512 b)
-  __m512 _mm512_add_round_ps(__m512 a, __m512 b, uint8_t rounding)
+  __m512 _mm512_add_round_ps(__m512 a, __m512 b, int32_t rounding)
   __m512 _mm512_mask_add_ps(__m512 s, __mmask16 k, __m512 a, __m512 b)
-  __m512 _mm512_mask_add_round_ps(__m512 s, __mmask16 k, __m512 a, __m512 b, uint8_t rounding)
+  __m512 _mm512_mask_add_round_ps(__m512 s, __mmask16 k, __m512 a, __m512 b, int32_t rounding)
   __m512 _mm512_maskz_add_ps(__mmask16 k, __m512 a, __m512 b)
-  __m512 _mm512_maskz_add_round_ps(__mmask16 k, __m512 a, __m512 b, uint8_t rounding)
+  __m512 _mm512_maskz_add_round_ps(__mmask16 k, __m512 a, __m512 b, int32_t rounding)
 exceptions:
   floating: Overflow, Underflow, Invalid, Precision, Denormal
   other:
