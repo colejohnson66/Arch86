@@ -31,10 +31,9 @@
         "vreg"
     ],
     "words": [
-        "AGPL",
         "Affero",
+        "AGPL",
         "Bochs",
-        "Vercel",
         "borderless",
         "callout",
         "cpuid",
@@ -42,12 +41,14 @@
         "encodable",
         "evex",
         "intrinsics",
+        "lowercased",
         "microarchitecture",
         "microarchitectures",
         "msr",
         "mxcsr",
         "nasm",
         "simd",
+        "Vercel",
         "vex",
         "writemask"
     ]

@@ -31,6 +31,13 @@ type PageProps = {
 };
 
 export default function Page(props: PageProps): JSX.Element {
+    const ccInstr = [
+        "cmovcc",
+        "fcmovcc",
+        "jcc",
+        "setcc",
+    ];
+
     const PageBreadcrumbs: IBreadcrumbProps[] = [
         { text: "Instructions" },
     ];
@@ -59,11 +66,27 @@ export default function Page(props: PageProps): JSX.Element {
                         In addition to the documented instructions in the software developer manual (SDM), undocumented and AMD-exclusive instructions are included here.
                     </Callout>
                     <UL>
-                        {props.instructions.map((instr) => (
-                            <li key={instr}>
-                                <Link href={`/instruction/${instr}`}>{instr.toUpperCase()}</Link>
-                            </li>
-                        ))}
+                        {props.instructions.map((instr) => {
+                            // If this is a conditional instruction, keep `cc` lowercase
+                            if (ccInstr.includes(instr)) {
+                                return (
+                                    <li key={instr}>
+                                        <Link href={`/instruction/${instr}`}>
+                                            {`${instr.substr(0, instr.length - 2).toUpperCase()}cc`}
+                                        </Link>
+                                    </li>
+                                );
+                            }
+
+                            // The /nnn/###/ is for FMA instructions
+                            return (
+                                <li key={instr}>
+                                    <Link href={`/instruction/${instr}`}>
+                                        {instr.replace("nnn", "###").toUpperCase()}
+                                    </Link>
+                                </li>
+                            );
+                        })}
                     </UL>
                 </div>
             </div>
