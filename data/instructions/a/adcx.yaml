@@ -26,10 +26,10 @@ encoding:
       - ModRM:reg[rw]
       - ModRM:r/w[r]
 description: >-
-  The \c{ADCX} instruction adds the destination operand, the source operand, and the \c{CF} flag and stores the result in the destination operand.
+  The \c{ADCX} instruction adds the destination operand, the source operand, and the \reg{CF} flag and stores the result in the destination operand.
 
   This instruction is designed for use in multibyte additions such as in arbitrary precision arithmetic.
-  The difference between this instruction and \instr{ADC} is that this one allows the creation of two "carry chains" \en{} one using \c{CF} (this one) and one using \c{OF} (\instr{ADOX}).
+  The difference between this instruction and \instr{ADC} is that this one allows the creation of two "carry chains" \en{} one using \reg{CF} (this one) and one using \reg{OF} (\instr{ADOX}).
 
   In 64-bit mode, the default operand size is 32 bits, but \c{REX.W} will change it to 64 bits.
 operation: >-

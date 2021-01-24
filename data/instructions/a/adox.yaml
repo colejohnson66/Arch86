@@ -4,7 +4,7 @@ title: Unsigned Integer Addition of Two Operands with Overflow Flag
 validity: 32,64
 opcode:
   - opcode: F3 0F 38 F6 /r
-    mnemonic: ADCX \i{r32}, \i{r/m32}
+    mnemonic: ADOX \i{r32}, \i{r/m32}
     encoding: RM
     validity:
       32: valid
@@ -12,7 +12,7 @@ opcode:
     cpuid: ADX
     description: Unsigned addition of \abbr{r32} with overflow flag and \abbr{r/m32} to \abbr{r32}.
   - opcode: F3 REX.W 0F 38 F6 /r
-    mnemonic: ADCX \i{r64}, \i{r/m64}
+    mnemonic: ADOX \i{r64}, \i{r/m64}
     encoding: RM
     validity:
       32: n/e
@@ -26,15 +26,15 @@ encoding:
       - ModRM:reg[rw]
       - ModRM:r/w[r]
 description: >-
-  The \c{ADOX} instruction adds the destination operand, the source operand, and the \c{OF} flag and stores the result in the destination operand.
+  The \c{ADOX} instruction adds the destination operand, the source operand, and the \reg{OF} flag and stores the result in the destination operand.
 
   This instruction is designed for use in multibyte additions such as in arbitrary precision arithmetic.
-  The difference between this instruction and \instr{ADC} is that this one allows the creation of two "carry chains" \en{} one using \c{OF} (this one) and one using \c{CF} (\instr{ADCX}).
+  The difference between this instruction and \instr{ADC} is that this one allows the creation of two "carry chains" \en{} one using \reg{OF} (this one) and one using \reg{CF} (\instr{ADCX}).
 
   In 64-bit mode, the default operand size is 32 bits, but \c{REX.W} will change it to 64 bits.
 operation: >-
   pub fn adox<D, S>(dest: &mut D, src: S) {
-    *dest = *dest + src + CF;
+    *dest = *dest + src + OF;
   }
 flags: >-
   \reg{OF} is updated based on the result. The \reg{CF}, \reg{SF}, \reg{ZF}, \reg{AF}, and \reg{PF} flags are unmodified.

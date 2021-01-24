@@ -173,10 +173,10 @@ encoding:
       - ModRM:reg[rw]
       - ModRM:r/m[r]
 description: >-
-  The \c{ADC} instruction adds the destination operand, the source operand, and the \c{CF} flag and stores the result in the destination operand.
+  The \c{ADC} instruction adds the destination operand, the source operand, and the \reg{CF} flag and stores the result in the destination operand.
 
   This instruction is designed for use in multibyte additions such as in arbitrary precision arithmetic.
-  It does not differentiate between signed and unsigned operands, but will set the \c{OF} and \c{CF} to indicate a carry for signed and unsigned results (respectively).
+  It does not differentiate between signed and unsigned operands, but will set the \reg{OF} and \reg{CF} to indicate a carry for signed and unsigned results (respectively).
 
   This instruction can be used with the \instr{LOCK} prefix to allow atomic execution.
 
