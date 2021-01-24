@@ -59,7 +59,7 @@ description: >-
 
   The legacy SSE version (\c{ADDSD}) works on the lowest 64 bits and leaves all others unchanged.
 
-  The AVX versions (\c{VADDSD}) work on the lowest 64 bits, but also copy the second 64 bits from the first source operand to the destination.
+  The AVX versions (\c{VADDSD}) work on the lowest 64 bits, but also copy the next 64 bits from the first source operand to the destination.
   Afterwards, all unchanged bits in the destination are zeroed.
 
   Although this instruction works with \c{(E)VEX.LIG}, Intel recommends that assemblers set \c{(E)VEX.L} to 0.
