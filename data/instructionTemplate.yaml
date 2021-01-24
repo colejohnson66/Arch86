@@ -25,7 +25,10 @@ examples:
   - |-
 flags: >-
 intrinsicsC: |-
-intrinsicsRust: |-
+  Cleanup Regex:
+    /[A-Z]+ ([^ ]+) ([^ ]+) \(([^\)]+)\);/
+    $1 $2($3)
+  After, ensure ALL parameters have a name
 exceptions:
   protected: 
   real:
