@@ -1,0 +1,83 @@
+%YAML 1.2
+---
+title: Packed Double-Precision Floating-Point Add/Subtract
+validity: 32,64
+opcode:
+  - opcode: 66 0F D0 /r
+    mnemonic: ADDSUBPD \i{xmm1}, \i{xmm2/m128}
+    encoding: LEGACY
+    validity:
+      32: valid
+      64: valid
+    cpuid: SSE3
+    description: >-
+      Add/subtract packed double-precision floating point values from \abbr{xmm2/m128} and \abbr{xmm1}.
+      Stores the result in \abbr{xmm1}.
+  - opcode: VEX.128.66.0F.WIG D0 /r
+    mnemonic: VADDSUBPD \i{xmm1}, \i{xmm2}, \i{xmm3/m128}
+    encoding: VEX
+    validity:
+      32: valid
+      64: valid
+    cpuid: AVX
+    description: >-
+      Add/subtract packed double-precision floating point values from \abbr{xmm3/m128} and \abbr{xmm2}.
+      Stores the result in \abbr{xmm1}.
+  - opcode: VEX.256.66.0F.WIG D0 /r
+    mnemonic: VADDSUBPD \i{ymm1}, \i{ymm2}, \i{ymm3/m256}
+    encoding: VEX
+    validity:
+      32: valid
+      64: valid
+    cpuid: AVX
+    description: >-
+      Add/subtract packed double-precision floating point values from \abbr{ymm2/m256} and \abbr{ymm2}.
+      Stores the result in \abbr{ymm1}.
+encoding:
+  ops: 3
+  encodings:
+    LEGACY:
+      - ModRM:reg[rw]
+      - ModRM:r/m[r]
+      - N/A
+    VEX:
+      - ModRM:reg[w]
+      - VEX.vvvv[r]
+      - ModRM:r/m[r]
+description: >-
+  The \c{(V)ADDSUBPD} instruction performs two operations:
+  It subtracts the odd numbered double-precision floating-point values, and adds the even numbered ones.
+
+  All versions \i{except} the legacy SSE version zero the unused upper SIMD register bits.
+operation: |-
+  pub fn addsubpd(dest: &mut Simd<f64>, src: Simd<f64>) {
+    dest[63..=0] = dest[63..=0] - src[63..=0];
+    dest[127..=64] = dest[127..=64] + src[127..=64];
+    // dest[Simd::max()..=128] (unmodified)
+  }
+
+  pub fn vaddsubpd_vex128(dest: &mut Simd<f64>, src1: Simd<f64>, src2: Simd<f64>) {
+    dest[63..=0] = src1[63..=0] - src2[63..=0];
+    dest[127..=64] = src1[127..=64] + src2[127..=64];
+    dest[Simd::max()..=128] = 0;
+  }
+
+  pub fn vaddsubpd_vex256(dest: &mut Simd<f64>, src1: Simd<f64>, src2: Simd<f64>) {
+    dest[63..=0] = src1[63..=0] - src2[63..=0];
+    dest[127..=64] = src1[127..=64] + src2[127..=64];
+    dest[191..=128] = src1[191..=128] - src2[191..=128];
+    dest[255..=192] = src1[255..=192] + src2[255..=192];
+    // dest[Simd::max()..=256] = 0; // see note 1
+  }
+operationNotes:
+  - >-
+    The manual makes no mention of if this instruction form clears the upper bits or not.
+intrinsicsC: |-
+  __m128d _mm_addsub_pd(__m128d a, __m128d b)
+  
+  __m256d _mm256_addsub_pd(__m256d a, __m256d b)
+exceptions:
+  floating: Overflow, Underflow, Invalid, Precision, Denormal
+  other:
+    - "VEX encoded form: see Exceptions Type 2."
+    - "EVEX encoded form: see Exceptions Type E2."
