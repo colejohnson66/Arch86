@@ -1,0 +1,77 @@
+%YAML 1.2
+---
+title: Unsigned Integer Addition of Two Operands with Overflow Flag
+validity: 32,64
+opcode:
+  - opcode: F3 0F 38 F6 /r
+    mnemonic: ADCX \i{r32}, \i{r/m32}
+    encoding: RM
+    validity:
+      32: valid
+      64: valid
+    cpuid: ADX
+    description: Unsigned addition of \abbr{r32} with overflow flag and \abbr{r/m32} to \abbr{r32}.
+  - opcode: F3 REX.W 0F 38 F6 /r
+    mnemonic: ADCX \i{r64}, \i{r/m64}
+    encoding: RM
+    validity:
+      32: n/e
+      64: valid
+    cpuid: ADX
+    description: Unsigned addition of \abbr{r64} with overflow flag and \abbr{r/m64} to \abbr{r64}.
+encoding:
+  operands: 2
+  encodings:
+    RM:
+      - ModRM:reg[rw]
+      - ModRM:r/w[r]
+description: >-
+  The \c{ADOX} instruction adds the destination operand, the source operand, and the \c{OF} flag and stores the result in the destination operand.
+
+  This instruction is designed for use in multibyte additions such as in arbitrary precision arithmetic.
+  The difference between this instruction and \instr{ADC} is that this one allows the creation of two "carry chains" \en{} one using \c{OF} (this one) and one using \c{CF} (\instr{ADCX}).
+
+  In 64-bit mode, the default operand size is 32 bits, but \c{REX.W} will change it to 64 bits.
+operation: >-
+  pub fn adox<D, S>(dest: &mut D, src: S) {
+    *dest = *dest + src + CF;
+  }
+flags: >-
+  \reg{OF} is updated based on the result. The \reg{CF}, \reg{SF}, \reg{ZF}, \reg{AF}, and \reg{PF} flags are unmodified.
+intrinsicsC: |-
+  uint8_t _addcarryx_u32(uint8_t c_in, uint32_t src1, uint32_t src2, uint32_t *sum_out)
+  uint8_t _addcarryx_u64(uint8_t c_in, uint64_t src1, uint64_t src2, uint64_t *sum_out)
+exceptions:
+  protected:
+    "#UD":
+      - If the \instr{LOCK} prefix is used.
+      - If \cpuid{eax,07,ecx,00,,ebx,adx,19} is 0.
+    "#SS(0)": For an illegal address in the \reg{SS} segment.
+    "#GP(0)":
+      - For an illegal memory operand effective address in the \reg{CS}, \reg{DS}, \reg{ES}, \reg{FS}, or \reg{GS} segments.
+      - If the \reg{DS}, \reg{ES}, \reg{FS}, or \reg{GS} register is used to access memory and it contains a \c{NULL} segment selector.
+    "#PF(fault-code)": If a page fault occurs.
+    "#AC(0)": If alignment checking is enabled and an unaligned memory reference is made while the current privilege level is 3.
+  real:
+    "#UD":
+      - If the \instr{LOCK} prefix is used.
+      - If \cpuid{eax,07,ecx,00,,ebx,adx,19} is 0.
+    "#SS(0)": For an illegal address in the \reg{SS} segment.
+    "#GP(0)": If any part of the operand lies outside the effective address space from 0 to 0xFFFF.
+  virtual:
+    "#UD":
+      - If the \instr{LOCK} prefix is used.
+      - If \cpuid{eax,07,ecx,00,,ebx,adx,19} is 0.
+    "#SS(0)": For an illegal address in the \reg{SS} segment.
+    "#GP(0)": If any part of the operand lies outside the effective address space from 0 to 0xFFFF.
+    "#PF(fault-code)": If a page fault occurs.
+    "#AC(0)": If alignment checking is enabled and an unaligned memory reference is made while the current privilege level is 3.
+  compatibility: Same exceptions as in protected mode.
+  long:
+    "#UD":
+      - If the \instr{LOCK} prefix is used.
+      - If \cpuid{eax,07,ecx,00,,ebx,adx,19} is 0.
+    "#SS(0)": If a memory address referencing the \reg{SS} segment is in non-canonical form.
+    "#GP(0)": If the memory address is in a non-canonical form.
+    "#PF(fault-code)": If a page fault occurs.
+    "#AC(0)": If alignment checking is enabled and an unaligned memory reference is made while the current privilege level is 3.
