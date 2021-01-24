@@ -29,9 +29,7 @@ opcode:
     validity:
       32: valid
       64: valid
-    cpuid:
-      - AVX512VL
-      - AVX512F
+    cpuid: AVX512F
     description: >-
       Adds a single single-precision floating-point value from \abbr{xmm3/m32} and \abbr{xmm2}.
       Stores the result in \abbr{xmm1} using writemask \abbr{k1}.
