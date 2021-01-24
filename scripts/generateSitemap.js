@@ -28,10 +28,10 @@ globby.sync([
 
 // handle "/instruction/[slug]"
 globby.sync([
-    "data/instructions/*"
+    "data/instructions/**/*"
 ].concat(ignore)).forEach((data) => {
-    // match `data/instructions/$1.yaml`
-    data = data.match(/data\/instructions\/([^\.]+)\.yaml/)[1];
+    // match `data/instructions/./$1.yaml`
+    data = data.match(/data\/instructions\/[a-z]\/([^\.]+)\.yaml/)[1];
     newUrl(`instruction/${data}`);
 });
 
