@@ -50,7 +50,6 @@ export default function Layout(props: LayoutProps): JSX.Element {
     return (
         <>
             <Head>
-                <meta name="viewport" content="min-width=1250" />
                 {props.title ?
                     <title>80x86 - {props.title}</title> :
                     <title>80x86</title>
@@ -60,7 +59,7 @@ export default function Layout(props: LayoutProps): JSX.Element {
                 {props.canonical && <link rel="canonical" href={`https://80x86.dev${props.canonical}`} />}
                 <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
             </Head>
-            <Card id="mainCard" className="bp3-dark">
+            <Card id="all" className="bp3-dark">
                 <header>
                     <Navbar>
                         <Navbar.Group>

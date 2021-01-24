@@ -19,15 +19,14 @@ body,
 #__next {
     height: 100%;
     width: 100%;
-    min-width: 1250px;
 }
 
-#mainCard {
+/* Contains everything (`header`, `main`, and `footer`) */
+#all {
     border-radius: 0;
     display: flex;
     flex-direction: column;
     min-height: 100%;
-    min-width: 1250px;
 }
 
 header {
@@ -39,8 +38,11 @@ header {
     margin-right: 0.5ch;
 }
 
+/* Contains `.breadcrumbs`, and `#main` (`#toc`, and `#content`) */
 main {
     flex: 1 1 auto;
+    display: flex;
+    flex-flow: column;
 }
 
 .breadcrumbs {
@@ -48,15 +50,22 @@ main {
     padding: 10px;
 }
 
+/* Contains `#toc` and `#content` */
 #main {
     margin: 0 2em;
+    height: 100%;
     display: flex;
     flex-flow: row;
-    height: 100%;
+}
+
+@media (max-width: 1000px) {
+    #main {
+        flex-flow: column;
+    }
 }
 
 #toc {
-    flex: 1;
+    flex: 0 1 auto;
     min-width: 200px;
     padding-right: 2em;
 }
@@ -70,12 +79,19 @@ main {
     padding-left: 1rem;
 }
 
+/* Actual content pane */
 #content {
-    flex: 5;
+    flex: 1 1 auto;
 }
 
 .mnemonic {
     white-space: nowrap;
+}
+
+@media (max-width: 1000px) {
+    .mnemonic {
+        white-space: unset;
+    }
 }
 
 [rel=external] {
