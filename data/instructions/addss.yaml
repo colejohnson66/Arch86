@@ -1,0 +1,105 @@
+%YAML 1.2
+---
+title: Add Scalar Single-Precision Floating-Point Values
+validity: 32,64
+opcode:
+  - opcode: F3 0F 58 /r
+    mnemonic: ADDSS \i{xmm1}, \i{xmm2/m32}
+    encoding: LEGACY
+    validity:
+      32: valid
+      64: valid
+    cpuid: SSE2
+    description: >-
+      Adds a single single-precision floating-point value from \abbr{xmm2/m32} and \abbr{xmm1}.
+      Stores the result in \abbr{xmm1}.
+  - opcode: VEX.LIG.F3.0F.WIG 58 /r
+    mnemonic: VADDSS \i{xmm1}, \i{xmm2}, \i{xmm3/m32}
+    encoding: VEX
+    validity:
+      32: valid
+      64: valid
+    cpuid: AVX
+    description: >-
+      Adds a single single-precision floating-point value from \abbr{xmm3/m32} and \abbr{xmm2}.
+      Stores the result in \abbr{xmm1}.
+  - opcode: EVEX.LIG.F3.0F.W0 58 /r
+    mnemonic: VADDSS \i{xmm1} {k1}{z}, \i{xmm2}, \i{xmm3/m32} {er}
+    encoding: EVEX
+    validity:
+      32: valid
+      64: valid
+    cpuid:
+      - AVX512VL
+      - AVX512F
+    description: >-
+      Adds a single single-precision floating-point value from \abbr{xmm3/m32} and \abbr{xmm2}.
+      Stores the result in \abbr{xmm1} using writemask \abbr{k1}.
+encoding:
+  ops: 3
+  hasTuple: true
+  encodings:
+    LEGACY:
+      - N/A
+      - ModRM:reg[rw]
+      - ModRM:r/m[r]
+      - N/A
+    VEX:
+      - N/A
+      - ModRM:reg[w]
+      - VEX.vvvv[r]
+      - ModRM:r/m[r]
+    EVEX:
+      - Tuple1 Scalar
+      - ModRM:reg[w]
+      - EVEX.vvvv[r]
+      - ModRM:r/m[r]
+description: >-
+  The \c{(V)ADDSS} instruction adds a single single-precision floating-point from the first source operand and the second source operand and stores the result in the destination operand.
+
+  The legacy SSE version (\c{ADDSS}) works on the lowest 32 bits and leaves all others unchanged.
+
+  The AVX versions (\c{VADDSS}) work on the lowest 32 bits, but also copy the next 96 bits from the first source operand to the destination.
+  Afterwards, all unchanged bits in the destination are zeroed.
+
+  Although this instruction works with \c{(E)VEX.LIG}, Intel recommends that assemblers set \c{(E)VEX.L} to 0.
+  Encoding with \c{(E)VEX.L} being 1 may not be allowed in the future.
+operation: |-
+  pub fn addss(dest: &mut Simd<f32>, src: Simd<f32>) {
+    dest[31..=0] = dest[31..=0] + src[31..=0];
+    // dest[Simd::max()..=32] (unmodified)
+  }
+
+  pub fn vaddss_vex(dest: &mut Simd<f32>, src1: Simd<f32>, src2: Simd<f32>) {
+    dest[31..=0] = src1[31..=0] + src2[31..=0];
+    dest[127..=32] = src1[127..=32];
+    dest[Simd::max()..=128] = 0;
+  }
+
+  pub fn vaddss_evex(dest: &mut Simd<f32>, src1: Simd<f32>, src2: Simd<f32>, k: KMask) {
+    set_rounding_for_this_instruction(if EVEX.b && src2.is_reg() { EVEX.RC } else { MXCSR.RC });
+
+    if k[0] {
+      dest[31..=0] = src1[31..=0] + src2[31..=0];
+    } else {
+      // zero mask?
+      if EVEX.z {
+        dest[31..=0] = 0;
+      }
+    }
+
+    dest[127..=32] = src1[127..=32];
+    dest[Simd::max()..=128] = 0;
+  }
+intrinsicsC: |-
+  __m128 _mm_add_ss(__m128 a, __m128 b)
+  __m128 _mm_add_round_ss(__m128 a, __m128 b, int32_t rounding)
+  __m128 _mm_mask_add_ss(__m128 s, __mmask8 k, __m128 a, __m128 b)
+  __m128 _mm_mask_add_round_ss(__m128 s, __mmask8 k, __m128 a, __m128 b, int32_t rounding)
+  __m128 _mm_maskz_add_ss(__mmask8 k, __m128 a, __m128 b)
+  __m128 _mm_maskz_add_round_ss(__mmask8 k, __m128 a, __m128 b, int32_t rounding)
+exceptions:
+  floating: Overflow, Underflow, Invalid, Precision, Denormal
+  other:
+    - "VEX encoded form: see Exceptions Type 2."
+    - "EVEX encoded form: see Exceptions Type E2."
