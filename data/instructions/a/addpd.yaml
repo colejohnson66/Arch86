@@ -99,7 +99,7 @@ operation: |-
 
   fn vaddpd_vex(dest: &mut Simd<f64>, src1: Simd<f64>, src2: Simd<f64>, kl: u32) {
     for n in 0..kl {
-      let vi: u32 = n * 64;
+      let vi = n * 64;
       let vi_next = vi + 63;
 
       dest[vi_next..=vi] = src1[vi_next..=vi] + src2[vi_next..=vi];
@@ -118,7 +118,7 @@ operation: |-
 
   fn vaddpd_evex_mem(dest: &mut Simd<f64>, src1: Simd<f64>, src2: Simd<f64>, k: KMask, kl: u8) {
     for n in 0..kl {
-      let vi: u32 = n * 64;
+      let vi = n * 64;
       let vi_next = vi + 63;
 
       if k[n] {
@@ -154,7 +154,7 @@ operation: |-
     set_rounding_for_this_instruction(if kl == 8 && EVEX.b { EVEX.RC } else { MXCSR.RC });
 
     for n in 0..kl {
-      let vi: u32 = n * 64;
+      let vi = n * 64;
       let vi_next = vi + 63;
 
       if k[n] {
