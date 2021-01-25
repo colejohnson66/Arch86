@@ -315,10 +315,6 @@ export default function Page(props: PageProps): JSX.Element {
                     {props.intrinsicsC &&
                         <>
                             <H2 id="headingIntrinsicsC">Intrinsics - C</H2>
-                            <Callout intent="primary">
-                                The official intrinsics use the full definition from the header file.
-                                These intrinsics are shorter definitions of those while also using fixed-width integer types.
-                            </Callout>
                             <SyntaxHighlighter language="c-like" style={SyntaxHighlighterDarkTheme}>
                                 {props.intrinsicsC}
                             </SyntaxHighlighter>
