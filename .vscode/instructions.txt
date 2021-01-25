@@ -555,6 +555,12 @@ vaddpd
 vaddps
 vaddsd
 vaddss
+vaddsubpd
+vaddsubps
+vaesdec
+vaesdeclast
+vaesenc
+vaesenclast
 valignd
 valignq
 vblendmpd
