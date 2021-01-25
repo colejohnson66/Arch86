@@ -168,7 +168,7 @@ export default function Page(props: PageProps): JSX.Element {
         </Link>);
 
     return (
-        <Layout canonical={`/instruction/${props.id}`} navGroup="instruction" title={`${props.id.toUpperCase()} Instruction`}>
+        <Layout canonical={`/instruction/${props.id}`} navGroup="instruction" title={`${props.id.toUpperCase()} - ${props.title}`}>
             <Card className="breadcrumbs" interactive>
                 <Breadcrumbs breadcrumbRenderer={renderBreadcrumbs} items={PageBreadcrumbs} />
             </Card>
