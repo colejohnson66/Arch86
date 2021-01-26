@@ -47,6 +47,7 @@
         "msr",
         "mxcsr",
         "nasm",
+        "scrollable",
         "simd",
         "Vercel",
         "vex",

@@ -84,14 +84,14 @@ main {
     flex: 1 1 auto;
 }
 
-.mnemonic {
-    white-space: nowrap;
+.scrollable {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
 }
 
-@media (max-width: 1000px) {
-    .mnemonic {
-        white-space: unset;
-    }
+.mnemonic {
+    white-space: nowrap;
 }
 
 [rel=external] {

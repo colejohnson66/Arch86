@@ -24,6 +24,7 @@ import IDictionary from "../../types/IDictionary";
 import Layout from "../../components/Layout";
 import Link from "../../components/Link";
 import React from "react";
+import Scrollable from "../../components/Scrollable";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import SyntaxHighlighterDarkTheme from "react-syntax-highlighter/dist/cjs/styles/hljs/atom-one-dark";
 import TOC from "../../components/TOC";
@@ -210,67 +211,71 @@ export default function Page(props: PageProps): JSX.Element {
                 </TOC.Root>
                 <div id="content">
                     <H1><Code>{props.id.toUpperCase()}</Code>: {processStringToJsx(props.title)}</H1>
-                    <HTMLTable striped bordered interactive>
-                        <thead>
-                            <tr>
-                                <th>Opcode and Mnemonic</th>
-                                <th><Link href="#headingEncoding">Encoding</Link></th>
-                                {props.validity.split(",").map((entry) => <th key={entry}>{OpcodeValidityKeyMap[entry]}</th>
-                                )}
-                                {props.opcode[0].cpuid &&
-                                    <th><Link href="/instruction/cpuid">CPUID</Link> Feature Flag</th>}
-                                <th>Description</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {props.opcode.map((row, idx) => (
-                                <tr key={idx}>
-                                    <td>
-                                        <Code>{processStringToJsx(row.opcode)}</Code>
-                                        <Divider />
-                                        <Code className="mnemonic">{processStringToJsx(row.mnemonic)}</Code>
-                                    </td>
-                                    <td><Code>{row.encoding}</Code></td>
-                                    {props.validity.split(",").map((entry) => (
-                                        // This ensures that they are displayed in the same order as the heading
-                                        <td key={entry}>{OpcodeValidityMap[row.validity[entry]]}</td>
-                                    ))}
-                                    {row.cpuid &&
-                                        <td>
-                                            {brTagsFromArray(coerceArray(row.cpuid))}
-                                        </td>}
-                                    <td>{processStringToJsx(row.description)}</td>
+                    <Scrollable>
+                        <HTMLTable bordered>
+                            <thead>
+                                <tr>
+                                    <th>Opcode and Mnemonic</th>
+                                    <th><Link href="#headingEncoding">Encoding</Link></th>
+                                    {props.validity.split(",").map((entry) => <th key={entry}>{OpcodeValidityKeyMap[entry]}</th>
+                                    )}
+                                    {props.opcode[0].cpuid &&
+                                        <th><Link href="/instruction/cpuid">CPUID</Link> Feature Flag</th>}
+                                    <th>Description</th>
                                 </tr>
-                            ))}
-                        </tbody>
-                    </HTMLTable>
+                            </thead>
+                            <tbody>
+                                {props.opcode.map((row, idx) => (
+                                    <tr key={idx}>
+                                        <td>
+                                            <Code>{processStringToJsx(row.opcode)}</Code>
+                                            <Divider />
+                                            <Code className="mnemonic">{processStringToJsx(row.mnemonic)}</Code>
+                                        </td>
+                                        <td><Code>{row.encoding}</Code></td>
+                                        {props.validity.split(",").map((entry) => (
+                                            // This ensures that they are displayed in the same order as the heading
+                                            <td key={entry}>{OpcodeValidityMap[row.validity[entry]]}</td>
+                                        ))}
+                                        {row.cpuid &&
+                                            <td>
+                                                {brTagsFromArray(coerceArray(row.cpuid))}
+                                            </td>}
+                                        <td>{processStringToJsx(row.description)}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </HTMLTable>
+                    </Scrollable>
 
                     <H2 id="headingEncoding">Encoding</H2>
-                    <HTMLTable striped bordered interactive>
-                        <thead>
-                            <tr>
-                                <th>Op/En</th>
-                                {props.encoding.hasTuple &&
-                                    <th>Tuple Type</th>}
-                                {[...Array(props.encoding.operands)].map((_, idx) => (
-                                    props.encoding.operands === 1
-                                        ? <th key={idx}>Operand</th>
-                                        : <th key={idx}>Operand {idx + 1}</th>
-                                ))}
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {Object.keys(props.encoding.encodings).map((key) => {
-                                const val = props.encoding.encodings[key];
-                                return (
-                                    <tr key={key}>
-                                        <td><Code>{key}</Code></td>
-                                        {val.map((value, idx) => (<td key={idx}>{value}</td>))}
-                                    </tr>
-                                );
-                            })}
-                        </tbody>
-                    </HTMLTable>
+                    <Scrollable>
+                        <HTMLTable bordered>
+                            <thead>
+                                <tr>
+                                    <th>Op/En</th>
+                                    {props.encoding.hasTuple &&
+                                        <th>Tuple Type</th>}
+                                    {[...Array(props.encoding.operands)].map((_, idx) => (
+                                        props.encoding.operands === 1
+                                            ? <th key={idx}>Operand</th>
+                                            : <th key={idx}>Operand {idx + 1}</th>
+                                    ))}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {Object.keys(props.encoding.encodings).map((key) => {
+                                    const val = props.encoding.encodings[key];
+                                    return (
+                                        <tr key={key}>
+                                            <td><Code>{key}</Code></td>
+                                            {val.map((value, idx) => (<td key={idx}>{value}</td>))}
+                                        </tr>
+                                    );
+                                })}
+                            </tbody>
+                        </HTMLTable>
+                    </Scrollable>
 
                     <H2 id="headingDescription">Description</H2>
                     {paragraphsFromString(props.description)}
@@ -280,9 +285,11 @@ export default function Page(props: PageProps): JSX.Element {
                         This pseudo-code uses a Rust-like syntax.
                         A list of the types used is <Link href="/instruction/help#headingOperation">available here</Link>.
                     </Callout>
-                    <SyntaxHighlighter language="rust" style={SyntaxHighlighterDarkTheme}>
-                        {props.operation}
-                    </SyntaxHighlighter>
+                    <Scrollable>
+                        <SyntaxHighlighter language="rust" style={SyntaxHighlighterDarkTheme}>
+                            {props.operation}
+                        </SyntaxHighlighter>
+                    </Scrollable>
                     {props.operationNotes &&
                         <>
                             <H3 id="headingOperationNotes">Notes</H3>
@@ -300,9 +307,11 @@ export default function Page(props: PageProps): JSX.Element {
                                 {plural(props.examples, "This example uses", "These examples use")} NASM syntax.
                             </Callout>
                             {coerceArray(props.examples).map((example, idx) => (
-                                <SyntaxHighlighter key={idx} language="nasm" style={SyntaxHighlighterDarkTheme}>
-                                    {example}
-                                </SyntaxHighlighter>
+                                <Scrollable key={idx}>
+                                    <SyntaxHighlighter language="nasm" style={SyntaxHighlighterDarkTheme}>
+                                        {example}
+                                    </SyntaxHighlighter>
+                                </Scrollable>
                             ))}
                         </>}
 
@@ -315,9 +324,11 @@ export default function Page(props: PageProps): JSX.Element {
                     {props.intrinsicsC &&
                         <>
                             <H2 id="headingIntrinsicsC">Intrinsics - C</H2>
-                            <SyntaxHighlighter language="c-like" style={SyntaxHighlighterDarkTheme}>
-                                {props.intrinsicsC}
-                            </SyntaxHighlighter>
+                            <Scrollable>
+                                <SyntaxHighlighter language="c-like" style={SyntaxHighlighterDarkTheme}>
+                                    {props.intrinsicsC}
+                                </SyntaxHighlighter>
+                            </Scrollable>
                         </>}
 
                     {props.intrinsicsRust &&
@@ -326,9 +337,11 @@ export default function Page(props: PageProps): JSX.Element {
                             <Callout intent="primary">
                                 These intrinsics are from an upcoming crate and may change.
                             </Callout>
-                            <SyntaxHighlighter language="rust" style={SyntaxHighlighterDarkTheme}>
-                                {props.intrinsicsRust}
-                            </SyntaxHighlighter>
+                            <Scrollable>
+                                <SyntaxHighlighter language="rust" style={SyntaxHighlighterDarkTheme}>
+                                    {props.intrinsicsRust}
+                                </SyntaxHighlighter>
+                            </Scrollable>
                         </>}
 
                     <H2 id="headingExceptions">Exceptions</H2>
