@@ -241,7 +241,7 @@ export default function Page(props: PageProps): JSX.Element {
                                             <td>
                                                 {brTagsFromArray(coerceArray(row.cpuid))}
                                             </td>}
-                                        <td>{processStringToJsx(row.description)}</td>
+                                        <td className="overviewDescription">{processStringToJsx(row.description)}</td>
                                     </tr>
                                 ))}
                             </tbody>

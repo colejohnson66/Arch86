@@ -94,6 +94,10 @@ main {
     white-space: nowrap;
 }
 
+.overviewDescription {
+    min-width: 250px;
+}
+
 [rel=external] {
     background: url(/img/external-ltr.png) center right no-repeat;
     padding-right: 15px;
