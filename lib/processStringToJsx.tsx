@@ -24,10 +24,10 @@ import { strict as assert } from "assert";
 
 // `functions.reg` may change, so don't combine with `functions.c`
 // `functions.cpuid` is currently fancy syntax around `functions.c`, but this may change
-const functions: IDictionary<(key: number, arg: string) => JSX.Element> = {
-    abbr: (key, arg) => (<i key={key}>{arg}</i>),
-    c: (key, arg) => (<Code key={key}>{arg}</Code>),
-    cpuid: (key, arg) => {
+const functions: IDictionary<(arg: string) => JSX.Element> = {
+    abbr: (arg) => (<i>{arg}</i>),
+    c: (arg) => (<Code>{arg}</Code>),
+    cpuid: (arg) => {
         // arg is a comma separated list with an empty parameter for separation of CPUID arguments and result
         // for example, `CPUID[EAX=07h,ECX=0]:EBX.ADX[bit 19]` will be `eax,07,ecx,00,,ebx,adx,19`
         // multiple bit results will use "range syntax" (eg. `0..=1` for the two LSB)
@@ -49,7 +49,7 @@ const functions: IDictionary<(key: number, arg: string) => JSX.Element> = {
         cpuidResultStr += `${cpuidResult[2]}]`;
 
         return (
-            <Code key={key}>
+            <Code>
                 {"CPUID.("}
                 {cpuidArgsStr.join(",")}
                 {"):"}
@@ -58,11 +58,11 @@ const functions: IDictionary<(key: number, arg: string) => JSX.Element> = {
         );
     },
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    en: (key, _) => (<React.Fragment key={key}>&ndash;</React.Fragment>),
-    error: (key, arg) => (<b key={key} style={{ color: Colors.RED3 }}>{arg}</b>),
-    i: (key, arg) => (<i key={key}>{arg}</i>),
-    instr: (key, arg) => (<Link key={key} href={`/instruction/${arg.toLowerCase()}`}><Code>{arg}</Code></Link>),
-    reg: (key, arg) => (<Code key={key}>{arg}</Code>),
+    en: (_) => (<React.Fragment>&ndash;</React.Fragment>),
+    error: (arg) => (<b style={{ color: Colors.RED3 }}>{arg}</b>),
+    i: (arg) => (<i>{arg}</i>),
+    instr: (arg) => (<Link href={`/instruction/${arg.toLowerCase()}`}><Code>{arg}</Code></Link>),
+    reg: (arg) => (<Code>{arg}</Code>),
 };
 
 /**
@@ -73,7 +73,8 @@ const functions: IDictionary<(key: number, arg: string) => JSX.Element> = {
  * @remarks
  * Functions in `str` *must* follow the syntax of `\func{arg}`.
  *
- * Arguments to `func` *must not* contain a closing brace (`}`) or other function calls.
+ * Currently, this function performs a simple "search and replace".
+ * Due to this, arguments to `func` *must not* contain a closing brace (`}`) or other function calls.
  * For example, `\c{\i{abc}}` will actually output `<code>\i{abc</code>}`.
  */
 export function processStringToJsx(str: string): JSX.Element {
@@ -90,11 +91,23 @@ export function processStringToJsx(str: string): JSX.Element {
             continue;
         }
 
-        if (Object.keys(functions).indexOf(arr[i]) === -1)
-            ret.push(functions.error(i, `\\${arr[i]}{${arr[i + 1]}}`));
-        else
-            ret.push(functions[arr[i]](i, arr[i + 1]));
-        i++; // skip over [idx % 3 === 2]; used in last line
+        // If that function doesn't exist, wrap the whole function call in `\error{...}`
+        if (Object.keys(functions).indexOf(arr[i]) === -1) {
+            ret.push(
+                <React.Fragment key={i}>
+                    {functions.error(`\\${arr[i]}{${arr[i + 1]}}`)}
+                </React.Fragment>
+            );
+        } else {
+            ret.push(
+                <React.Fragment key={i}>
+                    {functions[arr[i]](arr[i + 1])}
+                </React.Fragment>
+            );
+        }
+
+        // skip over [idx % 3 === 2]; used in above `if` block
+        i++;
     }
 
     return (<>{ret}</>);
