@@ -15,7 +15,7 @@
  *   with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { Breadcrumbs, Card, H1, H2, IBreadcrumbProps, UL } from "@blueprintjs/core";
+import { Breadcrumbs, Card, Code, H1, H2, IBreadcrumbProps, UL } from "@blueprintjs/core";
 
 import Layout from "../components/Layout";
 import Link from "../components/Link";
@@ -47,18 +47,22 @@ export default function Page(): JSX.Element {
                     <H2 id="headingStack">Software Stack</H2>
                     <p>
                         This site is build using <Link href="https://nextjs.org/">Next.js</Link> and deployed on <Link href="https://vercel.com/">Vercel</Link>.
-                        {" "}<Link href="https://react-bootstrap.github.io/">React Bootstrap</Link> is used for theming and layout.
+                        {" "}<Link href="https://blueprintjs.com/">Blueprint</Link> is used for theming and layout.
                     </p>
                     <p>
                         Additionally, the following npm packages are used:
                     </p>
                     <UL>
                         <li>
-                            <Link href="https://www.npmjs.com/package/react-syntax-highlighter"><code>react-syntax-highlighter</code></Link>
+                            <Link href="https://www.npmjs.com/package/react-syntax-highlighter"><Code>react-syntax-highlighter</Code></Link>
                             {": "}Any syntax highlighting used here.
                         </li>
                         <li>
-                            <Link href="https://www.npmjs.com/package/yaml"><code>yaml</code></Link>
+                            <Link href="https://www.npmjs.com/package/styled-jsx"><Code>styled-jsx</Code></Link>
+                            {": "}Localized CSS.
+                        </li>
+                        <li>
+                            <Link href="https://www.npmjs.com/package/yaml"><Code>yaml</Code></Link>
                             {": "}Parsing YAML files used for data storage.
                         </li>
                     </UL>
