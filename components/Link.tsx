@@ -24,25 +24,6 @@ type LinkProps = {
 };
 
 export default function Link(props: LinkProps): JSX.Element {
-    // instruction pages need special handling
-    const test = props.href.match(/^\/instruction\/([a-z0-9]+)$/);
-    if (test) {
-        if (test[1] === "help") {
-            // the single non instruction page
-            return (
-                <NextLink href="/instruction/help">
-                    <a>{props.children}</a>
-                </NextLink>
-            );
-        }
-
-        return (
-            <NextLink href="/instruction/[slug]" as={props.href}>
-                <a>{props.children}</a>
-            </NextLink>
-        );
-    }
-
     // is this an internal link?
     // NOTE: this may not work for all internal links (ones that don't start with "/" or "#")
     // TODO: will there be any that won't work?
