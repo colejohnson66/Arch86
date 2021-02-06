@@ -137,6 +137,11 @@ function paragraphsFromString(str: string, parse = true): JSX.Element[] {
     return paragraphsFromArray(str.split("\n"), parse);
 }
 
+function formatEncodingCell(operand: string): JSX.Element {
+    // TODO: don't just wrap it all, but parse it and selectively monospace
+    return <Code>{operand}</Code>;
+}
+
 function regularExceptionList(ex: string | ExceptionList, parse = true): JSX.Element {
     if (typeof ex === "string")
         return <p>{brTagsFromString(ex)}</p>;
@@ -256,11 +261,11 @@ export default function Page(props: PageProps): JSX.Element {
                                     <th>Op/En</th>
                                     {props.encoding.hasTuple &&
                                         <th>Tuple Type</th>}
-                                    {[...Array(props.encoding.operands)].map((_, idx) => (
-                                        props.encoding.operands === 1
-                                            ? <th key={idx}>Operand</th>
-                                            : <th key={idx}>Operand {idx + 1}</th>
-                                    ))}
+                                    {props.encoding.operands === 1
+                                        ? <th>Operand</th>
+                                        : [...Array(props.encoding.operands)].map((_, idx) => (
+                                            <th key={idx}>Operand {idx + 1}</th>
+                                        ))}
                                 </tr>
                             </thead>
                             <tbody>
@@ -269,7 +274,14 @@ export default function Page(props: PageProps): JSX.Element {
                                     return (
                                         <tr key={key}>
                                             <td><Code>{key}</Code></td>
-                                            {val.map((value, idx) => (<td key={idx}>{value}</td>))}
+                                            {val.map((value, idx) => (
+                                                <td key={idx}>
+                                                    {/* Is this an N/A or a "Tuple Type" cell? */}
+                                                    {value === "N/A" || (props.encoding.hasTuple && idx === 0)
+                                                        ? value
+                                                        : formatEncodingCell(value)}
+                                                </td>
+                                            ))}
                                         </tr>
                                     );
                                 })}
