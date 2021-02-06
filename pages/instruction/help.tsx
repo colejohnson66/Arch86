@@ -15,7 +15,7 @@
  *   with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { Breadcrumbs, Card, Code, H1, H2, H3, H4, IBreadcrumbProps } from "@blueprintjs/core";
+import { Breadcrumbs, Card, Code, H1, H2, H3, H4, IBreadcrumbProps, UL } from "@blueprintjs/core";
 
 import Layout from "../../components/Layout";
 import Link from "../../components/Link";
@@ -41,7 +41,9 @@ export default function Page(): JSX.Element {
             <div id="main">
                 <TOC.Root>
                     <TOC.Entry href="#headingOverviewTable" text="Overview Table" />
-                    <TOC.Entry href="#headingEncoding" text="Encoding" />
+                    <TOC.Entry href="#headingEncoding" text="Encoding">
+                        <TOC.Entry href="#headingEncodingOperand" text="Interpreting the Operand Value" />
+                    </TOC.Entry>
                     <TOC.Entry href="#headingDescription" text="Description" />
                     <TOC.Entry href="#headingOperation" text="Operation">
                         <TOC.Entry href="#headingOperationMode" text="MODE" />
@@ -69,6 +71,35 @@ export default function Page(): JSX.Element {
                     TODO
 
                     <H2 id="headingEncoding">Encoding</H2>
+                    <p>
+                        The &quot;Encoding&quot; section is a table listing the encoding of the operands for the various opcodes in the overview table at the start.
+                        Each row of the table consists of the following items, in order:
+                    </p>
+                    <UL>
+                        <li>
+                            <b>Encoding</b>:
+                            The name of the encoding this row is for.
+                            For example, if the &quot;Encoding&quot; cell of a mnemonic in the overview table contains <Code>RM</Code>, the row containing <Code>RM</Code> in this cell would list how the operands are encoded.
+                        </li>
+                        <li>
+                            <b>Tuple Type</b> (optional):
+                            The EVEX encoding&apos;s tuple form.
+                            {/* TODO: What is it? */}
+                            This column is only present if an EVEX encoding for this instruction exists.
+                        </li>
+                        <li>
+                            <b>Operand(s)</b>:
+                            The actual encoding of each operand.
+                            Instructions that contain a different number of operands depending on the mnemonic (for example, vector instructions with a legacy encoding) will contain &quot;N/A&quot; for disallowed operands.
+                            In other words, &quot;legacy&quot; vector encodings will typically have the first source and the destination be the same operand (<Code>MNEMONIC dest, src</Code>), but VEX and EVEX versions with a &quot;non-destructive&quot; form (<Code>MNEMONIC dest, src1, src2</Code>) will not.
+                            In these cases, the &quot;legacy&quot; form will only have two operands while the VEX and EVEX forms will have three.
+                            As such, the &quot;Operand 3&quot; cell will contain &quot;N/A&quot;.
+                            <br />
+                            <Link href="#headingEncodingOperand">See below</Link> for an explanation on interpreting this value.
+                        </li>
+                    </UL>
+
+                    <H3 id="headingEncodingOperand">Interpreting the Operand Value</H3>
                     TODO
 
                     <H2 id="headingDescription">Description</H2>
