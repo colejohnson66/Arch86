@@ -277,7 +277,7 @@ export default function Page(props: PageProps): JSX.Element {
                                             {val.map((value, idx) => (
                                                 <td key={idx}>
                                                     {/* Is this an N/A or a "Tuple Type" cell? */}
-                                                    {value === "N/A" || (props.encoding.hasTuple && idx === 0)
+                                                    {value === "N/A" || value === "None" || (props.encoding.hasTuple && idx === 0)
                                                         ? value
                                                         : formatEncodingCell(value)}
                                                 </td>
