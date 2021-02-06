@@ -255,7 +255,7 @@ export default function Page(props: PageProps): JSX.Element {
 
                     <H2 id="headingEncoding">Encoding</H2>
                     <Scrollable>
-                        <HTMLTable bordered>
+                        <HTMLTable>
                             <thead>
                                 <tr>
                                     <th>Op/En</th>
