@@ -34,7 +34,7 @@ opcode:
       Add/subtract packed double-precision floating point values from \abbr{ymm2/m256} and \abbr{ymm2}.
       Stores the result in \abbr{ymm1}.
 encoding:
-  ops: 3
+  operands: 3
   encodings:
     LEGACY:
       - ModRM:reg[rw]

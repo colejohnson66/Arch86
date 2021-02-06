@@ -12,7 +12,7 @@ opcode:
     cpuid:
     description:
 encoding:
-  ops: 2
+  operands: 2
   encodings:
     MI:
       -

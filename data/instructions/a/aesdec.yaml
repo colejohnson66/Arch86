@@ -72,7 +72,7 @@ opcode:
       Performs one round of AES decryption using four 128 bit states from \abbr{zmm2} with four 128 bit round keys from \abbr{zmm3/m512}.
       Stores the results in \abbr{zmm1}.
 encoding:
-  ops: 3
+  operands: 3
   hasTuple: true
   encodings:
     LEGACY:

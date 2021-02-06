@@ -34,7 +34,7 @@ opcode:
       Adds a single double-precision floating-point value from \abbr{xmm3/m64} and \abbr{xmm2}.
       Stores the result in \abbr{xmm1} using writemask \abbr{k1}.
 encoding:
-  ops: 3
+  operands: 3
   hasTuple: true
   encodings:
     LEGACY:

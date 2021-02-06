@@ -158,7 +158,7 @@ opcode:
       64: valid
     description: Adds \abbr{r/m64} to \abbr{r64}.
 encoding:
-  ops: 2
+  operands: 2
   encodings:
     I:
       - AL/AX/EAX/RAX

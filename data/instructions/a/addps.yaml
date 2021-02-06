@@ -68,7 +68,7 @@ opcode:
       Adds packed single-precision floating-point values from \abbr{zmm3/m512/m32bcst} and \abbr{zmm2}.
       Stores the result in \abbr{zmm1} using writemask \abbr{k1}.
 encoding:
-  ops: 3
+  operands: 3
   hasTuple: true
   encodings:
     LEGACY:
