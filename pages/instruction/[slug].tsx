@@ -258,7 +258,7 @@ export default function Page(props: PageProps): JSX.Element {
                         <HTMLTable>
                             <thead>
                                 <tr>
-                                    <th>Op/En</th>
+                                    <th>Encoding</th>
                                     {props.encoding.hasTuple &&
                                         <th>Tuple Type</th>}
                                     {props.encoding.operands === 1
