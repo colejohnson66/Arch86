@@ -33,10 +33,10 @@ description: >-
   The other arithmetic flags are undefined and undocumented.
 operation: |-
   pub fn aaa() {
-    if (MODE == 64) {
+    if MODE == 64 {
       #UD;
     } else {
-      if (((AL & 0xF) > 9) || AF) {
+      if ((AL & 0xF) > 9) || AF {
         match PROCESSOR {
           8086 | 8088 | 80186 => {
             AH = AH + 1; // see note 1

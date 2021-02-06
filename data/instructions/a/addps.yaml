@@ -125,14 +125,14 @@ operation: |-
 
       if k[n] {
         // broadcast?
-        if (EVEX.b) {
+        if EVEX.b {
           dest[vi_next..=vi] = src1[vi_next..=vi] + src2[31..=0];
         } else {
           dest[vi_next..=vi] = src1[vi_next..=vi] + src2[vi_next..=vi];
         }
       } else {
         // zero mask?
-        if (EVEX.z) {
+        if EVEX.z {
           dest[vi_next..=vi] = 0;
         }
       }

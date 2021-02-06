@@ -29,10 +29,10 @@ description: >-
   The other arithmetic flags are undefined and undocumented.
 operation: >-
   pub fn aas() {
-    if (MODE == 64) {
+    if MODE == 64 {
       #UD;
     } else {
-      if ((AL & 0xF) > 9) || AF) {
+      if (AL & 0xF) > 9) || AF {
         AX = AX - 6;
         AH = AH - 1;
         AF = 1;
