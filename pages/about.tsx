@@ -50,7 +50,7 @@ export default function Page(): JSX.Element {
                         {" "}<Link href="https://blueprintjs.com/">Blueprint</Link> is used for theming and layout.
                     </p>
                     <p>
-                        Additionally, the following npm packages are used:
+                        Additionally, the following npm packages are (directly) used:
                     </p>
                     <UL>
                         <li>
