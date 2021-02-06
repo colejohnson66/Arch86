@@ -25,6 +25,13 @@ export default function DateTime(props: DateTimeProps): JSX.Element {
     // TODO: verify if `props.dateTime` is valid
     // see: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/time
     return (
-        <time dateTime={props.dateTime}>{props.text ? props.text : props.dateTime}</time>
+        <time dateTime={props.dateTime}>
+            {props.text ? props.text : props.dateTime}
+            <style jsx>{`
+                time {
+                    white-space: nowrap;
+                }
+            `}</style>
+        </time>
     );
 }

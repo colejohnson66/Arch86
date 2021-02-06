@@ -22,8 +22,15 @@ type ScrollableProps = {
 
 export default function Scrollable(props: ScrollableProps): JSX.Element {
     return (
-        <div className="scrollable">
+        <div>
             {props.children}
+            <style jsx>{`
+                div {
+                    display: block;
+                    width: 100%;
+                    overflow-x: auto;
+                }
+            `}</style>
         </div>
     );
 }

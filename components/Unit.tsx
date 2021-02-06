@@ -24,6 +24,13 @@ type UnitProps = {
 
 export default function Unit(props: UnitProps): JSX.Element {
     return (
-        <span className="Unit">{props.value} {props.unit}</span>
+        <span>
+            {props.value} {props.unit}
+            <style jsx>{`
+                span {
+                    white-space: nowrap;
+                }
+            `}</style>
+        </span>
     );
 }
