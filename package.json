@@ -18,11 +18,6 @@
     "start": "next start",
     "eslint": "eslint components/** lib/** pages/** types/**"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app"
-    ]
-  },
   "dependencies": {
     "@blueprintjs/core": "^3.38.2",
     "@blueprintjs/icons": "^3.24.0",
