@@ -88,7 +88,7 @@ export default function Page(): JSX.Element {
                         &quot;Valid&quot; forms are allowed while &quot;invalid&quot; forms will throw an exception if encountered.
                         &quot;Not encodable&quot; forms are disallowed in the specified mode, and will, in fact, be interpreted differently than expected.
                         <br />
-                        For example, in <Link href="/architecture/mode/long">64-bit mode</Link>, the byte range <Code>40</Code> through <Code>4F</Code> was repurposed for the REX prefix.
+                        For example, in <Link href="/mode/long">64-bit mode</Link>, the byte range <Code>40</Code> through <Code>4F</Code> was repurposed for the REX prefix.
                         This makes encoding <Code>INC eax</Code> as <Code>40</Code> impossible.
                         Should the processor encounter what the author thinks is <Code>INC eax</Code>, it will treat it as a REX prefix with the lower four bits set to 0.
                         The correct encoding would be <Code>FF C0</Code>.
@@ -208,7 +208,7 @@ export default function Page(): JSX.Element {
                     </li>
                     <li>
                         <Code>FLAGS</Code>:
-                        The <Link href="/architecture/register/flags">FLAGS</Link> register.
+                        The <Link href="/register/flags">FLAGS</Link> register.
                     </li>
                     <li>
                         <Code>imm##</Code>:
@@ -262,7 +262,7 @@ export default function Page(): JSX.Element {
                 <p>
                     The <Code>MODE</Code> global variable represents the current operating mode of the processor thread.
                     It can be one of: <Code>16</Code>, <Code>32</Code>, or <Code>64</Code>, each representing the &quot;bit width&quot; of the current mode.
-                    However, it is only compared against <Code>64</Code> for instructions that are illegal in <Link href="/architecture/mode/long">long (64 bit) mode</Link>.
+                    However, it is only compared against <Code>64</Code> for instructions that are illegal in <Link href="/mode/long">long (64 bit) mode</Link>.
                 </p>
 
                 <H3 id="headingOperationProcessor">PROCESSOR</H3>
@@ -281,7 +281,7 @@ export default function Page(): JSX.Element {
                 <H3 id="headingOperationFlags">Flags</H3>
                 <p>
                     Flags are accessed as if they were global variables.
-                    For example, <Code>OF</Code> would refer to the <Link href="/architecture/register/flags">overflow flag</Link> (which is either a zero or a one).
+                    For example, <Code>OF</Code> would refer to the <Link href="/register/flags">overflow flag</Link> (which is either a zero or a one).
                     These single bit values, when used in <Code>if</Code> conditions, are implicitly coerced to a boolean.
                     The only multibit flag, <Code>IOPL</Code>, is a two bit value and, as such, <em>cannot</em> be coerced.
                 </p>
@@ -296,7 +296,7 @@ export default function Page(): JSX.Element {
                 <H4 id="headingOperationTypesSimd">Simd&lt;T&gt;</H4>
                 <p>
                     The most used type in the pseudo-code is the <Code>Simd&lt;T&gt;</Code> type.
-                    It represents an <Link href="/architecture/register/vector">x86 vector register</Link>.
+                    It represents an <Link href="/register/vector">x86 vector register</Link>.
                     Currently, <Code>Simd::max()</Code> is <Code>512</Code> to correspond with the <Code>ZMM</Code> registers, but this will change if an &quot;AVX-1024&quot; were to be created.
                 </p>
                 <p>
@@ -312,7 +312,7 @@ export default function Page(): JSX.Element {
                 <H4 id="headingOperationTypesKMask">KMask</H4>
                 <p>
                     In addition to the <Code>Simd&lt;T&gt;</Code> type for vector instructions, there also exists the <Code>KMask</Code> type.
-                    It represents an <Link href="/architecture/register/mask">x86 mask register</Link> (<Code>k0</Code> through <Code>k7</Code>).
+                    It represents an <Link href="/register/mask">x86 mask register</Link> (<Code>k0</Code> through <Code>k7</Code>).
                     {" "}<Code>KMask</Code> is a 64 bit wide bit addressable type.
                     Each bit corresponds to the same bit in the x86 mask register with <Code>k[n]</Code> referring to the &quot;n-th&quot; bit of the underlying mask register.
                 </p>
