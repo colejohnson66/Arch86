@@ -43,19 +43,19 @@ export default function Page(): JSX.Element {
                     <H1>Microarchitecture</H1>
                     <p>
                         Over the years, there have been many versions of the x86 microarchitecture.
-                        It began with the <Link href="/architecture/8086">8086</Link> (released <DateTime dateTime="1979-06-08" />), and continues to this day with the various &quot;Intel Core&quot; microarchitectures.
+                        It began with the <Link href="/architecture/processor/8086">8086</Link> (released <DateTime dateTime="1979-06-08" />), and continues to this day with the various &quot;Intel Core&quot; microarchitectures.
                     </p>
 
                     <H2 id="headingHistory">History</H2>
                     <WIP type="section" />
                     <UL>
-                        <li><Link href="/architecture/8086">8086</Link></li>
-                        <li><Link href="/architecture/80186">80186</Link></li>
-                        <li><Link href="/architecture/80286">80286</Link></li>
-                        <li><Link href="/architecture/80386">80386</Link></li>
-                        <li><Link href="/architecture/80486">80486</Link></li>
-                        <li><Link href="/architecture/p5">P5</Link></li>
-                        <li><Link href="/architecture/p5">P6</Link></li>
+                        <li><Link href="/architecture/processor/8086">8086</Link></li>
+                        <li><Link href="/architecture/processor/80186">80186</Link></li>
+                        <li><Link href="/architecture/processor/80286">80286</Link></li>
+                        <li><Link href="/architecture/processor/80386">80386</Link></li>
+                        <li><Link href="/architecture/processor/80486">80486</Link></li>
+                        <li><Link href="/architecture/processor/p5">P5</Link></li>
+                        <li><Link href="/architecture/processor/p5">P6</Link></li>
                         <li>...</li>
                     </UL>
                 </div>

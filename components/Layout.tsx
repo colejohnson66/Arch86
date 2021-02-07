@@ -75,7 +75,6 @@ export default function Layout(props: LayoutProps): JSX.Element {
                                 {navItem("about", "/about", "About")}
                                 {navItem("instruction", "/instruction", "Instructions")}
                                 {navItem("architecture", "/architecture", "Microarchitecture")}
-                                {navItem("")}
                             </Navbar.Group>
                         </Navbar>
                     </Scrollable>
