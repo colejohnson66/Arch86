@@ -1,0 +1,15 @@
+%YAML 1.2
+---
+architecture:
+  description: Pages related to the microarchitecture versions
+  list:
+    - /architecture
+mode:
+  description: Pages related to processor modes
+  list:
+    - /mode
+register:
+  description: Pages related to processor registers
+  list:
+    - /register
+    - /register/flags
