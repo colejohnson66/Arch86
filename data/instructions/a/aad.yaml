@@ -23,7 +23,7 @@ encoding:
     ZO:
       - None (implicitly 10)
     I:
-      - imm8
+      - imm8[r]
 description: >-
   The \c{AAD} instruction prepares a BCD number for division.
 

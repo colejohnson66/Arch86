@@ -79,7 +79,7 @@ encoding:
       - N/A
       - ModRM.reg[rw]
       - ModRM.r/m[r]
-      - N/A
+      - ""
     VEX:
       - N/A
       - ModRM.reg[w]

@@ -157,6 +157,7 @@ export default function Page(): JSX.Element {
                         The EVEX encoding&apos;s tuple form.
                         {/* TODO: What is it? */}
                         This column is only present if an EVEX encoding for this instruction exists.
+                        If present, any encoding that does not use an EVEX prefix will contain &quot;N/A&quot;.
                     </li>
                     <li>
                         <b>Operand(s)</b>:
@@ -164,7 +165,7 @@ export default function Page(): JSX.Element {
                         Instructions that contain a different number of operands depending on the mnemonic (for example, vector instructions with a legacy encoding) will contain &quot;N/A&quot; for disallowed operands.
                         In other words, &quot;legacy&quot; vector encodings will typically have the first source and the destination be the same operand (<Code>MNEMONIC dest, src</Code>), but VEX and EVEX versions with a &quot;non-destructive&quot; form (<Code>MNEMONIC dest, src1, src2</Code>) will not.
                         In these cases, the &quot;legacy&quot; form will only have two operands while the VEX and EVEX forms will have three.
-                        As such, the &quot;Operand 3&quot; cell will contain &quot;N/A&quot;.
+                        As such, the &quot;Operand 3&quot; cell will be empty.
                         <br />
                         <Link href="#headingEncodingOperand">See below</Link> for an explanation on interpreting this value.
                     </li>

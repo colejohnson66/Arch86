@@ -161,11 +161,11 @@ encoding:
   operands: 2
   encodings:
     I:
-      - AL/AX/EAX/RAX
-      - imm8/16/32
+      - AL/AX/EAX/RAX[rw]
+      - imm8/16/32[r]
     MI:
       - ModRM.r/m[rw]
-      - imm8/16/32
+      - imm8/16/32[r]
     MR:
       - ModRM.r/m[rw]
       - ModRM.reg[r]

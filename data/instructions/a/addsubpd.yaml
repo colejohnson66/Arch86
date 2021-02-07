@@ -39,7 +39,7 @@ encoding:
     LEGACY:
       - ModRM.reg[rw]
       - ModRM.r/m[r]
-      - N/A
+      - ""
     VEX:
       - ModRM.reg[w]
       - VEX.vvvv[r]

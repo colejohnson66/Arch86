@@ -23,7 +23,7 @@ encoding:
     ZO:
       - None (implicitly 10)
     I:
-      - imm8
+      - imm8[r]
 description: >-
   The \c{AAM} instruction converts the result of a multiplication of two BCD digits to a valid 2-digit BCD number.
 
