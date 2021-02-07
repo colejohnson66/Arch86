@@ -26,6 +26,13 @@ import TOC from "../components/TOC";
 import WIP from "../components/WIP";
 import { getGroupedInstructionList } from "../lib/instruction";
 
+const ccInstr = [
+    "cmovcc",
+    "fcmovcc",
+    "jcc",
+    "setcc",
+];
+
 function commaSeparatedLinks(list: string[]): JSX.Element[] {
     return list.map((item, idx) => (
         <React.Fragment key={idx}>
@@ -37,18 +44,51 @@ function commaSeparatedLinks(list: string[]): JSX.Element[] {
     ));
 }
 
+function instructionListWithHeading(list: (string | string[])[], char: string): JSX.Element {
+    return (
+        <React.Fragment key={char}>
+            <H3 id={`headingList${char.toUpperCase()}`}>{char.toUpperCase()}</H3>
+            <UL>
+                {list.map((item) => {
+                    // Join related instructions (signified by `string[]` in the YAML)
+                    if (Array.isArray(item)) {
+                        return (
+                            <li key={item[0]}>
+                                {commaSeparatedLinks(item)}
+                            </li>
+                        );
+                    }
+
+                    // If this is a conditional instruction, keep `cc` lowercase
+                    if (ccInstr.includes(item)) {
+                        return (
+                            <li key={item}>
+                                <Link href={`/instruction/${item}`}>
+                                    {`${item.substr(0, item.length - 2).toUpperCase()}cc`}
+                                </Link>
+                            </li>
+                        );
+                    }
+
+                    // The `nnn` to `###` is for FMA instructions
+                    return (
+                        <li key={item}>
+                            <Link href={`/instruction/${item}`}>
+                                {item.replace("nnn", "###").toUpperCase()}
+                            </Link>
+                        </li>
+                    );
+                })}
+            </UL>
+        </React.Fragment>
+    );
+}
+
 type PageProps = {
     instructions: IDictionary<(string | string[])[]>;
 };
 
 export default function Page(props: PageProps): JSX.Element {
-    const ccInstr = [
-        "cmovcc",
-        "fcmovcc",
-        "jcc",
-        "setcc",
-    ];
-
     const PageBreadcrumbs: IBreadcrumbProps[] = [
         { text: "Instructions" },
     ];
@@ -77,40 +117,9 @@ export default function Page(props: PageProps): JSX.Element {
                     In addition to the documented instructions in the software developer manual (SDM), undocumented and AMD-exclusive instructions are included here.
                 </Callout>
 
-                <H3 id="headingListA">A</H3>
-                <UL>
-                    {/* TODO: Don't limit this to just "A" for obvious reasons */}
-                    {props.instructions.a.map((item) => {
-                        // Join related instructions (signified by `string[]` in the YAML)
-                        if (Array.isArray(item)) {
-                            return (
-                                <li key={item[0]}>
-                                    {commaSeparatedLinks(item)}
-                                </li>
-                            );
-                        }
-
-                        // If this is a conditional instruction, keep `cc` lowercase
-                        if (ccInstr.includes(item)) {
-                            return (
-                                <li key={item}>
-                                    <Link href={`/instruction/${item}`}>
-                                        {`${item.substr(0, item.length - 2).toUpperCase()}cc`}
-                                    </Link>
-                                </li>
-                            );
-                        }
-
-                        // The `nnn` to `###` is for FMA instructions
-                        return (
-                            <li key={item}>
-                                <Link href={`/instruction/${item}`}>
-                                    {item.replace("nnn", "###").toUpperCase()}
-                                </Link>
-                            </li>
-                        );
-                    })}
-                </UL>
+                {Object.keys(props.instructions).map((char) => (
+                    instructionListWithHeading(props.instructions[char], char)
+                ))}
             </div>
         </Layout>
     );
