@@ -84,6 +84,15 @@ main {
     flex: 1 1 auto;
 }
 
+.columns {
+    display: flex;
+    flex-flow: row;
+}
+
+.column {
+    flex: auto;
+}
+
 .mnemonic {
     white-space: nowrap;
 }
