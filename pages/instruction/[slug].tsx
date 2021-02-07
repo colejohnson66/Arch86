@@ -211,6 +211,9 @@ export default function Page(props: PageProps): JSX.Element {
             </TOC.Root>
             <div id="content">
                 <H1><Code>{props.id.toUpperCase()}</Code>: {processStringToJsx(props.title)}</H1>
+                <Callout intent="primary">
+                    For information about interpreting this page, see <Link href="/instruction/help">the help page</Link>.
+                </Callout>
                 <Scrollable>
                     <HTMLTable bordered>
                         <thead>
