@@ -72,8 +72,8 @@ export default function Layout(props: LayoutProps): JSX.Element {
             </Head>
             <Card id="all" className="bp3-dark">
                 <header>
-                    <Scrollable>
-                        <Navbar>
+                    <Navbar>
+                        <Scrollable>
                             <Navbar.Group>
                                 <Link href="/">
                                     <Button
@@ -88,8 +88,8 @@ export default function Layout(props: LayoutProps): JSX.Element {
                                 {navItem("register", "/register", "Registers")}
                                 {navItem("mode", "/mode", "Modes")}
                             </Navbar.Group>
-                        </Navbar>
-                    </Scrollable>
+                        </Scrollable>
+                    </Navbar>
                 </header>
                 <main>
                     {props.breadcrumbs &&
