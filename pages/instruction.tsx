@@ -112,9 +112,9 @@ export default function Page(props: PageProps): JSX.Element {
                 <H2 id="headingList">List</H2>
                 <WIP type="section" />
                 <Callout intent="primary">
-                    This list is updated manually, and, as such, may not be current;
-                    It is current as of version 073 of the <Link href="https://software.intel.com/content/www/us/en/develop/articles/intel-sdm.html">Intel SDM</Link>.
-                    In addition to the documented instructions in the software developer manual (SDM), undocumented and AMD-exclusive instructions are included here.
+                    This list is updated manually, and, as such, may not be current.
+                    It is currently being created to follow version 073 of the <Link href="https://software.intel.com/content/www/us/en/develop/articles/intel-sdm.html">Intel SDM</Link>.
+                    In addition to the documented instructions in the software developer manual (SDM), undocumented and AMD-exclusive instructions (such as the XOP set) are included here.
                 </Callout>
 
                 {Object.keys(props.instructions).map((char) => (
