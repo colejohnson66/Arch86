@@ -15,12 +15,12 @@
  *   with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
+import Entry from "./Entry";
 import Link from "./Link";
-import RefEntry from "./RefEntry";
-import RefRoot from "./RefRoot";
+import Root from "./Root";
 
 export default {
     Link,
-    RefEntry,
-    RefRoot,
+    Entry,
+    Root,
 };

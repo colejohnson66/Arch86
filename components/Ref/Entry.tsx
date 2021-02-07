@@ -15,22 +15,18 @@
  *   with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { H2, UL } from "@blueprintjs/core";
-
 import React from "react";
 
-type RootProps = {
+type EntryProps = {
+    name: string,
     children: React.ReactNode,
 };
 
-export default function RefRoot(props: RootProps): JSX.Element {
-    // TODO: support columns
+export default function Entry(props: EntryProps): JSX.Element {
     return (
-        <>
-            <H2 id="headingReferences">References</H2>
-            <UL className="referenceList">
-                {props.children}
-            </UL>
-        </>
+        <li id={`reference-${props.name}`}>
+            {`[${props.name}] - `}
+            {props.children}
+        </li>
     );
 }
