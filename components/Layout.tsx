@@ -15,13 +15,14 @@
  *   with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { Button, Card, Divider, Navbar } from "@blueprintjs/core";
+import { Breadcrumbs, Button, Card, Divider, IBreadcrumbProps, Navbar } from "@blueprintjs/core";
 
 import Head from "next/head";
 import Link from "../components/Link";
 import React from "react";
 import Scrollable from "./Scrollable";
 import { strict as assert } from "assert";
+import renderBreadcrumbs from "../lib/renderBreadcrumbs";
 
 type NavGroup = "home" | "about" | "instruction" | "architecture";
 type LayoutProps = {
@@ -30,6 +31,7 @@ type LayoutProps = {
     keywords?: string;
     canonical?: string;
     navGroup?: NavGroup;
+    breadcrumbs?: IBreadcrumbProps[];
     children?: React.ReactNode;
 };
 
@@ -80,7 +82,13 @@ export default function Layout(props: LayoutProps): JSX.Element {
                     </Scrollable>
                 </header>
                 <main>
-                    {props.children}
+                    {props.breadcrumbs &&
+                        <Card className="breadcrumbs" interactive={true}>
+                            <Breadcrumbs breadcrumbRenderer={renderBreadcrumbs} items={props.breadcrumbs} />
+                        </Card>}
+                    <div id="main">
+                        {props.children}
+                    </div>
                 </main>
                 <Divider />
                 <footer>

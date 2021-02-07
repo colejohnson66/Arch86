@@ -14,11 +14,10 @@
  * You should have received a copy of the GNU Affero General Public License along
  *   with this program. If not, see <https://www.gnu.org/licenses/>.
  */
-import { Breadcrumbs, Card, H1, IBreadcrumbProps, UL } from "@blueprintjs/core";
+import { H1, IBreadcrumbProps, UL } from "@blueprintjs/core";
 
 import Layout from "../components/Layout";
 import React from "react";
-import renderBreadcrumbs from "../lib/renderBreadcrumbs";
 
 export default function Page(): JSX.Element {
     const PageBreadcrumbs: IBreadcrumbProps[] = [
@@ -26,20 +25,15 @@ export default function Page(): JSX.Element {
     ];
 
     return (
-        <Layout canonical="/contact" title="Contact">
-            <Card className="breadcrumbs" interactive={true}>
-                <Breadcrumbs breadcrumbRenderer={renderBreadcrumbs} items={PageBreadcrumbs} />
-            </Card>
-            <div id="main">
-                <div id="content">
-                    <H1>Contact</H1>
-                    <p>
-                        To contact me, please use the following method:
-                    </p>
-                    <UL>
-                        <li>Email: <i>coleharrisjohnson at gmail dot com</i></li>
-                    </UL>
-                </div>
+        <Layout canonical="/contact" title="Contact" breadcrumbs={PageBreadcrumbs}>
+            <div id="content">
+                <H1>Contact</H1>
+                <p>
+                    To contact me, please use the following method:
+                </p>
+                <UL>
+                    <li>Email: <i>coleharrisjohnson at gmail dot com</i></li>
+                </UL>
             </div>
         </Layout>
     );

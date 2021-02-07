@@ -15,7 +15,7 @@
  *   with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { Breadcrumbs, Callout, Card, H1, H2, IBreadcrumbProps, UL } from "@blueprintjs/core";
+import { Callout, H1, H2, IBreadcrumbProps, UL } from "@blueprintjs/core";
 
 import { GetStaticProps } from "next";
 import IDictionary from "../types/IDictionary";
@@ -25,7 +25,6 @@ import React from "react";
 import TOC from "../components/TOC";
 import WIP from "../components/WIP";
 import { getGroupedInstructionList } from "../lib/instruction";
-import renderBreadcrumbs from "../lib/renderBreadcrumbs";
 
 function commaSeparatedLinks(list: string[]): JSX.Element[] {
     return list.map((item, idx) => (
@@ -55,62 +54,57 @@ export default function Page(props: PageProps): JSX.Element {
     ];
 
     return (
-        <Layout canonical="/instruction" navGroup="instruction" title="Instructions">
-            <Card className="breadcrumbs" interactive={true}>
-                <Breadcrumbs breadcrumbRenderer={renderBreadcrumbs} items={PageBreadcrumbs} />
-            </Card>
-            <div id="main">
-                <TOC.Root>
-                    <TOC.Entry href="#headingList" text="List" />
-                </TOC.Root>
-                <div id="content">
-                    <H1>x86 Instructions</H1>
-                    <p>
-                        x86 is home to a few hundred instructions with over 3,000 different encodings.
-                        An up-to-date list is available in PDF form on <Link href="https://software.intel.com/content/www/us/en/develop/articles/intel-sdm.html">Intel&apos;s website</Link> (see volume 2).
-                    </p>
+        <Layout canonical="/instruction" navGroup="instruction" title="Instructions" breadcrumbs={PageBreadcrumbs}>
+            <TOC.Root>
+                <TOC.Entry href="#headingList" text="List" />
+            </TOC.Root>
+            <div id="content">
+                <H1>x86 Instructions</H1>
+                <p>
+                    x86 is home to a few hundred instructions with over 3,000 different encodings.
+                    An up-to-date list is available in PDF form on <Link href="https://software.intel.com/content/www/us/en/develop/articles/intel-sdm.html">Intel&apos;s website</Link> (see volume 2).
+                </p>
 
-                    <H2 id="headingList">List</H2>
-                    <WIP type="section" />
-                    <Callout intent="primary">
-                        This list is updated manually, and, as such, may not be current;
-                        It is current as of version 073 of the <Link href="https://software.intel.com/content/www/us/en/develop/articles/intel-sdm.html">Intel SDM</Link>.
-                        In addition to the documented instructions in the software developer manual (SDM), undocumented and AMD-exclusive instructions are included here.
-                    </Callout>
-                    <UL>
-                        {/* TODO: Don't limit this to just "A" for obvious reasons */}
-                        {props.instructions.a.map((item) => {
-                            // Join related instructions (signified by `string[]` in the YAML)
-                            if (Array.isArray(item)) {
-                                return (
-                                    <li key={item[0]}>
-                                        {commaSeparatedLinks(item)}
-                                    </li>
-                                );
-                            }
+                <H2 id="headingList">List</H2>
+                <WIP type="section" />
+                <Callout intent="primary">
+                    This list is updated manually, and, as such, may not be current;
+                    It is current as of version 073 of the <Link href="https://software.intel.com/content/www/us/en/develop/articles/intel-sdm.html">Intel SDM</Link>.
+                    In addition to the documented instructions in the software developer manual (SDM), undocumented and AMD-exclusive instructions are included here.
+                </Callout>
+                <UL>
+                    {/* TODO: Don't limit this to just "A" for obvious reasons */}
+                    {props.instructions.a.map((item) => {
+                        // Join related instructions (signified by `string[]` in the YAML)
+                        if (Array.isArray(item)) {
+                            return (
+                                <li key={item[0]}>
+                                    {commaSeparatedLinks(item)}
+                                </li>
+                            );
+                        }
 
-                            // If this is a conditional instruction, keep `cc` lowercase
-                            if (ccInstr.includes(item)) {
-                                return (
-                                    <li key={item}>
-                                        <Link href={`/instruction/${item}`}>
-                                            {`${item.substr(0, item.length - 2).toUpperCase()}cc`}
-                                        </Link>
-                                    </li>
-                                );
-                            }
-
-                            // The `nnn` to `###` is for FMA instructions
+                        // If this is a conditional instruction, keep `cc` lowercase
+                        if (ccInstr.includes(item)) {
                             return (
                                 <li key={item}>
                                     <Link href={`/instruction/${item}`}>
-                                        {item.replace("nnn", "###").toUpperCase()}
+                                        {`${item.substr(0, item.length - 2).toUpperCase()}cc`}
                                     </Link>
                                 </li>
                             );
-                        })}
-                    </UL>
-                </div>
+                        }
+
+                        // The `nnn` to `###` is for FMA instructions
+                        return (
+                            <li key={item}>
+                                <Link href={`/instruction/${item}`}>
+                                    {item.replace("nnn", "###").toUpperCase()}
+                                </Link>
+                            </li>
+                        );
+                    })}
+                </UL>
             </div>
         </Layout>
     );

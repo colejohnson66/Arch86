@@ -23,17 +23,15 @@ import React from "react";
 export default function Page(): JSX.Element {
     return (
         <Layout title="404">
-            <div id="main">
-                <div id="content">
-                    <H1>404</H1>
-                    <p>
-                        That means whatever you were trying to reach doesn&apos;t exist.
-                    </p>
-                    <p>
-                        This site is currently under active development, so many pages may not exist yet.
-                        If you believe you were linked here <em>in error</em>, please <Link href="/contact">contact me</Link> to report the problem.
-                    </p>
-                </div>
+            <div id="content">
+                <H1>404</H1>
+                <p>
+                    That means whatever you were trying to reach doesn&apos;t exist.
+                </p>
+                <p>
+                    This site is currently under active development, so many pages may not exist yet.
+                    If you believe you were linked here <em>in error</em>, please <Link href="/contact">contact me</Link> to report the problem.
+                </p>
             </div>
         </Layout>
     );
