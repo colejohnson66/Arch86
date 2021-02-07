@@ -23,7 +23,7 @@ import React from "react";
 import Scrollable from "./Scrollable";
 import { strict as assert } from "assert";
 
-type NavGroup = "home" | "about" | "architecture" | "instruction";
+type NavGroup = "home" | "about" | "instruction" | "architecture";
 type LayoutProps = {
     title?: string;
     description?: string;
@@ -75,6 +75,7 @@ export default function Layout(props: LayoutProps): JSX.Element {
                                 {navItem("about", "/about", "About")}
                                 {navItem("instruction", "/instruction", "Instructions")}
                                 {navItem("architecture", "/architecture", "Microarchitecture")}
+                                {navItem("")}
                             </Navbar.Group>
                         </Navbar>
                     </Scrollable>
