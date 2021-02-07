@@ -250,7 +250,10 @@ export default function Page(): JSX.Element {
                     </UL>
 
                     <H2 id="headingDescription">Description</H2>
-                    TODO
+                    <p>
+                        The &quot;Description&quot; section, as the name implies, contains a simplified description of the instruction&apos;s operation.
+                        In some cases, graphics will be used for illustrative purposes.
+                    </p>
 
                     <H2 id="headingOperation">Operation</H2>
                     <p>
