@@ -39,7 +39,7 @@ function renderBreadcrumbs({ text, href, ...restProps }: IBreadcrumbProps): JSX.
         <Breadcrumb {...restProps}>
             {href
                 ? <Link href={href}>{text}</Link>
-                : <>{text}</>}
+                : text}
         </Breadcrumb>
     );
 }
