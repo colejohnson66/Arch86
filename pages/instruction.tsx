@@ -15,7 +15,7 @@
  *   with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { Callout, H1, H2, IBreadcrumbProps, UL } from "@blueprintjs/core";
+import { Callout, H1, H2, H3, IBreadcrumbProps, UL } from "@blueprintjs/core";
 
 import { GetStaticProps } from "next";
 import IDictionary from "../types/IDictionary";
@@ -56,7 +56,11 @@ export default function Page(props: PageProps): JSX.Element {
     return (
         <Layout canonical="/instruction" navGroup="instruction" title="Instructions" breadcrumbs={PageBreadcrumbs}>
             <TOC.Root>
-                <TOC.Entry href="#headingList" text="List" />
+                <TOC.Entry href="#headingList" text="List">
+                    {Object.keys(props.instructions).map((char) => (
+                        <TOC.Entry key={char} href={`#headingList${char.toUpperCase()}`} text={char.toUpperCase()} />
+                    ))}
+                </TOC.Entry>
             </TOC.Root>
             <div id="content">
                 <H1>x86 Instructions</H1>
@@ -72,6 +76,8 @@ export default function Page(props: PageProps): JSX.Element {
                     It is current as of version 073 of the <Link href="https://software.intel.com/content/www/us/en/develop/articles/intel-sdm.html">Intel SDM</Link>.
                     In addition to the documented instructions in the software developer manual (SDM), undocumented and AMD-exclusive instructions are included here.
                 </Callout>
+
+                <H3 id="headingListA">A</H3>
                 <UL>
                     {/* TODO: Don't limit this to just "A" for obvious reasons */}
                     {props.instructions.a.map((item) => {
