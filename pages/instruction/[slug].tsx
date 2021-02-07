@@ -222,8 +222,9 @@ export default function Page(props: PageProps): JSX.Element {
                                 <tr>
                                     <th>Opcode and Mnemonic</th>
                                     <th><Link href="#headingEncoding">Encoding</Link></th>
-                                    {props.validity.split(",").map((entry) => <th key={entry}>{OpcodeValidityKeyMap[entry]}</th>
-                                    )}
+                                    {props.validity.split(",").map((entry) => (
+                                        <th key={entry}>{OpcodeValidityKeyMap[entry]}</th>
+                                    ))}
                                     {props.opcode[0].cpuid &&
                                         <th><Link href="/instruction/cpuid">CPUID</Link> Feature Flag</th>}
                                     <th>Description</th>
