@@ -41,7 +41,7 @@ export default function Page(): JSX.Element {
 
                 <H2 id="headingStack">Software Stack</H2>
                 <p>
-                    This site is build using <Link href="https://nextjs.org/">Next.js</Link> and deployed on <Link href="https://vercel.com/">Vercel</Link>.
+                    This site is build using <Link href="https://nextjs.org/">Next.js</Link> (itself built on <Link href="https://reactjs.org/">React.js</Link>) and deployed on <Link href="https://vercel.com/">Vercel</Link>.
                     {" "}<Link href="https://blueprintjs.com/">Blueprint</Link> is used for theming and layout.
                 </p>
                 <p>
