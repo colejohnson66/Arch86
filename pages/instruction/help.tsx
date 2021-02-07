@@ -100,7 +100,77 @@ export default function Page(): JSX.Element {
                     </UL>
 
                     <H3 id="headingEncodingOperand">Interpreting the Operand Value</H3>
-                    TODO
+                    <p>
+                        The operand value cell takes the form of <Code>source[rw]</Code> which represents a data, <Code>source</Code>, that is both read from and written to (<Code>[rw]</Code>).
+                        Read only or write only data is signified by <Code>[r]</Code> and <Code>[w]</Code>, respectively.
+                    </p>
+                    <p>
+                        <Code>source</Code> only specifies <em>where</em> the register number is encoded.
+                        It does <em>not</em> specify which register file is used (general purpose, segment, vector, etc.);
+                        That is specified by the mnemonic&apos;s encoding.
+                    </p>
+                    <p>
+                        <Code>source</Code> will be one of the following values:
+                    </p>
+                    <UL>
+                        <li>
+                            <Code>address##</Code>:
+                            An immediate value of size <Code>##</Code> that represents a &quot;direct&quot; address in the address space.
+                        </li>
+                        <li>
+                            <Code>AL/AX/EAX/RAX</Code>:
+                            The accumulator register.
+                        </li>
+                        <li>
+                            <Code>DS:SI</Code>:
+                            Memory addressed by the <Code>DS:SI</Code> register pair.
+                            {" "}<Code>DS:ESI</Code> and <Code>DS:RSI</Code> may be used instead depending on the processor&apos;s mode.
+                        </li>
+                        <li>
+                            <Code>ES:DI</Code>:
+                            Memory addressed by the <Code>ES:DI</Code> register pair.
+                            {" "}<Code>ES:EDI</Code> and <Code>ES:RDI</Code> may be used instead depending on the processor&apos;s mode.
+                        </li>
+                        <li>
+                            <Code>EVEX.vvvv</Code>:
+                            The <Code>vvvv</Code> field of an EVEX prefix represents the register.
+                        </li>
+                        <li>
+                            <Code>FLAGS</Code>:
+                            The <Link href="/architecture/register/flags">FLAGS</Link> register.
+                        </li>
+                        <li>
+                            <Code>imm##</Code>:
+                            An immediate value of size <Code>##</Code>.
+                        </li>
+                        <li>
+                            <Code>imm8(7..4)</Code>:
+                            The upper four bits of an 8 bit immediate represents the register.
+                            In 32 bit &quot;protected&quot; mode, the most significant bit (MSB; bit 7) is ignored and treated as if it were 0.
+                        </li>
+                        <li>
+                            <Code>ModRM.reg</Code>:
+                            The <Code>reg</Code> field of a ModR/M byte represents the register.
+                            The three bits can be extended to four using one of the following prefixes: REX, VEX, or EVEX.
+                        </li>
+                        <li>
+                            <Code>ModRM.r/m</Code>:
+                            If the <Code>mod</Code> field of a ModR/M byte signifies a register, the <Code>r/m</Code> field represents the register.
+                            The three bits can be extended to four using one of the following prefixes: REX, VEX, or EVEX.
+                            If, however, the <Code>mod</Code> field of a ModR/M byte signifies memory, the address is calculated and used instead.
+                        </li>
+                        <li>
+                            <Code>offset##</Code>:
+                            An immediate value of size <Code>##</Code> that represents an offset from the <em>following</em> instruction.
+                            For example, an infinite loop (<Code>a: JMP a</Code>) would be encoded as <Code>EB FE</Code> where <Code>FE</Code> represents negative 2.
+                            This would jump <em>backwards</em> two bytes to the <Code>a</Code> label and begin again.
+                            In fact, a &quot;nop&quot; could be encoded as <Code>EB 00</Code> which would be a simple jump to the following instruction (zero bytes ahead).
+                        </li>
+                        <li>
+                            <Code>VEX.vvvv</Code>:
+                            The <Code>vvvv</Code> field of a VEX prefix represents the register.
+                        </li>
+                    </UL>
 
                     <H2 id="headingDescription">Description</H2>
                     TODO
