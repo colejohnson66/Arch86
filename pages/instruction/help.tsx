@@ -131,7 +131,7 @@ export default function Page(): JSX.Element {
                         <b>prefixes</b>:
                         The implied prefix bytes that are encoded in the prefix.
                         Due to the nature of the VEX and EVEX prefixes, there can be up to two prefix fields specified in the opcode encoding: one for operand size and type prefixes (the <Code>pp</Code> field), and one for escape codes (the <Code>m</Code> bits).
-                        If unspecified, a prefix group is to be set to all zeros.
+                        If unspecified, a prefix group&apos;s bits must be all zeros (indicating no prefix).
                     </li>
                     <li>
                         <b>w</b>:
