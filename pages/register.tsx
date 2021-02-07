@@ -46,7 +46,7 @@ export default function Page(): JSX.Element {
                 </p>
                 <UL>
                     <li><Link href="/register/gpr">General purpose registers</Link> (<Code>EAX</Code>, <Code>EBX</Code>, etc.)</li>
-                    <li><Link href="/register/flags">Flag register</Link> (<Code>(ER)FLAGS</Code>)</li>
+                    <li><Link href="/register/flags">Flags register</Link> (<Code>(ER)FLAGS</Code>)</li>
                     <li><Link href="/register/segment">Segment registers</Link> (<Code>CS</Code>, <Code>DS</Code>, etc.)</li>
                     <li><Link href="/register/control">Control registers</Link> (<Code>CR0</Code>, <Code>CR2</Code>, etc.)</li>
                     <li><Link href="/register/debug">Debug registers</Link> (<Code>DR0</Code>, <Code>DR1</Code>, etc.)</li>
