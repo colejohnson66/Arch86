@@ -188,6 +188,7 @@ export default function Page(): JSX.Element {
                     <li>
                         <Code>address##</Code>:
                         An immediate value of size <Code>##</Code> that represents a &quot;direct&quot; address in the address space.
+                        If multiple values of <Code>##</Code> are allowed, they will be separated with a slash.
                     </li>
                     <li>
                         <Code>AL/AX/EAX/RAX</Code>:
@@ -214,6 +215,7 @@ export default function Page(): JSX.Element {
                     <li>
                         <Code>imm##</Code>:
                         An immediate value of size <Code>##</Code>.
+                        If multiple values of <Code>##</Code> are allowed, they will be separated with a slash.
                     </li>
                     <li>
                         <Code>imm8(7..4)</Code>:
@@ -234,6 +236,8 @@ export default function Page(): JSX.Element {
                     <li>
                         <Code>offset##</Code>:
                         An immediate value of size <Code>##</Code> that represents an offset from the <em>following</em> instruction.
+                        If multiple values of <Code>##</Code> are allowed, they will be separated with a slash.
+                        <br />
                         For example, an infinite loop (<Code>a: JMP a</Code>) would be encoded as <Code>EB FE</Code> where <Code>FE</Code> represents negative 2.
                         This would jump <em>backwards</em> two bytes to the <Code>a</Code> label and begin again.
                         In fact, a &quot;nop&quot; could be encoded as <Code>EB 00</Code> which would be a simple jump to the following instruction (zero bytes ahead).
