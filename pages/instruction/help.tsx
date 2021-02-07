@@ -40,7 +40,9 @@ export default function Page(): JSX.Element {
             </Card>
             <div id="main">
                 <TOC.Root>
-                    <TOC.Entry href="#headingOverviewTable" text="Overview Table" />
+                    <TOC.Entry href="#headingOverviewTable" text="Overview Table">
+                        <TOC.Entry href="#headingOverviewTableVex" text="Interpreting VEX and EVEX Opcodes" />
+                    </TOC.Entry>
                     <TOC.Entry href="#headingEncoding" text="Encoding">
                         <TOC.Entry href="#headingEncodingOperand" text="Interpreting the Operand Value" />
                     </TOC.Entry>
@@ -68,7 +70,82 @@ export default function Page(): JSX.Element {
                     </p>
 
                     <H2 id="headingOverviewTable">Overview Table</H2>
-                    TODO
+                    <p>
+                        The overview table lists all the various forms that an instruction can take.
+                        Each row of the table consists of the following items, in order:
+                    </p>
+                    <UL>
+                        <li>
+                            <b>Opcode and Mnemonic</b>:
+                            A single form of the instruction listing both the binary encoding and assembly form.
+                            Italics in the mnemonic part signify operands.
+                            {" "}<Link href="#headingOverviewTableVex">See below</Link> for an explanation on interpreting VEX and EVEX opcodes.
+                            <br />
+                            EVEX forms commonly feature other bits of information such as the mask register (<Code>{"{k1}"}</Code>), error masking (<Code>{"{er}"}</Code>), and more.
+                        </li>
+                        <li>
+                            <b>Encoding</b>:
+                            A reference to the <Link href="#headingEncoding">encoding table</Link>.
+                            This value represents <em>where</em> in the instruction the operands are encoded.
+                        </li>
+                        <li>
+                            <b>##-bit Mode</b> (multiple):
+                            Whether a given instruction form is valid, invalid, or not encodable in the specified processor mode.
+                            &quot;Valid&quot; forms are allowed while &quot;invalid&quot; forms will throw an exception if encountered.
+                            &quot;Not encodable&quot; forms are disallowed in the specified mode, and will, in fact, be interpreted differently than expected.
+                            <br />
+                            For example, in <Link href="/architecture/mode/long">64-bit mode</Link>, the byte range <Code>40</Code> through <Code>4F</Code> was repurposed for the REX prefix.
+                            This makes encoding <Code>INC eax</Code> as <Code>40</Code> impossible.
+                            Should the processor encounter what the author thinks is <Code>INC eax</Code>, it will treat it as a REX prefix with the lower four bits set to 0.
+                            The correct encoding would be <Code>FF C0</Code>.
+                        </li>
+                        <li>
+                            <b>CPUID Feature Flag</b> (optional):
+                            If present, these CPUID &quot;feature flags&quot; <em>must</em> be present (set).
+                            The existence of these flags does not necessarily imply the ability to execute the instruction;
+                            Some CPU features must be enabled before use.
+                            Failure to do so will result in a processor exception being thrown.
+                        </li>
+                        <li>
+                            <b>Description</b>:
+                            A short description of what the instruction form does.
+                            For most instructions, the various &quot;Description&quot; cells will be almost carbon copies of each other with minor changes.
+                        </li>
+                    </UL>
+
+                    <H3 id="headingOverviewTableVex">Interpreting VEX and EVEX Opcodes</H3>
+                    <p>
+                        VEX and EVEX opcodes are written differently than normal instructions.
+                        This is because the prefixes are multiple (two to four) bytes long and encode quite a bit of information.
+                        Both prefixes take the form of <Code>{"(E)VEX.{length}.{prefixes}.{w}"}</Code> with each field representing a specific field in the VEX or EVEX prefix.
+                        The other fields in the prefix are unspecified here and are dependent on the operands.
+                        The various fields in the opcode prefix encoding are:
+                    </p>
+                    <UL>
+                        <li>
+                            <b>length</b>:
+                            The amount of bits this instruction operates on.
+                            This is encoded in the <Code>L</Code> and (for EVEX) <Code>L&apos;</Code> bits.
+                            This can be one of: 128 (<Code>XMM</Code>), 256 (<Code>YMM</Code>), 512 (<Code>ZMM</Code>), or <Code>LIG</Code>.
+                            {" "}<Code>LIG</Code> stands for &quot;length ignored&quot; and means just that - the length field is ignored.
+                            This is typically used in situations involving scalars as only a single piece of data is operated on, not the whole register.
+                            <br />
+                            In some situations, despite an instruction being defined with <Code>LIG</Code>, Intel may recommend a specific value is used instead for future proofing.
+                            For example, the <Link href="/instruction/addsd"><Code>ADDSD</Code> instruction</Link> is defined to be <Code>LIG</Code>, but Intel recommends setting <Code>L</Code> (and <Code>L&apos;</Code> for EVEX) to zero.
+                        </li>
+                        <li>
+                            <b>prefixes</b>:
+                            The implied prefix bytes that are encoded in the prefix.
+                            Due to the nature of the VEX and EVEX prefixes, there can be up to two prefix fields specified in the opcode encoding: one for operand size and type prefixes (the <Code>pp</Code> field), and one for escape codes (the <Code>m</Code> bits).
+                            If unspecified, a prefix group is to be set to all zeros.
+                        </li>
+                        <li>
+                            <b>w</b>:
+                            The single <Code>W</Code> bit in the VEX or EVEX prefix.
+                            This is commonly used as an extra bit to specify the opcode, but will sometimes be used as its predecessor, <Code>REX.W</Code>, meant - expanding the operand size to 64 bits.
+                            {" "}<Code>WIG</Code> stands for &quot;W ignored&quot; and means just that - the <Code>W</Code> bit is ignored.
+                        </li>
+                    </UL>
 
                     <H2 id="headingEncoding">Encoding</H2>
                     <p>
