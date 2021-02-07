@@ -23,8 +23,8 @@ encoding:
   operands: 2
   encodings:
     RM:
-      - ModRM:reg[rw]
-      - ModRM:r/w[r]
+      - ModRM.reg[rw]
+      - ModRM.r/w[r]
 description: >-
   The \c{ADOX} instruction adds the destination operand, the source operand, and the \reg{OF} flag and stores the result in the destination operand.
 

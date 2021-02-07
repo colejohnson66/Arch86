@@ -73,19 +73,19 @@ encoding:
   encodings:
     LEGACY:
       - N/A
-      - ModRM:reg[rw]
-      - ModRM:r/m[r]
+      - ModRM.reg[rw]
+      - ModRM.r/m[r]
       - N/A
     VEX:
       - N/A
-      - ModRM:reg[w]
+      - ModRM.reg[w]
       - VEX.vvvv[r]
-      - ModRM:r/m[r]
+      - ModRM.r/m[r]
     EVEX:
       - Full
-      - ModRM:reg[w]
+      - ModRM.reg[w]
       - EVEX.vvvv[r]
-      - ModRM:r/m[r]
+      - ModRM.r/m[r]
 description: >-
   The \c{(V)ADDPS} instruction adds four, eight, or sixteen single-precision floating-point values from the first source operand to the second source operand and stores the result in the destination operand.
 

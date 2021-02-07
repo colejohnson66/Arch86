@@ -37,13 +37,13 @@ encoding:
   operands: 3
   encodings:
     LEGACY:
-      - ModRM:reg[rw]
-      - ModRM:r/m[r]
+      - ModRM.reg[rw]
+      - ModRM.r/m[r]
       - N/A
     VEX:
-      - ModRM:reg[w]
+      - ModRM.reg[w]
       - VEX.vvvv[r]
-      - ModRM:r/m[r]
+      - ModRM.r/m[r]
 description: >-
   The \c{(V)ADDSUBPD} instruction performs two operations:
   It subtracts the odd numbered double-precision floating-point values, and adds the even numbered ones.
