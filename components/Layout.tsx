@@ -15,14 +15,13 @@
  *   with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { Breadcrumbs, Button, Card, Divider, IBreadcrumbProps, Navbar } from "@blueprintjs/core";
+import { Breadcrumb, Breadcrumbs, Button, Card, Divider, IBreadcrumbProps, Navbar } from "@blueprintjs/core";
 
 import Head from "next/head";
 import Link from "../components/Link";
 import React from "react";
 import Scrollable from "./Scrollable";
 import { strict as assert } from "assert";
-import renderBreadcrumbs from "../lib/renderBreadcrumbs";
 
 type NavGroup = "home" | "about" | "instruction" | "architecture";
 type LayoutProps = {
@@ -34,6 +33,16 @@ type LayoutProps = {
     breadcrumbs?: IBreadcrumbProps[];
     children?: React.ReactNode;
 };
+
+function renderBreadcrumbs({ text, href, ...restProps }: IBreadcrumbProps): JSX.Element {
+    return (
+        <Breadcrumb {...restProps}>
+            {href
+                ? <Link href={href}>{text}</Link>
+                : <>{text}</>}
+        </Breadcrumb>
+    );
+}
 
 export default function Layout(props: LayoutProps): JSX.Element {
     function navItem(group: NavGroup, href: string, text: string) {
@@ -55,8 +64,7 @@ export default function Layout(props: LayoutProps): JSX.Element {
             <Head>
                 {props.title ?
                     <title>80x86 - {props.title}</title> :
-                    <title>80x86</title>
-                }
+                    <title>80x86</title>}
                 {props.description && <meta name="description" content={props.description} />}
                 {props.keywords && <meta name="keywords" content={props.keywords} />}
                 {props.canonical && <link rel="canonical" href={`https://80x86.dev${props.canonical}`} />}
