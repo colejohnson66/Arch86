@@ -51,6 +51,9 @@ export function getAllInstructionsArray(): string[] {
     // gets all directories in `data/instructions`
     const ret = [];
     fs.readdirSync(dataDirectory).forEach((char) => {
+        // skip the list
+        if (char === "list.yaml")
+            return;
         // get all files in `data/instructions/${char}`, then remove `.yaml` from the end
         const newDir = path.join(dataDirectory, char);
         const files = fs.readdirSync(newDir).map((file) => (file.replace(/\.yaml$/, "")));
@@ -73,6 +76,16 @@ export function getAllInstructionsAsParams(): GetAllInstructionsAsParamsReturnTy
             },
         }
     ));
+}
+
+type GetGroupedInstructionListReturnType = {
+    [char: string]: (string | string[])[];
+};
+export function getGroupedInstructionList(): GetGroupedInstructionListReturnType {
+    const fullPath = path.join(dataDirectory, "list.yaml");
+    const contents = fs.readFileSync(fullPath);
+    const yaml = YAML.parse(contents.toString());
+    return yaml as GetGroupedInstructionListReturnType;
 }
 
 export async function getInstructionData(id: string): Promise<unknown> {

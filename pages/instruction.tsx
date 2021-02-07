@@ -23,11 +23,24 @@ import Link from "../components/Link";
 import React from "react";
 import TOC from "../components/TOC";
 import WIP from "../components/WIP";
-import { getAllInstructionsArray } from "../lib/instruction";
+import { getGroupedInstructionList } from "../lib/instruction";
 import renderBreadcrumbs from "../lib/renderBreadcrumbs";
 
+function commaSeparatedLinks(list: string[]): JSX.Element[] {
+    return list.map((item, idx) => (
+        <React.Fragment key={idx}>
+            <Link href={`/instruction/${item}`}>
+                {item.toUpperCase()}
+            </Link>
+            {idx !== list.length - 1 && ", "}
+        </React.Fragment>
+    ));
+}
+
 type PageProps = {
-    instructions: string[];
+    instructions: {
+        [char: string]: (string | string[])[];
+    };
 };
 
 export default function Page(props: PageProps): JSX.Element {
@@ -66,23 +79,33 @@ export default function Page(props: PageProps): JSX.Element {
                         In addition to the documented instructions in the software developer manual (SDM), undocumented and AMD-exclusive instructions are included here.
                     </Callout>
                     <UL>
-                        {props.instructions.map((instr) => {
-                            // If this is a conditional instruction, keep `cc` lowercase
-                            if (ccInstr.includes(instr)) {
+                        {/* TODO: Don't limit this to just "A" for obvious reasons */}
+                        {props.instructions.a.map((item) => {
+                            // Join related instructions (signified by `string[]` in the YAML)
+                            if (Array.isArray(item)) {
                                 return (
-                                    <li key={instr}>
-                                        <Link href={`/instruction/${instr}`}>
-                                            {`${instr.substr(0, instr.length - 2).toUpperCase()}cc`}
+                                    <li key={item[0]}>
+                                        {commaSeparatedLinks(item)}
+                                    </li>
+                                );
+                            }
+
+                            // If this is a conditional instruction, keep `cc` lowercase
+                            if (ccInstr.includes(item)) {
+                                return (
+                                    <li key={item}>
+                                        <Link href={`/instruction/${item}`}>
+                                            {`${item.substr(0, item.length - 2).toUpperCase()}cc`}
                                         </Link>
                                     </li>
                                 );
                             }
 
-                            // The /nnn/###/ is for FMA instructions
+                            // The `nnn` to `###` is for FMA instructions
                             return (
-                                <li key={instr}>
-                                    <Link href={`/instruction/${instr}`}>
-                                        {instr.replace("nnn", "###").toUpperCase()}
+                                <li key={item}>
+                                    <Link href={`/instruction/${item}`}>
+                                        {item.replace("nnn", "###").toUpperCase()}
                                     </Link>
                                 </li>
                             );
@@ -97,7 +120,7 @@ export default function Page(props: PageProps): JSX.Element {
 export const getStaticProps: GetStaticProps = async () => {
     return {
         props: {
-            instructions: getAllInstructionsArray(),
+            instructions: getGroupedInstructionList(),
         },
     };
 };

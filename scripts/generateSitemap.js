@@ -42,7 +42,8 @@ globby.sync([
 
 // handle "/instruction/[slug]"
 globby.sync([
-    "data/instructions/**/*"
+    "data/instructions/**/*",
+    "!data/instructions/list.yaml",
 ]).forEach((file) => {
     // match `data/instructions/./$1.yaml`
     const slug = file.match(/data\/instructions\/[a-z]\/([^\.]+)\.yaml/)[1];

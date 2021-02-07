@@ -1,0 +1,14 @@
+%YAML 1.2
+---
+a:
+  - aaa
+  - aad
+  - aam
+  - aas
+  - adc
+  - adcx
+  - add
+  - [ addpd, addps, addsd, addss ]
+  - [ addsubpd, addsubps ]
+  - adox
+  - aesdec
