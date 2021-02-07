@@ -49,6 +49,7 @@ export default function Page(): JSX.Element {
                     <TOC.Entry href="#headingDescription" text="Description" />
                     <TOC.Entry href="#headingOperation" text="Operation">
                         <TOC.Entry href="#headingOperationMode" text="MODE" />
+                        <TOC.Entry href="#headingOperationProcessor" text="PROCESSOR" />
                         <TOC.Entry href="#headingOperationRegisters" text="Registers" />
                         <TOC.Entry href="#headingOperationFlags" text="Flags" />
                         <TOC.Entry href="#headingOperationInstructionBits" text="Instruction Bits" />
@@ -269,6 +270,13 @@ export default function Page(): JSX.Element {
                         The <Code>MODE</Code> global variable represents the current operating mode of the processor thread.
                         It can be one of: <Code>16</Code>, <Code>32</Code>, or <Code>64</Code>, each representing the &quot;bit width&quot; of the current mode.
                         However, it is only compared against <Code>64</Code> for instructions that are illegal in <Link href="/architecture/mode/long">long (64 bit) mode</Link>.
+                    </p>
+
+                    <H3 id="headingOperationProcessor">PROCESSOR</H3>
+                    <p>
+                        In some <em>rare</em> cases, the operation of an instruction depends on which processor version is being used.
+                        In those (known) instances, the <Code>PROCESSOR</Code> global variable represents the current processor.
+                        For example, the <Link href="/instruction/aaa"><Code>AAA</Code> instruction</Link> operates <em>slightly</em> differently on the 80186 and prior.
                     </p>
 
                     <H3 id="headingOperationRegisters">Registers</H3>
