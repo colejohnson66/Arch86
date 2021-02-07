@@ -41,6 +41,7 @@
  * This is to avoid issues with `#` in URLs.
  */
 
+import IDictionary from "../types/IDictionary";
 import YAML from "yaml";
 import fs from "fs";
 import path from "path";
@@ -78,9 +79,7 @@ export function getAllInstructionsAsParams(): GetAllInstructionsAsParamsReturnTy
     ));
 }
 
-type GetGroupedInstructionListReturnType = {
-    [char: string]: (string | string[])[];
-};
+type GetGroupedInstructionListReturnType = IDictionary<(string | string[])[]>;
 export function getGroupedInstructionList(): GetGroupedInstructionListReturnType {
     const fullPath = path.join(dataDirectory, "list.yaml");
     const contents = fs.readFileSync(fullPath);

@@ -18,6 +18,7 @@
 import { Breadcrumbs, Callout, Card, H1, H2, IBreadcrumbProps, UL } from "@blueprintjs/core";
 
 import { GetStaticProps } from "next";
+import IDictionary from "../types/IDictionary";
 import Layout from "../components/Layout";
 import Link from "../components/Link";
 import React from "react";
@@ -38,9 +39,7 @@ function commaSeparatedLinks(list: string[]): JSX.Element[] {
 }
 
 type PageProps = {
-    instructions: {
-        [char: string]: (string | string[])[];
-    };
+    instructions: IDictionary<(string | string[])[]>;
 };
 
 export default function Page(props: PageProps): JSX.Element {
