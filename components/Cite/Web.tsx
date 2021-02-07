@@ -26,9 +26,13 @@ type CiteWebProps = {
     title: string;
     website?: string;
     accessDate: string;
+    archiveUrl?: string;
+    archiveDate?: string;
+    dead?: boolean;
 }
 
 // Web citation roughly following Wikipedia's style (Citation Style 1)
+// TODO: When `props.dead` is `true`, use the archived URL as the main link and make "the original" `props.url`
 export default function CiteWeb(props: CiteWebProps): JSX.Element {
     let author: string;
     if (typeof props.author === "string")
@@ -53,6 +57,14 @@ export default function CiteWeb(props: CiteWebProps): JSX.Element {
 
     const accessDate = <>Retrieved <DateTime dateTime={props.accessDate} />{". "}</>;
 
+    let archived: JSX.Element | null = null;
+    if (props.archiveUrl) {
+        if (props.archiveDate)
+            archived = <>{" "}<Link href={props.archiveUrl}>Archived</Link> from the original on <DateTime dateTime={props.archiveDate} />.</>;
+        else
+            archived = <>{" "}<Link href={props.archiveUrl}>Archived</Link> from the original.</>;
+    }
+
     return (
         <span className="citation-web">
             {author}
@@ -61,6 +73,7 @@ export default function CiteWeb(props: CiteWebProps): JSX.Element {
             {titleAndLink}{". "}
             {website}
             {accessDate}
+            {archived}
         </span>
     );
 }
