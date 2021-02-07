@@ -5,28 +5,28 @@ validity: 1632,64
 opcode:
   - opcode: 04 \i{ib}
     mnemonic: ADD AL, \i{imm8}
-    encoding: I
+    encoding: AI
     validity:
       1632: valid
       64: valid
     description: Adds \abbr{imm8} to \reg{AL}.
   - opcode: 05 \i{iw}
     mnemonic: ADD AX, \i{imm16}
-    encoding: I
+    encoding: AI
     validity:
       1632: valid
       64: valid
     description: Adds \abbr{imm16} to \reg{AX}.
   - opcode: 05 \i{id}
     mnemonic: ADD EAX, \i{imm32}
-    encoding: I
+    encoding: AI
     validity:
       1632: valid
       64: valid
     description: Adds \abbr{imm32} to \reg{EAX}.
   - opcode: REX.W 05 \i{id}
     mnemonic: ADD RAX, \i{imm32}
-    encoding: I
+    encoding: AI
     validity:
       1632: n/e
       64: valid
@@ -160,7 +160,7 @@ opcode:
 encoding:
   operands: 2
   encodings:
-    I:
+    AI:
       - AL/AX/EAX/RAX[rw]
       - imm8/16/32[r]
     MI:
