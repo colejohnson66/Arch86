@@ -49,7 +49,7 @@ export default function Page(): JSX.Element {
                     <li><Link href="/architecture/80286">80286</Link></li>
                     <li><Link href="/architecture/80386">80386</Link></li>
                     <li><Link href="/architecture/80486">80486</Link></li>
-                    <li><Link href="/architecture/p5">P5</Link></li>
+                    <li><Link href="/architecture/p5">P5</Link> (80586)</li>
                     <li><Link href="/architecture/p6">P6</Link></li>
                     <li>...</li>
                 </UL>
