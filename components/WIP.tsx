@@ -19,6 +19,7 @@ import React from "react";
 
 type WipProps = {
     type: "page" | "section";
+    wording?: boolean;
 };
 
 export default function WIP(props: WipProps): JSX.Element {
@@ -26,6 +27,7 @@ export default function WIP(props: WipProps): JSX.Element {
         <Callout intent="warning">
             This {props.type} is a work in progress.
             It is incomplete, and may not be completely accurate or up to date.
+            {props.wording && " The wording or grammar is also in the process of being improved."}
         </Callout>
     );
 }
