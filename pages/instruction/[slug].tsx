@@ -319,7 +319,7 @@ export default function Page(props: PageProps): JSX.Element {
                         </Callout>
                         {coerceArray(props.examples).map((example, idx) => (
                             <Scrollable key={idx}>
-                                <SyntaxHighlighter language="nasm" style={SyntaxHighlighterDarkTheme}>
+                                <SyntaxHighlighter language="x86asm" style={SyntaxHighlighterDarkTheme}>
                                     {example}
                                 </SyntaxHighlighter>
                             </Scrollable>
