@@ -11,4 +11,4 @@ a:
   - [ addpd, addps, addsd, addss ]
   - [ addsubpd, addsubps ]
   - adox
-  - aesdec
+  - [ aesdec, aesdeclast ]
