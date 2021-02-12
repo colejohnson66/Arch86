@@ -29,7 +29,7 @@ const functions: IDictionary<(arg: string) => JSX.Element> = {
     c: (arg) => (<Code>{arg}</Code>),
     cpuid: (arg) => {
         // arg is a comma separated list with an empty parameter for separation of CPUID arguments and result
-        // for example, `CPUID[EAX=07h,ECX=0]:EBX.ADX[bit 19]` will be `eax,07,ecx,00,,ebx,adx,19`
+        // for example, `eax,07,ecx,00,,ebx,adx,19` will become `CPUID[EAX=07h,ECX=0]:EBX.ADX[bit 19]`
         // multiple bit results will use "range syntax" (eg. `0..=1` for the two LSB)
         // currently, the result portion must only have 3 parameters
 
@@ -111,4 +111,25 @@ export function processStringToJsx(str: string): JSX.Element {
     }
 
     return (<>{ret}</>);
+}
+
+export function processStringClean(str: string): string {
+    // takes a string, and removes all "function" calls
+
+    // [idx % 3 === 0]: plaintext
+    // [idx % 3 === 1]: "func"
+    // [idx % 3 === 2]: "data"
+    const arr = str.split(/\\([a-z]+){([^}]*)}/);
+    assert(arr.length % 3 === 1);
+
+    const ret: string[] = [];
+    for (let i = 0; i < arr.length; i++) {
+        if (i % 3 === 0 || i % 3 === 2) {
+            ret.push(arr[i]);
+            continue;
+        }
+        // do nothing for [idx % 3 === 1]; it's the function name
+    }
+
+    return ret.join("");
 }

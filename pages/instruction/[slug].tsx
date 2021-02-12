@@ -18,6 +18,7 @@
 import { Callout, Code, Divider, H1, H2, H3, HTMLTable, IBreadcrumbProps, OL, UL } from "@blueprintjs/core";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { getAllInstructionsAsParams, getInstructionData } from "../../lib/instruction";
+import { processStringClean, processStringToJsx } from "../../lib/processStringToJsx";
 
 import DateTime from "../../components/DateTime";
 import IDictionary from "../../types/IDictionary";
@@ -28,7 +29,6 @@ import Scrollable from "../../components/Scrollable";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import SyntaxHighlighterDarkTheme from "react-syntax-highlighter/dist/cjs/styles/hljs/atom-one-dark";
 import TOC from "../../components/TOC";
-import { processStringToJsx } from "../../lib/processStringToJsx";
 
 type OpcodeValidityValues = "valid" | "valid*" | "invalid" | "n/e";
 const OpcodeValidityMap: { [T in OpcodeValidityValues]: string } = {
@@ -173,7 +173,7 @@ export default function Page(props: PageProps): JSX.Element {
         </Link>);
 
     return (
-        <Layout canonical={`/instruction/${props.id}`} navGroup="instruction" title={`${props.id.toUpperCase()} - ${props.title}`} breadcrumbs={PageBreadcrumbs}>
+        <Layout canonical={`/instruction/${props.id}`} navGroup="instruction" title={`${props.id.toUpperCase()} - ${processStringClean(props.title)}`} breadcrumbs={PageBreadcrumbs}>
             <TOC.Root>
                 <TOC.Entry href="#headingEncoding" text="Encoding" />
                 <TOC.Entry href="#headingDescription" text="Description" />
