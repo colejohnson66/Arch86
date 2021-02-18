@@ -58,7 +58,7 @@ const functions: IDictionary<(arg: string) => JSX.Element> = {
         );
     },
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    en: (_) => (<React.Fragment>&ndash;</React.Fragment>),
+    en: (_) => (<>&ndash;</>),
     error: (arg) => (<b style={{ color: Colors.RED3 }}>{arg}</b>),
     i: (arg) => (<i>{arg}</i>),
     instr: (arg) => (<Link href={`/instruction/${arg.toLowerCase()}`}><Code>{arg}</Code></Link>),
