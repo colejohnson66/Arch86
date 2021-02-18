@@ -83,12 +83,7 @@ export default function Layout(props: LayoutProps): JSX.Element {
                     <Navbar>
                         <Scrollable>
                             <Navbar.Group>
-                                <Link href="/">
-                                    <Button
-                                        active={props.navGroup === "home"}
-                                        className="bp3-minimal"
-                                        text="80x86" />
-                                </Link>
+                                {navItem("home", "/", "80x86")}
                                 <Navbar.Divider />
                                 {navItem("about", "/about", "About")}
                                 {navItem("instruction", "/instruction", "Instructions")}
