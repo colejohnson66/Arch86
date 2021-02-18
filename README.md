@@ -29,17 +29,17 @@ However, should you want to run your own copy, follow the following steps:
 * Install [Node.js](https://nodejs.org/en/)
 * Install `yarn`:
 ```bash
-> npm i -g yarn
+$ npm i -g yarn
 ```
 * Clone the repository:
 ```bash
-> git clone https://github.com/colejohnson66/80x86
-> cd 80x86
+$ git clone https://github.com/colejohnson66/80x86
+$ cd 80x86
 ```
 * Download the dependencies and run:
 ```bash
-> yarn install
-> yarn dev
+$ yarn install
+$ yarn dev
 ```
 
 After a few seconds, a message will appear in the console telling you the server is "live":
