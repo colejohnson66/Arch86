@@ -29,7 +29,6 @@ type LayoutProps = {
     navGroup?: NavGroup;
     title?: string;
     description?: string;
-    keywords?: string;
     src?: string;
     dataSrc?: string;
     breadcrumbs?: IBreadcrumbProps[];
@@ -68,7 +67,6 @@ export default function Layout(props: LayoutProps): JSX.Element {
                     <title>80x86 - {props.title}</title> :
                     <title>80x86</title>}
                 {props.description && <meta name="description" content={props.description} />}
-                {props.keywords && <meta name="keywords" content={props.keywords} />}
                 {props.canonical && <link rel="canonical" href={`https://80x86.dev${props.canonical}`} />}
                 <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
             </Head>
