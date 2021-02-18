@@ -173,7 +173,7 @@ export default function Page(props: PageProps): JSX.Element {
         </Link>);
 
     return (
-        <Layout canonical={`/instruction/${props.id}`} navGroup="instruction" title={`${props.id.toUpperCase()}: ${processStringClean(props.title)}`} src="/pages/instruction/[slug].tsx" breadcrumbs={PageBreadcrumbs}>
+        <Layout canonical={`/instruction/${props.id}`} navGroup="instruction" title={`${props.id.toUpperCase()}: ${processStringClean(props.title)}`} src="/pages/instruction/[slug].tsx" dataSrc={`/data/instructions/${props.id[0]}/${props.id}.yaml`} breadcrumbs={PageBreadcrumbs}>
             <TOC.Root>
                 <TOC.Entry href="#headingEncoding" text="Encoding" />
                 <TOC.Entry href="#headingDescription" text="Description" />

@@ -31,6 +31,7 @@ type LayoutProps = {
     description?: string;
     keywords?: string;
     src?: string;
+    dataSrc?: string;
     breadcrumbs?: IBreadcrumbProps[];
     children?: React.ReactNode;
 };
@@ -107,8 +108,15 @@ export default function Layout(props: LayoutProps): JSX.Element {
                         {props.src &&
                             <p>
                                 <Link href={`https://github.com/colejohnson66/80x86/blob/main${props.src}`}>
-                                    View this page&apos;s source code.
+                                    View this page&apos;s source code{props.dataSrc ? "," : "."}
                                 </Link>
+                                {props.dataSrc &&
+                                    <>
+                                        {" and "}
+                                        <Link href={`https://github.com/colejohnson66/80x86/blob/main${props.dataSrc}`}>
+                                            the data used to generate it.
+                                        </Link>
+                                    </>}
                             </p>}
                         <p>
                             <Link href="/contact">Contact</Link>
