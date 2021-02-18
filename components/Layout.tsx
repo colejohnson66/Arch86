@@ -109,18 +109,17 @@ export default function Layout(props: LayoutProps): JSX.Element {
                         {props.src &&
                             <p>
                                 <Link href={`https://github.com/colejohnson66/80x86/blob/main${props.src}`}>
-                                    View this page&apos;s source code{props.dataSrc ? "," : "."}
+                                    View this page&apos;s source code
                                 </Link>
+                                {props.dataSrc ? ", and " : "."}
                                 {props.dataSrc &&
-                                    <>
-                                        {" and "}
-                                        <Link href={`https://github.com/colejohnson66/80x86/blob/main${props.dataSrc}`}>
-                                            the data used to generate it.
-                                        </Link>
-                                    </>}
+                                    <Link href={`https://github.com/colejohnson66/80x86/blob/main${props.dataSrc}`}>
+                                        the data used to generate it
+                                    </Link>}
+                                {props.dataSrc && "."}
                             </p>}
                         <p>
-                            <Link href="/contact">Contact</Link>
+                            <Link href="/contact">Contact</Link>.
                         </p>
                         <p>
                             Website copyright &copy; Cole Johnson 2020-2021.
