@@ -29,6 +29,7 @@ type LayoutProps = {
     description?: string;
     keywords?: string;
     canonical?: string;
+    src?: string;
     navGroup?: NavGroup;
     breadcrumbs?: IBreadcrumbProps[];
     children?: React.ReactNode;
@@ -103,6 +104,12 @@ export default function Layout(props: LayoutProps): JSX.Element {
                 <Divider />
                 <footer>
                     <div className="bp3-text-small">
+                        {props.src &&
+                            <p>
+                                <Link href={`https://github.com/colejohnson66/80x86/blob/main${props.src}`}>
+                                    View this page&apos;s source code.
+                                </Link>
+                            </p>}
                         <p>
                             <Link href="/contact">Contact</Link>
                         </p>
