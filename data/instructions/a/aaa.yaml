@@ -63,7 +63,7 @@ examples:
     add al, 5     ; AX == 0x10B
     aaa           ; AX == 0x202 (22 (decimal)) in BCD
   - |-
-    # Also handles overflow into the upper 4 bits of AL
+    ; Also handles overflow into the upper 4 bits of AL
     mov ax, 0x109 ; 19 (decimal) in BCD
     add al, 9     ; AX == 0x112; AF == 1
     aaa           ; AX == 0x208 (28 (decimal)) in BCD
