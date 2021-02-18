@@ -1,0 +1,154 @@
+%YAML 1.2
+---
+title: Perform Last Round of AES Encryption
+validity: 32,64
+opcode:
+  - opcode: 66 0F 38 DD /r
+    mnemonic: AESENCLAST \i{xmm1}, \i{xmm2/m128}
+    encoding: LEGACY
+    validity:
+      32: valid
+      64: valid
+    cpuid: AES
+    description: >-
+      Performs the last round of AES encryption using one 128 bit state from \abbr{xmm1} with one 128 bit round key from \abbr{xmm2/m128}.
+      Stores the result in \abbr{xmm1}.
+  - opcode: VEX.128.66.0F38.WIG DD /r
+    mnemonic: AESENCLAST \i{xmm1}, \i{xmm2}, \i{xmm2/m128}
+    encoding: VEX
+    validity:
+      32: valid
+      64: valid
+    cpuid:
+      - AES
+      - AVX
+    description: >-
+      Performs the last round of AES encryption using one 128 bit state from \abbr{xmm2} with one 128 bit round key from \abbr{xmm3/m128}.
+      Stores the result in \abbr{xmm1}.
+  - opcode: VEX.256.66.0F38.WIG DD /r
+    mnemonic: AESENCLAST \i{ymm1}, \i{ymm2}, \i{ymm2/m256}
+    encoding: VEX
+    validity:
+      32: valid
+      64: valid
+    cpuid: VAES
+    description: >-
+      Performs the last round of AES encryption using two 128 bit states from \abbr{ymm2} with two 128 bit round keys from \abbr{ymm3/m256}.
+      Stores the results in \abbr{ymm1}.
+  - opcode: EVEX.128.66.0F38.WIG DD /r
+    mnemonic: AESENCLAST \i{xmm1}, \i{xmm2}, \i{xmm2/m128}
+    encoding: EVEX
+    validity:
+      32: valid
+      64: valid
+    cpuid:
+      - VAES
+      - AVX512VL
+    description: >-
+      Performs the last round of AES encryption using one 128 bit state from \abbr{xmm2} with one 128 bit round key from \abbr{xmm3/m128}.
+      Stores the result in \abbr{xmm1}.
+  - opcode: EVEX.256.66.0F38.WIG DD /r
+    mnemonic: AESENCLAST \i{ymm1}, \i{ymm2}, \i{ymm2/m256}
+    encoding: EVEX
+    validity:
+      32: valid
+      64: valid
+    cpuid:
+      - VAES
+      - AVX512VL
+    description: >-
+      Performs the last round of AES encryption using two 128 bit states from \abbr{ymm2} with two 128 bit round keys from \abbr{ymm3/m256}.
+      Stores the results in \abbr{ymm1}.
+  - opcode: EVEX.512.66.0F38.WIG DD /r
+    mnemonic: AESENCLAST \i{zmm1}, \i{zmm2}, \i{zmm2/m512}
+    encoding: EVEX
+    validity:
+      32: valid
+      64: valid
+    cpuid:
+      - VAES
+      - AVX512VL
+    description: >-
+      Performs the last round of AES encryption using four 128 bit states from \abbr{zmm2} with four 128 bit round keys from \abbr{zmm3/m512}.
+      Stores the results in \abbr{zmm1}.
+encoding:
+  operands: 3
+  hasTuple: true
+  encodings:
+    LEGACY:
+      - N/A
+      - ModRM.reg[rw]
+      - ModRM.r/m[r]
+      - ""
+    VEX:
+      - N/A
+      - ModRM.reg[w]
+      - VEX.vvvv[r]
+      - ModRM.r/m[r]
+    EVEX:
+      - Full
+      - ModRM.reg[w]
+      - EVEX.vvvv[r]
+      - ModRM.r/m[r]
+description: >-
+  The \c{(V)AESENCLAST} instruction performs the last round of AES encryption using one, two, or four 128 bit states from the first source operand using 128 bit round keys from the second source operand and stores the result in the destination operand.
+
+  Due to the nature of AES, this instruction must be used for the last encryption round.
+  For all but the last, use the \instr{AESENC} instruction.
+  Failure to do this correctly will result in an incorrect result after all the rounds.
+
+  The EVEX form of this instruction does \i{not} support memory fault suppression.
+  
+  All versions \i{except} the legacy SSE version zero the unused upper SIMD register bits.
+operation: |-
+  pub fn aesenclast(dest: &mut Simd<u128>, src: Simd<u128>) {
+    let mut state = dest[127..=0];
+    state = aes_shift_rows(state);
+    state = aes_sub_bytes(state);
+
+    dest[127..=0] = state ^ src[127..=0];
+    // dest[Simd::max()..=128] (unmodified)
+  }
+
+  fn vaesenclast(dest: &mut Simd<u128>, src1: Simd<u128>, src2: Simd<u128>, kl: u32) {
+    for n in 0..kl {
+      let vi = n * 128;
+      let vi_next = vi + 127;
+
+      let mut state = src1[vi_next..=vi];
+      state = aes_shift_rows(state);
+      state = aes_sub_bytes(state);
+      dest[vi_next..=vi] = state ^ src2[vi_next..=vi];
+    }
+
+    let end = kl * 128;
+    dest[Simd::max()..=end] = 0;
+  }
+
+  pub fn vaesenclast_vex128(dest: &mut Simd<u128>, src1: Simd<u128>, src2: Simd<u128>) {
+    vaesenclast(dest, src1, src2, 1);
+  }
+  pub fn vaesenclast_vex256(dest: &mut Simd<u128>, src1: Simd<u128>, src2: Simd<u128>) {
+    vaesenclast(dest, src1, src2, 2);
+  }
+
+  pub fn vaesenclast_evex128(dest: &mut Simd<u128>, src1: Simd<u128>, src2: Simd<u128>) {
+    vaesenclast(dest, src1, src2, 1);
+  }
+  pub fn vaesenclast_evex256(dest: &mut Simd<u128>, src1: Simd<u128>, src2: Simd<u128>) {
+    vaesenclast(dest, src1, src2, 2);
+  }
+  pub fn vaesenclast_evex512(dest: &mut Simd<u128>, src1: Simd<u128>, src2: Simd<u128>) {
+    vaesenclast(dest, src1, src2, 4);
+  }
+intrinsicsC: |-
+  __m128i _mm_aesenclast(__m128i state, __m128i key)
+
+  __m256i _mm256_aesenclast_epi128(__m256i state, __m256i key)
+
+  __m512i _mm512_aesenclast_epi128(__m512i state, __m512i key)
+exceptions:
+  floating: None
+  other:
+    - "VEX encoded form: see Exceptions Type 4."
+    - "EVEX encoded form: see Exceptions Type E4NF."

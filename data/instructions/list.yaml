@@ -12,3 +12,4 @@ a:
   - [ addsubpd, addsubps ]
   - adox
   - [ aesdec, aesdeclast ]
+  - [ aesenc, aesenclast ]
