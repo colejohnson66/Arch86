@@ -94,7 +94,7 @@ export default function Page(props: PageProps): JSX.Element {
     ];
 
     return (
-        <Layout canonical="/instruction" navGroup="instruction" title="Instructions" breadcrumbs={PageBreadcrumbs}>
+        <Layout canonical="/instruction" navGroup="instruction" title="Instructions" src="/pages/instruction.tsx" breadcrumbs={PageBreadcrumbs}>
             <TOC.Root>
                 <TOC.Entry href="#headingList" text="List">
                     {Object.keys(props.instructions).map((char) => (

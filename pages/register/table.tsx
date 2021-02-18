@@ -50,7 +50,7 @@ export default function Page(): JSX.Element {
     ];
 
     return (
-        <Layout canonical="/register/table" navGroup="register" title="Table Registers" breadcrumbs={PageBreadcrumbs}>
+        <Layout canonical="/register/table" navGroup="register" title="Table Registers" src="/pages/register/table.tsx" breadcrumbs={PageBreadcrumbs}>
             <TOC.Root>
                 <TOC.Entry href="#headingGDTR" text="Global Descriptor Table" />
                 <TOC.Entry href="#headingIDTR" text="Interrupt Descriptor Table">

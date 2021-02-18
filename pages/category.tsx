@@ -67,7 +67,7 @@ export default function Page(props: PageProps): JSX.Element {
     });
 
     return (
-        <Layout canonical="/category" title="Categories" breadcrumbs={PageBreadcrumbs}>
+        <Layout canonical="/category" title="Categories" src="/pages/category.tsx" breadcrumbs={PageBreadcrumbs}>
             <div id="content">
                 <H1>Categories</H1>
                 <pre>{JSON.stringify(TreeNodes, null, 2)}</pre>

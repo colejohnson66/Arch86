@@ -27,7 +27,7 @@ export default function Page(): JSX.Element {
     ];
 
     return (
-        <Layout canonical="/register" navGroup="register" title="Registers" breadcrumbs={PageBreadcrumbs}>
+        <Layout canonical="/register" navGroup="register" title="Registers" src="/pages/register.tsx" breadcrumbs={PageBreadcrumbs}>
             <TOC.Root>
                 <TOC.Entry href="#headingFiles" text="Register Files" />
             </TOC.Root>

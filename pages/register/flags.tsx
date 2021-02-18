@@ -33,7 +33,7 @@ export default function Page(): JSX.Element {
     ];
 
     return (
-        <Layout canonical="/register/flags" navGroup="register" title="Flags Register" breadcrumbs={PageBreadcrumbs}>
+        <Layout canonical="/register/flags" navGroup="register" title="Flags Register" src="/pages/register/flags.tsx" breadcrumbs={PageBreadcrumbs}>
             <TOC.Root>
                 <TOC.Entry href="#headingList" text="List of Fields">
                     <TOC.Entry href="#headingVKFlags" text="V and K Flags" />

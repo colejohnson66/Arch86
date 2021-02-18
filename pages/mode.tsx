@@ -28,7 +28,7 @@ export default function Page(): JSX.Element {
     ];
 
     return (
-        <Layout canonical="/mode" navGroup="mode" title="Processor Modes" breadcrumbs={PageBreadcrumbs}>
+        <Layout canonical="/mode" navGroup="mode" title="Processor Modes" src="/pages/mode.tsx" breadcrumbs={PageBreadcrumbs}>
             <TOC.Root>
                 <TOC.Entry href="#headingList" text="List of Modes" />
             </TOC.Root>

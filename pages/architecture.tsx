@@ -29,7 +29,7 @@ export default function Page(): JSX.Element {
     ];
 
     return (
-        <Layout canonical="/architecture" navGroup="architecture" title="Microarchitecture" breadcrumbs={PageBreadcrumbs}>
+        <Layout canonical="/architecture" navGroup="architecture" title="Microarchitecture" src="/pages/architecture.tsx" breadcrumbs={PageBreadcrumbs}>
             <TOC.Root>
                 <TOC.Entry href="#headingHistory" text="History" />
                 <TOC.Entry href="#headingRegisters" text="Registers" />

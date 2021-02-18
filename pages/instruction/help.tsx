@@ -32,7 +32,7 @@ export default function Page(): JSX.Element {
     ];
 
     return (
-        <Layout canonical="/instruction/help" navGroup="instruction" title="Instruction Page Help" breadcrumbs={PageBreadcrumbs}>
+        <Layout canonical="/instruction/help" navGroup="instruction" title="Instruction Page Help" src="/pages/instruction/help.tsx" breadcrumbs={PageBreadcrumbs}>
             <TOC.Root>
                 <TOC.Entry href="#headingOverviewTable" text="Overview Table">
                     <TOC.Entry href="#headingOverviewTableVex" text="Interpreting VEX and EVEX Opcodes" />

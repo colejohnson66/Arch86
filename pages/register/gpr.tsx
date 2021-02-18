@@ -70,7 +70,7 @@ export default function Page(): JSX.Element {
     ];
 
     return (
-        <Layout canonical="/register/gpr" navGroup="register" title="General Purpose Registers" breadcrumbs={PageBreadcrumbs}>
+        <Layout canonical="/register/gpr" navGroup="register" title="General Purpose Registers" src="/pages/register/gpr.tsx" breadcrumbs={PageBreadcrumbs}>
             <TOC.Root>
                 <TOC.Entry href="#headingList" text="Register List" />
             </TOC.Root>

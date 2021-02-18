@@ -28,7 +28,7 @@ export default function Page(): JSX.Element {
     ];
 
     return (
-        <Layout canonical="/about" navGroup="about" title="About" breadcrumbs={PageBreadcrumbs}>
+        <Layout canonical="/about" navGroup="about" title="About" src="/pages/about.tsx" breadcrumbs={PageBreadcrumbs}>
             <TOC.Root>
                 <TOC.Entry href="#headingStack" text="Software Stack" />
                 <TOC.Entry href="#headingSource" text="Open Source" />

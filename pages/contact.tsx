@@ -25,7 +25,7 @@ export default function Page(): JSX.Element {
     ];
 
     return (
-        <Layout canonical="/contact" title="Contact" breadcrumbs={PageBreadcrumbs}>
+        <Layout canonical="/contact" title="Contact" src="/pages/contact.tsx" breadcrumbs={PageBreadcrumbs}>
             <div id="content">
                 <H1>Contact</H1>
                 <p>
