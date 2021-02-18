@@ -15,7 +15,7 @@
  *   with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { Callout, H1, H2, H3, IBreadcrumbProps, UL } from "@blueprintjs/core";
+import { Callout, Code, H1, H2, H3, IBreadcrumbProps, UL } from "@blueprintjs/core";
 
 import { GetStaticProps } from "next";
 import IDictionary from "../types/IDictionary";
@@ -37,7 +37,7 @@ function commaSeparatedLinks(list: string[]): JSX.Element[] {
     return list.map((item, idx) => (
         <React.Fragment key={idx}>
             <Link href={`/instruction/${item}`}>
-                {item.toUpperCase()}
+                <Code>{item.toUpperCase()}</Code>
             </Link>
             {idx !== list.length - 1 && ", "}
         </React.Fragment>
@@ -64,7 +64,7 @@ function instructionListWithHeading(list: (string | string[])[], char: string): 
                         return (
                             <li key={item}>
                                 <Link href={`/instruction/${item}`}>
-                                    {`${item.substr(0, item.length - 2).toUpperCase()}cc`}
+                                    <Code>{`${item.substr(0, item.length - 2).toUpperCase()}cc`}</Code>
                                 </Link>
                             </li>
                         );
@@ -74,7 +74,7 @@ function instructionListWithHeading(list: (string | string[])[], char: string): 
                     return (
                         <li key={item}>
                             <Link href={`/instruction/${item}`}>
-                                {item.replace("nnn", "###").toUpperCase()}
+                                <Code>{item.replace("nnn", "###").toUpperCase()}</Code>
                             </Link>
                         </li>
                     );
@@ -98,7 +98,9 @@ export default function Page(props: PageProps): JSX.Element {
             <TOC.Root>
                 <TOC.Entry href="#headingList" text="List">
                     {Object.keys(props.instructions).map((char) => (
-                        <TOC.Entry key={char} href={`#headingList${char.toUpperCase()}`} text={char.toUpperCase()} />
+                        char.toUpperCase()
+                    )).map((char) => (
+                        <TOC.Entry key={char} href={`#headingList${char}`} text={char} />
                     ))}
                 </TOC.Entry>
             </TOC.Root>
