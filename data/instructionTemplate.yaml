@@ -30,13 +30,14 @@ intrinsicsC: |-
     $1 $2($3)
   After, ensure ALL parameters have a name
 exceptions:
-  protected: 
+  protected:
   real:
   virtual:
   compatibility:
   long:
   floating:
   other:
+  otherAdditional:
 changes:
   version: 73
   date: 2020-11

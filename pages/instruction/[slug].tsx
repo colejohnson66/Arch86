@@ -72,6 +72,7 @@ type Exceptions = {
     long?: string | ExceptionList,
     floating?: string | string[],
     other?: string | string[],
+    otherAdditional?: string | ExceptionList,
 };
 type Changes = {
     version: number,
@@ -390,6 +391,8 @@ export default function Page(props: PageProps): JSX.Element {
                     <>
                         <H3 id="headingExceptionsOther">Other</H3>
                         {paragraphsFromArray(coerceArray(props.exceptions.other))}
+                        {props.exceptions.otherAdditional &&
+                            regularExceptionList(props.exceptions.otherAdditional)}
                     </>}
 
                 {props.changes &&
