@@ -57,8 +57,16 @@ export default function Layout(props: LayoutProps): JSX.Element {
         );
     }
 
+    // Sanity checks
+    // Existence of `props.src` and `props.dataSrc` can't be done as webpack
+    //   can't resolve the `fs` module (client can't see the filesystem).
+    //   Otherwise, `fs.existsSync(...)` could be used.
     if (props.canonical)
         assert(props.canonical[0] === "/");
+    if (props.src)
+        assert(props.src[0] === "/");
+    if (props.dataSrc)
+        assert(props.dataSrc[0] === "/");
 
     return (
         <>
