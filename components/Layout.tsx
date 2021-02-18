@@ -93,7 +93,7 @@ export default function Layout(props: LayoutProps): JSX.Element {
                 </header>
                 <main>
                     {props.breadcrumbs &&
-                        <Card className="breadcrumbs" interactive={true}>
+                        <Card className="breadcrumbs" interactive>
                             <Breadcrumbs breadcrumbRenderer={renderBreadcrumbs} items={props.breadcrumbs} />
                         </Card>}
                     <div id="main">
