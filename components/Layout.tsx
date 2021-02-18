@@ -25,12 +25,12 @@ import { strict as assert } from "assert";
 
 type NavGroup = "home" | "about" | "instruction" | "architecture" | "register" | "mode";
 type LayoutProps = {
+    canonical?: string;
+    navGroup?: NavGroup;
     title?: string;
     description?: string;
     keywords?: string;
-    canonical?: string;
     src?: string;
-    navGroup?: NavGroup;
     breadcrumbs?: IBreadcrumbProps[];
     children?: React.ReactNode;
 };
