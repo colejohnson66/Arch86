@@ -1,0 +1,56 @@
+%YAML 1.2
+---
+title: Perform the AES "Inverse Mix Columns" Transformation
+validity: 32,64
+opcode:
+  - opcode: 66 0F 38 DB /r
+    mnemonic: AESIMC \i{xmm1}, \i{xmm2/m128}
+    encoding: RM
+    validity:
+      32: valid
+      64: valid
+    cpuid: AES
+    description:
+      Performs the "inverse mix columns" transformation on a 128 bit round key from \abbr{xmm2/m128}.
+      Stores the result in \abbr{xmm1}.
+  - opcode: VEX.128.66.0F38.WIG DB /r
+    mnemonic: VAESIMC \i{xmm1}, \i{xmm2/m128}
+    encoding: RM
+    validity:
+      32: valid
+      64: valid
+    cpuid:
+      - AES
+      - AVX
+    description:
+      Performs the "inverse mix columns" transformation on a 128 bit round key from \abbr{xmm2/m128}.
+      Stores the result in \abbr{xmm1}.
+encoding:
+  operands: 2
+  encodings:
+    RM:
+      - ModRM.reg[w]
+      - ModRM.r/m[r]
+description: >-
+  The \c{(V)AESIMC} instruction performs the "inverse mix columns" (\c{InvMixColumns}) transformation on a round key stored in the source operand and stores the result in the destination operand.
+
+  This instruction should be applied to the expanded AES round keys (excepting the first and last) to prepare them for decryption using the "Equivalent Inverse Cipher" (see FIPS 197).
+
+  The VEX form of this instruction reserves \c{VEX.vvvv} (must be set to \c{0b1111}).
+  Failure to do so will result in a \c{#UD} exception.
+operation: |-
+  pub fn aesimc(dest: &mut Simd<u128>, src: Simd<u128>) {
+    dest[127..=0] = aes_inv_mix_columns(src[127..=0]);
+    // dest[Simd::max()..=128] (unmodified)
+  }
+
+  pub fn vaesimc_vex128(dest: &mut Simd<u128>, src: Simd<u128>) {
+    dest[127..=0] = aes_inv_mix_columns(src[127..=0]);
+    dest[Simd::max()..=128] = 0;
+  }
+intrinsicsC: |-
+  __m128i _mm_aesimc(__m128i key)
+exceptions:
+  floating: None
+  other: See Exceptions Type 4
+  # Additionally, #UD if VEX.vvvv != 0b1111

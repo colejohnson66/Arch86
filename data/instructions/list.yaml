@@ -13,3 +13,4 @@ a:
   - adox
   - [ aesdec, aesdeclast ]
   - [ aesenc, aesenclast ]
+  - aesimc
