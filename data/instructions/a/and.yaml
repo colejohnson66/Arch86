@@ -1,0 +1,230 @@
+%YAML 1.2
+---
+title: Logical AND
+validity: 1632,64
+opcode:
+  - opcode: 24 \i{ib}
+    mnemonic: AND AL, \i{imm8}
+    encoding: AI
+    validity:
+      1632: valid
+      64: valid
+    description: ANDs \abbr{imm8} into \abbr{AL}.
+  - opcode: 25 \i{iw}
+    mnemonic: AND AX, \i{imm16}
+    encoding: AI
+    validity:
+      1632: valid
+      64: valid
+    description: ANDs \abbr{imm16} into \abbr{AX}.
+  - opcode: 25 \i{id}
+    mnemonic: AND EAX, \i{imm32}
+    encoding: AI
+    validity:
+      1632: valid
+      64: valid
+    description: ANDs \abbr{imm32} into \abbr{EAX}.
+  - opcode: REX.W 25 \i{id}
+    mnemonic: AND RAX, \i{imm32}
+    encoding: AI
+    validity:
+      1632: n/e
+      64: valid
+    description: ANDs \abbr{imm32} (sign extended to 64 bits) into \abbr{RAX}.
+  - opcode: 80 /r \i{ib}
+    mnemonic: AND \i{r/m8}, \i{imm8}
+    encoding: MI
+    validity:
+      1632: valid
+      64: valid
+    description: ANDs \abbr{imm8} into \abbr{r/m8}.
+  - opcode: REX 80 /r \i{ib}
+    mnemonic: AND \i{r/m8*}, \i{imm8}
+    encoding: MI
+    validity:
+      1632: n/e
+      64: valid
+    description: ANDs \abbr{imm8} into \abbr{r/m8}.
+  - opcode: 81 /4 \i{iw}
+    mnemonic: AND \i{r/m16}, \i{imm16}
+    encoding: MI
+    validity:
+      1632: valid
+      64: valid
+    description: ANDs \abbr{imm16} into \abbr{r/m16}.
+  - opcode: 81 /4 \i{id}
+    mnemonic: AND \i{r/m32}, \i{imm32}
+    encoding: MI
+    validity:
+      1632: valid
+      64: valid
+    description: ANDs \abbr{imm32} into \abbr{r/m32}.
+  - opcode: REX.W 81 /r \i{id}
+    mnemonic: AND \i{r/m64}, \i{imm32}
+    encoding: MI
+    validity:
+      1632: n/e
+      64: valid
+    description: ANDs \abbr{imm32} (sign extended to 64 bits) into \abbr{r/m64}.
+  - opcode: 82 /4 \i{ib}
+    mnemonic: AND \i{r/m8}, \i{imm8}
+    encoding: MI
+    validity:
+      1632: valid
+      64: invalid
+    description: >-
+      Undocumented alias for \c{80 /4 ib}.
+      ANDs \abbr{imm8} (sign extended to 8 bits) into \abbr{r/m8}.
+  - opcode: 83 /4 \i{ib}
+    mnemonic: AND \i{r/m16}, \i{imm8}
+    encoding: MI
+    validity:
+      1632: valid
+      64: valid
+    description: ANDs \abbr{imm8} (sign extended to 16 bits) into \abbr{r/m16}.
+  - opcode: 83 /4 \i{ib}
+    mnemonic: AND \i{r/m32}, \i{imm8}
+    encoding: MI
+    validity:
+      1632: valid
+      64: valid
+    description: ANDs \abbr{imm8} (sign extended to 32 bits) into \abbr{r/m32}.
+  - opcode: REX.W 83 /4 \i{ib}
+    mnemonic: AND \i{r/m64}, \i{imm8}
+    encoding: MI
+    validity:
+      1632: n/e
+      64: valid
+    description: ANDs \abbr{imm8} (sign extended to 64 bits) into \abbr{r/m64}.
+  - opcode: 20 /r
+    mnemonic: AND \i{r/m8}, \i{r8}
+    encoding: MR
+    validity:
+      1632: valid
+      64: valid
+    description: ANDs \abbr{r8} into \abbr{r/m8}.
+  - opcode: REX 20 /r
+    mnemonic: AND \i{r/m8*}, \i{r8}
+    encoding: MR
+    validity:
+      1632: n/e
+      64: valid
+    description: ANDs \abbr{r8} into \abbr{r/m8}.
+  - opcode: 21 /r
+    mnemonic: AND \i{r/m16}, \i{r16}
+    encoding: MR
+    validity:
+      1632: valid
+      64: valid
+    description: ANDs \abbr{r16} into \abbr{r/m16}.
+  - opcode: 21 /r
+    mnemonic: AND \i{r/m32}, \i{r32}
+    encoding: MR
+    validity:
+      1632: valid
+      64: valid
+    description: ANDs \abbr{r32} into \abbr{r/m32}.
+  - opcode: REX.W 21 /r
+    mnemonic: AND \i{r/m64}, \i{r64}
+    encoding: MR
+    validity:
+      1632: n/e
+      64: valid
+    description: ANDs \abbr{r64} into \abbr{r/m64}.
+  - opcode: 22 /r
+    mnemonic: AND \i{r8}, \i{r/m8}
+    encoding: RM
+    validity:
+      1632: valid
+      64: valid
+    description: ANDs \abbr{r/m8} into \abbr{r8}.
+  - opcode: REX 22 /r
+    mnemonic: AND \i{r8*}, \i{r/m8*}
+    encoding: RM
+    validity:
+      1632: n/e
+      64: valid
+    description: ANDs \abbr{r/m8} into \abbr{r8}.
+  - opcode: 23 /r
+    mnemonic: AND \i{r16}, \i{r/m16}
+    encoding: RM
+    validity:
+      1632: valid
+      64: valid
+    description: ANDs \abbr{r/m16} into \abbr{r16}.
+  - opcode: 23 /r
+    mnemonic: AND \i{r32}, \i{r/m32}
+    encoding: RM
+    validity:
+      1632: valid
+      64: valid
+    description: ANDs \abbr{r/m32} into \abbr{r32}.
+  - opcode: REX.W 23 /r
+    mnemonic: AND \i{r64}, \i{r/m64}
+    encoding: RM
+    validity:
+      1632: n/e
+      64: valid
+    description: ANDs \abbr{r/m64} into \abbr{r64}.
+encoding:
+  operands: 2
+  encodings:
+    AI:
+      - AL/AX/EAX/RAX[rw]
+      - imm8/16/32[r]
+    MI:
+      - ModRM.r/m[rw]
+      - imm8/16/32[r]
+    MR:
+      - ModRM.r/m[rw]
+      - ModRM.reg[r]
+    RM:
+      - ModRM.reg[rw]
+      - ModRM.r/m[r]
+description: >-
+  The \c{AND} instruction performs a logical AND with the destination operand against the source operand and stores the result in the destination operand.
+
+  This instruction can be used with the \instr{LOCK} prefix to allow atomic execution.
+
+  In 64-bit mode, the default operand size is 32 bits, but \c{REX.W} will change it to 64 bits.
+operation: |-
+  pub fn and<D, S>(dest: &mut D, src: S) {
+    *dest = *dest & src;
+  }
+flags: >-
+  The \reg{OF} and \reg{CF} flags are cleared.
+  The \reg{SF}, \reg{ZF}, and \reg{PF} flags are set according to the result.
+  The \reg{AF} flag is undefined.
+exceptions:
+  protected:
+    "#GP(0)":
+      - If the destination is located in a non-writable segment.
+      - If a memory operand effective address is outside the \reg{CS}, \reg{DS}, \reg{ES}, \reg{FS}, or \reg{GS} segment limit.
+      - If the \reg{DS}, \reg{ES}, \reg{FS}, or \reg{GS} register is used to access memory and it contains a \c{NULL} segment selector.
+    "#SS(0)": If a memory operand effective address is outside the \reg{SS} segment limit.
+    "#PF(fault-code)": If a page fault occurs.
+    "#AC(0)": If alignment checking is enabled and an unaligned memory reference is made while the current privilege level is 3.
+    "#UD": If the \instr{LOCK} prefix is used but the destination is not a memory operand.
+  real:
+    "#GP": If a memory operand effective address is outside the \reg{CS}, \reg{DS}, \reg{ES}, \reg{FS}, or \reg{GS} segment limit.
+    "#SS": If a memory operand effective address is outside the \reg{SS} segment limit.
+    "#UD": If the \instr{LOCK} prefix is used but the destination is not a memory operand.
+  virtual:
+    "#GP(0)": If a memory operand effective address is outside the \reg{CS}, \reg{DS}, \reg{ES}, \reg{FS}, or \reg{GS} segment limit.
+    "#SS(0)": If a memory operand effective address is outside the \reg{SS} segment limit.
+    "#PF(fault-code)": If a page fault occurs.
+    "#AC(0)": If alignment checking is enabled and an unaligned memory reference is made.
+    "#UD": If the \instr{LOCK} prefix is used but the destination is not a memory operand.
+  compatibility: Same exceptions as in protected mode.
+  long:
+    "#SS(0)": If a memory address referencing the \reg{SS} segment is in a non-canonical form.
+    "#GP(0)": If a memory operand address is in a non-canonical form.
+    "#PF(fault-code)": If a page fault occurs.
+    "#AC(0)": If alignment checking is enabled and an unaligned memory reference is made while the current privilege level is 3.
+    "#UD": If the \instr{LOCK} prefix is used but the destination is not a memory operand.
+changes:
+  version: 73
+  date: 2020-11
+  list:
+    - \c{REX 20 /r} is incorrectly described as "\i{r/m64} AND \i{r8} (\i{sign-extended})."
+    - \c{REX 22 /r} is incorrectly described as "\i{r/m64} AND \i{r8} (\i{sign-extended})."
