@@ -15,12 +15,28 @@
  *   with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { Code, H1, H2, H3, H4, IBreadcrumbProps, UL } from "@blueprintjs/core";
+import { Code, H1, H2, H3, H4, HTMLTable, IBreadcrumbProps, UL } from "@blueprintjs/core";
 
 import Layout from "../../components/Layout";
 import Link from "../../components/Link";
 import React from "react";
 import TOC from "../../components/TOC";
+
+// Helper functions to cut down on repetitive lines
+function tableHeaderRow(...cells: (string | JSX.Element)[]): JSX.Element {
+    return (
+        <tr>
+            {cells.map((cell, idx) => (<th key={idx}>{cell}</th>))}
+        </tr>
+    );
+}
+function tableRow(...cells: (string | JSX.Element)[]): JSX.Element {
+    return (
+        <tr>
+            {cells.map((cell, idx) => (<td key={idx}>{cell}</td>))}
+        </tr>
+    );
+}
 
 export default function Page(): JSX.Element {
     const PageBreadcrumbs: IBreadcrumbProps[] = [
@@ -39,6 +55,9 @@ export default function Page(): JSX.Element {
                 </TOC.Entry>
                 <TOC.Entry href="#headingEncoding" text="Encoding">
                     <TOC.Entry href="#headingEncodingOperand" text="Interpreting the Operand Value" />
+                </TOC.Entry>
+                <TOC.Entry href="#headingBitEncoding" text="Bit Encoding">
+                    <TOC.Entry href="#headingBitEncodingBits" text="Interpreting Named Bits" />
                 </TOC.Entry>
                 <TOC.Entry href="#headingDescription" text="Description" />
                 <TOC.Entry href="#headingOperation" text="Operation">
@@ -245,6 +264,269 @@ export default function Page(): JSX.Element {
                     <li>
                         <Code>VEX.vvvv</Code>:
                         The <Code>vvvv</Code> field of a VEX prefix represents the register.
+                    </li>
+                </UL>
+
+                <H2 id="headingBitEncoding">Bit Encoding</H2>
+                <p>
+                    The &quot;Bit Encoding&quot; section details the actual bit representation of the various instruction forms.
+                    These bits will be grouped per byte, and separated by a colon (<Code>:</Code>) to show the order in a byte stream they would appear.
+                    Each byte will be written as either a two-hexdigit value (if possible) or as individual bits.
+                    If the bits will be written out one-by-one, they will be grouped into either four (&quot;nibbles&quot;) or three bits (octal-like).
+                </p>
+
+                <H3 id="headingBitEncodingBits">Interpreting Named Bits</H3>
+                <p>
+                    Sometimes, individual bits are named to represent their function.
+                    Generally, this is only used to show the individual bits of a byte (such as the two bit <Code>mod</Code> field of a ModR/M byte), or to show where registers are encoded.
+                    However, sometimes, two forms of an instruction will differ only in a few bits, and those bits have a defined meaning.
+                    For example, if a string of bits contains a character such as <Code>s</Code>, this would indicate if sign extension of an operand occurs.
+                </p>
+                <p>
+                    These named bits will be one of the following:
+                </p>
+                <UL>
+                    <li>
+                        <Code>d</Code> (direction):
+                        Specifies which direction data flows from and into.
+                        This is commonly used for ALU instructions from the original <Link href="/architecture/8086">8086</Link>.
+                        This can have one of two values:
+                        <HTMLTable small>
+                            <thead>
+                                {tableHeaderRow("Value", "Source", "Destination")}
+                            </thead>
+                            <tbody>
+                                {tableRow(
+                                    <Code>0</Code>,
+                                    <><Code>reg</Code> field</>,
+                                    <><Code>r/m</Code> field with an optional SIB byte</>
+                                )}
+                                {tableRow(
+                                    <Code>1</Code>,
+                                    <><Code>r/m</Code> field with an optional SIB byte</>,
+                                    <><Code>reg</Code> field</>
+                                )}
+                            </tbody>
+                        </HTMLTable>
+                    </li>
+                    <li>
+                        <Code>eee</Code> (special register):
+                        When control or debug registers are used in an instruction, they are represented using <Code>eee</Code>.
+                        Whether a control or debug register is used depends on the instruction, but both will <em>never</em> be used at the same time.
+                        This can have one of 16 values.
+                        If REX.R, VEX.R, or EVEX.R is not present, only the first eight possible values are available.
+                        <HTMLTable small>
+                            <thead>
+                                {tableHeaderRow("Value", "Control Register", "Destination Register")}
+                            </thead>
+                            <tbody>
+                                {tableRow(<Code>0.000</Code>, <Code>CR0</Code>, <Code>DR0</Code>)}
+                                {tableRow(<Code>0.001</Code>, "reserved", <Code>DR1</Code>)}
+                                {tableRow(<Code>0.010</Code>, <Code>CR2</Code>, <Code>DR2</Code>)}
+                                {tableRow(<Code>0.011</Code>, <Code>CR3</Code>, <Code>DR3</Code>)}
+                                {tableRow(<Code>0.100</Code>, <Code>CR4</Code>, "reserved")}
+                                {tableRow(<Code>0.101</Code>, "reserved", "reserved")}
+                                {tableRow(<Code>0.110</Code>, "reserved", <Code>DR6</Code>)}
+                                {tableRow(<Code>0.111</Code>, "reserved", <Code>DR7</Code>)}
+                                {tableRow(<Code>1.000</Code>, <Code>CR8</Code>, "reserved")}
+                                {tableRow(<Code>1.001</Code>, "reserved", "reserved")}
+                                {tableRow(<Code>1.010</Code>, "reserved", "reserved")}
+                                {tableRow(<Code>1.011</Code>, "reserved", "reserved")}
+                                {tableRow(<Code>1.100</Code>, "reserved", "reserved")}
+                                {tableRow(<Code>1.101</Code>, "reserved", "reserved")}
+                                {tableRow(<Code>1.110</Code>, "reserved", "reserved")}
+                                {tableRow(<Code>1.111</Code>, "reserved", "reserved")}
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colSpan={3}>
+                                        The first bit represents the <Code>R</Code> field in a REX, VEX, or EVEX prefix.
+                                        The other three are the <Code>eee</Code> field.
+                                        <br />
+                                        Usage of reserved encodings will lead to a <Code>#UD</Code> exception.
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </HTMLTable>
+                    </li>
+                    <li>
+                        <Code>reg</Code> (general purpose register):
+                        There are eight general purpose registers (16 in <Link href="/mode/long">Long Mode</Link>).
+                        Which one is used depends on the bits of this <Code>reg</Code> field (combined with REX.R, VEX.R, or EVEX.R if present), the <Code>w</Code> field (if present), <em>and</em> the current processor mode.
+                        <HTMLTable small>
+                            <caption>Selected Register When <Code>w</Code> is not Present</caption>
+                            <thead>
+                                {tableHeaderRow(
+                                    "Value",
+                                    "16 bit Operations",
+                                    "32 bit Operations",
+                                    "64 bit Operations"
+                                )}
+                            </thead>
+                            <tbody>
+                                {tableRow(<Code>000</Code>, <Code>AX</Code>, <Code>EAX</Code>, <Code>RAX</Code>)}
+                                {tableRow(<Code>001</Code>, <Code>CX</Code>, <Code>ECX</Code>, <Code>RCX</Code>)}
+                                {tableRow(<Code>010</Code>, <Code>DX</Code>, <Code>EDX</Code>, <Code>RDX</Code>)}
+                                {tableRow(<Code>011</Code>, <Code>BX</Code>, <Code>EBX</Code>, <Code>RBX</Code>)}
+                                {tableRow(<Code>100</Code>, <Code>SP</Code>, <Code>ESP</Code>, <Code>RSP</Code>)}
+                                {tableRow(<Code>101</Code>, <Code>BP</Code>, <Code>EBP</Code>, <Code>RBP</Code>)}
+                                {tableRow(<Code>110</Code>, <Code>SI</Code>, <Code>ESI</Code>, <Code>RSI</Code>)}
+                                {tableRow(<Code>111</Code>, <Code>DI</Code>, <Code>EDI</Code>, <Code>RDI</Code>)}
+                            </tbody>
+                        </HTMLTable>
+                        <HTMLTable small>
+                            <caption>Selected Register When <Code>w</Code> is Present</caption>
+                            <thead>
+                                {tableHeaderRow(
+                                    "Value",
+                                    <><Code>w</Code> Unset</>,
+                                    <><Code>w</Code> Set; 16 bit Operations</>,
+                                    <><Code>w</Code> Set; 32 bit Operations</>
+                                )}
+                            </thead>
+                            <tbody>
+                                {tableRow(<Code>000</Code>, <Code>AL</Code>, <Code>AX</Code>, <Code>EAX</Code>)}
+                                {tableRow(<Code>001</Code>, <Code>CL</Code>, <Code>CX</Code>, <Code>ECX</Code>)}
+                                {tableRow(<Code>010</Code>, <Code>DL</Code>, <Code>DX</Code>, <Code>EDX</Code>)}
+                                {tableRow(<Code>011</Code>, <Code>BL</Code>, <Code>BX</Code>, <Code>EBX</Code>)}
+                                {tableRow(<Code>100</Code>, <Code>AH</Code>, <Code>SP</Code>, <Code>ESP</Code>)}
+                                {tableRow(<Code>101</Code>, <Code>CH</Code>, <Code>BP</Code>, <Code>EBP</Code>)}
+                                {tableRow(<Code>110</Code>, <Code>DH</Code>, <Code>SI</Code>, <Code>ESI</Code>)}
+                                {tableRow(<Code>111</Code>, <Code>BH</Code>, <Code>DI</Code>, <Code>EDI</Code>)}
+                            </tbody>
+                        </HTMLTable>
+                        <style jsx>{`
+                            caption {
+                                font-size: large;
+                                font-weight: bold;
+                                padding-top: 6px;
+                            }
+                        `}</style>
+                    </li>
+                    <li>
+                        <Code>s</Code> (sign extend):
+                        Specifies whether an immediate is sign extended or left alone.
+                        This can have one of two values:
+                        <HTMLTable small>
+                            <thead>
+                                {tableHeaderRow("Value", "Effect on 8 bit Data", "Effect on 16 or 32 bit Data")}
+                            </thead>
+                            <tbody>
+                                {tableRow(
+                                    <Code>0</Code>,
+                                    "none",
+                                    "none"
+                                )}
+                                {tableRow(
+                                    <Code>1</Code>,
+                                    "sign extended to size of destination",
+                                    "none"
+                                )}
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colSpan={3}>
+                                        A quirk of this field is that the opcodes beginning with <Code>82</Code> (8086 ALU operations) perform the same operation as ones beginning with <Code>80</Code>.
+                                        For example, <Link href="/instruction/add"><Code>ADD <i>r/m8</i>, <i>imm8</i></Code></Link> is documented as being encoded as <Code>80 /0 <i>ib</i></Code>, but can also be encoded as <Code>82 /0 <i>ib</i></Code>.
+                                        This has the effect of sign extending the 8 bit immediate to the size of the 8 bit destination (i.e. doing nothing).
+                                        These encodings are undocumented and were removed in <Link href="/mode/long">Long Mode</Link> (a <Code>#UD</Code> exception will result).
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </HTMLTable>
+                    </li>
+                    <li>
+                        <Code>sreg#</Code> (segment register):
+                        Either a two or three bit field specifying a segment register.
+                        If <Code>sreg2</Code> is used, access to the <Code>FS</Code> and <Code>GS</Code> segments is unavailable.
+                        If <Code>sreg3</Code> is used, access to all six segment registers is available:
+                        <HTMLTable small>
+                            <thead>
+                                {tableHeaderRow("Value", "Segment Register")}
+                            </thead>
+                            <tbody>
+                                {tableRow(<Code>0.00</Code>, <Code>ES</Code>)}
+                                {tableRow(<Code>0.01</Code>, <Code>CS</Code>)}
+                                {tableRow(<Code>0.10</Code>, <Code>SS</Code>)}
+                                {tableRow(<Code>0.11</Code>, <Code>DS</Code>)}
+                                {tableRow(<Code>1.00</Code>, <Code>FS</Code>)}
+                                {tableRow(<Code>1.01</Code>, <Code>GS</Code>)}
+                                {tableRow(<Code>1.10</Code>, "reserved")}
+                                {tableRow(<Code>1.11</Code>, "reserved")}
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colSpan={2}>
+                                        The first bit represents the most significant bit of an <Code>sreg3</Code> field.
+                                        The other two are the <Code>sreg2</Code> field.
+                                        <br />
+                                        Usage of reserved encodings will lead to a <Code>#UD</Code> exception.
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </HTMLTable>
+                    </li>
+                    <li>
+                        <Code>tttn</Code> (condition test):
+                        Conditional instructions have the condition encoded in this four bit field.
+                        The first three (<Code>ttt</Code>) are the condition to test, and the fourth determines if the condition is used directly (<Code>n = 0</Code>), or its negated form (<Code>n = 1</Code>).
+                        These four bits are encoded in the four least significant bits (bits 3, 2, 1, and 0) of the opcode byte for single byte opcodes, or the four least significant bits of the second opcode byte for two byte opcodes.
+                        These bits have the following values:
+                        <HTMLTable small>
+                            <thead>
+                                {tableHeaderRow("Value", "Mnemonic Suffix", "Condition", "Check", "Signed or Unsigned")}
+                            </thead>
+                            <tbody>
+                                {tableRow(<Code>0000</Code>, "O", "Overflow", <Code>OF == 1</Code>, "Neither")}
+                                {tableRow(<Code>0001</Code>, "NO", "No overflow", <Code>OF == 0</Code>, "Neither")}
+                                {tableRow(<Code>0010</Code>, "B, NAE, C", "Below, Not above or equal, Carry", <Code>CF == 1</Code>, "Unsigned")}
+                                {tableRow(<Code>0011</Code>, "NB, AE, NC", "Not below, Above or equal, No carry", <Code>CF == 0</Code>, "Unsigned")}
+                                {tableRow(<Code>0100</Code>, "E, Z", "Equal, Zero", <Code>ZF == 1</Code>, "Neither")}
+                                {tableRow(<Code>0101</Code>, "NE, NZ", "Not equal, Not zero", <Code>ZF == 0</Code>, "Neither")}
+                                {tableRow(<Code>0110</Code>, "BE, NA", "Below or equal, Not above", <Code>(CF | OF) == 1</Code>, "Unsigned")}
+                                {tableRow(<Code>0111</Code>, "NBE, A", "Not below or equal, Above", <Code>(CF &amp; ZF) == 1</Code>, "Unsigned")}
+                                {tableRow(<Code>1000</Code>, "S", "Sign (MSB set)", <Code>SF == 1</Code>, "Neither")}
+                                {tableRow(<Code>1001</Code>, "NS", "No sign (MSB cleared)", <Code>SF == 0</Code>, "Neither")}
+                                {tableRow(<Code>1010</Code>, "P, PE", "Parity, Parity even", <Code>PF == 1</Code>, "Neither")}
+                                {tableRow(<Code>1011</Code>, "NP, PO", "No parity, Parity odd", <Code>PF == 0</Code>, "Neither")}
+                                {tableRow(<Code>1100</Code>, "L, NGE", "Less than, Not greater than or equal to", <Code>SF != OF</Code>, "Signed")}
+                                {tableRow(<Code>1101</Code>, "NL, GE", "Not less than, Greater than or equal to", <Code>SF == OF</Code>, "Signed")}
+                                {tableRow(<Code>1110</Code>, "LE, NG", "Less than or equal to, Not greater than", <Code>ZF == 1 || SF != OF</Code>, "Signed")}
+                                {tableRow(<Code>1111</Code>, "NLE, G", "Not less than or equal to, Greater than", <Code>ZF == 0 &amp;&amp; SF == OF</Code>, "Signed")}
+                            </tbody>
+                        </HTMLTable>
+                    </li>
+                    <li>
+                        <Code>w</Code> (wide):
+                        Determines if an operation is on 8 bits of the default operand width.
+                        This can have one of two values:
+                        <HTMLTable small>
+                            <thead>
+                                {tableHeaderRow(
+                                    "Value",
+                                    "Operand Size when Operand Size Attribute is 16 bits",
+                                    "Operand Size when Operand Size Attribute is 32 bits"
+                                )}
+                            </thead>
+                            <tbody>
+                                {tableRow(
+                                    <Code>0</Code>,
+                                    "8 bits",
+                                    "8 bits"
+                                )}
+                                {tableRow(
+                                    <Code>1</Code>,
+                                    "16 bits",
+                                    "32 bits"
+                                )}
+                            </tbody>
+                        </HTMLTable>
+                    </li>
+                    <li>
+                        <Code>xmmreg</Code> (vector register):
+                        There are 32 vector registers (only eight are accessible in <Link href="/mode/protected">Protected Mode</Link>).
+                        This field represents the three least significant bits of the register number.
+                        {/* TODO: How are the other 24 accessed */}
                     </li>
                 </UL>
 
