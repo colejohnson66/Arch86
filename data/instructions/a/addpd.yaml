@@ -86,6 +86,21 @@ encoding:
       - ModRM.reg[w]
       - EVEX.vvvv[r]
       - ModRM.r/m[r]
+bitEncoding:
+  - form: xmmreg2 into xmmreg1
+    src: SSE2
+    bits:
+      - \bits{66}
+      - \bits{0F}
+      - \bits{58}
+      - \bits{11 xmmreg1 xmmreg2}
+  - form: mem into xmmreg
+    src: SSE2
+    bits:
+      - \bits{66}
+      - \bits{0F}
+      - \bits{58}
+      - \bits{mod xmmreg r/m}
 description: >-
   The \c{(V)ADDPD} instruction adds two, four, or eight double-precision floating-point values from the first source operand to the second source operand and stores the result in the destination operand.
 

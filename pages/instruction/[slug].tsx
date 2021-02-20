@@ -25,10 +25,12 @@ import IDictionary from "../../types/IDictionary";
 import Layout from "../../components/Layout";
 import Link from "../../components/Link";
 import React from "react";
+import Ref from "../../components/Ref";
 import Scrollable from "../../components/Scrollable";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import SyntaxHighlighterDarkTheme from "react-syntax-highlighter/dist/cjs/styles/hljs/atom-one-dark";
 import TOC from "../../components/TOC";
+import { strict as assert } from "assert";
 
 type OpcodeValidityValues = "valid" | "valid*" | "invalid" | "n/e";
 const OpcodeValidityMap: { [T in OpcodeValidityValues]: string } = {
@@ -63,6 +65,14 @@ type Encoding = {
     hasTuple?: boolean,
     encodings: IDictionary<string[]>,
 };
+type BitEncoding = {
+    form: string,
+    // In the Intel SDM, what section in Volume 2, Appendix B?
+    // Unused here
+    src: string,
+    limits?: string,
+    bits: string | string[],
+};
 type ExceptionList = IDictionary<string | string[]>;
 type Exceptions = {
     protected?: string | ExceptionList,
@@ -79,12 +89,17 @@ type Changes = {
     date: string,
     list: string | string[],
 };
+type Reference = {
+    name: string,
+    value: string, // TODO: Is this how we should do this?
+};
 type PageProps = {
     id: string,
     title: string,
     validity: string,
     opcode: Opcode[],
     encoding: Encoding,
+    bitEncoding: BitEncoding[],
     description: string,
     operation: string,
     operationNotes: string[],
@@ -94,6 +109,7 @@ type PageProps = {
     intrinsicsRust?: string,
     exceptions: Exceptions,
     changes?: Changes,
+    refs?: Reference[],
 };
 
 function plural<T>(arr: T | T[], singular: string, plural: string): string {
@@ -142,6 +158,27 @@ function formatEncodingCell(operand: string): JSX.Element {
     return <Code>{operand}</Code>;
 }
 
+function bitEncodings(encodings: BitEncoding[]): JSX.Element {
+    const rows = encodings.map((entry, idx) => {
+        const bits = coerceArray(entry.bits).map((byte, idx, arr) => (
+            <React.Fragment key={idx}>
+                {processStringToJsx(byte)}
+                {idx !== arr.length - 1 && " : "}
+            </React.Fragment>
+        ));
+
+        return (
+            <React.Fragment key={idx}>
+                <dt>{processStringToJsx(entry.form)}</dt>
+                <dd>{bits}</dd>
+                {entry.limits &&
+                    <dd>{entry.limits}</dd>}
+            </React.Fragment>
+        );
+    });
+    return <dl>{rows}</dl>;
+}
+
 function regularExceptionList(ex: string | ExceptionList, parse = true): JSX.Element {
     if (typeof ex === "string")
         return <p>{brTagsFromString(ex)}</p>;
@@ -177,6 +214,7 @@ export default function Page(props: PageProps): JSX.Element {
         <Layout canonical={`/instruction/${props.id}`} navGroup="instruction" title={`${props.id.toUpperCase()}: ${processStringClean(props.title)}`} src="/pages/instruction/[slug].tsx" dataSrc={`/data/instructions/${props.id[0]}/${props.id}.yaml`} breadcrumbs={PageBreadcrumbs}>
             <TOC.Root>
                 <TOC.Entry href="#headingEncoding" text="Encoding" />
+                <TOC.Entry href="#headingBitEncoding" text="Bit Encoding" />
                 <TOC.Entry href="#headingDescription" text="Description" />
                 {props.operationNotes
                     ? <TOC.Entry href="#headingOperation" text="Operation">
@@ -209,6 +247,8 @@ export default function Page(props: PageProps): JSX.Element {
                 </TOC.Entry>
                 {props.changes &&
                     <TOC.Entry href="#headingChanges" text="Manual Changes" />}
+                {props.refs &&
+                    <TOC.Entry href="#headingReferences" text="References" />}
             </TOC.Root>
             <div id="content">
                 <H1><Code>{props.id.toUpperCase()}</Code>: {processStringToJsx(props.title)}</H1>
@@ -288,6 +328,9 @@ export default function Page(props: PageProps): JSX.Element {
                         </tbody>
                     </HTMLTable>
                 </Scrollable>
+
+                <H2 id="headingBitEncoding">Bit Encoding</H2>
+                {bitEncodings(props.bitEncoding)}
 
                 <H2 id="headingDescription">Description</H2>
                 {paragraphsFromString(props.description)}
@@ -407,6 +450,17 @@ export default function Page(props: PageProps): JSX.Element {
                                 <li key={idx}>{brTagsFromString(change)}</li>
                             ))}
                         </UL>
+                    </>}
+
+                {props.refs &&
+                    <>
+                        <Ref.Root>
+                            {props.refs.map((ref, idx) => (
+                                <Ref.Entry key={idx} name={ref.name}>
+                                    {ref.value}
+                                </Ref.Entry>
+                            ))}
+                        </Ref.Root>
                     </>}
             </div>
         </Layout>

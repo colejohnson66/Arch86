@@ -22,10 +22,14 @@ import Link from "../components/Link";
 import React from "react";
 import { strict as assert } from "assert";
 
-// `functions.reg` may change, so don't combine with `functions.c`
-// `functions.cpuid` is currently fancy syntax around `functions.c`, but this may change
+// `\abbr` may change, so don't combine with `\i`
+// `\bits` may change, so don't combine with `\c`
+// `\reg` may change, so don't combine with `\c`
+// `\cpuid` is currently fancy syntax around `\c`, but this may change
 const functions: IDictionary<(arg: string) => JSX.Element> = {
     abbr: (arg) => (<i>{arg}</i>),
+    bits: (arg) => (<Code>{arg}</Code>),
+    bitRef: (arg) => (<sup>[{arg}]</sup>),
     c: (arg) => (<Code>{arg}</Code>),
     cpuid: (arg) => {
         // arg is a comma separated list with an empty parameter for separation of CPUID arguments and result

@@ -25,6 +25,23 @@ encoding:
     RM:
       - ModRM.reg[rw]
       - ModRM.r/w[r]
+bitEncoding:
+  - form: reg2 into reg1
+    src: none
+    bits:
+      - \bits{F3}
+      - \bits{0F}
+      - \bits{38}
+      - \bits{F6}
+      - \bits{11 reg1 reg2}
+  - form: mem into reg
+    src: none
+    bits:
+      - \bits{F3}
+      - \bits{0F}
+      - \bits{38}
+      - \bits{F6}
+      - \bits{mod reg r/m}
 description: >-
   The \c{ADOX} instruction adds the destination operand, the source operand, and the \reg{OF} flag and stores the result in the destination operand.
 

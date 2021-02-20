@@ -17,6 +17,11 @@ encoding:
     MI:
       -
       -
+bitEncoding:
+  - form:
+    src:
+    limits:
+    bits:
 description: >-
 operation: |-
 operationNotes:
@@ -43,3 +48,6 @@ changes:
   date: 2020-11
   list:
     -
+refs:
+  - name:
+    value: >-

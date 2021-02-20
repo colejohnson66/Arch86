@@ -1,0 +1,56 @@
+x86 Instruction Patterns
+
+----
+
+ALU instructions (ADC, ADD, etc) have the forms:
+
+- [0] 00 op3 00dw : 11 reg1 reg2
+- [1] 00 op3 00dw : mod reg r/m
+- [2] 10 000 0sw : 11 op3 reg : imm
+- [3] 10 000 0sw : mod op3 r/m : imm
+
+With the following values:
+- d: direction?
+  - 0: dest = src1 OP3 src2
+  - 1: dest = src1 OP3 src2
+- s: sign extend?
+  - 0: none
+  - 1: sign extend reg (destination) to `w` bits (no effect if `w` is 0)
+- w: word or byte
+  - 0: 8 bits
+  - 1: depends on processor mode:
+    - 16-bit (real): 16 bits (32 with opSize override prefix)
+    - 32-bit (protected): 32 bits (16 with opSize override prefix)
+- op3: operation:
+  - 000: ADD
+  - 001: OR
+  - 010: ADC
+  - 011: SBB
+  - 100: AND
+  - 101: SUB
+  - 110: XOR
+  - 111: CMP
+
+Which form is used when:
+- [0]: register/register
+- [1]: register/memory or memory/register (depends on direction bit)
+- [2]: register/immediate
+- [3]: memory/immediate
+
+----
+
+AES encryption/decryption instructions have the forms:
+- [0] 66 : 0F : 38 : 1101 11ol : 11 xmmreg1 xmmreg2
+- [1] 66 : 0F : 38 : 1101 11ol : mod xmmreg r/m
+
+With the following values:
+- o: operation?
+  - 0: encryption
+  - 1: decryption
+- l: last?
+  - 0: not last (AESxxx)
+  - 1: last (AESxxxLAST)
+
+Which form is used when:
+- [0]: register/register (implicitly: xmmreg1 is destination as well)
+- [1]: register/memory (implicitly: register is src1 and memory is src2)

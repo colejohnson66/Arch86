@@ -90,6 +90,23 @@ encoding:
       - ModRM.reg[w]
       - EVEX.vvvv[r]
       - ModRM.r/m[r]
+bitEncoding:
+  - form: xmmreg2 into xmmreg1
+    src: AESNI
+    bits:
+      - \bits{66}
+      - \bits{0F}
+      - \bits{38}
+      - \bits{DE}
+      - \bits{11 xmmreg1 xmmreg2}
+  - form: mem into xmmreg
+    src: AESNI
+    bits:
+      - \bits{66}
+      - \bits{0F}
+      - \bits{38}
+      - \bits{DE}
+      - \bits{mod xmmreg r/m}
 description: >-
   The \c{(V)AESDEC} instruction performs a single round of AES decryption using one, two, or four 128 bit states from the first source operand using 128 bit round keys from the second source operand and stores the result in the destination operand.
 
