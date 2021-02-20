@@ -66,6 +66,15 @@ opcode:
       1632: n/e
       64: valid
     description: Adds \abbr{imm32} into \abbr{r/m64}.
+  - opcode: 82 /0 \i{ib}
+    mnemonic: ADD \i{r/m8}, \i{imm8}
+    encoding: MI
+    validity:
+      1632: valid
+      64: invalid
+    description: >-
+      Undocumented alias for \c{80 /0 ib}.
+      Adds \abbr{imm8} (sign extended to 8 bits) into \abbr{r/m8}.
   - opcode: 83 /0 \i{ib}
     mnemonic: ADD \i{r/m16}, \i{imm8}
     encoding: MI
