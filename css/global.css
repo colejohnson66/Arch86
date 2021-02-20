@@ -116,6 +116,16 @@ h2 {
     margin-bottom: 0.5em;
 }
 
+/* A little breathing room */
+dt {
+    padding-top: 6px;
+    padding-bottom: 2px;
+}
+
+dt:first-child {
+    padding-top: 0;
+}
+
 footer {
     flex: 0 1 auto;
     margin: 1em 0 0 10em;
