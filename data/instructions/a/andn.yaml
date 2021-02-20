@@ -1,0 +1,65 @@
+%YAML 1.2
+---
+title: Logical AND NOT
+validity: 32,64
+opcode:
+  - opcode: VEX.LZ.0F38.W0 F2 /r
+    mnemonic: ANDN \i{r32a}, \i{r32b}, \i{r/m32}
+    encoding: VEX
+    validity:
+      32: valid
+      64: valid
+    cpuid: BMI1
+    description:
+      ANDs \abbr{r/m32} with \abbr{r32b}.
+      Stores the result in \abbr{r32a}.
+  - opcode: VEX.LZ.0F38.W1 F2 /r
+    mnemonic: ANDN \i{r64a}, \i{r64b}, \i{r/m64}
+    encoding: VEX
+    validity:
+      32: invalid
+      64: valid
+    cpuid: BMI1
+    description:
+      ANDs \abbr{r/m64} with \abbr{r64b}.
+      Stores the result in \abbr{r64a}.
+encoding:
+  operands: 2
+  encodings:
+    VEX:
+      - ModRM.reg[w]
+      - VEX.vvvv[r]
+      - ModRM.r/m[r]
+bitEncoding:
+  - form: VEX encoded form (register)
+    src: none
+    bits: \i{}
+  - form: VEX encoded form (memory)
+    src: none
+    bits: \i{}
+description: >-
+  The \c{ANDN} instruction performs a logical AND against the inverted form of the first source operand with the unchanged second source operand and stores the result in the destination operand.
+
+  The operand size (\c{W} bit) is always 32 bits if not in Long Mode.
+  In other words, in Protected and Compatibility Mode, \c{VEX.W1} is treated as \c{VEX.W0}.
+
+  The length field (\c{L} bit) \i{must} be zero (signifying 128 bit vectors).
+  Attempts to execute with \c{VEX.L1} (256 bit vectors) will cause a \c{#UD} exception.
+operation: |-
+  pub fn andn<T>(dest: &mut T, src1: T, src2: T) {
+    *dest = !src1 & src2;
+  }
+flags: >-
+  The \reg{SF} and \reg{ZF} flags are set according to the result.
+  The \reg{OF} and \reg{CF} flags are cleared regardless.
+  The \reg{AF} and \reg{PF} flags are undefined.
+exceptions:
+  floating: None
+  other: See Exceptions Type 13.
+changes:
+  version: 73
+  date: 2020-11
+  list:
+    - >-
+      The \c{ANDN r64a, r64b, r/m64} form is incorrectly documented as being "not encodable" in 32 bit mode.
+      This is misleading as it \i{is} encodable, but is defined to be treated as the 32 bit form.
