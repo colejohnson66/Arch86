@@ -1,0 +1,71 @@
+%YAML 1.2
+---
+title: AES Round Key Generation Assist
+validity: 32,64
+opcode:
+  - opcode: 66 0F 3A DF /r ib
+    mnemonic: AESKEYGENASSIST \i{xmm1}, \i{xmm2/m128}, \i{imm8}
+    encoding: RMI
+    validity:
+      32: valid
+      64: valid
+    cpuid: AES
+    description: >-
+      Assist in AES round key generation using an 8 bit round constant (RCON) specified in the immediate byte and 128 bits of data specified in \abbr{xmm2/m128}.
+      Stores the result in \abbr{xmm1}.
+  - opcode: VEX.128.66.0F3A.WIG DF /r ib
+    mnemonic: VAESKEYGENASSIST \i{xmm1}, \i{xmm2/m128}, \i{imm8}
+    encoding: RMI
+    validity:
+      32: valid
+      64: valid
+    cpuid:
+      - AES
+      - AVX
+    description: >-
+      Assist in AES round key generation using an 8 bit round constant (RCON) specified in the immediate byte and 128 bits of data specified in \abbr{xmm2/m128}.
+      Stores the result in \abbr{xmm1}.
+encoding:
+  operands: 3
+  encodings:
+    RMI:
+      - ModRM.reg[w]
+      - ModRM.r/m[r]
+      - imm8
+description: >-
+  The \c{(V)AESKEYGENASSIST} instruction assists in expanding the AES cipher key using an 8 bit round constant (RCON) and 128 bits of data from the source operand.
+  The result is stored in the destination operand.
+
+  The VEX form of this instruction reserves \c{VEX.vvvv} (must be set to \c{0b1111}).
+  Failure to do so will result in a \c{#UD} exception.
+operation: |-
+  pub fn aeskeygenassist(dest: &mut Simd<u128>, src: Simd<u128>, roundConstant: u8) {
+    let x1: u32 = src[63..=32];
+    let x3: u32 = src[127..=96];
+    let rcon: u32 = roundConstant;
+
+    dest[31..=0] = sub_word(x1);
+    dest[63..=32] = rot_word(sub_word(x1)) ^ rcon;
+    dest[95..=64] = sub_word(x3);
+    dest[127..=96] = rot_word(sub_word(x3)) ^ rcon;
+    // dest[Simd::max()..=128] (unmodified)
+  }
+
+  pub fn vaeskeygenassist(dest: &mut Simd<u128>, src: Simd<u128>, roundConstant: u8) {
+    let x1: u32 = src[63..=32];
+    let x3: u32 = src[127..=96];
+    let rcon: u32 = roundConstant;
+
+    dest[31..=0] = sub_word(x1);
+    dest[63..=32] = rot_word(sub_word(x1)) ^ rcon;
+    dest[95..=64] = sub_word(x3);
+    dest[127..=96] = rot_word(sub_word(x3)) ^ rcon;
+    dest[Simd::max()..=128] = 0;
+  }
+intrinsicsC: |-
+  __m128i _mm_aeskeygenassist(__m128i data, uint8_t roundConstant)
+exceptions:
+  floating: None
+  other: See Exceptions Type 4.
+  otherAdditional:
+    "#UD": If \c{VEX.vvvv} is not \c{0b1111}.
