@@ -30,7 +30,7 @@ export default function Page(): JSX.Element {
     return (
         <Layout canonical="/" navGroup="home" src="/pages/index.tsx">
             <div id="content">
-                <img src="/img/icon.svg" width="64" height="64" style={IconStyle} />
+                <img src="/img/icon.svg" alt="80x86 Icon" width="64" height="64" style={IconStyle} />
                 <H1>80x86 Website</H1>
                 <p>
                     Welcome to the 80x86 website.
