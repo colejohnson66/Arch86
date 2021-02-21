@@ -66,6 +66,15 @@ opcode:
       1632: n/e
       64: valid
     description: Add with carry \abbr{imm32} (sign extended to 64 bits) too \abbr{r/m64}.
+  - opcode: 82 /2 \i{ib}
+    mnemonic: ADC \i{r/m8}, \i{r8}
+    encoding: MI
+    validity:
+      1632: valid
+      64: invalid
+    description: >-
+      Undocumented alias for \c{80 /2 ib}.
+      Add with carry \abbr{r8} (sign extended to 8 bits) to \abbr{r/m8}.
   - opcode: 83 /2 \i{ib}
     mnemonic: ADC \i{r/m16}, \i{imm8}
     encoding: MI
