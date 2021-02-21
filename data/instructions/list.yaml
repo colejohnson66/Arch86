@@ -16,4 +16,5 @@ a:
   - aesimc
   - aeskeygenassist
   - and
+  - [ andpd, andps ]
   - andn

@@ -1,0 +1,214 @@
+%YAML 1.2
+---
+title: Logical AND Packed Single-Precision Floating-Point Values
+validity: 32,64
+opcode:
+  - opcode: NP 0F 54 /r
+    mnemonic: ANDPS \i{xmm1}, \i{xmm2/m128}
+    encoding: LEGACY
+    validity:
+      32: valid
+      64: valid
+    cpuid: SSE2
+    description: >-
+      ANDs packed single-precision floating-point values from \abbr{xmm2/m128} and \abbr{xmm1}.
+      Stores the result in \abbr{xmm1}.
+  - opcode: VEX.128.0F.WIG 54 /r
+    mnemonic: VANDPS \i{xmm1}, \i{xmm2}, \i{xmm3/m128}
+    encoding: VEX
+    validity:
+      32: valid
+      64: valid
+    cpuid: AVX
+    description: >-
+      ANDs packed single-precision floating-point values from \abbr{xmm3/m128} and \abbr{xmm2}.
+      Stores the result in \abbr{xmm1}.
+  - opcode: VEX.256.0F.WIG 54 /r
+    mnemonic: VANDPS \i{ymm1}, \i{ymm2}, \i{ymm3/m256}
+    encoding: VEX
+    validity:
+      32: valid
+      64: valid
+    cpuid: AVX
+    description: >-
+      ANDs packed single-precision floating-point values from \abbr{ymm3/m256} and \abbr{ymm2}.
+      Stores the result in \abbr{ymm1}.
+  - opcode: EVEX.128.0F.W0 54 /r
+    mnemonic: VANDPS \i{xmm1} {k1}{z}, \i{xmm2}, \i{xmm3/m128/m32bcst}
+    encoding: EVEX
+    validity:
+      32: valid
+      64: valid
+    cpuid:
+      - AVX512VL
+      - AVX512DQ
+    description: >-
+      ANDs packed single-precision floating-point values from \abbr{xmm3/m128/m32bcst} and \abbr{xmm2}.
+      Stores the result in \abbr{xmm1}.
+  - opcode: EVEX.256.0F.W0 54 /r
+    mnemonic: VANDPS \i{ymm1} {k1}{z}, \i{ymm2}, \i{ymm3/m256/m32bcst}
+    encoding: EVEX
+    validity:
+      32: valid
+      64: valid
+    cpuid:
+      - AVX512VL
+      - AVX512DQ
+    description: >-
+      ANDs packed single-precision floating-point values from \abbr{ymm3/m256/m32bcst} and \abbr{ymm2}.
+      Stores the result in \abbr{ymm1}.
+  - opcode: EVEX.512.0F.W0 54 /r
+    mnemonic: VANDPS \i{zmm1} {k1}{z}, \i{zmm2}, \i{zmm3/m512/m32bcst}
+    encoding: EVEX
+    validity:
+      32: valid
+      64: valid
+    cpuid: AVX512DQ
+    description: >-
+      ANDs packed single-precision floating-point values from \abbr{zmm3/m512/m32bcst} and \abbr{zmm2}.
+      Stores the result in \abbr{zmm1}.
+encoding:
+  operands: 3
+  hasTuple: true
+  encodings:
+    LEGACY:
+      - N/A
+      - ModRM.reg[rw]
+      - ModRM.r/m[r]
+      - ""
+    VEX:
+      - N/A
+      - ModRM.reg[rw]
+      - VEX.vvvv[r]
+      - ModRM.r/m[r]
+    EVEX:
+      - Full
+      - ModRM.reg[rw]
+      - EVEX.vvvv[r]
+      - ModRM.r/m[r]
+bitEncoding:
+  list:
+    - form: xmmreg3(2) into xmmreg3(1)
+      bits:
+        - \bits{0F}
+        - \bits{54}
+        - \bits{11 xmmreg3(1) xmmreg3(2)}
+    - form: memory into xmmreg3
+      bits:
+        - \bits{0F}
+        - \bits{54}
+        - \bits{mod xmmreg3 r/m}
+description: >-
+  The \c{(V)ANDPS} instruction ANDs four, eight, or sixteen single-precision floating-point values from the first source operand to the second source operand and stores the result in the destination operand.
+
+  This instruction, despite being named as if it operates on floating-point numbers, internally operates on 32 bit integers.
+  The "Operation" section below has been updated to reflect this (using \c{u32} instead of \c{f32}).
+
+  All versions \i{except} the legacy SSE version zero the unused upper SIMD register bits.
+operation: |-
+  pub fn andps(dest: &mut Simd<u32>, src: Simd<u32>) {
+    dest[31..=0] = dest[31..=0] & src[31..=0];
+    dest[63..=32] = dest[63..=32] & src[63..=32];
+    dest[95..=64] = dest[95..=64] & src[95..=64];
+    dest[127..=96] = dest[127..=96] & src[127..=96];
+    // dest[Simd::max()..=128] (unmodified)
+  }
+
+  fn vandps_vex(dest: &mut Simd<u32>, src1: Simd<u32>, src2: Simd<u32>, kl: u32) {
+    for n in 0..kl {
+      let vi = n * 32;
+      let vi_next = vi + 31;
+
+      dest[vi_next..=vi] = src1[vi_next..=vi] & src2[vi_next..=vi];
+    }
+
+    let end = kl * 32;
+    dest[Simd::max()..=end] = 0;
+  }
+
+  pub fn vandps_vex128(dest: &mut Simd<u32>, src1: Simd<u32>, src2: Simd<u32>) {
+    vandps_vex(dest, src1, src2, 4);
+  }
+  pub fn vandps_vex256(dest: &mut Simd<u32>, src1: Simd<u32>, src2: Simd<u32>) {
+    vandps_vex(dest, src1, src2, 8);
+  }
+
+  fn vandps_evex_mem(dest: &mut Simd<u32>, src1: Simd<u32>, src2: Simd<u32>, k: KMask, kl: u8) {
+    for n in 0..kl {
+      let vi = n * 32;
+      let vi_next = vi + 31;
+
+      if k[n] {
+        // broadcast?
+        if EVEX.b {
+          dest[vi_next..=vi] = src1[vi_next..=vi] & src2[31..=0];
+        } else {
+          dest[vi_next..=vi] = src1[vi_next..=vi] & src2[vi_next..=vi];
+        }
+      } else {
+        // zero mask?
+        if EVEX.z {
+          dest[vi_next..=vi] = 0;
+        }
+      }
+    }
+
+    let end = kl * 32;
+    dest[Simd::max()..=end] = 0;
+  }
+
+  pub fn vandps_evex128_mem(dest: &mut Simd<u32>, src1: Simd<u32>, src2: Simd<u32>, k: KMask) {
+    vandps_evex_mem(dest, src1, src2, k, 4);
+  }
+  pub fn vandps_evex256_mem(dest: &mut Simd<u32>, src1: Simd<u32>, src2: Simd<u32>, k: KMask) {
+    vandps_evex_mem(dest, src1, src2, k, 8);
+  }
+  pub fn vandps_evex512_mem(dest: &mut Simd<u32>, src1: Simd<u32>, src2: Simd<u32>, k: KMask) {
+    vandps_evex_mem(dest, src1, src2, k, 16);
+  }
+
+  fn vandps_evex_vreg(dest: &mut Simd<u32>, src1: Simd<u32>, src2: Simd<u32>, k: KMask: kl: u8) {
+    for n in 0..kl {
+      let vi = n * 32;
+      let vi_next = vi + 31;
+
+      if k[n] {
+        dest[vi_next..=vi] = src1[vi_next..=vi] & src2[vi_next..=vi];
+      } else {
+        // zero mask?
+        if EVEX.z {
+          dest[vi_next..=vi] = 0;
+        }
+      }
+    }
+
+    let end = kl * 32;
+    dest[Simd::max()..=end] = 0;
+  }
+
+  pub fn vandps_evex128_vreg(dest: &mut Simd<u32>, src1: Simd<u32>, src2: Simd<u32>, k: KMask) {
+    vandps_evex_vreg(dest, src1, src2, k, 4);
+  }
+  pub fn vandps_evex256_vreg(dest: &mut Simd<u32>, src1: Simd<u32>, src2: Simd<u32>, k: KMask) {
+    vandps_evex_vreg(dest, src1, src2, k, 8);
+  }
+  pub fn vandps_evex512_vreg(dest: &mut Simd<u32>, src1: Simd<u32>, src2: Simd<u32>, k: KMask) {
+    vandps_evex_vreg(dest, src1, src2, k, 16);
+  }
+intrinsicsC: |-
+  __m128d _mm_and_ps(__m128d a, __m128d b)
+  __m128d _mm_mask_and_ps(__m128d s, __mmask16 k, __m128d a, __m128d b)
+  __m128d _mm_maskz_and_ps(__mmask16 k, __m128d a, __m128d b)
+
+  __m256d _mm256_and_ps(__m256d a, __m256d b)
+  __m256d _mm256_mask_and_ps(__m256d s, __mmask16 k, __m256d a, __m256d b)
+  __m256d _mm256_maskz_and_ps(__mmask16 k, __m256d a, __m256d b)
+
+  __m512d _mm512_and_ps(__m512d a, __m512d b)
+  __m512d _mm512_mask_and_ps(__m512d s, __mmask16 k, __m512d a, __m512d b)
+  __m512d _mm512_maskz_and_ps(__mmask16 k, __m512d a, __m512d b)
+exceptions:
+  floating: None
+  other:
+    - "VEX encoded form: see Exceptions Type 4."
+    - "EVEX encoded form: see Exceptions Type E4."
