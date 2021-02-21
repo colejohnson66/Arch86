@@ -16,9 +16,9 @@ encoding:
     ZO:
       - None
 bitEncoding:
-  - form: no operand
-    src: GenPurpose
-    bits: \bits{0011 1111}
+  list:
+    - form: no operand
+      bits: \bits{0011 1111}
 description: >-
   The \c{AAS} instruction converts the result of a subtraction of two BCD digits to a valid 2-digit BCD number.
 

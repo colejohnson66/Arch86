@@ -26,22 +26,21 @@ encoding:
       - ModRM.reg[rw]
       - ModRM.r/w[r]
 bitEncoding:
-  - form: reg2 into reg1
-    src: none
-    bits:
-      - \bits{66}
-      - \bits{0F}
-      - \bits{38}
-      - \bits{F6}
-      - \bits{11 reg1 reg2}
-  - form: mem into reg
-    src: none
-    bits:
-      - \bits{66}
-      - \bits{0F}
-      - \bits{38}
-      - \bits{F6}
-      - \bits{mod reg r/m}
+  list:
+    - form: reg3(2) into reg3(1)
+      bits:
+        - \bits{66}
+        - \bits{0F}
+        - \bits{38}
+        - \bits{F6}
+        - \bits{11 reg3(1) reg3(2)}
+    - form: memory into reg3
+      bits:
+        - \bits{66}
+        - \bits{0F}
+        - \bits{38}
+        - \bits{F6}
+        - \bits{mod reg3 r/m}
 description: >-
   The \c{ADCX} instruction adds the destination operand, the source operand, and the \reg{CF} flag and stores the result in the destination operand.
 

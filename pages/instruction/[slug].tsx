@@ -30,7 +30,6 @@ import Scrollable from "../../components/Scrollable";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import SyntaxHighlighterDarkTheme from "react-syntax-highlighter/dist/cjs/styles/hljs/atom-one-dark";
 import TOC from "../../components/TOC";
-import { strict as assert } from "assert";
 
 type OpcodeValidityValues = "valid" | "valid*" | "invalid" | "n/e";
 const OpcodeValidityMap: { [T in OpcodeValidityValues]: string } = {
@@ -66,10 +65,10 @@ type Encoding = {
     encodings: IDictionary<string[]>,
 };
 type BitEncoding = {
+    list: BitEncodingEntry[],
+};
+type BitEncodingEntry = {
     form: string,
-    // In the Intel SDM, what section in Volume 2, Appendix B?
-    // Unused here
-    src: string,
     limits?: string,
     bits: string | string[],
 };
@@ -99,7 +98,7 @@ type PageProps = {
     validity: string,
     opcode: Opcode[],
     encoding: Encoding,
-    bitEncoding: BitEncoding[],
+    bitEncoding?: BitEncoding,
     description: string,
     operation: string,
     operationNotes: string[],
@@ -158,7 +157,7 @@ function formatEncodingCell(operand: string): JSX.Element {
     return <Code>{operand}</Code>;
 }
 
-function bitEncodings(encodings: BitEncoding[]): JSX.Element {
+function bitEncodings(encodings: BitEncodingEntry[]): JSX.Element {
     const rows = encodings.map((entry, idx) => {
         const bits = coerceArray(entry.bits).map((byte, idx, arr) => (
             <React.Fragment key={idx}>
@@ -214,7 +213,8 @@ export default function Page(props: PageProps): JSX.Element {
         <Layout canonical={`/instruction/${props.id}`} navGroup="instruction" title={`${props.id.toUpperCase()}: ${processStringClean(props.title)}`} src="/pages/instruction/[slug].tsx" dataSrc={`/data/instructions/${props.id[0]}/${props.id}.yaml`} breadcrumbs={PageBreadcrumbs}>
             <TOC.Root>
                 <TOC.Entry href="#headingEncoding" text="Encoding" />
-                <TOC.Entry href="#headingBitEncoding" text="Bit Encoding" />
+                {props.bitEncoding &&
+                    <TOC.Entry href="#headingBitEncoding" text="Bit Encoding" />}
                 <TOC.Entry href="#headingDescription" text="Description" />
                 {props.operationNotes
                     ? <TOC.Entry href="#headingOperation" text="Operation">
@@ -329,8 +329,11 @@ export default function Page(props: PageProps): JSX.Element {
                     </HTMLTable>
                 </Scrollable>
 
-                <H2 id="headingBitEncoding">Bit Encoding</H2>
-                {bitEncodings(props.bitEncoding)}
+                {props.bitEncoding &&
+                    <>
+                        <H2 id="headingBitEncoding">Bit Encoding</H2>
+                        {bitEncodings(props.bitEncoding.list)}
+                    </>}
 
                 <H2 id="headingDescription">Description</H2>
                 {paragraphsFromString(props.description)}

@@ -25,16 +25,15 @@ encoding:
     I:
       - imm8[r]
 bitEncoding:
-  - form: implicit 10
-    src: GenPurpose
-    bits:
-      - \bits{1101 0100}
-      - \bits{0000 1010}
-  - form: immediate
-    src: GenPurpose
-    bits:
-      - \bits{1101 0100}
-      - immediate
+  list:
+    - form: implicit 10
+      bits:
+        - \bits{1101 0100}
+        - \bits{0000 1010}
+    - form: immediate
+      bits:
+        - \bits{1101 0100}
+        - immediate
 description: >-
   The \c{AAM} instruction converts the result of a multiplication of two BCD digits to a valid 2-digit BCD number.
 

@@ -53,20 +53,19 @@ encoding:
       - EVEX.vvvv[r]
       - ModRM.r/m[r]
 bitEncoding:
-  - form: xmmreg2 into xmmreg1
-    src: SSE
-    bits:
-      - \bits{F2}
-      - \bits{0F}
-      - \bits{58}
-      - \bits{11 xmmreg1 xmmreg2}
-  - form: mem into xmmreg
-    src: SSE
-    bits:
-      - \bits{F3}
-      - \bits{0F}
-      - \bits{58}
-      - \bits{mod xmmreg r/m}
+  list:
+    - form: xmmreg3(2) into xmmreg3(1)
+      bits:
+        - \bits{F3}
+        - \bits{0F}
+        - \bits{58}
+        - \bits{11 xmmreg3(1) xmmreg3(2)}
+    - form: memory into xmmreg3
+      bits:
+        - \bits{F3}
+        - \bits{0F}
+        - \bits{58}
+        - \bits{mod xmmreg3 r/m}
 description: >-
   The \c{(V)ADDSS} instruction adds a single single-precision floating-point from the first source operand and the second source operand and stores the result in the destination operand.
 

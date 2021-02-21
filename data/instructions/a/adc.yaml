@@ -182,43 +182,37 @@ encoding:
       - ModRM.reg[rw]
       - ModRM.r/m[r]
 bitEncoding:
-  - form: reg1 into reg2
-    src: GenPurpose
-    bits:
-      - \bits{0001 000w}
-      - \bits{11 reg1 reg2}
-  - form: reg2 into reg1
-    src: GenPurpose
-    bits:
-      - \bits{0001 001w}
-      - \bits{11 reg1 reg2}
-  - form: mem into reg
-    src: GenPurpose
-    bits:
-      - \bits{0001 001w}
-      - \bits{mod reg r/m}
-  - form: reg into mem
-    src: GenPurpose
-    bits:
-      - \bits{0001 000w}
-      - \bits{mod reg r/m}
-  - form: immediate into reg
-    src: GenPurpose
-    bits:
-      - \bits{1000 00sw}
-      - \bits{11 010 reg}
-      - immediate
-  - form: immediate into \reg{AL}, \reg{AX}, or \reg{EAX}
-    src: GenPurpose
-    bits:
-      - \bits{0001 010w}
-      - immediate
-  - form: immediate into mem
-    src: GenPurpose
-    bits:
-      - \bits{1000 00sw}
-      - \bits{mod 010 r/m}
-      - immediate
+  list:
+    - form: reg3(1) into reg3(2)
+      bits:
+        - \bits{0001 000w}
+        - \bits{11 reg3(1) reg3(2)}
+    - form: reg3 into memory
+      bits:
+        - \bits{0001 000w}
+        - \bits{mod reg3 r/m}
+    - form: reg3(2) into reg3(1)
+      bits:
+        - \bits{0001 001w}
+        - \bits{11 reg3(1) reg3(2)}
+    - form: memory into reg3
+      bits:
+        - \bits{0001 001w}
+        - \bits{mod reg3 r/m}
+    - form: immediate into reg3
+      bits:
+        - \bits{1000 00sw}
+        - \bits{11 010 reg3}
+        - immediate
+    - form: immediate into \reg{AL}, \reg{AX}, or \reg{EAX}
+      bits:
+        - \bits{0001 010w}
+        - immediate
+    - form: immediate into memory
+      bits:
+        - \bits{1000 00sw}
+        - \bits{mod 010 r/m}
+        - immediate
 description: >-
   The \c{ADC} instruction adds the destination operand, the source operand, and the \reg{CF} flag and stores the result in the destination operand.
 

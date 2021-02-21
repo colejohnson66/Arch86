@@ -30,13 +30,6 @@ encoding:
       - ModRM.reg[w]
       - VEX.vvvv[r]
       - ModRM.r/m[r]
-bitEncoding:
-  - form: VEX encoded form (register)
-    src: none
-    bits: \i{}
-  - form: VEX encoded form (memory)
-    src: none
-    bits: \i{}
 description: >-
   The \c{ANDN} instruction performs a logical AND against the inverted form of the first source operand with the unchanged second source operand and stores the result in the destination operand.
 

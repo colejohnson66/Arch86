@@ -18,10 +18,10 @@ encoding:
       -
       -
 bitEncoding:
-  - form:
-    src:
-    limits:
-    bits:
+  list:
+    - form:
+      limits:
+      bits:
 description: >-
 operation: |-
 operationNotes:

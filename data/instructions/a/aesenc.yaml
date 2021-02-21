@@ -91,22 +91,21 @@ encoding:
       - EVEX.vvvv[r]
       - ModRM.r/m[r]
 bitEncoding:
-  - form: xmmreg2 into xmmreg1
-    src: AESNI
-    bits:
-      - \bits{66}
-      - \bits{0F}
-      - \bits{38}
-      - \bits{DC}
-      - \bits{11 xmmreg1 xmmreg2}
-  - form: mem into xmmreg
-    src: AESNI
-    bits:
-      - \bits{66}
-      - \bits{0F}
-      - \bits{38}
-      - \bits{DC}
-      - \bits{mod xmmreg r/m}
+  list:
+    - form: xmmreg3(2) into xmmreg3(1)
+      bits:
+        - \bits{66}
+        - \bits{0F}
+        - \bits{38}
+        - \bits{DC}
+        - \bits{11 xmmreg3(1) xmmreg3(2)}
+    - form: memory into xmmreg3
+      bits:
+        - \bits{66}
+        - \bits{0F}
+        - \bits{38}
+        - \bits{DC}
+        - \bits{mod xmmreg3 r/m}
 description: >-
   The \c{(V)AESENC} instruction performs a single round of AES encryption using one, two, or four 128 bit states from the first source operand using 128 bit round keys from the second source operand and stores the result in the destination operand.
 
