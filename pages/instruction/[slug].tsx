@@ -39,10 +39,10 @@ const OpcodeValidityMap: { [T in OpcodeValidityValues]: string } = {
     "n/e": "Not Encodable",
 };
 type OpcodeValidity = {
-    16?: OpcodeValidityValues,
-    1632?: OpcodeValidityValues,
-    32?: OpcodeValidityValues,
-    64: OpcodeValidityValues,
+    16?: OpcodeValidityValues;
+    1632?: OpcodeValidityValues;
+    32?: OpcodeValidityValues;
+    64: OpcodeValidityValues;
 };
 // TODO: use <abbr>?
 const OpcodeValidityKeyMap: { [T in keyof OpcodeValidity]: string } = {
@@ -52,63 +52,63 @@ const OpcodeValidityKeyMap: { [T in keyof OpcodeValidity]: string } = {
     64: "64-bit Mode",
 };
 type Opcode = {
-    opcode: string,
-    mnemonic: string,
-    encoding: string,
-    validity: OpcodeValidity,
-    cpuid?: string | string[],
-    description: string,
+    opcode: string;
+    mnemonic: string;
+    encoding: string;
+    validity: OpcodeValidity;
+    cpuid?: string | string[];
+    description: string;
 };
 type Encoding = {
-    operands: number,
-    hasTuple?: boolean,
-    encodings: IDictionary<string[]>,
+    operands: number;
+    hasTuple?: boolean;
+    encodings: IDictionary<string[]>;
 };
 type BitEncoding = {
-    list: BitEncodingEntry[],
+    list: BitEncodingEntry[];
 };
 type BitEncodingEntry = {
-    form: string,
-    limits?: string,
-    bits: string | string[],
+    form: string;
+    limits?: string;
+    bits: string | string[];
 };
 type ExceptionList = IDictionary<string | string[]>;
 type Exceptions = {
-    protected?: string | ExceptionList,
-    real?: string | ExceptionList,
-    virtual?: string | ExceptionList,
-    compatibility?: string | ExceptionList,
-    long?: string | ExceptionList,
-    floating?: string | string[],
-    other?: string | string[],
-    otherAdditional?: string | ExceptionList,
+    protected?: string | ExceptionList;
+    real?: string | ExceptionList;
+    virtual?: string | ExceptionList;
+    compatibility?: string | ExceptionList;
+    long?: string | ExceptionList;
+    floating?: string | string[];
+    other?: string | string[];
+    otherAdditional?: string | ExceptionList;
 };
 type Changes = {
-    version: number,
-    date: string,
-    list: string | string[],
+    version: number;
+    date: string;
+    list: string | string[];
 };
 type Reference = {
-    name: string,
-    value: string, // TODO: Is this how we should do this?
+    name: string;
+    value: string; // TODO: Is this how we should do this?
 };
 type PageProps = {
-    id: string,
-    title: string,
-    validity: string,
-    opcode: Opcode[],
-    encoding: Encoding,
-    bitEncoding?: BitEncoding,
-    description: string,
-    operation: string,
-    operationNotes: string[],
-    examples?: string | string[]
-    flags?: string,
-    intrinsicsC?: string,
-    intrinsicsRust?: string,
-    exceptions: Exceptions,
-    changes?: Changes,
-    refs?: Reference[],
+    id: string;
+    title: string;
+    validity: string;
+    opcode: Opcode[];
+    encoding: Encoding;
+    bitEncoding?: BitEncoding;
+    description: string;
+    operation: string;
+    operationNotes: string[];
+    examples?: string | string[];
+    flags?: string;
+    intrinsicsC?: string;
+    intrinsicsRust?: string;
+    exceptions: Exceptions;
+    changes?: Changes;
+    refs?: Reference[];
 };
 
 function plural<T>(arr: T | T[], singular: string, plural: string): string {
