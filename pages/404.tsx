@@ -15,9 +15,9 @@
  *   with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
+import A from "../components/A";
 import { H1 } from "@blueprintjs/core";
 import Layout from "../components/Layout";
-import Link from "../components/Link";
 import React from "react";
 
 export default function Page(): JSX.Element {
@@ -30,7 +30,7 @@ export default function Page(): JSX.Element {
                 </p>
                 <p>
                     This site is currently under active development, so many pages may not exist yet.
-                    If you believe you were linked here <em>in error</em>, please <Link href="/contact">contact me</Link> to report the problem.
+                    If you believe you were linked here <em>in error</em>, please <A href="/contact">contact me</A> to report the problem.
                 </p>
             </div>
         </Layout>

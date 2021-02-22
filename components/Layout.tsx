@@ -17,8 +17,8 @@
 
 import { Breadcrumb, Breadcrumbs, Button, Card, Divider, IBreadcrumbProps, Navbar } from "@blueprintjs/core";
 
+import A from "./A";
 import Head from "next/head";
-import Link from "../components/Link";
 import React from "react";
 import Scrollable from "./Scrollable";
 import { strict as assert } from "assert";
@@ -39,7 +39,7 @@ function renderBreadcrumbs({ text, href, ...restProps }: IBreadcrumbProps): JSX.
     return (
         <Breadcrumb {...restProps}>
             {href
-                ? <Link href={href}>{text}</Link>
+                ? <A href={href}>{text}</A>
                 : text}
         </Breadcrumb>
     );
@@ -48,12 +48,12 @@ function renderBreadcrumbs({ text, href, ...restProps }: IBreadcrumbProps): JSX.
 export default function Layout(props: LayoutProps): JSX.Element {
     function navItem(group: NavGroup, href: string, text: string) {
         return (
-            <Link href={href}>
+            <A href={href}>
                 <Button
                     active={props.navGroup === group}
                     className="bp3-minimal"
                     text={text} />
-            </Link>
+            </A>
         );
     }
 
@@ -108,18 +108,18 @@ export default function Layout(props: LayoutProps): JSX.Element {
                     <div className="bp3-text-small">
                         {props.src &&
                             <p>
-                                <Link href={`https://github.com/colejohnson66/80x86/blob/main${props.src}`}>
+                                <A href={`https://github.com/colejohnson66/80x86/blob/main${props.src}`}>
                                     View this page&apos;s source code
-                                </Link>
+                                </A>
                                 {props.dataSrc ? ", and " : "."}
                                 {props.dataSrc &&
-                                    <Link href={`https://github.com/colejohnson66/80x86/blob/main${props.dataSrc}`}>
+                                    <A href={`https://github.com/colejohnson66/80x86/blob/main${props.dataSrc}`}>
                                         the data used to generate it
-                                    </Link>}
+                                    </A>}
                                 {props.dataSrc && "."}
                             </p>}
                         <p>
-                            <Link href="/contact">Contact</Link>.
+                            <A href="/contact">Contact</A>.
                         </p>
                         <p>
                             Website copyright &copy; Cole Johnson 2020-2021.

@@ -15,8 +15,8 @@
  *   with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
+import A from "../A";
 import DateTime from "../DateTime";
-import Link from "../Link";
 import React from "react";
 
 type CiteWebProps = {
@@ -47,7 +47,7 @@ export default function CiteWeb(props: CiteWebProps): JSX.Element {
 
     let titleAndLink: JSX.Element;
     if (props.url)
-        titleAndLink = <Link href={props.url}>{props.title}</Link>;
+        titleAndLink = <A href={props.url}>{props.title}</A>;
     else
         titleAndLink = <>&quot;{props.title}&quot;</>;
 
@@ -60,9 +60,9 @@ export default function CiteWeb(props: CiteWebProps): JSX.Element {
     let archived: JSX.Element | null = null;
     if (props.archiveUrl) {
         if (props.archiveDate)
-            archived = <>{" "}<Link href={props.archiveUrl}>Archived</Link> from the original on <DateTime dateTime={props.archiveDate} />.</>;
+            archived = <>{" "}<A href={props.archiveUrl}>Archived</A> from the original on <DateTime dateTime={props.archiveDate} />.</>;
         else
-            archived = <>{" "}<Link href={props.archiveUrl}>Archived</Link> from the original.</>;
+            archived = <>{" "}<A href={props.archiveUrl}>Archived</A> from the original.</>;
     }
 
     return (

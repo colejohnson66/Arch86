@@ -14,24 +14,24 @@
  * You should have received a copy of the GNU Affero General Public License along
  *   with this program. If not, see <https://www.gnu.org/licenses/>.
  */
-import { default as NextLink } from "next/link";
+import Link from "next/link";
 import React from "react";
 
 // TODO: next uses 'url.UrlObject | string' for 'href'; is that needed here?
-type LinkProps = {
+type AProps = {
     href: string;
     children: React.ReactNode;
 };
 
-export default function Link(props: LinkProps): JSX.Element {
+export default function A(props: AProps): JSX.Element {
     // is this an internal link?
     // NOTE: this may not work for all internal links (ones that don't start with "/" or "#")
     // TODO: will there be any that won't work?
     if (props.href[0] === "/") {
         return (
-            <NextLink href={props.href}>
+            <Link href={props.href}>
                 <a>{props.children}</a>
-            </NextLink>
+            </Link>
         );
     }
     // TODO: An unknown issue is causing Next to write out links with only a hash as

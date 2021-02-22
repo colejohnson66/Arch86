@@ -16,8 +16,8 @@
  */
 import { Code, H1, H2, IBreadcrumbProps, UL } from "@blueprintjs/core";
 
+import A from "../../components/A";
 import Layout from "../../components/Layout";
-import Link from "../../components/Link";
 import React from "react";
 import TOC from "../../components/TOC";
 
@@ -77,7 +77,7 @@ export default function Page(): JSX.Element {
             <div id="content">
                 <H1>General Purpose Registers</H1>
                 <p>
-                    x86 has 16 general purpose registers that can be used for any kind of data, however, only eight are accessible outside of <Link href="/mode/long">Long Mode</Link>.
+                    x86 has 16 general purpose registers that can be used for any kind of data, however, only eight are accessible outside of <A href="/mode/long">Long Mode</A>.
                     In addition, despite the name &quot;general purpose&quot;, some registers have defined functionality.
                     For example, instructions operating on the stack will implicitly utilize register 4 (stack pointer), and there is no way to change this.
                 </p>
@@ -167,7 +167,7 @@ export default function Page(): JSX.Element {
                     </div>
                     <div className="column">
                         <p>
-                            These registers are only accessible in <Link href="/mode/long">Long Mode</Link>.
+                            These registers are only accessible in <A href="/mode/long">Long Mode</A>.
                         </p>
                         <UL>
                             {longModeRegisterListItem(8)}

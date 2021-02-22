@@ -15,7 +15,7 @@
  *   with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import Link from "../Link";
+import A from "../A";
 import React from "react";
 
 type TOCEntryProps = {
@@ -37,7 +37,7 @@ export default function Entry(props: TOCEntryProps): JSX.Element {
     });
     return (
         <li>
-            {props.tocIndex}. <Link href={props.href}>{props.text}</Link>
+            {props.tocIndex}. <A href={props.href}>{props.text}</A>
             {(newChildren && newChildren.length !== 0) && <ul>{newChildren}</ul>}
         </li>
     );

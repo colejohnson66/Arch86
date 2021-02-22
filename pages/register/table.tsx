@@ -16,8 +16,8 @@
  */
 import { Code, H1, H2, H3, IBreadcrumbProps, UL } from "@blueprintjs/core";
 
+import A from "../../components/A";
 import Layout from "../../components/Layout";
-import Link from "../../components/Link";
 import React from "react";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import SyntaxHighlighterDarkTheme from "react-syntax-highlighter/dist/cjs/styles/hljs/atom-one-dark";
@@ -77,8 +77,8 @@ export default function Page(): JSX.Element {
 
                 <H2 id="headingIDTR">Interrupt Descriptor Table</H2>
                 <p>
-                    In <Link href="/mode/protected">Protected</Link> and <Link href="/mode/long">Long Mode</Link>, the Interrupt Descriptor Table details where the Interrupt Service Routines (ISR) are located.
-                    It is the counterpart to <Link href="/mode/real">Real Mode</Link>&apos;s <Link href="#headingIVT">Interrupt Vector Table</Link> (IVT).
+                    In <A href="/mode/protected">Protected</A> and <A href="/mode/long">Long Mode</A>, the Interrupt Descriptor Table details where the Interrupt Service Routines (ISR) are located.
+                    It is the counterpart to <A href="/mode/real">Real Mode</A>&apos;s <A href="#headingIVT">Interrupt Vector Table</A> (IVT).
                 </p>
                 <p>
                     Due to the limitations of the Interrupt Vector Table, Intel created the Interrupt Descriptor Table.
@@ -86,7 +86,7 @@ export default function Page(): JSX.Element {
                     This was previously not possible.
                 </p>
                 <p>
-                    The <Link href="/instruction/lidt"><Code>LIDT</Code> - Load Interrupt Descriptor Table Register</Link> instruction takes a pointer to a memory location containing the following data:
+                    The <A href="/instruction/lidt"><Code>LIDT</Code> - Load Interrupt Descriptor Table Register</A> instruction takes a pointer to a memory location containing the following data:
                 </p>
                 <SyntaxHighlighter lang="x86asm" style={SyntaxHighlighterDarkTheme}>
                     {idtrLayout}

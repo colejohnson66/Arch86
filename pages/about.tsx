@@ -17,8 +17,8 @@
 
 import { Code, H1, H2, IBreadcrumbProps, UL } from "@blueprintjs/core";
 
+import A from "../components/A";
 import Layout from "../components/Layout";
-import Link from "../components/Link";
 import React from "react";
 import TOC from "../components/TOC";
 
@@ -41,31 +41,31 @@ export default function Page(): JSX.Element {
 
                 <H2 id="headingStack">Software Stack</H2>
                 <p>
-                    This site is build using <Link href="https://nextjs.org/">Next.js</Link> (itself built on <Link href="https://reactjs.org/">React.js</Link>) and deployed on <Link href="https://vercel.com/">Vercel</Link>.
-                    {" "}<Link href="https://blueprintjs.com/">Blueprint</Link> is used for theming and layout.
+                    This site is build using <A href="https://nextjs.org/">Next.js</A> (itself built on <A href="https://reactjs.org/">React.js</A>) and deployed on <A href="https://vercel.com/">Vercel</A>.
+                    {" "}<A href="https://blueprintjs.com/">Blueprint</A> is used for theming and layout.
                 </p>
                 <p>
                     Additionally, the following npm packages are (directly) used:
                 </p>
                 <UL>
                     <li>
-                        <Link href="https://www.npmjs.com/package/react-syntax-highlighter"><Code>react-syntax-highlighter</Code></Link>
+                        <A href="https://www.npmjs.com/package/react-syntax-highlighter"><Code>react-syntax-highlighter</Code></A>
                         {": "}Any syntax highlighting used here.
                     </li>
                     <li>
-                        <Link href="https://www.npmjs.com/package/styled-jsx"><Code>styled-jsx</Code></Link>
+                        <A href="https://www.npmjs.com/package/styled-jsx"><Code>styled-jsx</Code></A>
                         {": "}Localized CSS.
                     </li>
                     <li>
-                        <Link href="https://www.npmjs.com/package/yaml"><Code>yaml</Code></Link>
+                        <A href="https://www.npmjs.com/package/yaml"><Code>yaml</Code></A>
                         {": "}Parsing YAML files used for data storage.
                     </li>
                 </UL>
 
                 <H2 id="headingSource">Open Source</H2>
                 <p>
-                    This site is open source and released under the <Link href="https://opensource.org/licenses/AGPL-3.0">GNU AGPL 3.0 or later</Link> license.
-                    The source code is available on <Link href="https://github.com/colejohnson66/80x86">GitHub</Link>.
+                    This site is open source and released under the <A href="https://opensource.org/licenses/AGPL-3.0">GNU AGPL 3.0 or later</A> license.
+                    The source code is available on <A href="https://github.com/colejohnson66/80x86">GitHub</A>.
                 </p>
             </div>
         </Layout>

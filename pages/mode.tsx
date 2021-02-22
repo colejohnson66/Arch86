@@ -16,8 +16,8 @@
  */
 import { H1, H2, IBreadcrumbProps, UL } from "@blueprintjs/core";
 
+import A from "../components/A";
 import Layout from "../components/Layout";
-import Link from "../components/Link";
 import React from "react";
 import TOC from "../components/TOC";
 import Unit from "../components/Unit";
@@ -45,16 +45,16 @@ export default function Page(): JSX.Element {
                     There exist three main modes of processor operation:
                 </p>
                 <UL>
-                    <li><Link href="/mode/real">Real Mode</Link> (16 bit)</li>
-                    <li><Link href="/mode/protected">Protected Mode</Link> (32 bit) with option for <Link href="/mode/virtual">Virtual-8086 Mode</Link> (16 bit) on individual threads</li>
-                    <li><Link href="/mode/long">Long Mode</Link> (64 bit) with option for <Link href="/mode/compatibility">Compatibility Mode</Link> (32 bit) on individual threads</li>
+                    <li><A href="/mode/real">Real Mode</A> (16 bit)</li>
+                    <li><A href="/mode/protected">Protected Mode</A> (32 bit) with option for <A href="/mode/virtual">Virtual-8086 Mode</A> (16 bit) on individual threads</li>
+                    <li><A href="/mode/long">Long Mode</A> (64 bit) with option for <A href="/mode/compatibility">Compatibility Mode</A> (32 bit) on individual threads</li>
                 </UL>
                 <p>
                     In addition to those three, there exist two other modes that are generally unused by user facing software:
                 </p>
                 <UL>
-                    <li><Link href="/mode/unreal">Unreal Mode</Link> - a variant of Real Mode, but with access to a <Unit value={4} unit="GiB" /> address space</li>
-                    <li><Link href="/mode/smm">System Management Mode</Link> - intended for BIOSes and other very low level system initialization routines</li>
+                    <li><A href="/mode/unreal">Unreal Mode</A> - a variant of Real Mode, but with access to a <Unit value={4} unit="GiB" /> address space</li>
+                    <li><A href="/mode/smm">System Management Mode</A> - intended for BIOSes and other very low level system initialization routines</li>
                 </UL>
             </div>
         </Layout>

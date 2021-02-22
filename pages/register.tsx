@@ -16,8 +16,8 @@
  */
 import { Code, H1, H2, IBreadcrumbProps, UL } from "@blueprintjs/core";
 
+import A from "../components/A";
 import Layout from "../components/Layout";
-import Link from "../components/Link";
 import React from "react";
 import TOC from "../components/TOC";
 
@@ -45,19 +45,19 @@ export default function Page(): JSX.Element {
                     For example, <Code>MXCSR</Code> is used with vector instructions, and would be listed with the other vector registers.
                 </p>
                 <UL>
-                    <li><Link href="/register/gpr">General purpose registers</Link> (<Code>EAX</Code>, <Code>EBX</Code>, etc.)</li>
-                    <li><Link href="/register/flags">Flags register</Link> (<Code>(ER)FLAGS</Code>)</li>
-                    <li><Link href="/register/segment">Segment registers</Link> (<Code>CS</Code>, <Code>DS</Code>, etc.)</li>
-                    <li><Link href="/register/control">Control registers</Link> (<Code>CR0</Code>, <Code>CR2</Code>, etc.)</li>
-                    <li><Link href="/register/debug">Debug registers</Link> (<Code>DR0</Code>, <Code>DR1</Code>, etc.)</li>
-                    <li><Link href="/register/fpu">Floating point registers</Link> (<Code>ST(0)</Code>, <Code>ST(1)</Code>, etc.)</li>
-                    <li><Link href="/register/table">Table registers</Link> (<Code>GDTR</Code>, <Code>IDTR</Code>, etc.)</li>
-                    <li><Link href="/register/mmx">Multimedia Extension registers</Link> (<Code>MM0</Code>, <Code>MM1</Code>, etc.)</li>
-                    <li><Link href="/register/vector">Vector registers</Link> (<Code>XMM0</Code>, <Code>YMM0</Code>, etc.)</li>
-                    <li><Link href="/register/mask">Vector mask registers</Link> (<Code>K0</Code>, <Code>K1</Code>, etc.)</li>
-                    <li><Link href="/register/bound">Bound registers</Link> (<Code>BND0</Code>, <Code>BND1</Code>, etc.)</li>
-                    <li><Link href="/register/tile">Tile registers</Link> (<Code>TMM0</Code>, <Code>TMM1</Code>, etc.)</li>
-                    <li><Link href="/register/msr">Model specific registers</Link></li>
+                    <li><A href="/register/gpr">General purpose registers</A> (<Code>EAX</Code>, <Code>EBX</Code>, etc.)</li>
+                    <li><A href="/register/flags">Flags register</A> (<Code>(ER)FLAGS</Code>)</li>
+                    <li><A href="/register/segment">Segment registers</A> (<Code>CS</Code>, <Code>DS</Code>, etc.)</li>
+                    <li><A href="/register/control">Control registers</A> (<Code>CR0</Code>, <Code>CR2</Code>, etc.)</li>
+                    <li><A href="/register/debug">Debug registers</A> (<Code>DR0</Code>, <Code>DR1</Code>, etc.)</li>
+                    <li><A href="/register/fpu">Floating point registers</A> (<Code>ST(0)</Code>, <Code>ST(1)</Code>, etc.)</li>
+                    <li><A href="/register/table">Table registers</A> (<Code>GDTR</Code>, <Code>IDTR</Code>, etc.)</li>
+                    <li><A href="/register/mmx">Multimedia Extension registers</A> (<Code>MM0</Code>, <Code>MM1</Code>, etc.)</li>
+                    <li><A href="/register/vector">Vector registers</A> (<Code>XMM0</Code>, <Code>YMM0</Code>, etc.)</li>
+                    <li><A href="/register/mask">Vector mask registers</A> (<Code>K0</Code>, <Code>K1</Code>, etc.)</li>
+                    <li><A href="/register/bound">Bound registers</A> (<Code>BND0</Code>, <Code>BND1</Code>, etc.)</li>
+                    <li><A href="/register/tile">Tile registers</A> (<Code>TMM0</Code>, <Code>TMM1</Code>, etc.)</li>
+                    <li><A href="/register/msr">Model specific registers</A></li>
                 </UL>
             </div>
         </Layout>

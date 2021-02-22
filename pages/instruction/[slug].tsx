@@ -20,10 +20,10 @@ import { GetStaticPaths, GetStaticProps } from "next";
 import { getAllInstructionsAsParams, getInstructionData } from "../../lib/instruction";
 import { processStringClean, processStringToJsx } from "../../lib/processStringToJsx";
 
+import A from "../../components/A";
 import DateTime from "../../components/DateTime";
 import IDictionary from "../../types/IDictionary";
 import Layout from "../../components/Layout";
-import Link from "../../components/Link";
 import MaybeArray from "../../types/MaybeArray";
 import React from "react";
 import Ref from "../../components/Ref";
@@ -201,9 +201,9 @@ export default function Page(props: PageProps): JSX.Element {
     ];
 
     const sdmTitleWithLink = (
-        <Link href="https://software.intel.com/content/www/us/en/develop/articles/intel-sdm.html">
+        <A href="https://software.intel.com/content/www/us/en/develop/articles/intel-sdm.html">
             <i>Intel® 64 and IA-32 Architectures Software Developer’s Manual</i>
-        </Link>);
+        </A>);
 
     return (
         <Layout canonical={`/instruction/${props.id}`} navGroup="instruction" title={`${props.id.toUpperCase()}: ${processStringClean(props.title)}`} src="/pages/instruction/[slug].tsx" dataSrc={`/data/instructions/${props.id[0]}/${props.id}.yaml`} breadcrumbs={PageBreadcrumbs}>
@@ -249,19 +249,19 @@ export default function Page(props: PageProps): JSX.Element {
             <div id="content">
                 <H1><Code>{props.id.toUpperCase()}</Code>: {processStringToJsx(props.title)}</H1>
                 <Callout intent="primary">
-                    For information about interpreting this page, see <Link href="/instruction/help">the help page</Link>.
+                    For information about interpreting this page, see <A href="/instruction/help">the help page</A>.
                 </Callout>
                 <Scrollable>
                     <HTMLTable bordered>
                         <thead>
                             <tr>
                                 <th>Opcode and Mnemonic</th>
-                                <th><Link href="#headingEncoding">Encoding</Link></th>
+                                <th><A href="#headingEncoding">Encoding</A></th>
                                 {props.validity.split(",").map((entry) => (
                                     <th key={entry}>{OpcodeValidityKeyMap[entry]}</th>
                                 ))}
                                 {props.opcode[0].cpuid &&
-                                    <th><Link href="/instruction/cpuid">CPUID</Link> Feature Flag</th>}
+                                    <th><A href="/instruction/cpuid">CPUID</A> Feature Flag</th>}
                                 <th>Description</th>
                             </tr>
                         </thead>
@@ -337,7 +337,7 @@ export default function Page(props: PageProps): JSX.Element {
                 <H2 id="headingOperation">Operation</H2>
                 <Callout intent="primary">
                     This pseudo-code uses a Rust-like syntax.
-                    A list of the types used is <Link href="/instruction/help#headingOperation">available here</Link>.
+                    A list of the types used is <A href="/instruction/help#headingOperation">available here</A>.
                 </Callout>
                 <Scrollable>
                     <SyntaxHighlighter language="rust" style={SyntaxHighlighterDarkTheme}>

@@ -17,8 +17,8 @@
 
 import { Code, H1, H2, H3, H4, HTMLTable, IBreadcrumbProps, UL } from "@blueprintjs/core";
 
+import A from "../../components/A";
 import Layout from "../../components/Layout";
-import Link from "../../components/Link";
 import React from "react";
 import TOC from "../../components/TOC";
 
@@ -92,13 +92,13 @@ export default function Page(): JSX.Element {
                         <b>Opcode and Mnemonic</b>:
                         A single form of the instruction listing both the binary encoding and assembly form.
                         Italics in the mnemonic part signify operands.
-                        {" "}<Link href="#headingOverviewTableVex">See below</Link> for an explanation on interpreting VEX and EVEX opcodes.
+                        {" "}<A href="#headingOverviewTableVex">See below</A> for an explanation on interpreting VEX and EVEX opcodes.
                         <br />
                         EVEX forms commonly feature other bits of information such as the mask register (<Code>{"{k1}"}</Code>), error masking (<Code>{"{er}"}</Code>), and more.
                     </li>
                     <li>
                         <b>Encoding</b>:
-                        A reference to the <Link href="#headingEncoding">encoding table</Link>.
+                        A reference to the <A href="#headingEncoding">encoding table</A>.
                         This value represents <em>where</em> in the instruction the operands are encoded.
                     </li>
                     <li>
@@ -107,7 +107,7 @@ export default function Page(): JSX.Element {
                         &quot;Valid&quot; forms are allowed while &quot;invalid&quot; forms will throw an exception if encountered.
                         &quot;Not encodable&quot; forms are disallowed in the specified mode, and will, in fact, be interpreted differently than expected.
                         <br />
-                        For example, in <Link href="/mode/long">64 bit mode</Link>, the byte range <Code>40</Code> through <Code>4F</Code> was repurposed for the REX prefix.
+                        For example, in <A href="/mode/long">64 bit mode</A>, the byte range <Code>40</Code> through <Code>4F</Code> was repurposed for the REX prefix.
                         This makes encoding <Code>INC eax</Code> as <Code>40</Code> impossible.
                         Should the processor encounter what the author thinks is <Code>INC eax</Code>, it will treat it as a REX prefix with the lower four bits set to 0.
                         The correct encoding would be <Code>FF C0</Code>.
@@ -144,7 +144,7 @@ export default function Page(): JSX.Element {
                         This is typically used in situations involving scalars as only a single piece of data is operated on, not the whole register.
                         <br />
                         In some situations, despite an instruction being defined with <Code>LIG</Code>, Intel may recommend a specific value is used instead for future proofing.
-                        For example, the <Link href="/instruction/addsd"><Code>ADDSD</Code> instruction</Link> is defined to be <Code>LIG</Code>, but Intel recommends setting <Code>L</Code> (and <Code>L&apos;</Code> for EVEX) to zero.
+                        For example, the <A href="/instruction/addsd"><Code>ADDSD</Code> instruction</A> is defined to be <Code>LIG</Code>, but Intel recommends setting <Code>L</Code> (and <Code>L&apos;</Code> for EVEX) to zero.
                     </li>
                     <li>
                         <b>prefixes</b>:
@@ -186,7 +186,7 @@ export default function Page(): JSX.Element {
                         In these cases, the &quot;legacy&quot; form will only have two operands while the VEX and EVEX forms will have three.
                         As such, the &quot;Operand 3&quot; cell will be empty.
                         <br />
-                        <Link href="#headingEncodingOperand">See below</Link> for an explanation on interpreting this value.
+                        <A href="#headingEncodingOperand">See below</A> for an explanation on interpreting this value.
                     </li>
                 </UL>
 
@@ -229,7 +229,7 @@ export default function Page(): JSX.Element {
                     </li>
                     <li>
                         <Code>FLAGS</Code>:
-                        The <Link href="/register/flags">FLAGS</Link> register.
+                        The <A href="/register/flags">FLAGS</A> register.
                     </li>
                     <li>
                         <Code>imm##</Code>:
@@ -289,7 +289,7 @@ export default function Page(): JSX.Element {
                     <li>
                         <Code>d</Code> (direction):
                         Specifies which direction data flows from and into.
-                        This is commonly used for ALU instructions from the original <Link href="/architecture/8086">8086</Link>.
+                        This is commonly used for ALU instructions from the original <A href="/architecture/8086">8086</A>.
                         This can have one of two values:
                         <HTMLTable small>
                             <thead>
@@ -351,7 +351,7 @@ export default function Page(): JSX.Element {
                     </li>
                     <li>
                         <Code>reg</Code> (general purpose register):
-                        There are eight general purpose registers (16 in <Link href="/mode/long">Long Mode</Link>).
+                        There are eight general purpose registers (16 in <A href="/mode/long">Long Mode</A>).
                         Which one is used depends on the bits of this <Code>reg</Code> field (combined with REX.R, VEX.R, or EVEX.R if present), the <Code>w</Code> field (if present), <em>and</em> the current processor mode.
                         <HTMLTable small>
                             <caption>Selected Register When <Code>w</Code> is not Present</caption>
@@ -427,9 +427,9 @@ export default function Page(): JSX.Element {
                                 <tr>
                                     <td colSpan={3}>
                                         A quirk of this field is that the opcodes beginning with <Code>82</Code> (8086 ALU operations) perform the same operation as ones beginning with <Code>80</Code>.
-                                        For example, <Link href="/instruction/add"><Code>ADD <i>r/m8</i>, <i>imm8</i></Code></Link> is documented as being encoded as <Code>80 /0 <i>ib</i></Code>, but can also be encoded as <Code>82 /0 <i>ib</i></Code>.
+                                        For example, <A href="/instruction/add"><Code>ADD <i>r/m8</i>, <i>imm8</i></Code></A> is documented as being encoded as <Code>80 /0 <i>ib</i></Code>, but can also be encoded as <Code>82 /0 <i>ib</i></Code>.
                                         This has the effect of sign extending the 8 bit immediate to the size of the 8 bit destination (i.e. doing nothing).
-                                        These encodings are undocumented and were removed in <Link href="/mode/long">Long Mode</Link> (a <Code>#UD</Code> exception will result).
+                                        These encodings are undocumented and were removed in <A href="/mode/long">Long Mode</A> (a <Code>#UD</Code> exception will result).
                                     </td>
                                 </tr>
                             </tfoot>
@@ -524,7 +524,7 @@ export default function Page(): JSX.Element {
                     </li>
                     <li>
                         <Code>xmmreg</Code> (vector register):
-                        There are 32 vector registers (only eight are accessible in <Link href="/mode/protected">Protected Mode</Link>).
+                        There are 32 vector registers (only eight are accessible in <A href="/mode/protected">Protected Mode</A>).
                         This field represents the three least significant bits of the register number.
                         {/* TODO: How are the other 24 accessed */}
                     </li>
@@ -541,7 +541,7 @@ export default function Page(): JSX.Element {
                     The &quot;Operation&quot; section is pseudo-code that uses a Rust-like syntax.
                     While attempts are made to mimic Rust&apos;s syntax, some things are &quot;incorrect&quot;.
                     For example, Rust&apos;s ranges follow other programming languages with a &quot;start to end&quot; order.
-                    This mimics how arrays are laid out in memory (index 0 is at a lower address than index n), however, a string of bits follows <Link href="https://en.wikipedia.org/wiki/Positional_notation">positional notation</Link> with the most significant bit (MSB) at the <em>left</em>.
+                    This mimics how arrays are laid out in memory (index 0 is at a lower address than index n), however, a string of bits follows <A href="https://en.wikipedia.org/wiki/Positional_notation">positional notation</A> with the most significant bit (MSB) at the <em>left</em>.
                     Due to this, bit position slices use a &quot;high to low&quot; (&quot;end to start&quot;) order.
                 </p>
 
@@ -549,14 +549,14 @@ export default function Page(): JSX.Element {
                 <p>
                     The <Code>MODE</Code> global variable represents the current operating mode of the processor thread.
                     It can be one of: <Code>16</Code>, <Code>32</Code>, or <Code>64</Code>, each representing the &quot;bit width&quot; of the current mode.
-                    However, it is only compared against <Code>64</Code> for instructions that are illegal in <Link href="/mode/long">long (64 bit) mode</Link>.
+                    However, it is only compared against <Code>64</Code> for instructions that are illegal in <A href="/mode/long">long (64 bit) mode</A>.
                 </p>
 
                 <H3 id="headingOperationProcessor">PROCESSOR</H3>
                 <p>
                     In some <em>rare</em> cases, the operation of an instruction depends on which processor version is being used.
                     In those (known) instances, the <Code>PROCESSOR</Code> global variable represents the current processor.
-                    For example, the <Link href="/instruction/aaa"><Code>AAA</Code> instruction</Link> operates <em>slightly</em> differently on the 80186 and prior.
+                    For example, the <A href="/instruction/aaa"><Code>AAA</Code> instruction</A> operates <em>slightly</em> differently on the 80186 and prior.
                 </p>
 
                 <H3 id="headingOperationRegisters">Registers</H3>
@@ -568,7 +568,7 @@ export default function Page(): JSX.Element {
                 <H3 id="headingOperationFlags">Flags</H3>
                 <p>
                     Flags are accessed as if they were global variables.
-                    For example, <Code>OF</Code> would refer to the <Link href="/register/flags">overflow flag</Link> (which is either a zero or a one).
+                    For example, <Code>OF</Code> would refer to the <A href="/register/flags">overflow flag</A> (which is either a zero or a one).
                     These single bit values, when used in <Code>if</Code> conditions, are implicitly coerced to a boolean.
                     The only multibit flag, <Code>IOPL</Code>, is a two bit value and, as such, <em>cannot</em> be coerced.
                 </p>
@@ -583,7 +583,7 @@ export default function Page(): JSX.Element {
                 <H4 id="headingOperationTypesSimd">Simd&lt;T&gt;</H4>
                 <p>
                     The most used type in the pseudo-code is the <Code>Simd&lt;T&gt;</Code> type.
-                    It represents an <Link href="/register/vector">x86 vector register</Link>.
+                    It represents an <A href="/register/vector">x86 vector register</A>.
                     Currently, <Code>Simd::max()</Code> is <Code>512</Code> to correspond with the <Code>ZMM</Code> registers, but this will change if an &quot;AVX-1024&quot; were to be created.
                 </p>
                 <p>
@@ -599,7 +599,7 @@ export default function Page(): JSX.Element {
                 <H4 id="headingOperationTypesKMask">KMask</H4>
                 <p>
                     In addition to the <Code>Simd&lt;T&gt;</Code> type for vector instructions, there also exists the <Code>KMask</Code> type.
-                    It represents an <Link href="/register/mask">x86 mask register</Link> (<Code>k0</Code> through <Code>k7</Code>).
+                    It represents an <A href="/register/mask">x86 mask register</A> (<Code>k0</Code> through <Code>k7</Code>).
                     {" "}<Code>KMask</Code> is a 64 bit wide bit addressable type.
                     Each bit corresponds to the same bit in the x86 mask register with <Code>k[n]</Code> referring to the &quot;n-th&quot; bit of the underlying mask register.
                 </p>
@@ -607,7 +607,7 @@ export default function Page(): JSX.Element {
                 <H2 id="headingExamples">Examples</H2>
                 <p>
                     The &quot;Examples&quot; section (if present) contains one or more example assembly snippets that demonstrate the instruction.
-                    Any examples provided use <Link href="https://nasm.us/">NASM</Link> (Intel) syntax.
+                    Any examples provided use <A href="https://nasm.us/">NASM</A> (Intel) syntax.
                 </p>
 
                 <H2 id="headingFlags">Flags Affected</H2>

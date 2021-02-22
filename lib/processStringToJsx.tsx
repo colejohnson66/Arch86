@@ -17,8 +17,8 @@
 /* eslint-disable react/display-name */
 import { Code, Colors } from "@blueprintjs/core";
 
+import A from "../components/A";
 import IDictionary from "../types/IDictionary";
-import Link from "../components/Link";
 import React from "react";
 import { strict as assert } from "assert";
 
@@ -65,7 +65,7 @@ const functions: IDictionary<(arg: string) => JSX.Element> = {
     en: (_) => (<>&ndash;</>),
     error: (arg) => (<b style={{ color: Colors.RED3 }}>{arg}</b>),
     i: (arg) => (<i>{arg}</i>),
-    instr: (arg) => (<Link href={`/instruction/${arg.toLowerCase()}`}><Code>{arg}</Code></Link>),
+    instr: (arg) => (<A href={`/instruction/${arg.toLowerCase()}`}><Code>{arg}</Code></A>),
     reg: (arg) => (<Code>{arg}</Code>),
 };
 

@@ -16,9 +16,9 @@
  */
 import { Blockquote, Code, H1, H2, H3, IBreadcrumbProps } from "@blueprintjs/core";
 
+import A from "../../components/A";
 import Cite from "../../components/Cite";
 import Layout from "../../components/Layout";
-import Link from "../../components/Link";
 import React from "react";
 import Ref from "../../components/Ref";
 import TOC from "../../components/TOC";
@@ -66,13 +66,13 @@ export default function Page(): JSX.Element {
                         Reserved.
                         Always set.
                         <br />
-                        <Link href="#headingVKFlags">See below</Link>.
+                        <A href="#headingVKFlags">See below</A>.
                     </dd>
                     <dt><Code>PF</Code> - Parity Flag (bit 2)</dt>
                     <dd>
                         Indicates if the least significant byte of a result contains an even number of 1s (meaning there is parity), and cleared otherwise.
                         As its name implies, it is used for operations involving parity (such as data transmission).
-                        For those situations, there exists two instructions: <Link href="/instruction/jcc"><Code>JP/JPE</Code> - Jump If Parity (Even)</Link> and <Link href="/instruction/jcc"><Code>JNP/JPO</Code> - Jump If No Parity (Odd)</Link>.
+                        For those situations, there exists two instructions: <A href="/instruction/jcc"><Code>JP/JPE</Code> - Jump If Parity (Even)</A> and <A href="/instruction/jcc"><Code>JNP/JPO</Code> - Jump If No Parity (Odd)</A>.
                         <br />
                         It is obsolete, but continues to exist for compatibility reasons.
                     </dd>
@@ -84,7 +84,7 @@ export default function Page(): JSX.Element {
                     <dt><Code>AF</Code> - Auxiliary Cary Flag (bit 4)</dt>
                     <dd>
                         Sometimes referred to as the &quot;Half Carry Flag&quot; it is similar to the carry flag (bit 0), but always operates on overflow or underflow involving bit 3 of the result.
-                        The purpose of this flag is for BCD instructions such as the <Link href="/instruction/aaa"><Code>AAA</Code> - ASCII Adjust After Addition</Link> instruction.
+                        The purpose of this flag is for BCD instructions such as the <A href="/instruction/aaa"><Code>AAA</Code> - ASCII Adjust After Addition</A> instruction.
                         <br />
                         It is obsolete, but continues to exist for compatibility reasons.
                     </dd>
@@ -93,7 +93,7 @@ export default function Page(): JSX.Element {
                         Reserved.
                         Always cleared.
                         <br />
-                        <Link href="#headingVKFlags">See below</Link>.
+                        <A href="#headingVKFlags">See below</A>.
                     </dd>
                     <dt><Code>ZF</Code> - Zero Flag (bit 6)</dt>
                     <dd>
@@ -124,7 +124,7 @@ export default function Page(): JSX.Element {
                     </dd>
                     <dt><Code>IOPL</Code> - I/O Privilege Level (bits 12 and 13)</dt>
                     <dd>
-                        Indicates the <Link href="https://en.wikipedia.org/wiki/Protection_ring">processor ring</Link> of a thread.
+                        Indicates the <A href="https://en.wikipedia.org/wiki/Protection_ring">processor ring</A> of a thread.
                         A zero indicates the most privilege, while a three indicates the least.
                         <br />
                         On the 8086 and 80186, bit 12 is always set, and bit 13 is always cleared.
@@ -152,7 +152,7 @@ export default function Page(): JSX.Element {
                     </dd>
                     <dt><Code>AC</Code> - Alignment Check / Access Control (bit 18)</dt>
                     <dd>
-                        A user-controllable flag that can mask the <Code>AM</Code> bit in the <Link href="/register/control/cr0"><Code>CR0</Code> register</Link>.
+                        A user-controllable flag that can mask the <Code>AM</Code> bit in the <A href="/register/control/cr0"><Code>CR0</Code> register</A>.
                         These flags (if both set) force alignment checking on data in memory.
                     </dd>
                     <dt><Code>VIF</Code> - Virtual Interrupt Flag (bit 19)</dt>
@@ -161,7 +161,7 @@ export default function Page(): JSX.Element {
                     <dd>TODO</dd>
                     <dt><Code>ID</Code> - ID Flag (bit 21)</dt>
                     <dd>
-                        Provides a method of checking for support of the <Link href="/instruction/cpuid"><Code>CPUID</Code></Link> instruction.
+                        Provides a method of checking for support of the <A href="/instruction/cpuid"><Code>CPUID</Code></A> instruction.
                         On the 80486 and older processors, attempts to set this bit will fail as the processor will just clear it.
                         However, Pentium (and newer) processors (which support <Code>CPUID</Code>) will allow writing to this bit.
                         <br />
@@ -186,7 +186,7 @@ export default function Page(): JSX.Element {
 
                 <H3 id="headingVKFlags">V and K Flags</H3>
                 <p>
-                    On the 8085 (the predecessor to the <Link href="/architecture/8086">8086</Link>), there exists an 8 bit flag register.
+                    On the 8085 (the predecessor to the <A href="/architecture/8086">8086</A>), there exists an 8 bit flag register.
                     It is the basis for the x86 flags register of today, and, short of two changes, was the same as the lowest 8 bits of x86&apos;s <Code>FLAGS</Code> register.
                     Those two changes are: the undocumented &quot;V&quot; and the &quot;K&quot; flags.<Ref.Link name="VKFlags" />{" "}
                     These reside in bits 1 and 5, respectively.
