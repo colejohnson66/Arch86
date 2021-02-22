@@ -46,10 +46,10 @@ type OpcodeValidity = {
 };
 // TODO: use <abbr>?
 const OpcodeValidityKeyMap: { [T in keyof OpcodeValidity]: string } = {
-    16: "16-bit Mode",
-    1632: "16- and 32-bit Mode",
-    32: "32-bit Mode",
-    64: "64-bit Mode",
+    16: "16 bit Mode",
+    1632: "16 and 32 bit Mode",
+    32: "32 bit Mode",
+    64: "64 bit Mode",
 };
 type Opcode = {
     opcode: string;
@@ -239,7 +239,7 @@ export default function Page(props: PageProps): JSX.Element {
                     {props.exceptions.compatibility &&
                         <TOC.Entry href="#headingExceptionsCompatibility" text="Compatibility Mode" />}
                     {props.exceptions.long &&
-                        <TOC.Entry href="#headingExceptionsLong" text="64-Bit Mode" />}
+                        <TOC.Entry href="#headingExceptionsLong" text="Long Mode" />}
                     {props.exceptions.floating &&
                         <TOC.Entry href="#headingExceptionsFloating" text="SIMD Floating-Point" />}
                     {props.exceptions.other &&
@@ -425,7 +425,7 @@ export default function Page(props: PageProps): JSX.Element {
                     </>}
                 {props.exceptions.long &&
                     <>
-                        <H3 id="headingExceptionsLong">64-Bit Mode</H3>
+                        <H3 id="headingExceptionsLong">Long Mode</H3>
                         {regularExceptionList(props.exceptions.long)}
                     </>}
                 {props.exceptions.floating &&

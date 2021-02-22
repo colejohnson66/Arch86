@@ -47,7 +47,7 @@ description: >-
   As such, it is possible to have this instruction work on other bases through an immediate 8 bit operand.
   Such methods are not guaranteed to be supported by your assembler, and in such situations, one must encode the instruction directly.
 
-  This instruction is not valid in 64-bit mode, and if encountered, the processor will raise a \c{#UD} exception.
+  This instruction is not valid in 64 bit mode, and if encountered, the processor will raise a \c{#UD} exception.
 operation: >-
   pub fn aam(imm8: u8) {
     if MODE == 64 {
@@ -68,4 +68,4 @@ exceptions:
   virtual: Same exceptions as protected mode.
   compatibility: Same exceptions as protected mode.
   long:
-    "#UD": If in 64-bit mode.
+    "#UD": If in 64 bit mode.

@@ -102,12 +102,12 @@ export default function Page(): JSX.Element {
                         This value represents <em>where</em> in the instruction the operands are encoded.
                     </li>
                     <li>
-                        <b>##-bit Mode</b> (multiple):
+                        <b>## bit Mode</b> (multiple):
                         Whether a given instruction form is valid, invalid, or not encodable in the specified processor mode.
                         &quot;Valid&quot; forms are allowed while &quot;invalid&quot; forms will throw an exception if encountered.
                         &quot;Not encodable&quot; forms are disallowed in the specified mode, and will, in fact, be interpreted differently than expected.
                         <br />
-                        For example, in <Link href="/mode/long">64-bit mode</Link>, the byte range <Code>40</Code> through <Code>4F</Code> was repurposed for the REX prefix.
+                        For example, in <Link href="/mode/long">64 bit mode</Link>, the byte range <Code>40</Code> through <Code>4F</Code> was repurposed for the REX prefix.
                         This makes encoding <Code>INC eax</Code> as <Code>40</Code> impossible.
                         Should the processor encounter what the author thinks is <Code>INC eax</Code>, it will treat it as a REX prefix with the lower four bits set to 0.
                         The correct encoding would be <Code>FF C0</Code>.
@@ -588,7 +588,7 @@ export default function Page(): JSX.Element {
                 </p>
                 <p>
                     The <Code>T</Code> generic is a numeric type (integer or floating point) that represents what the <Code>ZMM</Code> register contains.
-                    For example, <Code>Simd&lt;f64&gt;</Code> represents a <Code>ZMM</Code> register containing eight &quot;double precision&quot; floating point (64-bit) numbers.
+                    For example, <Code>Simd&lt;f64&gt;</Code> represents a <Code>ZMM</Code> register containing eight &quot;double precision&quot; floating point (64 bit) numbers.
                 </p>
                 <p>
                     Operations on <Code>Simd&lt;T&gt;</Code> are at the &quot;bit level&quot;.

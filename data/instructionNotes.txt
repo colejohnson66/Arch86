@@ -19,8 +19,8 @@ With the following values:
 - w: word or byte
   - 0: 8 bits
   - 1: depends on processor mode:
-    - 16-bit (real): 16 bits (32 with opSize override prefix)
-    - 32-bit (protected): 32 bits (16 with opSize override prefix)
+    - 16 bit (real): 16 bits (32 with opSize override prefix)
+    - 32 bit (protected): 32 bits (16 with opSize override prefix)
 - op3: operation:
   - 000: ADD
   - 001: OR

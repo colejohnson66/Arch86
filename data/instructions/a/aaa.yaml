@@ -32,8 +32,8 @@ description: >-
   This instruction operates on only the lower 4 bits of \reg{AL}.
   This instruction will only execute if the lower 4 bits of \reg{AL} are greater than 9, or if the \reg{AF} flag is set.
 
-  This instruction is not valid in 64-bit mode, and if encountered, the processor will raise a \c{#UD} exception.
-  In 16- or 32-bit mode, this instruction will only modify the \reg{AF} and \reg{CF} flags.
+  This instruction is not valid in 64 bit mode, and if encountered, the processor will raise a \c{#UD} exception.
+  In 16 or 32 bit mode, this instruction will only modify the \reg{AF} and \reg{CF} flags.
   The other arithmetic flags are undefined and undocumented.
 operation: |-
   pub fn aaa() {
@@ -81,4 +81,4 @@ exceptions:
   virtual: Same exceptions as protected mode.
   compatibility: Same exceptions as protected mode.
   long:
-    "#UD": If in 64-bit mode.
+    "#UD": If in 64 bit mode.

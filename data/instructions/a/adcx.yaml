@@ -47,7 +47,7 @@ description: >-
   This instruction is designed for use in multibyte additions such as in arbitrary precision arithmetic.
   The difference between this instruction and \instr{ADC} is that this one allows the creation of two "carry chains" \en{} one using \reg{CF} (this one) and one using \reg{OF} (\instr{ADOX}).
 
-  In 64-bit mode, the default operand size is 32 bits, but \c{REX.W} will change it to 64 bits.
+  In 64 bit mode, the default operand size is 32 bits, but \c{REX.W} will change it to 64 bits.
 operation: >-
   pub fn adcx<D, S>(dest: &mut D, src: S) {
     *dest = *dest + src + CF;
