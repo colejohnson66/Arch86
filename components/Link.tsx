@@ -27,13 +27,19 @@ export default function Link(props: LinkProps): JSX.Element {
     // is this an internal link?
     // NOTE: this may not work for all internal links (ones that don't start with "/" or "#")
     // TODO: will there be any that won't work?
-    if (props.href[0] === "/" || props.href[0] === "#") {
+    if (props.href[0] === "/") {
         return (
             <NextLink href={props.href}>
                 <a>{props.children}</a>
             </NextLink>
         );
     }
+    // TODO: An unknown issue is causing Next to write out links with only a hash as
+    //   `{url}#{hash}`. Normally, this wouldn't be an issue, but on "slug" pages, this
+    //   causes `#headingEncoding` to turn into `/instruction/[slug]#headingEncoding`,
+    //   which doesn't work.
+    if (props.href[0] === "#")
+        return <a href={props.href}>{props.children}</a>;
 
     // it's external
     return <a href={props.href} rel="external">{props.children}</a>;
