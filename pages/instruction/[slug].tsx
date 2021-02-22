@@ -167,8 +167,7 @@ function bitEncodings(encodings: BitEncodingEntry[]): JSX.Element {
             <React.Fragment key={idx}>
                 <dt>{processStringToJsx(entry.form)}</dt>
                 <dd>{bits}</dd>
-                {entry.limits &&
-                    <dd>{entry.limits}</dd>}
+                {entry.limits && <dd>{entry.limits}</dd>}
             </React.Fragment>
         );
     });
