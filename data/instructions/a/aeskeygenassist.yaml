@@ -3,7 +3,7 @@
 title: AES Round Key Generation Assist
 validity: 32,64
 opcode:
-  - opcode: 66 0F 3A DF /r ib
+  - opcode: 66 0F 3A DF /r \i{ib}
     mnemonic: AESKEYGENASSIST \i{xmm1}, \i{xmm2/m128}, \i{imm8}
     encoding: RMI
     validity:
@@ -13,7 +13,7 @@ opcode:
     description: >-
       Assist in AES round key generation using an 8 bit round constant (RCON) specified in the immediate byte and 128 bits of data specified in \abbr{xmm2/m128}.
       Stores the result in \abbr{xmm1}.
-  - opcode: VEX.128.66.0F3A.WIG DF /r ib
+  - opcode: VEX.128.66.0F3A.WIG DF /r \i{ib}
     mnemonic: VAESKEYGENASSIST \i{xmm1}, \i{xmm2/m128}, \i{imm8}
     encoding: RMI
     validity:
