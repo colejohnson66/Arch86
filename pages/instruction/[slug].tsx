@@ -24,6 +24,7 @@ import DateTime from "../../components/DateTime";
 import IDictionary from "../../types/IDictionary";
 import Layout from "../../components/Layout";
 import Link from "../../components/Link";
+import MaybeArray from "../../types/MaybeArray";
 import React from "react";
 import Ref from "../../components/Ref";
 import Scrollable from "../../components/Scrollable";
@@ -56,7 +57,7 @@ type Opcode = {
     mnemonic: string;
     encoding: string;
     validity: OpcodeValidity;
-    cpuid?: string | string[];
+    cpuid?: MaybeArray<string>;
     description: string;
 };
 type Encoding = {
@@ -70,23 +71,23 @@ type BitEncoding = {
 type BitEncodingEntry = {
     form: string;
     limits?: string;
-    bits: string | string[];
+    bits: MaybeArray<string>;
 };
-type ExceptionList = IDictionary<string | string[]>;
+type ExceptionList = IDictionary<MaybeArray<string>>;
 type Exceptions = {
     protected?: string | ExceptionList;
     real?: string | ExceptionList;
     virtual?: string | ExceptionList;
     compatibility?: string | ExceptionList;
     long?: string | ExceptionList;
-    floating?: string | string[];
-    other?: string | string[];
+    floating?: MaybeArray<string>;
+    other?: MaybeArray<string>;
     otherAdditional?: string | ExceptionList;
 };
 type Changes = {
     version: number;
     date: string;
-    list: string | string[];
+    list: MaybeArray<string>;
 };
 type Reference = {
     name: string;
@@ -102,7 +103,7 @@ type PageProps = {
     description: string;
     operation: string;
     operationNotes: string[];
-    examples?: string | string[];
+    examples?: MaybeArray<string>;
     flags?: string;
     intrinsicsC?: string;
     intrinsicsRust?: string;
@@ -111,13 +112,13 @@ type PageProps = {
     refs?: Reference[];
 };
 
-function plural<T>(arr: T | T[], singular: string, plural: string): string {
+function plural<T>(arr: MaybeArray<T>, singular: string, plural: string): string {
     if (Array.isArray(arr) && arr.length !== 0)
         return plural;
     return singular;
 }
 
-function coerceArray<T>(arr: T | T[]): T[] {
+function coerceArray<T>(arr: MaybeArray<T>): T[] {
     if (Array.isArray(arr))
         return arr;
     return [arr];
