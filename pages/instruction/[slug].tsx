@@ -124,33 +124,29 @@ function coerceArray<T>(arr: MaybeArray<T>): T[] {
     return [arr];
 }
 
-function brTagsFromArray(arr: string[], parse = true): JSX.Element[] {
+function brTagsFromArray(arr: string[]): JSX.Element[] {
     return arr.map((line, idx) => (
         <React.Fragment key={idx}>
-            {parse
-                ? processStringToJsx(line)
-                : line}
+            {processStringToJsx(line)}
             {idx !== arr.length - 1 && <br />}
         </React.Fragment>
     ));
 }
 
-function brTagsFromString(str: string, parse = true): JSX.Element[] {
-    return brTagsFromArray(str.split("\n"), parse);
+function brTagsFromString(str: string): JSX.Element[] {
+    return brTagsFromArray(str.split("\n"));
 }
 
-function paragraphsFromArray(arr: string[], parse = true): JSX.Element[] {
+function paragraphsFromArray(arr: string[]): JSX.Element[] {
     return arr.map((par, idx) => (
         <p key={idx}>
-            {parse
-                ? processStringToJsx(par)
-                : par}
+            {processStringToJsx(par)}
         </p>
     ));
 }
 
-function paragraphsFromString(str: string, parse = true): JSX.Element[] {
-    return paragraphsFromArray(str.split("\n"), parse);
+function paragraphsFromString(str: string): JSX.Element[] {
+    return paragraphsFromArray(str.split("\n"));
 }
 
 function formatEncodingCell(operand: string): JSX.Element {
@@ -179,7 +175,7 @@ function bitEncodings(encodings: BitEncodingEntry[]): JSX.Element {
     return <dl>{rows}</dl>;
 }
 
-function regularExceptionList(ex: string | ExceptionList, parse = true): JSX.Element {
+function regularExceptionList(ex: string | ExceptionList): JSX.Element {
     if (typeof ex === "string")
         return <p>{brTagsFromString(ex)}</p>;
 
@@ -189,7 +185,7 @@ function regularExceptionList(ex: string | ExceptionList, parse = true): JSX.Ele
         return (
             <React.Fragment key={key}>
                 <dt><Code>{key}</Code></dt>
-                <dd>{brTagsFromArray(coerceArray(val), parse)}</dd>
+                <dd>{brTagsFromArray(coerceArray(val))}</dd>
             </React.Fragment>
         );
     });
