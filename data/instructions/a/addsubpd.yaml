@@ -1,6 +1,6 @@
 %YAML 1.2
 ---
-title: Packed Double-Precision Floating-Point Add/Subtract
+title: Add/Subtract Packed Double-Precision Floating-Point Values
 validity: 32,64
 opcode:
   - opcode: 66 0F D0 /r

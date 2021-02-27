@@ -1,6 +1,6 @@
 %YAML 1.2
 ---
-title: Packed Single-Precision Floating-Point Add/Subtract
+title: Add/Subtract Packed Single-Precision Floating-Point Values
 validity: 32,64
 opcode:
   - opcode: F2 0F D0 /r
