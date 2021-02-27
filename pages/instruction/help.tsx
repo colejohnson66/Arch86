@@ -70,6 +70,7 @@ export default function Page(): JSX.Element {
                     <TOC.Entry href="#headingOperationTypes" text="Types">
                         <TOC.Entry href="#headingOperationTypesSimd" text="Simd<T>" />
                         <TOC.Entry href="#headingOperationTypesKMask" text="KMask" />
+                        <TOC.Entry href="#headingOperationTypesNumerics" text="Integer Types" />
                     </TOC.Entry>
                 </TOC.Entry>
                 <TOC.Entry href="#headingExamples" text="Examples" />
@@ -590,7 +591,7 @@ export default function Page(): JSX.Element {
                 <p>
                     The most used type in the pseudo-code is the <Code>Simd&lt;T&gt;</Code> type.
                     It represents an <A href="/register/vector">x86 vector register</A>.
-                    Currently, <Code>Simd::max()</Code> is <Code>512</Code> to correspond with the <Code>ZMM</Code> registers, but this will change if an &quot;AVX-1024&quot; were to be created.
+                    Currently, <Code>Simd::max()</Code> is <Code>512</Code> to correspond with the <Code>ZMM</Code> registers, but this will change if an &quot;AVX-768&quot; or &quot;AVX-1024&quot; were to be created.
                 </p>
                 <p>
                     The <Code>T</Code> generic is a numeric type (integer or floating point) that represents what the <Code>ZMM</Code> register contains.
@@ -608,6 +609,14 @@ export default function Page(): JSX.Element {
                     It represents an <A href="/register/mask">x86 mask register</A> (<Code>k0</Code> through <Code>k7</Code>).
                     {" "}<Code>KMask</Code> is a 64 bit wide bit addressable type.
                     Each bit corresponds to the same bit in the x86 mask register with <Code>k[n]</Code> referring to the &quot;n-th&quot; bit of the underlying mask register.
+                </p>
+
+                <H4 id="headingOperationTypesNumerics">Integer Types</H4>
+                <p>
+                    Rust&apos;s integer types, by default, do not allow access to the individual bits through slices.
+                    The only way to do so (without external crates) is through bit shifts and masking operations.
+                    Despite that, individual bits are exposed through slices.
+                    For example, to get the lowest three bits of an integer, one would normally do something similar to <Code>data &amp; 7</Code>, but the operations show that as <Code>data[2..=0]</Code>.
                 </p>
 
                 <H2 id="headingExamples">Examples</H2>
