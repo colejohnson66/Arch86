@@ -15,11 +15,11 @@
  *   with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
+import React, { CSSProperties } from "react";
+
 import A from "../components/A";
-import { CSSProperties } from "react";
 import { H1 } from "@blueprintjs/core";
 import Layout from "../components/Layout";
-import React from "react";
 
 export default function Page(): JSX.Element {
     const IconStyle: CSSProperties = {
