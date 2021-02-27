@@ -14,7 +14,7 @@ opcode:
       Performs the last round of AES encryption using one 128 bit state from \abbr{xmm1} with one 128 bit round key from \abbr{xmm2/m128}.
       Stores the result in \abbr{xmm1}.
   - opcode: VEX.128.66.0F38.WIG DD /r
-    mnemonic: AESENCLAST \i{xmm1}, \i{xmm2}, \i{xmm2/m128}
+    mnemonic: VAESENCLAST \i{xmm1}, \i{xmm2}, \i{xmm2/m128}
     encoding: VEX
     validity:
       32: valid
@@ -24,7 +24,7 @@ opcode:
       Performs the last round of AES encryption using one 128 bit state from \abbr{xmm2} with one 128 bit round key from \abbr{xmm3/m128}.
       Stores the result in \abbr{xmm1}.
   - opcode: VEX.256.66.0F38.WIG DD /r
-    mnemonic: AESENCLAST \i{ymm1}, \i{ymm2}, \i{ymm2/m256}
+    mnemonic: VAESENCLAST \i{ymm1}, \i{ymm2}, \i{ymm2/m256}
     encoding: VEX
     validity:
       32: valid
@@ -34,7 +34,7 @@ opcode:
       Performs the last round of AES encryption using two 128 bit states from \abbr{ymm2} with two 128 bit round keys from \abbr{ymm3/m256}.
       Stores the results in \abbr{ymm1}.
   - opcode: EVEX.128.66.0F38.WIG DD /r
-    mnemonic: AESENCLAST \i{xmm1}, \i{xmm2}, \i{xmm2/m128}
+    mnemonic: VAESENCLAST \i{xmm1}, \i{xmm2}, \i{xmm2/m128}
     encoding: EVEX
     validity:
       32: valid
@@ -44,7 +44,7 @@ opcode:
       Performs the last round of AES encryption using one 128 bit state from \abbr{xmm2} with one 128 bit round key from \abbr{xmm3/m128}.
       Stores the result in \abbr{xmm1}.
   - opcode: EVEX.256.66.0F38.WIG DD /r
-    mnemonic: AESENCLAST \i{ymm1}, \i{ymm2}, \i{ymm2/m256}
+    mnemonic: VAESENCLAST \i{ymm1}, \i{ymm2}, \i{ymm2/m256}
     encoding: EVEX
     validity:
       32: valid
@@ -54,7 +54,7 @@ opcode:
       Performs the last round of AES encryption using two 128 bit states from \abbr{ymm2} with two 128 bit round keys from \abbr{ymm3/m256}.
       Stores the results in \abbr{ymm1}.
   - opcode: EVEX.512.66.0F38.WIG DD /r
-    mnemonic: AESENCLAST \i{zmm1}, \i{zmm2}, \i{zmm2/m512}
+    mnemonic: VAESENCLAST \i{zmm1}, \i{zmm2}, \i{zmm2/m512}
     encoding: EVEX
     validity:
       32: valid
