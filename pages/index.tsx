@@ -15,6 +15,7 @@
  *   with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
+import A from "../components/A";
 import { CSSProperties } from "react";
 import { H1 } from "@blueprintjs/core";
 import Layout from "../components/Layout";
@@ -33,8 +34,8 @@ export default function Page(): JSX.Element {
                 <img src="/img/icon.svg" alt="80x86 Icon" width="64" height="64" style={IconStyle} />
                 <H1>80x86 Website</H1>
                 <p>
-                    Welcome to the 80x86 website.
-                    This website is designed to be a digital reference version of the x86 (and x86-64) processor architecture.
+                    This website is designed to be a digital reference version of the x86 processor architecture.
+                    This includes everything from the venerable <A href="/architecture/8086">8086</A> to the Intel Core architecture of today.
                 </p>
             </div>
         </Layout>
