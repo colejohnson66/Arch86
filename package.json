@@ -19,7 +19,7 @@
     "eslint": "eslint components/** lib/** pages/** types/**"
   },
   "dependencies": {
-    "@blueprintjs/core": "^3.38.2",
+    "@blueprintjs/core": "^3.39.0",
     "@blueprintjs/icons": "^3.24.0",
     "next": "^10.0.7",
     "react": "^17.0.1",
