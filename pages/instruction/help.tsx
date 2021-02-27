@@ -94,6 +94,11 @@ export default function Page(): JSX.Element {
                         Italics in the mnemonic part signify operands.
                         {" "}<A href="#headingOverviewTableVex">See below</A> for an explanation on interpreting VEX and EVEX opcodes.
                         <br />
+                        Some vector instructions (such as <Code><A href="/instruction/addps">ADDPS</A></Code>) require that <em>no</em> legacy prefixes (such as <Code>0x66</Code>) be present.
+                        Including a prefix will change how the instruction is decoded.
+                        For example, prefixes and <Code>ADDPS</Code> instruction with <Code>0x66</Code> will change it into an <Code><A href="/instruction/addpd">ADDPD</A></Code> instruction.
+                        These mandatory &quot;no prefix&quot; opcodes are notated with <Code>NP</Code> at the beginning of the opcode line.
+                        <br />
                         EVEX forms commonly feature other bits of information such as the mask register (<Code>{"{k1}"}</Code>), error masking (<Code>{"{er}"}</Code>), and more.
                     </li>
                     <li>
