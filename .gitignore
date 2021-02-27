@@ -1,6 +1,12 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
+# Used for personal testing
 asm.asm
+# Intel x86-64 SDM
+252046-sdm-change-document.pdf
+325462-sdm-vol-1-2abcd-3abcd.pdf
+# Generated
+public/sitemap.xml
 
 # dependencies
 /node_modules
