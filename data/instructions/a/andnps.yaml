@@ -39,9 +39,7 @@ opcode:
     validity:
       32: valid
       64: valid
-    cpuid:
-      - AVX512VL
-      - AVX512DQ
+    cpuid: [ AVX512VL, AVS512DQ ]
     description: >-
       ANDs packed single-precision floating-point values from the inverted form of \abbr{xmm3/m128/m32bcst} and \abbr{xmm2}.
       Stores the result in \abbr{xmm1}.
@@ -51,9 +49,7 @@ opcode:
     validity:
       32: valid
       64: valid
-    cpuid:
-      - AVX512VL
-      - AVX512DQ
+    cpuid: [ AVX512VL, AVS512DQ ]
     description: >-
       ANDs packed single-precision floating-point values from the inverted form of \abbr{ymm3/m256/m32bcst} and \abbr{ymm2}.
       Stores the result in \abbr{ymm1}.

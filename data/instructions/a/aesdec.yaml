@@ -19,9 +19,7 @@ opcode:
     validity:
       32: valid
       64: valid
-    cpuid:
-      - AES
-      - AVX
+    cpuid: [ AES, AVX ]
     description: >-
       Performs one round of AES decryption using one 128 bit state from \abbr{xmm2} with one 128 bit round key from \abbr{xmm3/m128}.
       Stores the result in \abbr{xmm1}.
@@ -41,9 +39,7 @@ opcode:
     validity:
       32: valid
       64: valid
-    cpuid:
-      - VAES
-      - AVX512VL
+    cpuid: [ VAES, AVX512VL ]
     description: >-
       Performs one round of AES decryption using one 128 bit state from \abbr{xmm2} with one 128 bit round key from \abbr{xmm3/m128}.
       Stores the result in \abbr{xmm1}.
@@ -53,9 +49,7 @@ opcode:
     validity:
       32: valid
       64: valid
-    cpuid:
-      - VAES
-      - AVX512VL
+    cpuid: [ VAES, AVX512VL ]
     description: >-
       Performs one round of AES decryption using two 128 bit states from \abbr{ymm2} with two 128 bit round keys from \abbr{ymm3/m256}.
       Stores the results in \abbr{ymm1}.
@@ -65,9 +59,7 @@ opcode:
     validity:
       32: valid
       64: valid
-    cpuid:
-      - VAES
-      - AVX512VL
+    cpuid: [ VAES, AVX512VL ]
     description: >-
       Performs one round of AES decryption using four 128 bit states from \abbr{zmm2} with four 128 bit round keys from \abbr{zmm3/m512}.
       Stores the results in \abbr{zmm1}.

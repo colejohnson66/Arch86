@@ -19,9 +19,7 @@ opcode:
     validity:
       32: valid
       64: valid
-    cpuid:
-      - AES
-      - AVX
+    cpuid: [ AES, AVX ]
     description:
       Performs the "inverse mix columns" transformation on a 128 bit round key from \abbr{xmm2/m128}.
       Stores the result in \abbr{xmm1}.
