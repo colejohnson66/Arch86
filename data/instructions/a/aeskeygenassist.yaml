@@ -19,9 +19,7 @@ opcode:
     validity:
       32: valid
       64: valid
-    cpuid:
-      - AES
-      - AVX
+    cpuid: [ AES, AVX ]
     description: >-
       Assist in AES round key generation using an 8 bit round constant (RCON) specified in the immediate byte and 128 bits of data specified in \abbr{xmm2/m128}.
       Stores the result in \abbr{xmm1}.

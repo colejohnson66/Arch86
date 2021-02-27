@@ -39,9 +39,7 @@ opcode:
     validity:
       32: valid
       64: valid
-    cpuid:
-      - AVX512VL
-      - AVX512F
+    cpuid: [ AVX512VL, AVX512F ]
     description: >-
       Adds packed single-precision floating-point values from \abbr{xmm3/m128/m32bcst} and \abbr{xmm2}.
       Stores the result in \abbr{xmm1} using writemask \abbr{k1}.
@@ -51,9 +49,7 @@ opcode:
     validity:
       32: valid
       64: valid
-    cpuid:
-      - AVX512VL
-      - AVX512F
+    cpuid: [ AVX512VL, AVX512F ]
     description: >-
       Adds packed single-precision floating-point values from \abbr{ymm3/m256/m32bcst} and \abbr{ymm2}.
       Stores the result in \abbr{ymm1} using writemask \abbr{k1}.
