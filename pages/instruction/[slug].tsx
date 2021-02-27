@@ -261,6 +261,7 @@ export default function Page(props: PageProps): JSX.Element {
                                     <th key={entry}>{OpcodeValidityKeyMap[entry]}</th>
                                 ))}
                                 {props.opcode[0].cpuid &&
+                                    /* Don't use <Instruction ... /> to avoid <code> block */
                                     <th><A href="/instruction/cpuid">CPUID</A> Feature Flag</th>}
                                 <th>Description</th>
                             </tr>

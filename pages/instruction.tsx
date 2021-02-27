@@ -15,11 +15,12 @@
  *   with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { Callout, Code, H1, H2, H3, IBreadcrumbProps, UL } from "@blueprintjs/core";
+import { Callout, H1, H2, H3, IBreadcrumbProps, UL } from "@blueprintjs/core";
 
 import A from "../components/A";
 import { GetStaticProps } from "next";
 import IDictionary from "../types/IDictionary";
+import Instruction from "../components/Instruction";
 import Layout from "../components/Layout";
 import React from "react";
 import TOC from "../components/TOC";
@@ -36,9 +37,7 @@ const ccInstr = [
 function commaSeparatedLinks(list: string[]): JSX.Element[] {
     return list.map((item, idx) => (
         <React.Fragment key={idx}>
-            <A href={`/instruction/${item}`}>
-                <Code>{item.toUpperCase()}</Code>
-            </A>
+            <Instruction name={item.toUpperCase()} />
             {idx !== list.length - 1 && ", "}
         </React.Fragment>
     ));
@@ -63,9 +62,7 @@ function instructionListWithHeading(list: (string | string[])[], char: string): 
                     if (ccInstr.includes(item)) {
                         return (
                             <li key={item}>
-                                <A href={`/instruction/${item}`}>
-                                    <Code>{`${item.substr(0, item.length - 2).toUpperCase()}cc`}</Code>
-                                </A>
+                                <Instruction name={`${item.substr(0, item.length - 2).toUpperCase()}cc`} />
                             </li>
                         );
                     }
@@ -73,9 +70,7 @@ function instructionListWithHeading(list: (string | string[])[], char: string): 
                     // The `nnn` to `###` is for FMA instructions
                     return (
                         <li key={item}>
-                            <A href={`/instruction/${item}`}>
-                                <Code>{item.replace("nnn", "###").toUpperCase()}</Code>
-                            </A>
+                            <Instruction name={item.replace("nnn", "###").toUpperCase()} as={item} />
                         </li>
                     );
                 })}

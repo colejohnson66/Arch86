@@ -18,6 +18,7 @@
 import { Code, H1, H2, H3, H4, HTMLTable, IBreadcrumbProps, UL } from "@blueprintjs/core";
 
 import A from "../../components/A";
+import Instruction from "../../components/Instruction";
 import Layout from "../../components/Layout";
 import React from "react";
 import TOC from "../../components/TOC";
@@ -94,9 +95,9 @@ export default function Page(): JSX.Element {
                         Italics in the mnemonic part signify operands.
                         {" "}<A href="#headingOverviewTableVex">See below</A> for an explanation on interpreting VEX and EVEX opcodes.
                         <br />
-                        Some vector instructions (such as <Code><A href="/instruction/addps">ADDPS</A></Code>) require that <em>no</em> legacy prefixes (such as <Code>0x66</Code>) be present.
+                        Some vector instructions (such as <Instruction name="ADDPS" />) require that <em>no</em> legacy prefixes (such as <Code>0x66</Code>) be present.
                         Including a prefix will change how the instruction is decoded.
-                        For example, prefixes and <Code>ADDPS</Code> instruction with <Code>0x66</Code> will change it into an <Code><A href="/instruction/addpd">ADDPD</A></Code> instruction.
+                        For example, prefixing the <Instruction name="ADDPS" noLink /> instruction with <Code>0x66</Code> will change it into an <Instruction name="ADDPD" /> instruction.
                         These mandatory &quot;no prefix&quot; opcodes are notated with <Code>NP</Code> at the beginning of the opcode line.
                         <br />
                         EVEX forms commonly feature other bits of information such as the mask register (<Code>{"{k1}"}</Code>), error masking (<Code>{"{er}"}</Code>), and more.
@@ -149,7 +150,7 @@ export default function Page(): JSX.Element {
                         This is typically used in situations involving scalars as only a single piece of data is operated on, not the whole register.
                         <br />
                         In some situations, despite an instruction being defined with <Code>LIG</Code>, Intel may recommend a specific value is used instead for future proofing.
-                        For example, the <A href="/instruction/addsd"><Code>ADDSD</Code> instruction</A> is defined to be <Code>LIG</Code>, but Intel recommends setting <Code>L</Code> (and <Code>L&apos;</Code> for EVEX) to zero.
+                        For example, the <Instruction name="ADDSD" /> instruction is defined to be <Code>LIG</Code>, but Intel recommends setting <Code>L</Code> (and <Code>L&apos;</Code> for EVEX) to zero.
                     </li>
                     <li>
                         <b>prefixes</b>:
@@ -561,7 +562,7 @@ export default function Page(): JSX.Element {
                 <p>
                     In some <em>rare</em> cases, the operation of an instruction depends on which processor version is being used.
                     In those (known) instances, the <Code>PROCESSOR</Code> global variable represents the current processor.
-                    For example, the <A href="/instruction/aaa"><Code>AAA</Code> instruction</A> operates <em>slightly</em> differently on the 80186 and prior.
+                    For example, the <Instruction name="AAA" /> instruction operates <em>slightly</em> differently on the 80186 and prior.
                 </p>
 
                 <H3 id="headingOperationRegisters">Registers</H3>
