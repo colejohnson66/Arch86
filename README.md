@@ -27,17 +27,17 @@ Therefore, the code here is what is running *right now.*
 However, should you want to run your own copy, follow the following steps:
 
 * Install [Node.js](https://nodejs.org/en/)
-* Install `yarn`:
-```bash
+* Install `yarn` (on Linux, your package manager may have it):
+```shell
 $ npm i -g yarn
 ```
 * Clone the repository:
-```bash
+```shell
 $ git clone https://github.com/colejohnson66/80x86
 $ cd 80x86
 ```
 * Download the dependencies and run:
-```bash
+```shell
 $ yarn install
 $ yarn dev
 ```
