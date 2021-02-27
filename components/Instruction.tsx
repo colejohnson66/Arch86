@@ -1,3 +1,5 @@
+import { processStringClean, processStringToJsx } from "../lib/processStringToJsx";
+
 /* This file is part of 80x86.
  * Copyright (c) 2021 Cole Johnson
  *
@@ -16,7 +18,15 @@
  */
 import A from "./A";
 import { Code } from "@blueprintjs/core";
+import InstructionTitles from "../data/InstructionTitles";
 import React from "react";
+
+function getInstructionName(name: string): string | undefined {
+    const nameLower = name.toLowerCase();
+    if (Object.keys(InstructionTitles).indexOf(nameLower) !== -1)
+        return InstructionTitles[nameLower];
+    return undefined;
+}
 
 type InstructionProps = {
     /**
@@ -48,6 +58,15 @@ type InstructionProps = {
      *   (generally the same paragraph).
      */
     noLink?: boolean;
+    /**
+     * Don't format the instruction name (clean it)
+     *
+     * By default, instructions titles containing formatting directives are ran
+     *   through a formatter (see `/lib/processStringToJsx.tsx`).
+     * Set this prop to format "cleanly".
+     * In other words, `processStringClean` is used if this prop is set.
+     */
+    clean?: boolean;
 }
 
 /**
@@ -65,8 +84,14 @@ type InstructionProps = {
  * <Instruction name="VFMADD132PD" as="vfmaddnnnpd" />
  */
 export default function Instruction(props: InstructionProps): JSX.Element {
-    const name = undefined; // getInstructionName(props.name);
-    const nameStr = name ? ` - ${name}` : "";
+    const name = getInstructionName(props.name);
+    let nameStr: JSX.Element = <></>;
+    if (name) {
+        if (props.clean)
+            nameStr = <> - {processStringClean(name)}</>;
+        else
+            nameStr = <> - {processStringToJsx(name)}</>;
+    }
 
     if (props.noLink)
         return <><Code>{props.name}</Code>{nameStr}</>;

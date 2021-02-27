@@ -96,15 +96,3 @@ export async function getInstructionData(id: string): Promise<unknown> {
         ...yaml,
     };
 }
-
-type InstructionNames = IDictionary<string>;
-export function getInstructionName(instr: string): string | undefined {
-    const fullPath = path.join(dataDirectory, "titles.yaml");
-    const contents = fs.readFileSync(fullPath);
-    const yaml = YAML.parse(contents.toString()) as InstructionNames;
-
-    const instrLower = instr.toLowerCase();
-    if (Object.keys(yaml).indexOf(instrLower) !== -1)
-        return yaml[instrLower];
-    return undefined;
-}
