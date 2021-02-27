@@ -56,8 +56,18 @@ type InstructionProps = {
      *
      * Used if an instruction is named multiple times in the same region of text
      *   (generally the same paragraph).
+     * This will also suppress showing the instruction title, but this can be
+     *   overridden with `forceTitle`.
      */
     noLink?: boolean;
+    /**
+     * Force the display of a suppressed title
+     *
+     * By default, the title is shown, but if the link is suppressed (through
+     *   `noLink`), the title will be suppressed as well.
+     *
+     */
+    forceTitle?: boolean;
     /**
      * Don't format the instruction name (clean it)
      *
@@ -65,6 +75,8 @@ type InstructionProps = {
      *   through a formatter (see `/lib/processStringToJsx.tsx`).
      * Set this prop to format "cleanly".
      * In other words, `processStringClean` is used if this prop is set.
+     *
+     * Ignored if the title is not shown (suppressed by `noLink`)
      */
     clean?: boolean;
 }
@@ -72,32 +84,49 @@ type InstructionProps = {
 /**
  * A thin wrapper to generate links to instruction pages
  *
+ * By default, the `name` is the linked instruction, but in some cases (ex. FMA),
+ *   this is undesirable.
+ * For these situations, the `name` will be what is displayed and the `as` will
+ *   be what is linked.
+ *
+ * If a link is not desired, the `noLink` prop can be set to `true`.
+ * This is desireable if the instruction is referenced multiple times in the same
+ *   region (such as the same paragraph).
+ * To accommodate this situation, `noLink` will also suppress the title of the
+ *   instruction from appearing.
+ * If the title is desired (but with no link), set `forceTitle` to `true`.
+ *
  * @example
- * // (href, text)
- * // ("/instruction/addpd", "ADDPD")
+ * // (href, text, titleShown)
+ * // ("/instruction/addpd", "ADDPD", true)
  * <Instruction name="ADDPD" />
- * // (undefined, "AND")
+ * // (undefined, "AND", false)
  * <Instruction name="AND" noLink />
- * // ("/instruction/jcc", "Jcc")
+ * // (undefined, "CALL", true)
+ * <Instruction name="CALL" noLink forceTitle />
+ * // ("/instruction/jcc", "Jcc", title)
  * <Instruction name="Jcc" />
- * // ("/instruction/vfmaddnnnpd", "VFMADD132PD")
+ * // ("/instruction/vfmaddnnnpd", "VFMADD132PD", true)
  * <Instruction name="VFMADD132PD" as="vfmaddnnnpd" />
  */
 export default function Instruction(props: InstructionProps): JSX.Element {
     const name = getInstructionName(props.name);
-    let nameStr: JSX.Element = <></>;
+    let nameJsx: JSX.Element = <></>;
     if (name) {
         if (props.clean)
-            nameStr = <> - {processStringClean(name)}</>;
+            nameJsx = <> ({processStringClean(name)})</>;
         else
-            nameStr = <> - {processStringToJsx(name)}</>;
+            nameJsx = <> ({processStringToJsx(name)})</>;
     }
 
-    if (props.noLink)
-        return <><Code>{props.name}</Code>{nameStr}</>;
+    if (props.noLink) {
+        if (props.forceTitle)
+            return <><Code>{props.name}</Code>{nameJsx}</>;
+        return <Code>{props.name}</Code>;
+    }
 
     const href = props.as
         ? `/instruction/${props.as.toLowerCase()}`
         : `/instruction/${props.name.toLowerCase()}`;
-    return <A href={href}><Code>{props.name}</Code>{nameStr}</A>;
+    return <A href={href}><Code>{props.name}</Code>{nameJsx}</A>;
 }
