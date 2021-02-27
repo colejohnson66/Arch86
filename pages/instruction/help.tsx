@@ -97,7 +97,7 @@ export default function Page(): JSX.Element {
                         <br />
                         Some vector instructions (such as <Instruction name="ADDPS" />) require that <em>no</em> legacy prefixes (such as <Code>0x66</Code>) be present.
                         Including a prefix will change how the instruction is decoded.
-                        For example, prefixing the <Instruction name="ADDPS" noLink /> instruction with <Code>0x66</Code> will change it into an <Instruction name="ADDPD" /> instruction.
+                        For example, prefixing the <Instruction name="ADDPS" noLink noTitle /> instruction with <Code>0x66</Code> will change it into an <Instruction name="ADDPD" /> instruction.
                         These mandatory &quot;no prefix&quot; opcodes are notated with <Code>NP</Code> at the beginning of the opcode line.
                         <br />
                         EVEX forms commonly feature other bits of information such as the mask register (<Code>{"{k1}"}</Code>), error masking (<Code>{"{er}"}</Code>), and more.
