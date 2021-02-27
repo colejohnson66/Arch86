@@ -14,6 +14,12 @@
  * You should have received a copy of the GNU Affero General Public License along
  *   with this program. If not, see <https://www.gnu.org/licenses/>.
  */
+
+/* CSS rules that apply to every page
+ *
+ * Despite being "modularized", all CSS files are included in `/pages/_app.tsx`.
+ */
+
 html,
 body,
 #__next {
@@ -32,10 +38,6 @@ body,
 header {
     flex: 0 1 auto;
     margin-bottom: 20px;
-}
-
-.navbarLogo {
-    margin-right: 0.5ch;
 }
 
 /* Contains `.breadcrumbs`, and `#main` (`#toc`, and `#content`) */
@@ -64,21 +66,6 @@ main {
     }
 }
 
-#toc {
-    flex: 0 1 auto;
-    min-width: 200px;
-    padding-right: 2em;
-}
-
-#tocTitle {
-    font-size: x-large;
-}
-
-#toc ul {
-    list-style: none;
-    padding-left: 1rem;
-}
-
 /* Actual content pane */
 #content {
     flex: 1 1 auto;
@@ -97,14 +84,6 @@ main {
 li > br {
     display: block;
     margin-bottom: 5px;
-}
-
-.mnemonic {
-    white-space: nowrap;
-}
-
-.overviewDescription {
-    min-width: 250px;
 }
 
 [rel=external] {
