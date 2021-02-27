@@ -65,11 +65,14 @@ type InstructionProps = {
  * <Instruction name="VFMADD132PD" as="vfmaddnnnpd" />
  */
 export default function Instruction(props: InstructionProps): JSX.Element {
+    const name = undefined; // getInstructionName(props.name);
+    const nameStr = name ? ` - ${name}` : "";
+
     if (props.noLink)
-        return <Code>{props.name}</Code>;
+        return <><Code>{props.name}</Code>{nameStr}</>;
 
     const href = props.as
         ? `/instruction/${props.as.toLowerCase()}`
         : `/instruction/${props.name.toLowerCase()}`;
-    return <A href={href}><Code>{props.name}</Code></A>;
+    return <A href={href}><Code>{props.name}</Code>{nameStr}</A>;
 }
