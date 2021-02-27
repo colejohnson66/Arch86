@@ -52,8 +52,10 @@ export function getAllInstructionsArray(): string[] {
     // gets all directories in `data/instructions`
     const ret = [];
     fs.readdirSync(dataDirectory).forEach((char) => {
-        // skip the list
+        // skip the lists
         if (char === "list.yaml")
+            return;
+        if (char === "Titles.ts")
             return;
         // get all files in `data/instructions/${char}`, then remove `.yaml` from the end
         const newDir = path.join(dataDirectory, char);

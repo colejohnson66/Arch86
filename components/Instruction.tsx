@@ -18,7 +18,7 @@ import { processStringClean, processStringToJsx } from "../lib/processStringToJs
  */
 import A from "./A";
 import { Code } from "@blueprintjs/core";
-import InstructionTitles from "../data/InstructionTitles";
+import InstructionTitles from "../data/instructions/Titles";
 import React from "react";
 
 function getInstructionName(name: string): string | undefined {

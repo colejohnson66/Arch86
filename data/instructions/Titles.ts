@@ -1,4 +1,4 @@
-import IDictionary from "../types/IDictionary";
+import IDictionary from "../../types/IDictionary";
 
 const InstructionTitles: IDictionary<string> = {
     aaa: "ASCII Adjust \\reg{AL} After Addition",

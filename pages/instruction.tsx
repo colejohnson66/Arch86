@@ -21,7 +21,7 @@ import A from "../components/A";
 import { GetStaticProps } from "next";
 import IDictionary from "../types/IDictionary";
 import Instruction from "../components/Instruction";
-import InstructionTitles from "../data/InstructionTitles";
+import InstructionTitles from "../data/instructions/Titles";
 import Layout from "../components/Layout";
 import React from "react";
 import TOC from "../components/TOC";
