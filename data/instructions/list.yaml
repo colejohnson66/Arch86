@@ -18,3 +18,4 @@ a:
   - and
   - [ andpd, andps ]
   - andn
+  - [ andnpd, andnps ]
