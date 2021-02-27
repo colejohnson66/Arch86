@@ -21,6 +21,7 @@ import A from "../components/A";
 import { GetStaticProps } from "next";
 import IDictionary from "../types/IDictionary";
 import Instruction from "../components/Instruction";
+import InstructionTitles from "../data/InstructionTitles";
 import Layout from "../components/Layout";
 import React from "react";
 import TOC from "../components/TOC";
@@ -34,13 +35,24 @@ const ccInstr = [
     "setcc",
 ];
 
-function commaSeparatedLinks(list: string[]): JSX.Element[] {
-    return list.map((item, idx) => (
+function commaSeparatedLinks(list: string[]): JSX.Element {
+    // list[0] is the name in `InstructionTitles`
+    // list[1..] is the instructions
+    const fragments = list.slice(1).map((item, idx, sliced) => (
         <React.Fragment key={idx}>
-            <Instruction name={item.toUpperCase()} />
-            {idx !== list.length - 1 && ", "}
+            <Instruction name={item.toUpperCase()} noTitle />
+            {idx !== sliced.length - 1 && ", "}
         </React.Fragment>
     ));
+
+    return (
+        <>
+            {fragments}
+            {" ("}
+            {InstructionTitles[list[0]]}
+            {")"}
+        </>
+    );
 }
 
 function instructionListWithHeading(list: (string | string[])[], char: string): JSX.Element {

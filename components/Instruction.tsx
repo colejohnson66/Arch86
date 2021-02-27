@@ -65,9 +65,15 @@ type InstructionProps = {
      *
      * By default, the title is shown, but if the link is suppressed (through
      *   `noLink`), the title will be suppressed as well.
-     *
+     * Takes precedence over `noTitle`.
      */
     forceTitle?: boolean;
+    /**
+     * Suppress the display of a title (overridden by `forceTitle`)
+     *
+     * Used for where a link is desired, but no title.
+     */
+    noTitle?: boolean;
     /**
      * Don't format the instruction name (clean it)
      *
@@ -76,7 +82,7 @@ type InstructionProps = {
      * Set this prop to format "cleanly".
      * In other words, `processStringClean` is used if this prop is set.
      *
-     * Ignored if the title is not shown (suppressed by `noLink`)
+     * Ignored if the title is not shown (suppressed by `noLink` or `noTitle`)
      */
     clean?: boolean;
 }
@@ -96,12 +102,18 @@ type InstructionProps = {
  *   instruction from appearing.
  * If the title is desired (but with no link), set `forceTitle` to `true`.
  *
+ * If a title is not desired, but a link is, the `noTitle` prop can be set to
+ *   `true`.
+ * This will be overridden by `forceTitle`.
+ *
  * @example
  * // (href, text, titleShown)
  * // ("/instruction/addpd", "ADDPD", true)
  * <Instruction name="ADDPD" />
  * // (undefined, "AND", false)
  * <Instruction name="AND" noLink />
+ * // ("/instruction/bound", "BOUND", false)
+ * <Instruction name="BOUND" noTitle />
  * // (undefined, "CALL", true)
  * <Instruction name="CALL" noLink forceTitle />
  * // ("/instruction/jcc", "Jcc", title)
@@ -119,6 +131,7 @@ export default function Instruction(props: InstructionProps): JSX.Element {
             nameJsx = <> ({processStringToJsx(name)})</>;
     }
 
+    // if `noLink` is set, suppress the title unless `forceTitle` is set
     if (props.noLink) {
         if (props.forceTitle)
             return <><Code>{props.name}</Code>{nameJsx}</>;
@@ -128,5 +141,9 @@ export default function Instruction(props: InstructionProps): JSX.Element {
     const href = props.as
         ? `/instruction/${props.as.toLowerCase()}`
         : `/instruction/${props.name.toLowerCase()}`;
-    return <A href={href}><Code>{props.name}</Code>{nameJsx}</A>;
+    // `noTitle` suppresses the title, but is overridden by `forceTitle`
+    if (props.noTitle && !props.forceTitle)
+        return <A href={href}><Code>{props.name}</Code></A>;
+    else
+        return <A href={href}><Code>{props.name}</Code>{nameJsx}</A>;
 }

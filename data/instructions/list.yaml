@@ -1,5 +1,9 @@
 %YAML 1.2
 ---
+# Each entry is of the type `string | string[]`
+# `string` values are displayed as is (roughly; see `/pages/instruction.tsx`)
+# `string[]` values are of the form `[title, ...names]` where `title` is from `/data/InstructionTitles.ts`,
+#   and will be displayed as "{title}: {names[0]}, {names[1]}..." (without individual titles)
 a:
   - aaa
   - aad
@@ -8,15 +12,15 @@ a:
   - adc
   - adcx
   - add
-  - [ addpd, addps, addsd, addss ]
-  - [ addsubpd, addsubps ]
+  - [ addList, addpd, addps, addsd, addss ]
+  - [ addsubList, addsubpd, addsubps ]
   - adox
-  - [ aesdec, aesdeclast ]
-  - [ aesenc, aesenclast ]
+  - [ aesdecList, aesdec, aesdeclast ]
+  - [ aesencList, aesenc, aesenclast ]
   - aesimc
   - aeskeygenassist
   - and
-  - [ andpd, andps ]
+  - [ andList, andpd, andps ]
   - andn
-  - [ andnpd, andnps ]
+  - [ andnList, andnpd, andnps ]
   - arpl
