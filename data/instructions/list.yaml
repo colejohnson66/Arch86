@@ -19,3 +19,4 @@ a:
   - [ andpd, andps ]
   - andn
   - [ andnpd, andnps ]
+  - arpl
