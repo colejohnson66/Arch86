@@ -49,6 +49,8 @@ flags: >-
 exceptions:
   floating: None
   other: See Exceptions Type 13.
+  otherAdditional:
+    "#UD": If \c{VEX.L} is not \c{0}.
 changes:
   version: 73
   date: 2020-11
@@ -56,3 +58,5 @@ changes:
     - >-
       The \c{ANDN r64a, r64b, r/m64} form is incorrectly documented as being "not encodable" in 32 bit mode.
       This is misleading as it \i{is} encodable, but is defined to be treated as the 32 bit form.
+    - >-
+      The \c{#UD} exception is not present in their exceptions list.
