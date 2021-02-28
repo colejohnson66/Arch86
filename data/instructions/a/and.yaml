@@ -220,7 +220,7 @@ description: >-
 
   In 64 bit mode, the default operand size is 32 bits, but \c{REX.W} will change it to 64 bits.
 operation: |-
-  pub fn and<D, S>(dest: &mut D, src: S) {
+  pub fn and<T>(dest: &mut T, src: T) {
     *dest = *dest & src;
   }
 flags: >-
