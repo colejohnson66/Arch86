@@ -97,7 +97,8 @@ bitEncoding:
         - \bits{55}
         - \bits{mod xmmreg3 r/m}
 description: >-
-  The \c{(V)ANDNPD} instruction ANDs two, four, or eight double-precision floating-point values from the inverted form of the first source operand to the second source operand and stores the result in the destination operand.
+  The \c{(V)ANDNPD} instruction ANDs two, four, or eight double-precision floating-point values from the inverted form of the first source operand to the second source operand.
+  The result is stored in in the destination operand.
 
   This instruction, despite being named as if it operates on floating-point numbers, internally operates on 64 bit integers.
   The "Operation" section below has been updated to reflect this (using \c{u64} instead of \c{f64}).

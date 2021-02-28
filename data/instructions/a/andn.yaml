@@ -31,7 +31,8 @@ encoding:
       - VEX.vvvv[r]
       - ModRM.r/m[r]
 description: >-
-  The \c{ANDN} instruction performs a logical AND against the inverted form of the first source operand with the unchanged second source operand and stores the result in the destination operand.
+  The \c{ANDN} instruction performs a logical AND against the inverted form of the first source operand with the unchanged second source operand.
+  The result is stored in in the destination operand.
 
   The operand size (\c{W} bit) is always 32 bits if not in Long Mode.
   In other words, in Protected and Compatibility Mode, \c{VEX.W1} is treated as \c{VEX.W0}.

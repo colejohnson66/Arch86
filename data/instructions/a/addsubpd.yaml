@@ -61,6 +61,8 @@ bitEncoding:
 description: >-
   The \c{(V)ADDSUBPD} instruction performs two operations:
   It subtracts the odd numbered double-precision floating-point values, and adds the even numbered ones.
+  These operations are done as \c{src1 op src2} (where \c{op} is either addition or subtraction).
+  The result is stored in in the destination operand.
 
   All versions \i{except} the legacy SSE version zero the unused upper SIMD register bits.
 operation: |-

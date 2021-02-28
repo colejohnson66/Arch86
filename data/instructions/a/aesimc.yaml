@@ -46,7 +46,8 @@ bitEncoding:
         - \bits{DB}
         - \bits{mod xmmreg3 r/m}
 description: >-
-  The \c{(V)AESIMC} instruction performs the "inverse mix columns" (\c{InvMixColumns}) transformation on a round key stored in the source operand and stores the result in the destination operand.
+  The \c{(V)AESIMC} instruction performs the "inverse mix columns" (\c{InvMixColumns}) transformation on a round key stored in the source operand.
+  The result is stored in in the destination operand.
 
   This instruction should be applied to the expanded AES round keys (excepting the first and last) to prepare them for decryption using the "Equivalent Inverse Cipher" (see FIPS 197).
 

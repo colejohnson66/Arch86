@@ -215,6 +215,7 @@ bitEncoding:
         - immediate
 description: >-
   The \c{AND} instruction performs a logical AND with the destination operand against the source operand and stores the result in the destination operand.
+  The result is stored in in the destination operand.
 
   This instruction can be used with the \instr{LOCK} prefix to allow atomic execution.
 

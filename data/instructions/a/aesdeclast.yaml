@@ -99,7 +99,8 @@ bitEncoding:
         - \bits{DF}
         - \bits{mod xmmreg3 r/m}
 description: >-
-  The \c{(V)AESDECLAST} instruction performs the last round of AES decryption using one, two, or four 128 bit states from the first source operand using 128 bit round keys from the second source operand and stores the result in the destination operand.
+  The \c{(V)AESDECLAST} instruction performs the last round of AES decryption using one, two, or four 128 bit states from the first source operand using 128 bit round keys from the second source operand.
+  The result is stored in in the destination operand.
 
   Due to the nature of AES, this instruction must be used for the last decryption round.
   For all but the last, use the \instr{AESDEC} instruction.

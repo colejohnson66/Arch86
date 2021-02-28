@@ -97,7 +97,8 @@ bitEncoding:
         - \bits{58}
         - \bits{mod xmmreg3 r/m}
 description: >-
-  The \c{(V)ADDPD} instruction adds two, four, or eight double-precision floating-point values from the first source operand to the second source operand and stores the result in the destination operand.
+  The \c{(V)ADDPD} instruction adds two, four, or eight double-precision floating-point values from the first source operand to the second source operand.
+  The result is stored in in the destination operand.
 
   All versions \i{except} the legacy SSE version zero the unused upper SIMD register bits.
 operation: |-

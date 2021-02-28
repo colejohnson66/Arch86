@@ -67,7 +67,8 @@ bitEncoding:
         - \bits{58}
         - \bits{mod xmmreg3 r/m}
 description: >-
-  The \c{(V)ADDSD} instruction adds a single double-precision floating-point from the first source operand and the second source operand and stores the result in the destination operand.
+  The \c{(V)ADDSD} instruction adds a single double-precision floating-point from the first source operand and the second source operand.
+  The result is stored in in the destination operand.
 
   The legacy SSE version (\c{ADDSD}) works on the lowest 64 bits and leaves all others unchanged.
 

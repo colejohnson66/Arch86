@@ -95,7 +95,8 @@ bitEncoding:
         - \bits{54}
         - \bits{mod xmmreg3 r/m}
 description: >-
-  The \c{(V)ANDPS} instruction ANDs four, eight, or sixteen single-precision floating-point values from the first source operand to the second source operand and stores the result in the destination operand.
+  The \c{(V)ANDPS} instruction ANDs four, eight, or sixteen single-precision floating-point values from the first source operand to the second source operand.
+  The result is stored in in the destination operand.
 
   This instruction, despite being named as if it operates on floating-point numbers, internally operates on 32 bit integers.
   The "Operation" section below has been updated to reflect this (using \c{u32} instead of \c{f32}).

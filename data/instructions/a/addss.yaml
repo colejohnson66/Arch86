@@ -67,7 +67,8 @@ bitEncoding:
         - \bits{58}
         - \bits{mod xmmreg3 r/m}
 description: >-
-  The \c{(V)ADDSS} instruction adds a single single-precision floating-point from the first source operand and the second source operand and stores the result in the destination operand.
+  The \c{(V)ADDSS} instruction adds a single single-precision floating-point from the first source operand and the second source operand.
+  The result is stored in in the destination operand.
 
   The legacy SSE version (\c{ADDSS}) works on the lowest 32 bits and leaves all others unchanged.
 
