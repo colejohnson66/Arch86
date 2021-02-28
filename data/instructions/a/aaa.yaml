@@ -37,25 +37,21 @@ description: >-
   The other arithmetic flags are undefined and undocumented.
 operation: |-
   pub fn aaa() {
-    if MODE == 64 {
-      #UD;
+    if ((AL & 0xF) > 9) || AF {
+      match PROCESSOR {
+        8086 | 8088 | 80186 => {
+          AH = AH + 1; // see note 1
+          AL = AL + 6;
+        },
+        _ => AX = AX + 0x106;
+      };
+      AF = 1;
+      CF = 1;
     } else {
-      if ((AL & 0xF) > 9) || AF {
-        match PROCESSOR {
-          8086 | 8088 | 80186 => {
-            AH = AH + 1; // see note 1
-            AL = AL + 6;
-          },
-          _ => AX = AX + 0x106;
-        };
-        AF = 1;
-        CF = 1;
-      } else {
-        AF = 0;
-        CF = 0;
-      }
-      AL = AL & 0xF;
+      AF = 0;
+      CF = 0;
     }
+    AL = AL & 0xF;
   }
 operationNotes:
   - >-

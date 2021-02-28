@@ -33,20 +33,16 @@ description: >-
   The other arithmetic flags are undefined and undocumented.
 operation: >-
   pub fn aas() {
-    if MODE == 64 {
-      #UD;
+    if (AL & 0xF) > 9) || AF {
+      AX = AX - 6;
+      AH = AH - 1;
+      AF = 1;
+      CF = 1;
     } else {
-      if (AL & 0xF) > 9) || AF {
-        AX = AX - 6;
-        AH = AH - 1;
-        AF = 1;
-        CF = 1;
-      } else {
-        AF = 0;
-        CF = 0;
-      }
-      AL = AL & 0xF;
+      AF = 0;
+      CF = 0;
     }
+    AL = AL & 0xF;
   }
 flags: >-
   The \reg{AF} and \reg{CF} flags are set to 1 if the adjustment results in a decimal borrow; otherwise they are set to 0.
