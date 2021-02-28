@@ -76,6 +76,13 @@ type InstructionProps = {
      * Ignored if the title is not shown (suppressed by `noLink` or `noTitle`)
      */
     clean?: boolean;
+    /**
+     * Use a hyphen instead of parenthesis for the instruction title
+     *
+     * By default, the instruction will be formatted as: `{name} ({title})`.
+     * This changes that to `{name} - {title}`.
+     */
+    useHyphen?: boolean;
 }
 
 /**
@@ -92,6 +99,9 @@ type InstructionProps = {
  * If that is the situation, it is recommended that `noTitle` be set as well.
  *
  * If a title is not desired, the `noTitle` prop can be set to `true`.
+ *
+ * If the title and name should be separated with a hyphen (instead of the title
+ *   appearing in parenthesis), the `useHyphen` prop should be set to `true`.
  *
  * @example
  * // (href, text, titleShown)
@@ -112,12 +122,18 @@ export default function Instruction(props: InstructionProps): JSX.Element {
     const name = getInstructionName(props.name);
     let nameJsx: JSX.Element = <></>;
     if (name) {
-        if (props.clean)
-            nameJsx = <> ({formatStringPlaintext(name)})</>;
-        else
-            nameJsx = <> ({formatStringToJsx(name)})</>;
+        if (props.useHyphen) {
+            if (props.clean)
+                nameJsx = <> - {formatStringPlaintext(name)}</>;
+            else
+                nameJsx = <> - {formatStringToJsx(name)}</>;
+        } else {
+            if (props.clean)
+                nameJsx = <> ({formatStringPlaintext(name)})</>;
+            else
+                nameJsx = <> ({formatStringToJsx(name)})</>;
+        }
     }
-
     if (props.noLink) {
         if (props.noTitle)
             return <Code>{props.name}</Code>;

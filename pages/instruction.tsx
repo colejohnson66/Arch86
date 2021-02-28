@@ -48,9 +48,8 @@ function commaSeparatedLinks(list: string[]): JSX.Element {
     return (
         <>
             {fragments}
-            {" ("}
+            {" - "}
             {InstructionTitles[list[0]]}
-            {")"}
         </>
     );
 }
@@ -74,7 +73,7 @@ function instructionListWithHeading(list: (string | string[])[], char: string): 
                     if (ccInstr.includes(item)) {
                         return (
                             <li key={item}>
-                                <Instruction name={`${item.substr(0, item.length - 2).toUpperCase()}cc`} />
+                                <Instruction name={`${item.substr(0, item.length - 2).toUpperCase()}cc`} useHyphen />
                             </li>
                         );
                     }
@@ -82,7 +81,7 @@ function instructionListWithHeading(list: (string | string[])[], char: string): 
                     // The `nnn` to `###` is for FMA instructions
                     return (
                         <li key={item}>
-                            <Instruction name={item.replace("nnn", "###").toUpperCase()} as={item} />
+                            <Instruction name={item.replace("nnn", "###").toUpperCase()} as={item} useHyphen />
                         </li>
                     );
                 })}
