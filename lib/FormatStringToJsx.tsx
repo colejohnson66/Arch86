@@ -32,11 +32,12 @@ const functions: IDictionary<(arg: string) => JSX.Element> = {
     bitRef: (arg) => (<sup>[{arg}]</sup>),
     c: (arg) => (<Code>{arg}</Code>),
     cpuid: (arg) => {
-        // arg is a comma separated list with an empty parameter for separation of CPUID arguments and result
-        // for example, `eax,07,ecx,00,,ebx,adx,19` will become `CPUID[EAX=07h,ECX=0]:EBX.ADX[bit 19]`
-        // multiple bit results will use "range syntax" (eg. `0..=1` for the two LSB)
-        // currently, the result portion must only have 3 parameters
-
+        /**
+         * arg is a comma separated list with an empty parameter for separation of CPUID arguments and result.
+         * For example, `eax,07,ecx,00,,ebx,adx,19` will become `CPUID[EAX=07h,ECX=0]:EBX.ADX[bit 19]`.
+         * Multiple bit results will use "range syntax" (eg. `0..=1` for the two LSB).
+         * Currently, the result portion must only have 3 parameters.
+         */
         const args = arg.split(",,");
         assert(args.length === 2);
 
@@ -65,6 +66,18 @@ const functions: IDictionary<(arg: string) => JSX.Element> = {
     en: (_) => (<>&ndash;</>),
     error: (arg) => (<b style={{ color: Colors.RED3 }}>{arg}</b>),
     i: (arg) => (<i>{arg}</i>),
+    img: (arg) => {
+        /**
+         * arg is a comma separated list of parameters of the form:
+         *   `{src},{alt}`
+         * Only the first (src) is required.
+         * Both parameters are passed unaltered to their respective <img> attributes.
+         */
+        const args = arg.split(",");
+        if (args.length === 1)
+            return <img src={args[0]} alt="" className="whiteBgRoundBorder" />;
+        return <img src={args[0]} alt={args[1]} className="whiteBgRoundBorder" />;
+    },
     instr: (arg) => (<Instruction name={arg} />),
     reg: (arg) => (<Code>{arg}</Code>),
 };

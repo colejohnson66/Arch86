@@ -111,6 +111,11 @@ dt:first-child {
     padding-top: 0;
 }
 
+.whiteBgRoundBorder {
+    background-color: white;
+    border-radius: 5px;
+}
+
 footer {
     flex: 0 1 auto;
     margin: 1em 0 0 10em;
