@@ -23,6 +23,7 @@ import IDictionary from "../types/IDictionary";
 import Instruction from "../components/Instruction";
 import InstructionTitles from "../data/instructions/Titles";
 import Layout from "../components/Layout";
+import MaybeArray from "../types/MaybeArray";
 import React from "react";
 import TOC from "../components/TOC";
 import WIP from "../components/WIP";
@@ -54,13 +55,13 @@ function commaSeparatedLinks(list: string[]): JSX.Element {
     );
 }
 
-function instructionListWithHeading(list: (string | string[])[], char: string): JSX.Element {
+function instructionListWithHeading(list: MaybeArray<string>[], char: string): JSX.Element {
     return (
         <React.Fragment key={char}>
             <H3 id={`headingList${char.toUpperCase()}`}>{char.toUpperCase()}</H3>
             <UL>
                 {list.map((item) => {
-                    // Join related instructions (signified by `string[]` in the YAML)
+                    // Join related instructions (`string[]` in the YAML)
                     if (Array.isArray(item)) {
                         return (
                             <li key={item[0]}>
