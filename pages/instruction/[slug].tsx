@@ -17,8 +17,8 @@
 
 import { Callout, Code, Divider, H1, H2, H3, HTMLTable, IBreadcrumbProps, OL, UL } from "@blueprintjs/core";
 import { GetStaticPaths, GetStaticProps } from "next";
+import { formatStringPlaintext, formatStringToJsx } from "../../lib/FormatStringToJsx";
 import { getAllInstructionsAsParams, getInstructionData } from "../../lib/instruction";
-import { processStringClean, processStringToJsx } from "../../lib/processStringToJsx";
 
 import A from "../../components/A";
 import DateTime from "../../components/DateTime";
@@ -127,7 +127,7 @@ function coerceArray<T>(arr: MaybeArray<T>): T[] {
 function brTagsFromArray(arr: string[]): JSX.Element[] {
     return arr.map((line, idx) => (
         <React.Fragment key={idx}>
-            {processStringToJsx(line)}
+            {formatStringToJsx(line)}
             {idx !== arr.length - 1 && <br />}
         </React.Fragment>
     ));
@@ -140,7 +140,7 @@ function brTagsFromString(str: string): JSX.Element[] {
 function paragraphsFromArray(arr: string[]): JSX.Element[] {
     return arr.map((par, idx) => (
         <p key={idx}>
-            {processStringToJsx(par)}
+            {formatStringToJsx(par)}
         </p>
     ));
 }
@@ -158,14 +158,14 @@ function bitEncodings(encodings: BitEncodingEntry[]): JSX.Element {
     const rows = encodings.map((entry, idx) => {
         const bits = coerceArray(entry.bits).map((byte, idx, arr) => (
             <React.Fragment key={idx}>
-                {processStringToJsx(byte)}
+                {formatStringToJsx(byte)}
                 {idx !== arr.length - 1 && " : "}
             </React.Fragment>
         ));
 
         return (
             <React.Fragment key={idx}>
-                <dt>{processStringToJsx(entry.form)}</dt>
+                <dt>{formatStringToJsx(entry.form)}</dt>
                 <dd>{bits}</dd>
                 {entry.limits && <dd>{entry.limits}</dd>}
             </React.Fragment>
@@ -206,7 +206,7 @@ export default function Page(props: PageProps): JSX.Element {
         </A>);
 
     return (
-        <Layout canonical={`/instruction/${props.id}`} navGroup="instruction" title={`${props.id.toUpperCase()}: ${processStringClean(props.title)}`} src="/pages/instruction/[slug].tsx" dataSrc={`/data/instructions/${props.id[0]}/${props.id}.yaml`} breadcrumbs={PageBreadcrumbs}>
+        <Layout canonical={`/instruction/${props.id}`} navGroup="instruction" title={`${props.id.toUpperCase()}: ${formatStringPlaintext(props.title)}`} src="/pages/instruction/[slug].tsx" dataSrc={`/data/instructions/${props.id[0]}/${props.id}.yaml`} breadcrumbs={PageBreadcrumbs}>
             <TOC.Root>
                 <TOC.Entry href="#headingEncoding" text="Encoding" />
                 {props.bitEncoding &&
@@ -247,7 +247,7 @@ export default function Page(props: PageProps): JSX.Element {
                     <TOC.Entry href="#headingReferences" text="References" />}
             </TOC.Root>
             <div id="content">
-                <H1><Code>{props.id.toUpperCase()}</Code>: {processStringToJsx(props.title)}</H1>
+                <H1><Code>{props.id.toUpperCase()}</Code>: {formatStringToJsx(props.title)}</H1>
                 <Callout intent="primary">
                     For information about interpreting this page, see <A href="/instruction/help">the help page</A>.
                 </Callout>
@@ -270,9 +270,9 @@ export default function Page(props: PageProps): JSX.Element {
                             {props.opcode.map((row, idx) => (
                                 <tr key={idx}>
                                     <td>
-                                        <Code>{processStringToJsx(row.opcode)}</Code>
+                                        <Code>{formatStringToJsx(row.opcode)}</Code>
                                         <Divider />
-                                        <Code className="mnemonic">{processStringToJsx(row.mnemonic)}</Code>
+                                        <Code className="mnemonic">{formatStringToJsx(row.mnemonic)}</Code>
                                     </td>
                                     <td><Code>{row.encoding}</Code></td>
                                     {props.validity.split(",").map((entry) => (
@@ -283,7 +283,7 @@ export default function Page(props: PageProps): JSX.Element {
                                         <td>
                                             {brTagsFromArray(coerceArray(row.cpuid))}
                                         </td>}
-                                    <td className="overviewDescription">{processStringToJsx(row.description)}</td>
+                                    <td className="overviewDescription">{formatStringToJsx(row.description)}</td>
                                 </tr>
                             ))}
                         </tbody>

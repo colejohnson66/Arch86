@@ -1,5 +1,3 @@
-import { processStringClean, processStringToJsx } from "../lib/processStringToJsx";
-
 /* This file is part of 80x86.
  * Copyright (c) 2021 Cole Johnson
  *
@@ -16,6 +14,9 @@ import { processStringClean, processStringToJsx } from "../lib/processStringToJs
  * You should have received a copy of the GNU Affero General Public License along
  *   with this program. If not, see <https://www.gnu.org/licenses/>.
  */
+
+import { formatStringPlaintext, formatStringToJsx } from "../lib/FormatStringToJsx";
+
 import A from "./A";
 import { Code } from "@blueprintjs/core";
 import InstructionTitles from "../data/instructions/Titles";
@@ -68,9 +69,9 @@ type InstructionProps = {
      * Don't format the instruction name (clean it)
      *
      * By default, instructions titles containing formatting directives are ran
-     *   through a formatter (see `/lib/processStringToJsx.tsx`).
+     *   through a formatter (see `/lib/FormatStringToJsx.tsx`).
      * Set this prop to format "cleanly".
-     * In other words, `processStringClean` is used if this prop is set.
+     * In other words, `formatStringPlaintext` is used if this prop is set.
      *
      * Ignored if the title is not shown (suppressed by `noLink` or `noTitle`)
      */
@@ -112,9 +113,9 @@ export default function Instruction(props: InstructionProps): JSX.Element {
     let nameJsx: JSX.Element = <></>;
     if (name) {
         if (props.clean)
-            nameJsx = <> ({processStringClean(name)})</>;
+            nameJsx = <> ({formatStringPlaintext(name)})</>;
         else
-            nameJsx = <> ({processStringToJsx(name)})</>;
+            nameJsx = <> ({formatStringToJsx(name)})</>;
     }
 
     if (props.noLink) {
