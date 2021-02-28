@@ -34,6 +34,8 @@ const InstructionTitles: IDictionary<string> = {
     andnpd: "Logical AND NOT Packed Double-Precision Floating-Point Values",
     andnps: "Logical AND NOT Packed Single-Precision Floating-Point Values",
     arpl: "Adjust \\c{RPL} Field of Segment Selector",
+
+    bextr: "Bit Extract Field",
 };
 
 export default InstructionTitles;

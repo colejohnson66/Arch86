@@ -24,3 +24,5 @@ a:
   - andn
   - [ andnList, andnpd, andnps ]
   - arpl
+b:
+  - bextr
