@@ -102,6 +102,7 @@ type PageProps = {
     bitEncoding?: BitEncoding;
     description: string;
     operation: string;
+    operationImage?: string;
     operationNotes: string[];
     examples?: MaybeArray<string>;
     flags?: string;
@@ -345,6 +346,10 @@ export default function Page(props: PageProps): JSX.Element {
                         {props.operation}
                     </SyntaxHighlighter>
                 </Scrollable>
+                {props.operationImage &&
+                    <Scrollable>
+                        <img src={props.operationImage} alt={`The operation of the ${props.id.toUpperCase()} instruction`} className="whiteBgRoundBorder" />
+                    </Scrollable>}
                 {props.operationNotes &&
                     <>
                         <H3 id="headingOperationNotes">Notes</H3>

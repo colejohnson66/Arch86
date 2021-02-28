@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="180"
+   height="80"
+   viewBox="0 0 47.624999 21.166667"
+   version="1.1"
+   id="svg3155"
+   inkscape:version="1.0.2 (e86c870879, 2021-01-15)"
+   sodipodi:docname="aaa.svg"
+   inkscape:export-filename="/home/cole/Desktop/80x86/public/img/instruction/a/aaa.png"
+   inkscape:export-xdpi="192"
+   inkscape:export-ydpi="192">
+  <defs
+     id="defs3149">
+    <marker
+       style="overflow:visible"
+       id="marker3958"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="TriangleOutM"
+       inkscape:isstock="true">
+      <path
+         transform="scale(0.4)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 5.77,0 -2.88,5 V -5 Z"
+         id="path3956" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker3910"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="TriangleOutM"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="scale(0.4)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 5.77,0 -2.88,5 V -5 Z"
+         id="path3908" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="TriangleOutM"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="TriangleOutM"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         transform="scale(0.4)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 5.77,0 -2.88,5 V -5 Z"
+         id="path1987" />
+    </marker>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="6.4"
+     inkscape:cx="65.885586"
+     inkscape:cy="55.049756"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     inkscape:document-rotation="0"
+     showgrid="true"
+     units="px"
+     inkscape:window-width="1343"
+     inkscape:window-height="908"
+     inkscape:window-x="0"
+     inkscape:window-y="105"
+     inkscape:window-maximized="0">
+    <inkscape:grid
+       type="xygrid"
+       id="grid3157"
+       spacingx="1.3229167"
+       spacingy="1.3229167"
+       empspacing="2" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata3152">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+        <cc:license
+           rdf:resource="http://creativecommons.org/licenses/by-sa/4.0/" />
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>Cole Johnson</dc:title>
+          </cc:Agent>
+        </dc:creator>
+      </cc:Work>
+      <cc:License
+         rdf:about="http://creativecommons.org/licenses/by-sa/4.0/">
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Reproduction" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Distribution" />
+        <cc:requires
+           rdf:resource="http://creativecommons.org/ns#Notice" />
+        <cc:requires
+           rdf:resource="http://creativecommons.org/ns#Attribution" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#DerivativeWorks" />
+        <cc:requires
+           rdf:resource="http://creativecommons.org/ns#ShareAlike" />
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <g
+       id="g3252"
+       transform="translate(2.6458343)">
+      <rect
+         style="fill:#99c1f1;stroke:#000000;stroke-width:0.264583;paint-order:stroke fill markers"
+         id="rect3159"
+         width="10.583333"
+         height="5.2916665"
+         x="2.6458333"
+         y="2.6458333" />
+      <text
+         xml:space="preserve"
+         style="font-size:4.23333px;line-height:1.25;font-family:'DejaVu Sans';-inkscape-font-specification:'DejaVu Sans';stroke-width:0.264583"
+         x="5.089097"
+         y="6.8347235"
+         id="text3163"><tspan
+           sodipodi:role="line"
+           id="tspan3161"
+           x="5.089097"
+           y="6.8347235"
+           style="font-size:4.23333px;stroke-width:0.264583">AX</tspan></text>
+    </g>
+    <g
+       id="g3257">
+      <rect
+         style="fill:#8ff0a4;stroke:#000000;stroke-width:0.264583;paint-order:stroke fill markers"
+         id="rect3159-0"
+         width="15.874999"
+         height="5.291667"
+         x="2.6458349"
+         y="13.229167" />
+      <text
+         xml:space="preserve"
+         style="font-size:4.23333px;line-height:1.25;font-family:'DejaVu Sans';-inkscape-font-specification:'DejaVu Sans';stroke-width:0.264583"
+         x="3.9377506"
+         y="17.415991"
+         id="text3163-6"><tspan
+           sodipodi:role="line"
+           id="tspan3161-2"
+           x="3.9377506"
+           y="17.415991"
+           style="font-size:4.23333px;stroke-width:0.264583">0x106</tspan></text>
+    </g>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#TriangleOutM)"
+       d="m 15.875,5.2916669 h 10.583333 l 1e-6,1.3229166"
+       id="path3259"
+       sodipodi:nodetypes="ccc" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker3910)"
+       d="m 18.520834,15.875 h 7.937499 l 1e-6,-1.322916"
+       id="path3900"
+       sodipodi:nodetypes="ccc" />
+    <g
+       id="layer1-6"
+       transform="translate(23.8125,7.9374999)">
+      <circle
+         style="fill:#c061cb;fill-opacity:1;stroke:#000000;stroke-width:0.264583;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
+         id="path12"
+         cx="2.6458333"
+         cy="2.6458333"
+         r="2.5135417" />
+      <text
+         xml:space="preserve"
+         style="font-size:5.64444px;line-height:1.25;font-family:'DejaVu Sans';-inkscape-font-specification:'DejaVu Sans';stroke-width:0.264583"
+         x="0.28112149"
+         y="4.4152331"
+         id="text851"><tspan
+           id="tspan849"
+           x="0.28112149"
+           y="4.4152331"
+           style="font-size:5.64444px;stroke-width:0.264583">+</tspan></text>
+    </g>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker3958)"
+       d="m 29.104166,10.583333 3.968751,1e-6"
+       id="path3948"
+       sodipodi:nodetypes="cc" />
+    <g
+       id="g3252-1"
+       transform="translate(31.750001,5.2916669)">
+      <rect
+         style="fill:#99c1f1;stroke:#000000;stroke-width:0.264583;paint-order:stroke fill markers"
+         id="rect3159-8"
+         width="10.583333"
+         height="5.2916665"
+         x="2.6458333"
+         y="2.6458333" />
+      <text
+         xml:space="preserve"
+         style="font-size:4.23333px;line-height:1.25;font-family:'DejaVu Sans';-inkscape-font-specification:'DejaVu Sans';stroke-width:0.264583"
+         x="5.089097"
+         y="6.8347235"
+         id="text3163-7"><tspan
+           sodipodi:role="line"
+           id="tspan3161-9"
+           x="5.089097"
+           y="6.8347235"
+           style="font-size:4.23333px;stroke-width:0.264583">AX</tspan></text>
+    </g>
+    <g
+       id="g4302"
+       transform="translate(-1.3229175,1.3229173)">
+      <rect
+         style="fill:#c0bfbc;stroke:#000000;stroke-width:0.264583;stroke-miterlimit:4;stroke-dasharray:none;paint-order:stroke fill markers"
+         id="rect4293"
+         width="2.6458333"
+         height="2.6458333"
+         x="18.520834"
+         y="10.583333" />
+      <text
+         xml:space="preserve"
+         style="font-size:2.82223px;line-height:1.25;font-family:'DejaVu Sans';-inkscape-font-specification:'DejaVu Sans';stroke-width:0.264583"
+         x="18.921152"
+         y="12.934958"
+         id="text4297"><tspan
+           sodipodi:role="line"
+           id="tspan4295"
+           x="18.921152"
+           y="12.934958"
+           style="stroke-width:0.264583">1</tspan></text>
+    </g>
+  </g>
+</svg>

@@ -24,6 +24,7 @@ bitEncoding:
       bits:
 description: >-
 operation: |-
+operationImage:
 operationNotes:
   - >-
 examples:
