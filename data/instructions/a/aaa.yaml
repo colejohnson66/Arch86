@@ -35,7 +35,6 @@ description: >-
   This instruction is not valid in 64 bit mode, and if encountered, the processor will raise a \c{#UD} exception.
   In 16 or 32 bit mode, this instruction will only modify the \reg{AF} and \reg{CF} flags.
   The other arithmetic flags are undefined and undocumented.
-operationImage: /img/instruction/a/aaa.png
 operation: |-
   pub fn aaa() {
     if ((AL & 0xF) > 9) || AF {
@@ -54,6 +53,7 @@ operation: |-
     }
     AL = AL & 0xF;
   }
+operationImage: /img/instruction/a/aaa.png
 operationNotes:
   - >-
     According to the source code for Bochs' (\c{/cpu/bcd.cc}), this instruction is implemented differently on the 80186 and prior.
