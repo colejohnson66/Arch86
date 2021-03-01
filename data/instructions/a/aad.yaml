@@ -56,6 +56,7 @@ operation: |-
     AL = (AL + (AH * imm8)) & 0xFF;
     AH = 0;
   }
+operationImage: /img/instruction/a/aad.png
 operationNotes:
   - >-
     According to the source code for Bochs' (\c{/cpu/bcd.cc}), this instruction actually performs the operation on the \reg{AX} register, not \reg{AL}.
