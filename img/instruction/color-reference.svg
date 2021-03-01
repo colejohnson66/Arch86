@@ -5,13 +5,39 @@
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    width="100"
    height="280"
    viewBox="0 0 26.458333 74.083335"
    version="1.1"
-   id="svg983">
+   id="svg983"
+   inkscape:version="1.0.2 (e86c870879, 2021-01-15)"
+   sodipodi:docname="color-reference.svg">
   <defs
      id="defs977" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="3.2"
+     inkscape:cx="111.65175"
+     inkscape:cy="140.63273"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     inkscape:document-rotation="0"
+     showgrid="true"
+     units="px">
+    <inkscape:grid
+       type="xygrid"
+       id="grid1546"
+       spacingx="1.3229167"
+       spacingy="1.3229167"
+       empspacing="2" />
+  </sodipodi:namedview>
   <metadata
      id="metadata980">
     <rdf:RDF>
@@ -25,6 +51,8 @@
     </rdf:RDF>
   </metadata>
   <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
      id="layer1">
     <rect
        style="fill:#99c1f1;stroke:#000000;stroke-width:0.264583;paint-order:stroke fill markers"
@@ -39,6 +67,7 @@
        x="3.5512116"
        y="6.4595532"
        id="text1552"><tspan
+         sodipodi:role="line"
          id="tspan1550"
          x="3.5512116"
          y="6.4595532"
@@ -56,6 +85,7 @@
        x="3.1956756"
        y="14.807364"
        id="text1558"><tspan
+         sodipodi:role="line"
          id="tspan1556"
          x="3.1956756"
          y="14.807364"
@@ -73,6 +103,7 @@
        x="4.1072459"
        y="22.334553"
        id="text1562"><tspan
+         sodipodi:role="line"
          id="tspan1560"
          x="4.1072459"
          y="22.334553"
@@ -90,6 +121,7 @@
        x="3.5057366"
        y="30.682362"
        id="text1568"><tspan
+         sodipodi:role="line"
          id="tspan1566"
          x="3.5057366"
          y="30.682362"
@@ -97,10 +129,10 @@
     <rect
        style="fill:#f66151;stroke:#000000;stroke-width:0.264583;paint-order:stroke fill markers"
        id="rect1572"
-       width="5.2916665"
-       height="5.2916665"
+       width="10.583334"
+       height="5.2916694"
        x="2.6458333"
-       y="34.395832" />
+       y="34.395836" />
     <rect
        style="fill:#dc8add;stroke:#000000;stroke-width:0.264583;paint-order:stroke fill markers"
        id="rect1578"
@@ -114,6 +146,7 @@
        x="3.1295331"
        y="46.147053"
        id="text1576"><tspan
+         sodipodi:role="line"
          id="tspan1574"
          x="3.1295331"
          y="46.147053"
@@ -139,5 +172,34 @@
        height="5.2916665"
        x="2.6458333"
        y="66.145836" />
+    <text
+       xml:space="preserve"
+       style="font-size:4.23333px;line-height:1.25;font-family:'DejaVu Sans';-inkscape-font-specification:'DejaVu Sans';stroke-width:0.264583"
+       x="3.2060101"
+       y="38.649841"
+       id="text2747"><tspan
+         sodipodi:role="line"
+         id="tspan2745"
+         x="3.2060101"
+         y="38.649841"
+         style="stroke-width:0.264583">imm</tspan></text>
+    <rect
+       style="fill:#c0bfbc;stroke:#000000;stroke-width:0.264583;paint-order:stroke fill markers"
+       id="rect5358"
+       width="10.583333"
+       height="5.2916665"
+       x="10.583334"
+       y="58.208336" />
+    <text
+       xml:space="preserve"
+       style="font-size:4.23333px;line-height:1.25;font-family:'DejaVu Sans';-inkscape-font-specification:'DejaVu Sans';stroke-width:0.264583"
+       x="11.026722"
+       y="62.31041"
+       id="text5356"><tspan
+         sodipodi:role="line"
+         id="tspan5354"
+         x="11.026722"
+         y="62.31041"
+         style="stroke-width:0.264583">note</tspan></text>
   </g>
 </svg>
