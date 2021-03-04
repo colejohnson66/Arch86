@@ -22,12 +22,10 @@ import Instruction from "../components/Instruction";
 import React from "react";
 import { strict as assert } from "assert";
 
-// `\abbr` may change, so don't combine with `\i`
 // `\bits` may change, so don't combine with `\c`
 // `\reg` may change, so don't combine with `\c`
 // `\cpuid` is currently fancy syntax around `\c`, but this may change
 const functions: IDictionary<(arg: string) => JSX.Element> = {
-    abbr: (arg) => (<i>{arg}</i>),
     bits: (arg) => (<Code>{arg}</Code>),
     bitRef: (arg) => (<sup>[{arg}]</sup>),
     c: (arg) => (<Code>{arg}</Code>),

@@ -11,8 +11,8 @@ opcode:
       64: valid
     cpuid: AES
     description: >-
-      Assist in AES round key generation using an 8 bit round constant (RCON) specified in the immediate byte and 128 bits of data specified in \abbr{xmm2/m128}.
-      Stores the result in \abbr{xmm1}.
+      Assist in AES round key generation using an 8 bit round constant (RCON) specified in the immediate byte and 128 bits of data specified in \i{xmm2/m128}.
+      Stores the result in \i{xmm1}.
   - opcode: VEX.128.66.0F3A.WIG DF /r \i{ib}
     mnemonic: VAESKEYGENASSIST \i{xmm1}, \i{xmm2/m128}, \i{imm8}
     encoding: RMI
@@ -21,8 +21,8 @@ opcode:
       64: valid
     cpuid: [ AES, AVX ]
     description: >-
-      Assist in AES round key generation using an 8 bit round constant (RCON) specified in the immediate byte and 128 bits of data specified in \abbr{xmm2/m128}.
-      Stores the result in \abbr{xmm1}.
+      Assist in AES round key generation using an 8 bit round constant (RCON) specified in the immediate byte and 128 bits of data specified in \i{xmm2/m128}.
+      Stores the result in \i{xmm1}.
 encoding:
   operands: 3
   encodings:

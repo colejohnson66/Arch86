@@ -11,8 +11,8 @@ opcode:
       64: valid
     cpuid: SSE3
     description: >-
-      Add/subtract packed double-precision floating point values from \abbr{xmm2/m128} and \abbr{xmm1}.
-      Stores the result in \abbr{xmm1}.
+      Add/subtract packed double-precision floating point values from \i{xmm2/m128} and \i{xmm1}.
+      Stores the result in \i{xmm1}.
   - opcode: VEX.128.66.0F.WIG D0 /r
     mnemonic: VADDSUBPD \i{xmm1}, \i{xmm2}, \i{xmm3/m128}
     encoding: VEX
@@ -21,8 +21,8 @@ opcode:
       64: valid
     cpuid: AVX
     description: >-
-      Add/subtract packed double-precision floating point values from \abbr{xmm3/m128} and \abbr{xmm2}.
-      Stores the result in \abbr{xmm1}.
+      Add/subtract packed double-precision floating point values from \i{xmm3/m128} and \i{xmm2}.
+      Stores the result in \i{xmm1}.
   - opcode: VEX.256.66.0F.WIG D0 /r
     mnemonic: VADDSUBPD \i{ymm1}, \i{ymm2}, \i{ymm3/m256}
     encoding: VEX
@@ -31,8 +31,8 @@ opcode:
       64: valid
     cpuid: AVX
     description: >-
-      Add/subtract packed double-precision floating point values from \abbr{ymm2/m256} and \abbr{ymm2}.
-      Stores the result in \abbr{ymm1}.
+      Add/subtract packed double-precision floating point values from \i{ymm2/m256} and \i{ymm2}.
+      Stores the result in \i{ymm1}.
 encoding:
   operands: 3
   encodings:

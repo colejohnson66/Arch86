@@ -9,63 +9,63 @@ opcode:
     validity:
       1632: valid
       64: valid
-    description: ANDs \abbr{imm8} into \abbr{AL}.
+    description: ANDs \i{imm8} into \i{AL}.
   - opcode: 25 \i{iw}
     mnemonic: AND AX, \i{imm16}
     encoding: AI
     validity:
       1632: valid
       64: valid
-    description: ANDs \abbr{imm16} into \abbr{AX}.
+    description: ANDs \i{imm16} into \i{AX}.
   - opcode: 25 \i{id}
     mnemonic: AND EAX, \i{imm32}
     encoding: AI
     validity:
       1632: valid
       64: valid
-    description: ANDs \abbr{imm32} into \abbr{EAX}.
+    description: ANDs \i{imm32} into \i{EAX}.
   - opcode: REX.W 25 \i{id}
     mnemonic: AND RAX, \i{imm32}
     encoding: AI
     validity:
       1632: n/e
       64: valid
-    description: ANDs \abbr{imm32} (sign extended to 64 bits) into \abbr{RAX}.
+    description: ANDs \i{imm32} (sign extended to 64 bits) into \i{RAX}.
   - opcode: 80 /r \i{ib}
     mnemonic: AND \i{r/m8}, \i{imm8}
     encoding: MI
     validity:
       1632: valid
       64: valid
-    description: ANDs \abbr{imm8} into \abbr{r/m8}.
+    description: ANDs \i{imm8} into \i{r/m8}.
   - opcode: REX 80 /r \i{ib}
     mnemonic: AND \i{r/m8*}, \i{imm8}
     encoding: MI
     validity:
       1632: n/e
       64: valid
-    description: ANDs \abbr{imm8} into \abbr{r/m8}.
+    description: ANDs \i{imm8} into \i{r/m8}.
   - opcode: 81 /4 \i{iw}
     mnemonic: AND \i{r/m16}, \i{imm16}
     encoding: MI
     validity:
       1632: valid
       64: valid
-    description: ANDs \abbr{imm16} into \abbr{r/m16}.
+    description: ANDs \i{imm16} into \i{r/m16}.
   - opcode: 81 /4 \i{id}
     mnemonic: AND \i{r/m32}, \i{imm32}
     encoding: MI
     validity:
       1632: valid
       64: valid
-    description: ANDs \abbr{imm32} into \abbr{r/m32}.
+    description: ANDs \i{imm32} into \i{r/m32}.
   - opcode: REX.W 81 /r \i{id}
     mnemonic: AND \i{r/m64}, \i{imm32}
     encoding: MI
     validity:
       1632: n/e
       64: valid
-    description: ANDs \abbr{imm32} (sign extended to 64 bits) into \abbr{r/m64}.
+    description: ANDs \i{imm32} (sign extended to 64 bits) into \i{r/m64}.
   - opcode: 82 /4 \i{ib}
     mnemonic: AND \i{r/m8}, \i{imm8}
     encoding: MI
@@ -74,98 +74,98 @@ opcode:
       64: invalid
     description: >-
       Undocumented alias for \c{80 /4 ib}.
-      ANDs \abbr{imm8} (sign extended to 8 bits) into \abbr{r/m8}.
+      ANDs \i{imm8} (sign extended to 8 bits) into \i{r/m8}.
   - opcode: 83 /4 \i{ib}
     mnemonic: AND \i{r/m16}, \i{imm8}
     encoding: MI
     validity:
       1632: valid
       64: valid
-    description: ANDs \abbr{imm8} (sign extended to 16 bits) into \abbr{r/m16}.
+    description: ANDs \i{imm8} (sign extended to 16 bits) into \i{r/m16}.
   - opcode: 83 /4 \i{ib}
     mnemonic: AND \i{r/m32}, \i{imm8}
     encoding: MI
     validity:
       1632: valid
       64: valid
-    description: ANDs \abbr{imm8} (sign extended to 32 bits) into \abbr{r/m32}.
+    description: ANDs \i{imm8} (sign extended to 32 bits) into \i{r/m32}.
   - opcode: REX.W 83 /4 \i{ib}
     mnemonic: AND \i{r/m64}, \i{imm8}
     encoding: MI
     validity:
       1632: n/e
       64: valid
-    description: ANDs \abbr{imm8} (sign extended to 64 bits) into \abbr{r/m64}.
+    description: ANDs \i{imm8} (sign extended to 64 bits) into \i{r/m64}.
   - opcode: 20 /r
     mnemonic: AND \i{r/m8}, \i{r8}
     encoding: MR
     validity:
       1632: valid
       64: valid
-    description: ANDs \abbr{r8} into \abbr{r/m8}.
+    description: ANDs \i{r8} into \i{r/m8}.
   - opcode: REX 20 /r
     mnemonic: AND \i{r/m8*}, \i{r8}
     encoding: MR
     validity:
       1632: n/e
       64: valid
-    description: ANDs \abbr{r8} into \abbr{r/m8}.
+    description: ANDs \i{r8} into \i{r/m8}.
   - opcode: 21 /r
     mnemonic: AND \i{r/m16}, \i{r16}
     encoding: MR
     validity:
       1632: valid
       64: valid
-    description: ANDs \abbr{r16} into \abbr{r/m16}.
+    description: ANDs \i{r16} into \i{r/m16}.
   - opcode: 21 /r
     mnemonic: AND \i{r/m32}, \i{r32}
     encoding: MR
     validity:
       1632: valid
       64: valid
-    description: ANDs \abbr{r32} into \abbr{r/m32}.
+    description: ANDs \i{r32} into \i{r/m32}.
   - opcode: REX.W 21 /r
     mnemonic: AND \i{r/m64}, \i{r64}
     encoding: MR
     validity:
       1632: n/e
       64: valid
-    description: ANDs \abbr{r64} into \abbr{r/m64}.
+    description: ANDs \i{r64} into \i{r/m64}.
   - opcode: 22 /r
     mnemonic: AND \i{r8}, \i{r/m8}
     encoding: RM
     validity:
       1632: valid
       64: valid
-    description: ANDs \abbr{r/m8} into \abbr{r8}.
+    description: ANDs \i{r/m8} into \i{r8}.
   - opcode: REX 22 /r
     mnemonic: AND \i{r8*}, \i{r/m8*}
     encoding: RM
     validity:
       1632: n/e
       64: valid
-    description: ANDs \abbr{r/m8} into \abbr{r8}.
+    description: ANDs \i{r/m8} into \i{r8}.
   - opcode: 23 /r
     mnemonic: AND \i{r16}, \i{r/m16}
     encoding: RM
     validity:
       1632: valid
       64: valid
-    description: ANDs \abbr{r/m16} into \abbr{r16}.
+    description: ANDs \i{r/m16} into \i{r16}.
   - opcode: 23 /r
     mnemonic: AND \i{r32}, \i{r/m32}
     encoding: RM
     validity:
       1632: valid
       64: valid
-    description: ANDs \abbr{r/m32} into \abbr{r32}.
+    description: ANDs \i{r/m32} into \i{r32}.
   - opcode: REX.W 23 /r
     mnemonic: AND \i{r64}, \i{r/m64}
     encoding: RM
     validity:
       1632: n/e
       64: valid
-    description: ANDs \abbr{r/m64} into \abbr{r64}.
+    description: ANDs \i{r/m64} into \i{r64}.
 encoding:
   operands: 2
   encodings:

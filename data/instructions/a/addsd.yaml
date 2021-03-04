@@ -11,8 +11,8 @@ opcode:
       64: valid
     cpuid: SSE2
     description: >-
-      Adds a single double-precision floating-point value from \abbr{xmm2/m64} and \abbr{xmm1}.
-      Stores the result in \abbr{xmm1}.
+      Adds a single double-precision floating-point value from \i{xmm2/m64} and \i{xmm1}.
+      Stores the result in \i{xmm1}.
   - opcode: VEX.LIG.F2.0F.WIG 58 /r
     mnemonic: VADDSD \i{xmm1}, \i{xmm2}, \i{xmm3/m64}
     encoding: VEX
@@ -21,8 +21,8 @@ opcode:
       64: valid
     cpuid: AVX
     description: >-
-      Adds a single double-precision floating-point value from \abbr{xmm3/m64} and \abbr{xmm2}.
-      Stores the result in \abbr{xmm1}.
+      Adds a single double-precision floating-point value from \i{xmm3/m64} and \i{xmm2}.
+      Stores the result in \i{xmm1}.
   - opcode: EVEX.LIG.F2.0F.W1 58 /r
     mnemonic: VADDSD \i{xmm1} {k1}{z}, \i{xmm2}, \i{xmm3/m64} {er}
     encoding: EVEX
@@ -31,8 +31,8 @@ opcode:
       64: valid
     cpuid: AVX512F
     description: >-
-      Adds a single double-precision floating-point value from \abbr{xmm3/m64} and \abbr{xmm2}.
-      Stores the result in \abbr{xmm1} using writemask \abbr{k1}.
+      Adds a single double-precision floating-point value from \i{xmm3/m64} and \i{xmm2}.
+      Stores the result in \i{xmm1} using writemask \i{k1}.
 encoding:
   operands: 3
   hasTuple: true

@@ -10,7 +10,7 @@ opcode:
       16: invalid
       32: valid
       64: n/e
-    description: Adjusts the \c{RPL} field of \abbr{r/m16} to be greater than or equal to the \c{RPL} field of \abbr{r16}.
+    description: Adjusts the \c{RPL} field of \i{r/m16} to be greater than or equal to the \c{RPL} field of \i{r16}.
 encoding:
   operands: 2
   encodings:

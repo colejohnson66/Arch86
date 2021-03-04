@@ -11,8 +11,8 @@ opcode:
       64: valid
     cpuid: AES
     description: >-
-      Performs one round of AES decryption using one 128 bit state from \abbr{xmm1} with one 128 bit round key from \abbr{xmm2/m128}.
-      Stores the result in \abbr{xmm1}.
+      Performs one round of AES decryption using one 128 bit state from \i{xmm1} with one 128 bit round key from \i{xmm2/m128}.
+      Stores the result in \i{xmm1}.
   - opcode: VEX.128.66.0F38.WIG DE /r
     mnemonic: VAESDEC \i{xmm1}, \i{xmm2}, \i{xmm2/m128}
     encoding: VEX
@@ -21,8 +21,8 @@ opcode:
       64: valid
     cpuid: [ AES, AVX ]
     description: >-
-      Performs one round of AES decryption using one 128 bit state from \abbr{xmm2} with one 128 bit round key from \abbr{xmm3/m128}.
-      Stores the result in \abbr{xmm1}.
+      Performs one round of AES decryption using one 128 bit state from \i{xmm2} with one 128 bit round key from \i{xmm3/m128}.
+      Stores the result in \i{xmm1}.
   - opcode: VEX.256.66.0F38.WIG DE /r
     mnemonic: VAESDEC \i{ymm1}, \i{ymm2}, \i{ymm2/m256}
     encoding: VEX
@@ -31,8 +31,8 @@ opcode:
       64: valid
     cpuid: VAES
     description: >-
-      Performs one round of AES decryption using two 128 bit states from \abbr{ymm2} with two 128 bit round keys from \abbr{ymm3/m256}.
-      Stores the results in \abbr{ymm1}.
+      Performs one round of AES decryption using two 128 bit states from \i{ymm2} with two 128 bit round keys from \i{ymm3/m256}.
+      Stores the results in \i{ymm1}.
   - opcode: EVEX.128.66.0F38.WIG DE /r
     mnemonic: VAESDEC \i{xmm1}, \i{xmm2}, \i{xmm2/m128}
     encoding: EVEX
@@ -41,8 +41,8 @@ opcode:
       64: valid
     cpuid: [ VAES, AVX512VL ]
     description: >-
-      Performs one round of AES decryption using one 128 bit state from \abbr{xmm2} with one 128 bit round key from \abbr{xmm3/m128}.
-      Stores the result in \abbr{xmm1}.
+      Performs one round of AES decryption using one 128 bit state from \i{xmm2} with one 128 bit round key from \i{xmm3/m128}.
+      Stores the result in \i{xmm1}.
   - opcode: EVEX.256.66.0F38.WIG DE /r
     mnemonic: VAESDEC \i{ymm1}, \i{ymm2}, \i{ymm2/m256}
     encoding: EVEX
@@ -51,8 +51,8 @@ opcode:
       64: valid
     cpuid: [ VAES, AVX512VL ]
     description: >-
-      Performs one round of AES decryption using two 128 bit states from \abbr{ymm2} with two 128 bit round keys from \abbr{ymm3/m256}.
-      Stores the results in \abbr{ymm1}.
+      Performs one round of AES decryption using two 128 bit states from \i{ymm2} with two 128 bit round keys from \i{ymm3/m256}.
+      Stores the results in \i{ymm1}.
   - opcode: EVEX.512.66.0F38.WIG DE /r
     mnemonic: VAESDEC \i{zmm1}, \i{zmm2}, \i{zmm2/m512}
     encoding: EVEX
@@ -61,8 +61,8 @@ opcode:
       64: valid
     cpuid: [ VAES, AVX512VL ]
     description: >-
-      Performs one round of AES decryption using four 128 bit states from \abbr{zmm2} with four 128 bit round keys from \abbr{zmm3/m512}.
-      Stores the results in \abbr{zmm1}.
+      Performs one round of AES decryption using four 128 bit states from \i{zmm2} with four 128 bit round keys from \i{zmm3/m512}.
+      Stores the results in \i{zmm1}.
 encoding:
   operands: 3
   hasTuple: true

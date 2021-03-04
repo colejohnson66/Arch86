@@ -11,8 +11,8 @@ opcode:
       64: valid
     cpuid: AES
     description:
-      Performs the "inverse mix columns" transformation on a 128 bit round key from \abbr{xmm2/m128}.
-      Stores the result in \abbr{xmm1}.
+      Performs the "inverse mix columns" transformation on a 128 bit round key from \i{xmm2/m128}.
+      Stores the result in \i{xmm1}.
   - opcode: VEX.128.66.0F38.WIG DB /r
     mnemonic: VAESIMC \i{xmm1}, \i{xmm2/m128}
     encoding: RM
@@ -21,8 +21,8 @@ opcode:
       64: valid
     cpuid: [ AES, AVX ]
     description:
-      Performs the "inverse mix columns" transformation on a 128 bit round key from \abbr{xmm2/m128}.
-      Stores the result in \abbr{xmm1}.
+      Performs the "inverse mix columns" transformation on a 128 bit round key from \i{xmm2/m128}.
+      Stores the result in \i{xmm1}.
 encoding:
   operands: 2
   encodings:

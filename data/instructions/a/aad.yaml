@@ -16,7 +16,7 @@ opcode:
     validity:
       1632: valid
       64: invalid
-    description: ASCII adjust \reg{AX} before division to number base \abbr{imm8}.
+    description: ASCII adjust \reg{AX} before division to number base \i{imm8}.
 encoding:
   operands: 1
   encodings:

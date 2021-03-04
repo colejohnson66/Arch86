@@ -11,8 +11,8 @@ opcode:
       64: valid
     cpuid: BMI1
     description: >-
-      Contiguous bitwise extraction from \abbr{r/m32} using \abbr{r32b} as a control.
-      Stores the result in \abbr{r32a}.
+      Contiguous bitwise extraction from \i{r/m32} using \i{r32b} as a control.
+      Stores the result in \i{r32a}.
   - opcode: VEX.LZ.0F38.W1 F7 /r
     mnemonic: BEXTR \i{r64a}, \i{r/m64}, \i{r64b}
     encoding: RMV
@@ -21,8 +21,8 @@ opcode:
       64: valid
     cpuid: BMI1
     description: >-
-      Contiguous bitwise extraction from \abbr{r/m64} using \abbr{r64b} as a control.
-      Stores the result in \abbr{r64a}.
+      Contiguous bitwise extraction from \i{r/m64} using \i{r64b} as a control.
+      Stores the result in \i{r64a}.
 encoding:
   operands: 3
   encodings:

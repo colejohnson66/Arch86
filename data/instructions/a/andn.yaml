@@ -11,8 +11,8 @@ opcode:
       64: valid
     cpuid: BMI1
     description:
-      ANDs the inverted form of \abbr{r/m32} with \abbr{r32b}.
-      Stores the result in \abbr{r32a}.
+      ANDs the inverted form of \i{r/m32} with \i{r32b}.
+      Stores the result in \i{r32a}.
   - opcode: VEX.LZ.0F38.W1 F2 /r
     mnemonic: ANDN \i{r64a}, \i{r64b}, \i{r/m64}
     encoding: VEX
@@ -21,8 +21,8 @@ opcode:
       64: valid
     cpuid: BMI1
     description:
-      ANDs the inverted form of \abbr{r/m64} with \abbr{r64b}.
-      Stores the result in \abbr{r64a}.
+      ANDs the inverted form of \i{r/m64} with \i{r64b}.
+      Stores the result in \i{r64a}.
 encoding:
   operands: 2
   encodings:

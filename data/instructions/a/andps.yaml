@@ -11,8 +11,8 @@ opcode:
       64: valid
     cpuid: SSE2
     description: >-
-      ANDs packed single-precision floating-point values from \abbr{xmm2/m128} and \abbr{xmm1}.
-      Stores the result in \abbr{xmm1}.
+      ANDs packed single-precision floating-point values from \i{xmm2/m128} and \i{xmm1}.
+      Stores the result in \i{xmm1}.
   - opcode: VEX.128.0F.WIG 54 /r
     mnemonic: VANDPS \i{xmm1}, \i{xmm2}, \i{xmm3/m128}
     encoding: VEX
@@ -21,8 +21,8 @@ opcode:
       64: valid
     cpuid: AVX
     description: >-
-      ANDs packed single-precision floating-point values from \abbr{xmm3/m128} and \abbr{xmm2}.
-      Stores the result in \abbr{xmm1}.
+      ANDs packed single-precision floating-point values from \i{xmm3/m128} and \i{xmm2}.
+      Stores the result in \i{xmm1}.
   - opcode: VEX.256.0F.WIG 54 /r
     mnemonic: VANDPS \i{ymm1}, \i{ymm2}, \i{ymm3/m256}
     encoding: VEX
@@ -31,8 +31,8 @@ opcode:
       64: valid
     cpuid: AVX
     description: >-
-      ANDs packed single-precision floating-point values from \abbr{ymm3/m256} and \abbr{ymm2}.
-      Stores the result in \abbr{ymm1}.
+      ANDs packed single-precision floating-point values from \i{ymm3/m256} and \i{ymm2}.
+      Stores the result in \i{ymm1}.
   - opcode: EVEX.128.0F.W0 54 /r
     mnemonic: VANDPS \i{xmm1} {k1}{z}, \i{xmm2}, \i{xmm3/m128/m32bcst}
     encoding: EVEX
@@ -41,8 +41,8 @@ opcode:
       64: valid
     cpuid: [ AVX512VL, AVS512DQ ]
     description: >-
-      ANDs packed single-precision floating-point values from \abbr{xmm3/m128/m32bcst} and \abbr{xmm2}.
-      Stores the result in \abbr{xmm1}.
+      ANDs packed single-precision floating-point values from \i{xmm3/m128/m32bcst} and \i{xmm2}.
+      Stores the result in \i{xmm1}.
   - opcode: EVEX.256.0F.W0 54 /r
     mnemonic: VANDPS \i{ymm1} {k1}{z}, \i{ymm2}, \i{ymm3/m256/m32bcst}
     encoding: EVEX
@@ -51,8 +51,8 @@ opcode:
       64: valid
     cpuid: [ AVX512VL, AVS512DQ ]
     description: >-
-      ANDs packed single-precision floating-point values from \abbr{ymm3/m256/m32bcst} and \abbr{ymm2}.
-      Stores the result in \abbr{ymm1}.
+      ANDs packed single-precision floating-point values from \i{ymm3/m256/m32bcst} and \i{ymm2}.
+      Stores the result in \i{ymm1}.
   - opcode: EVEX.512.0F.W0 54 /r
     mnemonic: VANDPS \i{zmm1} {k1}{z}, \i{zmm2}, \i{zmm3/m512/m32bcst}
     encoding: EVEX
@@ -61,8 +61,8 @@ opcode:
       64: valid
     cpuid: AVX512DQ
     description: >-
-      ANDs packed single-precision floating-point values from \abbr{zmm3/m512/m32bcst} and \abbr{zmm2}.
-      Stores the result in \abbr{zmm1}.
+      ANDs packed single-precision floating-point values from \i{zmm3/m512/m32bcst} and \i{zmm2}.
+      Stores the result in \i{zmm1}.
 encoding:
   operands: 3
   hasTuple: true

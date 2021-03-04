@@ -10,7 +10,7 @@ opcode:
       32: valid
       64: valid
     cpuid: ADX
-    description: Unsigned addition of \abbr{r32} with overflow flag and \abbr{r/m32} to \abbr{r32}.
+    description: Unsigned addition of \i{r32} with overflow flag and \i{r/m32} to \i{r32}.
   - opcode: F3 REX.W 0F 38 F6 /r
     mnemonic: ADOX \i{r64}, \i{r/m64}
     encoding: RM
@@ -18,7 +18,7 @@ opcode:
       32: n/e
       64: valid
     cpuid: ADX
-    description: Unsigned addition of \abbr{r64} with overflow flag and \abbr{r/m64} to \abbr{r64}.
+    description: Unsigned addition of \i{r64} with overflow flag and \i{r/m64} to \i{r64}.
 encoding:
   operands: 2
   encodings:
