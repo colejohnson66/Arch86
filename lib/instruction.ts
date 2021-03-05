@@ -50,7 +50,7 @@ const dataDirectory = path.join(process.cwd(), "data", "instructions");
 
 export function getAllInstructionsArray(): string[] {
     // gets all directories in `data/instructions`
-    const ret = [];
+    const ret: string[] = [];
     fs.readdirSync(dataDirectory).forEach((char) => {
         // skip anything that's not just a character
         if (char.length !== 1)

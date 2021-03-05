@@ -21,6 +21,7 @@ import { GetStaticProps } from "next";
 import IDictionary from "../types/IDictionary";
 import Layout from "../components/Layout";
 import React from "react";
+import { strict as assert } from "assert";
 import { getCategoryData } from "../lib/category";
 
 function buildTreeNode(entry: CategoryEntry, path: string): ITreeNode[] {
@@ -35,6 +36,8 @@ function buildTreeNode(entry: CategoryEntry, path: string): ITreeNode[] {
 
     if (entry.subcategories) {
         Object.keys(entry.subcategories).forEach((name) => {
+            // This assert is needed to shut the Typescript compiler up
+            assert(entry.subcategories);
             const data = entry.subcategories[name];
             ret.push(...buildTreeNode(data, `${path}/${name}`));
         });
