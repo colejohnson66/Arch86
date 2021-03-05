@@ -28,20 +28,14 @@ import React from "react";
 import TOC from "../components/TOC";
 import WIP from "../components/WIP";
 import { getGroupedInstructionList } from "../lib/instruction";
-
-const ccInstr = [
-    "cmovcc",
-    "fcmovcc",
-    "jcc",
-    "setcc",
-];
+import uppercaseMnemonic from "../lib/uppercaseMnemonic";
 
 function commaSeparatedLinks(list: string[]): JSX.Element {
     // list[0] is the name in `InstructionTitles`
     // list[1..] is the instructions
     const fragments = list.slice(1).map((item, idx, sliced) => (
         <React.Fragment key={idx}>
-            <Instruction name={item.toUpperCase()} noTitle />
+            <Instruction name={uppercaseMnemonic(item)} as={item} noTitle />
             {idx !== sliced.length - 1 && ", "}
         </React.Fragment>
     ));
@@ -70,19 +64,9 @@ function instructionListWithHeading(list: MaybeArray<string>[], char: string): J
                         );
                     }
 
-                    // If this is a conditional instruction, keep `cc` lowercase
-                    if (ccInstr.includes(item)) {
-                        return (
-                            <li key={item}>
-                                <Instruction name={`${item.substr(0, item.length - 2).toUpperCase()}cc`} useHyphen />
-                            </li>
-                        );
-                    }
-
-                    // The `nnn` to `###` is for FMA instructions
                     return (
                         <li key={item}>
-                            <Instruction name={item.replace("nnn", "###").toUpperCase()} as={item} useHyphen />
+                            <Instruction name={uppercaseMnemonic(item)} as={item} useHyphen />
                         </li>
                     );
                 })}

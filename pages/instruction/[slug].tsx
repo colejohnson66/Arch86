@@ -31,6 +31,7 @@ import Scrollable from "../../components/Scrollable";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import SyntaxHighlighterDarkTheme from "react-syntax-highlighter/dist/cjs/styles/hljs/atom-one-dark";
 import TOC from "../../components/TOC";
+import uppercaseMnemonic from "../../lib/uppercaseMnemonic";
 
 type OpcodeValidityValues = "valid" | "valid*" | "invalid" | "n/e";
 const OpcodeValidityMap: { [T in OpcodeValidityValues]: string } = {
@@ -207,7 +208,7 @@ export default function Page(props: PageProps): JSX.Element {
         </A>);
 
     return (
-        <Layout canonical={`/instruction/${props.id}`} navGroup="instruction" title={`${props.id.toUpperCase()}: ${formatStringPlaintext(props.title)}`} src="/pages/instruction/[slug].tsx" dataSrc={`/data/instructions/${props.id[0]}/${props.id}.yaml`} breadcrumbs={PageBreadcrumbs}>
+        <Layout canonical={`/instruction/${props.id}`} navGroup="instruction" title={`${uppercaseMnemonic(props.id)}: ${formatStringPlaintext(props.title)}`} src="/pages/instruction/[slug].tsx" dataSrc={`/data/instructions/${props.id[0]}/${props.id}.yaml`} breadcrumbs={PageBreadcrumbs}>
             <TOC.Root>
                 <TOC.Entry href="#headingEncoding" text="Encoding" />
                 {props.bitEncoding &&
