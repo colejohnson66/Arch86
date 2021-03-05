@@ -31,10 +31,11 @@ import Scrollable from "../../components/Scrollable";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import SyntaxHighlighterDarkTheme from "react-syntax-highlighter/dist/cjs/styles/hljs/atom-one-dark";
 import TOC from "../../components/TOC";
+import { strict as assert } from "assert";
 import uppercaseMnemonic from "../../lib/uppercaseMnemonic";
 
 type OpcodeValidityValues = "valid" | "valid*" | "invalid" | "n/e";
-const OpcodeValidityMap: { [T in OpcodeValidityValues]: string } = {
+const OpcodeValidityMap: IDictionary<string> = {
     "valid": "Valid",
     "valid*": "Valid*",
     "invalid": "Invalid",
@@ -47,7 +48,7 @@ type OpcodeValidity = {
     64: OpcodeValidityValues;
 };
 // TODO: use <abbr>?
-const OpcodeValidityKeyMap: { [T in keyof OpcodeValidity]: string } = {
+const OpcodeValidityKeyMap: { [key: number]: string } = {
     16: "16 bit Mode",
     1632: "16 and 32 bit Mode",
     32: "32 bit Mode",
@@ -260,7 +261,7 @@ export default function Page(props: PageProps): JSX.Element {
                                 <th>Opcode and Mnemonic</th>
                                 <th><A href="#headingEncoding">Encoding</A></th>
                                 {props.validity.split(",").map((entry) => (
-                                    <th key={entry}>{OpcodeValidityKeyMap[entry]}</th>
+                                    <th key={entry}>{OpcodeValidityKeyMap[parseInt(entry, 10)]}</th>
                                 ))}
                                 {props.opcode[0].cpuid &&
                                     /* Don't use <Instruction ... /> to avoid <code> block */
@@ -279,7 +280,10 @@ export default function Page(props: PageProps): JSX.Element {
                                     <td><Code>{row.encoding}</Code></td>
                                     {props.validity.split(",").map((entry) => (
                                         // This ensures that they are displayed in the same order as the heading
-                                        <td key={entry}>{OpcodeValidityMap[row.validity[entry]]}</td>
+                                        // The weird cast shuts the Typescript compiler up
+                                        <td key={entry}>
+                                            {OpcodeValidityMap[(row.validity as unknown as string[])[parseInt(entry, 10)]]}
+                                        </td>
                                     ))}
                                     {row.cpuid &&
                                         <td>
@@ -481,7 +485,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
-    const data = await getInstructionData(context.params["slug"] as string);
+    assert(context.params);
+    const data: PageProps = await getInstructionData(context.params["slug"] as string) as PageProps;
     return {
         props: data,
     };
