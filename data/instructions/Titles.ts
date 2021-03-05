@@ -36,6 +36,9 @@ const InstructionTitles: IDictionary<string> = {
     arpl: "Adjust \\c{RPL} Field of Segment Selector",
 
     bextr: "Bit Extract Field",
+    blendList: "Blend (Vector)",
+    blendpd: "Blend Packed Double-Precision Floating-Point Values",
+    blendps: "Blend Packed Single-Precision Floating-Point Values",
 };
 
 export default InstructionTitles;

@@ -26,3 +26,4 @@ a:
   - arpl
 b:
   - bextr
+  - [ blendList, blendpd, blendps ]

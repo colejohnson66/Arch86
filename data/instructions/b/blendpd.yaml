@@ -1,0 +1,113 @@
+%YAML 1.2
+---
+title: Blend Packed Double-Precision Floating-Point Values
+validity: 32,64
+opcode:
+  - opcode: 66 0F 3A 0D /r \i{ib}
+    mnemonic: BLENDPD \i{xmm1}, \i{xmm2/m128}, \i{imm8}
+    encoding: LEGACY
+    validity:
+      32: valid
+      64: valid
+    cpuid: SSE4_1
+    description: >-
+      Selects packed double-precision floating-point values from \i{xmm1} and \i{xmm2/m128} from a mask specified in \i{imm8}.
+      Stores the result in \i{xmm1}.
+  - opcode: VEX.128.66.0F3A.WIG 0D /r \i{ib}
+    mnemonic: VBLENDPD \i{xmm1}, \i{xmm2}, \i{xmm3/m128}, \i{imm8}
+    encoding: VEX
+    validity:
+      32: valid
+      64: valid
+    cpuid: AVX
+    description: >-
+      Selects packed double-precision floating-point values from \i{xmm2} and \i{xmm3/m128} from a mask specified in \i{imm8}.
+      Stores the result in \i{xmm1}.
+  - opcode: VEX.256.66.0F3A.WIG 0D /r \i{ib}
+    mnemonic: VBLENDPD \i{ymm1}, \i{ymm2}, \i{ymm3/m256}, \i{imm8}
+    encoding: VEX
+    validity:
+      32: valid
+      64: valid
+    cpuid: AVX
+    description: >-
+      Selects packed double-precision floating-point values from \i{ymm2} and \i{ymm3/m256} from a mask specified in \i{imm8}.
+      Stores the result in \i{ymm1}.
+encoding:
+  operands: 4
+  encodings:
+    LEGACY:
+      - ModRM:reg[rw]
+      - ModRM:r/m[r]
+      - imm8[1:0]
+      - ""
+    VEX:
+      - ModRM:reg[w]
+      - VEX.vvvv[r]
+      - ModRM:r/m[r]
+      - imm8[3:0]
+bitEncoding:
+  list:
+    - form: xmmreg3(2) into xmmreg3(1)
+      bits:
+        - \bits{66}
+        - \bits{0F}
+        - \bits{3A}
+        - \bits{0D}
+        - \bits{11 xmmreg3(1) xmmreg3(2)}
+        - \bits{imm8}
+    - form: memory into xmmreg3
+      bits:
+        - \bits{66}
+        - \bits{0F}
+        - \bits{3A}
+        - \bits{0D}
+        - \bits{mod xmmreg3 r/m}
+        - \bits{imm8}
+description: >-
+  The \c{(V)BLENDPD} instruction conditionally moves double-precision floating-point values from the second source operand into the first source operand.
+  The result is stored in the destination operand.
+
+  This instruction, despite being named as if it operates on floating-point numbers, will work on 64 bit integers as well.
+
+  All versions \i{except} the legacy SSE version zero the unused upper SIMD register bits.
+operation: |-
+  pub fn blendpd(dest: &mut Simd<f64>, src: Simd<f64>, mask: u8) {
+    // If `mask[n]` is 0, `dest` will be copied into itself (i.e. nothing will happen)
+    if mask[0] {
+      dest[63..=0] = src[63..=0]
+    }
+    if mask[1] {
+      dest[127..=64] = src[127..=64];
+    }
+    // dest[Simd::max()..=128] (unmodified)
+  }
+
+  fn vblendpd_vex(dest: &mut Simd<f64>, src1: Simd<f64>, src2: Simd<f64>, mask: u8, kl: u32) {
+    for n in 0..kl {
+      let vi = n * 64;
+      let vi_next = vi + 63;
+
+      if mask[n] {
+        dest[vi_next..=vi] = src2[vi_next..=vi];
+      } else {
+        dest[vi_next..=vi] = src1[vi_next..=vi];
+      }
+    }
+
+    let end = kl * 64;
+    dest[Simd::max()..=end] = 0;
+  }
+
+  pub fn vblendpd_vex128(dest: &mut Simd<f64>, src1: Simd<f64>, src2: Simd<f64>, mask: u8) {
+    vblendpd_vex(dest, src1, src2, mask, 2);
+  }
+  pub fn vblendpd_vex256(dest: &mut Simd<f64>, src1: Simd<f64>, src2: Simd<f64>, mask: u8) {
+    vblendpd_vex(dest, src1, src2, mask, 4);
+  }
+intrinsicsC: |-
+  __m128d _mm_blend_pd(__m128d v1, __m128d v2, const uint32_t mask)
+  __m256d _mm256_blend_pd(__m256d a, __m256d b, const uint32_t mask)
+exceptions:
+  floating: None
+  other: See Exceptions Type 4.
