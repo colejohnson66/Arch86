@@ -52,7 +52,7 @@ description: >-
   The \c{(V)AESKEYGENASSIST} instruction assists in expanding the AES cipher key using an 8 bit round constant (RCON) and 128 bits of data from the source operand.
   The result is stored in the destination operand.
 
-  The VEX form of this instruction reserves \c{VEX.vvvv} (must be set to \c{0b1111}).
+  The VEX form of this instruction reserves \c{VEX.vvvv} (i.e. it must be set to \c{0b1111}).
   Failure to do so will result in a \c{#UD} exception.
 operation: |-
   pub fn aeskeygenassist(dest: &mut Simd<u128>, src: Simd<u128>, roundConstant: u8) {

@@ -51,7 +51,7 @@ description: >-
 
   This instruction should be applied to the expanded AES round keys (excepting the first and last) to prepare them for decryption using the "Equivalent Inverse Cipher" (see FIPS 197).
 
-  The VEX form of this instruction reserves \c{VEX.vvvv} (must be set to \c{0b1111}).
+  The VEX form of this instruction reserves \c{VEX.vvvv} (i.e. it must be set to \c{0b1111}).
   Failure to do so will result in a \c{#UD} exception.
 operation: |-
   pub fn aesimc(dest: &mut Simd<u128>, src: Simd<u128>) {
