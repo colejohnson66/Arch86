@@ -1,6 +1,6 @@
 %YAML 1.2
 ---
-title: Blend Packed Double-Precision Floating-Point Values
+title: Blend Packed Single-Precision Floating-Point Values
 validity: 32,64
 opcode:
   - opcode: 66 0F 3A 0C /r \i{ib}
