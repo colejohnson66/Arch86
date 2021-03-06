@@ -15,8 +15,8 @@ encoding:
   operands: 2
   encodings:
     MR:
-      - ModRM:r/m[rw]
-      - ModRM:reg[r]
+      - ModRM.r/m[rw]
+      - ModRM.reg[r]
 bitEncoding:
   list:
     - form: reg3(1) (src) against reg3(2) (dest)

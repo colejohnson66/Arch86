@@ -37,14 +37,14 @@ encoding:
   operands: 4
   encodings:
     LEGACY:
-      - ModRM:reg[rw]
-      - ModRM:r/m[r]
+      - ModRM.reg[rw]
+      - ModRM.r/m[r]
       - imm8[1:0]
       - ""
     VEX:
-      - ModRM:reg[w]
+      - ModRM.reg[w]
       - VEX.vvvv[r]
-      - ModRM:r/m[r]
+      - ModRM.r/m[r]
       - imm8[3:0]
 bitEncoding:
   list:

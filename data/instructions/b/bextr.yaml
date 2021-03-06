@@ -27,8 +27,8 @@ encoding:
   operands: 3
   encodings:
     RMV:
-      - ModRM:reg[w]
-      - ModRM:r/m[r]
+      - ModRM.reg[w]
+      - ModRM.r/m[r]
       - VEX.vvvv[r]
 description: >-
   The \c{BEXTR} instruction extracts contiguous bits from the first source operand using using index and length values provided in the second source operand.
