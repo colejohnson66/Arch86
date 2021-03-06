@@ -1,0 +1,60 @@
+%YAML 1.2
+---
+title: Extract Lowest Set Bit
+validity: 32,64
+opcode:
+  - opcode: VEX.LZ.0F38.W0 F3 /3
+    mnemonic: BLSI \i{r32}, \i{r/m32}
+    encoding: VEX
+    validity:
+      32: valid
+      64: valid
+    cpuid: BMI1
+    description: >-
+      Extracts the lowest set bit from \i{r/m32}, and sets that same bit in \i{r32}.
+      All other bits in \i{r32} are cleared.
+  - opcode: VEX.LZ.0F38.W1 F3 /3
+    mnemonic: BLSI \i{r64}, \i{r/m64}
+    encoding: VEX
+    validity:
+      32: valid
+      64: valid
+    cpuid: BMI1
+    description: >-
+      Extracts the lowest set bit from \i{r/m64}, and sets that same bit in \i{r64}.
+      All other bits in \i{r64} are cleared.
+encoding:
+  operands: 2
+  encodings:
+    VEX:
+      - VEX.vvvv[w]
+      - ModRM.r/m[r]
+description: >-
+  The \c{BLSI} instruction extracts the lowest set bit in the source operand and sets that same bit in the destination operand.
+  All other bits in the destination operand are zeroed.
+
+  The \reg{CF} flag is set if the source is not zero.
+  This can be useful to detect if the destination operand will have anything set without actually testing it.
+
+  The operand size (\c{W} bit) is always 32 bits if not in Long Mode.
+  In other words, in Protected and Compatibility Mode, \c{VEX.W1} is treated as \c{VEX.W0}.
+
+  The length field (\c{L} bit) \i{must} be zero (signifying 128 bit vectors).
+  Attempts to execute with \c{VEX.L1} (256 bit vectors) will cause a \c{#UD} exception.
+operation: |-
+  pub fn blsi<T>(dest: &mut T, src: T) {
+    // extract the lowest set bit into `temp`
+    *dest = (-src) & src;
+    CF = (src != 0);
+  }
+flags: >-
+  The \reg{ZF} and \reg{SF} flags are updated based on the result.
+  The \reg{CF} flag is set if the source is not zero.
+  The \reg{OF} flag is cleared.
+  The \reg{AF} and \reg{PF} flags are undefined.
+intrinsicsC: |-
+  uint32_t _blsi_u32(uint32_t src)
+  uint64_t _blsi_u64(uint64_t src)
+exceptions:
+  floating: None
+  other: See Exceptions Type 13.

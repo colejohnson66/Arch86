@@ -42,6 +42,7 @@ const InstructionTitles: IDictionary<string> = {
     blendvList: "Variable Blend (Vector)",
     blendvpd: "Variable Blend Packed Double-Precision Floating-Point Values",
     blendvps: "Variable Blend Packed Single-Precision Floating-Point Values",
+    blsi: "Extract Lowest Set Bit",
 };
 
 export default InstructionTitles;
