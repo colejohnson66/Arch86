@@ -321,7 +321,7 @@ export default function Page(props: PageProps): JSX.Element {
                                             <td key={idx}>
                                                 {/* Is this an empty or a "Tuple Type" cell? */}
                                                 {value === "" || value.startsWith("None") || (props.encoding.hasTuple && idx === 0)
-                                                    ? value
+                                                    ? formatStringToJsx(value)
                                                     : formatEncodingCell(value)}
                                             </td>
                                         ))}
