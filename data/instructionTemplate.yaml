@@ -32,7 +32,7 @@ examples:
 flags: >-
 intrinsicsC: |-
   Cleanup Regex:
-    /[A-Z]+ ([^ ]+) ([^ ]+) \(([^\)]+)\);/
+    [A-Z1-3]+:?\s+([^ ]+) ([^ ]+) ?\(([^\)]+)\);
     $1 $2($3)
   After, ensure ALL parameters have a name
 exceptions:
