@@ -27,3 +27,4 @@ a:
 b:
   - bextr
   - [ blendList, blendpd, blendps ]
+  - [ blendvList, blendvpd, blendvps ]

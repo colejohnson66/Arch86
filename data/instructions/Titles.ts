@@ -39,6 +39,9 @@ const InstructionTitles: IDictionary<string> = {
     blendList: "Blend (Vector)",
     blendpd: "Blend Packed Double-Precision Floating-Point Values",
     blendps: "Blend Packed Single-Precision Floating-Point Values",
+    blendvList: "Variable Blend (Vector)",
+    blendvpd: "Variable Blend Packed Double-Precision Floating-Point Values",
+    blendvps: "Variable Blend Packed Single-Precision Floating-Point Values",
 };
 
 export default InstructionTitles;
