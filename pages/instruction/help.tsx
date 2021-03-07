@@ -69,9 +69,10 @@ export default function Page(): JSX.Element {
                     <TOC.Entry href="#headingOperationFlags" text="Flags" />
                     <TOC.Entry href="#headingOperationInstructionBits" text="Instruction Bits" />
                     <TOC.Entry href="#headingOperationTypes" text="Types">
+                        <TOC.Entry href="#headingOperationTypesNumerics" text="Integer Types" />
                         <TOC.Entry href="#headingOperationTypesSimd" text="Simd<T>" />
                         <TOC.Entry href="#headingOperationTypesKMask" text="KMask" />
-                        <TOC.Entry href="#headingOperationTypesNumerics" text="Integer Types" />
+                        <TOC.Entry href="#headingOperationTypesBound" text="Bound" />
                     </TOC.Entry>
                 </TOC.Entry>
                 <TOC.Entry href="#headingExamples" text="Examples" />
@@ -604,15 +605,23 @@ export default function Page(): JSX.Element {
                 </p>
 
                 <H3 id="headingOperationTypes">Types</H3>
+                <H4 id="headingOperationTypesNumerics">Integer Types</H4>
+                <p>
+                    Rust&apos;s integer types, by default, do not allow access to the individual bits through slices.
+                    The only way to do so (without external crates) is through bit shifts and masking operations.
+                    Despite that, individual bits are exposed through slices.
+                    For example, to get the lowest three bits of an integer, one would normally do something similar to <Code>data &amp; 7</Code>, but the operations show that as <Code>data[2..=0]</Code>.
+                </p>
+
                 <H4 id="headingOperationTypesSimd">Simd&lt;T&gt;</H4>
                 <p>
-                    The most used type in the pseudo-code is the <Code>Simd&lt;T&gt;</Code> type.
+                    The most used type in the pseudo-code (besides integers) is the <Code>Simd&lt;T&gt;</Code> type.
                     It represents an <A href="/register/vector">x86 vector register</A>.
                     Currently, <Code>Simd::max()</Code> is <Code>512</Code> to correspond with the <Code>ZMM</Code> registers, but this will change if an &quot;AVX-768&quot; or &quot;AVX-1024&quot; were to be created.
                 </p>
                 <p>
                     The <Code>T</Code> generic is a numeric type (integer or floating point) that represents what the <Code>ZMM</Code> register contains.
-                    For example, <Code>Simd&lt;f64&gt;</Code> represents a <Code>ZMM</Code> register containing eight &quot;double precision&quot; floating point (64 bit) numbers.
+                    For example, <Code>Simd&lt;f64&gt;</Code> (on a machine supporting AVX-512) represents a <Code>ZMM</Code> register containing eight &quot;double precision&quot; floating point (64 bit) numbers.
                 </p>
                 <p>
                     Operations on <Code>Simd&lt;T&gt;</Code> are at the &quot;bit level&quot;.
@@ -628,12 +637,15 @@ export default function Page(): JSX.Element {
                     Each bit corresponds to the same bit in the x86 mask register with <Code>k[n]</Code> referring to the &quot;n-th&quot; bit of the underlying mask register.
                 </p>
 
-                <H4 id="headingOperationTypesNumerics">Integer Types</H4>
+                <H4 id="headingOperationTypesBound">Bound</H4>
                 <p>
-                    Rust&apos;s integer types, by default, do not allow access to the individual bits through slices.
-                    The only way to do so (without external crates) is through bit shifts and masking operations.
-                    Despite that, individual bits are exposed through slices.
-                    For example, to get the lowest three bits of an integer, one would normally do something similar to <Code>data &amp; 7</Code>, but the operations show that as <Code>data[2..=0]</Code>.
+                    Intel MPX (Memory Protection Extensions) created four <A href="/register/bound">bounds registers</A> that can be used to check if a memory address is within a specified range.
+                    These registers are represented with the <Code>Bound</Code> type.
+                    The <Code>Bound</Code> type contains two accessible values: <Code>lower</Code> (the 64 bit lower bound) and <Code>upper</Code> (the 64 bit upper bound).
+                </p>
+                <p>
+                    In addition to the bounds registers, there also exists three configuration and status registers: <Code>BNDCFGS</Code>, <Code>BNDCFGU</Code>, and <Code>BNDSTATUS</Code>.
+                    Each of those three are 64 bits wide and are accessed as if they were global variables.
                 </p>
 
                 <H2 id="headingExamples">Examples</H2>
