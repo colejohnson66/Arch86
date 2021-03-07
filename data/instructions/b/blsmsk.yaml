@@ -33,9 +33,6 @@ description: >-
   The \c{BLSMSK} instruction sets all the bits in the destination operand from position 0 up to (and including) the lowest set bit of the source operand.
   All other bits in the destination operand are zeroed.
 
-  This instruction is equivalent to \instr{BLSI} followed by the result being logically ORd with itself minus one.
-  In other words, if the result of \c{BLSI} is stored in \reg{EAX}, this instruction is the equivalent to that combined with setting \reg{EAX} to \c{EAX | (EAX - 1)}.
-
   The \reg{CF} flag is set if the source is not zero.
   This can be useful to detect if the destination operand will have anything set without actually testing it.
 
