@@ -40,7 +40,7 @@ description: >-
   In 16 and 32 bit mode, the 32 bit form is used, and, in 64 bit mode, the 64 bit form is used.
   If a memory address is used as the second source operand, this distinction is irrelevant.
 operation: |-
-  pub fn bndldx_op16_op32(dest: Bound, addr: Sib) {
+  pub fn bndldx_op16_op32(dest: &mut Bound, addr: Sib) {
     let base = addr.base + disp;
     let ptr = addr.index;
 
@@ -64,7 +64,7 @@ operation: |-
     }
   }
 
-  pub fn bndldx_op64(dest: Bound, addr: Sib) {
+  pub fn bndldx_op64(dest: &mut Bound, addr: Sib) {
     let base = addr.base + disp;
     let ptr = addr.index;
 
