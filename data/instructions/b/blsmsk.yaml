@@ -1,0 +1,69 @@
+%YAML 1.2
+---
+title: Get Mask Up to Lowest Set Bit
+validity: 32,64
+opcode:
+  - opcode: VEX.LZ.0F38.W0 F3 /2
+    mnemonic: BLSMSK \i{r32}, \i{r/m32}
+    encoding: VEX
+    validity:
+      32: valid
+      64: valid
+    cpuid: BMI1
+    description: >-
+      Sets the lowest bits in \i{r32} from position 0 up to (and including) the lowest set bit of \i{r/m32}.
+      All upper bits in \i{r32} are cleared.
+  - opcode: VEX.LZ.0F38.W1 F3 /2
+    mnemonic: BLSMSK \i{r64}, \i{r/m64}
+    encoding: VEX
+    validity:
+      32: valid
+      64: invalid
+    cpuid: BMI1
+    description: >-
+      Sets the lowest bits in \i{r64} from position 0 up to (and including) the lowest set bit of \i{r/m64}.
+      All upper bits in \i{r64} are cleared.
+encoding:
+  operands: 2
+  encodings:
+    VEX:
+      - VEX.vvvv[w]
+      - ModRM.r/m[r]
+description: >-
+  The \c{BLSMSK} instruction sets all the bits in the destination operand from position 0 up to (and including) the lowest set bit of the source operand.
+  All other bits in the destination operand are zeroed.
+
+  This instruction is equivalent to \instr{BLSI} followed by the result being logically ORd with itself minus one.
+  In other words, if the result of \c{BLSI} is stored in \reg{EAX}, this instruction is the equivalent to that combined with setting \reg{EAX} to \c{EAX | (EAX - 1)}.
+
+  The \reg{CF} flag is set if the source is not zero.
+  This can be useful to detect if the destination operand will have anything set without actually testing it.
+
+  The operand size (\c{W} bit) is always 32 bits if not in Long Mode.
+  In other words, in Protected and Compatibility Mode, \c{VEX.W1} is treated as \c{VEX.W0}.
+
+  The length field (\c{L} bit) \i{must} be zero (signifying 128 bit vectors).
+  Attempts to execute with \c{VEX.L1} (256 bit vectors) will cause a \c{#UD} exception.
+operation: |-
+  pub fn blsmsk<T>(dest: &mut T, src: T) {
+    *dest = src ^ (src - 1);
+    CF = (src != 0);
+  }
+flags: >-
+  The \reg{SF} flag is updated based on the result.
+  The \reg{CF} flag is set if the source is not zero.
+  The \reg{ZF} and \reg{OF} flags are cleared.
+  The \reg{AF} and \reg{PF} flags are undefined.
+intrinsicsC: |-
+  uint32_t _blsmsk_u32(uint32_t src)
+  uint64_t _blsmsk_u64(uint64_t src)
+exceptions:
+  floating: None
+  other: See Exceptions Type 13.
+changes:
+  version: 73
+  date: 2020-11
+  list:
+    - >-
+      The \c{BLSMSK r64, r/m64} form is incorrectly documented as being "not encodable" in 32 bit mode.
+      This is misleading as it \i{is} encodable, but is defined to be treated as the 32 bit form.

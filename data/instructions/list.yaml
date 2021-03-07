@@ -29,3 +29,4 @@ b:
   - [ blendList, blendpd, blendps ]
   - [ blendvList, blendvpd, blendvps ]
   - blsi
+  - blsmsk
