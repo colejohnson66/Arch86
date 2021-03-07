@@ -46,6 +46,8 @@ description: >-
   If the second source operand is greater, a \c{#BR} exception is thrown, and \c{BNDSTATUS} is set to \c{1h}.
 
   This instruction is similar to the \instr{BNDCN} instruction, except this one inverts the bound register (i.e. finds the one's complemented form) before comparison.
+  Generally, this instruction is the one that would be used (not \c{BNDCN}).
+  This is because the upper bound is actually \i{stored} in inverted (1's complement) form, so any comparisons against it should have it inverted first.
 
   If the second source operand is a general purpose register, the value contained in it is treated as the address to compare against.
   If, however, it is a memory location, the effective address is calculated (see \instr{LEA}) and used in the comparison.
