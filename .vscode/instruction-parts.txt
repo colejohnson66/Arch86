@@ -18,3 +18,4 @@ rcon
 andnot
 blendv
 usize
+lbounds
