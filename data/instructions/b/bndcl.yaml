@@ -90,9 +90,8 @@ changes:
   date: 2020-11
   list:
     - >-
+      The overview table only mentions 32 and 64 bit mode support.
+      However, this instruction is supported in all modes.
+    - >-
       The "Encoding" section incorrectly lists the first operand (the bound register) as being written to.
       It is actually only read.
-todos:
-  - >-
-    Is 16 bit mode supported?
-    The overview table lists 32 and 64 bit modes, but the exceptions list mentions Real and Virtual-8086 modes.
