@@ -17,3 +17,4 @@ vaes
 rcon
 andnot
 blendv
+usize

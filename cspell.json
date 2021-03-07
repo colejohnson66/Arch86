@@ -3,6 +3,10 @@
     "language": "en",
     "dictionaryDefinitions": [
         {
+            "name": "registers",
+            "path": "./.vscode/registers.txt"
+        },
+        {
             "name": "instruction-parts",
             "path": "./.vscode/instruction-parts.txt"
         },
@@ -16,6 +20,7 @@
         }
     ],
     "dictionaries": [
+        "registers",
         "instruction-parts",
         "instructions-a",
         "instructions-b"
