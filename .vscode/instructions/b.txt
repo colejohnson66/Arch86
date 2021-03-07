@@ -10,3 +10,11 @@ vblendvps
 blsi
 blsmsk
 blsr
+bndcl
+bndcu
+bndcn
+bndldx
+bndmk
+bndmov
+bndstx
+bound
