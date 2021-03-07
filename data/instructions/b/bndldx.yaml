@@ -1,0 +1,142 @@
+%YAML 1.2
+---
+title: Load Extended Bounds Using Address Translation
+validity: 1632,64
+opcode:
+  - opcode: NP 0F 1A /r
+    mnemonic: BNDLDX \i{bnd}, \i{mib}
+    encoding: RM
+    validity:
+      1632: valid
+      64: valid
+    cpuid: MPX
+    description: >-
+      Load the bounds stored in a bound table entry (BTE) from \i{mib} into \i{bnd}.
+encoding:
+  operands: 2
+  encodings:
+    RM:
+      - ModRM.reg[w]
+      - SIB.base[r] + SIB.index[r]
+bitEncoding:
+  list:
+    - form: memory into bound3
+      bits:
+        - \bits{0F}
+        - \bits{1A}
+        - \bits{mod bound3 r/m}
+description: >-
+  The \c{BNDLDX} instruction conditionally loads the destination operand with the bounds referenced at the address pointed to by the source operand.
+  This is conditional on the value contained in the register referenced in the SIB's index field matching the value stored in the bounds table entry.
+  If the check fails, the destination is set to the \c{INIT} bounds value (lower = \c{0}, upper = \c{0}), allowing access to all available memory.
+
+  The second source operand \i{must} be a memory operand encoded using an SIB byte.
+  The \c{base} field of the SIB byte contains the address of the bounds table, and the \c{index} field contains the buffer's offset.
+  The \c{scale} field is ignored (treated as \c{0b00} (scale of 1)).
+  If a displacement is provided, it is added to the \c{base} register's value.
+  At no time is memory referenced by the SIB byte accessed (the memory contained at the address referenced by the \c{base} \i{is}, however), and the flags are untouched.
+
+  Which instruction form (32 or 64 bit) is used depends on the operating mode of the processor.
+  In 16 and 32 bit mode, the 32 bit form is used, and, in 64 bit mode, the 64 bit form is used.
+  If a memory address is used as the second source operand, this distinction is irrelevant.
+operation: |-
+  pub fn bndldx_op16_op32(dest: Bound, addr: Sib) {
+    let base = addr.base + disp;
+    let ptr = addr.index;
+
+    let a_bde: u32 = (base[31..=12] << 2) + (BNDCFG[31..=12] << 12);
+    let a_bt: u32 = *a_bde;
+    if a_bt[0] == 0 {
+      BNDSTATUS = a_bde | 0x02;
+      #BR;
+    }
+
+    let a_bte: u32 = (base[11..=2] << 4) + (a_bt[31..=2] << 2);
+    let temp_lb: u32 = *a_bte;
+    let temp_ub: u32 = *(a_bte + 4);
+    let temp_ptr: u32 = *(a_bte + 8);
+    if temp_ptr == ptr {
+      dest.lower = temp_lb;
+      dest.upper = temp_up;
+    } else {
+      dest.lower = 0;
+      dest.upper = 0;
+    }
+  }
+
+  pub fn bndldx_op64(dest: Bound, addr: Sib) {
+    let base = addr.base + disp;
+    let ptr = addr.index;
+
+    let a_bde: u64 = (base[(47 + MAWA)..=20] << 3) + (BNDCFG[63..=12] << 12); // see note 1
+    let a_bt: u64 = *a_bde;
+    if a_bt[0] == 0 {
+      BNDSTATUS = a_bde | 0x02;
+      #BR;
+    }
+
+    let a_bte: u64 = (base[19..=3] << 5) + (a_bt[63..=3] << 3);
+    let temp_lb: u64 = *a_bte;
+    let temp_ub: u64 = *(a_bte + 8);
+    let temp_ptr: u64 = *(a_bte + 16);
+    if temp_ptr == ptr {
+      dest.lower = temp_lb;
+      dest.upper = temp_up;
+    } else {
+      dest.lower = 0;
+      dest.upper = 0;
+    }
+  }
+operationNotes:
+  - >-
+    If \c{CPL} (protection ring) is less than 3, the supervisor \c{MAWA} (\c{MAWAS}) is used, which is 0.
+    Otherwise, the user \c{MAWA} (\c{MAWAU}) is used; it's value is enumerated in \cpuid{eax,07,ecx,00,,ecx,mawau,21..17}.
+flags: None
+exceptions:
+  protected:
+    "#BR": If the upper bounds check fails.
+    "#UD":
+      - If the \instr{LOCK} prefix is used.
+      - If \c{ModRM.r/m} does not encode \c{BND0} through \c{BND3} (i.e. contains a 4, 5, 6, or 7).
+      - If the address size overload prefix (\c{67h}) is used when \c{CS.D} is \c{1}.
+      - If the address size overload prefix is \i{not} used when \c{CS.D} is \c{0}.
+    "#GP(0)":
+      - If the destination's effective address of the Bound Table entry is outside the \reg{DS} segment limit.
+      - If the \reg{DS} segment contains a \c{NULL} segment selector.
+    "#PF(fault-code)": If a page fault occurs.
+  real:
+    "#BR": If the upper bounds check fails.
+    "#UD":
+      - If the \instr{LOCK} prefix is used.
+      - If \c{ModRM.r/m} does not encode \c{BND0} through \c{BND3} (i.e. contains a 4, 5, 6, or 7).
+      - If 16 bit addressing is used.
+    "#GP(0)":
+      - If the destination's effective address of the Bound Table entry is outside the \reg{DS} segment limit.
+      - If the \reg{DS} segment contains a \c{NULL} segment selector.
+  virtual:
+    "#BR": If the upper bounds check fails.
+    "#UD":
+      - If the \instr{LOCK} prefix is used.
+      - If \c{ModRM.r/m} does not encode \c{BND0} through \c{BND3} (i.e. contains a 4, 5, 6, or 7).
+      - If 16 bit addressing is used.
+    "#GP(0)":
+      - If the destination's effective address of the Bound Table entry is outside the \reg{DS} segment limit.
+      - If the \reg{DS} segment contains a \c{NULL} segment selector.
+    "#PF(fault-code)": If a page fault occurs.
+  compatibility: Same exceptions as protected mode.
+  long:
+    "#BR": If the upper bounds check fails.
+    "#UD":
+      - If the \instr{LOCK} prefix is used.
+      - If \c{ModRM.r/m} does not encode \c{BND0} through \c{BND3} (i.e. contains any of 4 through 15).
+      - If the address size overload prefix (\c{67h}) is used when \c{CS.D} is \c{1}.
+      - If the address size overload prefix is \i{not} used when \c{CS.D} is \c{0}.
+    "#GP(0)": If the memory address (\c{A_BDE} or \c{A_BTE}) is in non-canonical form.
+    "#PF(fault-code)": If a page fault occurs.
+changes:
+  version: 73
+  date: 2020-11
+  list:
+    - >-
+      The overview table only mentions 32 and 64 bit mode support.
+      However, this instruction is supported in all modes.
