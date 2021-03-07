@@ -1,0 +1,98 @@
+%YAML 1.2
+---
+title: Check Lower Bound
+validity: 1632,64
+opcode:
+  - opcode: F3 0F 1A /r
+    mnemonic: BNDCL \i{bnd}, \i{r/m32}
+    encoding: RM
+    validity:
+      1632: valid
+      64: n/e
+    cpuid: MPX
+    description: >-
+      Throws a \c{#BR} exception if the address in \i{r/m32} is lower than the lower bound in \i{bnd}.
+  - opcode: F3 0F 1A /r
+    mnemonic: BNDCL \i{bnd}, \i{r/m64}
+    encoding: RM
+    validity:
+      1632: n/e
+      64: valid
+    cpuid: MPX
+    description: >-
+      Throws a \c{#BR} exception if the address in \i{r/m64} is lower than the lower bound in \i{bnd}.
+encoding:
+  operands: 2
+  encodings:
+    RM:
+      - ModRM.reg[r]
+      - ModRM.r/m[r]
+bitEncoding:
+  list:
+    - form: reg3 into bound3
+      bits:
+        - \bits{F3}
+        - \bits{0F}
+        - \bits{1A}
+        - \bits{11 bound3 reg3}
+    - form: memory into bound3
+      bits:
+        - \bits{F3}
+        - \bits{0F}
+        - \bits{1A}
+        - \bits{mod bound3 r/m}
+description: >-
+  The \c{BNDCL} instruction compares the address in the second source operand (a GPR or memory location) against the lower bound (\c{LB}) in the first source operand (a bound register).
+  If the second source operand is lower, a \c{#BR} exception is thrown, and \c{BNDSTATUS} is set to \c{1h}.
+
+  If the second source operand is a general purpose register, the value contained in it is treated as the address to compare against.
+  If, however, it is a memory location, the effective address is calculated (see \instr{LEA}) and used in the comparison.
+  At no time is memory accessed, and the flags are untouched.
+
+  Which instruction form (32 or 64 bit) is used depends on the operating mode of the processor.
+  In 16 and 32 bit mode, the 32 bit form is used, and, in 64 bit mode, the 64 bit form is used.
+  If a memory address is used as the second source operand, this distinction is irrelevant.
+operation: |-
+  pub fn bndcl(bnd: Bound, addr: usize) {
+    if addr < bnd.lower {
+      BNDSTATUS = 0x01;
+      #BR;
+    }
+  }
+flags: None
+intrinsicsC: |-
+  void _bnd_chk_ptr_lbounds(const void *address)
+exceptions:
+  protected:
+    "#BR": If the lower bounds check fails.
+    "#UD":
+      - If the \instr{LOCK} prefix is used.
+      - If \c{ModRM.r/m} does not encode \c{BND0} through \c{BND3} (i.e. contains a 4, 5, 6, or 7).
+      - If the address size overload prefix (\c{67h}) is used when \c{CS.D} is \c{1}.
+      - If the address size overload prefix is \i{not} used when \c{CS.D} is \c{0}.
+  real:
+    "#BR": If the lower bounds check fails.
+    "#UD":
+      - If the \instr{LOCK} prefix is used.
+      - If \c{ModRM.r/m} does not encode \c{BND0} through \c{BND3} (i.e. contains a 4, 5, 6, or 7).
+      - If 16 bit addressing is used.
+  virtual: Same exceptions as real mode.
+  compatibility: Same exceptions as protected mode.
+  long:
+    "#BR": If the lower bounds check fails.
+    "#UD":
+      - If the \instr{LOCK} prefix is used.
+      - If \c{ModRM.r/m} does not encode \c{BND0} through \c{BND3} (i.e. contains any of 4 through 15).
+      - If the address size overload prefix (\c{67h}) is used when \c{CS.D} is \c{1}.
+      - If the address size overload prefix is \i{not} used when \c{CS.D} is \c{0}.
+changes:
+  version: 73
+  date: 2020-11
+  list:
+    - >-
+      The "Encoding" section incorrectly lists the first operand (the bound register) as being written to.
+      It is actually only read.
+todos:
+  - >-
+    Is 16 bit mode supported?
+    The overview table lists 32 and 64 bit modes, but the exceptions list mentions Real and Virtual-8086 modes.

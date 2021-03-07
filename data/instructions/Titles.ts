@@ -45,6 +45,7 @@ const InstructionTitles: IDictionary<string> = {
     blsi: "Extract Lowest Set Bit",
     blsmsk: "Get Mask Up to Lowest Set Bit",
     blsr: "Clear Lowest Set Bit",
+    bndcl: "Check Lower Bound",
 };
 
 export default InstructionTitles;
