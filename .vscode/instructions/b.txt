@@ -1,0 +1,12 @@
+bextr
+blendpd
+vblendpd
+blendps
+vblendps
+blendvpd
+vblendvpd
+blendvps
+vblendvps
+blsi
+blsmsk
+blsr

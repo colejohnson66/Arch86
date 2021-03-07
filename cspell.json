@@ -3,12 +3,17 @@
     "language": "en",
     "dictionaryDefinitions": [
         {
-            "name": "instructions",
-            "path": "./.vscode/instructions.txt"
+            "name": "instructions-a",
+            "path": "./.vscode/instructions/a.txt"
+        },
+        {
+            "name": "instructions-b",
+            "path": "./.vscode/instructions/b.txt"
         }
     ],
     "dictionaries": [
-        "instructions"
+        "instructions-a",
+        "instructions-b"
     ],
     "ignorePaths": [
         "**/node_modules/**",
