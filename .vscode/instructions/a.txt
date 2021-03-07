@@ -36,5 +36,6 @@ vandps
 andn
 andnpd
 vandnpd
+andnps
 vandnps
 arpl

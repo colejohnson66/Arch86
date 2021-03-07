@@ -3,6 +3,10 @@
     "language": "en",
     "dictionaryDefinitions": [
         {
+            "name": "instruction-parts",
+            "path": "./.vscode/instruction-parts.txt"
+        },
+        {
             "name": "instructions-a",
             "path": "./.vscode/instructions/a.txt"
         },
@@ -12,6 +16,7 @@
         }
     ],
     "dictionaries": [
+        "instruction-parts",
         "instructions-a",
         "instructions-b"
     ],
@@ -26,7 +31,6 @@
         "**/yarn.lock"
     ],
     "ignoreWords": [
-        "bcst",
         "blueprintjs",
         "coleharrisjohnson",
         "globby",
@@ -46,6 +50,7 @@
         "denormal",
         "encodable",
         "evex",
+        "FIPS",
         "intrinsics",
         "lowercased",
         "microarchitecture",
