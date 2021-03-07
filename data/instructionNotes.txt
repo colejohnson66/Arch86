@@ -54,3 +54,30 @@ With the following values:
 Which form is used when:
 - [0]: register/register (implicitly: xmmreg1 is destination as well)
 - [1]: register/memory (implicitly: register is src1 and memory is src2)
+
+----
+
+Instructions from the BMI1 (bit manipulation instructions 1) set have the form:
+- [0] VEX.LZ.0F38.W0 F3 /op3
+- [1] VEX.LZ.0F38.W1 F3 /op3
+
+With the following values:
+- op3:
+  - 000 (/0):
+  - 001 (/1): BLSR
+  - 010 (/2): BLSMSK
+  - 011 (/3): BLSI
+  - 100 (/4):
+  - 101 (/5):
+  - 110 (/6):
+  - 111 (/7):
+
+Which form is used when:
+- [0]: 32 bit operand size
+- [1]: 64 bit operand size
+
+Notes:
+- W=1 [1] is *always* treated as W=0 [0] in 32 bit mode.
+- L!=0 will *always* #UD.
+
+----
