@@ -58,3 +58,10 @@ intrinsicsC: |-
 exceptions:
   floating: None
   other: See Exceptions Type 13.
+changes:
+  version: 73
+  date: 2020-11
+  list:
+    - >-
+      The \c{BLSI r64, r/m64} form is incorrectly documented as being "not encodable" in 32 bit mode.
+      This is misleading as it \i{is} encodable, but is defined to be treated as the 32 bit form.
