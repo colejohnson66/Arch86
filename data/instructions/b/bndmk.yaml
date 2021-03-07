@@ -1,0 +1,78 @@
+%YAML 1.2
+---
+title:
+validity: 1632,64
+opcode:
+  - opcode: F3 0F 1B /r
+    mnemonic: BNDMK \i{bnd}, \i{m32}
+    encoding: RM
+    validity:
+      1632: valid
+      64: n/e
+    cpuid: MPX
+    description: >-
+      Makes lower and upper bounds from \i{m32} and stores them into \i{bnd}.
+  - opcode: F3 0F 1B /r
+    mnemonic: BNDMK \i{bnd}, \i{m64}
+    encoding: RM
+    validity:
+      1632: n/e
+      64: valid
+    cpuid: MPX
+    description: >-
+      Makes lower and upper bounds from \i{m64} and stores them into \i{bnd}.
+encoding:
+  operands: 2
+  encodings:
+    RM:
+      - ModRM.reg[w]
+      - ModRM.r/m[r]
+bitEncoding:
+  list:
+    - form: memory into bound3
+      bits:
+        - \bits{F3}
+        - \bits{0F}
+        - \bits{1B}
+        - \bits{mod bound3 r/m}
+description: >-
+  The \c{BNDMK} instruction creates lower and upper bounds from the source operand and stores them into the bounds register in the destination operand.
+
+  The lower bound is taken from the value contained in the register pointed to by the \c{base} field of the SIB byte.
+  The upper bound is created by computing the effective address (see \instr{LEA}) of the referenced memory.
+  At no time is memory accessed, and the flags are untouched.
+
+  Which instruction form (32 or 64 bit) is used depends on the operating mode of the processor.
+  In 16 and 32 bit mode, the 32 bit form is used, and, in 64 bit mode, the 64 bit form is used.
+  If a memory address is used as the second source operand, this distinction is irrelevant.
+operation: |-
+  pub fn bndmk<T>(dest: &mut Bound, addr: Sib) {
+    dest.lower = addr.base;
+    dest.upper = !lea(addr);
+  }
+flags: None
+intrinsicsC: |-
+  void *_bnd_set_ptr_bounds(const void *address, size_t size)
+exceptions:
+  protected:
+    "#UD":
+      - If the \instr{LOCK} prefix is used.
+      - If \c{ModRM.r/m} does not encode \c{BND0} through \c{BND3} (i.e. contains a 4, 5, 6, or 7).
+      - If the address size overload prefix (\c{67h}) is used when \c{CS.D} is \c{1}.
+      - If the address size overload prefix is \i{not} used when \c{CS.D} is \c{0}.
+  real:
+    "#UD":
+      - If the \instr{LOCK} prefix is used.
+      - If \c{ModRM.r/m} does not encode \c{BND0} through \c{BND3} (i.e. contains a 4, 5, 6, or 7).
+      - If 16 bit addressing is used.
+  virtual: Same exceptions as real mode.
+  compatibility: Same exceptions as protected mode.
+  long:
+    "#UD":
+      - If the \instr{LOCK} prefix is used.
+      - If \c{ModRM.r/m} does not encode \c{BND0} through \c{BND3} (i.e. contains any of 4 through 15).
+      - If the address size overload prefix (\c{67h}) is used when \c{CS.D} is \c{1}.
+      - If the address size overload prefix is \i{not} used when \c{CS.D} is \c{0}.
+      - If RIP-relative addressing is used.
+    "#SS(0)": If the memory address referencing the \reg{SS} segment is in non-canonical form.
+    "#GP(0)": If the memory address is in non-canonical form.

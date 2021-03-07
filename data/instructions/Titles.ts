@@ -50,6 +50,7 @@ const InstructionTitles: IDictionary<string> = {
     bndcn: "Check Upper Bound",
     bndcu: "Check Upper Bound (Inverted)",
     bndldx: "Load Extended Bounds Using Address Translation",
+    bndmk: "Make Bounds",
 };
 
 export default InstructionTitles;
