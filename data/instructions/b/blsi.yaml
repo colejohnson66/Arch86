@@ -18,7 +18,7 @@ opcode:
     encoding: VEX
     validity:
       32: valid
-      64: valid
+      64: invalid
     cpuid: BMI1
     description: >-
       Extracts the lowest set bit from \i{r/m64}, and sets that same bit in \i{r64}.
