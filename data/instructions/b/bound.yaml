@@ -1,0 +1,81 @@
+%YAML 1.2
+---
+title: Check Array Index Against Bounds
+validity: 1632,64
+opcode:
+  - opcode: 62 /r
+    mnemonic: BOUND \i{r16}, \i{m16&16}
+    encoding: RM
+    validity:
+      1632: valid
+      64: n/e
+    cpuid: # MPX?
+    description: >-
+      Checks if \i{r16} (an array index) is within the bounds specified by \i{m16&16}.
+  - opcode: 62 /r
+    mnemonic: BOUND \i{r32}, \i{m32&32}
+    encoding: RM
+    validity:
+      1632: valid
+      64: n/e
+    cpuid: # MPX?
+    description: >-
+      Checks if \i{r32} (an array index) is within the bounds specified by \i{m32&32}.
+encoding:
+  operands: 2
+  encodings:
+    RM:
+      - ModRM.reg[r]
+      - ModRM.r/m[r]
+bitEncoding:
+  list:
+    - form: reg3 against memory
+      bits:
+        - \bits{62}
+        - \bits{mod reg3 r/m}
+description: >-
+  The \c{BOUND} instruction determines if the first operand (an array index) is within the bounds of an array specified in the second operand.
+  The array index is a signed integer located in a register, and the bounds are a memory location containing either two consecutive words (in 16 bit mode) or two consecutive double words (in 32 bit mode).
+  From these two memory values, the first is the lower bound of the array and the second is the upper bound of the array.
+
+  If the index is within the bounds specified, this instruction executes with no side effects.
+  If, however, the index is \i{not} within the bounds, a \c{#BR} exception is throw.
+
+  This instruction is not encodable in 64 bit mode, and if encountered, will be interpreted as an EVEX prefix.
+operation: |-
+  pub fn bound<T>(index: T, bounds: T*) {
+    if index < *bounds || index > *(bounds + 1) {
+      #BR;
+    }
+  }
+flags: None
+exceptions:
+  protected:
+    "#BR": If the bounds test fails.
+    "#UD":
+      - If the \instr{LOCK} prefix is used.
+      - If the second operand is not a memory location.
+    "#GP(0)":
+      - If the destination's effective address of the Bound Table entry is outside the \reg{DS} segment limit.
+      - If the \reg{DS} segment contains a \c{NULL} segment selector.
+    "#SS(0)": If a memory operand's effective address is outside the \reg{SS} segment limit.
+    "#PF(fault-code)": If a page fault occurs.
+    "#AC(0)": If alignment checking is enabled and an unaligned memory reference is made while the current privilege level is 3.
+  real:
+    "#BR": If the bounds test fails.
+    "#UD":
+      - If the \instr{LOCK} prefix is used.
+      - If the second operand is not a memory location.
+    "#GP(0)":
+      - If the destination's effective address of the Bound Table entry is outside the \reg{DS} segment limit.
+      - If the \reg{DS} segment contains a \c{NULL} segment selector.
+    "#SS(0)": If a memory operand's effective address is outside the \reg{SS} segment limit.
+  virtual: Same exceptions as protected mode.
+  compatibility: Same exceptions as protected mode.
+  long:
+    "#UD": If in 64 bit mode.
+changes:
+  version: 73
+  date: 2020-11
+  list:
+    - The overview table lists the encodings as "invalid" in 64 bit mode, but they are actually not encodable due to the EVEX prefix.

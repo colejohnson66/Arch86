@@ -53,6 +53,7 @@ const InstructionTitles: IDictionary<string> = {
     bndmk: "Make Bounds",
     bndmov: "Move Bounds",
     bndstx: "Store Extended Bounds Using Address Translation",
+    bound: "Check Array Index Against Bounds",
 };
 
 export default InstructionTitles;
