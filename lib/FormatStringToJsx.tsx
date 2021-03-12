@@ -92,7 +92,10 @@ const functions: IDictionary<(arg: string) => JSX.Element> = {
  * Due to this, arguments to `func` *must not* contain a closing brace (`}`) or other function calls.
  * For example, `\c{\i{abc}}` will actually output `<code>\i{abc</code>}`.
  */
-export function formatStringToJsx(str: string): JSX.Element {
+export function formatStringToJsx(str?: string): JSX.Element {
+    if (str === null || str === undefined)
+        return <></>;
+
     // [idx % 3 === 0]: plaintext
     // [idx % 3 === 1]: "func"
     // [idx % 3 === 2]: "data"
@@ -130,6 +133,8 @@ export function formatStringToJsx(str: string): JSX.Element {
 
 export function formatStringPlaintext(str: string): string {
     // takes a string, and removes all "function" calls
+    if (str === null || str === undefined)
+        return "";
 
     // [idx % 3 === 0]: plaintext
     // [idx % 3 === 1]: "func"
