@@ -94,7 +94,7 @@ operationNotes:
 flags: None
 exceptions:
   protected:
-    "#BR": If the upper bounds check fails.
+    "#BR": If the bound directory entry is invalid.
     "#UD":
       - If the \instr{LOCK} prefix is used.
       - If \c{ModRM.r/m} does not encode \c{BND0} through \c{BND3} (i.e. contains a 4, 5, 6, or 7).
@@ -105,7 +105,7 @@ exceptions:
       - If the \reg{DS} segment contains a \c{NULL} segment selector.
     "#PF(fault-code)": If a page fault occurs.
   real:
-    "#BR": If the upper bounds check fails.
+    "#BR": If the bound directory entry is invalid.
     "#UD":
       - If the \instr{LOCK} prefix is used.
       - If \c{ModRM.r/m} does not encode \c{BND0} through \c{BND3} (i.e. contains a 4, 5, 6, or 7).
@@ -114,7 +114,7 @@ exceptions:
       - If the destination's effective address of the Bound Table entry is outside the \reg{DS} segment limit.
       - If the \reg{DS} segment contains a \c{NULL} segment selector.
   virtual:
-    "#BR": If the upper bounds check fails.
+    "#BR": If the bound directory entry is invalid.
     "#UD":
       - If the \instr{LOCK} prefix is used.
       - If \c{ModRM.r/m} does not encode \c{BND0} through \c{BND3} (i.e. contains a 4, 5, 6, or 7).
@@ -125,7 +125,7 @@ exceptions:
     "#PF(fault-code)": If a page fault occurs.
   compatibility: Same exceptions as protected mode.
   long:
-    "#BR": If the upper bounds check fails.
+    "#BR": If the bound directory entry is invalid.
     "#UD":
       - If the \instr{LOCK} prefix is used.
       - If \c{ModRM.r/m} does not encode \c{BND0} through \c{BND3} (i.e. contains any of 4 through 15).
