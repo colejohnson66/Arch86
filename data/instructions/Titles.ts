@@ -52,6 +52,7 @@ const InstructionTitles: IDictionary<string> = {
     bndldx: "Load Extended Bounds Using Address Translation",
     bndmk: "Make Bounds",
     bndmov: "Move Bounds",
+    bndstx: "Store Extended Bounds Using Address Translation",
 };
 
 export default InstructionTitles;

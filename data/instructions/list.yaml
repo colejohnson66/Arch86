@@ -36,3 +36,4 @@ b:
   - bndldx
   - bndmk
   - bndmov
+  - bndstx
