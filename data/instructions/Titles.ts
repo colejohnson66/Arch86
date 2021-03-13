@@ -61,7 +61,7 @@ const InstructionTitles: IDictionary<string> = {
     btc: "Bit Test and Complement",
     btr: "Bit Test and Reset",
     bts: "Bit Test and Set",
-    bzhi: "Zero High Bits Starting with Specified Bit Position",
+    bzhi: "Zero High Bits From Index",
 };
 
 export default InstructionTitles;

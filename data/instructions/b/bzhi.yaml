@@ -1,0 +1,83 @@
+%YAML 1.2
+---
+title: Zero High Bits From Index
+validity: 32,64
+opcode:
+  - opcode: VEX.LZ.0F38.W0 F5 /r
+    mnemonic: BZHI \i{r32a}, \i{r/m32}, \i{r32b}
+    encoding: VEX
+    validity:
+      32: valid
+      64: valid
+    cpuid: BMI2
+    description: >-
+      Zeros the bits in \i{r/m32} starting from the bit index specified in \i{r32b}.
+      Stores the result in \i{r32a}.
+  - opcode: VEX.LZ.0F38.W1 F5 /r
+    mnemonic: BZHI \i{r64a}, \i{r/m64}, \i{r64b}
+    encoding: VEX
+    validity:
+      32: invalid
+      64: valid
+    cpuid: BMI2
+    description: >-
+      Zeros the bits in \i{r/m64} starting from the bit index specified in \i{r64b}.
+      Stores the result in \i{r64a}.
+encoding:
+  operands: 3
+  encodings:
+    VEX:
+      - ModRM.reg[w]
+      - ModRM.r/m[r]
+      - VEX.vvvv[r]
+description: >-
+  The \c{BZHI} instruction zeros the high bits of the first source operand starting at the index specified in the lowest 8 bits of the second source operand.
+  The result is stored in the destination operand.
+
+  The low 8 bits of the second source operand (the index) \i{must not} exceed the bit width of the operands.
+  In other words, for the 32 bit form, the second source operand's low 8 bits must be 31 or less.
+  The 64 bit form changes this requirement to 63 or less.
+
+  The operand size (\c{W} bit) is always 32 bits if not in Long Mode.
+  In other words, in Protected and Compatibility Mode, \c{VEX.W1} is treated as \c{VEX.W0}.
+
+  The length field (\c{L} bit) \i{must} be zero (signifying 128 bit vectors).
+  Attempts to execute with \c{VEX.L1} (256 bit vectors) will cause a \c{#UD} exception.
+operation: |-
+  pub fn bzhi_op32(dest: &mut u32, src: u32, idx: u32) {
+    let n: u8 = idx[7..=0];
+    if n < 32 {
+      dest[31..=n] = 0;
+      CF = 0;
+    } else {
+      CF = 1;
+    }
+  }
+
+  pub fn bzhi_op64(dest: &mut u64, src: u64, idx: u64) {
+    let n: u8 = idx[7..=0];
+    if n < 64 {
+      dest[63..=n] = 0;
+      CF = 0;
+    } else {
+      CF = 1;
+    }
+  }
+flags: >-
+  The \reg{CF} flag is set if the index is too large, and cleared otherwise.
+  The \reg{ZF}, and \reg{SF} flags are updated based on the result.
+  The \reg{OF} flag is cleared;
+  The \reg{AF} and \reg{PF} flags are undefined.
+intrinsicsC: |-
+  uint32_t _bzhi_u32(uint32_t src, uint32_t index)
+  uint64_t _bzhi_u64(uint64_t src, uint64_t index)
+exceptions:
+  floating: None
+  other: See Exceptions Type 13.
+changes:
+  version: 73
+  date: 2020-11
+  list:
+    - >-
+      The \c{BZHI r64a, r/m64, r64b} form is incorrectly documented as being "not encodable" in 32 bit mode.
+      This is misleading as it \i{is} encodable, but is defined to be treated as the 32 bit form.
