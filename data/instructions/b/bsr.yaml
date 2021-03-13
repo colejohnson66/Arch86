@@ -107,7 +107,7 @@ exceptions:
     "#AC(0)": If alignment checking is enabled and an unaligned memory reference is made while the current privilege level is 3.
   real:
     "#UD": If the \instr{LOCK} prefix is used.
-    "#GP":If the memory operand's effective address is outside the \reg{CS}, \reg{DS}, \reg{ES}, \reg{FS}, or \reg{GS} segment limit.
+    "#GP": If the memory operand's effective address is outside the \reg{CS}, \reg{DS}, \reg{ES}, \reg{FS}, or \reg{GS} segment limit.
     "#SS": If a memory operand's effective address is outside the \reg{SS} segment limit.
   virtual:
     "#UD": If the \instr{LOCK} prefix is used.
