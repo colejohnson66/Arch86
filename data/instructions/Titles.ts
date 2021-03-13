@@ -54,6 +54,14 @@ const InstructionTitles: IDictionary<string> = {
     bndmov: "Move Bounds",
     bndstx: "Store Extended Bounds Using Address Translation",
     bound: "Check Array Index Against Bounds",
+    bsf: "Bit Scan Forward",
+    bsr: "Bit Scan Reverse",
+    bswap: "Byte Swap",
+    bt: "Bit Test",
+    btc: "Bit Test and Complement",
+    btr: "Bit Test and Reset",
+    bts: "Bit Test and Set",
+    bzhi: "Zero High Bits Starting with Specified Bit Position",
 };
 
 export default InstructionTitles;

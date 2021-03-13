@@ -1,0 +1,96 @@
+%YAML 1.2
+---
+title: Bit Scan Forward
+validity: 1632,64
+opcode:
+  - opcode: 0F BC /r
+    mnemonic: BSF \i{r16}, \i{r/m16}
+    encoding: RM
+    validity:
+      1632: valid
+      64: valid
+    description: >-
+      Stores the least significant set bit's position from \i{r/m16} into \i{r16}.
+  - opcode: 0F BC /r
+    mnemonic: BSF \i{r32}, \i{r/m32}
+    encoding: RM
+    validity:
+      1632: valid
+      64: valid
+    description: >-
+      Stores the least significant set bit's position from \i{r/m32} into \i{r32}.
+  - opcode: REX.W 0F BC /r
+    mnemonic: BSF \i{r64}, \i{r/m64}
+    encoding: RM
+    validity:
+      1632: n/e
+      64: valid
+    description: >-
+      Stores the least significant set bit's position from \i{r/m64} into \i{r64}.
+encoding:
+  operands: 2
+  encodings:
+    RM:
+      - ModRM.reg[w]
+      - ModRM.r/m[r]
+bitEncoding:
+  list:
+    - form: reg3(1) into reg3(2)
+      bits:
+        - \bits{0F}
+        - \bits{BC}
+        - \bits{11 reg3(2) reg3(1)}
+    - form: memory into reg3
+      bits:
+        - \bits{0F}
+        - \bits{BC}
+        - \bits{mod reg3 r/m}
+description: >-
+  The \c{BSF} instruction searches the source operand for the least significant set bit.
+  The zero-based index of this bit is stored in the destination operand.
+
+  The \reg{ZF} flag is set if the source is 0 (no set bits), and cleared if a bit is found.
+  If the \reg{ZF} flag is set, the value in the destination operand is undefined.
+operation: |-
+  pub fn bsf<T>(dest: &mut T, src: T) {
+    if src == 0 {
+      ZF = 1;
+      // dest = undefined;
+    } else {
+      ZF = 0;
+      let mut idx: u8 = 0;
+      while src[idx] == 0 {
+        idx = idx + 1;
+      }
+      dest = idx;
+    }
+  }
+flags: >-
+  The \reg{ZF} is set if the source operand is 0, and cleared otherwise.
+  The \reg{CF}, \reg{OF}, \reg{SF}, \reg{AF}, and \reg{PF} flags are undefined.
+exceptions:
+  protected:
+    "#UD": If the \instr{LOCK} prefix is used.
+    "#GP(0)":
+      - If the memory operand's effective address is outside the \reg{CS}, \reg{DS}, \reg{ES}, \reg{FS}, or \reg{GS} segment limit.
+      - If the \reg{DS}, \reg{ES}, \reg{FS}, or \reg{GS} segment register contains a \c{NULL} segment selector.
+    "#SS(0)": If a memory operand's effective address is outside the \reg{SS} segment limit.
+    "#PF(fault-code)": If a page fault occurs.
+    "#AC(0)": If alignment checking is enabled and an unaligned memory reference is made while the current privilege level is 3.
+  real:
+    "#UD": If the \instr{LOCK} prefix is used.
+    "#GP":If the memory operand's effective address is outside the \reg{CS}, \reg{DS}, \reg{ES}, \reg{FS}, or \reg{GS} segment limit.
+    "#SS": If a memory operand's effective address is outside the \reg{SS} segment limit.
+  virtual:
+    "#UD": If the \instr{LOCK} prefix is used.
+    "#GP(0)": If the memory operand's effective address is outside the \reg{CS}, \reg{DS}, \reg{ES}, \reg{FS}, or \reg{GS} segment limit.
+    "#SS(0)": If a memory operand's effective address is outside the \reg{SS} segment limit.
+    "#PF(fault-code)": If a page fault occurs.
+    "#AC(0)": If alignment checking is enabled and an unaligned memory reference is made while the current privilege level is 3.
+  compatibility: Same exceptions as protected mode.
+  long:
+    "#UD": If the \instr{LOCK} prefix is used.
+    "#GP(0)": If the memory address is in a non-canonical form.
+    "#SS(0)": If a memory address referencing the \reg{SS} segment is in a non-canonical form.
+    "#PF(fault-code)": If a page fault occurs.
+    "#AC(0)": If alignment checking is enabled and an unaligned memory reference is made while the current privilege level is 3.

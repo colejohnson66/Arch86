@@ -18,3 +18,11 @@ bndmk
 bndmov
 bndstx
 bound
+bsf
+bsr
+bswap
+bt
+btc
+btr
+bts
+bzhi

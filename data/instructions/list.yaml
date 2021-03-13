@@ -38,3 +38,5 @@ b:
   - bndmov
   - bndstx
   - bound
+  - bsf
+  - bsr
