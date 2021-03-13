@@ -55,6 +55,7 @@
         "cpuid",
         "denormal",
         "encodable",
+        "endianness",
         "evex",
         "FIPS",
         "intrinsics",

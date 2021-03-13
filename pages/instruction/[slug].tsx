@@ -15,7 +15,7 @@
  *   with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { Callout, Code, Divider, H1, H2, H3, HTMLTable, IBreadcrumbProps, OL, UL } from "@blueprintjs/core";
+import { Callout, Code, Divider, H1, H2, H3, H5, HTMLTable, IBreadcrumbProps, OL, UL } from "@blueprintjs/core";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { formatStringPlaintext, formatStringToJsx } from "../../lib/FormatStringToJsx";
 import { getAllInstructionsAsParams, getInstructionData } from "../../lib/instruction";
@@ -100,6 +100,7 @@ type PageProps = {
     title: string;
     validity: string;
     opcode: Opcode[];
+    opcodeNote?: MaybeArray<string>;
     encoding: Encoding;
     bitEncoding?: BitEncoding;
     description: string;
@@ -150,6 +151,20 @@ function paragraphsFromArray(arr: string[]): JSX.Element[] {
 
 function paragraphsFromString(str: string): JSX.Element[] {
     return paragraphsFromArray(str.split("\n"));
+}
+
+function hasValidAsteriskValidity(opcodes: Opcode[]): boolean {
+    for (let i = 0; i < opcodes.length; i++) {
+        // The weird cast shuts TS up
+        const validity = opcodes[i].validity as unknown as string[];
+        const validityKeys = Object.keys(validity).map((key) => parseInt(key, 10));
+        for (let j = 0; j < validityKeys.length; j++) {
+            if (validity[validityKeys[j]] === "valid*")
+                return true;
+        }
+    }
+
+    return false;
 }
 
 function formatEncodingCell(operand: string): JSX.Element {
@@ -295,6 +310,14 @@ export default function Page(props: PageProps): JSX.Element {
                         </tbody>
                     </HTMLTable>
                 </Scrollable>
+                {hasValidAsteriskValidity(props.opcode) &&
+                    props.opcodeNote &&
+                    <>
+                        <H5>Notes:</H5>
+                        <p>
+                            *{" "}{brTagsFromArray(coerceArray(props.opcodeNote))}
+                        </p>
+                    </>}
 
                 <H2 id="headingEncoding">Encoding</H2>
                 <Scrollable>

@@ -11,6 +11,7 @@ opcode:
       64:
     cpuid:
     description:
+opcodeNote: >-
 encoding:
   operands: 2
   encodings:

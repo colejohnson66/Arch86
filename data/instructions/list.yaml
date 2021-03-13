@@ -40,3 +40,4 @@ b:
   - bound
   - bsf
   - bsr
+  - bswap
