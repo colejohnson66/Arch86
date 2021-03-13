@@ -43,8 +43,14 @@ description: >-
 
   This instruction is not encodable in 64 bit mode, and if encountered, will be interpreted as an EVEX prefix.
 operation: |-
-  pub fn bound<T>(index: T, bounds: T*) {
-    if index < *bounds || index > *(bounds + 1) {
+  pub fn bound_op16(index: u16, bounds: usize) {
+    if index < readWordU(bounds) || index > readWordU(bounds + 2) {
+      #BR;
+    }
+  }
+
+  pub fn bound_op32(index: u32, bounds: usize) {
+    if index < readDwordU(bounds) || index > readDwordU(bounds + 4) {
       #BR;
     }
   }

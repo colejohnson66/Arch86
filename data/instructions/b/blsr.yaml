@@ -40,7 +40,12 @@ description: >-
   The length field (\c{L} bit) \i{must} be zero (signifying 128 bit vectors).
   Attempts to execute with \c{VEX.L1} (256 bit vectors) will cause a \c{#UD} exception.
 operation: |-
-  pub fn blsr<T>(dest: &mut T, src: T) {
+  pub fn blsr_op32(dest: &mut u32, src: u32) {
+    *dest = src & (src - 1);
+    CF = (src != 0);
+  }
+
+  pub fn blsr_op64(dest: &mut u64, src: u64) {
     *dest = src & (src - 1);
     CF = (src != 0);
   }

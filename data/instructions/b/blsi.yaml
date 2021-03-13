@@ -42,7 +42,13 @@ description: >-
   The length field (\c{L} bit) \i{must} be zero (signifying 128 bit vectors).
   Attempts to execute with \c{VEX.L1} (256 bit vectors) will cause a \c{#UD} exception.
 operation: |-
-  pub fn blsi<T>(dest: &mut T, src: T) {
+  pub fn blsi_op32(dest: &mut u32, src: u32) {
+    // extract the lowest set bit into `temp`
+    *dest = (-src) & src;
+    CF = (src != 0);
+  }
+
+  pub fn blsi_op64(dest: &mut u64, src: u64) {
     // extract the lowest set bit into `temp`
     *dest = (-src) & src;
     CF = (src != 0);

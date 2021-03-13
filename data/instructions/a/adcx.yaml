@@ -49,7 +49,11 @@ description: >-
 
   In 64 bit mode, the default operand size is 32 bits, but \c{REX.W} will change it to 64 bits.
 operation: >-
-  pub fn adcx<T>(dest: &mut T, src: T) {
+  pub fn adcx_op32(dest: &mut u32, src: u32) {
+    *dest = *dest + src + CF;
+  }
+
+  pub fn adcx_op64(dest: &mut u64, src: u64) {
     *dest = *dest + src + CF;
   }
 flags: >-

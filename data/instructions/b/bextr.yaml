@@ -45,7 +45,14 @@ description: >-
   The length field (\c{L} bit) \i{must} be zero (signifying 128 bit vectors).
   Attempts to execute with \c{VEX.L1} (256 bit vectors) will cause a \c{#UD} exception.
 operation: |-
-  pub fn bextr<T>(dest: &mut T, src1: T, src2: T) {
+  pub fn bextr_op32(dest: &mut u32, src1: u32, src2: u32) {
+    let start = src2[7..=0];
+    let len = src2[15..=0];
+    let end = start + len - 1;
+    dest = src1[end..=start];
+  }
+
+  pub fn bextr_op64(dest: &mut u64, src1: u64, src2: u64) {
     let start = src2[7..=0];
     let len = src2[15..=0];
     let end = start + len - 1;

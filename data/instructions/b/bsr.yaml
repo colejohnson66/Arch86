@@ -52,13 +52,41 @@ description: >-
   The \reg{ZF} flag is set if the source is 0 (no set bits), and cleared if a bit is found.
   If the \reg{ZF} flag is set, the value in the destination operand is undefined.
 operation: |-
-  pub fn bsr<T>(dest: &mut T, src: T) {
+  pub fn bsr_op16(dest: &mut u16, src: u16) {
     if src == 0 {
       ZF = 1;
       // dest = undefined;
     } else {
       ZF = 0;
-      let mut idx: u8 = sizeof T;
+      let mut idx: u16 = 15;
+      while src[idx] == 0 {
+        idx = idx - 1;
+      }
+      dest = idx;
+    }
+  }
+
+  pub fn bsr_op32(dest: &mut u32, src: u32) {
+    if src == 0 {
+      ZF = 1;
+      // dest = undefined;
+    } else {
+      ZF = 0;
+      let mut idx: u32 = 31;
+      while src[idx] == 0 {
+        idx = idx - 1;
+      }
+      dest = idx;
+    }
+  }
+
+  pub fn bsr_op64(dest: &mut u64, src: u64) {
+    if src == 0 {
+      ZF = 1;
+      // dest = undefined;
+    } else {
+      ZF = 0;
+      let mut idx: u64 = 63;
       while src[idx] == 0 {
         idx = idx - 1;
       }
