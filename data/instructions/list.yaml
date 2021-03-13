@@ -41,3 +41,7 @@ b:
   - bsf
   - bsr
   - bswap
+  - bt
+  - btc
+  - btr
+  - bts

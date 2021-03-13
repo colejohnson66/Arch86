@@ -3,7 +3,6 @@ x86 Instruction Patterns
 ----
 
 ALU instructions (ADC, ADD, etc) have the forms:
-
 - [0] 00 op3 00dw : 11 reg1 reg2
 - [1] 00 op3 00dw : mod reg r/m
 - [2] 10 000 0sw : 11 op3 reg : imm
@@ -37,6 +36,9 @@ Which form is used when:
 - [2]: register/immediate
 - [3]: memory/immediate
 
+Notes:
+- Forms [2] and [3]: see "Immediate Group 1"
+
 ----
 
 AES encryption/decryption instructions have the forms:
@@ -58,11 +60,11 @@ Which form is used when:
 ----
 
 Instructions from the BMI1 (bit manipulation instructions 1) set have the form:
-- [0] VEX.LZ.0F38.W0 F3 /op3
-- [1] VEX.LZ.0F38.W1 F3 /op3
+- [0] VEX.LZ.0F38.W0 : F3 /op3
+- [1] VEX.LZ.0F38.W1 : F3 /op3
 
 With the following values:
-- op3:
+- op3: (see "Group 17")
   - 000 (/0):
   - 001 (/1): BLSR
   - 010 (/2): BLSMSK
@@ -81,3 +83,26 @@ Notes:
 - L!=0 will *always* #UD.
 
 ----
+
+"Bit Test" instructions (BT, BTC, BTR, BTS) have the form:
+- [0] 0F : 10 op3 011 : 11 reg1 reg2
+- [1] 0F : 10 op3 011 : mod reg r/m
+- [2] 0F : BA : 11 op3 reg3 : imm8 (0F BA /op3)
+- [3] 0F : BA : mod op3 r/m : imm8 (0F BA /op3)
+
+With the following values:
+- op3: (see "Group 8")
+  - 000 (/0):
+  - 001 (/1):
+  - 010 (/2):
+  - 011 (/3):
+  - 100 (/4): BT
+  - 101 (/5): BTS
+  - 110 (/6): BTR
+  - 111 (/7): BTC
+
+Which form is used when:
+- [0]: register/register
+- [1]: memory/register
+- [2]: register/immediate
+- [3]: memory/immediate

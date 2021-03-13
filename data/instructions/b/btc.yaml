@@ -1,0 +1,138 @@
+%YAML 1.2
+---
+title: Bit Test and Complement
+validity: 1632,64
+opcode:
+  - opcode: 0F BB /r
+    mnemonic: BTC \i{r/m16}, \i{r16}
+    encoding: MR
+    validity:
+      1632: valid
+      64: valid
+    description: >-
+      Store the bit specified in \i{r16} from \i{r/m16} into the \reg{CF} flag before complementing (inverting) the selected bit.
+  - opcode: 0F BB /r
+    mnemonic: BTC \i{r/m32}, \i{r32}
+    encoding: MR
+    validity:
+      1632: valid
+      64: valid
+    description: >-
+      Store the bit specified in \i{r32} from \i{r/m32} into the \reg{CF} flag before complementing (inverting) the selected bit.
+  - opcode: REX.W 0F BB /r
+    mnemonic: BTC \i{r/m64}, \i{r64}
+    encoding: MR
+    validity:
+      1632: n/e
+      64: valid
+    description: >-
+      Store the bit specified in \i{r64} from \i{r/m64} into the \reg{CF} flag before complementing (inverting) the selected bit.
+  - opcode: 0F BA /7 ib
+    mnemonic: BTC \i{r/m16}, \i{imm8}
+    encoding: MI
+    validity:
+      1632: valid
+      64: valid
+    description: >-
+      Store the bit specified in \i{imm8} from \i{r/m16} into the \reg{CF} flag before complementing (inverting) the selected bit.
+  - opcode: 0F BA /7 ib
+    mnemonic: BTC \i{r/m32}, \i{imm8}
+    encoding: MI
+    validity:
+      1632: valid
+      64: valid
+    description: >-
+      Store the bit specified in \i{imm8} from \i{r/m32} into the \reg{CF} flag before complementing (inverting) the selected bit.
+  - opcode: REX.W 0F BA /7 ib
+    mnemonic: BTC \i{r/m64}, \i{imm8}
+    encoding: MI
+    validity:
+      1632: n/e
+      64: valid
+    description: >-
+      Store the bit specified in \i{imm8} from \i{r/m64} into the \reg{CF} flag before complementing (inverting) the selected bit.
+encoding:
+  operands: 2
+  encodings:
+    MR:
+      - ModRM.r/m[rw]
+      - ModRM.reg[r]
+    MI:
+      - ModRM.r/m[rw]
+      - imm8[r]
+bitEncoding:
+  list:
+    - form: reg3(1) selects from reg3(2)
+      bits:
+        - \bits{0F}
+        - \bits{BB}
+        - \bits{11 reg3(1) reg3(2)}
+    - form: reg3 selects from memory
+      bits:
+        - \bits{0F}
+        - \bits{BB}
+        - \bits{mod reg3 r/m}
+    - form: imm8 selects from reg3
+      bits:
+        - \bits{0F}
+        - \bits{BA}
+        - \bits{11 111 reg3}
+        - \bits{imm8}
+    - form: imm8 selects from memory
+      bits:
+        - \bits{0F}
+        - \bits{BA}
+        - \bits{mod 111 r/m}
+        - \bits{imm8}
+description: >-
+  The \c{BTC} instruction selects a bit from the destination operand and stores it in the \reg{CF} flag.
+  The specific bit selected is specified in the source operand.
+  Afterwards, the selected bit is complemented (inverted) and saved in the destination operand.
+
+  If the source operand references a bit higher than the width of the destination operand (eg. the 21st bit in a 16 bit register), the upper bits are ignored.
+  In other words, attempting to reference the 21st bit of a 16 bit register only accesses the \i5th} bit (as 21 modulo 16 is 5).
+operation: |-
+  pub fn btc_op16(src: u16, idx: u16) {
+    CF = src[idx % 16];
+    src[idx % 16] = !CF;
+  }
+
+  pub fn btc_op32(src: u32, idx: u32) {
+    CF = src[idx % 32];
+    src[idx % 32] = !CF;
+  }
+
+  pub fn btc_op64(src: u64, idx: u64) {
+    CF = src[idx % 64];
+    src[idx % 64] = !CF;
+  }
+flags: >-
+  The \reg{CF} flag contains the value of the selected bit before it is complemented.
+  The \reg{ZF} flag is unaffected.
+  The \reg{OF}, \reg{SF}, \reg{AF}, and \reg{PF} flags are undefined.
+exceptions:
+  protected:
+    "#UD": If the \instr{LOCK} prefix is used, but the destination is not a memory operand.
+    "#GP(0)":
+      - If the memory operand's effective address is outside the \reg{CS}, \reg{DS}, \reg{ES}, \reg{FS}, or \reg{GS} segment limit.
+      - If the \reg{DS}, \reg{ES}, \reg{FS}, or \reg{GS} segment register contains a \c{NULL} segment selector.
+    "#SS(0)": If a memory operand's effective address is outside the \reg{SS} segment limit.
+    "#PF(fault-code)": If a page fault occurs.
+    "#AC(0)": If alignment checking is enabled and an unaligned memory reference is made while the current privilege level is 3.
+  real:
+    "#UD": If the \instr{LOCK} prefix is used, but the destination is not a memory operand.
+    "#GP": If the memory operand's effective address is outside the \reg{CS}, \reg{DS}, \reg{ES}, \reg{FS}, or \reg{GS} segment limit.
+    "#SS": If a memory operand's effective address is outside the \reg{SS} segment limit.
+  virtual:
+    "#UD": If the \instr{LOCK} prefix is used, but the destination is not a memory operand.
+    "#GP(0)": If the memory operand's effective address is outside the \reg{CS}, \reg{DS}, \reg{ES}, \reg{FS}, or \reg{GS} segment limit.
+    "#SS(0)": If a memory operand's effective address is outside the \reg{SS} segment limit.
+    "#PF(fault-code)": If a page fault occurs.
+    "#AC(0)": If alignment checking is enabled and an unaligned memory reference is made while the current privilege level is 3.
+  compatibility: Same exceptions as protected mode.
+  long:
+    "#UD": If the \instr{LOCK} prefix is used, but the destination is not a memory operand.
+    "#GP(0)": If the memory address is in a non-canonical form.
+    "#SS(0)": If a memory address referencing the \reg{SS} segment is in a non-canonical form.
+    "#PF(fault-code)": If a page fault occurs.
+    "#AC(0)": If alignment checking is enabled and an unaligned memory reference is made while the current privilege level is 3.
