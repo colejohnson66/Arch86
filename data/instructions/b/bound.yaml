@@ -1,13 +1,13 @@
 %YAML 1.2
 ---
 title: Check Array Index Against Bounds
-validity: 1632,64
 opcode:
   - opcode: 62 /r
     mnemonic: BOUND \i{r16}, \i{m16&16}
     encoding: RM
     validity:
-      1632: valid
+      16: valid
+      32: valid
       64: n/e
     cpuid: # MPX?
     description: >-
@@ -16,7 +16,8 @@ opcode:
     mnemonic: BOUND \i{r32}, \i{m32&32}
     encoding: RM
     validity:
-      1632: valid
+      16: valid
+      32: valid
       64: n/e
     cpuid: # MPX?
     description: >-

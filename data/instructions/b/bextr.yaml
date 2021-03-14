@@ -1,12 +1,12 @@
 %YAML 1.2
 ---
 title: Bit Extract Field
-validity: 32,64
 opcode:
   - opcode: VEX.LZ.0F38.W0 F7 /r
     mnemonic: BEXTR \i{r32a}, \i{r/m32}, \i{r32b}
     encoding: RMV
     validity:
+      16: invalid
       32: valid
       64: valid
     cpuid: BMI1
@@ -17,6 +17,7 @@ opcode:
     mnemonic: BEXTR \i{r64a}, \i{r/m64}, \i{r64b}
     encoding: RMV
     validity:
+      16: invalid
       32: invalid
       64: valid
     cpuid: BMI1

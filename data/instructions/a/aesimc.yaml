@@ -1,12 +1,12 @@
 %YAML 1.2
 ---
 title: Perform the AES "Inverse Mix Columns" Transformation
-validity: 32,64
 opcode:
   - opcode: 66 0F 38 DB /r
     mnemonic: AESIMC \i{xmm1}, \i{xmm2/m128}
     encoding: RM
     validity:
+      16: invalid
       32: valid
       64: valid
     cpuid: AES
@@ -17,6 +17,7 @@ opcode:
     mnemonic: VAESIMC \i{xmm1}, \i{xmm2/m128}
     encoding: RM
     validity:
+      16: invalid
       32: valid
       64: valid
     cpuid: [ AES, AVX ]

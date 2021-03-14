@@ -1,20 +1,21 @@
 %YAML 1.2
 ---
 title: Byte Swap
-validity: 1632,64
 opcode:
   - opcode: 0F C8+rd
     mnemonic: BSWAP \i{r32}
     encoding: O
     validity:
-      1632: valid*
+      16: valid
+      32: valid*
       64: valid
     description: Reverses the byte order (endianness) of \i{r32}.
   - opcode: REX.W 0F C8+rd
     mnemonic: BSWAP \i{r64}
     encoding: O
     validity:
-      1632: n/e
+      16: n/e
+      32: n/e
       64: valid
     description: Reverses the byte order (endianness) of \i{r64}.
 opcodeNote: >-

@@ -1,12 +1,12 @@
 %YAML 1.2
 ---
 title: Logical AND Packed Single-Precision Floating-Point Values
-validity: 32,64
 opcode:
   - opcode: NP 0F 54 /r
     mnemonic: ANDPS \i{xmm1}, \i{xmm2/m128}
     encoding: LEGACY
     validity:
+      16: invalid
       32: valid
       64: valid
     cpuid: SSE2
@@ -17,6 +17,7 @@ opcode:
     mnemonic: VANDPS \i{xmm1}, \i{xmm2}, \i{xmm3/m128}
     encoding: VEX
     validity:
+      16: invalid
       32: valid
       64: valid
     cpuid: AVX
@@ -27,6 +28,7 @@ opcode:
     mnemonic: VANDPS \i{ymm1}, \i{ymm2}, \i{ymm3/m256}
     encoding: VEX
     validity:
+      16: invalid
       32: valid
       64: valid
     cpuid: AVX
@@ -37,6 +39,7 @@ opcode:
     mnemonic: VANDPS \i{xmm1} {k1}{z}, \i{xmm2}, \i{xmm3/m128/m32bcst}
     encoding: EVEX
     validity:
+      16: invalid
       32: valid
       64: valid
     cpuid: [ AVX512VL, AVS512DQ ]
@@ -47,6 +50,7 @@ opcode:
     mnemonic: VANDPS \i{ymm1} {k1}{z}, \i{ymm2}, \i{ymm3/m256/m32bcst}
     encoding: EVEX
     validity:
+      16: invalid
       32: valid
       64: valid
     cpuid: [ AVX512VL, AVS512DQ ]
@@ -57,6 +61,7 @@ opcode:
     mnemonic: VANDPS \i{zmm1} {k1}{z}, \i{zmm2}, \i{zmm3/m512/m32bcst}
     encoding: EVEX
     validity:
+      16: invalid
       32: valid
       64: valid
     cpuid: AVX512DQ

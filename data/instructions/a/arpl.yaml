@@ -1,7 +1,6 @@
 %YAML 1.2
 ---
 title: Adjust \c{RPL} Field of Segment Selector
-validity: 16,32,64
 opcode:
   - opcode: 63 /r
     mnemonic: ARPL \i{r/m16}, \i{r16}

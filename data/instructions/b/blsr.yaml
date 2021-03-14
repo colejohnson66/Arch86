@@ -1,12 +1,12 @@
 %YAML 1.2
 ---
 title: Clear Lowest Set Bit
-validity: 32,64
 opcode:
   - opcode: VEX.LZ.0F38.W0 F3 /1
     mnemonic: BLSMSK \i{r32}, \i{r/m32}
     encoding: VEX
     validity:
+      16: invalid
       32: valid
       64: valid
     cpuid: BMI1
@@ -16,6 +16,7 @@ opcode:
     mnemonic: BLSMSK \i{r64}, \i{r/m64}
     encoding: VEX
     validity:
+      16: invalid
       32: valid
       64: invalid
     cpuid: BMI1

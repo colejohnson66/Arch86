@@ -1,13 +1,13 @@
 %YAML 1.2
 ---
 title: Bit Test and Reset
-validity: 1632,64
 opcode:
   - opcode: 0F B3 /r
     mnemonic: BTR \i{r/m16}, \i{r16}
     encoding: MR
     validity:
-      1632: valid
+      16: valid
+      32: valid
       64: valid
     description: >-
       Store the bit specified in \i{r16} from \i{r/m16} into the \reg{CF} flag before resetting (clearing) the selected bit.
@@ -15,7 +15,8 @@ opcode:
     mnemonic: BTR \i{r/m32}, \i{r32}
     encoding: MR
     validity:
-      1632: valid
+      16: valid
+      32: valid
       64: valid
     description: >-
       Store the bit specified in \i{r32} from \i{r/m32} into the \reg{CF} flag before resetting (clearing) the selected bit.
@@ -23,7 +24,8 @@ opcode:
     mnemonic: BTR \i{r/m64}, \i{r64}
     encoding: MR
     validity:
-      1632: n/e
+      16: n/e
+      32: n/e
       64: valid
     description: >-
       Store the bit specified in \i{r64} from \i{r/m64} into the \reg{CF} flag before resetting (clearing) the selected bit.
@@ -31,7 +33,8 @@ opcode:
     mnemonic: BTR \i{r/m16}, \i{imm8}
     encoding: MI
     validity:
-      1632: valid
+      16: valid
+      32: valid
       64: valid
     description: >-
       Store the bit specified in \i{imm8} from \i{r/m16} into the \reg{CF} flag before resetting (clearing) the selected bit.
@@ -39,7 +42,8 @@ opcode:
     mnemonic: BTR \i{r/m32}, \i{imm8}
     encoding: MI
     validity:
-      1632: valid
+      16: valid
+      32: valid
       64: valid
     description: >-
       Store the bit specified in \i{imm8} from \i{r/m32} into the \reg{CF} flag before resetting (clearing) the selected bit.
@@ -47,7 +51,8 @@ opcode:
     mnemonic: BTR \i{r/m64}, \i{imm8}
     encoding: MI
     validity:
-      1632: n/e
+      16: n/e
+      32: n/e
       64: valid
     description: >-
       Store the bit specified in \i{imm8} from \i{r/m64} into the \reg{CF} flag before resetting (clearing) the selected bit.

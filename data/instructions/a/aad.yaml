@@ -1,20 +1,21 @@
 %YAML 1.2
 ---
 title: ASCII Adjust \reg{AX} Before Division
-validity: 1632,64
 opcode:
   - opcode: D5 0A
     mnemonic: AAD
     encoding: ZO
     validity:
-      1632: valid
+      16: valid
+      32: valid
       64: invalid
     description: ASCII adjust \reg{AX} before division.
   - opcode: D5 \i{ib}
     mnemonic: AAD \i{imm8}
     encoding: I
     validity:
-      1632: valid
+      16: valid
+      32: valid
       64: invalid
     description: ASCII adjust \reg{AX} before division to number base \i{imm8}.
 encoding:

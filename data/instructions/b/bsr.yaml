@@ -1,13 +1,13 @@
 %YAML 1.2
 ---
 title: Bit Scan Reverse
-validity: 1632,64
 opcode:
   - opcode: 0F BD /r
     mnemonic: BSR \i{r16}, \i{r/m16}
     encoding: RM
     validity:
-      1632: valid
+      16: valid
+      32: valid
       64: valid
     description: >-
       Stores the most significant set bit's position from \i{r/m16} into \i{r16}.
@@ -15,7 +15,8 @@ opcode:
     mnemonic: BSR \i{r32}, \i{r/m32}
     encoding: RM
     validity:
-      1632: valid
+      16: valid
+      32: valid
       64: valid
     description: >-
       Stores the most significant set bit's position from \i{r/m32} into \i{r32}.
@@ -23,7 +24,8 @@ opcode:
     mnemonic: BSR \i{r64}, \i{r/m64}
     encoding: RM
     validity:
-      1632: n/e
+      16: n/e
+      32: n/e
       64: valid
     description: >-
       Stores the most significant set bit's position from \i{r/m64} into \i{r64}.

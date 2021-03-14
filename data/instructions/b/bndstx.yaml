@@ -1,13 +1,13 @@
 %YAML 1.2
 ---
 title: Store Extended Bounds Using Address Translation
-validity: 1632,64
 opcode:
   - opcode: NP 0F 1B /r
     mnemonic: BNDSTX \i{mib}, \i{bnd}
     encoding: RM
     validity:
-      1632: valid
+      16: valid
+      32: valid
       64: valid
     cpuid: MPX
     description: >-

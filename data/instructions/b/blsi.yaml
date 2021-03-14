@@ -1,12 +1,12 @@
 %YAML 1.2
 ---
 title: Extract Lowest Set Bit
-validity: 32,64
 opcode:
   - opcode: VEX.LZ.0F38.W0 F3 /3
     mnemonic: BLSI \i{r32}, \i{r/m32}
     encoding: VEX
     validity:
+      16: invalid
       32: valid
       64: valid
     cpuid: BMI1
@@ -17,6 +17,7 @@ opcode:
     mnemonic: BLSI \i{r64}, \i{r/m64}
     encoding: VEX
     validity:
+      16: invalid
       32: valid
       64: invalid
     cpuid: BMI1

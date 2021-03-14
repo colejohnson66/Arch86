@@ -1,12 +1,12 @@
 %YAML 1.2
 ---
 title: Perform One Round of AES Decryption
-validity: 32,64
 opcode:
   - opcode: 66 0F 38 DE /r
     mnemonic: AESDEC \i{xmm1}, \i{xmm2/m128}
     encoding: LEGACY
     validity:
+      16: invalid
       32: valid
       64: valid
     cpuid: AES
@@ -17,6 +17,7 @@ opcode:
     mnemonic: VAESDEC \i{xmm1}, \i{xmm2}, \i{xmm2/m128}
     encoding: VEX
     validity:
+      16: invalid
       32: valid
       64: valid
     cpuid: [ AES, AVX ]
@@ -27,6 +28,7 @@ opcode:
     mnemonic: VAESDEC \i{ymm1}, \i{ymm2}, \i{ymm2/m256}
     encoding: VEX
     validity:
+      16: invalid
       32: valid
       64: valid
     cpuid: VAES
@@ -37,6 +39,7 @@ opcode:
     mnemonic: VAESDEC \i{xmm1}, \i{xmm2}, \i{xmm2/m128}
     encoding: EVEX
     validity:
+      16: invalid
       32: valid
       64: valid
     cpuid: [ VAES, AVX512VL ]
@@ -47,6 +50,7 @@ opcode:
     mnemonic: VAESDEC \i{ymm1}, \i{ymm2}, \i{ymm2/m256}
     encoding: EVEX
     validity:
+      16: invalid
       32: valid
       64: valid
     cpuid: [ VAES, AVX512VL ]
@@ -57,6 +61,7 @@ opcode:
     mnemonic: VAESDEC \i{zmm1}, \i{zmm2}, \i{zmm2/m512}
     encoding: EVEX
     validity:
+      16: invalid
       32: valid
       64: valid
     cpuid: [ VAES, AVX512VL ]

@@ -42,17 +42,9 @@ const OpcodeValidityMap: IDictionary<string> = {
     "n/e": "Not Encodable",
 };
 type OpcodeValidity = {
-    16?: OpcodeValidityValues;
-    1632?: OpcodeValidityValues;
-    32?: OpcodeValidityValues;
+    16: OpcodeValidityValues;
+    32: OpcodeValidityValues;
     64: OpcodeValidityValues;
-};
-// TODO: use <abbr>?
-const OpcodeValidityKeyMap: { [key: number]: string } = {
-    16: "16 bit Mode",
-    1632: "16 and 32 bit Mode",
-    32: "32 bit Mode",
-    64: "64 bit Mode",
 };
 type Opcode = {
     opcode: string;
@@ -106,7 +98,6 @@ type Reference = {
 type PageProps = {
     id: string;
     title: string;
-    validity: string;
     opcode: Opcode[];
     opcodeNote?: MaybeArray<string>;
     encoding: Encoding;
@@ -283,9 +274,9 @@ export default function Page(props: PageProps): JSX.Element {
                             <tr>
                                 <th>Opcode and Mnemonic</th>
                                 <th><A href="#headingEncoding">Encoding</A></th>
-                                {props.validity.split(",").map((entry) => (
-                                    <th key={entry}>{OpcodeValidityKeyMap[parseInt(entry, 10)]}</th>
-                                ))}
+                                <th>16 bit Mode</th>
+                                <th>32 bit Mode</th>
+                                <th>64 bit Mode</th>
                                 {props.opcode[0].cpuid &&
                                     /* Don't use <Instruction ... /> to avoid <code> block */
                                     <th><A href="/instruction/cpuid">CPUID</A> Feature Flag</th>}
@@ -301,13 +292,9 @@ export default function Page(props: PageProps): JSX.Element {
                                         <Code className="mnemonic">{formatStringToJsx(row.mnemonic)}</Code>
                                     </td>
                                     <td><Code>{row.encoding}</Code></td>
-                                    {props.validity.split(",").map((entry) => (
-                                        // This ensures that they are displayed in the same order as the heading
-                                        // The weird cast shuts the Typescript compiler up
-                                        <td key={entry}>
-                                            {OpcodeValidityMap[(row.validity as unknown as string[])[parseInt(entry, 10)]]}
-                                        </td>
-                                    ))}
+                                    <td>{OpcodeValidityMap[row.validity[16]]}</td>
+                                    <td>{OpcodeValidityMap[row.validity[32]]}</td>
+                                    <td>{OpcodeValidityMap[row.validity[64]]}</td>
                                     {row.cpuid &&
                                         <td>
                                             {brTagsFromArray(coerceArray(row.cpuid))}

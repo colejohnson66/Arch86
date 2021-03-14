@@ -1,12 +1,12 @@
 %YAML 1.2
 ---
 title: Unsigned Integer Addition of Two Operands with Carry Flag
-validity: 32,64
 opcode:
   - opcode: 66 0F 38 F6 /r
     mnemonic: ADCX \i{r32}, \i{r/m32}
     encoding: RM
     validity:
+      16: invalid
       32: valid
       64: valid
     cpuid: ADX
@@ -15,6 +15,7 @@ opcode:
     mnemonic: ADCX \i{r64}, \i{r/m64}
     encoding: RM
     validity:
+      16: n/e
       32: n/e
       64: valid
     cpuid: ADX

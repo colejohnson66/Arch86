@@ -1,13 +1,13 @@
 %YAML 1.2
 ---
 title: Load Extended Bounds Using Address Translation
-validity: 1632,64
 opcode:
   - opcode: NP 0F 1A /r
     mnemonic: BNDLDX \i{bnd}, \i{mib}
     encoding: RM
     validity:
-      1632: valid
+      16: valid
+      32: valid
       64: valid
     cpuid: MPX
     description: >-

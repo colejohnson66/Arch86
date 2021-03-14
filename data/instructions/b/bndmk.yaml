@@ -1,13 +1,13 @@
 %YAML 1.2
 ---
 title:
-validity: 1632,64
 opcode:
   - opcode: F3 0F 1B /r
     mnemonic: BNDMK \i{bnd}, \i{m32}
     encoding: RM
     validity:
-      1632: valid
+      16: valid
+      32: valid
       64: n/e
     cpuid: MPX
     description: >-
@@ -16,7 +16,8 @@ opcode:
     mnemonic: BNDMK \i{bnd}, \i{m64}
     encoding: RM
     validity:
-      1632: n/e
+      16: n/e
+      32: n/e
       64: valid
     cpuid: MPX
     description: >-

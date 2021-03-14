@@ -1,12 +1,12 @@
 %YAML 1.2
 ---
 title: Zero High Bits From Index
-validity: 32,64
 opcode:
   - opcode: VEX.LZ.0F38.W0 F5 /r
     mnemonic: BZHI \i{r32a}, \i{r/m32}, \i{r32b}
     encoding: VEX
     validity:
+      16: invalid
       32: valid
       64: valid
     cpuid: BMI2
@@ -17,6 +17,7 @@ opcode:
     mnemonic: BZHI \i{r64a}, \i{r/m64}, \i{r64b}
     encoding: VEX
     validity:
+      16: invalid
       32: invalid
       64: valid
     cpuid: BMI2

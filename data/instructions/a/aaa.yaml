@@ -1,13 +1,13 @@
 %YAML 1.2
 ---
 title: ASCII Adjust \reg{AL} After Addition
-validity: 1632,64
 opcode:
   - opcode: "37"
     mnemonic: AAA
     encoding: ZO
     validity:
-      1632: valid
+      16: valid
+      32: valid
       64: invalid
     description: ASCII adjust \reg{AL} after addition.
 encoding:

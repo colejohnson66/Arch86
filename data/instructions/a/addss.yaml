@@ -1,12 +1,12 @@
 %YAML 1.2
 ---
 title: Add Scalar Single-Precision Floating-Point Values
-validity: 32,64
 opcode:
   - opcode: F3 0F 58 /r
     mnemonic: ADDSS \i{xmm1}, \i{xmm2/m32}
     encoding: LEGACY
     validity:
+      16: invalid
       32: valid
       64: valid
     cpuid: SSE2
@@ -17,6 +17,7 @@ opcode:
     mnemonic: VADDSS \i{xmm1}, \i{xmm2}, \i{xmm3/m32}
     encoding: VEX
     validity:
+      16: invalid
       32: valid
       64: valid
     cpuid: AVX
@@ -27,6 +28,7 @@ opcode:
     mnemonic: VADDSS \i{xmm1} {k1}{z}, \i{xmm2}, \i{xmm3/m32} {er}
     encoding: EVEX
     validity:
+      16: invalid
       32: valid
       64: valid
     cpuid: AVX512F

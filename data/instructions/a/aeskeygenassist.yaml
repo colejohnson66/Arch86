@@ -1,12 +1,12 @@
 %YAML 1.2
 ---
 title: AES Round Key Generation Assist
-validity: 32,64
 opcode:
   - opcode: 66 0F 3A DF /r \i{ib}
     mnemonic: AESKEYGENASSIST \i{xmm1}, \i{xmm2/m128}, \i{imm8}
     encoding: RMI
     validity:
+      16: invalid
       32: valid
       64: valid
     cpuid: AES
@@ -17,6 +17,7 @@ opcode:
     mnemonic: VAESKEYGENASSIST \i{xmm1}, \i{xmm2/m128}, \i{imm8}
     encoding: RMI
     validity:
+      16: invalid
       32: valid
       64: valid
     cpuid: [ AES, AVX ]

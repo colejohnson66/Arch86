@@ -1,12 +1,12 @@
 %YAML 1.2
 ---
 title: Blend Packed Double-Precision Floating-Point Values
-validity: 32,64
 opcode:
   - opcode: 66 0F 3A 0D /r \i{ib}
     mnemonic: BLENDPD \i{xmm1}, \i{xmm2/m128}, \i{imm8}
     encoding: LEGACY
     validity:
+      16: invalid
       32: valid
       64: valid
     cpuid: SSE4_1
@@ -17,6 +17,7 @@ opcode:
     mnemonic: VBLENDPD \i{xmm1}, \i{xmm2}, \i{xmm3/m128}, \i{imm8}
     encoding: VEX
     validity:
+      16: invalid
       32: valid
       64: valid
     cpuid: AVX
@@ -27,6 +28,7 @@ opcode:
     mnemonic: VBLENDPD \i{ymm1}, \i{ymm2}, \i{ymm3/m256}, \i{imm8}
     encoding: VEX
     validity:
+      16: invalid
       32: valid
       64: valid
     cpuid: AVX

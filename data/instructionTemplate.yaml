@@ -1,13 +1,13 @@
 %YAML 1.2
 ---
 title:
-validity: 1632,64
 opcode:
   - opcode:
     mnemonic:
     encoding:
     validity:
-      1632:
+      16:
+      32:
       64:
     cpuid:
     description:
