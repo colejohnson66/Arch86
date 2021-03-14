@@ -113,8 +113,8 @@ export default function Page(): JSX.Element {
                     <li>
                         <b>## bit Mode</b> (multiple):
                         Whether a given instruction form is valid, invalid, or not encodable in the specified processor mode.
-                        &quot;Valid&quot; forms are allowed while &quot;invalid&quot; forms will throw an exception if encountered.
-                        &quot;Not encodable&quot; forms are disallowed in the specified mode, and will, in fact, be interpreted differently than expected.
+                        &quot;Valid&quot; forms are allowed while &quot;invalid&quot; forms will usually throw an exception if encountered.
+                        &quot;Not encodable&quot; forms are also invalid, but because they also encode a different (valid) instruction, they will be interpreted incorrectly.
                         <br />
                         For example, in <A href="/mode/long">64 bit mode</A>, the byte range <Code>40</Code> through <Code>4F</Code> was repurposed for the REX prefix.
                         This makes encoding <Code>INC eax</Code> as <Code>40</Code> impossible.
@@ -656,7 +656,8 @@ export default function Page(): JSX.Element {
 
                 <H2 id="headingFlags">Flags Affected</H2>
                 <p>
-                    The &quot;Flags Affected&quot; section (if present) contains a description of how the processor flags are affected by the instruction.
+                    The &quot;Flags Affected&quot; section (if present) contains a description of how the processor&apos;s arithmetic flags are affected by the instruction.
+                    If this section is not present, then no arithmetic flags are changed.
                 </p>
 
                 <H2 id="headingIntrinsics">Intrinsics</H2>
