@@ -84,7 +84,6 @@ operation: |-
     dest.lower = src.lower;
     dest.upper = src.upper;
   }
-flags: None
 intrinsicsC: |-
   void *_bnd_copy_ptr_bounds(const void *q, const void *r)
 exceptions:

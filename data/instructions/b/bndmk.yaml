@@ -50,7 +50,6 @@ operation: |-
     dest.lower = addr.base;
     dest.upper = !lea(addr);
   }
-flags: None
 intrinsicsC: |-
   void *_bnd_set_ptr_bounds(const void *address, size_t size)
 exceptions:

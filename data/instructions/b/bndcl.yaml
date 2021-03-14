@@ -59,7 +59,6 @@ operation: |-
       #BR;
     }
   }
-flags: None
 intrinsicsC: |-
   void _bnd_chk_ptr_lbounds(const void *address)
 exceptions:

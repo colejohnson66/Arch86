@@ -76,7 +76,6 @@ operationNotes:
   - >-
     If \c{CPL} (protection ring) is less than 3, the supervisor \c{MAWA} (\c{MAWAS}) is used, which is 0.
     Otherwise, the user \c{MAWA} (\c{MAWAU}) is used; it's value is enumerated in \cpuid{eax,07,ecx,00,,ecx,mawau,21..17}.
-flags: None
 exceptions:
   protected:
     "#BR": If the bound directory entry is invalid.

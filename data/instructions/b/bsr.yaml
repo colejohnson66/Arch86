@@ -93,9 +93,13 @@ operation: |-
       dest = idx;
     }
   }
-flags: >-
-  The \reg{ZF} is set if the source operand is 0, and cleared otherwise.
-  The \reg{CF}, \reg{OF}, \reg{SF}, \reg{AF}, and \reg{PF} flags are undefined.
+flags:
+  CF: Undefined.
+  PF: Undefined.
+  AF: Undefined.
+  ZF: Set if the source is not zero. Cleared otherwise.
+  SF: Undefined.
+  OF: Undefined.
 exceptions:
   protected:
     "#UD": If the \instr{LOCK} prefix is used.

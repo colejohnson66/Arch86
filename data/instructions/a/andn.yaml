@@ -47,10 +47,13 @@ operation: |-
   pub fn andn_op64(dest: &mut u64, src1: u64, src2: u64) {
     *dest = !src1 & src2;
   }
-flags: >-
-  The \reg{SF} and \reg{ZF} flags are set according to the result.
-  The \reg{OF} and \reg{CF} flags are cleared regardless.
-  The \reg{AF} and \reg{PF} flags are undefined.
+flags:
+  CF: Cleared.
+  PF: Undefined.
+  AF: Undefined.
+  ZF: Set according to the result.
+  SF: Set according to the result.
+  OF: Cleared.
 exceptions:
   floating: None
   other: See Exceptions Type 13.

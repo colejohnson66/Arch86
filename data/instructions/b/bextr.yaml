@@ -58,10 +58,13 @@ operation: |-
     let end = start + len - 1;
     dest = src1[end..=start];
   }
-flags: >-
-  The \reg{ZF} flag is updated based on the result.
-  \reg{AF}, \reg{SF}, and \reg{PF} are undefined.
-  All other flags are cleared.
+flags:
+  CF: Cleared.
+  PF: Undefined.
+  AF: Undefined.
+  ZF: Set according to the result.
+  SF: Undefined.
+  OF: Cleared.
 intrinsicsC: |-
   uint32_t _bextr_u32(uint32_t src, uint32_t start, uint32_t len)
   uint64_t _bextr_u64(uint64_t src, uint32_t start, uint32_t len)

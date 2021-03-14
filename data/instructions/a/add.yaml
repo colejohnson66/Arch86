@@ -223,8 +223,13 @@ operation: |-
   pub fn add<T>(dest: &mut T, src: T) {
     *dest = *dest + src;
   }
-flags: >-
-  The \reg{OF}, \reg{SF}, \reg{ZF}, \reg{AF}, \reg{CF}, and \reg{PF} flags are set according to the result.
+flags:
+  CF: Set according to the result.
+  PF: Set according to the result.
+  AF: Set according to the result.
+  ZF: Set according to the result.
+  SF: Set according to the result.
+  OF: Set according to the result.
 exceptions:
   protected:
     "#GP(0)":

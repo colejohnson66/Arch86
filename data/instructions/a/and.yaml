@@ -224,10 +224,13 @@ operation: |-
   pub fn and<T>(dest: &mut T, src: T) {
     *dest = *dest & src;
   }
-flags: >-
-  The \reg{OF} and \reg{CF} flags are cleared.
-  The \reg{SF}, \reg{ZF}, and \reg{PF} flags are set according to the result.
-  The \reg{AF} flag is undefined.
+flags:
+  CF: Cleared.
+  PF: Set according to the result.
+  AF: Undefined.
+  ZF: Set according to the result.
+  SF: Set according to the result.
+  OF: Cleared.
 exceptions:
   protected:
     "#GP(0)":

@@ -106,10 +106,13 @@ operation: |-
     CF = src[idx % 64];
     src[idx % 64] = 0;
   }
-flags: >-
-  The \reg{CF} flag contains the value of the selected bit before it is reset.
-  The \reg{ZF} flag is unaffected.
-  The \reg{OF}, \reg{SF}, \reg{AF}, and \reg{PF} flags are undefined.
+flags:
+  CF: Set if the selected bit is set (before being cleared). Cleared otherwise.
+  PF: Undefined.
+  AF: Undefined.
+  ZF: Unmodified.
+  SF: Undefined.
+  OF: Undefined.
 exceptions:
   protected:
     "#UD": If the \instr{LOCK} prefix is used, but the destination is not a memory operand.

@@ -44,9 +44,13 @@ operation: >-
     }
     AL = AL & 0xF;
   }
-flags: >-
-  The \reg{AF} and \reg{CF} flags are set to 1 if the adjustment results in a decimal borrow; otherwise they are set to 0.
-  The \reg{OF}, \reg{SF}, \reg{ZF}, and \reg{PF} flags are undefined.
+flags:
+  CF: Set if an adjustment is made. Cleared otherwise.
+  PF: Undefined.
+  AF: Set if an adjustment is made. Cleared otherwise.
+  ZF: Undefined.
+  SF: Undefined.
+  OF: Undefined.
 exceptions:
   protected:
     "#UD": If the \instr{LOCK} prefix is used.

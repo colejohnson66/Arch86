@@ -57,8 +57,13 @@ operation: >-
   pub fn adox_op64(dest: &mut u64, src: u64) {
     *dest = *dest + src + OF;
   }
-flags: >-
-  \reg{OF} is updated based on the result. The \reg{CF}, \reg{SF}, \reg{ZF}, \reg{AF}, and \reg{PF} flags are unmodified.
+flags:
+  CF: Unmodified.
+  PF: Unmodified.
+  AF: Unmodified.
+  ZF: Unmodified.
+  SF: Unmodified.
+  OF: Set according to the result.
 intrinsicsC: |-
   uint8_t _addcarryx_u32(uint8_t c_in, uint32_t src1, uint32_t src2, uint32_t *sum_out)
   uint8_t _addcarryx_u64(uint8_t c_in, uint64_t src1, uint64_t src2, uint64_t *sum_out)

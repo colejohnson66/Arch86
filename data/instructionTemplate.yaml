@@ -30,7 +30,20 @@ operationNotes:
   - >-
 examples:
   - |-
-flags: >-
+flags:
+  # Common values:
+  # Set according to the result.
+  # Set.
+  # Cleared.
+  # Undefined.
+  # Unmodified.
+  # Set if ... Cleared otherwise.
+  CF:
+  PF:
+  AF:
+  ZF:
+  SF:
+  OF:
 intrinsicsC: |-
   Cleanup Regex:
     [A-Z1-3]+:?\s+([^ ]+) ([^ ]+) ?\(([^\)]+)\);

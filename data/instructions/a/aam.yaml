@@ -53,9 +53,13 @@ operation: >-
     AH = AL / imm8;
     AL = AL % imm8;
   }
-flags: >-
-  The \reg{SF}, \reg{ZF}, and \reg{PF} flags are set according to the resulting binary value in the AL register.
-  The \reg{OF}, \reg{AF}, and \reg{CF} flags are undefined.
+flags:
+  CF: Undefined.
+  PF: Set based on the resulting value in \reg{AL}.
+  AF: Undefined.
+  ZF: Set based on the resulting value in \reg{AL}.
+  SF: Set based on the resulting value in \reg{AL}.
+  OF: Undefined.
 exceptions:
   protected:
     "#DE": If an immediate value of 0 is used.

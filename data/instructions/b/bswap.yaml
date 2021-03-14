@@ -57,7 +57,6 @@ operation: |-
     arg[55..=48] = temp[15..=8];
     arg[63..=56] = temp[7..=0];
   }
-flags: None
 exceptions:
   protected:
     "#UD": If the \instr{LOCK} prefix is used.

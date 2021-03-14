@@ -61,9 +61,13 @@ operationNotes:
   - >-
     According to the source code for Bochs' (\c{/cpu/bcd.cc}), this instruction actually performs the operation on the \reg{AX} register, not \reg{AL}.
     This is currently untested.
-flags: >-
-  The \reg{SF}, \reg{ZF}, and \reg{PF} flags are set according to the resulting binary value in the AL register.
-  The \reg{OF}, \reg{AF}, and \reg{CF} flags are undefined.
+flags:
+  CF: Undefined.
+  PF: Set based on the resulting value in \reg{AL}.
+  AF: Undefined.
+  ZF: Set based on the resulting value in \reg{AL}.
+  SF: Set based on the resulting value in \reg{AL}.
+  OF: Undefined.
 exceptions:
   protected:
     "#UD": If the \instr{LOCK} prefix is used.

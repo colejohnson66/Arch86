@@ -102,10 +102,13 @@ operation: |-
   pub fn bt_op64(src: u64, idx: u64) {
     CF = src[idx % 64];
   }
-flags: >-
-  The \reg{CF} flag contains the value of the selected bit.
-  The \reg{ZF} flag is unaffected.
-  The \reg{OF}, \reg{SF}, \reg{AF}, and \reg{PF} flags are undefined.
+flags:
+  CF: Set if the selected bit is set. Cleared otherwise.
+  PF: Undefined.
+  AF: Undefined.
+  ZF: Unmodified.
+  SF: Undefined.
+  OF: Undefined.
 exceptions:
   protected:
     "#UD": If the \instr{LOCK} prefix is used.

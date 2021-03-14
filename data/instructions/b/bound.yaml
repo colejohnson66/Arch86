@@ -54,7 +54,6 @@ operation: |-
       #BR;
     }
   }
-flags: None
 exceptions:
   protected:
     "#BR": If the bounds test fails.

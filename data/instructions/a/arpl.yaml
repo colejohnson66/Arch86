@@ -44,9 +44,13 @@ operation: |-
       ZF = 0;
     }
   }
-flags: >-
-  The \reg{ZF} flag is set if the \c{RPL} field (bits 0 and 1) of the destination operand if less than that of the source operand.
-  Otherwise, it is cleared.
+flags:
+  CF: "???"
+  PF: "???"
+  AF: "???"
+  ZF: Set if the destination operand is changed.
+  SF: "???"
+  OF: "???"
 exceptions:
   protected:
     "#GP(0)":

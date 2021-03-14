@@ -49,11 +49,13 @@ operation: |-
     *dest = src & (src - 1);
     CF = (src != 0);
   }
-flags: >-
-  The \reg{ZF} and \reg{SF} flags are updated based on the result.
-  The \reg{CF} flag is set if the source is not zero.
-  The \reg{OF} flag is cleared.
-  The \reg{AF} and \reg{PF} flags are undefined.
+flags:
+  CF: Set if the source is not zero. Cleared otherwise.
+  PF: Undefined.
+  AF: Undefined.
+  ZF: Set according to the result.
+  SF: Set according to the result.
+  OF: Cleared.
 intrinsicsC: |-
   uint32_t _blsr_u32(uint32_t src)
   uint64_t _blsr_u64(uint64_t src)

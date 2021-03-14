@@ -75,6 +75,14 @@ type BitEncodingEntry = {
     limits?: string;
     bits: MaybeArray<string>;
 };
+type Flags = {
+    CF: string;
+    PF: string;
+    AF: string;
+    ZF: string;
+    SF: string;
+    OF: string;
+};
 type ExceptionList = IDictionary<MaybeArray<string>>;
 type Exceptions = {
     protected?: string | ExceptionList;
@@ -108,7 +116,7 @@ type PageProps = {
     operationImage?: string;
     operationNotes: string[];
     examples?: MaybeArray<string>;
-    flags?: string;
+    flags?: Flags;
     intrinsicsC?: string;
     intrinsicsRust?: string;
     exceptions: Exceptions;
@@ -406,7 +414,20 @@ export default function Page(props: PageProps): JSX.Element {
                 {props.flags &&
                     <>
                         <H2 id="headingFlags">Flags Affected</H2>
-                        {paragraphsFromString(props.flags)}
+                        <dl>
+                            <dt><Code>CF</Code> (carry flag)</dt>
+                            <dd>{brTagsFromString(props.flags.CF)}</dd>
+                            <dt><Code>PF</Code> (parity flag)</dt>
+                            <dd>{brTagsFromString(props.flags.PF)}</dd>
+                            <dt><Code>AF</Code> (auxiliary flag)</dt>
+                            <dd>{brTagsFromString(props.flags.AF)}</dd>
+                            <dt><Code>ZF</Code> (zero flag)</dt>
+                            <dd>{brTagsFromString(props.flags.ZF)}</dd>
+                            <dt><Code>SF</Code> (sign flag)</dt>
+                            <dd>{brTagsFromString(props.flags.SF)}</dd>
+                            <dt><Code>OF</Code> (overflow flag)</dt>
+                            <dd>{brTagsFromString(props.flags.OF)}</dd>
+                        </dl>
                     </>}
 
                 {props.intrinsicsC &&
