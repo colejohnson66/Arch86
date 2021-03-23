@@ -34,12 +34,14 @@ import TOC from "../../components/TOC";
 import { strict as assert } from "assert";
 import uppercaseMnemonic from "../../lib/uppercaseMnemonic";
 
-type OpcodeValidityValues = "valid" | "valid*" | "invalid" | "n/e";
+type OpcodeValidityValues = "valid" | "valid*" | "invalid" | "n/e" | "n/s";
 const OpcodeValidityMap: IDictionary<string> = {
     "valid": "Valid",
     "valid*": "Valid*",
     "invalid": "Invalid",
     "n/e": "Not Encodable",
+    "n/p": "Not Prefixable",
+    "n/s": "Not Supported",
 };
 type OpcodeValidity = {
     16: OpcodeValidityValues;
