@@ -17,13 +17,18 @@
         {
             "name": "instructions-b",
             "path": "./.vscode/instructions/b.txt"
+        },
+        {
+            "name": "instructions-c",
+            "path": "./.vscode/instructions/c.txt"
         }
     ],
     "dictionaries": [
         "registers",
         "instruction-parts",
         "instructions-a",
-        "instructions-b"
+        "instructions-b",
+        "instructions-c"
     ],
     "ignorePaths": [
         "**/node_modules/**",
