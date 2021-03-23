@@ -62,6 +62,11 @@ const InstructionTitles: IDictionary<string> = {
     btr: "Bit Test and Reset",
     bts: "Bit Test and Set",
     bzhi: "Zero High Bits From Index",
+
+    call: "Call Procedure",
+    cbw: "Convert Byte to Word",
+    cwde: "Convert Word to Doubleword",
+    cdqe: "Convert Doubleword to Quadword",
 };
 
 export default InstructionTitles;
