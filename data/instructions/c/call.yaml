@@ -1,5 +1,6 @@
 %YAML 1.2
 ---
+wip: true
 title: Call Procedure
 opcode:
   - opcode: E8 \i{cw}
@@ -47,7 +48,7 @@ opcode:
       64: valid
     description: >-
       Call a near procedure with an absolute address stored in \i{r/m64}.
-  - opcode: 9A /i{cww}
+  - opcode: 9A \i{cww}
     mnemonic: CALL \i{ptr16:16}
     encoding: D
     validity:
@@ -56,7 +57,7 @@ opcode:
       64: invalid
     description: >-
       Call a far procedure with an absolute address stored in \i{ptr16:16}.
-  - opcode: 9A /i{cwd}
+  - opcode: 9A \i{cwd}
     mnemonic: CALL \i{ptr16:32}
     encoding: D
     validity:
@@ -109,22 +110,34 @@ encoding:
       - Offset[r]
     M:
       - ModRM.r/m[r]
-# bitEncoding:
-#   list:
-#     - form:
-#       limits:
-#       bits:
+bitEncoding:
+  list:
+    - form: near procedure with encoded relative offset
+      bits:
+        - \bits{E8}
+        - \bits{offset}
+    - form: near procedure with relative offset in register
+      bits:
+        - \bits{FF}
+        - \bits{11 010 reg}
+    - form: near procedure with relative offset in memory
+      bits:
+        - \bits{FF}
+        - \bits{mod 010 r/m}
+    - form: far procedure with encoded absolute address
+      bits:
+        - \bits{9A}
+        - \bits{offset}
+        - \bits{selector}
+    - form: far procedure with absolute address in memory
+      bits:
+        - \bits{FF}
+        - \bits{mod 011 r/m}
 description: >-
   The \c{CALL} instruction saves a return address on the stack before jumping to the called procedure whose address is specified in the operand.
 operation: |-
+  TODO
 flags:
-  # Common values:
-  # Set according to the result.
-  # Set.
-  # Cleared.
-  # Undefined.
-  # Unmodified.
-  # Set if ... Cleared otherwise.
   CF: Affected only if a task switch occurs.
   PF: Affected only if a task switch occurs.
   AF: Affected only if a task switch occurs.
@@ -133,18 +146,99 @@ flags:
   OF: Affected only if a task switch occurs.
 exceptions:
   protected:
+    "#GP(0)":
+      - If the target offset in the operand is beyond the new code segment limit.
+      - If the segment selector in the operand is \c{NULL}.
+      - If the code segment selector in the gate is \c{NULL}.
+      - If a memory operand effective address is outside the \reg{CS}, \reg{DS}, \reg{ES}, \reg{FS}, or \reg{GS} segment limit.
+      - If the \reg{DS}, \reg{ES}, \reg{FS}, or \reg{GS} segment register is used to access memory and it contains a \c{NULL} segment selector.
+      - If the target mode is compatibility mode and \c{SSP} is not in the low 4\nbsp{}GiB.
+      - If \c{SSP} in \reg{IA32_PLi_SSP} (where \c{i} is the new \c{CPL}) is not 8 byte aligned.
+      - If "supervisor shadow stack" token on the new shadow stack is marked busy.
+      - If the destination mode is protected or compatibility mode, but \c{SSP} in "supervisor shadow stack" token is beyond 4\nbsp{}GiB.
+      - If \c{SSP} in "supervisor shadow stack" token does not match \c{SSP} address in \reg{IA32_PLi_SSP} (where \c{i} is the new \c{CPL}).
+    "#GP(selector)":
+      - If a code segment or gate or \c{TSS} selector index is outside descriptor table limits.
+      - If the segment descriptor pointed to by the segment selector in the destination operand is not for a conforming-code segment, nonconforming-code segment, call gate, task gate, or task state segment.
+      - If the \c{DPL} for a nonconforming-code segment is not equal to the \c{CPL} or the \c{RPL} for the segment's segment selector is greater than the \c{CPL}.
+      - If the \c{DPL} for a conforming-code segment is greater than the \c{CPL}.
+      - If the \c{DPL} from a call-gate, task-gate, or \c{TSS} segment descriptor is less than the \c{CPL} or than the \c{RPL} of the call-gate, task-gate, or \c{TSS}'s segment selector.
+      - If the segment descriptor for a segment selector from a call gate does not indicate it is a code segment.
+      - If the segment selector from a call gate is beyond the descriptor table limits.
+      - If the \c{DPL} for a code-segment obtained from a call gate is greater than the \c{CPL}.
+      - If the segment selector for a \c{TSS} has its local/global bit set for local.
+      - If a \c{TSS} segment descriptor specifies that the \c{TSS} is busy or not available.
+    "#SS(0)":
+      - If pushing the return address, parameters, or stack segment pointer onto the stack exceeds the bounds of the stack segment (if no stack switch occurs).
+      - If a memory operand effective address is outside the \reg{SS} segment limit.
+    "#SS(selector)":
+      - If pushing the return address, parameters, or stack segment pointer onto the stack exceeds the bounds of the stack segment (when a stack switch occurs).
+      - If the \reg{SS} segment register is being loaded as part of a stack switch and the segment pointed to is marked not present.
+    "#NP(selector)":
+      - If a code segment, data segment, call gate, task gate, or \c{TSS} is not present.
+    "#TS(selector)":
+      - If the new stack segment selector and \reg{ESP} are beyond the end of the \c{TSS}.
+      - If the new stack segment selector is \c{NULL}.
+      - If the \c{RPL} of the new stack segment selector in the \c{TSS} is not equal to the \c{DPL} of the code segment being accessed.
+      - If the new stack segment is not a writable data segment.
+      - If the segment-selector index for a stack segment is outside the descriptor table limits.
+    "#PF(fault-code)":
+      - If a page fault occurs.
+    "#AC(0)":
+      - If alignment checking is enabled and an unaligned memory reference is made while the current privilege level is 3.
+    "#UD":
+      - If the \instr{LOCK} prefix is used.
   real:
+    "#GP": If a memory effective address is outside the \reg{CS}, \reg{DS}, \reg{ES}, \reg{FS}, or \reg{GS} segment limit.
+    "#UD": If the \instr{LOCK} prefix is used.
   virtual:
+    "#GP(0)": If a memory effective address is outside the \reg{CS}, \reg{DS}, \reg{ES}, \reg{FS}, or \reg{GS} segment limit.
+    "#PF(fault-code)": If a page fault occurs.
+    "#AC(0)": If alignment checking is enabled and an unaligned memory reference is made while the current privilege level is 3.
+    "#UD": If the \instr{LOCK} prefix is used.
   compatibility:
-  long:
-  floating:
-  other:
-  otherAdditional:
-changes:
-  version: 73
-  date: 2020-11
-  list:
-    -
-refs:
-  - name:
-    value: >-
+    "#GP(0)":
+      - If the target offset in the operand is beyond the new code segment limit.
+      - If the segment selector in the operand is \c{NULL}.
+      - If the code segment selector in the gate is \c{NULL}.
+      - If a memory operand effective address is outside the \reg{CS}, \reg{DS}, \reg{ES}, \reg{FS}, or \reg{GS} segment limit.
+      - If the \reg{DS}, \reg{ES}, \reg{FS}, or \reg{GS} segment register is used to access memory and it contains a \c{NULL} segment selector.
+      - If the target mode is compatibility mode and \c{SSP} is not in the low 4\nbsp{}GiB.
+      - If \c{SSP} in \reg{IA32_PLi_SSP} (where \c{i} is the new \c{CPL}) is not 8 byte aligned.
+      - If "supervisor shadow stack" token on the new shadow stack is marked busy.
+      - If the destination mode is protected or compatibility mode, but \c{SSP} in "supervisor shadow stack" token is beyond 4\nbsp{}GiB.
+      - If \c{SSP} in "supervisor shadow stack" token does not match \c{SSP} address in \reg{IA32_PLi_SSP} (where \c{i} is the new \c{CPL}).
+      - If the target offset in the operand is in non-canonical form.
+    "#GP(selector)":
+      - If a code segment or gate or \c{TSS} selector index is outside descriptor table limits.
+      - If the segment descriptor pointed to by the segment selector in the destination operand is not for a conforming-code segment, nonconforming-code segment, call gate, task gate, or task state segment.
+      - If the \c{DPL} for a nonconforming-code segment is not equal to the \c{CPL} or the \c{RPL} for the segment's segment selector is greater than the \c{CPL}.
+      - If the \c{DPL} for a conforming-code segment is greater than the \c{CPL}.
+      - If the \c{DPL} from a call-gate, task-gate, or \c{TSS} segment descriptor is less than the \c{CPL} or than the \c{RPL} of the call-gate, task-gate, or \c{TSS}'s segment selector.
+      - If the segment descriptor for a segment selector from a call gate does not indicate it is a code segment.
+      - If the segment selector from a call gate is beyond the descriptor table limits.
+      - If the \c{DPL} for a code-segment obtained from a call gate is greater than the \c{CPL}.
+      - If the segment selector for a \c{TSS} has its local/global bit set for local.
+      - If a \c{TSS} segment descriptor specifies that the \c{TSS} is busy or not available.
+      - If a memory addressed accessed by the selector is is non-canonical form.
+    "#SS(0)":
+      - If pushing the return address, parameters, or stack segment pointer onto the stack exceeds the bounds of the stack segment (if no stack switch occurs).
+      - If a memory operand effective address is outside the \reg{SS} segment limit.
+    "#SS(selector)":
+      - If pushing the return address, parameters, or stack segment pointer onto the stack exceeds the bounds of the stack segment (when a stack switch occurs).
+      - If the \reg{SS} segment register is being loaded as part of a stack switch and the segment pointed to is marked not present.
+    "#NP(selector)":
+      - If a code segment, data segment, call gate, task gate, or \c{TSS} is not present.
+    "#TS(selector)":
+      - If the new stack segment selector and \reg{ESP} are beyond the end of the \c{TSS}.
+      - If the new stack segment selector is \c{NULL}.
+      - If the \c{RPL} of the new stack segment selector in the \c{TSS} is not equal to the \c{DPL} of the code segment being accessed.
+      - If the new stack segment is not a writable data segment.
+      - If the segment-selector index for a stack segment is outside the descriptor table limits.
+    "#PF(fault-code)":
+      - If a page fault occurs.
+    "#AC(0)":
+      - If alignment checking is enabled and an unaligned memory reference is made while the current privilege level is 3.
+    "#UD":
+      - If the \instr{LOCK} prefix is used.
+  long: TODO

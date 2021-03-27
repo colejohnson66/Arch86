@@ -77,6 +77,8 @@ const functions: IDictionary<(arg: string) => JSX.Element> = {
         return <img src={args[0]} alt={args[1]} className="whiteBgRoundBorder" />;
     },
     instr: (arg) => (<Instruction name={arg} />),
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    nbsp: (_) => (<>&nbsp;</>),
     reg: (arg) => (<Code>{arg}</Code>),
 };
 

@@ -31,6 +31,7 @@ import Scrollable from "../../components/Scrollable";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import SyntaxHighlighterDarkTheme from "react-syntax-highlighter/dist/cjs/styles/hljs/atom-one-dark";
 import TOC from "../../components/TOC";
+import WIP from "../../components/WIP";
 import { strict as assert } from "assert";
 import uppercaseMnemonic from "../../lib/uppercaseMnemonic";
 
@@ -99,6 +100,7 @@ type Reference = {
 };
 type PageProps = {
     id: string;
+    wip?: boolean;
     title: string;
     opcode: Opcode[];
     opcodeNote?: MaybeArray<string>;
@@ -267,6 +269,7 @@ export default function Page(props: PageProps): JSX.Element {
             </TOC.Root>
             <div id="content">
                 <H1><Code>{props.id.toUpperCase()}</Code>: {formatStringToJsx(props.title)}</H1>
+                {props.wip && <WIP type="page" />}
                 <Callout intent="primary">
                     For information about interpreting this page, see <A href="/instruction/help">the help page</A>.
                 </Callout>
