@@ -1,0 +1,60 @@
+%YAML 1.2
+---
+title: Clear \c{AC} in \reg{EFLAGS}
+opcode:
+  - opcode: NP 0F 01 CA
+    mnemonic: CLAC
+    encoding: ZO
+    validity:
+      16: valid
+      32: valid
+      64: valid
+    cpuid: SMAP
+    description: >-
+      Clears the \reg{AC} flag in the \reg{EFLAGS} register.
+opcodeNote: >-
+encoding:
+  operands: 1
+  encodings:
+    ZO:
+      - None
+bitEncoding:
+  list:
+    - form: clear the \reg{AC} flag
+      bits:
+        - \bits{0F}
+        - \bits{01}
+        - \bits{CA}
+description: >-
+  The \c{CLAC} instruction clears the \reg{AC} (alignment check) flag in the \reg{EFLAGS} register.
+  If the \c{SMAP} bit is set in the \reg{CR4} register, this also disallows explicit supervisor-mode data access of user-mode pages.
+
+  This instruction can only be executed when \c{CPL} is \c{0} (ring 0).
+  Attempts to execute this instruction is less privileged rings will cause a \c{#UD} exception to be thrown.
+operation: |-
+  pub fn clac() {
+    AC = 0;
+  }
+exceptions:
+  protected:
+    "#UD":
+      - If the \instr{LOCK} prefix is used.
+      - If \c{CPL} is greater than \c{0}.
+      - If \cpuid{eax,07,ecx,00,,ebx,smap,20} is \c{0}.
+  real:
+    "#UD":
+      - If the \instr{LOCK} prefix is used.
+      - If \cpuid{eax,07,ecx,00,,ebx,smap,20} is \c{0}.
+  virtual:
+    "#UD":
+      - The \c{CLAC} instruction is not recognized in virtual 8086 mode.
+  compatibility:
+    "#UD":
+      - If the \instr{LOCK} prefix is used.
+      - If \c{CPL} is greater than \c{0}.
+      - If \cpuid{eax,07,ecx,00,,ebx,smap,20} is \c{0}.
+  long:
+    "#UD":
+      - If the \instr{LOCK} prefix is used.
+      - If \c{CPL} is greater than \c{0}.
+      - If \cpuid{eax,07,ecx,00,,ebx,smap,20} is \c{0}.

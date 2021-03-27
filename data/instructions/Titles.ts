@@ -67,6 +67,7 @@ const InstructionTitles: IDictionary<string> = {
     cbw: "Convert Byte to Word",
     cwde: "Convert Word to Doubleword",
     cdqe: "Convert Doubleword to Quadword",
+    clac: "Clear \\c{AC} in \\reg{EFLAGS}",
 };
 
 export default InstructionTitles;
