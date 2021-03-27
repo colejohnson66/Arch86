@@ -48,3 +48,6 @@ b:
   - bzhi
 c:
   - call
+  - cbw
+  - cwde
+  - cdqe

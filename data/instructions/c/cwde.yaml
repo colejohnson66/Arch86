@@ -1,0 +1,51 @@
+%YAML 1.2
+---
+title: Convert Word to Doubleword
+opcode:
+  - opcode: "98"
+    mnemonic: CWDE
+    encoding: ZO
+    validity:
+      16: valid
+      32: valid
+      64: valid
+    description: >-
+      Sign extend \reg{AX} into \reg{EAX}.
+encoding:
+  operands: 1
+  encodings:
+    ZO:
+      - None
+bitEncoding:
+  list:
+    - form: sign extend \reg{AX} into \reg{EAX}
+      bits:
+        - \bits{98}
+description: >-
+  The \c{CWDE} instruction sign extends \reg{AX} into \reg{EAX}.
+
+  This instruction shares its opcode with \instr{CBW}.
+  Which one will be used depends on the operating mode of the processor (\c{CBW} in 16 bit mode and \c{CWDE} in 32 bit mode).
+  To force the use of the other one (i.e. \c{CBW} in 32 bit mode and \c{CWDE} in 16 bit mode), prefix this instruction with \instr{OPSIZE} (\c{0x66}).
+operation: |-
+  pub fn cwde() {
+    EAX = sign_extend(AX);
+  }
+flags:
+  CF: Unmodified.
+  PF: Unmodified.
+  AF: Unmodified.
+  ZF: Unmodified.
+  SF: Unmodified.
+  OF: Unmodified.
+exceptions:
+  protected:
+    "#UD": If the \instr{LOCK} prefix is used.
+  real:
+    "#UD": If the \instr{LOCK} prefix is used.
+  virtual:
+    "#UD": If the \instr{LOCK} prefix is used.
+  compatibility:
+    "#UD": If the \instr{LOCK} prefix is used.
+  long:
+    "#UD": If the \instr{LOCK} prefix is used.
