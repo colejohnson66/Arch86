@@ -70,6 +70,7 @@ const InstructionTitles: IDictionary<string> = {
     clac: "Clear \\c{AC} in \\reg{EFLAGS}",
     clc: "Clear Carry Flag",
     cld: "Clear Direction Flag",
+    cldemote: "Cache Line Demote",
 };
 
 export default InstructionTitles;
