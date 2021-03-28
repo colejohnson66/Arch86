@@ -68,6 +68,7 @@ const InstructionTitles: IDictionary<string> = {
     cwde: "Convert Word to Doubleword",
     cdqe: "Convert Doubleword to Quadword",
     clac: "Clear \\c{AC} in \\reg{EFLAGS}",
+    clc: "Clear Carry Flag",
 };
 
 export default InstructionTitles;
