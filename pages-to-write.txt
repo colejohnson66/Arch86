@@ -7,6 +7,15 @@
   /p5
   /p6
   ...
+/instruction
+  /aesdec128kl
+  /aesdec256kl
+  /aesdecwide128kl
+  /aesdecwide256kl
+  /aesenc128kl
+  /aesenc256kl
+  /aesencwide128kl
+  /aesencwide256kl
 /register
   /segment
   /control
