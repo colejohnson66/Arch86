@@ -159,12 +159,11 @@ function paragraphsFromString(str: string): JSX.Element[] {
 function hasValidAsteriskValidity(opcodes: Opcode[]): boolean {
     for (let i = 0; i < opcodes.length; i++) {
         // The weird cast shuts TS up
-        const validity = opcodes[i].validity as unknown as string[];
-        const validityKeys = Object.keys(validity).map((key) => parseInt(key, 10));
-        for (let j = 0; j < validityKeys.length; j++) {
-            if (validity[validityKeys[j]] === "valid*")
-                return true;
-        }
+        const validity = opcodes[i].validity;
+        if (validity[16] === "valid*" ||
+            validity[32] === "valid*" ||
+            validity[64] === "valid*")
+            return true;
     }
 
     return false;
@@ -315,7 +314,7 @@ export default function Page(props: PageProps): JSX.Element {
                     <>
                         <H5>Notes:</H5>
                         <p>
-                            *{" "}{brTagsFromArray(coerceArray(props.opcodeNote))}
+                            {"* "}{brTagsFromArray(coerceArray(props.opcodeNote))}
                         </p>
                     </>}
 
