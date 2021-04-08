@@ -61,7 +61,7 @@ function newUrl(slug, file) {
     const args = [
         "log",
         "-1",
-        "--format=%aI", // "author date, strict ISO 8601 format"
+        "--format=%cI", // "committer date, strict ISO 8601 format"
         file,
     ];
     const date = execFileSync("git", args).toString().trim();
