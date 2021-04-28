@@ -51,12 +51,14 @@ description: >-
 
   In 64 bit mode, the default operand size is 32 bits, but \c{REX.W} will change it to 64 bits.
 operation: >-
-  pub fn adox_op32(dest: &mut u32, src: u32) {
-    *dest = *dest + src + OF;
+  public void ADOX_32(ref uint dest, uint src)
+  {
+    dest = dest + src + OF;
   }
 
-  pub fn adox_op64(dest: &mut u64, src: u64) {
-    *dest = *dest + src + OF;
+  public void ADOX_64(ref ulong dest, ulong src)
+  {
+    dest = dest + src + OF;
   }
 flags:
   CF: Unmodified.

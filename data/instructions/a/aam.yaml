@@ -50,9 +50,10 @@ description: >-
 
   This instruction is not valid in 64 bit mode, and if encountered, the processor will raise a \c{#UD} exception.
 operation: >-
-  pub fn aam(imm8: u8) {
+  public void AAM(byte imm8)
+  {
     AH = AL / imm8;
-    AL = AL % imm8;
+    AL = AL & imm8;
   }
 flags:
   CF: Undefined.

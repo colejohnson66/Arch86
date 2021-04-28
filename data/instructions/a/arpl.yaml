@@ -35,11 +35,15 @@ description: >-
 
   This instruction is not encodable in 64 bit mode, and, if encountered, will be treated as the \instr{MOVSXD} instruction.
 operation: |-
-  pub fn arpl(dest: &mut u16, src: u16) {
-    if dest[1..=0] < src[1..=0] {
+  public void ARPL(ref ushort dest, ushort src)
+  {
+    if (dest[1..=0] < src[1..=0])
+    {
       dest[1..=0] = src[1..=0];
       ZF = 1;
-    } else {
+    }
+    else
+    {
       ZF = 0;
     }
   }

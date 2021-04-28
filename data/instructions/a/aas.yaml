@@ -32,13 +32,17 @@ description: >-
   In 16 or 32 bit mode, this instruction will only modify the \reg{AF} and \reg{CF} flags.
   The other arithmetic flags are undefined and undocumented.
 operation: >-
-  pub fn aas() {
-    if (AL & 0xF) > 9) || AF {
+  public void AAS()
+  {
+    if (((AL & 0xF) > 9) || AF)
+    {
       AX = AX - 6;
       AH = AH - 1;
       AF = 1;
       CF = 1;
-    } else {
+    }
+    else
+    {
       AF = 0;
       CF = 0;
     }

@@ -242,8 +242,26 @@ description: >-
 
   In 64 bit mode, the default operand size is 32 bits, but \c{REX.W} will change it to 64 bits.
 operation: |-
-  pub fn add<T>(dest: &mut T, src: T) {
-    *dest = *dest + src;
+  // `src` is sign extended to the width of `dest`
+
+  public void ADD_8(ref byte dest, byte src)
+  {
+    CF:dest = dest + src;
+  }
+
+  public void ADD_16(ref ushort dest, ushort src)
+  {
+    CF:dest = dest + src;
+  }
+
+  public void ADD_32(ref uint dest, uint src)
+  {
+    CF:dest = dest + src;
+  }
+
+  public void ADD_64(ref ulong dest, ulong src)
+  {
+    CF:dest = dest + src;
   }
 flags:
   CF: Set according to the result.

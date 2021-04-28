@@ -53,7 +53,8 @@ description: >-
 
   This instruction is not valid in 64 bit mode, and if encountered, the processor will raise a \c{#UD} exception.
 operation: |-
-  pub fn aad(imm8: u8) {
+  public void AAD(byte imm8)
+  {
     AL = (AL + (AH * imm8)) & 0xFF;
     AH = 0;
   }

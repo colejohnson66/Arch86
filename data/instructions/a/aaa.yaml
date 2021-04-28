@@ -36,22 +36,22 @@ description: >-
   In 16 or 32 bit mode, this instruction will only modify the \reg{AF} and \reg{CF} flags.
   The other arithmetic flags are undefined and undocumented.
 operation: |-
-  pub fn aaa() {
-    if ((AL & 0xF) > 9) || AF {
-      match PROCESSOR {
-        8086 | 8088 | 80186 => {
-          AH = AH + 1; // see note 1
-          AL = AL + 6;
-        },
-        _ => AX = AX + 0x106;
-      };
-      AF = 1;
-      CF = 1;
-    } else {
-      AF = 0;
-      CF = 0;
+  public void AAA()
+  {
+    if (((AL & 0xF) > 9) || AF)
+    {
+      if (PROCESSOR == 8086 ||
+          PROCESSOR == 8088 ||
+          PROCESSOR == 80186)
+      {
+        AH = AH + 1; // see note 1
+        AL = AL + 6;
+      }
+      else
+      {
+        AX = AX + 0x106;
+      }
     }
-    AL = AL & 0xF;
   }
 operationImage: /img/instruction/a/aaa.png
 operationNotes:

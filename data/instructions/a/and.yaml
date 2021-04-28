@@ -243,8 +243,26 @@ description: >-
 
   In 64 bit mode, the default operand size is 32 bits, but \c{REX.W} will change it to 64 bits.
 operation: |-
-  pub fn and<T>(dest: &mut T, src: T) {
-    *dest = *dest & src;
+  // `src` is sign extended to the width of `dest`
+
+  public void AND_8(ref byte dest, byte src)
+  {
+    dest = dest & src;
+  }
+
+  public void AND_16(ref ushort dest, ushort src)
+  {
+    dest = dest & src;
+  }
+
+  public void AND_32(ref uint dest, uint src)
+  {
+    dest = dest & src;
+  }
+
+  public void AND_64(ref ulong dest, ulong src)
+  {
+    dest = dest & src;
   }
 flags:
   CF: Cleared.
