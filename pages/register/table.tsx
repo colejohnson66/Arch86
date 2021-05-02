@@ -17,6 +17,7 @@
 import { Code, H1, H2, H3, IBreadcrumbProps, UL } from "@blueprintjs/core";
 
 import A from "../../components/A";
+import Instruction from "../../components/Instruction";
 import Layout from "../../components/Layout";
 import React from "react";
 import SyntaxHighlighter from "react-syntax-highlighter";
@@ -86,7 +87,7 @@ export default function Page(): JSX.Element {
                     This was previously not possible.
                 </p>
                 <p>
-                    The <A href="/instruction/lidt"><Code>LIDT</Code> - Load Interrupt Descriptor Table Register</A> instruction takes a pointer to a memory location containing the following data:
+                    The <Instruction name="LIDT" /> instruction takes a pointer to a memory location containing the following data:
                 </p>
                 <SyntaxHighlighter lang="x86asm" style={SyntaxHighlighterDarkTheme}>
                     {idtrLayout}
