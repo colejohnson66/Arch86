@@ -60,9 +60,10 @@ type InstructionProps = {
      */
     noLink?: boolean;
     /**
-     * Suppress the display of a title (overridden by `forceTitle`)
+     * Suppress the display of a title
      *
-     * Used for where a link is desired, but no title.
+     * Used if an instruction is named multiple times in the same region of text
+     *   (generally the same paragraph).
      */
     noTitle?: boolean;
     /**
@@ -105,18 +106,12 @@ type InstructionProps = {
  *
  * @example
  * // (href, text, titleShown)
- * // ("/instruction/addpd", "ADDPD", true)
- * <Instruction name="ADDPD" />
- * // (undefined, "AND", false)
- * <Instruction name="AND" noLink />
- * // ("/instruction/bound", "BOUND", false)
- * <Instruction name="BOUND" noTitle />
- * // (undefined, "CALL", true)
- * <Instruction name="CALL" noLink forceTitle />
- * // ("/instruction/jcc", "Jcc", title)
- * <Instruction name="Jcc" />
- * // ("/instruction/vfmaddnnnpd", "VFMADD132PD", true)
- * <Instruction name="VFMADD132PD" as="vfmaddnnnpd" />
+ * <Instruction name="ADDPD" />                        // ("/instruction/addpd", "ADDPD", true)
+ * <Instruction name="AND" noLink />                   // (undefined, "AND", false)
+ * <Instruction name="BOUND" noTitle />                // ("/instruction/bound", "BOUND", false)
+ * <Instruction name="CALL" noLink forceTitle />       // (undefined, "CALL", true)
+ * <Instruction name="Jcc" />                          // ("/instruction/jcc", "Jcc", title)
+ * <Instruction name="VFMADD132PD" as="vfmaddnnnpd" /> // ("/instruction/vfmaddnnnpd", "VFMADD132PD", true)
  */
 export default function Instruction(props: InstructionProps): JSX.Element {
     const name = getInstructionName(props.name);
@@ -145,6 +140,5 @@ export default function Instruction(props: InstructionProps): JSX.Element {
         : `/instruction/${props.name.toLowerCase()}`;
     if (props.noTitle)
         return <A href={href}><Code>{props.name}</Code></A>;
-    else
-        return <A href={href}><Code>{props.name}</Code>{nameJsx}</A>;
+    return <A href={href}><Code>{props.name}</Code>{nameJsx}</A>;
 }
