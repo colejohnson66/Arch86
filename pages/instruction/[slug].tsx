@@ -15,7 +15,7 @@
  *   with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { Callout, Code, Divider, H1, H2, H3, H5, HTMLTable, IBreadcrumbProps, OL, UL } from "@blueprintjs/core";
+import { BreadcrumbProps, Callout, Code, Divider, H1, H2, H3, H5, HTMLTable, OL, UL } from "@blueprintjs/core";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { formatStringPlaintext, formatStringToJsx } from "../../lib/FormatStringToJsx";
 import { getAllInstructionsAsParams, getInstructionData } from "../../lib/instruction";
@@ -212,7 +212,7 @@ function regularExceptionList(ex: string | ExceptionList): JSX.Element {
 }
 
 export default function Page(props: PageProps): JSX.Element {
-    const PageBreadcrumbs: IBreadcrumbProps[] = [
+    const PageBreadcrumbs: BreadcrumbProps[] = [
         {
             text: "Instructions",
             href: "/instruction",

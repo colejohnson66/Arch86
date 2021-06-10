@@ -15,7 +15,7 @@
  *   with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { Breadcrumb, Breadcrumbs, Button, Card, Divider, IBreadcrumbProps, Navbar } from "@blueprintjs/core";
+import { Breadcrumb, BreadcrumbProps, Breadcrumbs, Button, Card, Divider, Navbar } from "@blueprintjs/core";
 
 import A from "./A";
 import Head from "next/head";
@@ -31,11 +31,11 @@ type LayoutProps = {
     description?: string;
     src?: string;
     dataSrc?: string;
-    breadcrumbs?: IBreadcrumbProps[];
+    breadcrumbs?: BreadcrumbProps[];
     children?: React.ReactNode;
 };
 
-function renderBreadcrumbs({ text, href, ...restProps }: IBreadcrumbProps): JSX.Element {
+function renderBreadcrumbs({ text, href, ...restProps }: BreadcrumbProps): JSX.Element {
     return (
         <Breadcrumb {...restProps}>
             {href

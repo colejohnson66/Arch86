@@ -15,7 +15,7 @@
  *   with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { H1, IBreadcrumbProps, ITreeNode, Tree } from "@blueprintjs/core";
+import { BreadcrumbProps, H1, ITreeNode, Tree } from "@blueprintjs/core";
 
 import { GetStaticProps } from "next";
 import IDictionary from "../types/IDictionary";
@@ -55,7 +55,7 @@ type PageProps = {
 };
 
 export default function Page(props: PageProps): JSX.Element {
-    const PageBreadcrumbs: IBreadcrumbProps[] = [
+    const PageBreadcrumbs: BreadcrumbProps[] = [
         { text: "Categories" },
     ];
 

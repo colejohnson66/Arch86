@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU Affero General Public License along
  *   with this program. If not, see <https://www.gnu.org/licenses/>.
  */
-import { Blockquote, Code, H1, H2, H3, IBreadcrumbProps } from "@blueprintjs/core";
+import { Blockquote, BreadcrumbProps, Code, H1, H2, H3 } from "@blueprintjs/core";
 
 import A from "../../components/A";
 import Cite from "../../components/Cite";
@@ -24,7 +24,7 @@ import Ref from "../../components/Ref";
 import TOC from "../../components/TOC";
 
 export default function Page(): JSX.Element {
-    const PageBreadcrumbs: IBreadcrumbProps[] = [
+    const PageBreadcrumbs: BreadcrumbProps[] = [
         {
             text: "Registers",
             href: "/register",

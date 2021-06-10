@@ -15,7 +15,7 @@
  *   with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { Code, H1, H2, H3, H4, HTMLTable, IBreadcrumbProps, UL } from "@blueprintjs/core";
+import { BreadcrumbProps, Code, H1, H2, H3, H4, HTMLTable, UL } from "@blueprintjs/core";
 
 import A from "../../components/A";
 import Instruction from "../../components/Instruction";
@@ -41,7 +41,7 @@ function tableRow(...cells: (string | JSX.Element)[]): JSX.Element {
 }
 
 export default function Page(): JSX.Element {
-    const PageBreadcrumbs: IBreadcrumbProps[] = [
+    const PageBreadcrumbs: BreadcrumbProps[] = [
         {
             text: "Instructions",
             href: "/instruction",

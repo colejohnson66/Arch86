@@ -15,7 +15,7 @@
  *   with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { Callout, H1, H2, H3, IBreadcrumbProps, UL } from "@blueprintjs/core";
+import { BreadcrumbProps, Callout, H1, H2, H3, UL } from "@blueprintjs/core";
 
 import A from "../components/A";
 import { GetStaticProps } from "next";
@@ -80,7 +80,7 @@ type PageProps = {
 };
 
 export default function Page(props: PageProps): JSX.Element {
-    const PageBreadcrumbs: IBreadcrumbProps[] = [
+    const PageBreadcrumbs: BreadcrumbProps[] = [
         { text: "Instructions" },
     ];
 
