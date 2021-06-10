@@ -51,6 +51,19 @@ export default function Page(): JSX.Element {
                     <li><A href="/architecture/80486">80486</A></li>
                     <li><A href="/architecture/p5">P5</A> (80586)</li>
                     <li><A href="/architecture/p6">P6</A></li>
+                    <li><A href="/architecture/netBurst">NetBurst</A> (P68)</li>
+                    <li>
+                        <A href="/architecture/core">Core</A>
+                        <UL>
+                            <li><A href="/architecture/core/sandyBridge">Sandy Bridge</A> (2nd generation)</li>
+                            <li><A href="/architecture/core/ivyBridge">Ivy Bridge</A> (3rd generation)</li>
+                            <li><A href="/architecture/core/haswell">Haswell</A> (4th generation)</li>
+                            <li><A href="/architecture/core/broadwell">Broadwell</A> (5th generation)</li>
+                            <li><A href="/architecture/core/skylake">Skylake</A> (6th generation)</li>
+                            <li><A href="/architecture/core/kabyLake">Kaby Lake</A> (7th generation)</li>
+                            <li>...</li>
+                        </UL>
+                    </li>
                     <li>...</li>
                 </UL>
             </div>
