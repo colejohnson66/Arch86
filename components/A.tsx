@@ -24,9 +24,7 @@ type AProps = {
 };
 
 export default function A(props: AProps): JSX.Element {
-    // is this an internal link?
-    // NOTE: this may not work for all internal links (ones that don't start with "/" or "#")
-    // TODO: will there be any that won't work?
+    // is this an internal link? (internal links without slash are invalid)
     if (props.href[0] === "/") {
         return (
             <Link href={props.href}>
