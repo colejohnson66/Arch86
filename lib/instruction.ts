@@ -48,11 +48,12 @@ import path from "path";
 
 const dataDirectory = path.join(process.cwd(), "data", "instructions");
 
+// Gets a list of all the instructions in `data/instructions/*`
+// Returns `[ "aaa", "aad", ... ]`
 export function getAllInstructionsArray(): string[] {
-    // gets all directories in `data/instructions`
     const ret: string[] = [];
     fs.readdirSync(dataDirectory).forEach((char) => {
-        // skip anything that's not just a character
+        // skip anything that's not just a character (this removes, eg. `list.yaml`)
         if (char.length !== 1)
             return;
         // get all files in `data/instructions/${char}`, then remove `.yaml` from the end
@@ -60,10 +61,11 @@ export function getAllInstructionsArray(): string[] {
         const files = fs.readdirSync(newDir).map((file) => (file.replace(/\.yaml$/, "")));
         ret.push(...files);
     });
-
     return ret;
 }
 
+// Takes the list of instructions from `getAllInstructionsArray()` and formats for `getStaticPaths`
+// Basically, when Next.js renders the instructions, it needs to know what `[slug]` should be
 type GetAllInstructionsAsParamsReturnType = {
     params: {
         slug: string;
@@ -79,6 +81,7 @@ export function getAllInstructionsAsParams(): GetAllInstructionsAsParamsReturnTy
     ));
 }
 
+// Gets the list from `list.yaml` for `/instruction`
 type GetGroupedInstructionListReturnType = IDictionary<(string | string[])[]>;
 export function getGroupedInstructionList(): GetGroupedInstructionListReturnType {
     const fullPath = path.join(dataDirectory, "list.yaml");
@@ -87,6 +90,7 @@ export function getGroupedInstructionList(): GetGroupedInstructionListReturnType
     return yaml as GetGroupedInstructionListReturnType;
 }
 
+// Reads out the instruction
 export async function getInstructionData(id: string): Promise<unknown> {
     const fullPath = path.join(dataDirectory, id[0], `${id}.yaml`);
     const contents = fs.readFileSync(fullPath);
