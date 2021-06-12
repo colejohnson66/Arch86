@@ -16,10 +16,10 @@
  */
 import { BreadcrumbProps, Code, H1, H2, UL } from "@blueprintjs/core";
 
-import A from "../components/A";
-import Layout from "../components/Layout";
+import A from "../../components/A";
+import Layout from "../../components/Layout";
 import React from "react";
-import TOC from "../components/TOC";
+import TOC from "../../components/TOC";
 
 export default function Page(): JSX.Element {
     const PageBreadcrumbs: BreadcrumbProps[] = [

@@ -17,18 +17,18 @@
 
 import { BreadcrumbProps, Callout, H1, H2, H3, UL } from "@blueprintjs/core";
 
-import A from "../components/A";
+import A from "../../components/A";
 import { GetStaticProps } from "next";
-import IDictionary from "../types/IDictionary";
-import Instruction from "../components/Instruction";
-import InstructionTitles from "../data/instructions/Titles";
-import Layout from "../components/Layout";
-import MaybeArray from "../types/MaybeArray";
+import IDictionary from "../../types/IDictionary";
+import Instruction from "../../components/Instruction";
+import InstructionTitles from "../../data/instructions/Titles";
+import Layout from "../../components/Layout";
+import MaybeArray from "../../types/MaybeArray";
 import React from "react";
-import TOC from "../components/TOC";
-import WIP from "../components/WIP";
-import { getGroupedInstructionList } from "../lib/instruction";
-import uppercaseMnemonic from "../lib/uppercaseMnemonic";
+import TOC from "../../components/TOC";
+import WIP from "../../components/WIP";
+import { getGroupedInstructionList } from "../../lib/instruction";
+import uppercaseMnemonic from "../../lib/uppercaseMnemonic";
 
 function commaSeparatedLinks(list: string[]): JSX.Element {
     // list[0] is the name in `InstructionTitles`
