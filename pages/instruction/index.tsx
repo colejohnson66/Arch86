@@ -106,7 +106,7 @@ export default function Page(props: PageProps): JSX.Element {
                 <WIP type="section" />
                 <Callout intent="primary">
                     This list is updated manually, and, as such, may not be current.
-                    It is currently being created to follow version 073 of the <A href="https://software.intel.com/content/www/us/en/develop/articles/intel-sdm.html">Intel SDM</A>.
+                    It is currently being created to follow version 074 of the <A href="https://software.intel.com/content/www/us/en/develop/articles/intel-sdm.html">Intel SDM</A>.
                     In addition to the documented instructions in the software developer manual (SDM), undocumented and AMD-exclusive instructions (such as the XOP set) are included here.
                 </Callout>
 
