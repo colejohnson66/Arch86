@@ -301,7 +301,7 @@ export default function Page(): JSX.Element {
                         This is commonly used for ALU instructions from the original <A href="/architecture/8086">8086</A>.
                         This can have one of two values:
                         <Scrollable>
-                            <HTMLTable small>
+                            <HTMLTable condensed>
                                 <thead>
                                     {tableHeaderRow("Value", "Source", "Destination")}
                                 </thead>
@@ -327,7 +327,7 @@ export default function Page(): JSX.Element {
                         This can have one of 16 values.
                         If REX.R, VEX.R, or EVEX.R is not present, only the first eight possible values are available.
                         <Scrollable>
-                            <HTMLTable small>
+                            <HTMLTable condensed>
                                 <thead>
                                     {tableHeaderRow("Value", "Control Register", "Destination Register")}
                                 </thead>
@@ -367,7 +367,7 @@ export default function Page(): JSX.Element {
                         There are eight general purpose registers (16 in <A href="/mode/long">Long Mode</A>).
                         Which one is used depends on the bits of this <Code>reg</Code> field (combined with REX.R, VEX.R, or EVEX.R if present), the <Code>w</Code> field (if present), <em>and</em> the current processor mode.
                         <Scrollable>
-                            <HTMLTable small>
+                            <HTMLTable condensed>
                                 <caption>Selected Register When <Code>w</Code> is not Present</caption>
                                 <thead>
                                     {tableHeaderRow(
@@ -390,7 +390,7 @@ export default function Page(): JSX.Element {
                             </HTMLTable>
                         </Scrollable>
                         <Scrollable>
-                            <HTMLTable small>
+                            <HTMLTable condensed>
                                 <caption>Selected Register When <Code>w</Code> is Present</caption>
                                 <thead>
                                     {tableHeaderRow(
@@ -425,7 +425,7 @@ export default function Page(): JSX.Element {
                         Specifies whether an immediate is sign extended or left alone.
                         This can have one of two values:
                         <Scrollable>
-                            <HTMLTable small>
+                            <HTMLTable condensed>
                                 <thead>
                                     {tableHeaderRow("Value", "Effect on 8 bit Data", "Effect on 16 or 32 bit Data")}
                                 </thead>
@@ -460,7 +460,7 @@ export default function Page(): JSX.Element {
                         If <Code>sreg2</Code> is used, access to the <Code>FS</Code> and <Code>GS</Code> segments is unavailable.
                         If <Code>sreg3</Code> is used, access to all six segment registers is available:
                         <Scrollable>
-                            <HTMLTable small>
+                            <HTMLTable condensed>
                                 <thead>
                                     {tableHeaderRow("Value", "Segment Register")}
                                 </thead>
@@ -494,7 +494,7 @@ export default function Page(): JSX.Element {
                         These four bits are encoded in the four least significant bits (bits 3, 2, 1, and 0) of the opcode byte for single byte opcodes, or the four least significant bits of the second opcode byte for two byte opcodes.
                         These bits have the following values:
                         <Scrollable>
-                            <HTMLTable small>
+                            <HTMLTable condensed>
                                 <thead>
                                     {tableHeaderRow("Value", "Mnemonic Suffix", "Condition", "Check", "Signed or Unsigned")}
                                 </thead>
@@ -524,7 +524,7 @@ export default function Page(): JSX.Element {
                         Determines if an operation is on 8 bits of the default operand width.
                         This can have one of two values:
                         <Scrollable>
-                            <HTMLTable small>
+                            <HTMLTable condensed>
                                 <thead>
                                     {tableHeaderRow(
                                         "Value",
