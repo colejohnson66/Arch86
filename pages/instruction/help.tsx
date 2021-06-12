@@ -329,7 +329,7 @@ export default function Page(): JSX.Element {
                         <Scrollable>
                             <HTMLTable condensed>
                                 <thead>
-                                    {tableHeaderRow("Value", "Control Register", "Destination Register")}
+                                    {tableHeaderRow("Value", "Control Register", "Debug Register")}
                                 </thead>
                                 <tbody>
                                     {tableRow(<Code>0.000</Code>, <Code>CR0</Code>, <Code>DR0</Code>)}
