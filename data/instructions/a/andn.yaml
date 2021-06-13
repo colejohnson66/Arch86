@@ -10,8 +10,7 @@ opcode:
       32: valid
       64: valid
     cpuid: BMI1
-    description:
-      ANDs the inverted form of \i{r/m32} with \i{r32b}.
+    description: ANDs the inverted form of \i{r/m32} with \i{r32b}.
       Stores the result in \i{r32a}.
   - opcode: VEX.LZ.0F38.W1 F2 /r
     mnemonic: ANDN \i{r64a}, \i{r64b}, \i{r/m64}
@@ -21,8 +20,7 @@ opcode:
       32: invalid
       64: valid
     cpuid: BMI1
-    description:
-      ANDs the inverted form of \i{r/m64} with \i{r64b}.
+    description: ANDs the inverted form of \i{r/m64} with \i{r64b}.
       Stores the result in \i{r64a}.
 encoding:
   operands: 2
@@ -41,12 +39,12 @@ description: >-
   The length field (\c{L} bit) \i{must} be zero (signifying 128 bit vectors).
   Attempts to execute with \c{VEX.L1} (256 bit vectors) will cause a \c{#UD} exception.
 operation: |-
-  pub fn andn_op32(dest: &mut u32, src1: u32, src2: u32) {
-    *dest = !src1 & src2;
+  public void ANDN_32(ref uint dest, uint src1, uint src2) {
+    dest = ~src1 & src2;
   }
 
-  pub fn andn_op64(dest: &mut u64, src1: u64, src2: u64) {
-    *dest = !src1 & src2;
+  public void ANDN_64(ref ulong dest, ulong src1, ulong src2) {
+    dest = ~src1 & src2;
   }
 flags:
   CF: Cleared.

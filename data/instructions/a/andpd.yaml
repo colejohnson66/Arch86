@@ -42,7 +42,7 @@ opcode:
       16: invalid
       32: valid
       64: valid
-    cpuid: [ AVX512VL, AVS512DQ ]
+    cpuid: [AVX512VL, AVS512DQ]
     description: >-
       ANDs packed double-precision floating-point values from \i{xmm3/m128/m64bcst} and \i{xmm2}.
       Stores the result in \i{xmm1}.
@@ -53,7 +53,7 @@ opcode:
       16: invalid
       32: valid
       64: valid
-    cpuid: [ AVX512VL, AVS512DQ ]
+    cpuid: [AVX512VL, AVS512DQ]
     description: >-
       ANDs packed double-precision floating-point values from \i{ymm3/m256/m64bcst} and \i{ymm2}.
       Stores the result in \i{ymm1}.
@@ -106,96 +106,85 @@ description: >-
   The result is stored in in the destination operand.
 
   This instruction, despite being named as if it operates on floating-point numbers, internally operates on 64 bit integers.
-  The "Operation" section below has been updated to reflect this (using \c{u64} instead of \c{f64}).
+  The "Operation" section below has been updated to reflect this (using \c{SimdU64} instead of \c{SimdF64}).
 
   All versions \i{except} the legacy SSE version zero the unused upper SIMD register bits.
 operation: |-
-  pub fn andpd(dest: &mut Simd<u64>, src: Simd<u64>) {
-    dest[63..=0] = dest[63..=0] & src[63..=0];
-    dest[127..=64] = dest[127..=64] & src[127..=64];
-    // dest[Simd::max()..=128] (unmodified)
+  public void ANDPD(SimdU64 dest, SimdU64 src)
+  {
+    dest[0] &= src[0];
+    dest[1] &= src[1];
+    // dest[2..Simd.Max] (unmodified)
   }
 
-  fn vandpd_vex(dest: &mut Simd<u64>, src1: Simd<u64>, src2: Simd<u64>, kl: u32) {
-    for n in 0..kl {
-      let vi = n * 64;
-      let vi_next = vi + 63;
-
-      dest[vi_next..=vi] = src1[vi_next..=vi] & src2[vi_next..=vi];
-    }
-
-    let end = kl * 64;
-    dest[Simd::max()..=end] = 0;
+  void VANDPD_Vex(SimdU64 dest, SimdU64 src1, SimdU64 src2, int kl)
+  {
+    for (int n = 0; n < kl, n++)
+      dest[n] = src1[n] & src2[n];
+    dest[kl..Simd.MAX] = 0;
+  }
+  public void VANDPD_Vex128(SimdU64 dest, SimdU64 src1, SimdU64 src2)
+  {
+    VANDPD_Vex(dest, src1, src2, 2);
+  }
+  public void VANDPD_Vex256(SimdU64 dest, SimdU64 src1, SimdU64 src2)
+  {
+    VANDPD_Vex(dest, src1, src2, 4);
   }
 
-  pub fn vandpd_vex128(dest: &mut Simd<u64>, src1: Simd<u64>, src2: Simd<u64>) {
-    vandpd_vex(dest, src1, src2, 2);
-  }
-  pub fn vandpd_vex256(dest: &mut Simd<u64>, src1: Simd<u64>, src2: Simd<u64>) {
-    vandpd_vex(dest, src1, src2, 4);
-  }
-
-  fn vandpd_evex_mem(dest: &mut Simd<u64>, src1: Simd<u64>, src2: Simd<u64>, k: KMask, kl: u8) {
-    for n in 0..kl {
-      let vi = n * 64;
-      let vi_next = vi + 63;
-
-      if k[n] {
-        // broadcast?
-        if EVEX.b {
-          dest[vi_next..=vi] = src1[vi_next..=vi] & src2[63..=0];
-        } else {
-          dest[vi_next..=vi] = src1[vi_next..=vi] & src2[vi_next..=vi];
-        }
-      } else {
-        // zero mask?
-        if EVEX.z {
-          dest[vi_next..=vi] = 0;
-        }
+  void VANDPD_EvexMemory(SimdU64 dest, SimdU64 src1, SimdU64 src2, KMask k, int kl)
+  {
+    for (int n = 0; n < kl, n++)
+    {
+      if (k[n])
+      {
+        if (EVEX.b)
+          dest[n] = src1[n] & src2[0];
+        else
+          dest[n] = src1[n] & src2[n];
+      }
+      else if (EVEX.z)
+      {
+        dest[n] = 0;
       }
     }
-
-    let end = kl * 64;
-    dest[Simd::max()..=end] = 0;
+    dest[kl..Simd.MAX] = 0;
+  }
+  public void VANDPD_Evex128Memory(SimdU64 dest, SimdU64 src1, SimdU64 src2, KMask k)
+  {
+    VANDPD_EvexMemory(dest, src1, src2, k, 2);
+  }
+  public void VANDPD_Evex256Memory(SimdU64 dest, SimdU64 src1, SimdU64 src2, KMask k)
+  {
+    VANDPD_EvexMemory(dest, src1, src2, k, 4);
+  }
+  public void VANDPD_Evex512Memory(SimdU64 dest, SimdU64 src1, SimdU64 src2, KMask k)
+  {
+    VANDPD_EvexMemory(dest, src1, src2, k, 8);
   }
 
-  pub fn vandpd_evex128_mem(dest: &mut Simd<u64>, src1: Simd<u64>, src2: Simd<u64>, k: KMask) {
-    vandpd_evex_mem(dest, src1, src2, k, 2);
-  }
-  pub fn vandpd_evex256_mem(dest: &mut Simd<u64>, src1: Simd<u64>, src2: Simd<u64>, k: KMask) {
-    vandpd_evex_mem(dest, src1, src2, k, 4);
-  }
-  pub fn vandpd_evex512_mem(dest: &mut Simd<u64>, src1: Simd<u64>, src2: Simd<u64>, k: KMask) {
-    vandpd_evex_mem(dest, src1, src2, k, 8);
-  }
-
-  fn vandpd_evex_vreg(dest: &mut Simd<u64>, src1: Simd<u64>, src2: Simd<u64>, k: KMask: kl: u8) {
-    for n in 0..kl {
-      let vi = n * 64;
-      let vi_next = vi + 63;
-
-      if k[n] {
-        dest[vi_next..=vi] = src1[vi_next..=vi] & src2[vi_next..=vi];
-      } else {
-        // zero mask?
-        if EVEX.z {
-          dest[vi_next..=vi] = 0;
-        }
-      }
+  void VANDPD_EvexRegister(SimdU64 dest, SimdU64 src1, SimdU64 src2, KMask k, int kl)
+  {
+    for (int n = 0; n < kl, n++)
+    {
+      if (k[n])
+        dest[n] = src1[n] & src2[n];
+      else if (EVEX.z)
+        dest[n] = 0;
     }
-
-    let end = kl * 64;
-    dest[Simd::max()..=end] = 0;
+    dest[kl..Simd.MAX] = 0;
   }
-
-  pub fn vandpd_evex128_vreg(dest: &mut Simd<u64>, src1: Simd<u64>, src2: Simd<u64>, k: KMask) {
-    vandpd_evex_vreg(dest, src1, src2, k, 2);
+  public void VANDPD_Evex128Register(SimdU64 dest, SimdU64 src1, SimdU64 src2, KMask k)
+  {
+    VANDPD_EvexRegister(dest, src1, src2, k, 2);
   }
-  pub fn vandpd_evex256_vreg(dest: &mut Simd<u64>, src1: Simd<u64>, src2: Simd<u64>, k: KMask) {
-    vandpd_evex_vreg(dest, src1, src2, k, 4);
+  public void VANDPD_Evex256Register(SimdU64 dest, SimdU64 src1, SimdU64 src2, KMask k)
+  {
+    VANDPD_EvexRegister(dest, src1, src2, k, 4);
   }
-  pub fn vandpd_evex512_vreg(dest: &mut Simd<u64>, src1: Simd<u64>, src2: Simd<u64>, k: KMask) {
-    vandpd_evex_vreg(dest, src1, src2, k, 8);
+  public void VANDPD_Evex512Register(SimdU64 dest, SimdU64 src1, SimdU64 src2, KMask k)
+  {
+    VANDPD_EvexRegister(dest, src1, src2, k, 8);
   }
 intrinsicsC: |-
   __m128d _mm_and_pd(__m128d a, __m128d b)
