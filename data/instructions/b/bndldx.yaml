@@ -40,49 +40,59 @@ description: >-
   In 16 and 32 bit mode, the 32 bit form is used, and, in 64 bit mode, the 64 bit form is used.
   If a memory address is used as the second source operand, this distinction is irrelevant.
 operation: |-
-  pub fn bndldx_op16_op32(dest: &mut Bound, addr: Sib) {
-    let base = addr.base + disp;
-    let ptr = addr.index;
+  public void BNDLDX_1632(Bound dest, Sib addr)
+  {
+    IntPtr base = addr.base + addr.displacement;
+    uint ptr = GPR(addr.index);
 
-    let a_bde: u32 = (base[31..=12] << 2) + (BNDCFG[31..=12] << 12);
-    let a_bt: u32 = *a_bde;
-    if a_bt[0] == 0 {
+    uint a_bde = (base[12..32] << 2) + (BNDCFG[12..32] << 12);
+    uint a_bt = mem[a_bde];
+    if (a_bt.Bit[0] == 0)
+    {
       BNDSTATUS = a_bde | 0x02;
       #BR;
     }
 
-    let a_bte: u32 = (base[11..=2] << 4) + (a_bt[31..=2] << 2);
-    let temp_lb: u32 = *a_bte;
-    let temp_ub: u32 = *(a_bte + 4);
-    let temp_ptr: u32 = *(a_bte + 8);
-    if temp_ptr == ptr {
-      dest.lower = temp_lb;
-      dest.upper = temp_up;
-    } else {
+    uint a_bte = (base[2..12] << 4) + (a_bt[2..32] << 2);
+    uint temp_lower = mem[a_bte];
+    uint temp_upper = mem[a_bte + 4];
+    uint temp_ptr = mem[a_bte + 8];
+    if (temp_ptr == ptr)
+    {
+      dest.lower = temp_lower;
+      dest.upper = temp_upper;
+    }
+    else
+    {
       dest.lower = 0;
       dest.upper = 0;
     }
   }
 
-  pub fn bndldx_op64(dest: &mut Bound, addr: Sib) {
-    let base = addr.base + disp;
-    let ptr = addr.index;
+  public void BNDLDX_64(Bound dest, Sib addr)
+  {
+    IntPtr base = addr.base + addr.displacement;
+    uint ptr = GPR(addr.index);
 
-    let a_bde: u64 = (base[(47 + MAWA)..=20] << 3) + (BNDCFG[63..=12] << 12); // see note 1
-    let a_bt: u64 = *a_bde;
-    if a_bt[0] == 0 {
+    ulong a_bde = (base[20..(48+MAWA)] << 3) + (BNDCFG[12..64] << 12); // see note 1
+    ulong a_bt = mem[a_bde];
+    if (a_bt.Bit[0] == 0)
+    {
       BNDSTATUS = a_bde | 0x02;
       #BR;
     }
 
-    let a_bte: u64 = (base[19..=3] << 5) + (a_bt[63..=3] << 3);
-    let temp_lb: u64 = *a_bte;
-    let temp_ub: u64 = *(a_bte + 8);
-    let temp_ptr: u64 = *(a_bte + 16);
-    if temp_ptr == ptr {
-      dest.lower = temp_lb;
-      dest.upper = temp_up;
-    } else {
+    ulong a_bte = (base[3..20] << 5) + (a_bt[3..64] << 3);
+    ulong temp_lower = mem[a_bte];
+    ulong temp_upper = mem[a_bte + 8];
+    ulong temp_ptr = mem[a_bte + 16];
+    if (temp_ptr == ptr)
+    {
+      dest.lower = temp_lower;
+      dest.upper = temp_upper;
+    }
+    else
+    {
       dest.lower = 0;
       dest.upper = 0;
     }

@@ -74,44 +74,37 @@ description: >-
 
   All versions \i{except} the legacy SSE version zero the unused upper SIMD register bits.
 operation: |-
-  pub fn blendps(dest: &mut Simd<f32>, src: Simd<f32>, mask: u8) {
+  public void BLENDPS(SimdF32 dest, SimdF32 src, byte mask)
+  {
     // If `mask[n]` is 0, `dest` will be copied into itself (i.e. nothing will happen)
-    if mask[0] {
-      dest[31..=0] = src[31..=0]
-    }
-    if mask[1] {
-      dest[63..=32] = src[63..=32];
-    }
-    if mask[2] {
-      dest[95..=64] = src[95..=64];
-    }
-    if mask[3] {
-      dest[127..=96] = src[127..=96];
-    }
-    // dest[Simd::max()..=128] (unmodified)
+    if (mask[0])
+      dest[0] = src[0];
+    if (mask[1])
+      dest[1] = src[1];
+    if (mask[2])
+      dest[2] = src[2];
+    if (mask[3])
+      dest[3] = src[3];
+    // dest[4..Simd.MAX] (unmodified)
   }
 
-  fn vblendps_vex(dest: &mut Simd<f32>, src1: Simd<f32>, src2: Simd<f32>, mask: u8, kl: u32) {
-    for n in 0..kl {
-      let vi = n * 32;
-      let vi_next = vi + 31;
-
-      if mask[n] {
-        dest[vi_next..=vi] = src2[vi_next..=vi];
-      } else {
-        dest[vi_next..=vi] = src1[vi_next..=vi];
-      }
+  void VBLENDPS_Vex(SimdF32 dest, SimdF32 src1, SimdF32 src2, byte mask, int kl)
+  {
+    for (int n = 0; n < kl, n++) {
+      if (mask[n])
+        dest[n] = src2[n];
+      else
+        dest[n] = src1[n];
     }
-
-    let end = kl * 32;
-    dest[Simd::max()..=end] = 0;
+    dest[kl..Simd.MAX] = 0;
   }
-
-  pub fn vblendps_vex128(dest: &mut Simd<f32>, src1: Simd<f32>, src2: Simd<f32>, mask: u8) {
-    vblendps_vex(dest, src1, src2, mask, 4);
+  public void VBLENDPS_Vex128(SimdF32 dest, SimdF32 src1, SimdF32 src2, byte mask)
+  {
+    VBLENDPS_Vex(dest, src1, src2, mask, 4);
   }
-  pub fn vblendps_vex256(dest: &mut Simd<f32>, src1: Simd<f32>, src2: Simd<f32>, mask: u8) {
-    vblendps_vex(dest, src1, src2, mask, 8);
+  public void VBLENDPS_Vex256(SimdF32 dest, SimdF32 src1, SimdF32 src2, byte mask)
+  {
+    VBLENDPS_Vex(dest, src1, src2, mask, 8);
   }
 intrinsicsC: |-
   __m128 _mm_blend_ps(__m128 v1, __m128 v2, const uint32_t mask)

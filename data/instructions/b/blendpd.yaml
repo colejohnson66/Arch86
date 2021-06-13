@@ -74,38 +74,33 @@ description: >-
 
   All versions \i{except} the legacy SSE version zero the unused upper SIMD register bits.
 operation: |-
-  pub fn blendpd(dest: &mut Simd<f64>, src: Simd<f64>, mask: u8) {
+  public void BLENDPD(SimdF64 dest, SimdF64 src, byte mask)
+  {
     // If `mask[n]` is 0, `dest` will be copied into itself (i.e. nothing will happen)
-    if mask[0] {
-      dest[63..=0] = src[63..=0]
-    }
-    if mask[1] {
-      dest[127..=64] = src[127..=64];
-    }
-    // dest[Simd::max()..=128] (unmodified)
+    if (mask[0])
+      dest[0] = src[0];
+    if (mask[1])
+      dest[1] = src[1];
+    // dest[2..Simd.MAX] (unmodified)
   }
 
-  fn vblendpd_vex(dest: &mut Simd<f64>, src1: Simd<f64>, src2: Simd<f64>, mask: u8, kl: u32) {
-    for n in 0..kl {
-      let vi = n * 64;
-      let vi_next = vi + 63;
-
-      if mask[n] {
-        dest[vi_next..=vi] = src2[vi_next..=vi];
-      } else {
-        dest[vi_next..=vi] = src1[vi_next..=vi];
-      }
+  void VBLENDPD_Vex(SimdF64 dest, SimdF64 src1, SimdF64 src2, byte mask, int kl)
+  {
+    for (int n = 0; n < kl, n++) {
+      if (mask[n])
+        dest[n] = src2[n];
+      else
+        dest[n] = src1[n];
     }
-
-    let end = kl * 64;
-    dest[Simd::max()..=end] = 0;
+    dest[kl..Simd.MAX] = 0;
   }
-
-  pub fn vblendpd_vex128(dest: &mut Simd<f64>, src1: Simd<f64>, src2: Simd<f64>, mask: u8) {
-    vblendpd_vex(dest, src1, src2, mask, 2);
+  public void VBLENDPD_Vex128(SimdF64 dest, SimdF64 src1, SimdF64 src2, byte mask)
+  {
+    VBLENDPD_Vex(dest, src1, src2, mask, 2);
   }
-  pub fn vblendpd_vex256(dest: &mut Simd<f64>, src1: Simd<f64>, src2: Simd<f64>, mask: u8) {
-    vblendpd_vex(dest, src1, src2, mask, 4);
+  public void VBLENDPD_Vex256(SimdF64 dest, SimdF64 src1, SimdF64 src2, byte mask)
+  {
+    VBLENDPD_Vex(dest, src1, src2, mask, 4);
   }
 intrinsicsC: |-
   __m128d _mm_blend_pd(__m128d v1, __m128d v2, const uint32_t mask)

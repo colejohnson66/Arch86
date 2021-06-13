@@ -80,38 +80,34 @@ description: >-
   The VEX form of this instruction reserves \c{VEX.W = 1} (i.e. it must be set to \c{0}).
   Failure to do so will result in a \c{#UD} exception.
 operation: |-
-  pub fn blendvpd(dest: &mut Simd<f64>, src: Simd<f64>) {
-    // If `XMM0[n]` is 0, `dest` will be copied into itself (i.e. nothing will happen)
-    if XMM0[0] {
-      dest[63..=0] = src[63..=0]
-    }
-    if XMM0[1] {
-      dest[127..=64] = src[127..=64];
-    }
-    // dest[Simd::max()..=128] (unmodified)
+  public void BLENDVPD(SimdF64 dest, SimdF64 src)
+  {
+    // If `XMM0.Bit[n]` is 0, `dest` will be copied into itself (i.e. nothing will happen)
+    if (XMM0.Bit[0])
+      dest[0] = src[0];
+    if (XMM0.Bit[1])
+      dest[1] = src[1];
+    // dest[2..Simd.MAX] (unmodified)
   }
 
-  fn vblendvpd_vex(dest: &mut Simd<f64>, src1: Simd<f64>, src2: Simd<f64>, src3: Simd<bool>, kl: u32) {
-    for n in 0..kl {
-      let vi = n * 64;
-      let vi_next = vi + 63;
-
-      if src3[n] {
-        dest[vi_next..=vi] = src2[vi_next..=vi];
-      } else {
-        dest[vi_next..=vi] = src1[vi_next..=vi];
-      }
+  void VBLENDVPD_Vex(SimdF64 dest, SimdF64 src1, SimdF64 src2, SimdF64 src3, int kl)
+  {
+    for (int n = 0; n < kl, n++) {
+      if (src3.Bit[n])
+        dest[n] = src2[n];
+      else
+        dest[n] = src1[n];
     }
-
-    let end = kl * 64;
-    dest[Simd::max()..=end] = 0;
+    dest[kl..Simd.MAX] = 0;
   }
-
-  pub fn vblendvpd_vex128(dest: &mut Simd<f64>, src1: Simd<f64>, src2: Simd<f64>, src3: Simd<bool>) {
-    vblendpd_vex(dest, src1, src2, src3, 2);
+  public void VBLENDVPD_Vex128(SimdF64 dest, SimdF64 src1, SimdF64 src2, SimdF64 src3)
+  {
+    VBLENDVPD_Vex(dest, src1, src2, src3, 2);
   }
-  pub fn vblendvpd_vex256(dest: &mut Simd<f64>, src1: Simd<f64>, src2: Simd<f64>, src3: Simd<bool>) {
-    vblendpd_vex(dest, src1, src2, src3, 4);
+  public void VBLENDVPD_Vex256(SimdF64 dest, SimdF64 src1, SimdF64 src2, SimdF64 src3)
+  {
+    VBLENDVPD_Vex(dest, src1, src2, src3, 4);
+  }
 intrinsicsC: |-
   __m128 _mm_blendv_pd(__m128d a, __m128d b, __m128d mask)
   __m256 _mm256_blendv_pd(__m256d a, __m256d b, __m256d mask)
@@ -120,8 +116,3 @@ exceptions:
   other: See Exceptions Type 4.
   otherAdditional:
     "#UD": If \c{VEX.W} is \c{1}.
-changes:
-  version: 73
-  date: 2020-11
-  list:
-    - The "Intrinsics" section featured a duplicate copy of the 128 bit version.

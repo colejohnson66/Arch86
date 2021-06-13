@@ -80,44 +80,38 @@ description: >-
   The VEX form of this instruction reserves \c{VEX.W = 1} (i.e. it must be set to \c{0}).
   Failure to do so will result in a \c{#UD} exception.
 operation: |-
-  pub fn blendvps(dest: &mut Simd<f32>, src: Simd<f32>) {
-    // If `XMM0[n]` is 0, `dest` will be copied into itself (i.e. nothing will happen)
-    if XMM0[0] {
-      dest[31..=0] = src[31..=0]
-    }
-    if XMM0[1] {
-      dest[63..=32] = src[63..=32]
-    }
-    if XMM0[2] {
-      dest[95..=64] = src[95..=64]
-    }
-    if XMM0[3] {
-      dest[127..=96] = src[127..=96];
-    }
-    // dest[Simd::max()..=128] (unmodified)
+  public void BLENDVPS(SimdF32 dest, SimdF32 src)
+  {
+    // If `XMM0.Bit[n]` is 0, `dest` will be copied into itself (i.e. nothing will happen)
+    if (XMM0.Bit[0])
+      dest[0] = src[0];
+    if (XMM0.Bit[1])
+      dest[1] = src[1];
+    if (XMM0.Bit[2])
+      dest[2] = src[2];
+    if (XMM0.Bit[3])
+      dest[3] = src[3];
+    // dest[4..Simd.MAX] (unmodified)
   }
 
-  fn vblendvps_vex(dest: &mut Simd<f32>, src1: Simd<f32>, src2: Simd<f32>, src3: Simd<bool>, kl: u32) {
-    for n in 0..kl {
-      let vi = n * 32;
-      let vi_next = vi + 31;
-
-      if src3[n] {
-        dest[vi_next..=vi] = src2[vi_next..=vi];
-      } else {
-        dest[vi_next..=vi] = src1[vi_next..=vi];
-      }
+  void VBLENDVPS_Vex(SimdF32 dest, SimdF32 src1, SimdF32 src2, SimdF32 src3, int kl)
+  {
+    for (int n = 0; n < kl, n++) {
+      if (src3.Bit[n])
+        dest[n] = src2[n];
+      else
+        dest[n] = src1[n];
     }
-
-    let end = kl * 32;
-    dest[Simd::max()..=end] = 0;
+    dest[kl..Simd.MAX] = 0;
   }
-
-  pub fn vblendvps_vex128(dest: &mut Simd<f32>, src1: Simd<f32>, src2: Simd<f32>, src3: Simd<bool>) {
-    vblendvps_vex(dest, src1, src2, src3, 4);
+  public void VBLENDVPS_Vex128(SimdF32 dest, SimdF32 src1, SimdF32 src2, SimdF32 src3)
+  {
+    VBLENDVPS_Vex(dest, src1, src2, src3, 4);
   }
-  pub fn vblendvps_vex256(dest: &mut Simd<f32>, src1: Simd<f32>, src2: Simd<f32>, src3: Simd<bool>) {
-    vblendvps_vex(dest, src1, src2, src3, 8);
+  public void VBLENDVPS_Vex256(SimdF32 dest, SimdF32 src1, SimdF32 src2, SimdF32 src3)
+  {
+    VBLENDVPS_Vex(dest, src1, src2, src3, 8);
+  }
 intrinsicsC: |-
   __m128 _mm_blendv_ps(__m128 a, __m128 b, __m128 mask)
   __m256 _mm256_blendv_ps(__m256 a, __m256 b, __m256 mask)

@@ -46,18 +46,20 @@ description: >-
   The length field (\c{L} bit) \i{must} be zero (signifying 128 bit vectors).
   Attempts to execute with \c{VEX.L1} (256 bit vectors) will cause a \c{#UD} exception.
 operation: |-
-  pub fn bextr_op32(dest: &mut u32, src1: u32, src2: u32) {
-    let start = src2[7..=0];
-    let len = src2[15..=0];
-    let end = start + len - 1;
-    dest = src1[end..=start];
+  public void BEXTR_32(ref uint dest, uint src1, uint src2)
+  {
+    uint start = src2[0..8];
+    uint len = src2[8..16];
+    uint end = start + len;
+    dest = src1[start..end];
   }
 
-  pub fn bextr_op64(dest: &mut u64, src1: u64, src2: u64) {
-    let start = src2[7..=0];
-    let len = src2[15..=0];
-    let end = start + len - 1;
-    dest = src1[end..=start];
+  public void BEXTR_64(ref ulong dest, ulong src1, ulong src2)
+  {
+    ulong start = src2[0..8];
+    ulong len = src2[8..16];
+    ulong end = start + len;
+    dest = src1[start..end]
   }
 flags:
   CF: Cleared.
