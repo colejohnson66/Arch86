@@ -37,9 +37,10 @@ description: >-
 operation: |-
   public void ARPL(ref ushort dest, ushort src)
   {
-    if (dest[1..=0] < src[1..=0])
+    // lowest two bits
+    if (dest.Bit[0..2] < src.Bit[0..2])
     {
-      dest[1..=0] = src[1..=0];
+      dest.Bit[0..2] = src.Bit[0..2];
       ZF = 1;
     }
     else

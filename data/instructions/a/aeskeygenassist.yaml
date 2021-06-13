@@ -56,7 +56,8 @@ description: >-
   The VEX form of this instruction reserves \c{VEX.vvvv} (i.e. it must be set to \c{0b1111}).
   Failure to do so will result in a \c{#UD} exception.
 operation: |-
-  public void AESKEYGENASSIST(SimdU32 dest, SimdU32 src, byte roundConstant) {
+  public void AESKEYGENASSIST(SimdU32 dest, SimdU32 src, byte roundConstant)
+  {
     uint x0 = src[0];
     uint x1 = src[1];
     uint x2 = src[2];
@@ -70,7 +71,8 @@ operation: |-
     // dest[4..Simd.MAX] (unmodified)
   }
 
-  public void VAESKEYGENASSIST_Vex128(SimdU32 dest, SimdU32 src, byte roundConstant) {
+  public void VAESKEYGENASSIST_Vex128(SimdU32 dest, SimdU32 src, byte roundConstant)
+  {
     uint x0 = src[0];
     uint x1 = src[1];
     uint x2 = src[2];

@@ -115,7 +115,8 @@ description: >-
 
   All versions \i{except} the legacy SSE version zero the unused upper SIMD register bits.
 operation: |-
-  public void AESDECLAST(SimdU128 dest, SimdU128 src) {
+  public void AESDECLAST(SimdU128 dest, SimdU128 src)
+  {
     U128 state = dest[0];
     state = AesInvShiftRows(state);
     state = AesInvSubBytes(state);
@@ -125,7 +126,8 @@ operation: |-
 
   void VAESDECLAST(SimdU128 dest, SimdU128 src1, SimdU128 src2, int kl)
   {
-    for (int n = 0; n < kl, n++) {
+    for (int n = 0; n < kl, n++)
+    {
       U128 state = src1[n];
       state = AesInvShiftRows(state);
       state = AesInvSubBytes(state);

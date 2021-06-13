@@ -39,11 +39,13 @@ description: >-
   The length field (\c{L} bit) \i{must} be zero (signifying 128 bit vectors).
   Attempts to execute with \c{VEX.L1} (256 bit vectors) will cause a \c{#UD} exception.
 operation: |-
-  public void ANDN_32(ref uint dest, uint src1, uint src2) {
+  public void ANDN_32(ref uint dest, uint src1, uint src2)
+  {
     dest = ~src1 & src2;
   }
 
-  public void ANDN_64(ref ulong dest, ulong src1, ulong src2) {
+  public void ANDN_64(ref ulong dest, ulong src1, ulong src2)
+  {
     dest = ~src1 & src2;
   }
 flags:

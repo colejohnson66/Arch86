@@ -55,12 +55,14 @@ description: >-
   The VEX form of this instruction reserves \c{VEX.vvvv} (i.e. it must be set to \c{0b1111}).
   Failure to do so will result in a \c{#UD} exception.
 operation: |-
-  public void AESIMC(SimdU128 dest, SimdU128 src) {
+  public void AESIMC(SimdU128 dest, SimdU128 src)
+  {
     dest[0] = AesInvMixColumns(src[0]);
     // dest[1..Simd.MAX] (unmodified)
   }
 
-  public void VAESIMC_Vex128(SimdU128 dest, SimdU128 src) {
+  public void VAESIMC_Vex128(SimdU128 dest, SimdU128 src)
+  {
     dest[0] = AesInvMixColumns(src[0]);
     dest[1..Simd.MAX] = 0;
   }

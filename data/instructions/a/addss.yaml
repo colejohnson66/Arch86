@@ -80,12 +80,14 @@ description: >-
   Although this instruction works with \c{(E)VEX.LIG}, Intel recommends that assemblers set \c{(E)VEX.L} to 0.
   Encoding with \c{(E)VEX.L} being 1 may not be allowed in the future.
 operation: |-
-  public void ADDSS(SimdF32 dest, SimdF32 src) {
+  public void ADDSS(SimdF32 dest, SimdF32 src)
+  {
     dest[0] += src[0];
     // dest[1..Simd.MAX] (unchanged)
   }
 
-  public void VADDSS_Vex(SimdF32 dest, SimdF32 src1, SimdF32 src2) {
+  public void VADDSS_Vex(SimdF32 dest, SimdF32 src1, SimdF32 src2)
+  {
     dest[0] = src1[0] + src2[0];
     dest[1] = src1[1];
     dest[2] = src1[2];
@@ -93,7 +95,8 @@ operation: |-
     dest[4..Simd.MAX] = 0;
   }
 
-  public void VADDSS_EvexMemory(SimdF32 dest, SimdF32 src1, SimdF32 src2, KMask k) {
+  public void VADDSS_EvexMemory(SimdF32 dest, SimdF32 src1, SimdF32 src2, KMask k)
+  {
     if (k[0])
       dest[0] = src1[0] + src2[0];
     else if (EVEX.z)
@@ -104,7 +107,8 @@ operation: |-
     dest[4..Simd.MAX] = 0;
   }
 
-  public void VADDSS_EvexRegister(SimdF32 dest, SimdF32 src1, SimdF32 src2, KMask k) {
+  public void VADDSS_EvexRegister(SimdF32 dest, SimdF32 src1, SimdF32 src2, KMask k)
+  {
     if (EVEX.b)
       SetRoundingForThisInstruction(EVEX.rc);
     else
@@ -118,36 +122,6 @@ operation: |-
     dest[2] = src1[2];
     dest[3] = src1[3];
     dest[4..Simd.MAX] = 0;
-  }
-  pub fn addss(dest: &mut Simd<f32>, src: Simd<f32>) {
-    dest[31..=0] = dest[31..=0] + src[31..=0];
-    // dest[Simd::max()..=32] (unmodified)
-  }
-
-
-
-
-
-  pub fn vaddss_vex(dest: &mut Simd<f32>, src1: Simd<f32>, src2: Simd<f32>) {
-    dest[31..=0] = src1[31..=0] + src2[31..=0];
-    dest[127..=32] = src1[127..=32];
-    dest[Simd::max()..=128] = 0;
-  }
-
-  pub fn vaddss_evex(dest: &mut Simd<f32>, src1: Simd<f32>, src2: Simd<f32>, k: KMask) {
-    set_rounding_for_this_instruction(if EVEX.b && src2.is_reg() { EVEX.RC } else { MXCSR.RC });
-
-    if k[0] {
-      dest[31..=0] = src1[31..=0] + src2[31..=0];
-    } else {
-      // zero mask?
-      if EVEX.z {
-        dest[31..=0] = 0;
-      }
-    }
-
-    dest[127..=32] = src1[127..=32];
-    dest[Simd::max()..=128] = 0;
   }
 intrinsicsC: |-
   __m128 _mm_add_ss(__m128 a, __m128 b)
