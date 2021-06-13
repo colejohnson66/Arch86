@@ -136,7 +136,7 @@ bitEncoding:
 description: >-
   The \c{CALL} instruction saves a return address on the stack before jumping to the called procedure whose address is specified in the operand.
 operation: |-
-  TODO
+  // TODO
 flags:
   CF: Affected only if a task switch occurs.
   PF: Affected only if a task switch occurs.

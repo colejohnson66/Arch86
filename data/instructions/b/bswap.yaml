@@ -39,24 +39,26 @@ description: >-
   To operate on a 16 bit operand, use the \instr{XCHG} instruction.
   Use of this instruction on a 16 bit operand is undefined.
 operation: |-
-  pub fn bswap_op32(arg: &mut u32) {
-    let temp = *arg;
-    arg[7..=0] = temp[31..=24];
-    arg[15..=8] = temp[23..=16];
-    arg[23..=16] = temp[15..=8];
-    arg[31..=24] = temp[7..=0];
+  public void BSWAP_32(ref uint arg)
+  {
+    uint temp = arg;
+    arg.Bit[0..8] = temp.Bit[24..32];
+    arg.Bit[8..16] = temp.Bit[16..24];
+    arg.Bit[16..24] = temp.Bit[8..16];
+    arg.Bit[24..32] = temp.Bit[0..8];
   }
 
-  pub fn bswap_op64(arg: &mut u64) {
-    let temp = *arg;
-    arg[7..=0] = temp[63..=56];
-    arg[15..=8] = temp[55..=48];
-    arg[23..=16] = temp[47..=40];
-    arg[31..=24] = temp[39..=32];
-    arg[39..=32] = temp[31..=24];
-    arg[47..=40] = temp[23..=16];
-    arg[55..=48] = temp[15..=8];
-    arg[63..=56] = temp[7..=0];
+  public void BSWAP_64(ref ulong arg)
+  {
+    ulong temp = arg;
+    arg.Bit[0..8] = temp.Bit[56..64];
+    arg.Bit[8..16] = temp.Bit[48..56];
+    arg.Bit[16..24] = temp.Bit[40..48];
+    arg.Bit[24..32] = temp.Bit[32..40];
+    arg.Bit[32..40] = temp.Bit[24..32];
+    arg.Bit[40..48] = temp.Bit[16..24];
+    arg.Bit[48..56] = temp.Bit[8..16];
+    arg.Bit[56..64] = temp.Bit[0..8];
   }
 exceptions:
   protected:

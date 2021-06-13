@@ -39,38 +39,42 @@ description: >-
   In 16 and 32 bit mode, the 32 bit form is used, and, in 64 bit mode, the 64 bit form is used.
   If a memory address is used as the second source operand, this distinction is irrelevant.
 operation: |-
-  pub fn bndstx_op16_op32(addr: Sib, bound: Bound) {
-    let base = addr.base + disp;
-    let ptr = addr.index;
+  public void BNDSTX_1632(Sib addr, Bound src)
+  {
+    IntPtr base = addr.base + addr.displacement;
+    uint ptr = GPR(addr.index);
 
-    let a_bde: u32 = (base[31..=12] << 2) + (BNDCFG[31..=12] << 12);
-    let a_bt: u32 = *a_bde;
-    if a_bt[0] == 0 {
+    uint a_bde = (base[12..32] << 2) + (BNDCFG[12..32] << 12);
+    uint a_bt = mem[a_bde];
+    if (a_bt.Bit[0] == 0)
+    {
       BNDSTATUS = a_bde | 0x02;
       #BR;
     }
 
-    let a_dest: u32 = (base[11..=2] << 4) + (a_bt[31..=2] << 2);
-    *(u32*)a_dest = bound.lower;
-    *(u32*)(a_dest + 4) = bound.upper;
-    *(u32*)(a_dest + 8) = ptr;
+    uint a_bte = (base[2..12] << 4) + (a_bt[2..32] << 2);
+    mem[a_bte] = bound.lower;
+    mem[a_bte + 4] = bound.upper;
+    mem[a_bte + 8] = ptr;
   }
 
-  pub fn bndstx_op64(addr: Sib, bound: Bound) {
-    let base = addr.base + disp;
-    let ptr = addr.index;
+  public void BNDSTX_64(Bound dest, Sib addr)
+  {
+    IntPtr base = addr.base + addr.displacement;
+    uint ptr = GPR(addr.index);
 
-    let a_bde: u64 = (base[(47 + MAWA)..=20] << 3) + (BNDCFG[63..=12] << 12); // see note 1
-    let a_bt: u64 = *a_bde;
-    if a_bt[0] == 0 {
+    uint a_bde = (base[20..(48+MAWA)] << 3) + (BNDCFG[12..64] << 12); // see note 1
+    uint a_bt = mem[a_bde];
+    if (a_bt.Bit[0] == 0)
+    {
       BNDSTATUS = a_bde | 0x02;
       #BR;
     }
 
-    let a_dest: u64 = (base[19..=3] << 5) + (a_bt[63..=3] << 3);
-    *(u64*)a_dest = bound.lower;
-    *(u64*)(a_dest + 8) = bound.upper;
-    *(u64*)(a_dest + 16) = ptr;
+    ulong a_bte = (base[3..20] << 5) + (a_bt[3..64] << 3);
+    mem[a_bte] = bound.lower;
+    mem[a_bte + 8] = bound.upper;
+    mem[a_bte + 16] = ptr;
   }
 operationNotes:
   - >-

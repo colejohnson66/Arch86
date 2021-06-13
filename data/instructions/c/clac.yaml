@@ -32,7 +32,8 @@ description: >-
   This instruction can only be executed when \c{CPL} is \c{0} (ring 0).
   Attempts to execute this instruction is less privileged rings will cause a \c{#UD} exception to be thrown.
 operation: |-
-  pub fn clac() {
+  public void CLAC()
+  {
     AC = 0;
   }
 exceptions:

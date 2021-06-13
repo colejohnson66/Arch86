@@ -45,22 +45,30 @@ description: >-
   The length field (\c{L} bit) \i{must} be zero (signifying 128 bit vectors).
   Attempts to execute with \c{VEX.L1} (256 bit vectors) will cause a \c{#UD} exception.
 operation: |-
-  pub fn bzhi_op32(dest: &mut u32, src: u32, idx: u32) {
-    let n: u8 = idx[7..=0];
-    if n < 32 {
-      dest[31..=n] = 0;
+  public void BZHI_32(ref uint dest, uint src, uint idx)
+  {
+    uint n = idx.Bit[0..8];
+    if (n < 32)
+    {
+      dest[n..32] = 0;
       CF = 0;
-    } else {
+    }
+    else
+    {
       CF = 1;
     }
   }
 
-  pub fn bzhi_op64(dest: &mut u64, src: u64, idx: u64) {
-    let n: u8 = idx[7..=0];
-    if n < 64 {
-      dest[63..=n] = 0;
+  public void BZHI_64(ref uint dest, uint src, uint idx)
+  {
+    uint n = idx.Bit[0..8];
+    if (n < 64)
+    {
+      dest[n..64] = 0;
       CF = 0;
-    } else {
+    }
+    else
+    {
       CF = 1;
     }
   }

@@ -28,7 +28,8 @@ description: >-
   When clear, string operations will increment the index registers (\reg{ESI} and/or \reg{EDI}) during operation.
   When set, they will be decremented instead.
 operation: |-
-  pub fn cld() {
+  public void CLD()
+  {
     DF = 0;
   }
 flags:

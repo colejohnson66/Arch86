@@ -9,7 +9,6 @@ opcode:
       16: valid
       32: valid
       64: n/e
-    cpuid: # MPX?
     description: >-
       Checks if \i{r16} (an array index) is within the bounds specified by \i{m16&16}.
   - opcode: 62 /r
@@ -19,7 +18,6 @@ opcode:
       16: valid
       32: valid
       64: n/e
-    cpuid: # MPX?
     description: >-
       Checks if \i{r32} (an array index) is within the bounds specified by \i{m32&32}.
 encoding:
@@ -44,16 +42,16 @@ description: >-
 
   This instruction is not encodable in 64 bit mode, and if encountered, will be interpreted as an EVEX prefix.
 operation: |-
-  pub fn bound_op16(index: u16, bounds: usize) {
-    if index < readWordU(bounds) || index > readWordU(bounds + 2) {
+  public void BOUND_16(ushort index, IntPtr bounds)
+  {
+    if (index < mem16[bounds] || index > mem16[bounds + 2])
       #BR;
-    }
   }
 
-  pub fn bound_op32(index: u32, bounds: usize) {
-    if index < readDwordU(bounds) || index > readDwordU(bounds + 4) {
+  public void BOUND_32(uint index, IntPtr bounds)
+  {
+    if (index < mem32[bounds] || index > mem32[bounds + 2])
       #BR;
-    }
   }
 exceptions:
   protected:

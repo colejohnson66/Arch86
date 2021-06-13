@@ -365,11 +365,11 @@ export default function Page(props: PageProps): JSX.Element {
 
                 <H2 id="headingOperation">Operation</H2>
                 <Callout intent="primary">
-                    This pseudo-code uses a Rust-like syntax.
+                    This pseudo-code uses C# syntax.
                     A list of the types used is <A href="/instruction/help#headingOperation">available here</A>.
                 </Callout>
                 <Scrollable>
-                    <SyntaxHighlighter language="rust" style={SyntaxHighlighterDarkTheme}>
+                    <SyntaxHighlighter language="csharp" style={SyntaxHighlighterDarkTheme}>
                         {props.operation}
                     </SyntaxHighlighter>
                 </Scrollable>

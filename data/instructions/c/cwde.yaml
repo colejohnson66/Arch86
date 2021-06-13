@@ -28,8 +28,9 @@ description: >-
   Which one will be used depends on the operating mode of the processor (\c{CBW} in 16 bit mode and \c{CWDE} in 32 bit mode).
   To force the use of the other one (i.e. \c{CBW} in 32 bit mode and \c{CWDE} in 16 bit mode), prefix this instruction with \instr{OPSIZE} (\c{0x66}).
 operation: |-
-  pub fn cwde() {
-    EAX = sign_extend(AX);
+  public void CWDE()
+  {
+    EAX = SignExtend(AX);
   }
 flags:
   CF: Unmodified.

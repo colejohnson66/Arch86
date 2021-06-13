@@ -97,19 +97,22 @@ description: >-
   If the source operand references a bit higher than the width of the destination operand (eg. the 21st bit in a 16 bit register), the upper bits are ignored.
   In other words, attempting to reference the 21st bit of a 16 bit register only accesses the \i5th} bit (as 21 modulo 16 is 5).
 operation: |-
-  pub fn bts_op16(src: u16, idx: u16) {
-    CF = src[idx % 16];
-    src[idx % 16] = 1;
+  public void BTS_16(ushort src, ushort idx)
+  {
+    CF = src.Bit[idx % 16];
+    src.Bit[idx % 16] = 1;
   }
 
-  pub fn bts_op32(src: u32, idx: u32) {
-    CF = src[idx % 32];
-    src[idx % 32] = 1;
+  public void BTS_32(uint src, uint idx)
+  {
+    CF = src.Bit[idx % 32];
+    src.Bit[idx % 32] = 1;
   }
 
-  pub fn bts_op64(src: u64, idx: u64) {
-    CF = src[idx % 64];
-    src[idx % 64] = 1;
+  public void BTS_64(ulong src, ulong idx)
+  {
+    CF = src.Bit[idx % 64];
+    src.Bit[idx % 64] = 1;
   }
 flags:
   CF: Set if the selected bit is set. Cleared otherwise.

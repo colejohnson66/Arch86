@@ -47,9 +47,10 @@ description: >-
   In 16 and 32 bit mode, the 32 bit form is used, and, in 64 bit mode, the 64 bit form is used.
   If a memory address is used as the second source operand, this distinction is irrelevant.
 operation: |-
-  pub fn bndmk(dest: &mut Bound, addr: Sib) {
+  public void BNDMK(Bound dest, Sib addr)
+  {
     dest.lower = addr.base;
-    dest.upper = !lea(addr);
+    dest.upper = ~lea(addr);
   }
 intrinsicsC: |-
   void *_bnd_set_ptr_bounds(const void *address, size_t size)

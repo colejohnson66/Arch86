@@ -83,9 +83,9 @@ description: >-
   Which instruction form (32 or 64 bit) is used depends on the operating mode of the processor.
   In 16 and 32 bit mode, the 32 bit form is used (64 bits are moved), and, in 64 bit mode, the 64 bit form is used (128 bits are moved).
 operation: |-
-  pub fn bndmov(dest: &mut Bound, src: Bound) {
-    dest.lower = src.lower;
-    dest.upper = src.upper;
+  public void BNDMOV(ref Bound dest, Bound src)
+  {
+    dest = src;
   }
 intrinsicsC: |-
   void *_bnd_copy_ptr_bounds(const void *q, const void *r)

@@ -24,8 +24,9 @@ bitEncoding:
 description: >-
   The \c{CDQE} instruction sign extends \reg{EAX} into \reg{RAX}.
 operation: |-
-  pub fn cdqe() {
-    RAX = sign_extend(EAX);
+  public void CDQE()
+  {
+    RAX = SignExtend(EAX);
   }
 flags:
   CF: Unmodified.

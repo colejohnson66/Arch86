@@ -24,7 +24,8 @@ bitEncoding:
 description: >-
   The \c{CLC} instruction clears the \reg{CF} (carry) flag in the \reg{EFLAGS} register.
 operation: |-
-  pub fn clc() {
+  public void CLC()
+  {
     CF = 0;
   }
 flags:

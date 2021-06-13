@@ -35,8 +35,9 @@ description: >-
   In some architectures, this instruction may cause a transactional abort with the Transactional Synchronization Extensions (TSX).
   However, programmers must \i{not} rely on this behavior.
 operation: |-
-  pub fn cldemote(*mut libc::c_void ptr) {
-    cache_line_demote(ptr);
+  public void CLDEMOTE(IntPtr ptr)
+  {
+    CacheLineDemote(ptr);
   }
 intrinsicsC: |-
   void _cldemote(const void* ptr)
