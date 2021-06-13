@@ -80,31 +80,38 @@ description: >-
   Although this instruction works with \c{(E)VEX.LIG}, Intel recommends that assemblers set \c{(E)VEX.L} to 0.
   Encoding with \c{(E)VEX.L} being 1 may not be allowed in the future.
 operation: |-
-  pub fn addsd(dest: &mut Simd<f64>, src: Simd<f64>) {
-    dest[63..=0] = dest[63..=0] + src[63..=0];
-    // dest[Simd::max()..=64] (unmodified)
+  public void ADDSD(SimdF64 dest, SimdF64 src) {
+    dest[0] += src[0];
+    // dest[1..Simd.MAX] (unchanged)
   }
 
-  pub fn vaddsd_vex(dest: &mut Simd<f64>, src1: Simd<f64>, src2: Simd<f64>) {
-    dest[63..=0] = src1[63..=0] + src2[63..=0];
-    dest[127..=64] = src1[127..=64];
-    dest[Simd::max()..=128] = 0;
+  public void VADDSD_Vex(SimdF64 dest, SimdF64 src1, SimdF64 src2) {
+    dest[0] = src1[0] + src2[0];
+    dest[1] = src1[1];
+    dest[2..Simd.MAX] = 0;
   }
 
-  pub fn vaddsd_evex(dest: &mut Simd<f64>, src1: Simd<f64>, src2: Simd<f64>, k: KMask) {
-    set_rounding_for_this_instruction(if EVEX.b && src2.is_reg() { EVEX.RC } else { MXCSR.RC });
+  public void VADDSD_EvexMemory(SimdF64 dest, SimdF64 src1, SimdF64 src2, KMask k) {
+    if (k[0])
+      dest[0] = src1[0] + src2[0];
+    else if (EVEX.z)
+      dest[0] = 0;
+    dest[1] = src1[1];
+    dest[2..Simd.MAX] = 0;
+  }
 
-    if k[0] {
-      dest[63..=0] = src1[63..=0] + src2[63..=0];
-    } else {
-      // zero mask?
-      if EVEX.z {
-        dest[63..=0] = 0;
-      }
-    }
+  public void VADDSD_EvexRegister(SimdF64 dest, SimdF64 src1, SimdF64 src2, KMask k) {
+    if (EVEX.b)
+      SetRoundingForThisInstruction(EVEX.rc);
+    else
+      SetRoundingForThisInstruction(MXCSR.rc);
 
-    dest[127..=64] = src1[127..=64];
-    dest[Simd::max()..=128] = 0;
+    if (k[0])
+      dest[0] = src1[0] + src2[0];
+    else if (EVEX.z)
+      dest[0] = 0;
+    dest[1] = src1[1];
+    dest[2..Simd.MAX] = 0;
   }
 intrinsicsC: |-
   __m128d _mm_add_sd(__m128d a, __m128d b)

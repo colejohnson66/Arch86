@@ -68,39 +68,42 @@ description: >-
 
   All versions \i{except} the legacy SSE version zero the unused upper SIMD register bits.
 operation: |-
-  pub fn addsubps(dest: &mut Simd<f32>, src: Simd<f32>) {
-    dest[31..=0] = dest[31..=0] - src[31..=0];
-    dest[63..=32] = dest[63..=32] + src[63..=32];
-    dest[95..=64] = dest[95..=64] - src[95..=64];
-    dest[127..=96] = dest[127..=96] + src[127..=96];
-    // dest[Simd::max()..=128] (unmodified)
+  public void ADDSUBPS(SimdF32 dest, SimdF32 src)
+  {
+    dest[0] -= src[0];
+    dest[1] += src[1];
+    dest[2] -= src[2];
+    dest[3] += src[3];
+    // dest[4..Simd.Max] (unmodified)
   }
 
-  pub fn vaddsubps_vex128(dest: &mut Simd<f32>, src1: Simd<f32>, src2: Simd<f32>) {
-    dest[31..=0] = src1[31..=0] - src2[31..=0];
-    dest[63..=32] = src1[63..=32] + src2[63..=32];
-    dest[95..=64] = src1[95..=64] - src2[95..=64];
-    dest[127..=96] = src1[127..=96] + src2[127..=96];
-    dest[Simd::max()..=128] = 0;
+  public void VADDSUBPS_Vex128(SimdF32 dest, SimdF32 src1, SimdF32 src2)
+  {
+    dest[0] -= src[0];
+    dest[1] += src[1];
+    dest[2] -= src[2];
+    dest[3] += src[3];
+    dest[4..Simd.Max] = 0;
   }
-
-  pub fn vaddsubps_vex256(dest: &mut Simd<f32>, src1: Simd<f32>, src2: Simd<f32>) {
-    dest[31..=0] = src1[31..=0] - src2[31..=0];
-    dest[63..=32] = src1[63..=32] + src2[63..=32];
-    dest[95..=64] = src1[95..=64] - src2[95..=64];
-    dest[127..=96] = src1[127..=96] + src2[127..=96];
-    dest[159..=128] = src1[159..=128] - src2[159..=128];
-    dest[191..=160] = src1[191..=160] + src2[191..=160];
-    dest[223..=192] = src1[223..=192] - src2[223..=192];
-    dest[255..=224] = src1[255..=224] + src2[255..=224];
-    // dest[Simd::max()..=256] = 0; // see note 1
+  public void VADDSUBPS_Vex256(SimdF32 dest, SimdF32 src1, SimdF32 src2)
+  {
+    dest[0] -= src[0];
+    dest[1] += src[1];
+    dest[2] -= src[2];
+    dest[3] += src[3];
+    dest[4] -= src[4];
+    dest[5] += src[5];
+    dest[6] -= src[6];
+    dest[7] += src[7];
+    dest[8..Simd.Max] = 0; // see note 1
   }
 operationNotes:
   - >-
     The manual makes no mention of if this instruction form clears the upper bits or not.
+    It is assumed that it would.
 intrinsicsC: |-
   __m128d _mm_addsub_ps(__m128d a, __m128d b)
-  
+
   __m256d _mm256_addsub_ps(__m256d a, __m256d b)
 exceptions:
   floating: Overflow, Underflow, Invalid, Precision, Denormal

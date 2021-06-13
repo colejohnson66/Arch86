@@ -68,34 +68,36 @@ description: >-
 
   All versions \i{except} the legacy SSE version zero the unused upper SIMD register bits.
 operation: |-
-  pub fn addsubpd(dest: &mut Simd<f64>, src: Simd<f64>) {
-    dest[63..=0] = dest[63..=0] - src[63..=0];
-    dest[127..=64] = dest[127..=64] + src[127..=64];
-    // dest[Simd::max()..=128] (unmodified)
+  public void ADDSUBPD(SimdF64 dest, SimdF64 src)
+  {
+    dest[0] -= src[0];
+    dest[1] += src[1];
+    // dest[2..Simd.Max] (unmodified)
   }
 
-  pub fn vaddsubpd_vex128(dest: &mut Simd<f64>, src1: Simd<f64>, src2: Simd<f64>) {
-    dest[63..=0] = src1[63..=0] - src2[63..=0];
-    dest[127..=64] = src1[127..=64] + src2[127..=64];
-    dest[Simd::max()..=128] = 0;
+  public void VADDSUBPD_Vex128(SimdF64 dest, SimdF64 src1, SimdF64 src2)
+  {
+    dest[0] -= src[0];
+    dest[1] += src[1];
+    dest[2..Simd.Max] = 0;
   }
-
-  pub fn vaddsubpd_vex256(dest: &mut Simd<f64>, src1: Simd<f64>, src2: Simd<f64>) {
-    dest[63..=0] = src1[63..=0] - src2[63..=0];
-    dest[127..=64] = src1[127..=64] + src2[127..=64];
-    dest[191..=128] = src1[191..=128] - src2[191..=128];
-    dest[255..=192] = src1[255..=192] + src2[255..=192];
-    // dest[Simd::max()..=256] = 0; // see note 1
+  public void VADDSUBPD_Vex256(SimdF64 dest, SimdF64 src1, SimdF64 src2)
+  {
+    dest[0] -= src[0];
+    dest[1] += src[1];
+    dest[2] -= src[2];
+    dest[3] += src[3];
+    dest[4..Simd.Max] = 0; // see note 1
   }
 operationNotes:
   - >-
     The manual makes no mention of if this instruction form clears the upper bits or not.
+    It is assumed that it would.
 intrinsicsC: |-
   __m128d _mm_addsub_pd(__m128d a, __m128d b)
-  
+
   __m256d _mm256_addsub_pd(__m256d a, __m256d b)
 exceptions:
   floating: Overflow, Underflow, Invalid, Precision, Denormal
   other:
-    - "VEX encoded form: see Exceptions Type 2."
-    - "EVEX encoded form: see Exceptions Type E2."
+    - "See Exceptions Type 2."

@@ -38,13 +38,6 @@ operation: >-
     {
       AX = AX - 6;
       AH = AH - 1;
-      AF = 1;
-      CF = 1;
-    }
-    else
-    {
-      AF = 0;
-      CF = 0;
     }
     AL = AL & 0xF;
   }
