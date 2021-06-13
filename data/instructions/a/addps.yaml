@@ -116,7 +116,7 @@ operation: |-
 
   void VADDPS_Vex(SimdF32 dest, SimdF32 src1, SimdF32 src2, int kl)
   {
-    for (int n = 0; i < kl, i++)
+    for (int n = 0; n < kl, n++)
       dest[n] = src1[n] + src2[n];
     dest[kl..Simd.MAX] = 0;
   }
@@ -131,7 +131,7 @@ operation: |-
 
   void VADDPS_EvexMemory(SimdF32 dest, SimdF32 src1, SimdF32 src2, KMask k, int kl)
   {
-    for (int n = 0; i < kl, i++)
+    for (int n = 0; n < kl, n++)
     {
       if (k[n])
       {
@@ -167,11 +167,8 @@ operation: |-
     else
       SetRoundingForThisInstruction(MXCSR.rc);
 
-    for (int n = 0; i < kl, i++)
+    for (int n = 0; n < kl, n++)
     {
-      int vi = n * 64;
-      int viNext = vi + 63;
-
       if (k[n])
         dest[n] = src1[n] + src2[n];
       else if (EVEX.z)
