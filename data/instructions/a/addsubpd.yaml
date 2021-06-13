@@ -99,5 +99,4 @@ intrinsicsC: |-
   __m256d _mm256_addsub_pd(__m256d a, __m256d b)
 exceptions:
   floating: Overflow, Underflow, Invalid, Precision, Denormal
-  other:
-    - "See Exceptions Type 2."
+  other: "See Exceptions Type 2."

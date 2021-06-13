@@ -107,6 +107,4 @@ intrinsicsC: |-
   __m256d _mm256_addsub_ps(__m256d a, __m256d b)
 exceptions:
   floating: Overflow, Underflow, Invalid, Precision, Denormal
-  other:
-    - "VEX encoded form: see Exceptions Type 2."
-    - "EVEX encoded form: see Exceptions Type E2."
+  other: "See Exceptions Type 2."
