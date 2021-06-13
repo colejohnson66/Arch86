@@ -31,7 +31,6 @@
 /extension
   ...
 /instruction
-  /aesdec128kl
   /aesdec256kl
   /aesdecwide128kl
   /aesdecwide256kl

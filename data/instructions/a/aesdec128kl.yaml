@@ -1,0 +1,102 @@
+%YAML 1.2
+---
+title: Perform Ten Rounds of AES Decryption With Key Locker
+opcode:
+  - opcode: F3 0F 38 DD !(11):rrr:bbb
+    mnemonic: AESDEC128KL \i{xmm}, \i{m384}
+    encoding: RM
+    validity:
+      16: invalid # TODO: ???
+      32: valid
+      64: valid
+    cpuid: AESKLE
+    description: >-
+      Decrypts \i{xmm} using a 128 bit AES key indicated by the handle at \i{m384}.
+      Stores the result in \i{xmm}.
+encoding:
+  operands: 2
+  encodings:
+    RM:
+      - ModRM.reg[rw]
+      - ModRM.r/m[r]
+bitEncoding:
+  list:
+    - form: RM
+      bits:
+        - \bits{F3}
+        - \bits{0F}
+        - \bits{38}
+        - \bits{DD}
+        - \bits{mod xmm3 r/m}
+description: >-
+  The \c{AESDEC128KL} instruction performs ten rounds of AES decryption on the first operand using the 128 bit key indicated by the handle in the second operand.
+  If a handle violation occurs, the \reg{ZF} flag is set.
+  Otherwise, the result is stored in the first operand, and the \reg{ZF} flag is cleared.
+operation: |-
+  public void AESDEC128KL(SimdU128 arg, IntPtr handleAddress)
+  {
+    Handle handle = mem384[handleAddress];
+    bool illegalHandle = (
+      handle.reserved ||
+      (handle.Bit[0] == 1 && CPL > 0) ||
+      handle.Bit[2] == 1 ||
+      handle.type != HANDLE_KEY_TYPE_AES128);
+
+    if (illegalHandle)
+    {
+      ZF = 1;
+    }
+    else
+    {
+      (unwrappedKey, authentic) = UnwrapKeyAndAuthenticate384(handle, IWKey);
+      if (authentic)
+      {
+        arg[0] = Aes128.Decrypt(arg[0], unwrappedKey)
+        ZF = 0;
+      }
+      else
+      {
+        ZF = 1;
+      }
+    }
+
+    OF = SF = AF = PF = CF = 0;
+  }
+flags:
+  # Common values:
+  # Set according to the result.
+  # Set.
+  # Cleared.
+  # Undefined.
+  # Unmodified.
+  # Set if ... Cleared otherwise.
+  CF: Cleared.
+  PF: Cleared.
+  AF: Cleared.
+  ZF: Set if a handle violation occurs. Cleared otherwise.
+  SF: Cleared.
+  OF: Cleared.
+intrinsicsC: |-
+  unsigned char _mm_aesdec128kl_u8(__m128i *odata, __m128i idata, const void *h)
+exceptions:
+  protected:
+    "#UD":
+      - If the \instr{LOCK} prefix is used.
+      - If \cpuid{eax,00,,ecx,kl,23} is \c{0}.
+      - If \c{CR4.KL} is \c{0}.
+      - If \cpuid{eax,19,,ebx,aeskle,0} is \c{0}.
+      - If \c{CR0.EM} is \c{1}.
+      - If \c{CR4.OSFXSR} is \c{1}.
+    "#NM": If \c{CR0.TS} is \c{1}.
+    "#PF": If a page fault occurs.
+    "#GP(0)":
+      - If a memory operand effective address is outside the \reg{CS}, \reg{DS}, \reg{ES}, \reg{FS}, or \reg{GS} segment limit.
+      - If the \reg{DS}, \reg{ES}, \reg{FS}, or \reg{GS} segment is used to access memory and it contains a \c{NULL} segment selector.
+      - If the memory address is in non-canonical form.
+    "#SS(0)":
+      - If a memory operand effective address is outside the \reg{SS} segment limit.
+      - If a memory address referencing the \reg{SS} segment is in non-canonical form.
+  real: Same exceptions as protected mode.
+  virtual: Same exceptions as protected mode.
+  compatibility: Same exceptions as protected mode.
+  long: Same exceptions as protected mode.

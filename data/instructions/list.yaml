@@ -12,27 +12,28 @@ a:
   - adc
   - adcx
   - add
-  - [ addList, addpd, addps, addsd, addss ]
-  - [ addsubList, addsubpd, addsubps ]
+  - [addList, addpd, addps, addsd, addss]
+  - [addsubList, addsubpd, addsubps]
   - adox
-  - [ aesdecList, aesdec, aesdeclast ]
-  - [ aesencList, aesenc, aesenclast ]
+  - [aesdecList, aesdec, aesdeclast]
+  - aesdec128kl
+  - [aesencList, aesenc, aesenclast]
   - aesimc
   - aeskeygenassist
   - and
-  - [ andList, andpd, andps ]
+  - [andList, andpd, andps]
   - andn
-  - [ andnList, andnpd, andnps ]
+  - [andnList, andnpd, andnps]
   - arpl
 b:
   - bextr
-  - [ blendList, blendpd, blendps ]
-  - [ blendvList, blendvpd, blendvps ]
+  - [blendList, blendpd, blendps]
+  - [blendvList, blendvpd, blendvps]
   - blsi
   - blsmsk
   - blsr
   - bndcl
-  - [ bndcuList, bndcn, bndcu ]
+  - [bndcuList, bndcn, bndcu]
   - bndldx
   - bndmk
   - bndmov
