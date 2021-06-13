@@ -20,7 +20,7 @@ opcode:
       16: invalid
       32: valid
       64: valid
-    cpuid: [ AES, AVX ]
+    cpuid: [AES, AVX]
     description: >-
       Performs the last round of AES encryption using one 128 bit state from \i{xmm2} with one 128 bit round key from \i{xmm3/m128}.
       Stores the result in \i{xmm1}.
@@ -42,7 +42,7 @@ opcode:
       16: invalid
       32: valid
       64: valid
-    cpuid: [ VAES, AVX512VL ]
+    cpuid: [VAES, AVX512VL]
     description: >-
       Performs the last round of AES encryption using one 128 bit state from \i{xmm2} with one 128 bit round key from \i{xmm3/m128}.
       Stores the result in \i{xmm1}.
@@ -53,7 +53,7 @@ opcode:
       16: invalid
       32: valid
       64: valid
-    cpuid: [ VAES, AVX512VL ]
+    cpuid: [VAES, AVX512VL]
     description: >-
       Performs the last round of AES encryption using two 128 bit states from \i{ymm2} with two 128 bit round keys from \i{ymm3/m256}.
       Stores the results in \i{ymm1}.
@@ -64,7 +64,7 @@ opcode:
       16: invalid
       32: valid
       64: valid
-    cpuid: [ VAES, AVX512VL ]
+    cpuid: [VAES, AVX512VL]
     description: >-
       Performs the last round of AES encryption using four 128 bit states from \i{zmm2} with four 128 bit round keys from \i{zmm3/m512}.
       Stores the results in \i{zmm1}.
@@ -112,48 +112,47 @@ description: >-
   Failure to do this correctly will result in an incorrect result after all the rounds.
 
   The EVEX form of this instruction does \i{not} support memory fault suppression.
-  
+
   All versions \i{except} the legacy SSE version zero the unused upper SIMD register bits.
 operation: |-
-  pub fn aesenclast(dest: &mut Simd<u128>, src: Simd<u128>) {
-    let mut state = dest[127..=0];
-    state = aes_shift_rows(state);
-    state = aes_sub_bytes(state);
-
-    dest[127..=0] = state ^ src[127..=0];
-    // dest[Simd::max()..=128] (unmodified)
+  public void AESENCLAST(SimdU128 dest, SimdU128 src) {
+    U128 state = dest[0];
+    state = AesShiftRows(state);
+    state = AesSubBytes(state);
+    dest[0] = state ^ src[0];
+    // dest[1..Simd.MAX] (unmodified)
   }
 
-  fn vaesenclast(dest: &mut Simd<u128>, src1: Simd<u128>, src2: Simd<u128>, kl: u32) {
-    for n in 0..kl {
-      let vi = n * 128;
-      let vi_next = vi + 127;
-
-      let mut state = src1[vi_next..=vi];
-      state = aes_shift_rows(state);
-      state = aes_sub_bytes(state);
-      dest[vi_next..=vi] = state ^ src2[vi_next..=vi];
+  void VAESENCLAST(SimdU128 dest, SimdU128 src1, SimdU128 src2, int kl)
+  {
+    for (int n = 0; n < kl, n++) {
+      U128 state = src1[n];
+      state = AesShiftRows(state);
+      state = AesSubBytes(state);
+      dest[n] = state ^ src2[n];
     }
-
-    let end = kl * 128;
-    dest[Simd::max()..=end] = 0;
+    dest[kl..Simd.MAX] = 0;
+  }
+  public void VAESENC_Vex128(SimdU128 dest, SimdU128 src1, SimdU128 src2)
+  {
+    VAESENCLAST(dest, src1, src2, 1);
+  }
+  public void VAESENC_Vex256(SimdU128 dest, SimdU128 src1, SimdU128 src2)
+  {
+    VAESENCLAST(dest, src1, src2, 2);
   }
 
-  pub fn vaesenclast_vex128(dest: &mut Simd<u128>, src1: Simd<u128>, src2: Simd<u128>) {
-    vaesenclast(dest, src1, src2, 1);
+  public void VAESENC_Evex128(SimdU128 dest, SimdU128 src1, SimdU128 src2)
+  {
+    VAESENCLAST(dest, src1, src2, 1);
   }
-  pub fn vaesenclast_vex256(dest: &mut Simd<u128>, src1: Simd<u128>, src2: Simd<u128>) {
-    vaesenclast(dest, src1, src2, 2);
+  public void VAESENC_Evex256(SimdU128 dest, SimdU128 src1, SimdU128 src2)
+  {
+    VAESENCLAST(dest, src1, src2, 2);
   }
-
-  pub fn vaesenclast_evex128(dest: &mut Simd<u128>, src1: Simd<u128>, src2: Simd<u128>) {
-    vaesenclast(dest, src1, src2, 1);
-  }
-  pub fn vaesenclast_evex256(dest: &mut Simd<u128>, src1: Simd<u128>, src2: Simd<u128>) {
-    vaesenclast(dest, src1, src2, 2);
-  }
-  pub fn vaesenclast_evex512(dest: &mut Simd<u128>, src1: Simd<u128>, src2: Simd<u128>) {
-    vaesenclast(dest, src1, src2, 4);
+  public void VAESENC_Evex512(SimdU128 dest, SimdU128 src1, SimdU128 src2)
+  {
+    VAESENCLAST(dest, src1, src2, 4);
   }
 intrinsicsC: |-
   __m128i _mm_aesenclast(__m128i state, __m128i key)

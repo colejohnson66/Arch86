@@ -20,7 +20,7 @@ opcode:
       16: invalid
       32: valid
       64: valid
-    cpuid: [ AES, AVX ]
+    cpuid: [AES, AVX]
     description: >-
       Assist in AES round key generation using an 8 bit round constant (RCON) specified in the immediate byte and 128 bits of data specified in \i{xmm2/m128}.
       Stores the result in \i{xmm1}.
@@ -56,28 +56,32 @@ description: >-
   The VEX form of this instruction reserves \c{VEX.vvvv} (i.e. it must be set to \c{0b1111}).
   Failure to do so will result in a \c{#UD} exception.
 operation: |-
-  pub fn aeskeygenassist(dest: &mut Simd<u128>, src: Simd<u128>, roundConstant: u8) {
-    let x1: u32 = src[63..=32];
-    let x3: u32 = src[127..=96];
-    let rcon: u32 = roundConstant;
+  public void AESKEYGENASSIST(SimdU32 dest, SimdU32 src, byte roundConstant) {
+    uint x0 = src[0];
+    uint x1 = src[1];
+    uint x2 = src[2];
+    uint x3 = src[3];
+    uint rcon = roundConstant;
 
-    dest[31..=0] = sub_word(x1);
-    dest[63..=32] = rot_word(sub_word(x1)) ^ rcon;
-    dest[95..=64] = sub_word(x3);
-    dest[127..=96] = rot_word(sub_word(x3)) ^ rcon;
-    // dest[Simd::max()..=128] (unmodified)
+    dest[0] = SubWord(x1);
+    dest[1] = RotWord(SubWord(x1)) ^ rcon;
+    dest[2] = SubWord(x3);
+    dest[3] = RotWord(SubWord(x3)) ^ rcon;
+    // dest[4..Simd.MAX] (unmodified)
   }
 
-  pub fn vaeskeygenassist(dest: &mut Simd<u128>, src: Simd<u128>, roundConstant: u8) {
-    let x1: u32 = src[63..=32];
-    let x3: u32 = src[127..=96];
-    let rcon: u32 = roundConstant;
+  public void VAESKEYGENASSIST_Vex128(SimdU32 dest, SimdU32 src, byte roundConstant) {
+    uint x0 = src[0];
+    uint x1 = src[1];
+    uint x2 = src[2];
+    uint x3 = src[3];
+    uint rcon = roundConstant;
 
-    dest[31..=0] = sub_word(x1);
-    dest[63..=32] = rot_word(sub_word(x1)) ^ rcon;
-    dest[95..=64] = sub_word(x3);
-    dest[127..=96] = rot_word(sub_word(x3)) ^ rcon;
-    dest[Simd::max()..=128] = 0;
+    dest[0] = SubWord(x1);
+    dest[1] = RotWord(SubWord(x1)) ^ rcon;
+    dest[2] = SubWord(x3);
+    dest[3] = RotWord(SubWord(x3)) ^ rcon;
+    dest[4..Simd.MAX] = 0;
   }
 intrinsicsC: |-
   __m128i _mm_aeskeygenassist(__m128i data, uint8_t roundConstant)

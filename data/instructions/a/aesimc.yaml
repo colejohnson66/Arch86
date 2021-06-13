@@ -20,7 +20,7 @@ opcode:
       16: invalid
       32: valid
       64: valid
-    cpuid: [ AES, AVX ]
+    cpuid: [AES, AVX]
     description:
       Performs the "inverse mix columns" transformation on a 128 bit round key from \i{xmm2/m128}.
       Stores the result in \i{xmm1}.
@@ -55,14 +55,14 @@ description: >-
   The VEX form of this instruction reserves \c{VEX.vvvv} (i.e. it must be set to \c{0b1111}).
   Failure to do so will result in a \c{#UD} exception.
 operation: |-
-  pub fn aesimc(dest: &mut Simd<u128>, src: Simd<u128>) {
-    dest[127..=0] = aes_inv_mix_columns(src[127..=0]);
-    // dest[Simd::max()..=128] (unmodified)
+  public void AESIMC(SimdU128 dest, SimdU128 src) {
+    dest[0] = AesInvMixColumns(src[0]);
+    // dest[1..Simd.MAX] (unmodified)
   }
 
-  pub fn vaesimc_vex128(dest: &mut Simd<u128>, src: Simd<u128>) {
-    dest[127..=0] = aes_inv_mix_columns(src[127..=0]);
-    dest[Simd::max()..=128] = 0;
+  public void VAESIMC_Vex128(SimdU128 dest, SimdU128 src) {
+    dest[0] = AesInvMixColumns(src[0]);
+    dest[1..Simd.MAX] = 0;
   }
 intrinsicsC: |-
   __m128i _mm_aesimc(__m128i key)
