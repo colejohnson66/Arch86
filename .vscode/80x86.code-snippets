@@ -1,24 +1,49 @@
 {
-  "Operation Function": {
-    "scope": "yaml",
-    "prefix": "func",
-    "body": [
-      "public void $1($2)",
-      "{",
-      "  $0",
-      "}",
-    ],
-    "description": "Creates an operation function"
-  },
-  "Operation If": {
-    "scope": "yaml",
-    "prefix": "if",
-    "body": [
-      "if ($1)",
-      "{",
-      "  $0",
-      "}",
-    ],
-    "description": "Creates an if statement"
-  }
+    "Stub Page": {
+        "scope": "typescriptreact",
+        "prefix": "stub",
+        "body": [
+            "/* This file is part of 80x86.",
+            " * Copyright (c) 2021 Cole Johnson",
+            " *",
+            " * This program is free software: you can redistribute it and/or modify it under",
+            " *   the terms of the GNU Affero General Public License as published by the Free",
+            " *   Software Foundation, either version 3 of the License, or (at your option)",
+            " *   any later version.",
+            " *",
+            " * This program is distributed in the hope that it will be useful, but WITHOUT",
+            " *   ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or",
+            " *   FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License",
+            " *   for more details.",
+            " *",
+            " * You should have received a copy of the GNU Affero General Public License along",
+            " *   with this program. If not, see <https://www.gnu.org/licenses/>.",
+            " */",
+            "import { BreadcrumbProps, H1, } from \"@blueprintjs/core\";",
+            "",
+            "import A from \"../../components/A\";",
+            "import Layout from \"../../components/Layout\";",
+            "import React from \"react\";",
+            "import TOC from \"../../components/TOC\";",
+            "",
+            "export default function Page(): JSX.Element {",
+            "    const PageBreadcrumbs: BreadcrumbProps[] = [",
+            "        { text: \"$1\" },",
+            "    ];",
+            "",
+            "    return (",
+            "        <Layout canonical=\"$2\" navGroup=\"$3\" title=\"$1\" src=\"/pages/$4\" breadcrumbs={PageBreadcrumbs}>",
+            "            <TOC.Root>",
+            "                <TOC.Entry href=\"#headingStub\" text=\"Stub\" />",
+            "            </TOC.Root>",
+            "            <div id=\"content\">",
+            "                <H1>$1</H1>",
+            "                <p>",
+            "                </p>",
+            "            </div>",
+            "        </Layout>",
+            "    );",
+            "}"
+        ]
+    }
 }
