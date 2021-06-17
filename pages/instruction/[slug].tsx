@@ -495,6 +495,7 @@ export default function Page(props: PageProps): JSX.Element {
     );
 }
 
+// gets a list of all valid values of `[slug]`
 export const getStaticPaths: GetStaticPaths = async () => {
     return {
         paths: getAllInstructionsAsParams(),
@@ -502,9 +503,10 @@ export const getStaticPaths: GetStaticPaths = async () => {
     };
 };
 
+// gets the props for a specific value of `[slug]` (i.e. a specific instruction)
 export const getStaticProps: GetStaticProps = async (context) => {
     assert(context.params);
-    const data: PageProps = await getInstructionData(context.params["slug"] as string) as PageProps;
+    const data = await getInstructionData(context.params["slug"] as string) as PageProps;
     return {
         props: data,
     };
