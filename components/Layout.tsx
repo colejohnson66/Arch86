@@ -15,7 +15,7 @@
  *   with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { Breadcrumb, BreadcrumbProps, Breadcrumbs, Button, Card, Divider, Navbar } from "@blueprintjs/core";
+import { AnchorButton, Breadcrumb, BreadcrumbProps, Breadcrumbs, Card, Divider, Navbar } from "@blueprintjs/core";
 
 import A from "./A";
 import Head from "next/head";
@@ -48,12 +48,11 @@ function renderBreadcrumbs({ text, href, ...restProps }: BreadcrumbProps): JSX.E
 export default function Layout(props: LayoutProps): JSX.Element {
     function navItem(group: NavGroup, href: string, text: string) {
         return (
-            <A href={href}>
-                <Button
-                    active={props.navGroup === group}
-                    className="bp3-minimal"
-                    text={text} />
-            </A>
+            <AnchorButton
+                active={props.navGroup === group}
+                className="bp3-minimal"
+                href={href}
+                text={text} />
         );
     }
 
