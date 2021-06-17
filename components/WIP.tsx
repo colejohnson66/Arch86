@@ -16,16 +16,20 @@
  */
 import { Callout } from "@blueprintjs/core";
 import React from "react";
+import { strict as assert } from "assert";
 
 type WipProps = {
-    type: "page" | "section";
+    page?: boolean;
+    section?: boolean;
     wording?: boolean;
 };
 
 export default function WIP(props: WipProps): JSX.Element {
+    assert((!!props.page && !props.section) ||
+        (!props.page && !!props.section));
     return (
         <Callout intent="warning">
-            This {props.type} is a work in progress.
+            This {props.page ? "page" : "section"} is a work in progress.
             It is incomplete, and may not be completely accurate or up to date.
             {props.wording && " The wording or grammar is also in the process of being improved."}
         </Callout>

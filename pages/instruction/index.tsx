@@ -103,7 +103,7 @@ export default function Page(props: PageProps): JSX.Element {
                 </p>
 
                 <H2 id="headingList">List</H2>
-                <WIP type="section" />
+                <WIP section />
                 <Callout intent="primary">
                     This list is updated manually, and, as such, may not be current.
                     It is currently being created to follow version 074 of the <A href="https://software.intel.com/content/www/us/en/develop/articles/intel-sdm.html">Intel SDM</A>.

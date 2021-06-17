@@ -264,7 +264,7 @@ export default function Page(props: PageProps): JSX.Element {
             </TOC.Root>
             <div id="content">
                 <H1><Code>{props.id.toUpperCase()}</Code>: {formatStringToJsx(props.title)}</H1>
-                {props.wip && <WIP type="page" />}
+                {props.wip && <WIP page />}
                 <Callout intent="primary">
                     For information about interpreting this page, see <A href="/instruction/help">the help page</A>.
                 </Callout>

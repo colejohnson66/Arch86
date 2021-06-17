@@ -42,7 +42,7 @@ export default function Page(): JSX.Element {
                 </p>
 
                 <H2 id="headingHistory">History</H2>
-                <WIP type="section" />
+                <WIP section />
                 <UL>
                     <li><A href="/architecture/8086">8086</A></li>
                     <li><A href="/architecture/80186">80186</A></li>

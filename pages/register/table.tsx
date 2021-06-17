@@ -63,7 +63,7 @@ export default function Page(): JSX.Element {
             </TOC.Root>
             <div id="content">
                 <H1>Table Registers</H1>
-                <WIP type="page" wording />
+                <WIP page wording />
                 <p>
                     x86 has three main &quot;table&quot; registers: the Global Descriptor Table Register (<Code>GDTR</Code>), the Interrupt Descriptor Table Register (<Code>IDTR</Code>), and the Local Descriptor Table Register (<Code>LDTR</Code>).
                     The Global Descriptor Table contains information about the various memory segments, the Interrupt Descriptor Table contains execution vectors for interrupts, and the Local Descriptor Table contains information about the currently executing task&apos;s segments.
