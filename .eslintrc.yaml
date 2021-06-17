@@ -8,6 +8,7 @@ extends:
   - "eslint:recommended"
   - "plugin:react/recommended"
   - "plugin:@typescript-eslint/recommended"
+  - "plugin:@next/next/recommended"
 parser: "@typescript-eslint/parser"
 parserOptions:
   ecmaFeatures:
@@ -32,8 +33,7 @@ rules:
   brace-style: error
   comma-dangle:
     - error
-    -
-      arrays: always-multiline
+    - arrays: always-multiline
       objects: always-multiline
       imports: never
       exports: never
@@ -58,8 +58,7 @@ rules:
   jsx-quotes: error
   key-spacing:
     - error
-    -
-      beforeColon: false
+    - beforeColon: false
       afterColon: true
       mode: strict
   keyword-spacing: error
@@ -111,4 +110,5 @@ rules:
   template-tag-spacing: error
   unicode-bom: error
   yoda: error
+  "@next/next/no-img-element": "off"
   "@typescript-eslint/no-use-before-define": error
