@@ -226,7 +226,7 @@ export default function Page(props: PageProps): JSX.Element {
         </A>);
 
     return (
-        <Layout canonical={`/instruction/${props.id}`} navGroup="instruction" title={`${uppercaseMnemonic(props.id)}: ${formatStringPlaintext(props.title)}`} src="/pages/instruction/[slug].tsx" dataSrc={`/data/instructions/${props.id[0]}/${props.id}.yaml`} breadcrumbs={PageBreadcrumbs}>
+        <Layout canonical={`/instruction/${props.id}`} navGroup="instruction" title={`${uppercaseMnemonic(props.id)}: ${formatStringPlaintext(props.title)}`} src="/pages/instruction/%5Bslug%5D.tsx" dataSrc={`/data/instructions/${props.id[0]}/${props.id}.yaml`} breadcrumbs={PageBreadcrumbs}>
             <TOC.Root>
                 <TOC.Entry href="#headingEncoding" text="Encoding" />
                 {props.bitEncoding &&
