@@ -31,7 +31,7 @@ export default function Page(): JSX.Element {
     return (
         <Layout canonical="/" navGroup="home" src="/pages/index.tsx">
             <div id="content">
-                <img src="/img/icon.svg" alt="80x86 Icon" width="64" height="64" style={IconStyle} />
+                <img src="/img/icon.svg" alt="" width="64" height="64" style={IconStyle} />
                 <H1>80x86 Website</H1>
                 <p>
                     This website is designed to be a digital reference version of the x86 processor architecture.
