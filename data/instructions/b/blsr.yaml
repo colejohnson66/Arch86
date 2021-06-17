@@ -59,7 +59,7 @@ flags:
   ZF: Set according to the result.
   SF: Set according to the result.
   OF: Cleared.
-intrinsicsC: |-
+intrinsics: |-
   uint32_t _blsr_u32(uint32_t src)
   uint64_t _blsr_u64(uint64_t src)
 exceptions:

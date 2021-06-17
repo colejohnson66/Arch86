@@ -52,7 +52,7 @@ operation: |-
     dest.lower = addr.base;
     dest.upper = ~lea(addr);
   }
-intrinsicsC: |-
+intrinsics: |-
   void *_bnd_set_ptr_bounds(const void *address, size_t size)
 exceptions:
   protected:

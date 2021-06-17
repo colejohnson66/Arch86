@@ -158,7 +158,7 @@ operation: |-
   {
     VAESDEC(dest, src1, src2, 4);
   }
-intrinsicsC: |-
+intrinsics: |-
   __m128i _mm_aesdec(__m128i state, __m128i key)
 
   __m256i _mm256_aesdec_epi128(__m256i state, __m256i key)

@@ -39,7 +39,7 @@ operation: |-
   {
     CacheLineDemote(ptr);
   }
-intrinsicsC: |-
+intrinsics: |-
   void _cldemote(const void* ptr)
 exceptions:
   protected:

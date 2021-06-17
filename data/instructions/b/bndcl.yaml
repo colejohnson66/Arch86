@@ -62,7 +62,7 @@ operation: |-
       #BR;
     }
   }
-intrinsicsC: |-
+intrinsics: |-
   void _bnd_chk_ptr_lbounds(const void *address)
 exceptions:
   protected:

@@ -112,7 +112,7 @@ operation: |-
   {
     VBLENDVPS_Vex(dest, src1, src2, src3, 8);
   }
-intrinsicsC: |-
+intrinsics: |-
   __m128 _mm_blendv_ps(__m128 a, __m128 b, __m128 mask)
   __m256 _mm256_blendv_ps(__m256 a, __m256 b, __m256 mask)
 exceptions:

@@ -188,7 +188,7 @@ operation: |-
   {
     VADDPD_EvexRegister(dest, src1, src2, k, 8);
   }
-intrinsicsC: |-
+intrinsics: |-
   __m128d _mm_add_pd(__m128d a, __m128d b)
   __m128d _mm_mask_add_pd(__m128d s, __mmask8 k, __m128d a, __m128d b)
   __m128d _mm_maskz_add_pd(__mmask8 k, __m128d a, __m128d b)

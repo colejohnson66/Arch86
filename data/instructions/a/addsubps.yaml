@@ -101,7 +101,7 @@ operationNotes:
   - >-
     The manual makes no mention of if this instruction form clears the upper bits or not.
     It is assumed that it would.
-intrinsicsC: |-
+intrinsics: |-
   __m128d _mm_addsub_ps(__m128d a, __m128d b)
 
   __m256d _mm256_addsub_ps(__m256d a, __m256d b)

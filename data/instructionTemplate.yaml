@@ -44,7 +44,7 @@ flags:
   ZF:
   SF:
   OF:
-intrinsicsC: |-
+intrinsics: |-
   Cleanup Regex:
     [A-Z1-3]+:?\s+([^ ]+) ([^ ]+) ?\(([^\)]+)\);
     $1 $2($3)

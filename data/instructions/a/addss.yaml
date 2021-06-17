@@ -123,7 +123,7 @@ operation: |-
     dest[3] = src1[3];
     dest[4..Simd.MAX] = 0;
   }
-intrinsicsC: |-
+intrinsics: |-
   __m128 _mm_add_ss(__m128 a, __m128 b)
   __m128 _mm_add_round_ss(__m128 a, __m128 b, int32_t rounding)
   __m128 _mm_mask_add_ss(__m128 s, __mmask8 k, __m128 a, __m128 b)

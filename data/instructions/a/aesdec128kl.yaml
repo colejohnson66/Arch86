@@ -76,7 +76,7 @@ flags:
   ZF: Set if a handle violation occurs. Cleared otherwise.
   SF: Cleared.
   OF: Cleared.
-intrinsicsC: |-
+intrinsics: |-
   unsigned char _mm_aesdec128kl_u8(__m128i *odata, __m128i idata, const void *h)
 exceptions:
   protected:

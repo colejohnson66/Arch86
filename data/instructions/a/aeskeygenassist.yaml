@@ -85,7 +85,7 @@ operation: |-
     dest[3] = RotWord(SubWord(x3)) ^ rcon;
     dest[4..Simd.MAX] = 0;
   }
-intrinsicsC: |-
+intrinsics: |-
   __m128i _mm_aeskeygenassist(__m128i data, uint8_t roundConstant)
 exceptions:
   floating: None

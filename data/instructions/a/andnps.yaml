@@ -186,7 +186,7 @@ operation: |-
   {
     VANDNPS_EvexRegister(dest, src1, src2, k, 16);
   }
-intrinsicsC: |-
+intrinsics: |-
   __m128d _mm_andnot_ps(__m128d a, __m128d b)
   __m128d _mm_mask_andnot_ps(__m128d s, __mmask16 k, __m128d a, __m128d b)
   __m128d _mm_maskz_andnot_ps(__mmask16 k, __m128d a, __m128d b)

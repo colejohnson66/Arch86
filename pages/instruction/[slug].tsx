@@ -112,8 +112,7 @@ type PageProps = {
     operationNotes: string[];
     examples?: MaybeArray<string>;
     flags?: Flags;
-    intrinsicsC?: string;
-    intrinsicsRust?: string;
+    intrinsics?: string;
     exceptions: Exceptions;
     changes?: Changes;
     refs?: Reference[];
@@ -158,7 +157,6 @@ function paragraphsFromString(str: string): JSX.Element[] {
 
 function hasValidAsteriskValidity(opcodes: Opcode[]): boolean {
     for (let i = 0; i < opcodes.length; i++) {
-        // The weird cast shuts TS up
         const validity = opcodes[i].validity;
         if (validity[16] === "valid*" ||
             validity[32] === "valid*" ||
@@ -241,10 +239,8 @@ export default function Page(props: PageProps): JSX.Element {
                     <TOC.Entry href="#headingExamples" text={plural(props.examples, "Example", "Examples")} />}
                 {props.flags &&
                     <TOC.Entry href="#headingFlags" text="Flags Affected" />}
-                {props.intrinsicsC &&
-                    <TOC.Entry href="#headingIntrinsicsC" text="Intrinsics - C" />}
-                {props.intrinsicsRust &&
-                    <TOC.Entry href="#headingIntrinsicsRust" text="Intrinsics - Rust" />}
+                {props.intrinsics &&
+                    <TOC.Entry href="#headingIntrinsics" text="C Intrinsics" />}
                 <TOC.Entry href="#headingExceptions" text="Exceptions">
                     {props.exceptions.protected &&
                         <TOC.Entry href="#headingExceptionsProtected" text="Protected Mode" />}
@@ -421,25 +417,12 @@ export default function Page(props: PageProps): JSX.Element {
                         </dl>
                     </>}
 
-                {props.intrinsicsC &&
+                {props.intrinsics &&
                     <>
-                        <H2 id="headingIntrinsicsC">Intrinsics - C</H2>
+                        <H2 id="headingIntrinsics">C Intrinsics</H2>
                         <Scrollable>
                             <SyntaxHighlighter language="c-like" style={SyntaxHighlighterDarkTheme}>
-                                {props.intrinsicsC}
-                            </SyntaxHighlighter>
-                        </Scrollable>
-                    </>}
-
-                {props.intrinsicsRust &&
-                    <>
-                        <H2 id="headingIntrinsicsRust">Intrinsics - Rust</H2>
-                        <Callout intent="primary">
-                            These intrinsics are from an upcoming crate and may change.
-                        </Callout>
-                        <Scrollable>
-                            <SyntaxHighlighter language="rust" style={SyntaxHighlighterDarkTheme}>
-                                {props.intrinsicsRust}
+                                {props.intrinsics}
                             </SyntaxHighlighter>
                         </Scrollable>
                     </>}

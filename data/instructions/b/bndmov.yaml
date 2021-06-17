@@ -87,7 +87,7 @@ operation: |-
   {
     dest = src;
   }
-intrinsicsC: |-
+intrinsics: |-
   void *_bnd_copy_ptr_bounds(const void *q, const void *r)
 exceptions:
   protected:

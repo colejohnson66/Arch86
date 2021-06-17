@@ -68,7 +68,7 @@ flags:
   ZF: Set according to the result.
   SF: Undefined.
   OF: Cleared.
-intrinsicsC: |-
+intrinsics: |-
   uint32_t _bextr_u32(uint32_t src, uint32_t start, uint32_t len)
   uint64_t _bextr_u64(uint64_t src, uint32_t start, uint32_t len)
 exceptions:

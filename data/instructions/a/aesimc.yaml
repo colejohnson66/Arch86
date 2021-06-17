@@ -66,7 +66,7 @@ operation: |-
     dest[0] = AesInvMixColumns(src[0]);
     dest[1..Simd.MAX] = 0;
   }
-intrinsicsC: |-
+intrinsics: |-
   __m128i _mm_aesimc(__m128i key)
 exceptions:
   floating: None
