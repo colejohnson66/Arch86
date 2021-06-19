@@ -66,6 +66,10 @@ function newUrl(slug, file) {
     ];
     const date = execFileSync("git", args).toString().trim();
 
+    // handle `index.tsx` pages
+    if (slug.endsWith("/"))
+        slug = slug.substring(0, slug.length - 1);
+
     siteMapLines.push(
         "  <url>",
         `    <loc>https://80x86.dev/${slug}</loc>`,
