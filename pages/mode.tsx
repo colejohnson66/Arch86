@@ -14,7 +14,8 @@
  * You should have received a copy of the GNU Affero General Public License along
  *   with this program. If not, see <https://www.gnu.org/licenses/>.
  */
-import { Breadcrumb, Col, Container, Row } from "react-bootstrap";
+import { Breadcrumb, Container } from "../components/Bootstrap";
+import { Col, Row } from "react-bootstrap";
 import Layout, { Title } from "../components/Layout";
 
 import A from "../components/A";
@@ -28,9 +29,9 @@ export default function Page(): JSX.Element {
         <Layout canonical="/mode" navGroup="mode" src="/pages/mode.tsx">
             <Title title="Processor Modes" />
             <Container fluid>
-                <Breadcrumb>
-                    <Breadcrumb.Item active>Processor Modes</Breadcrumb.Item>
-                </Breadcrumb>
+                <Breadcrumb.Root>
+                    <Breadcrumb.Item>Processor Modes</Breadcrumb.Item>
+                </Breadcrumb.Root>
                 <Row>
                     <TOC.Root>
                         <TOC.Entry href="#headingList" text="List of Modes" />

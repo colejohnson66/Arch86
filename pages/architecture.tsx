@@ -14,7 +14,8 @@
  * You should have received a copy of the GNU Affero General Public License along
  *   with this program. If not, see <https://www.gnu.org/licenses/>.
  */
-import { Breadcrumb, Col, Container, Row } from "react-bootstrap";
+import { Breadcrumb, Container } from "../components/Bootstrap";
+import { Col, Row } from "react-bootstrap";
 import Layout, { Title } from "../components/Layout";
 
 import A from "../components/A";
@@ -29,9 +30,9 @@ export default function Page(): JSX.Element {
         <Layout canonical="/architecture" navGroup="architecture" src="/pages/architecture.tsx">
             <Title title="Microarchitecture" />
             <Container fluid>
-                <Breadcrumb>
-                    <Breadcrumb.Item active>Microarchitecture</Breadcrumb.Item>
-                </Breadcrumb>
+                <Breadcrumb.Root>
+                    <Breadcrumb.Item>Microarchitecture</Breadcrumb.Item>
+                </Breadcrumb.Root>
                 <Row>
                     <TOC.Root>
                         <TOC.Entry href="#headingHistory" text="History" />

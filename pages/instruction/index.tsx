@@ -1,3 +1,4 @@
+import { Alert, Col, Row } from "react-bootstrap";
 /* This file is part of 80x86.
  * Copyright (c) 2021 Cole Johnson
  *
@@ -14,7 +15,7 @@
  * You should have received a copy of the GNU Affero General Public License along
  *   with this program. If not, see <https://www.gnu.org/licenses/>.
  */
-import { Alert, Breadcrumb, Col, Container, Row } from "react-bootstrap";
+import { Breadcrumb, Container } from "../../components/Bootstrap";
 import Layout, { Title } from "../../components/Layout";
 
 import A from "../../components/A";
@@ -84,9 +85,9 @@ export default function Page(props: PageProps): JSX.Element {
         <Layout canonical="/instruction" navGroup="instruction" src="/pages/instruction/index.tsx">
             <Title title="Instructions" />
             <Container fluid>
-                <Breadcrumb>
-                    <Breadcrumb.Item active>Instructions</Breadcrumb.Item>
-                </Breadcrumb>
+                <Breadcrumb.Root>
+                    <Breadcrumb.Item>Instructions</Breadcrumb.Item>
+                </Breadcrumb.Root>
                 <Row>
                     <TOC.Root>
                         <TOC.Entry href="#headingList" text="List">

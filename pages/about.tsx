@@ -14,7 +14,8 @@
  * You should have received a copy of the GNU Affero General Public License along
  *   with this program. If not, see <https://www.gnu.org/licenses/>.
  */
-import { Breadcrumb, Col, Container, Row } from "react-bootstrap";
+import { Breadcrumb, Container } from "../components/Bootstrap";
+import { Col, Row } from "react-bootstrap";
 import Layout, { Title } from "../components/Layout";
 
 import A from "../components/A";
@@ -27,9 +28,9 @@ export default function Page(): JSX.Element {
         <Layout canonical="/about" navGroup="about" src="/pages/about.tsx">
             <Title title="About" />
             <Container fluid>
-                <Breadcrumb>
-                    <Breadcrumb.Item active>About</Breadcrumb.Item>
-                </Breadcrumb>
+                <Breadcrumb.Root>
+                    <Breadcrumb.Item>About</Breadcrumb.Item>
+                </Breadcrumb.Root>
                 <Row>
                     <TOC.Root>
                         <TOC.Entry href="#headingStack" text="Software Stack" />

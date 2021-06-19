@@ -14,7 +14,8 @@
  * You should have received a copy of the GNU Affero General Public License along
  *   with this program. If not, see <https://www.gnu.org/licenses/>.
  */
-import { Alert, Breadcrumb, Col, Container, Row, Table } from "react-bootstrap";
+import { Alert, Col, Row, Table } from "react-bootstrap";
+import { Breadcrumb, Container } from "../../components/Bootstrap";
 import { GetStaticPaths, GetStaticProps } from "next";
 import Layout, { Title } from "../../components/Layout";
 import { formatStringPlaintext, formatStringToJsx } from "../../lib/FormatStringToJsx";
@@ -219,10 +220,10 @@ export default function Page(props: PageProps): JSX.Element {
         <Layout canonical={`/instruction/${props.id}`} navGroup="instruction" src="/pages/instruction/%5Bslug%5D.tsx" dataSrc={`/data/instructions/${props.id[0]}/${props.id}.yaml`}>
             <Title title={`${uppercaseMnemonic(props.id)}: ${formatStringPlaintext(props.title)}`} />
             <Container fluid>
-                <Breadcrumb>
+                <Breadcrumb.Root>
                     <Breadcrumb.Item href="/instruction">Instructions</Breadcrumb.Item>
-                    <Breadcrumb.Item active>{uppercaseMnemonic(props.id)}</Breadcrumb.Item>
-                </Breadcrumb>
+                    <Breadcrumb.Item>{uppercaseMnemonic(props.id)}</Breadcrumb.Item>
+                </Breadcrumb.Root>
                 <Row>
                     <TOC.Root>
                         <TOC.Entry href="#headingEncoding" text="Encoding" />

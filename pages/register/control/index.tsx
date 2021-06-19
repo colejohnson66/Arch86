@@ -14,7 +14,8 @@
  * You should have received a copy of the GNU Affero General Public License along
  *   with this program. If not, see <https://www.gnu.org/licenses/>.
  */
-import { Breadcrumb, Col, Container, Row } from "react-bootstrap";
+import { Breadcrumb, Container } from "../../../components/Bootstrap";
+import { Col, Row } from "react-bootstrap";
 import Layout, { Title } from "../../../components/Layout";
 
 import A from "../../../components/A";
@@ -29,10 +30,10 @@ export default function Page(): JSX.Element {
         <Layout canonical="/register/control" navGroup="register" src="/pages/register/control/index.tsx">
             <Title title="Control Registers" />
             <Container fluid>
-                <Breadcrumb>
+                <Breadcrumb.Root>
                     <Breadcrumb.Item href="/register">Registers</Breadcrumb.Item>
-                    <Breadcrumb.Item active>Control Registers</Breadcrumb.Item>
-                </Breadcrumb>
+                    <Breadcrumb.Item>Control Registers</Breadcrumb.Item>
+                </Breadcrumb.Root>
                 <Row>
                     <TOC.Root>
                         <TOC.Entry href="#headingList" text="List of Control Registers">
