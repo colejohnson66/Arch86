@@ -63,7 +63,7 @@ export default function Layout(props: LayoutProps): JSX.Element {
             </Head>
             <header>
                 <Container fluid>
-                    <Navbar bg="light">
+                    <Navbar bg="dark" className="navbar-dark">
                         <Nav>
                             {navItem("home", "/", "80x86")}
                             {navItem("history", "/history", "History")}

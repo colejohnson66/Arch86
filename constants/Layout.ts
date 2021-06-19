@@ -18,11 +18,13 @@ export default {
     toc: {
         sm: 12,
         md: 3,
+        lg: 2,
         id: "toc",
     },
     content: {
         sm: 12,
         md: true,
+        lg: true,
         id: "content",
     },
 };

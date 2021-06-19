@@ -19,7 +19,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "bootstrap": "^5.0.1",
+    "bootswatch": "^5.0.1",
     "next": "^11.0.0",
     "react": "^17.0.2",
     "react-bootstrap": "^2.0.0-beta.2",
@@ -29,7 +29,6 @@
     "yaml": "^1.10.2"
   },
   "devDependencies": {
-    "@types/bootstrap": "^5.0.16",
     "@types/node": "^15.12.2",
     "@types/react": "^17.0.11",
     "@types/react-dom": "^17.0.7",

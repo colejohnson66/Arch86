@@ -45,7 +45,7 @@ export default function Page(): JSX.Element {
                         <h2 id="headingStack">Software Stack</h2>
                         <p>
                             This site is build using <A href="https://nextjs.org/">Next.js</A> (itself built on <A href="https://reactjs.org/">React.js</A>) and deployed on <A href="https://vercel.com/">Vercel</A>.
-                            {" "}<A href="https://getbootstrap.com/">Bootstrap</A> is used for theming and layout.
+                            {" "}<A href="https://getbootstrap.com/">Bootstrap</A> is used for layout, along with <A href="https://bootswatch.com/darkly/">Bootswatch&apos;s &quot;Darkly&quot; theme</A>.
                         </p>
                         <p>
                             Additionally, the following npm packages are (directly) used:

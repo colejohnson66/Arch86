@@ -15,7 +15,7 @@
  *   with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import "bootstrap/dist/css/bootstrap.min.css";
+import "bootswatch/dist/darkly/bootstrap.min.css";
 import "../css/global.css";
 import "../css/instruction.css";
 import "../css/toc.css";
