@@ -1,6 +1,6 @@
 %YAML 1.2
 ---
-title: Add Scalar Double-Precision Floating-Point Values
+title: Add Scalar Double-Precision Floating-Point Value
 opcode:
   - opcode: F2 0F 58 /r
     mnemonic: ADDSD \i{xmm1}, \i{xmm2/m64}

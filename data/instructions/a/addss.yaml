@@ -1,6 +1,6 @@
 %YAML 1.2
 ---
-title: Add Scalar Single-Precision Floating-Point Values
+title: Add Scalar Single-Precision Floating-Point Value
 opcode:
   - opcode: F3 0F 58 /r
     mnemonic: ADDSS \i{xmm1}, \i{xmm2/m32}
