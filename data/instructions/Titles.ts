@@ -138,6 +138,19 @@ const InstructionTitles: IDictionary<string> = {
     cwd: "Convert Word to Doubleword Through DX",
     cdq: "Convert Doubleword to Quadword Through EDX",
     cqo: "Convert Quadword to Octoword Through RDX",
+
+    daa: "Decimal Adjust \\reg{AL} After Addition",
+    das: "Decimal Adjust \\reg{AL} After Subtraction",
+    dec: "Decrement by One",
+    div: "Unsigned Divide",
+    divList: "Divide (Vector)",
+    divpd: "Divide Packed Double-Precision Floating-Point Values",
+    divps: "Divide Packed Single-Precision Floating-Point Values",
+    divsd: "Divide Scalar Double-Precision Floating-Point Value",
+    divss: "Divide Scalar Single-Precision Floating-Point Value",
+    dpList: "Dot Product (Vector)",
+    dppd: "Dot Product of Packed Double-Precision Floating Point Values",
+    dpps: "Dot Product of Packed Single-Precision Floating Point Values",
 };
 
 export default InstructionTitles;

@@ -1,0 +1,16 @@
+daa
+das
+dec
+div
+divpd
+vdivpd
+divps
+vdivps
+divsd
+vdivsd
+divss
+vdivss
+dppd
+vdppd
+dpps
+vdpps
