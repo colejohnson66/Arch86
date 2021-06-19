@@ -1,6 +1,6 @@
 %YAML 1.2
 ---
-title: Clear \c{AC} in \reg{EFLAGS}
+title: Clear Alignment Check Flag
 opcode:
   - opcode: NP 0F 01 CA
     mnemonic: CLAC

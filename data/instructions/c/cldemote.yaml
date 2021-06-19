@@ -1,6 +1,6 @@
 %YAML 1.2
 ---
-title: Cache Line Demote
+title: Demote Cache Line
 opcode:
   - opcode: NP 0F 1C /0
     mnemonic: CLDEMOTE \i{m8}
