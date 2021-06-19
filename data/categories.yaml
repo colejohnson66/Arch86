@@ -12,4 +12,14 @@ register:
   description: Pages related to processor registers
   list:
     - /register
+    - /register/control
     - /register/flags
+    - /register/gpr
+    - /register/table
+  subcategories:
+    control:
+      description: Pages related to control registers
+      list:
+        - /register/control
+        - /register/cr0
+        - /register/cr4

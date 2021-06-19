@@ -15,7 +15,7 @@
  *   with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { BreadcrumbProps, H1, ITreeNode, Tree } from "@blueprintjs/core";
+import { BreadcrumbProps, H1, Tree, TreeNodeInfo } from "@blueprintjs/core";
 
 import { GetStaticProps } from "next";
 import IDictionary from "../types/IDictionary";
@@ -24,8 +24,8 @@ import React from "react";
 import { strict as assert } from "assert";
 import { getCategoryData } from "../lib/category";
 
-function buildTreeNode(entry: CategoryEntry, path: string): ITreeNode[] {
-    const ret: ITreeNode[] = [];
+function buildTreeNode(entry: CategoryEntry, path: string): TreeNodeInfo[] {
+    const ret: TreeNodeInfo[] = [];
 
     entry.list.forEach((item, idx) => {
         ret.push({
@@ -35,11 +35,16 @@ function buildTreeNode(entry: CategoryEntry, path: string): ITreeNode[] {
     });
 
     if (entry.subcategories) {
-        Object.keys(entry.subcategories).forEach((name) => {
+        Object.keys(entry.subcategories).forEach((name, idx) => {
             // This assert is needed to shut the Typescript compiler up
             assert(entry.subcategories);
             const data = entry.subcategories[name];
-            ret.push(...buildTreeNode(data, `${path}/${name}`));
+            ret.push({
+                id: `${path}/subcategories/${idx}`,
+                label: name,
+                isExpanded: true,
+                childNodes: buildTreeNode(data, `${path}/subcategories/${idx}/${name}`),
+            });
         });
     }
     return ret;
@@ -59,14 +64,13 @@ export default function Page(props: PageProps): JSX.Element {
         { text: "Categories" },
     ];
 
-    const TreeNodes: ITreeNode[] = [];
-    Object.keys(props.data).forEach((category) => {
-        TreeNodes.push({
+    const TreeNodes: TreeNodeInfo[] = Object.keys(props.data).map((category) => {
+        return {
             id: category,
             label: category,
             isExpanded: true,
             childNodes: buildTreeNode(props.data[category], category),
-        });
+        };
     });
 
     return (
