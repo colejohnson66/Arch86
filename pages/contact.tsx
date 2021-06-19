@@ -15,8 +15,8 @@
  *   with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 import { BreadcrumbProps, H1, UL } from "@blueprintjs/core";
+import Layout, { Title } from "../components/Layout";
 
-import Layout from "../components/Layout";
 import React from "react";
 
 export default function Page(): JSX.Element {
@@ -25,7 +25,8 @@ export default function Page(): JSX.Element {
     ];
 
     return (
-        <Layout canonical="/contact" title="Contact" src="/pages/contact.tsx" breadcrumbs={PageBreadcrumbs}>
+        <Layout canonical="/contact" src="/pages/contact.tsx" breadcrumbs={PageBreadcrumbs}>
+            <Title title="Contact" />
             <div id="content">
                 <H1>Contact</H1>
                 <p>

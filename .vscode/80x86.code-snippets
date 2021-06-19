@@ -20,9 +20,9 @@
             " *   with this program. If not, see <https://www.gnu.org/licenses/>.",
             " */",
             "import { BreadcrumbProps, H1 } from \"@blueprintjs/core\";",
+            "import Layout, { Title } from \"../$1components/Layout\";",
             "",
             "import A from \"../$1components/A\";",
-            "import Layout from \"../$1components/Layout\";",
             "import React from \"react\";",
             "import TOC from \"../$1components/TOC\";",
             "",
@@ -32,18 +32,21 @@
             "    ];",
             "",
             "    return (",
-            "        <Layout canonical=\"$3\" navGroup=\"$4\" title=\"$2\" src=\"/pages/$5\" breadcrumbs={PageBreadcrumbs}>",
+            "        <Layout canonical=\"$3\" navGroup=\"$4\" src=\"/pages$3$5\" breadcrumbs={PageBreadcrumbs}>",
+            "            <Title title=\"$2\" />",
             "            <TOC.Root>",
             "                <TOC.Entry href=\"#headingStub\" text=\"Stub\" />",
             "            </TOC.Root>",
             "            <div id=\"content\">",
             "                <H1>$2</H1>",
             "                <p>",
+            "                    $0",
             "                </p>",
             "            </div>",
             "        </Layout>",
             "    );",
-            "}"
+            "}",
+            ""
         ]
     }
 }

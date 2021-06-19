@@ -16,10 +16,10 @@
  */
 
 import { BreadcrumbProps, H1, Tree, TreeNodeInfo } from "@blueprintjs/core";
+import Layout, { Title } from "../components/Layout";
 
 import { GetStaticProps } from "next";
 import IDictionary from "../types/IDictionary";
-import Layout from "../components/Layout";
 import React from "react";
 import { strict as assert } from "assert";
 import { getCategoryData } from "../lib/category";
@@ -74,7 +74,8 @@ export default function Page(props: PageProps): JSX.Element {
     });
 
     return (
-        <Layout canonical="/category" title="Categories" src="/pages/category.tsx" breadcrumbs={PageBreadcrumbs}>
+        <Layout canonical="/category" src="/pages/category.tsx" breadcrumbs={PageBreadcrumbs}>
+            <Title title="Categories" />
             <div id="content">
                 <H1>Categories</H1>
                 <pre>{JSON.stringify(TreeNodes, null, 2)}</pre>

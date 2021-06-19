@@ -29,7 +29,7 @@ export default function Page(): JSX.Element {
     };
 
     return (
-        <Layout canonical="/" navGroup="home" src="/pages/index.tsx">
+        <Layout canonical="/" navGroup="home" homePage src="/pages/index.tsx">
             <div id="content">
                 <img src="/img/icon.svg" alt="" width="64" height="64" style={IconStyle} />
                 <H1>80x86 Website</H1>

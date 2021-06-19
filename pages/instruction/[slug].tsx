@@ -14,16 +14,15 @@
  * You should have received a copy of the GNU Affero General Public License along
  *   with this program. If not, see <https://www.gnu.org/licenses/>.
  */
-
 import { BreadcrumbProps, Callout, Code, Divider, H1, H2, H3, H5, HTMLTable, OL, UL } from "@blueprintjs/core";
 import { GetStaticPaths, GetStaticProps } from "next";
+import Layout, { Title } from "../../components/Layout";
 import { formatStringPlaintext, formatStringToJsx } from "../../lib/FormatStringToJsx";
 import { getAllInstructionsAsParams, getInstructionData } from "../../lib/instruction";
 
 import A from "../../components/A";
 import DateTime from "../../components/DateTime";
 import IDictionary from "../../types/IDictionary";
-import Layout from "../../components/Layout";
 import MaybeArray from "../../types/MaybeArray";
 import React from "react";
 import Ref from "../../components/Ref";
@@ -224,7 +223,8 @@ export default function Page(props: PageProps): JSX.Element {
         </A>);
 
     return (
-        <Layout canonical={`/instruction/${props.id}`} navGroup="instruction" title={`${uppercaseMnemonic(props.id)}: ${formatStringPlaintext(props.title)}`} src="/pages/instruction/%5Bslug%5D.tsx" dataSrc={`/data/instructions/${props.id[0]}/${props.id}.yaml`} breadcrumbs={PageBreadcrumbs}>
+        <Layout canonical={`/instruction/${props.id}`} navGroup="instruction" src="/pages/instruction/%5Bslug%5D.tsx" dataSrc={`/data/instructions/${props.id[0]}/${props.id}.yaml`} breadcrumbs={PageBreadcrumbs}>
+            <Title title={`${uppercaseMnemonic(props.id)}: ${formatStringPlaintext(props.title)}`} />
             <TOC.Root>
                 <TOC.Entry href="#headingEncoding" text="Encoding" />
                 {props.bitEncoding &&

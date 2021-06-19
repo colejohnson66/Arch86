@@ -15,10 +15,10 @@
  *   with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 import { BreadcrumbProps, Code, H1, H2, H3, UL } from "@blueprintjs/core";
+import Layout, { Title } from "../../components/Layout";
 
 import A from "../../components/A";
 import Instruction from "../../components/Instruction";
-import Layout from "../../components/Layout";
 import React from "react";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import SyntaxHighlighterDarkTheme from "react-syntax-highlighter/dist/cjs/styles/hljs/atom-one-dark";
@@ -51,7 +51,8 @@ export default function Page(): JSX.Element {
     ];
 
     return (
-        <Layout canonical="/register/table" navGroup="register" title="Table Registers" src="/pages/register/table.tsx" breadcrumbs={PageBreadcrumbs}>
+        <Layout canonical="/register/table" navGroup="register" src="/pages/register/table.tsx" breadcrumbs={PageBreadcrumbs}>
+            <Title title="Table Registers" />
             <TOC.Root>
                 <TOC.Entry href="#headingGDTR" text="Global Descriptor Table" />
                 <TOC.Entry href="#headingIDTR" text="Interrupt Descriptor Table">

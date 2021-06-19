@@ -14,15 +14,16 @@
  * You should have received a copy of the GNU Affero General Public License along
  *   with this program. If not, see <https://www.gnu.org/licenses/>.
  */
+import Layout, { Title } from "../components/Layout";
 
 import A from "../components/A";
 import { H1 } from "@blueprintjs/core";
-import Layout from "../components/Layout";
 import React from "react";
 
 export default function Page(): JSX.Element {
     return (
-        <Layout title="404">
+        <Layout>
+            <Title title="404" />
             <div id="content">
                 <H1>404</H1>
                 <p>

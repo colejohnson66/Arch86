@@ -15,9 +15,9 @@
  *   with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 import { BreadcrumbProps, H1, H2, UL } from "@blueprintjs/core";
+import Layout, { Title } from "../components/Layout";
 
 import A from "../components/A";
-import Layout from "../components/Layout";
 import React from "react";
 import TOC from "../components/TOC";
 import Unit from "../components/Unit";
@@ -28,7 +28,8 @@ export default function Page(): JSX.Element {
     ];
 
     return (
-        <Layout canonical="/mode" navGroup="mode" title="Processor Modes" src="/pages/mode.tsx" breadcrumbs={PageBreadcrumbs}>
+        <Layout canonical="/mode" navGroup="mode" src="/pages/mode.tsx" breadcrumbs={PageBreadcrumbs}>
+            <Title title="Processor Modes" />
             <TOC.Root>
                 <TOC.Entry href="#headingList" text="List of Modes" />
             </TOC.Root>

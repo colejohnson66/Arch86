@@ -27,8 +27,7 @@ type NavGroup = "home" | "history" | "architecture" | "register" | "mode" | "ext
 type LayoutProps = {
     canonical?: string;
     navGroup?: NavGroup;
-    title?: string;
-    description?: string;
+    homePage?: boolean;
     src?: string;
     dataSrc?: string;
     breadcrumbs?: BreadcrumbProps[];
@@ -70,10 +69,7 @@ export default function Layout(props: LayoutProps): JSX.Element {
     return (
         <>
             <Head>
-                {props.title ?
-                    <title>80x86 - {props.title}</title> :
-                    <title>80x86</title>}
-                {props.description && <meta name="description" content={props.description} />}
+                {props.homePage && <title>80x86</title>}
                 {props.canonical && <link rel="canonical" href={`https://80x86.dev${props.canonical}`} />}
                 <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
             </Head>
@@ -129,5 +125,27 @@ export default function Layout(props: LayoutProps): JSX.Element {
                 </footer>
             </Card>
         </>
+    );
+}
+
+type TitleProps = {
+    title: string;
+};
+export function Title(props: TitleProps): JSX.Element {
+    return (
+        <Head>
+            <title>80x86 - {props.title}</title>
+        </Head>
+    );
+}
+
+type DescriptionProps = {
+    text: string;
+};
+export function Description(props: DescriptionProps): JSX.Element {
+    return (
+        <Head>
+            <meta name="description" content={props.text} />
+        </Head>
     );
 }

@@ -15,9 +15,9 @@
  *   with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 import { BreadcrumbProps, Code, H1, H2, UL } from "@blueprintjs/core";
+import Layout, { Title } from "../../components/Layout";
 
 import A from "../../components/A";
-import Layout from "../../components/Layout";
 import React from "react";
 import TOC from "../../components/TOC";
 
@@ -27,7 +27,8 @@ export default function Page(): JSX.Element {
     ];
 
     return (
-        <Layout canonical="/register" navGroup="register" title="Registers" src="/pages/register/index.tsx" breadcrumbs={PageBreadcrumbs}>
+        <Layout canonical="/register" navGroup="register" src="/pages/register/index.tsx" breadcrumbs={PageBreadcrumbs}>
+            <Title title="Registers" />
             <TOC.Root>
                 <TOC.Entry href="#headingFiles" text="Register Files" />
             </TOC.Root>

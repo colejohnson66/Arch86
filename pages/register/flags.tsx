@@ -15,10 +15,10 @@
  *   with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 import { Blockquote, BreadcrumbProps, Code, H1, H2, H3 } from "@blueprintjs/core";
+import Layout, { Title } from "../../components/Layout";
 
 import A from "../../components/A";
 import Cite from "../../components/Cite";
-import Layout from "../../components/Layout";
 import React from "react";
 import Ref from "../../components/Ref";
 import TOC from "../../components/TOC";
@@ -33,7 +33,8 @@ export default function Page(): JSX.Element {
     ];
 
     return (
-        <Layout canonical="/register/flags" navGroup="register" title="Flags Register" src="/pages/register/flags.tsx" breadcrumbs={PageBreadcrumbs}>
+        <Layout canonical="/register/flags" navGroup="register" src="/pages/register/flags.tsx" breadcrumbs={PageBreadcrumbs}>
+            <Title title="Flags Register" />
             <TOC.Root>
                 <TOC.Entry href="#headingList" text="List of Fields">
                     <TOC.Entry href="#headingVKFlags" text="V and K Flags" />

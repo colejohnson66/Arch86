@@ -16,13 +16,13 @@
  */
 
 import { BreadcrumbProps, Callout, H1, H2, H3, UL } from "@blueprintjs/core";
+import Layout, { Title } from "../../components/Layout";
 
 import A from "../../components/A";
 import { GetStaticProps } from "next";
 import IDictionary from "../../types/IDictionary";
 import Instruction from "../../components/Instruction";
 import InstructionTitles from "../../data/instructions/Titles";
-import Layout from "../../components/Layout";
 import MaybeArray from "../../types/MaybeArray";
 import React from "react";
 import TOC from "../../components/TOC";
@@ -85,7 +85,8 @@ export default function Page(props: PageProps): JSX.Element {
     ];
 
     return (
-        <Layout canonical="/instruction" navGroup="instruction" title="Instructions" src="/pages/instruction/index.tsx" breadcrumbs={PageBreadcrumbs}>
+        <Layout canonical="/instruction" navGroup="instruction" src="/pages/instruction/index.tsx" breadcrumbs={PageBreadcrumbs}>
+            <Title title="Instructions" />
             <TOC.Root>
                 <TOC.Entry href="#headingList" text="List">
                     {Object.keys(props.instructions).map((char) => (
@@ -96,7 +97,7 @@ export default function Page(props: PageProps): JSX.Element {
                 </TOC.Entry>
             </TOC.Root>
             <div id="content">
-                <H1>x86 Instructions</H1>
+                <H1>Instructions</H1>
                 <p>
                     x86 is home to a few hundred instructions with over 3,000 different encodings.
                     An up-to-date list is available in PDF form on <A href="https://software.intel.com/content/www/us/en/develop/articles/intel-sdm.html">Intel&apos;s website</A> (see volume 2).

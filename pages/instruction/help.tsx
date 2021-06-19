@@ -16,10 +16,10 @@
  */
 
 import { BreadcrumbProps, Code, H1, H2, H3, H4, HTMLTable, UL } from "@blueprintjs/core";
+import Layout, { Title } from "../../components/Layout";
 
 import A from "../../components/A";
 import Instruction from "../../components/Instruction";
-import Layout from "../../components/Layout";
 import React from "react";
 import Scrollable from "../../components/Scrollable";
 import TOC from "../../components/TOC";
@@ -50,7 +50,8 @@ export default function Page(): JSX.Element {
     ];
 
     return (
-        <Layout canonical="/instruction/help" navGroup="instruction" title="Instruction Page Help" src="/pages/instruction/help.tsx" breadcrumbs={PageBreadcrumbs}>
+        <Layout canonical="/instruction/help" navGroup="instruction" src="/pages/instruction/help.tsx" breadcrumbs={PageBreadcrumbs}>
+            <Title title="Instruction Page Help" />
             <TOC.Root>
                 <TOC.Entry href="#headingOverviewTable" text="Overview Table">
                     <TOC.Entry href="#headingOverviewTableVex" text="Interpreting VEX and EVEX Opcodes" />
