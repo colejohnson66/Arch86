@@ -110,7 +110,7 @@ type InstructionProps = {
  * <Instruction name="AND" noLink />                   // (undefined, "AND", false)
  * <Instruction name="BOUND" noTitle />                // ("/instruction/bound", "BOUND", false)
  * <Instruction name="CALL" noLink forceTitle />       // (undefined, "CALL", true)
- * <Instruction name="Jcc" />                          // ("/instruction/jcc", "Jcc", title)
+ * <Instruction name="Jcc" />                          // ("/instruction/jcc", "Jcc", true)
  * <Instruction name="VFMADD132PD" as="vfmaddnnnpd" /> // ("/instruction/vfmaddnnnpd", "VFMADD132PD", true)
  */
 export default function Instruction(props: InstructionProps): JSX.Element {
