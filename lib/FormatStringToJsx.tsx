@@ -15,8 +15,6 @@
  *   with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 /* eslint-disable react/display-name */
-import { Code, Colors } from "@blueprintjs/core";
-
 import IDictionary from "../types/IDictionary";
 import Instruction from "../components/Instruction";
 import React from "react";
@@ -26,9 +24,9 @@ import { strict as assert } from "assert";
 // `\reg` may change, so don't combine with `\c`
 // `\cpuid` is currently fancy syntax around `\c`, but this may change
 const functions: IDictionary<(arg: string) => JSX.Element> = {
-    bits: (arg) => (<Code>{arg}</Code>),
+    bits: (arg) => (<code>{arg}</code>),
     bitRef: (arg) => (<sup>[{arg}]</sup>),
-    c: (arg) => (<Code>{arg}</Code>),
+    c: (arg) => (<code>{arg}</code>),
     cpuid: (arg) => {
         /**
          * arg is a comma separated list with an empty parameter for separation of CPUID arguments and result.
@@ -52,17 +50,17 @@ const functions: IDictionary<(arg: string) => JSX.Element> = {
         cpuidResultStr += `${cpuidResult[2]}]`;
 
         return (
-            <Code>
+            <code>
                 {"CPUID.("}
                 {cpuidArgsStr.join(",")}
                 {"):"}
                 {cpuidResultStr}
-            </Code>
+            </code>
         );
     },
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     en: (_) => (<>&ndash;</>),
-    error: (arg) => (<b style={{ color: Colors.RED3 }}>{arg}</b>),
+    error: (arg) => (<b className="text-danger">{arg}</b>),
     i: (arg) => (<i>{arg}</i>),
     img: (arg) => {
         /**
@@ -73,13 +71,13 @@ const functions: IDictionary<(arg: string) => JSX.Element> = {
          */
         const args = arg.split(",");
         if (args.length === 1)
-            return <img src={args[0]} alt="" className="whiteBgRoundBorder" />;
-        return <img src={args[0]} alt={args[1]} className="whiteBgRoundBorder" />;
+            return <img src={args[0]} alt="" />;
+        return <img src={args[0]} alt={args[1]} />;
     },
     instr: (arg) => (<Instruction name={arg} />),
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     nbsp: (_) => (<>&nbsp;</>),
-    reg: (arg) => (<Code>{arg}</Code>),
+    reg: (arg) => (<code>{arg}</code>),
 };
 
 /**

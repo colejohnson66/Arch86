@@ -14,8 +14,7 @@
  * You should have received a copy of the GNU Affero General Public License along
  *   with this program. If not, see <https://www.gnu.org/licenses/>.
  */
-
-import { BreadcrumbProps, Callout, H1, H2, H3, UL } from "@blueprintjs/core";
+import { Alert, Breadcrumb, Col, Container, Row } from "react-bootstrap";
 import Layout, { Title } from "../../components/Layout";
 
 import A from "../../components/A";
@@ -23,6 +22,7 @@ import { GetStaticProps } from "next";
 import IDictionary from "../../types/IDictionary";
 import Instruction from "../../components/Instruction";
 import InstructionTitles from "../../data/instructions/Titles";
+import LayoutConstants from "../../constants/Layout";
 import MaybeArray from "../../types/MaybeArray";
 import React from "react";
 import TOC from "../../components/TOC";
@@ -52,8 +52,8 @@ function commaSeparatedLinks(list: string[]): JSX.Element {
 function instructionListWithHeading(list: MaybeArray<string>[], char: string): JSX.Element {
     return (
         <React.Fragment key={char}>
-            <H3 id={`headingList${char.toUpperCase()}`}>{char.toUpperCase()}</H3>
-            <UL>
+            <h3 id={`headingList${char.toUpperCase()}`}>{char.toUpperCase()}</h3>
+            <ul>
                 {list.map((item) => {
                     // Join related instructions (`string[]` in the YAML)
                     if (Array.isArray(item)) {
@@ -70,7 +70,7 @@ function instructionListWithHeading(list: MaybeArray<string>[], char: string): J
                         </li>
                     );
                 })}
-            </UL>
+            </ul>
         </React.Fragment>
     );
 }
@@ -80,41 +80,44 @@ type PageProps = {
 };
 
 export default function Page(props: PageProps): JSX.Element {
-    const PageBreadcrumbs: BreadcrumbProps[] = [
-        { text: "Instructions" },
-    ];
-
     return (
-        <Layout canonical="/instruction" navGroup="instruction" src="/pages/instruction/index.tsx" breadcrumbs={PageBreadcrumbs}>
+        <Layout canonical="/instruction" navGroup="instruction" src="/pages/instruction/index.tsx">
             <Title title="Instructions" />
-            <TOC.Root>
-                <TOC.Entry href="#headingList" text="List">
-                    {Object.keys(props.instructions).map((char) => (
-                        char.toUpperCase()
-                    )).map((char) => (
-                        <TOC.Entry key={char} href={`#headingList${char}`} text={char} />
-                    ))}
-                </TOC.Entry>
-            </TOC.Root>
-            <div id="content">
-                <H1>Instructions</H1>
-                <p>
-                    x86 is home to a few hundred instructions with over 3,000 different encodings.
-                    An up-to-date list is available in PDF form on <A href="https://software.intel.com/content/www/us/en/develop/articles/intel-sdm.html">Intel&apos;s website</A> (see volume 2).
-                </p>
+            <Container fluid>
+                <Breadcrumb>
+                    <Breadcrumb.Item active>Instructions</Breadcrumb.Item>
+                </Breadcrumb>
+                <Row>
+                    <TOC.Root>
+                        <TOC.Entry href="#headingList" text="List">
+                            {Object.keys(props.instructions).map((char) => (
+                                char.toUpperCase()
+                            )).map((char) => (
+                                <TOC.Entry key={char} href={`#headingList${char}`} text={char} />
+                            ))}
+                        </TOC.Entry>
+                    </TOC.Root>
+                    <Col {...LayoutConstants.content}>
+                        <h1>Instructions</h1>
+                        <p>
+                            x86 is home to a few hundred instructions with over 3,000 different encodings.
+                            An up-to-date list is available in PDF form on <A href="https://software.intel.com/content/www/us/en/develop/articles/intel-sdm.html">Intel&apos;s website</A> (see volume 2).
+                        </p>
 
-                <H2 id="headingList">List</H2>
-                <WIP section />
-                <Callout intent="primary">
-                    This list is updated manually, and, as such, may not be current.
-                    It is currently being created to follow version 074 of the <A href="https://software.intel.com/content/www/us/en/develop/articles/intel-sdm.html">Intel SDM</A>.
-                    In addition to the documented instructions in the software developer manual (SDM), undocumented and AMD-exclusive instructions (such as the XOP set) are included here.
-                </Callout>
+                        <h2 id="headingList">List</h2>
+                        <WIP section />
+                        <Alert variant="primary">
+                            This list is updated manually, and, as such, may not be current.
+                            It is currently being created to follow version 074 of the <A href="https://software.intel.com/content/www/us/en/develop/articles/intel-sdm.html">Intel SDM</A>.
+                            In addition to the documented instructions in the software developer manual (SDM), undocumented and AMD-exclusive instructions (such as the XOP set) are included here.
+                        </Alert>
 
-                {Object.keys(props.instructions).map((char) => (
-                    instructionListWithHeading(props.instructions[char], char)
-                ))}
-            </div>
+                        {Object.keys(props.instructions).map((char) => (
+                            instructionListWithHeading(props.instructions[char], char)
+                        ))}
+                    </Col>
+                </Row>
+            </Container>
         </Layout>
     );
 }

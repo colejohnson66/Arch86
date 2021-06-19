@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU Affero General Public License along
  *   with this program. If not, see <https://www.gnu.org/licenses/>.
  */
-import { BreadcrumbProps, Callout, Code, Divider, H1, H2, H3, H5, HTMLTable, OL, UL } from "@blueprintjs/core";
+import { Alert, Breadcrumb, Col, Container, Row, Table } from "react-bootstrap";
 import { GetStaticPaths, GetStaticProps } from "next";
 import Layout, { Title } from "../../components/Layout";
 import { formatStringPlaintext, formatStringToJsx } from "../../lib/FormatStringToJsx";
@@ -23,6 +23,7 @@ import { getAllInstructionsAsParams, getInstructionData } from "../../lib/instru
 import A from "../../components/A";
 import DateTime from "../../components/DateTime";
 import IDictionary from "../../types/IDictionary";
+import LayoutConstants from "../../constants/Layout";
 import MaybeArray from "../../types/MaybeArray";
 import React from "react";
 import Ref from "../../components/Ref";
@@ -168,7 +169,7 @@ function hasValidAsteriskValidity(opcodes: Opcode[]): boolean {
 
 function formatEncodingCell(operand: string): JSX.Element {
     // TODO: don't just wrap it all, but parse it and selectively monospace
-    return <Code>{operand}</Code>;
+    return <code>{operand}</code>;
 }
 
 function bitEncodings(encodings: BitEncodingEntry[]): JSX.Element {
@@ -200,7 +201,7 @@ function regularExceptionList(ex: string | ExceptionList): JSX.Element {
 
         return (
             <React.Fragment key={key}>
-                <dt><Code>{key}</Code></dt>
+                <dt><code>{key}</code></dt>
                 <dd>{brTagsFromArray(coerceArray(val))}</dd>
             </React.Fragment>
         );
@@ -209,288 +210,293 @@ function regularExceptionList(ex: string | ExceptionList): JSX.Element {
 }
 
 export default function Page(props: PageProps): JSX.Element {
-    const PageBreadcrumbs: BreadcrumbProps[] = [
-        {
-            text: "Instructions",
-            href: "/instruction",
-        },
-        { text: props.id.toUpperCase() },
-    ];
-
     const sdmTitleWithLink = (
         <A href="https://software.intel.com/content/www/us/en/develop/articles/intel-sdm.html">
             <i>Intel® 64 and IA-32 Architectures Software Developer’s Manual</i>
         </A>);
 
     return (
-        <Layout canonical={`/instruction/${props.id}`} navGroup="instruction" src="/pages/instruction/%5Bslug%5D.tsx" dataSrc={`/data/instructions/${props.id[0]}/${props.id}.yaml`} breadcrumbs={PageBreadcrumbs}>
+        <Layout canonical={`/instruction/${props.id}`} navGroup="instruction" src="/pages/instruction/%5Bslug%5D.tsx" dataSrc={`/data/instructions/${props.id[0]}/${props.id}.yaml`}>
             <Title title={`${uppercaseMnemonic(props.id)}: ${formatStringPlaintext(props.title)}`} />
-            <TOC.Root>
-                <TOC.Entry href="#headingEncoding" text="Encoding" />
-                {props.bitEncoding &&
-                    <TOC.Entry href="#headingBitEncoding" text="Bit Encoding" />}
-                <TOC.Entry href="#headingDescription" text="Description" />
-                {props.operationNotes
-                    ? <TOC.Entry href="#headingOperation" text="Operation">
-                        <TOC.Entry href="#headingOperationNotes" text="Notes" />
-                    </TOC.Entry>
-                    : <TOC.Entry href="#headingOperation" text="Operation" />}
-                {props.examples &&
-                    <TOC.Entry href="#headingExamples" text={plural(props.examples, "Example", "Examples")} />}
-                {props.flags &&
-                    <TOC.Entry href="#headingFlags" text="Flags Affected" />}
-                {props.intrinsics &&
-                    <TOC.Entry href="#headingIntrinsics" text="C Intrinsics" />}
-                <TOC.Entry href="#headingExceptions" text="Exceptions">
-                    {props.exceptions.protected &&
-                        <TOC.Entry href="#headingExceptionsProtected" text="Protected Mode" />}
-                    {props.exceptions.real &&
-                        <TOC.Entry href="#headingExceptionsReal" text="Real-Address Mode" />}
-                    {props.exceptions.virtual &&
-                        <TOC.Entry href="#headingExceptionsVirtual" text="Virtual-8086 Mode" />}
-                    {props.exceptions.compatibility &&
-                        <TOC.Entry href="#headingExceptionsCompatibility" text="Compatibility Mode" />}
-                    {props.exceptions.long &&
-                        <TOC.Entry href="#headingExceptionsLong" text="Long Mode" />}
-                    {props.exceptions.floating &&
-                        <TOC.Entry href="#headingExceptionsFloating" text="SIMD Floating-Point" />}
-                    {props.exceptions.other &&
-                        <TOC.Entry href="#headingExceptionsOther" text="Other" />}
-                </TOC.Entry>
-                {props.changes &&
-                    <TOC.Entry href="#headingChanges" text="Manual Changes" />}
-                {props.refs &&
-                    <TOC.Entry href="#headingReferences" text="References" />}
-            </TOC.Root>
-            <div id="content">
-                <H1><Code>{props.id.toUpperCase()}</Code>: {formatStringToJsx(props.title)}</H1>
-                {props.wip && <WIP page />}
-                <Callout intent="primary">
-                    For information about interpreting this page, see <A href="/instruction/help">the help page</A>.
-                </Callout>
-                <Scrollable>
-                    <HTMLTable bordered>
-                        <thead>
-                            <tr>
-                                <th>Opcode and Mnemonic</th>
-                                <th><A href="#headingEncoding">Encoding</A></th>
-                                <th>16 bit Mode</th>
-                                <th>32 bit Mode</th>
-                                <th>64 bit Mode</th>
-                                {props.opcode[0].cpuid &&
-                                    /* Don't use <Instruction ... /> to avoid <code> block */
-                                    <th><A href="/instruction/cpuid">CPUID</A> Feature Flag</th>}
-                                <th>Description</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {props.opcode.map((row, idx) => (
-                                <tr key={idx}>
-                                    <td>
-                                        <Code>{formatStringToJsx(row.opcode)}</Code>
-                                        <Divider />
-                                        <Code className="mnemonic">{formatStringToJsx(row.mnemonic)}</Code>
-                                    </td>
-                                    <td><Code>{row.encoding}</Code></td>
-                                    <td>{OpcodeValidityMap[row.validity[16]]}</td>
-                                    <td>{OpcodeValidityMap[row.validity[32]]}</td>
-                                    <td>{OpcodeValidityMap[row.validity[64]]}</td>
-                                    {row.cpuid &&
-                                        <td>
-                                            {brTagsFromArray(coerceArray(row.cpuid))}
-                                        </td>}
-                                    <td className="overviewDescription">{formatStringToJsx(row.description)}</td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </HTMLTable>
-                </Scrollable>
-                {hasValidAsteriskValidity(props.opcode) &&
-                    props.opcodeNote &&
-                    <>
-                        <H5>Notes:</H5>
-                        <p>
-                            {"* "}{brTagsFromArray(coerceArray(props.opcodeNote))}
-                        </p>
-                    </>}
-
-                <H2 id="headingEncoding">Encoding</H2>
-                <Scrollable>
-                    <HTMLTable>
-                        <thead>
-                            <tr>
-                                <th>Encoding</th>
-                                {props.encoding.hasTuple &&
-                                    <th>Tuple Type</th>}
-                                {props.encoding.operands === 1
-                                    ? <th>Operand</th>
-                                    : [...Array(props.encoding.operands)].map((_, idx) => (
-                                        <th key={idx}>Operand {idx + 1}</th>
-                                    ))}
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {Object.keys(props.encoding.encodings).map((key) => {
-                                const val = props.encoding.encodings[key];
-                                return (
-                                    <tr key={key}>
-                                        <td><Code>{key}</Code></td>
-                                        {val.map((value, idx) => (
-                                            <td key={idx}>
-                                                {/* Is this an empty or a "Tuple Type" cell? */}
-                                                {value === "" || value.startsWith("None") || (props.encoding.hasTuple && idx === 0)
-                                                    ? formatStringToJsx(value)
-                                                    : formatEncodingCell(value)}
-                                            </td>
-                                        ))}
-                                    </tr>
-                                );
-                            })}
-                        </tbody>
-                    </HTMLTable>
-                </Scrollable>
-
-                {props.bitEncoding &&
-                    <>
-                        <H2 id="headingBitEncoding">Bit Encoding</H2>
-                        {bitEncodings(props.bitEncoding.list)}
-                    </>}
-
-                <H2 id="headingDescription">Description</H2>
-                {paragraphsFromString(props.description)}
-
-                <H2 id="headingOperation">Operation</H2>
-                <Callout intent="primary">
-                    This pseudo-code uses C# syntax.
-                    A list of the types used is <A href="/instruction/help#headingOperation">available here</A>.
-                </Callout>
-                <Scrollable>
-                    <SyntaxHighlighter language="csharp" style={SyntaxHighlighterDarkTheme}>
-                        {props.operation}
-                    </SyntaxHighlighter>
-                </Scrollable>
-                {props.operationImage &&
-                    <Scrollable>
-                        <img src={props.operationImage} alt={`The operation of the ${props.id.toUpperCase()} instruction`} className="whiteBgRoundBorder" />
-                    </Scrollable>}
-                {props.operationNotes &&
-                    <>
-                        <H3 id="headingOperationNotes">Notes</H3>
-                        <OL>
-                            {props.operationNotes.map((note, idx) => (
-                                <li key={idx}>{brTagsFromString(note)}</li>
-                            ))}
-                        </OL>
-                    </>}
-
-                {props.examples &&
-                    <>
-                        <H2 id="headingExamples">{plural(props.examples, "Example", "Examples")}</H2>
-                        <Callout intent="primary">
-                            {plural(props.examples, "This example uses", "These examples use")} NASM syntax.
-                        </Callout>
-                        {coerceArray(props.examples).map((example, idx) => (
-                            <Scrollable key={idx}>
-                                <SyntaxHighlighter language="x86asm" style={SyntaxHighlighterDarkTheme}>
-                                    {example}
-                                </SyntaxHighlighter>
-                            </Scrollable>
-                        ))}
-                    </>}
-
-                {props.flags &&
-                    <>
-                        <H2 id="headingFlags">Flags Affected</H2>
-                        <dl>
-                            <dt><Code>CF</Code> (carry flag)</dt>
-                            <dd>{brTagsFromString(props.flags.CF)}</dd>
-                            <dt><Code>PF</Code> (parity flag)</dt>
-                            <dd>{brTagsFromString(props.flags.PF)}</dd>
-                            <dt><Code>AF</Code> (auxiliary flag)</dt>
-                            <dd>{brTagsFromString(props.flags.AF)}</dd>
-                            <dt><Code>ZF</Code> (zero flag)</dt>
-                            <dd>{brTagsFromString(props.flags.ZF)}</dd>
-                            <dt><Code>SF</Code> (sign flag)</dt>
-                            <dd>{brTagsFromString(props.flags.SF)}</dd>
-                            <dt><Code>OF</Code> (overflow flag)</dt>
-                            <dd>{brTagsFromString(props.flags.OF)}</dd>
-                        </dl>
-                    </>}
-
-                {props.intrinsics &&
-                    <>
-                        <H2 id="headingIntrinsics">C Intrinsics</H2>
+            <Container fluid>
+                <Breadcrumb>
+                    <Breadcrumb.Item href="/instruction">Instructions</Breadcrumb.Item>
+                    <Breadcrumb.Item active>{uppercaseMnemonic(props.id)}</Breadcrumb.Item>
+                </Breadcrumb>
+                <Row>
+                    <TOC.Root>
+                        <TOC.Entry href="#headingEncoding" text="Encoding" />
+                        {props.bitEncoding &&
+                            <TOC.Entry href="#headingBitEncoding" text="Bit Encoding" />}
+                        <TOC.Entry href="#headingDescription" text="Description" />
+                        {props.operationNotes
+                            ? <TOC.Entry href="#headingOperation" text="Operation">
+                                <TOC.Entry href="#headingOperationNotes" text="Notes" />
+                            </TOC.Entry>
+                            : <TOC.Entry href="#headingOperation" text="Operation" />}
+                        {props.examples &&
+                            <TOC.Entry href="#headingExamples" text={plural(props.examples, "Example", "Examples")} />}
+                        {props.flags &&
+                            <TOC.Entry href="#headingFlags" text="Flags Affected" />}
+                        {props.intrinsics &&
+                            <TOC.Entry href="#headingIntrinsics" text="C Intrinsics" />}
+                        <TOC.Entry href="#headingExceptions" text="Exceptions">
+                            {props.exceptions.protected &&
+                                <TOC.Entry href="#headingExceptionsProtected" text="Protected Mode" />}
+                            {props.exceptions.real &&
+                                <TOC.Entry href="#headingExceptionsReal" text="Real-Address Mode" />}
+                            {props.exceptions.virtual &&
+                                <TOC.Entry href="#headingExceptionsVirtual" text="Virtual-8086 Mode" />}
+                            {props.exceptions.compatibility &&
+                                <TOC.Entry href="#headingExceptionsCompatibility" text="Compatibility Mode" />}
+                            {props.exceptions.long &&
+                                <TOC.Entry href="#headingExceptionsLong" text="Long Mode" />}
+                            {props.exceptions.floating &&
+                                <TOC.Entry href="#headingExceptionsFloating" text="SIMD Floating-Point" />}
+                            {props.exceptions.other &&
+                                <TOC.Entry href="#headingExceptionsOther" text="Other" />}
+                        </TOC.Entry>
+                        {props.changes &&
+                            <TOC.Entry href="#headingChanges" text="Manual Changes" />}
+                        {props.refs &&
+                            <TOC.Entry href="#headingReferences" text="References" />}
+                    </TOC.Root>
+                    <Col {...LayoutConstants.content}>
+                        <h1><code>{props.id.toUpperCase()}</code>: {formatStringToJsx(props.title)}</h1>
+                        {props.wip && <WIP page />}
+                        <Alert variant="primary">
+                            For information about interpreting this page, see <A href="/instruction/help">the help page</A>.
+                        </Alert>
                         <Scrollable>
-                            <SyntaxHighlighter language="c-like" style={SyntaxHighlighterDarkTheme}>
-                                {props.intrinsics}
+                            <Table striped bordered size="sm">
+                                <thead>
+                                    <tr>
+                                        <th>Opcode and Mnemonic</th>
+                                        <th><A href="#headingEncoding">Encoding</A></th>
+                                        <th>16 bit Mode</th>
+                                        <th>32 bit Mode</th>
+                                        <th>64 bit Mode</th>
+                                        {props.opcode[0].cpuid &&
+                                            /* Don't use <Instruction ... /> to avoid <code> block */
+                                            <th><A href="/instruction/cpuid">CPUID</A> Feature Flag</th>}
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {props.opcode.map((row, idx) => (
+                                        <tr key={idx}>
+                                            <td>
+                                                <code className="mnemonic-encoding">{formatStringToJsx(row.opcode)}</code>
+                                                <hr />
+                                                <code className="mnemonic">{formatStringToJsx(row.mnemonic)}</code>
+                                            </td>
+                                            <td><code>{row.encoding}</code></td>
+                                            <td>{OpcodeValidityMap[row.validity[16]]}</td>
+                                            <td>{OpcodeValidityMap[row.validity[32]]}</td>
+                                            <td>{OpcodeValidityMap[row.validity[64]]}</td>
+                                            {row.cpuid &&
+                                                <td>
+                                                    {brTagsFromArray(coerceArray(row.cpuid))}
+                                                </td>}
+                                            <td className="overviewDescription">{formatStringToJsx(row.description)}</td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                                <style jsx>{`
+                                    hr {
+                                        margin: 0;
+                                    }
+                                `}</style>
+                            </Table>
+                        </Scrollable>
+                        {hasValidAsteriskValidity(props.opcode) &&
+                            props.opcodeNote &&
+                            <>
+                                <h5>Notes:</h5>
+                                <p>
+                                    {"* "}{brTagsFromArray(coerceArray(props.opcodeNote))}
+                                </p>
+                            </>}
+
+                        <h2 id="headingEncoding">Encoding</h2>
+                        <Scrollable>
+                            <Table striped bordered size="sm">
+                                <thead>
+                                    <tr>
+                                        <th>Encoding</th>
+                                        {props.encoding.hasTuple &&
+                                            <th>Tuple Type</th>}
+                                        {props.encoding.operands === 1
+                                            ? <th>Operand</th>
+                                            : [...Array(props.encoding.operands)].map((_, idx) => (
+                                                <th key={idx}>Operand {idx + 1}</th>
+                                            ))}
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {Object.keys(props.encoding.encodings).map((key) => {
+                                        const val = props.encoding.encodings[key];
+                                        return (
+                                            <tr key={key}>
+                                                <td><code>{key}</code></td>
+                                                {val.map((value, idx) => (
+                                                    <td key={idx}>
+                                                        {/* Is this an empty or a "Tuple Type" cell? */}
+                                                        {value === "" || value.startsWith("None") || (props.encoding.hasTuple && idx === 0)
+                                                            ? formatStringToJsx(value)
+                                                            : formatEncodingCell(value)}
+                                                    </td>
+                                                ))}
+                                            </tr>
+                                        );
+                                    })}
+                                </tbody>
+                            </Table>
+                        </Scrollable>
+
+                        {props.bitEncoding &&
+                            <>
+                                <h2 id="headingBitEncoding">Bit Encoding</h2>
+                                {bitEncodings(props.bitEncoding.list)}
+                            </>}
+
+                        <h2 id="headingDescription">Description</h2>
+                        {paragraphsFromString(props.description)}
+
+                        <h2 id="headingOperation">Operation</h2>
+                        <Alert variant="primary">
+                            This pseudo-code uses C# syntax.
+                            A list of the types used is <A href="/instruction/help#headingOperation">available here</A>.
+                        </Alert>
+                        <Scrollable>
+                            <SyntaxHighlighter language="csharp" style={SyntaxHighlighterDarkTheme}>
+                                {props.operation}
                             </SyntaxHighlighter>
                         </Scrollable>
-                    </>}
+                        {props.operationImage &&
+                            <Scrollable>
+                                <img src={props.operationImage} alt={`The operation of the ${props.id.toUpperCase()} instruction`} />
+                            </Scrollable>}
+                        {props.operationNotes &&
+                            <>
+                                <h3 id="headingOperationNotes">Notes</h3>
+                                <ol>
+                                    {props.operationNotes.map((note, idx) => (
+                                        <li key={idx}>{brTagsFromString(note)}</li>
+                                    ))}
+                                </ol>
+                            </>}
 
-                <H2 id="headingExceptions">Exceptions</H2>
-                {props.exceptions.protected &&
-                    <>
-                        <H3 id="headingExceptionsProtected">Protected Mode</H3>
-                        {regularExceptionList(props.exceptions.protected)}
-                    </>}
-                {props.exceptions.real &&
-                    <>
-                        <H3 id="headingExceptionsReal">Real-Address Mode</H3>
-                        {regularExceptionList(props.exceptions.real)}
-                    </>}
-                {props.exceptions.virtual &&
-                    <>
-                        <H3 id="headingExceptionsVirtual">Virtual-8086 Mode</H3>
-                        {regularExceptionList(props.exceptions.virtual)}
-                    </>}
-                {props.exceptions.compatibility &&
-                    <>
-                        <H3 id="headingExceptionsCompatibility">Compatibility Mode</H3>
-                        {regularExceptionList(props.exceptions.compatibility)}
-                    </>}
-                {props.exceptions.long &&
-                    <>
-                        <H3 id="headingExceptionsLong">Long Mode</H3>
-                        {regularExceptionList(props.exceptions.long)}
-                    </>}
-                {props.exceptions.floating &&
-                    <>
-                        <H3 id="headingExceptionsFloating">SIMD Floating-Point</H3>
-                        {paragraphsFromArray(coerceArray(props.exceptions.floating))}
-                    </>}
-                {props.exceptions.other &&
-                    <>
-                        <H3 id="headingExceptionsOther">Other</H3>
-                        {paragraphsFromArray(coerceArray(props.exceptions.other))}
-                        {props.exceptions.otherAdditional &&
-                            regularExceptionList(props.exceptions.otherAdditional)}
-                    </>}
+                        {props.examples &&
+                            <>
+                                <h2 id="headingExamples">{plural(props.examples, "Example", "Examples")}</h2>
+                                <Alert variant="primary">
+                                    {plural(props.examples, "This example uses", "These examples use")} NASM syntax.
+                                </Alert>
+                                {coerceArray(props.examples).map((example, idx) => (
+                                    <Scrollable key={idx}>
+                                        <SyntaxHighlighter language="x86asm" style={SyntaxHighlighterDarkTheme}>
+                                            {example}
+                                        </SyntaxHighlighter>
+                                    </Scrollable>
+                                ))}
+                            </>}
 
-                {props.changes &&
-                    <>
-                        <H2 id="headingChanges">Manual Changes</H2>
-                        <p>
-                            This is a list of changes that have been made from the {sdmTitleWithLink}.
-                            These changes were against version {props.changes.version} (dated <DateTime dateTime={props.changes.date} />).
-                        </p>
-                        <UL>
-                            {coerceArray(props.changes.list).map((change, idx) => (
-                                <li key={idx}>{brTagsFromString(change)}</li>
-                            ))}
-                        </UL>
-                    </>}
+                        {props.flags &&
+                            <>
+                                <h2 id="headingFlags">Flags Affected</h2>
+                                <dl>
+                                    <dt><code>CF</code> (carry flag)</dt>
+                                    <dd>{brTagsFromString(props.flags.CF)}</dd>
+                                    <dt><code>PF</code> (parity flag)</dt>
+                                    <dd>{brTagsFromString(props.flags.PF)}</dd>
+                                    <dt><code>AF</code> (auxiliary flag)</dt>
+                                    <dd>{brTagsFromString(props.flags.AF)}</dd>
+                                    <dt><code>ZF</code> (zero flag)</dt>
+                                    <dd>{brTagsFromString(props.flags.ZF)}</dd>
+                                    <dt><code>SF</code> (sign flag)</dt>
+                                    <dd>{brTagsFromString(props.flags.SF)}</dd>
+                                    <dt><code>OF</code> (overflow flag)</dt>
+                                    <dd>{brTagsFromString(props.flags.OF)}</dd>
+                                </dl>
+                            </>}
 
-                {props.refs &&
-                    <>
-                        <Ref.Root>
-                            {props.refs.map((ref, idx) => (
-                                <Ref.Entry key={idx} name={ref.name}>
-                                    {ref.value}
-                                </Ref.Entry>
-                            ))}
-                        </Ref.Root>
-                    </>}
-            </div>
+                        {props.intrinsics &&
+                            <>
+                                <h2 id="headingIntrinsics">C Intrinsics</h2>
+                                <Scrollable>
+                                    <SyntaxHighlighter language="c-like" style={SyntaxHighlighterDarkTheme}>
+                                        {props.intrinsics}
+                                    </SyntaxHighlighter>
+                                </Scrollable>
+                            </>}
+
+                        <h2 id="headingExceptions">Exceptions</h2>
+                        {props.exceptions.protected &&
+                            <>
+                                <h3 id="headingExceptionsProtected">Protected Mode</h3>
+                                {regularExceptionList(props.exceptions.protected)}
+                            </>}
+                        {props.exceptions.real &&
+                            <>
+                                <h3 id="headingExceptionsReal">Real-Address Mode</h3>
+                                {regularExceptionList(props.exceptions.real)}
+                            </>}
+                        {props.exceptions.virtual &&
+                            <>
+                                <h3 id="headingExceptionsVirtual">Virtual-8086 Mode</h3>
+                                {regularExceptionList(props.exceptions.virtual)}
+                            </>}
+                        {props.exceptions.compatibility &&
+                            <>
+                                <h3 id="headingExceptionsCompatibility">Compatibility Mode</h3>
+                                {regularExceptionList(props.exceptions.compatibility)}
+                            </>}
+                        {props.exceptions.long &&
+                            <>
+                                <h3 id="headingExceptionsLong">Long Mode</h3>
+                                {regularExceptionList(props.exceptions.long)}
+                            </>}
+                        {props.exceptions.floating &&
+                            <>
+                                <h3 id="headingExceptionsFloating">SIMD Floating-Point</h3>
+                                {paragraphsFromArray(coerceArray(props.exceptions.floating))}
+                            </>}
+                        {props.exceptions.other &&
+                            <>
+                                <h3 id="headingExceptionsOther">Other</h3>
+                                {paragraphsFromArray(coerceArray(props.exceptions.other))}
+                                {props.exceptions.otherAdditional &&
+                                    regularExceptionList(props.exceptions.otherAdditional)}
+                            </>}
+
+                        {props.changes &&
+                            <>
+                                <h2 id="headingChanges">Manual Changes</h2>
+                                <p>
+                                    This is a list of changes that have been made from the {sdmTitleWithLink}.
+                                    These changes were against version {props.changes.version} (dated <DateTime dateTime={props.changes.date} />).
+                                </p>
+                                <ul>
+                                    {coerceArray(props.changes.list).map((change, idx) => (
+                                        <li key={idx}>{brTagsFromString(change)}</li>
+                                    ))}
+                                </ul>
+                            </>}
+
+                        {props.refs &&
+                            <>
+                                <Ref.Root>
+                                    {props.refs.map((ref, idx) => (
+                                        <Ref.Entry key={idx} name={ref.name}>
+                                            {ref.value}
+                                        </Ref.Entry>
+                                    ))}
+                                </Ref.Root>
+                            </>}
+                    </Col>
+                </Row>
+            </Container>
         </Layout>
     );
 }

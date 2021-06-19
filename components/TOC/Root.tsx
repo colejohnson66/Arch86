@@ -15,6 +15,8 @@
  *   with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
+import { Col } from "react-bootstrap";
+import LayoutConstants from "../../constants/Layout";
 import React from "react";
 
 type TOCRootProps = {
@@ -32,11 +34,11 @@ export default function Root(props: TOCRootProps): JSX.Element {
         return child;
     });
     return (
-        <div id="toc">
+        <Col {...LayoutConstants.toc}>
             <div id="tocTitle">Contents</div>
             <ul>
                 {newChildren}
             </ul>
-        </div>
+        </Col>
     );
 }

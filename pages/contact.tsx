@@ -14,28 +14,31 @@
  * You should have received a copy of the GNU Affero General Public License along
  *   with this program. If not, see <https://www.gnu.org/licenses/>.
  */
-import { BreadcrumbProps, H1, UL } from "@blueprintjs/core";
+import { Breadcrumb, Col, Container, Row } from "react-bootstrap";
 import Layout, { Title } from "../components/Layout";
 
 import React from "react";
 
 export default function Page(): JSX.Element {
-    const PageBreadcrumbs: BreadcrumbProps[] = [
-        { text: "Contact" },
-    ];
-
     return (
-        <Layout canonical="/contact" src="/pages/contact.tsx" breadcrumbs={PageBreadcrumbs}>
+        <Layout canonical="/contact" src="/pages/contact.tsx">
             <Title title="Contact" />
-            <div id="content">
-                <H1>Contact</H1>
-                <p>
-                    To contact me, please use the following method:
-                </p>
-                <UL>
-                    <li>Email: <i>coleharrisjohnson at gmail dot com</i></li>
-                </UL>
-            </div>
+            <Container fluid>
+                <Breadcrumb>
+                    <Breadcrumb.Item active>Contact</Breadcrumb.Item>
+                </Breadcrumb>
+                <Row>
+                    <Col id="content">
+                        <h1>Contact</h1>
+                        <p>
+                            To contact me, please use the following method:
+                        </p>
+                        <ul>
+                            <li>Email: <i>coleharrisjohnson at gmail dot com</i></li>
+                        </ul>
+                    </Col>
+                </Row>
+            </Container>
         </Layout>
     );
 }

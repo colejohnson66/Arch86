@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU Affero General Public License along
  *   with this program. If not, see <https://www.gnu.org/licenses/>.
  */
-import { Callout } from "@blueprintjs/core";
+import { Alert } from "react-bootstrap";
 import React from "react";
 import { strict as assert } from "assert";
 
@@ -28,10 +28,12 @@ export default function WIP(props: WipProps): JSX.Element {
     assert((!!props.page && !props.section) ||
         (!props.page && !!props.section));
     return (
-        <Callout intent="warning">
-            This {props.page ? "page" : "section"} is a work in progress.
-            It is incomplete, and may not be completely accurate or up to date.
-            {props.wording && " The wording or grammar is also in the process of being improved."}
-        </Callout>
+        <Alert variant="warning">
+            <small>
+                This {props.page ? "page" : "section"} is a work in progress.
+                It is incomplete, and may not be completely accurate or up to date.
+                {props.wording && " The wording or grammar is also in the process of being improved."}
+            </small>
+        </Alert>
     );
 }

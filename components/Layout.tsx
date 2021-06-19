@@ -15,12 +15,13 @@
  *   with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { AnchorButton, Breadcrumb, BreadcrumbProps, Breadcrumbs, Card, Divider, Navbar } from "@blueprintjs/core";
+// import { AnchorButton, Breadcrumb, BreadcrumbProps, Breadcrumbs, Card, Divider, Navbar } from "@blueprintjs/core";
+
+import { Col, Container, Nav, Navbar, Row } from "react-bootstrap";
 
 import A from "./A";
 import Head from "next/head";
 import React from "react";
-import Scrollable from "./Scrollable";
 import { strict as assert } from "assert";
 
 type NavGroup = "home" | "history" | "architecture" | "register" | "mode" | "extension" | "instruction" | "about";
@@ -30,28 +31,15 @@ type LayoutProps = {
     homePage?: boolean;
     src?: string;
     dataSrc?: string;
-    breadcrumbs?: BreadcrumbProps[];
     children?: React.ReactNode;
 };
-
-function renderBreadcrumbs({ text, href, ...restProps }: BreadcrumbProps): JSX.Element {
-    return (
-        <Breadcrumb {...restProps}>
-            {href
-                ? <A href={href}>{text}</A>
-                : text}
-        </Breadcrumb>
-    );
-}
 
 export default function Layout(props: LayoutProps): JSX.Element {
     function navItem(group: NavGroup, href: string, text: string) {
         return (
-            <AnchorButton
-                active={props.navGroup === group}
-                className="bp3-minimal"
-                href={href}
-                text={text} />
+            <Nav.Link href={href} active={props.navGroup === group}>
+                {text}
+            </Nav.Link>
         );
     }
 
@@ -73,57 +61,54 @@ export default function Layout(props: LayoutProps): JSX.Element {
                 {props.canonical && <link rel="canonical" href={`https://80x86.dev${props.canonical}`} />}
                 <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
             </Head>
-            <Card id="all" className="bp3-dark">
-                <header>
-                    <Navbar>
-                        <Scrollable>
-                            <Navbar.Group>
-                                {navItem("home", "/", "80x86")}
-                                <Navbar.Divider />
-                                {navItem("history", "/history", "History")}
-                                {navItem("architecture", "/architecture", "Microarchitecture")}
-                                {navItem("register", "/register", "Registers")}
-                                {navItem("mode", "/mode", "Modes")}
-                                {navItem("extension", "/extension", "Extensions")}
-                                {navItem("instruction", "/instruction", "Instructions")}
-                                {navItem("about", "/about", "About")}
-                            </Navbar.Group>
-                        </Scrollable>
+            <header>
+                <Container fluid>
+                    <Navbar bg="light">
+                        <Nav>
+                            {navItem("home", "/", "80x86")}
+                            {navItem("history", "/history", "History")}
+                            {navItem("architecture", "/architecture", "Microarchitecture")}
+                            {navItem("register", "/register", "Registers")}
+                            {navItem("mode", "/mode", "Modes")}
+                            {navItem("extension", "/extension", "Extensions")}
+                            {navItem("instruction", "/instruction", "Instructions")}
+                            {navItem("about", "/about", "About")}
+                        </Nav>
                     </Navbar>
-                </header>
-                <main>
-                    {props.breadcrumbs &&
-                        <Card className="breadcrumbs" interactive>
-                            <Breadcrumbs breadcrumbRenderer={renderBreadcrumbs} items={props.breadcrumbs} />
-                        </Card>}
-                    <div id="main">
-                        {props.children}
-                    </div>
-                </main>
-                <Divider />
-                <footer>
-                    <div className="bp3-text-small">
-                        {props.src &&
-                            <p>
-                                <A href={`https://github.com/colejohnson66/80x86/blob/main${props.src}`}>
-                                    View this page&apos;s source code
-                                </A>
-                                {props.dataSrc ? ", and " : "."}
-                                {props.dataSrc &&
-                                    <A href={`https://github.com/colejohnson66/80x86/blob/main${props.dataSrc}`}>
-                                        the data used to generate it
-                                    </A>}
-                                {props.dataSrc && "."}
-                            </p>}
-                        <p>
-                            <A href="/contact">Contact</A>.
-                        </p>
-                        <p>
-                            Website copyright &copy; Cole Johnson 2020-2021.
-                        </p>
-                    </div>
-                </footer>
-            </Card>
+                </Container>
+            </header>
+            <main>
+                {props.children}
+            </main>
+            <hr />
+            <footer>
+                <Container fluid>
+                    <Row>
+                        <Col>
+                            <small>
+                                {props.src &&
+                                    <p>
+                                        <A href={`https://github.com/colejohnson66/80x86/blob/main${props.src}`}>
+                                            View this page&apos;s source code
+                                        </A>
+                                        {props.dataSrc ? ", and " : "."}
+                                        {props.dataSrc &&
+                                            <A href={`https://github.com/colejohnson66/80x86/blob/main${props.dataSrc}`}>
+                                                the data used to generate it
+                                            </A>}
+                                        {props.dataSrc && "."}
+                                    </p>}
+                                <p>
+                                    <A href="/contact">Contact</A>.
+                                </p>
+                                <p>
+                                    Website copyright &copy; Cole Johnson 2020-2021.
+                                </p>
+                            </small>
+                        </Col>
+                    </Row>
+                </Container>
+            </footer>
         </>
     );
 }

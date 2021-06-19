@@ -14,53 +14,57 @@
  * You should have received a copy of the GNU Affero General Public License along
  *   with this program. If not, see <https://www.gnu.org/licenses/>.
  */
-import { BreadcrumbProps, Code, H1, H2, UL } from "@blueprintjs/core";
+import { Breadcrumb, Col, Container, Row } from "react-bootstrap";
 import Layout, { Title } from "../../components/Layout";
 
 import A from "../../components/A";
+import LayoutConstants from "../../constants/Layout";
 import React from "react";
 import TOC from "../../components/TOC";
 
 export default function Page(): JSX.Element {
-    const PageBreadcrumbs: BreadcrumbProps[] = [
-        { text: "Registers" },
-    ];
-
     return (
-        <Layout canonical="/register" navGroup="register" src="/pages/register/index.tsx" breadcrumbs={PageBreadcrumbs}>
+        <Layout canonical="/register" navGroup="register" src="/pages/register/index.tsx">
             <Title title="Registers" />
-            <TOC.Root>
-                <TOC.Entry href="#headingFiles" text="Register Files" />
-            </TOC.Root>
-            <div id="content">
-                <H1>Registers</H1>
-                <p>
-                    x86 is home to <em>many</em> different registers.
-                    They are generally organized into a few different &quot;register files&quot;.
-                </p>
+            <Container fluid>
+                <Breadcrumb>
+                    <Breadcrumb.Item active>Registers</Breadcrumb.Item>
+                </Breadcrumb>
+                <Row>
+                    <TOC.Root>
+                        <TOC.Entry href="#headingFiles" text="Register Files" />
+                    </TOC.Root>
+                    <Col {...LayoutConstants.content}>
+                        <h1>Registers</h1>
+                        <p>
+                            x86 is home to <em>many</em> different registers.
+                            They are generally organized into a few different &quot;register files&quot;.
+                        </p>
 
-                <H2 id="headingFiles">Register Files</H2>
-                <p>
-                    This is a list of the various register files for x86.
-                    Any configuration registers are listed with the register file that accompany them.
-                    For example, <Code>MXCSR</Code> is used with vector instructions, and would be listed with the other vector registers.
-                </p>
-                <UL>
-                    <li><A href="/register/gpr">General purpose registers</A> (<Code>EAX</Code>, <Code>EBX</Code>, etc.)</li>
-                    <li><A href="/register/flags">Flags register</A> (<Code>(ER)FLAGS</Code>)</li>
-                    <li><A href="/register/segment">Segment registers</A> (<Code>CS</Code>, <Code>DS</Code>, etc.)</li>
-                    <li><A href="/register/control">Control registers</A> (<Code>CR0</Code>, <Code>CR2</Code>, etc.)</li>
-                    <li><A href="/register/debug">Debug registers</A> (<Code>DR0</Code>, <Code>DR1</Code>, etc.)</li>
-                    <li><A href="/register/fpu">Floating point registers</A> (<Code>ST(0)</Code>, <Code>ST(1)</Code>, etc.)</li>
-                    <li><A href="/register/table">Table registers</A> (<Code>GDTR</Code>, <Code>IDTR</Code>, etc.)</li>
-                    <li><A href="/register/mmx">Multimedia Extension registers</A> (<Code>MM0</Code>, <Code>MM1</Code>, etc.)</li>
-                    <li><A href="/register/vector">Vector registers</A> (<Code>XMM0</Code>, <Code>YMM0</Code>, etc.)</li>
-                    <li><A href="/register/mask">Vector mask registers</A> (<Code>K0</Code>, <Code>K1</Code>, etc.)</li>
-                    <li><A href="/register/bound">Bound registers</A> (<Code>BND0</Code>, <Code>BND1</Code>, etc.)</li>
-                    <li><A href="/register/tile">Tile registers</A> (<Code>TMM0</Code>, <Code>TMM1</Code>, etc.)</li>
-                    <li><A href="/register/msr">Model specific registers</A></li>
-                </UL>
-            </div>
+                        <h2 id="headingFiles">Register Files</h2>
+                        <p>
+                            This is a list of the various register files for x86.
+                            Any configuration registers are listed with the register file that accompany them.
+                            For example, <code>MXCSR</code> is used with vector instructions, and would be listed with the other vector registers.
+                        </p>
+                        <ul>
+                            <li><A href="/register/gpr">General purpose registers</A> (<code>EAX</code>, <code>EBX</code>, etc.)</li>
+                            <li><A href="/register/flags">Flags register</A> (<code>(ER)FLAGS</code>)</li>
+                            <li><A href="/register/segment">Segment registers</A> (<code>CS</code>, <code>DS</code>, etc.)</li>
+                            <li><A href="/register/control">Control registers</A> (<code>CR0</code>, <code>CR2</code>, etc.)</li>
+                            <li><A href="/register/debug">Debug registers</A> (<code>DR0</code>, <code>DR1</code>, etc.)</li>
+                            <li><A href="/register/fpu">Floating point registers</A> (<code>ST(0)</code>, <code>ST(1)</code>, etc.)</li>
+                            <li><A href="/register/table">Table registers</A> (<code>GDTR</code>, <code>IDTR</code>, etc.)</li>
+                            <li><A href="/register/mmx">Multimedia Extension registers</A> (<code>MM0</code>, <code>MM1</code>, etc.)</li>
+                            <li><A href="/register/vector">Vector registers</A> (<code>XMM0</code>, <code>YMM0</code>, etc.)</li>
+                            <li><A href="/register/mask">Vector mask registers</A> (<code>K0</code>, <code>K1</code>, etc.)</li>
+                            <li><A href="/register/bound">Bound registers</A> (<code>BND0</code>, <code>BND1</code>, etc.)</li>
+                            <li><A href="/register/tile">Tile registers</A> (<code>TMM0</code>, <code>TMM1</code>, etc.)</li>
+                            <li><A href="/register/msr">Model specific registers</A></li>
+                        </ul>
+                    </Col>
+                </Row>
+            </Container>
         </Layout>
     );
 }

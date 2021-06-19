@@ -14,9 +14,6 @@
  * You should have received a copy of the GNU Affero General Public License along
  *   with this program. If not, see <https://www.gnu.org/licenses/>.
  */
-
-import { H2, UL } from "@blueprintjs/core";
-
 import React from "react";
 
 type RootProps = {
@@ -27,10 +24,10 @@ export default function Root(props: RootProps): JSX.Element {
     // TODO: support columns
     return (
         <>
-            <H2 id="headingReferences">References</H2>
-            <UL className="referenceList">
+            <h2 id="headingReferences">References</h2>
+            <ul className="referenceList">
                 {props.children}
-            </UL>
+            </ul>
         </>
     );
 }

@@ -1,5 +1,5 @@
 /* This file is part of 80x86.
- * Copyright (c) 2020-2021 Cole Johnson
+ * Copyright (c) 2021 Cole Johnson
  *
  * This program is free software: you can redistribute it and/or modify it under
  *   the terms of the GNU Affero General Public License as published by the Free
@@ -14,15 +14,15 @@
  * You should have received a copy of the GNU Affero General Public License along
  *   with this program. If not, see <https://www.gnu.org/licenses/>.
  */
-
-import "bootstrap/dist/css/bootstrap.min.css";
-import "../css/global.css";
-import "../css/instruction.css";
-import "../css/toc.css";
-
-import { AppProps } from "next/app";
-import React from "react";
-
-export default function App({ Component, pageProps }: AppProps): JSX.Element {
-    return <Component {...pageProps} />;
-}
+export default {
+    toc: {
+        sm: 12,
+        md: 3,
+        id: "toc",
+    },
+    content: {
+        sm: 12,
+        md: true,
+        id: "content",
+    },
+};

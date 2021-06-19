@@ -1,16 +1,16 @@
 /* This file is part of 80x86.
  * Copyright (c) 2021 Cole Johnson
- * 
+ *
  * This program is free software: you can redistribute it and/or modify it under
  *   the terms of the GNU Affero General Public License as published by the Free
  *   Software Foundation, either version 3 of the License, or (at your option)
  *   any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  *   ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
  *   FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License
  *   for more details.
- * 
+ *
  * You should have received a copy of the GNU Affero General Public License along
  *   with this program. If not, see <https://www.gnu.org/licenses/>.
  */
@@ -30,54 +30,11 @@ body,
 /* Contains everything (`header`, `main`, and `footer`) */
 #all {
     border-radius: 0;
-    display: flex;
-    flex-direction: column;
     min-height: 100%;
 }
 
 header {
-    flex: 0 1 auto;
     margin-bottom: 20px;
-}
-
-/* Contains `.breadcrumbs`, and `#main` (`#toc`, and `#content`) */
-main {
-    flex: 1 1 auto;
-    display: flex;
-    flex-flow: column;
-}
-
-.breadcrumbs {
-    margin: 0 2em 1em 2em;
-    padding: 10px;
-}
-
-/* Contains `#toc` and `#content` */
-#main {
-    margin: 0 2em;
-    height: 100%;
-    display: flex;
-    flex-flow: row;
-}
-
-@media (max-width: 1000px) {
-    #main {
-        flex-flow: column;
-    }
-}
-
-/* Actual content pane */
-#content {
-    flex: 1 1 auto;
-}
-
-.columns {
-    display: flex;
-    flex-flow: row;
-}
-
-.column {
-    flex: auto;
 }
 
 /* <li> tags don't contain <p> blocks sometimes; add a margin */
@@ -94,29 +51,8 @@ li > br {
 h2 {
     border-width: 0 0 1px 0;
     border-style: solid;
-    margin-top: 0.5em !important;
-}
-
-.bp3-callout {
-    margin-bottom: 0.5em;
-}
-
-/* A little breathing room */
-dt {
-    padding-top: 6px;
-    padding-bottom: 2px;
-}
-
-dt:first-child {
-    padding-top: 0;
-}
-
-.whiteBgRoundBorder {
-    background-color: white;
-    border-radius: 5px;
 }
 
 footer {
-    flex: 0 1 auto;
-    margin: 1em 0 0 10em;
+    margin: 1em 0 0 5em;
 }

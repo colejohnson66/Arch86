@@ -14,26 +14,30 @@
  * You should have received a copy of the GNU Affero General Public License along
  *   with this program. If not, see <https://www.gnu.org/licenses/>.
  */
+import { Col, Container, Row } from "react-bootstrap";
 import Layout, { Title } from "../components/Layout";
 
 import A from "../components/A";
-import { H1 } from "@blueprintjs/core";
 import React from "react";
 
 export default function Page(): JSX.Element {
     return (
         <Layout>
             <Title title="404" />
-            <div id="content">
-                <H1>404</H1>
-                <p>
-                    That means whatever you were trying to reach doesn&apos;t exist.
-                </p>
-                <p>
-                    This site is currently under active development, so many pages may not exist yet.
-                    If you believe you were linked here <em>in error</em>, please <A href="/contact">contact me</A> to report the problem.
-                </p>
-            </div>
+            <Container fluid>
+                <Row>
+                    <Col id="content">
+                        <h1>404</h1>
+                        <p>
+                            That means whatever you were trying to reach doesn&apos;t exist.
+                        </p>
+                        <p>
+                            This site is currently under active development, so many pages may not exist yet.
+                            If you believe you were linked here <em>in error</em>, please <A href="/contact">contact me</A> to report the problem.
+                        </p>
+                    </Col>
+                </Row>
+            </Container>
         </Layout>
     );
 }

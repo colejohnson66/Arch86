@@ -18,7 +18,6 @@
 import { formatStringPlaintext, formatStringToJsx } from "../lib/FormatStringToJsx";
 
 import A from "./A";
-import { Code } from "@blueprintjs/core";
 import InstructionTitles from "../data/instructions/Titles";
 import React from "react";
 
@@ -131,14 +130,14 @@ export default function Instruction(props: InstructionProps): JSX.Element {
     }
     if (props.noLink) {
         if (props.noTitle)
-            return <Code>{props.name}</Code>;
-        return <><Code>{props.name}</Code>{nameJsx}</>;
+            return <code>{props.name}</code>;
+        return <><code>{props.name}</code>{nameJsx}</>;
     }
 
     const href = props.as
         ? `/instruction/${props.as.toLowerCase()}`
         : `/instruction/${props.name.toLowerCase()}`;
     if (props.noTitle)
-        return <A href={href}><Code>{props.name}</Code></A>;
-    return <A href={href}><Code>{props.name}</Code>{nameJsx}</A>;
+        return <A href={href}><code>{props.name}</code></A>;
+    return <A href={href}><code>{props.name}</code>{nameJsx}</A>;
 }
