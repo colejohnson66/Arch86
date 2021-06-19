@@ -11,15 +11,14 @@
 /register
   /segment
   /control
-  /debug
   /fpu
-  /table
   /mmx
   /vector
   /mask
   /bound
   /tile
   /msr
+    ...
 /mode
   /real
   /protected
