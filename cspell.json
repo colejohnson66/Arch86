@@ -25,6 +25,10 @@
         {
             "name": "instructions-d",
             "path": "./.vscode/instructions/d.txt"
+        },
+        {
+            "name": "instructions-e",
+            "path": "./.vscode/instructions/e.txt"
         }
     ],
     "dictionaries": [
@@ -33,7 +37,8 @@
         "instructions-a",
         "instructions-b",
         "instructions-c",
-        "instructions-d"
+        "instructions-d",
+        "instructions-e"
     ],
     "ignorePaths": [
         "**/node_modules/**",

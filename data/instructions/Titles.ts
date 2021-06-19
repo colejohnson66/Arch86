@@ -151,6 +151,14 @@ const InstructionTitles: IDictionary<string> = {
     dpList: "Dot Product (Vector)",
     dppd: "Dot Product of Packed Double-Precision Floating Point Values",
     dpps: "Dot Product of Packed Single-Precision Floating Point Values",
+
+    emms: "Empty MMX Technology State",
+    encodekey128: "Encode 128 bit Key with Key Locker",
+    encodekey256: "Encode 256 bit Key with Key Locker",
+    endbr32: "Terminate an Indirect Branch in 32 bit Mode",
+    endbr64: "Terminate an Indirect Branch in 64 bit Mode",
+    enter: "Make Stack Frame for Procedure Parameters",
+    extractps: "Extract Packed Floating-Point Values",
 };
 
 export default InstructionTitles;

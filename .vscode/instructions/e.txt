@@ -1,0 +1,8 @@
+emms
+encodekey128
+encodekey256
+endbr32
+endbr64
+enter
+extractps
+vextractps
