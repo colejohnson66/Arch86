@@ -51,7 +51,6 @@
         "**/yarn.lock"
     ],
     "ignoreWords": [
-        "blueprintjs",
         "coleharrisjohnson",
         "globby",
         "gmail",

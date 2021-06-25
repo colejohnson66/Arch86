@@ -11,10 +11,10 @@
  *   FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License
  *   for more details.
  *
- * You should have received a copy of the GNU Affero General Public License along
- *   with this program. If not, see <https://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Affero General Public License
+ *   along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
-import { Alert } from "react-bootstrap";
+import { Alert } from "./Bootstrap";
 import React from "react";
 import { strict as assert } from "assert";
 
@@ -28,7 +28,7 @@ export default function WIP(props: WipProps): JSX.Element {
     assert((!!props.page && !props.section) ||
         (!props.page && !!props.section));
     return (
-        <Alert variant="warning">
+        <Alert variant="secondary">
             <small>
                 This {props.page ? "page" : "section"} is a work in progress.
                 It is incomplete, and may not be completely accurate or up to date.

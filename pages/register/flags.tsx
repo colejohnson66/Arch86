@@ -11,16 +11,14 @@
  *   FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License
  *   for more details.
  *
- * You should have received a copy of the GNU Affero General Public License along
- *   with this program. If not, see <https://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Affero General Public License
+ *   along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
-import { Breadcrumb, Container } from "../../components/Bootstrap";
-import { Col, Row } from "react-bootstrap";
+import { Breadcrumb, Container, ContentCol, Row } from "../../components/Bootstrap";
 import Layout, { Title } from "../../components/Layout";
 
 import A from "../../components/A";
 import Cite from "../../components/Cite";
-import LayoutConstants from "../../constants/Layout";
 import React from "react";
 import Ref from "../../components/Ref";
 import TOC from "../../components/TOC";
@@ -41,7 +39,7 @@ export default function Page(): JSX.Element {
                         </TOC.Entry>
                         <TOC.Entry href="#headingReferences" text="References" />
                     </TOC.Root>
-                    <Col {...LayoutConstants.content}>
+                    <ContentCol>
                         <h1>Flags Register</h1>
                         <p>
                             The flags register (<code>RFLAGS</code>) is a 64 bit bitfield register.
@@ -56,112 +54,112 @@ export default function Page(): JSX.Element {
                         <p>
                             In ascending order (least significant to most significant bit), the register contains the following bits of information:
                         </p>
-                        <dl>
-                            <dt><code>CF</code> - Carry Flag (bit 0)</dt>
-                            <dd>
+                        <dl className="row">
+                            <dt className="col-sm-2"><code>CF</code> - Carry Flag (bit 0)</dt>
+                            <dd className="col-sm-10">
                                 Indicates if an arithmetic operation generated a carry or borrow out of the most significant bit of the result.
                                 It indicates an overflow or underflow for unsigned arithmetic.
                             </dd>
-                            <dt><code>VF</code> - &quot;V&quot; Flag (bit 1)</dt>
-                            <dd>
+                            <dt className="col-sm-2"><code>VF</code> - &quot;V&quot; Flag (bit 1)</dt>
+                            <dd className="col-sm-10">
                                 Reserved.
                                 Always set.
                                 <br />
                                 <A href="#headingVKFlags">See below</A>.
                             </dd>
-                            <dt><code>PF</code> - Parity Flag (bit 2)</dt>
-                            <dd>
+                            <dt className="col-sm-2"><code>PF</code> - Parity Flag (bit 2)</dt>
+                            <dd className="col-sm-10">
                                 Indicates if the least significant byte of a result contains an even number of 1s (meaning there is parity), and cleared otherwise.
                                 As its name implies, it is used for operations involving parity (such as data transmission).
                                 For those situations, there exists two instructions: <A href="/instruction/jcc"><code>JP/JPE</code> - Jump If Parity (Even)</A> and <A href="/instruction/jcc"><code>JNP/JPO</code> - Jump If No Parity (Odd)</A>.
                                 <br />
                                 It is obsolete, but continues to exist for compatibility reasons.
                             </dd>
-                            <dt>(bit 3)</dt>
-                            <dd>
+                            <dt className="col-sm-2">(bit 3)</dt>
+                            <dd className="col-sm-10">
                                 Reserved.
                                 Always cleared.
                             </dd>
-                            <dt><code>AF</code> - Auxiliary Cary Flag (bit 4)</dt>
-                            <dd>
+                            <dt className="col-sm-2"><code>AF</code> - Auxiliary Cary Flag (bit 4)</dt>
+                            <dd className="col-sm-10">
                                 Sometimes referred to as the &quot;Half Carry Flag&quot; it is similar to the carry flag (bit 0), but always operates on overflow or underflow involving bit 3 of the result.
                                 The purpose of this flag is for BCD instructions such as the <A href="/instruction/aaa"><code>AAA</code> - ASCII Adjust After Addition</A> instruction.
                                 <br />
                                 It is obsolete, but continues to exist for compatibility reasons.
                             </dd>
-                            <dt><code>KF</code> - &quot;K&quot; Flag (bit 5)</dt>
-                            <dd>
+                            <dt className="col-sm-2"><code>KF</code> - &quot;K&quot; Flag (bit 5)</dt>
+                            <dd className="col-sm-10">
                                 Reserved.
                                 Always cleared.
                                 <br />
                                 <A href="#headingVKFlags">See below</A>.
                             </dd>
-                            <dt><code>ZF</code> - Zero Flag (bit 6)</dt>
-                            <dd>
+                            <dt className="col-sm-2"><code>ZF</code> - Zero Flag (bit 6)</dt>
+                            <dd className="col-sm-10">
                                 As the name implies, this flag is set if the result is zero, and cleared otherwise.
                             </dd>
-                            <dt><code>SF</code> - Sign Flag (bit 7)</dt>
-                            <dd>
+                            <dt className="col-sm-2"><code>SF</code> - Sign Flag (bit 7)</dt>
+                            <dd className="col-sm-10">
                                 As the name implies, this flag is set to the most significant bit (the sign bit) of the result.
                             </dd>
-                            <dt><code>TF</code> - Trap Flag (bit 8)</dt>
-                            <dd>
+                            <dt className="col-sm-2"><code>TF</code> - Trap Flag (bit 8)</dt>
+                            <dd className="col-sm-10">
                                 Enables single-step debugging of a thread.
                             </dd>
-                            <dt><code>IF</code> - Interrupt Enable Flag (bit 9)</dt>
-                            <dd>
+                            <dt className="col-sm-2"><code>IF</code> - Interrupt Enable Flag (bit 9)</dt>
+                            <dd className="col-sm-10">
                                 Controls whether the processor should respond to maskable interrupts or not.
                                 It does <em>not</em> inhibit non-maskable interrupts.
                             </dd>
-                            <dt><code>DF</code> - Direction Flag (bit 10)</dt>
-                            <dd>
+                            <dt className="col-sm-2"><code>DF</code> - Direction Flag (bit 10)</dt>
+                            <dd className="col-sm-10">
                                 Controls the &quot;direction&quot; of string instructions.
                                 When set, the instructions will decrement (process from high to low addressed), and when cleared, they will increment (low to high).
                             </dd>
-                            <dt><code>OF</code> - Overflow Flag (bit 11)</dt>
-                            <dd>
+                            <dt className="col-sm-2"><code>OF</code> - Overflow Flag (bit 11)</dt>
+                            <dd className="col-sm-10">
                                 Indicates if an arithmetic operation generated a carry or borrow out of the <em>second</em> most significant bit of the result.
                                 It indicates an overflow or underflow for signed arithmetic.
                             </dd>
-                            <dt><code>IOPL</code> - I/O Privilege Level (bits 12 and 13)</dt>
-                            <dd>
+                            <dt className="col-sm-2"><code>IOPL</code> - I/O Privilege Level (bits 12 and 13)</dt>
+                            <dd className="col-sm-10">
                                 Indicates the <A href="https://en.wikipedia.org/wiki/Protection_ring">processor ring</A> of a thread.
                                 A zero indicates the most privilege, while a three indicates the least.
                                 <br />
                                 On the 8086 and 80186, bit 12 is always set, and bit 13 is always cleared.
                             </dd>
-                            <dt><code>NT</code> - Nested Task (bit 14)</dt>
-                            <dd>
+                            <dt className="col-sm-2"><code>NT</code> - Nested Task (bit 14)</dt>
+                            <dd className="col-sm-10">
                                 Controls if the current thread is linked to a previously executed thread.
                                 <br />
                                 On the 8086 and 80186, this is always set.
                             </dd>
-                            <dt>(bit 15)</dt>
-                            <dd>
+                            <dt className="col-sm-2">(bit 15)</dt>
+                            <dd className="col-sm-10">
                                 Reserved.
                                 <br />
                                 On the 8086 and 80186, this is always set.
                                 Later models have this always cleared.
                             </dd>
-                            <dt><code>RF</code> - Resume Flag (bit 16)</dt>
-                            <dd>
+                            <dt className="col-sm-2"><code>RF</code> - Resume Flag (bit 16)</dt>
+                            <dd className="col-sm-10">
                                 Controls whether the processor responds to debug exceptions.
                             </dd>
-                            <dt><code>VM</code> - Virtual-8086 Mode (bit 17)</dt>
-                            <dd>
+                            <dt className="col-sm-2"><code>VM</code> - Virtual-8086 Mode (bit 17)</dt>
+                            <dd className="col-sm-10">
                                 Controls whether the processor is in Virtual-8086 mode (inside of Protected Mode).
                             </dd>
-                            <dt><code>AC</code> - Alignment Check / Access Control (bit 18)</dt>
-                            <dd>
+                            <dt className="col-sm-2"><code>AC</code> - Alignment Check / Access Control (bit 18)</dt>
+                            <dd className="col-sm-10">
                                 A user-controllable flag that can mask the <code>AM</code> bit in the <A href="/register/control/cr0"><code>CR0</code> register</A>.
                                 These flags (if both set) force alignment checking on data in memory.
                             </dd>
-                            <dt><code>VIF</code> - Virtual Interrupt Flag (bit 19)</dt>
-                            <dd>TODO</dd>
-                            <dt><code>VIP</code> - Virtual Interrupt Pending (bit 20)</dt>
-                            <dd>TODO</dd>
-                            <dt><code>ID</code> - ID Flag (bit 21)</dt>
-                            <dd>
+                            <dt className="col-sm-2"><code>VIF</code> - Virtual Interrupt Flag (bit 19)</dt>
+                            <dd className="col-sm-10">TODO</dd>
+                            <dt className="col-sm-2"><code>VIP</code> - Virtual Interrupt Pending (bit 20)</dt>
+                            <dd className="col-sm-10">TODO</dd>
+                            <dt className="col-sm-2"><code>ID</code> - ID Flag (bit 21)</dt>
+                            <dd className="col-sm-10">
                                 Provides a method of checking for support of the <A href="/instruction/cpuid"><code>CPUID</code></A> instruction.
                                 On the 80486 and older processors, attempts to set this bit will fail as the processor will just clear it.
                                 However, Pentium (and newer) processors (which support <code>CPUID</code>) will allow writing to this bit.
@@ -170,19 +168,19 @@ export default function Page(): JSX.Element {
                                 If this bit is still set, the CPU supports <code>CPUID</code>.
                                 If the bit is cleared when read back, the processor is an 80486 or older, and other methods must be used to determine which processor is running (and therefore, which features are available).
                             </dd>
-                            <dt>(bits 22 and up)</dt>
-                            <dd>
+                            <dt className="col-sm-2">(bits 22 and up)</dt>
+                            <dd className="col-sm-10">
                                 Reserved.
                                 Always cleared.
                             </dd>
                             <style jsx>{`
-                        dd {
-                            margin-bottom: 8px;
-                        }
-                        br {
-                            margin-bottom: 2px;
-                        }
-                    `}</style>
+                                dd {
+                                    margin-bottom: 8px;
+                                }
+                                br {
+                                    margin-bottom: 2px;
+                                }
+                            `}</style>
                         </dl>
 
                         <h3 id="headingVKFlags">V and K Flags</h3>
@@ -229,7 +227,7 @@ export default function Page(): JSX.Element {
                                     archiveDate="2021-02-07" />
                             </Ref.Entry>
                         </Ref.Root>
-                    </Col>
+                    </ContentCol>
                 </Row>
             </Container>
         </Layout>

@@ -11,11 +11,10 @@
  *   FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License
  *   for more details.
  *
- * You should have received a copy of the GNU Affero General Public License along
- *   with this program. If not, see <https://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Affero General Public License
+ *   along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
-import { Alert, Col, Row, Table } from "react-bootstrap";
-import { Breadcrumb, Container } from "../../components/Bootstrap";
+import { Alert, Breadcrumb, Container, ContentCol, Row, Table } from "../../components/Bootstrap";
 import { GetStaticPaths, GetStaticProps } from "next";
 import Layout, { Title } from "../../components/Layout";
 import { formatStringPlaintext, formatStringToJsx } from "../../lib/FormatStringToJsx";
@@ -24,7 +23,6 @@ import { getAllInstructionsAsParams, getInstructionData } from "../../lib/instru
 import A from "../../components/A";
 import DateTime from "../../components/DateTime";
 import IDictionary from "../../types/IDictionary";
-import LayoutConstants from "../../constants/Layout";
 import MaybeArray from "../../types/MaybeArray";
 import React from "react";
 import Ref from "../../components/Ref";
@@ -173,12 +171,12 @@ function regularExceptionList(ex: string | ExceptionList): JSX.Element {
 
         return (
             <React.Fragment key={key}>
-                <dt><code>{key}</code></dt>
-                <dd>{brTagsFromArray(coerceArray(val))}</dd>
+                <dt className="col-sm-1"><code>{key}</code></dt>
+                <dd className="col-sm-11">{brTagsFromArray(coerceArray(val))}</dd>
             </React.Fragment>
         );
     });
-    return <dl>{rows}</dl>;
+    return <dl className="row">{rows}</dl>;
 }
 
 export default function Page(props: PageProps): JSX.Element {
@@ -231,14 +229,14 @@ export default function Page(props: PageProps): JSX.Element {
                         {props.refs &&
                             <TOC.Entry href="#headingReferences" text="References" />}
                     </TOC.Root>
-                    <Col {...LayoutConstants.content}>
+                    <ContentCol>
                         <h1><code>{props.id.toUpperCase()}</code>: {formatStringToJsx(props.title)}</h1>
                         {props.wip && <WIP page />}
                         <Alert variant="primary">
                             For information about interpreting this page, see <A href="/instruction/help">the help page</A>.
                         </Alert>
                         <Scrollable>
-                            <Table striped bordered size="sm">
+                            <Table striped>
                                 <thead>
                                     <tr>
                                         <th>Opcode and Mnemonic</th>
@@ -290,7 +288,7 @@ export default function Page(props: PageProps): JSX.Element {
 
                         <h2 id="headingEncoding">Encoding</h2>
                         <Scrollable>
-                            <Table striped bordered size="sm">
+                            <Table striped>
                                 <thead>
                                     <tr>
                                         <th>Encoding</th>
@@ -369,19 +367,19 @@ export default function Page(props: PageProps): JSX.Element {
                         {props.flags &&
                             <>
                                 <h2 id="headingFlags">Flags Affected</h2>
-                                <dl>
-                                    <dt><code>CF</code> (carry flag)</dt>
-                                    <dd>{brTagsFromString(props.flags.CF)}</dd>
-                                    <dt><code>PF</code> (parity flag)</dt>
-                                    <dd>{brTagsFromString(props.flags.PF)}</dd>
-                                    <dt><code>AF</code> (auxiliary flag)</dt>
-                                    <dd>{brTagsFromString(props.flags.AF)}</dd>
-                                    <dt><code>ZF</code> (zero flag)</dt>
-                                    <dd>{brTagsFromString(props.flags.ZF)}</dd>
-                                    <dt><code>SF</code> (sign flag)</dt>
-                                    <dd>{brTagsFromString(props.flags.SF)}</dd>
-                                    <dt><code>OF</code> (overflow flag)</dt>
-                                    <dd>{brTagsFromString(props.flags.OF)}</dd>
+                                <dl className="row">
+                                    <dt className="col-sm-2"><code>CF</code> (carry flag)</dt>
+                                    <dd className="col-sm-10">{brTagsFromString(props.flags.CF)}</dd>
+                                    <dt className="col-sm-2"><code>PF</code> (parity flag)</dt>
+                                    <dd className="col-sm-10">{brTagsFromString(props.flags.PF)}</dd>
+                                    <dt className="col-sm-2"><code>AF</code> (auxiliary flag)</dt>
+                                    <dd className="col-sm-10">{brTagsFromString(props.flags.AF)}</dd>
+                                    <dt className="col-sm-2"><code>ZF</code> (zero flag)</dt>
+                                    <dd className="col-sm-10">{brTagsFromString(props.flags.ZF)}</dd>
+                                    <dt className="col-sm-2"><code>SF</code> (sign flag)</dt>
+                                    <dd className="col-sm-10">{brTagsFromString(props.flags.SF)}</dd>
+                                    <dt className="col-sm-2"><code>OF</code> (overflow flag)</dt>
+                                    <dd className="col-sm-10">{brTagsFromString(props.flags.OF)}</dd>
                                 </dl>
                             </>}
 
@@ -458,7 +456,7 @@ export default function Page(props: PageProps): JSX.Element {
                                     ))}
                                 </Ref.Root>
                             </>}
-                    </Col>
+                    </ContentCol>
                 </Row>
             </Container>
         </Layout>

@@ -11,11 +11,9 @@
  *   FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License
  *   for more details.
  *
- * You should have received a copy of the GNU Affero General Public License along
- *   with this program. If not, see <https://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Affero General Public License
+ *   along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
-
-import { Col } from "react-bootstrap";
 import LayoutConstants from "../../constants/Layout";
 import React from "react";
 
@@ -24,6 +22,13 @@ type TOCRootProps = {
 };
 
 export default function Root(props: TOCRootProps): JSX.Element {
+    const classes = [
+        "col",
+        `col-sm-${LayoutConstants.toc.sm}`,
+        `col-md-${LayoutConstants.toc.md}`,
+        `col-lg-${LayoutConstants.toc.lg}`,
+    ];
+
     // Set `tocIndex`, but only on valid TOC entries (filter out nulls)
     let count = 0;
     const newChildren = React.Children.map(props.children, (child) => {
@@ -34,11 +39,11 @@ export default function Root(props: TOCRootProps): JSX.Element {
         return child;
     });
     return (
-        <Col {...LayoutConstants.toc}>
+        <div className={classes.join(" ")} id={LayoutConstants.toc.id}>
             <div id="tocTitle">Contents</div>
             <ul>
                 {newChildren}
             </ul>
-        </Col>
+        </div>
     );
 }

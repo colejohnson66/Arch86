@@ -11,13 +11,14 @@
  *   FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License
  *   for more details.
  *
- * You should have received a copy of the GNU Affero General Public License along
- *   with this program. If not, see <https://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Affero General Public License
+ *   along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import "bootswatch/dist/darkly/bootstrap.min.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 import "../css/global.css";
 import "../css/instruction.css";
+import "../css/opmap.css";
 import "../css/toc.css";
 
 import { AppProps } from "next/app";

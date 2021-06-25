@@ -1,4 +1,3 @@
-import { Alert, Col, Row } from "react-bootstrap";
 /* This file is part of 80x86.
  * Copyright (c) 2021 Cole Johnson
  *
@@ -12,10 +11,10 @@ import { Alert, Col, Row } from "react-bootstrap";
  *   FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License
  *   for more details.
  *
- * You should have received a copy of the GNU Affero General Public License along
- *   with this program. If not, see <https://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Affero General Public License
+ *   along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
-import { Breadcrumb, Container } from "../../components/Bootstrap";
+import { Alert, Breadcrumb, Container, ContentCol, Row } from "../../components/Bootstrap";
 import Layout, { Title } from "../../components/Layout";
 
 import A from "../../components/A";
@@ -23,7 +22,6 @@ import { GetStaticProps } from "next";
 import IDictionary from "../../types/IDictionary";
 import Instruction from "../../components/Instruction";
 import InstructionTitles from "../../data/instructions/Titles";
-import LayoutConstants from "../../constants/Layout";
 import MaybeArray from "../../types/MaybeArray";
 import React from "react";
 import TOC from "../../components/TOC";
@@ -98,7 +96,7 @@ export default function Page(props: PageProps): JSX.Element {
                             ))}
                         </TOC.Entry>
                     </TOC.Root>
-                    <Col {...LayoutConstants.content}>
+                    <ContentCol>
                         <h1>Instructions</h1>
                         <p>
                             x86 is home to a few hundred instructions with over 3,000 different encodings.
@@ -116,7 +114,7 @@ export default function Page(props: PageProps): JSX.Element {
                         {Object.keys(props.instructions).map((char) => (
                             instructionListWithHeading(props.instructions[char], char)
                         ))}
-                    </Col>
+                    </ContentCol>
                 </Row>
             </Container>
         </Layout>

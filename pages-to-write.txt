@@ -11,6 +11,9 @@
 /register
   /segment
   /control
+    /cr0
+    /cr3
+    /cr4
   /fpu
   /mmx
   /vector

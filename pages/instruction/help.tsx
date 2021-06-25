@@ -11,35 +11,16 @@
  *   FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License
  *   for more details.
  *
- * You should have received a copy of the GNU Affero General Public License along
- *   with this program. If not, see <https://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Affero General Public License
+ *   along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
-import { Breadcrumb, Container } from "../../components/Bootstrap";
-import { Col, Row, Table } from "react-bootstrap";
+import { Breadcrumb, Container, ContentCol, Row } from "../../components/Bootstrap";
 import Layout, { Title } from "../../components/Layout";
 
 import A from "../../components/A";
 import Instruction from "../../components/Instruction";
-import LayoutConstants from "../../constants/Layout";
 import React from "react";
-import Scrollable from "../../components/Scrollable";
 import TOC from "../../components/TOC";
-
-// Helper functions to cut down on repetitive lines
-function tableHeaderRow(...cells: (string | JSX.Element)[]): JSX.Element {
-    return (
-        <tr>
-            {cells.map((cell, idx) => (<th key={idx}>{cell}</th>))}
-        </tr>
-    );
-}
-function tableRow(...cells: (string | JSX.Element)[]): JSX.Element {
-    return (
-        <tr>
-            {cells.map((cell, idx) => (<td key={idx}>{cell}</td>))}
-        </tr>
-    );
-}
 
 export default function Page(): JSX.Element {
     return (
@@ -57,9 +38,6 @@ export default function Page(): JSX.Element {
                         </TOC.Entry>
                         <TOC.Entry href="#headingEncoding" text="Encoding">
                             <TOC.Entry href="#headingEncodingOperand" text="Interpreting the Operand Value" />
-                        </TOC.Entry>
-                        <TOC.Entry href="#headingBitEncoding" text="Bit Encoding">
-                            <TOC.Entry href="#headingBitEncodingBits" text="Interpreting Named Bits" />
                         </TOC.Entry>
                         <TOC.Entry href="#headingDescription" text="Description" />
                         <TOC.Entry href="#headingOperation" text="Operation">
@@ -80,7 +58,7 @@ export default function Page(): JSX.Element {
                         <TOC.Entry href="#headingIntrinsics" text="Intrinsics" />
                         <TOC.Entry href="#headingExceptions" text="Exceptions" />
                     </TOC.Root>
-                    <Col {...LayoutConstants.content}>
+                    <ContentCol>
                         <h1>Instruction Page Help</h1>
                         <p>
                             This page details many of the features of the instruction pages.
@@ -276,285 +254,6 @@ export default function Page(): JSX.Element {
                             </li>
                         </ul>
 
-                        <h2 id="headingBitEncoding">Bit Encoding</h2>
-                        <p>
-                            The &quot;Bit Encoding&quot; section details the actual bit representation of the various instruction forms.
-                            These bits will be grouped per byte, and separated by a colon (<code>:</code>) to show the order in a byte stream they would appear.
-                            Each byte will be written as either a two-hexdigit value (if possible) or as individual bits.
-                            If the bits will be written out one-by-one, they will be grouped into either four (&quot;nibbles&quot;) or three bits (octal-like).
-                        </p>
-
-                        <h3 id="headingBitEncodingBits">Interpreting Named Bits</h3>
-                        <p>
-                            Sometimes, individual bits are named to represent their function.
-                            Generally, this is only used to show the individual bits of a byte (such as the two bit <code>mod</code> field of a ModR/M byte), or to show where registers are encoded.
-                            However, sometimes, two forms of an instruction will differ only in a few bits, and those bits have a defined meaning.
-                            For example, if a string of bits contains a character such as <code>s</code>, this would indicate if sign extension of an operand occurs.
-                        </p>
-                        <p>
-                            These named bits will be one of the following:
-                        </p>
-                        <ul>
-                            <li>
-                                <code>d</code> (direction):
-                                Specifies which direction data flows from and into.
-                                This is commonly used for ALU instructions from the original <A href="/architecture/8086">8086</A>.
-                                This can have one of two values:
-                                <Scrollable>
-                                    <Table striped bordered size="sm">
-                                        <thead>
-                                            {tableHeaderRow("Value", "Source", "Destination")}
-                                        </thead>
-                                        <tbody>
-                                            {tableRow(
-                                                <code>0</code>,
-                                                <><code>reg</code> field</>,
-                                                <><code>r/m</code> field with an optional SIB byte</>
-                                            )}
-                                            {tableRow(
-                                                <code>1</code>,
-                                                <><code>r/m</code> field with an optional SIB byte</>,
-                                                <><code>reg</code> field</>
-                                            )}
-                                        </tbody>
-                                    </Table>
-                                </Scrollable>
-                            </li>
-                            <li>
-                                <code>eee</code> (special register):
-                                When control or debug registers are used in an instruction, they are represented using <code>eee</code>.
-                                Whether a control or debug register is used depends on the instruction, but both will <em>never</em> be used at the same time.
-                                This can have one of 16 values.
-                                If REX.R, VEX.R, or EVEX.R is not present, only the first eight possible values are available.
-                                <Scrollable>
-                                    <Table striped bordered size="sm">
-                                        <thead>
-                                            {tableHeaderRow("Value", "Control Register", "Debug Register")}
-                                        </thead>
-                                        <tbody>
-                                            {tableRow(<code>0.000</code>, <code>CR0</code>, <code>DR0</code>)}
-                                            {tableRow(<code>0.001</code>, "reserved", <code>DR1</code>)}
-                                            {tableRow(<code>0.010</code>, <code>CR2</code>, <code>DR2</code>)}
-                                            {tableRow(<code>0.011</code>, <code>CR3</code>, <code>DR3</code>)}
-                                            {tableRow(<code>0.100</code>, <code>CR4</code>, "reserved")}
-                                            {tableRow(<code>0.101</code>, "reserved", "reserved")}
-                                            {tableRow(<code>0.110</code>, "reserved", <code>DR6</code>)}
-                                            {tableRow(<code>0.111</code>, "reserved", <code>DR7</code>)}
-                                            {tableRow(<code>1.000</code>, <code>CR8</code>, "reserved")}
-                                            {tableRow(<code>1.001</code>, "reserved", "reserved")}
-                                            {tableRow(<code>1.010</code>, "reserved", "reserved")}
-                                            {tableRow(<code>1.011</code>, "reserved", "reserved")}
-                                            {tableRow(<code>1.100</code>, "reserved", "reserved")}
-                                            {tableRow(<code>1.101</code>, "reserved", "reserved")}
-                                            {tableRow(<code>1.110</code>, "reserved", "reserved")}
-                                            {tableRow(<code>1.111</code>, "reserved", "reserved")}
-                                        </tbody>
-                                        <tfoot>
-                                            <tr>
-                                                <td colSpan={3}>
-                                                    The first bit represents the <code>R</code> field in a REX, VEX, or EVEX prefix.
-                                                    The other three are the <code>eee</code> field.
-                                                    <br />
-                                                    Usage of reserved encodings will lead to a <code>#UD</code> exception.
-                                                </td>
-                                            </tr>
-                                        </tfoot>
-                                    </Table>
-                                </Scrollable>
-                            </li>
-                            <li>
-                                <code>reg</code> (general purpose register):
-                                There are eight general purpose registers (16 in <A href="/mode/long">Long Mode</A>).
-                                Which one is used depends on the bits of this <code>reg</code> field (combined with REX.R, VEX.R, or EVEX.R if present), the <code>w</code> field (if present), <em>and</em> the current processor mode.
-                                <Scrollable>
-                                    <Table striped bordered size="sm">
-                                        <caption>Selected Register When <code>w</code> is not Present</caption>
-                                        <thead>
-                                            {tableHeaderRow(
-                                                "Value",
-                                                "16 bit Operations",
-                                                "32 bit Operations",
-                                                "64 bit Operations"
-                                            )}
-                                        </thead>
-                                        <tbody>
-                                            {tableRow(<code>000</code>, <code>AX</code>, <code>EAX</code>, <code>RAX</code>)}
-                                            {tableRow(<code>001</code>, <code>CX</code>, <code>ECX</code>, <code>RCX</code>)}
-                                            {tableRow(<code>010</code>, <code>DX</code>, <code>EDX</code>, <code>RDX</code>)}
-                                            {tableRow(<code>011</code>, <code>BX</code>, <code>EBX</code>, <code>RBX</code>)}
-                                            {tableRow(<code>100</code>, <code>SP</code>, <code>ESP</code>, <code>RSP</code>)}
-                                            {tableRow(<code>101</code>, <code>BP</code>, <code>EBP</code>, <code>RBP</code>)}
-                                            {tableRow(<code>110</code>, <code>SI</code>, <code>ESI</code>, <code>RSI</code>)}
-                                            {tableRow(<code>111</code>, <code>DI</code>, <code>EDI</code>, <code>RDI</code>)}
-                                        </tbody>
-                                    </Table>
-                                </Scrollable>
-                                <Scrollable>
-                                    <Table striped bordered size="sm">
-                                        <caption>Selected Register When <code>w</code> is Present</caption>
-                                        <thead>
-                                            {tableHeaderRow(
-                                                "Value",
-                                                <><code>w</code> Unset</>,
-                                                <><code>w</code> Set; 16 bit Operations</>,
-                                                <><code>w</code> Set; 32 bit Operations</>
-                                            )}
-                                        </thead>
-                                        <tbody>
-                                            {tableRow(<code>000</code>, <code>AL</code>, <code>AX</code>, <code>EAX</code>)}
-                                            {tableRow(<code>001</code>, <code>CL</code>, <code>CX</code>, <code>ECX</code>)}
-                                            {tableRow(<code>010</code>, <code>DL</code>, <code>DX</code>, <code>EDX</code>)}
-                                            {tableRow(<code>011</code>, <code>BL</code>, <code>BX</code>, <code>EBX</code>)}
-                                            {tableRow(<code>100</code>, <code>AH</code>, <code>SP</code>, <code>ESP</code>)}
-                                            {tableRow(<code>101</code>, <code>CH</code>, <code>BP</code>, <code>EBP</code>)}
-                                            {tableRow(<code>110</code>, <code>DH</code>, <code>SI</code>, <code>ESI</code>)}
-                                            {tableRow(<code>111</code>, <code>BH</code>, <code>DI</code>, <code>EDI</code>)}
-                                        </tbody>
-                                    </Table>
-                                </Scrollable>
-                                <style jsx>{`
-                            caption {
-                                font-size: large;
-                                font-weight: bold;
-                                padding-top: 6px;
-                            }
-                        `}</style>
-                            </li>
-                            <li>
-                                <code>s</code> (sign extend):
-                                Specifies whether an immediate is sign extended or left alone.
-                                This can have one of two values:
-                                <Scrollable>
-                                    <Table striped bordered size="sm">
-                                        <thead>
-                                            {tableHeaderRow("Value", "Effect on 8 bit Data", "Effect on 16 or 32 bit Data")}
-                                        </thead>
-                                        <tbody>
-                                            {tableRow(
-                                                <code>0</code>,
-                                                "none",
-                                                "none"
-                                            )}
-                                            {tableRow(
-                                                <code>1</code>,
-                                                "sign extended to size of destination",
-                                                "none"
-                                            )}
-                                        </tbody>
-                                        <tfoot>
-                                            <tr>
-                                                <td colSpan={3}>
-                                                    A quirk of this field is that the opcodes beginning with <code>82</code> (8086 ALU operations) perform the same operation as ones beginning with <code>80</code>.
-                                                    For example, <A href="/instruction/add"><code>ADD <i>r/m8</i>, <i>imm8</i></code></A> is documented as being encoded as <code>80 /0 <i>ib</i></code>, but can also be encoded as <code>82 /0 <i>ib</i></code>.
-                                                    This has the effect of sign extending the 8 bit immediate to the size of the 8 bit destination (i.e. doing nothing).
-                                                    These encodings are undocumented and were removed in <A href="/mode/long">Long Mode</A> (a <code>#UD</code> exception will result).
-                                                </td>
-                                            </tr>
-                                        </tfoot>
-                                    </Table>
-                                </Scrollable>
-                            </li>
-                            <li>
-                                <code>sreg#</code> (segment register):
-                                Either a two or three bit field specifying a segment register.
-                                If <code>sreg2</code> is used, access to the <code>FS</code> and <code>GS</code> segments is unavailable.
-                                If <code>sreg3</code> is used, access to all six segment registers is available:
-                                <Scrollable>
-                                    <Table striped bordered size="sm">
-                                        <thead>
-                                            {tableHeaderRow("Value", "Segment Register")}
-                                        </thead>
-                                        <tbody>
-                                            {tableRow(<code>0.00</code>, <code>ES</code>)}
-                                            {tableRow(<code>0.01</code>, <code>CS</code>)}
-                                            {tableRow(<code>0.10</code>, <code>SS</code>)}
-                                            {tableRow(<code>0.11</code>, <code>DS</code>)}
-                                            {tableRow(<code>1.00</code>, <code>FS</code>)}
-                                            {tableRow(<code>1.01</code>, <code>GS</code>)}
-                                            {tableRow(<code>1.10</code>, "reserved")}
-                                            {tableRow(<code>1.11</code>, "reserved")}
-                                        </tbody>
-                                        <tfoot>
-                                            <tr>
-                                                <td colSpan={2}>
-                                                    The first bit represents the most significant bit of an <code>sreg3</code> field.
-                                                    The other two are the <code>sreg2</code> field.
-                                                    <br />
-                                                    Usage of reserved encodings will lead to a <code>#UD</code> exception.
-                                                </td>
-                                            </tr>
-                                        </tfoot>
-                                    </Table>
-                                </Scrollable>
-                            </li>
-                            <li>
-                                <code>tttn</code> (condition test):
-                                Conditional instructions have the condition encoded in this four bit field.
-                                The first three (<code>ttt</code>) are the condition to test, and the fourth determines if the condition is used directly (<code>n = 0</code>), or its negated form (<code>n = 1</code>).
-                                These four bits are encoded in the four least significant bits (bits 3, 2, 1, and 0) of the opcode byte for single byte opcodes, or the four least significant bits of the second opcode byte for two byte opcodes.
-                                These bits have the following values:
-                                <Scrollable>
-                                    <Table striped bordered size="sm">
-                                        <thead>
-                                            {tableHeaderRow("Value", "Mnemonic Suffix", "Condition", "Check", "Signed or Unsigned")}
-                                        </thead>
-                                        <tbody>
-                                            {tableRow(<code>0000</code>, "O", "Overflow", <code>OF == 1</code>, "Neither")}
-                                            {tableRow(<code>0001</code>, "NO", "No overflow", <code>OF == 0</code>, "Neither")}
-                                            {tableRow(<code>0010</code>, "B, NAE, C", "Below, Not above or equal, Carry", <code>CF == 1</code>, "Unsigned")}
-                                            {tableRow(<code>0011</code>, "NB, AE, NC", "Not below, Above or equal, No carry", <code>CF == 0</code>, "Unsigned")}
-                                            {tableRow(<code>0100</code>, "E, Z", "Equal, Zero", <code>ZF == 1</code>, "Neither")}
-                                            {tableRow(<code>0101</code>, "NE, NZ", "Not equal, Not zero", <code>ZF == 0</code>, "Neither")}
-                                            {tableRow(<code>0110</code>, "BE, NA", "Below or equal, Not above", <code>(CF | OF) == 1</code>, "Unsigned")}
-                                            {tableRow(<code>0111</code>, "NBE, A", "Not below or equal, Above", <code>(CF &amp; ZF) == 1</code>, "Unsigned")}
-                                            {tableRow(<code>1000</code>, "S", "Sign (MSB set)", <code>SF == 1</code>, "Neither")}
-                                            {tableRow(<code>1001</code>, "NS", "No sign (MSB cleared)", <code>SF == 0</code>, "Neither")}
-                                            {tableRow(<code>1010</code>, "P, PE", "Parity, Parity even", <code>PF == 1</code>, "Neither")}
-                                            {tableRow(<code>1011</code>, "NP, PO", "No parity, Parity odd", <code>PF == 0</code>, "Neither")}
-                                            {tableRow(<code>1100</code>, "L, NGE", "Less than, Not greater than or equal to", <code>SF != OF</code>, "Signed")}
-                                            {tableRow(<code>1101</code>, "NL, GE", "Not less than, Greater than or equal to", <code>SF == OF</code>, "Signed")}
-                                            {tableRow(<code>1110</code>, "LE, NG", "Less than or equal to, Not greater than", <code>ZF == 1 || SF != OF</code>, "Signed")}
-                                            {tableRow(<code>1111</code>, "NLE, G", "Not less than or equal to, Greater than", <code>ZF == 0 &amp;&amp; SF == OF</code>, "Signed")}
-                                        </tbody>
-                                    </Table>
-                                </Scrollable>
-                            </li>
-                            <li>
-                                <code>w</code> (wide):
-                                Determines if an operation is on 8 bits of the default operand width.
-                                This can have one of two values:
-                                <Scrollable>
-                                    <Table striped bordered size="sm">
-                                        <thead>
-                                            {tableHeaderRow(
-                                                "Value",
-                                                "Operand Size when Operand Size Attribute is 16 bits",
-                                                "Operand Size when Operand Size Attribute is 32 bits"
-                                            )}
-                                        </thead>
-                                        <tbody>
-                                            {tableRow(
-                                                <code>0</code>,
-                                                "8 bits",
-                                                "8 bits"
-                                            )}
-                                            {tableRow(
-                                                <code>1</code>,
-                                                "16 bits",
-                                                "32 bits"
-                                            )}
-                                        </tbody>
-                                    </Table>
-                                </Scrollable>
-                            </li>
-                            <li>
-                                <code>xmmreg</code> (vector register):
-                                There are 32 vector registers (only eight are accessible in <A href="/mode/protected">Protected Mode</A>).
-                                This field represents the three least significant bits of the register number.
-                                {/* TODO: How are the other 24 accessed */}
-                            </li>
-                        </ul>
-
                         <h2 id="headingDescription">Description</h2>
                         <p>
                             The &quot;Description&quot; section, as the name implies, contains a simplified description of the instruction&apos;s operation.
@@ -671,7 +370,7 @@ export default function Page(): JSX.Element {
                             For regular (non-vector) instructions, each subsection will be for the various processor modes.
                             Vector instructions, on the other hand, will typically only have two subsections: &quot;SIMD Floating-Point&quot; and &quot;Other&quot;.
                         </p>
-                    </Col>
+                    </ContentCol>
                 </Row>
             </Container>
         </Layout>

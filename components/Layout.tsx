@@ -11,13 +11,10 @@
  *   FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License
  *   for more details.
  *
- * You should have received a copy of the GNU Affero General Public License along
- *   with this program. If not, see <https://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Affero General Public License
+ *   along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
-
-// import { AnchorButton, Breadcrumb, BreadcrumbProps, Breadcrumbs, Card, Divider, Navbar } from "@blueprintjs/core";
-
-import { Col, Container, Nav, Navbar, Row } from "react-bootstrap";
+import { Col, Container, Nav, Navbar, Row } from "./Bootstrap";
 
 import A from "./A";
 import Head from "next/head";
@@ -37,9 +34,10 @@ type LayoutProps = {
 export default function Layout(props: LayoutProps): JSX.Element {
     function navItem(group: NavGroup, href: string, text: string) {
         return (
-            <Nav.Link href={href} active={props.navGroup === group}>
+            <Nav.Item href={href} active={props.navGroup === group}>
                 {text}
-            </Nav.Link>
+                {props.navGroup === group && <span className="visually-hidden">(current)</span>}
+            </Nav.Item>
         );
     }
 
@@ -62,9 +60,9 @@ export default function Layout(props: LayoutProps): JSX.Element {
                 <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
             </Head>
             <header>
-                <Container fluid>
-                    <Navbar bg="dark" className="navbar-dark">
-                        <Nav>
+                <Navbar>
+                    <Container fluid>
+                        <Nav.Root>
                             {navItem("home", "/", "80x86")}
                             {navItem("history", "/history", "History")}
                             {navItem("architecture", "/architecture", "Microarchitecture")}
@@ -73,9 +71,9 @@ export default function Layout(props: LayoutProps): JSX.Element {
                             {navItem("extension", "/extension", "Extensions")}
                             {navItem("instruction", "/instruction", "Instructions")}
                             {navItem("about", "/about", "About")}
-                        </Nav>
-                    </Navbar>
-                </Container>
+                        </Nav.Root>
+                    </Container>
+                </Navbar>
             </header>
             <main>
                 {props.children}

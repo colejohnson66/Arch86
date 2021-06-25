@@ -11,15 +11,13 @@
  *   FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License
  *   for more details.
  *
- * You should have received a copy of the GNU Affero General Public License along
- *   with this program. If not, see <https://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Affero General Public License
+ *   along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
-import { Breadcrumb, Container } from "../../components/Bootstrap";
-import { Col, Row } from "react-bootstrap";
+import { Breadcrumb, Container, ContentCol, Row } from "../../components/Bootstrap";
 import Layout, { Title } from "../../components/Layout";
 
 import A from "../../components/A";
-import LayoutConstants from "../../constants/Layout";
 import React from "react";
 import TOC from "../../components/TOC";
 
@@ -35,7 +33,7 @@ export default function Page(): JSX.Element {
                     <TOC.Root>
                         <TOC.Entry href="#headingFiles" text="Register Files" />
                     </TOC.Root>
-                    <Col {...LayoutConstants.content}>
+                    <ContentCol>
                         <h1>Registers</h1>
                         <p>
                             x86 is home to <em>many</em> different registers.
@@ -63,7 +61,7 @@ export default function Page(): JSX.Element {
                             <li><A href="/register/tile">Tile registers</A> (<code>TMM0</code>, <code>TMM1</code>, etc.)</li>
                             <li><A href="/register/msr">Model specific registers</A></li>
                         </ul>
-                    </Col>
+                    </ContentCol>
                 </Row>
             </Container>
         </Layout>

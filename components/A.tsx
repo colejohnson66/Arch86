@@ -11,8 +11,8 @@
  *   FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License
  *   for more details.
  *
- * You should have received a copy of the GNU Affero General Public License along
- *   with this program. If not, see <https://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Affero General Public License
+ *   along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 import Link from "next/link";
 import React from "react";
@@ -20,15 +20,18 @@ import React from "react";
 // TODO: next uses 'url.UrlObject | string' for 'href'; is that needed here?
 type AProps = {
     href: string;
+    className?: string;
     children: React.ReactNode;
 };
 
 export default function A(props: AProps): JSX.Element {
+    const classes = props.className ?? "";
+
     // is this an internal link? (internal links without slash are invalid)
     if (props.href[0] === "/") {
         return (
-            <Link href={props.href}>
-                <a>{props.children}</a>
+            <Link href={props.href} >
+                <a className={classes}>{props.children}</a>
             </Link>
         );
     }
@@ -37,8 +40,8 @@ export default function A(props: AProps): JSX.Element {
     //   causes `#headingEncoding` to turn into `/instruction/[slug]#headingEncoding`,
     //   which doesn't work.
     if (props.href[0] === "#")
-        return <a href={props.href}>{props.children}</a>;
+        return <a href={props.href} className={classes}>{props.children}</a>;
 
     // it's external
-    return <a href={props.href} rel="external">{props.children}</a>;
+    return <a href={props.href} className={classes} rel="external">{props.children}</a>;
 }

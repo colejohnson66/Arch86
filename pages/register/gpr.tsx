@@ -11,15 +11,13 @@
  *   FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License
  *   for more details.
  *
- * You should have received a copy of the GNU Affero General Public License along
- *   with this program. If not, see <https://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Affero General Public License
+ *   along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
-import { Breadcrumb, Container } from "../../components/Bootstrap";
-import { Col, Row } from "react-bootstrap";
+import { Breadcrumb, Container, ContentCol, Row } from "../../components/Bootstrap";
 import Layout, { Title } from "../../components/Layout";
 
 import A from "../../components/A";
-import LayoutConstants from "../../constants/Layout";
 import React from "react";
 import TOC from "../../components/TOC";
 
@@ -75,7 +73,7 @@ export default function Page(): JSX.Element {
                     <TOC.Root>
                         <TOC.Entry href="#headingList" text="Register List" />
                     </TOC.Root>
-                    <Col {...LayoutConstants.content}>
+                    <ContentCol>
                         <h1>General Purpose Registers</h1>
                         <p>
                             x86 has 16 general purpose registers that can be used for any kind of data, however, only eight are accessible outside of <A href="/mode/long">Long Mode</A>.
@@ -182,7 +180,7 @@ export default function Page(): JSX.Element {
                                 </ul>
                             </div>
                         </div>
-                    </Col>
+                    </ContentCol>
                 </Row>
             </Container>
         </Layout>

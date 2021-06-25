@@ -11,16 +11,14 @@
  *   FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License
  *   for more details.
  *
- * You should have received a copy of the GNU Affero General Public License along
- *   with this program. If not, see <https://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Affero General Public License
+ *   along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
-import { Breadcrumb, Container } from "../../components/Bootstrap";
-import { Col, Row } from "react-bootstrap";
+import { Breadcrumb, Container, ContentCol, Row } from "../../components/Bootstrap";
 import Layout, { Title } from "../../components/Layout";
 
 import A from "../../components/A";
 import Instruction from "../../components/Instruction";
-import LayoutConstants from "../../constants/Layout";
 import React from "react";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import SyntaxHighlighterDarkTheme from "react-syntax-highlighter/dist/cjs/styles/hljs/atom-one-dark";
@@ -62,7 +60,7 @@ export default function Page(): JSX.Element {
                         </TOC.Entry>
                         <TOC.Entry href="#headingLDTR" text="Local Descriptor Table" />
                     </TOC.Root>
-                    <Col {...LayoutConstants.content}>
+                    <ContentCol>
                         <h1>Table Registers</h1>
                         <WIP page wording />
                         <p>
@@ -176,7 +174,7 @@ export default function Page(): JSX.Element {
 
                         <h2 id="headingLDTR">Local Descriptor Table</h2>
                         TODO
-                    </Col>
+                    </ContentCol>
                 </Row>
             </Container>
         </Layout>

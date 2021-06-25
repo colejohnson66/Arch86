@@ -11,16 +11,14 @@
  *   FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License
  *   for more details.
  *
- * You should have received a copy of the GNU Affero General Public License along
- *   with this program. If not, see <https://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Affero General Public License
+ *   along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
-import { Breadcrumb, Container } from "../components/Bootstrap";
-import { Col, Row } from "react-bootstrap";
+import { Breadcrumb, Container, ContentCol, Row } from "../components/Bootstrap";
 import Layout, { Title } from "../components/Layout";
 
 import A from "../components/A";
 import DateTime from "../components/DateTime";
-import LayoutConstants from "../constants/Layout";
 import React from "react";
 import TOC from "../components/TOC";
 import WIP from "../components/WIP";
@@ -38,7 +36,7 @@ export default function Page(): JSX.Element {
                         <TOC.Entry href="#headingHistory" text="History" />
                         <TOC.Entry href="#headingRegisters" text="Registers" />
                     </TOC.Root>
-                    <Col {...LayoutConstants.content}>
+                    <ContentCol>
                         <h1>Microarchitecture</h1>
                         <p>
                             Over the years, there have been many versions of the x86 microarchitecture.
@@ -70,7 +68,7 @@ export default function Page(): JSX.Element {
                             </li>
                             <li>...</li>
                         </ul>
-                    </Col>
+                    </ContentCol>
                 </Row>
             </Container>
         </Layout>

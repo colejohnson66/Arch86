@@ -15,17 +15,39 @@
  *   along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 import React from "react";
+import { Variant } from ".";
 
-type BreadcrumbRootProps = {
+type TableProps = {
+    variant?: Variant;
+    bordered?: boolean;
+    hover?: boolean;
+    striped?: boolean;
+    small?: boolean;
+    captionTop?: boolean;
     children: React.ReactNode;
 };
 
-export default function BreadcrumbRoot(props: BreadcrumbRootProps): JSX.Element {
+export default function Table(props: TableProps): JSX.Element {
+    const classes: string[] = [
+        "table",
+    ];
+
+    if (props.variant)
+        classes.push(`table-${props.variant}`);
+    if (props.bordered)
+        classes.push("table-bordered");
+    if (props.hover)
+        classes.push("table-hover");
+    if (props.striped)
+        classes.push("table-striped");
+    if (props.small)
+        classes.push("table-sm");
+    if (props.captionTop)
+        classes.push("caption-top");
+
     return (
-        <nav aria-label="breadcrumb">
-            <ol className="breadcrumb">
-                {props.children}
-            </ol>
-        </nav>
+        <table className={classes.join(" ")}>
+            {props.children}
+        </table>
     );
 }

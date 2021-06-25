@@ -6,7 +6,8 @@
 
 80x86 is built on Node.js with [Next.js](https://nextjs.org/) and deployed on [Vercel](https://vercel.com).
 TypeScript is used *extensively.*
-The website's theme is built on [Blueprint](https://blueprintjs.com/), and data files are stored in [YAML](https://yaml.org/) (see below).
+The website's theme is built on [Bootstrap](https://getbootstrap.com/).
+Data files are stored in [YAML](https://yaml.org/) (see below).
 
 ### Why YAML?
 
@@ -42,7 +43,7 @@ $ yarn install
 $ yarn dev
 ```
 
-After a few seconds, a message will appear in the console telling you the server is "live":
+After a few seconds, a message will appear in the console telling you the server is ready:
 ```
 ready - started server on 0.0.0.0:3000, url: http://localhost:3000
 ```

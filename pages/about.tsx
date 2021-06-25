@@ -11,15 +11,13 @@
  *   FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License
  *   for more details.
  *
- * You should have received a copy of the GNU Affero General Public License along
- *   with this program. If not, see <https://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Affero General Public License
+ *   along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
-import { Breadcrumb, Container } from "../components/Bootstrap";
-import { Col, Row } from "react-bootstrap";
+import { Breadcrumb, Container, ContentCol, Row } from "../components/Bootstrap";
 import Layout, { Title } from "../components/Layout";
 
 import A from "../components/A";
-import LayoutConstants from "../constants/Layout";
 import React from "react";
 import TOC from "../components/TOC";
 
@@ -36,7 +34,7 @@ export default function Page(): JSX.Element {
                         <TOC.Entry href="#headingStack" text="Software Stack" />
                         <TOC.Entry href="#headingSource" text="Open Source" />
                     </TOC.Root>
-                    <Col {...LayoutConstants.content}>
+                    <ContentCol>
                         <h1>About</h1>
                         <p>
                             This website is designed to be a digital reference version of the x86 (and x86-64) processor architecture.
@@ -70,7 +68,7 @@ export default function Page(): JSX.Element {
                             This site is open source and released under the <A href="https://opensource.org/licenses/AGPL-3.0">GNU AGPL 3.0 or later</A> license.
                             The source code is available on <A href="https://github.com/colejohnson66/80x86">GitHub</A>.
                         </p>
-                    </Col>
+                    </ContentCol>
                 </Row>
             </Container>
         </Layout>

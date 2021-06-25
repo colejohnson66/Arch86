@@ -11,16 +11,14 @@
  *   FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License
  *   for more details.
  *
- * You should have received a copy of the GNU Affero General Public License along
- *   with this program. If not, see <https://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Affero General Public License
+ *   along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
-import { Breadcrumb, Container } from "../../../components/Bootstrap";
-import { Col, Row } from "react-bootstrap";
+import { Breadcrumb, Container, ContentCol, Row } from "../../../components/Bootstrap";
 import Layout, { Title } from "../../../components/Layout";
 
 import A from "../../../components/A";
 import Instruction from "../../../components/Instruction";
-import LayoutConstants from "../../../constants/Layout";
 import React from "react";
 import TOC from "../../../components/TOC";
 import WIP from "../../../components/WIP";
@@ -43,7 +41,7 @@ export default function Page(): JSX.Element {
                         <TOC.Entry href="#headingUndefinedRegisters" text="Undefined Registers" />
                         <TOC.Entry href="#headingAccess" text="Accessing the Registers" />
                     </TOC.Root>
-                    <Col {...LayoutConstants.content}>
+                    <ContentCol>
                         <h1>Control Registers</h1>
                         <p>
                             The five control registers determine various characteristics of the currently executing program.
@@ -99,7 +97,7 @@ export default function Page(): JSX.Element {
                             Access to the control registers is only allowed through <A href="/register/gpr">general purpose registers</A>;
                             Memory forms of the <A href="/instruction/help/modRM">ModR/M</A> byte (i.e. where <code>mod</code> is not <code>0b11</code>) are not allowed.
                         </p>
-                    </Col>
+                    </ContentCol>
                 </Row>
             </Container>
         </Layout>

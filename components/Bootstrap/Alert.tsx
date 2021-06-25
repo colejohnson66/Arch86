@@ -14,45 +14,18 @@
  * You should have received a copy of the GNU Affero General Public License
  *   along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
+import React from "react";
+import { Variant } from ".";
 
-/* CSS rules that apply to every page
- *
- * Despite being "modularized", all CSS files are included in `/pages/_app.tsx`.
- */
+type AlertProps = {
+    variant: Variant;
+    children: React.ReactNode;
+};
 
-html,
-body,
-#__next {
-    height: 100%;
-    width: 100%;
-}
-
-/* Contains everything (`header`, `main`, and `footer`) */
-#all {
-    border-radius: 0;
-    min-height: 100%;
-}
-
-header {
-    margin-bottom: 20px;
-}
-
-/* <li> tags don't contain <p> blocks sometimes; add a margin */
-li > br {
-    display: block;
-    margin-bottom: 5px;
-}
-
-[rel=external] {
-    background: url(/img/external-ltr.png) center right no-repeat;
-    padding-right: 15px;
-}
-
-h2 {
-    border-width: 0 0 1px 0;
-    border-style: solid;
-}
-
-footer {
-    margin: 1em 0 0 5em;
+export default function Alert(props: AlertProps): JSX.Element {
+    return (
+        <div className={`alert alert-${props.variant}`}>
+            {props.children}
+        </div>
+    );
 }

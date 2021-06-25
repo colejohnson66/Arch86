@@ -11,15 +11,13 @@
  *   FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License
  *   for more details.
  *
- * You should have received a copy of the GNU Affero General Public License along
- *   with this program. If not, see <https://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Affero General Public License
+ *   along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
-import { Breadcrumb, Container } from "../components/Bootstrap";
-import { Col, Row } from "react-bootstrap";
+import { Breadcrumb, Container, ContentCol, Row } from "../components/Bootstrap";
 import Layout, { Title } from "../components/Layout";
 
 import A from "../components/A";
-import LayoutConstants from "../constants/Layout";
 import React from "react";
 import TOC from "../components/TOC";
 import Unit from "../components/Unit";
@@ -36,7 +34,7 @@ export default function Page(): JSX.Element {
                     <TOC.Root>
                         <TOC.Entry href="#headingList" text="List of Modes" />
                     </TOC.Root>
-                    <Col {...LayoutConstants.content}>
+                    <ContentCol>
                         <h1>Processor Modes</h1>
                         <p>
                             x86 has a variety of operating modes.
@@ -60,7 +58,7 @@ export default function Page(): JSX.Element {
                             <li><A href="/mode/unreal">Unreal Mode</A> - a variant of Real Mode, but with access to a <Unit value={4} unit="GiB" /> address space</li>
                             <li><A href="/mode/smm">System Management Mode</A> - intended for BIOSes and other very low level system initialization routines</li>
                         </ul>
-                    </Col>
+                    </ContentCol>
                 </Row>
             </Container>
         </Layout>
