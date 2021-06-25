@@ -16,11 +16,6 @@ encoding:
   encodings:
     ZO:
       - None
-bitEncoding:
-  list:
-    - form: sign extend \reg{AX} into \reg{EAX}
-      bits:
-        - \bits{98}
 description: >-
   The \c{CWDE} instruction sign extends \reg{AX} into \reg{EAX}.
 

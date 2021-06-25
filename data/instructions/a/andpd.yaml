@@ -87,20 +87,6 @@ encoding:
       - ModRM.reg[rw]
       - EVEX.vvvv[r]
       - ModRM.r/m[r]
-bitEncoding:
-  list:
-    - form: xmmreg3(2) into xmmreg3(1)
-      bits:
-        - \bits{66}
-        - \bits{0F}
-        - \bits{54}
-        - \bits{11 xmmreg3(1) xmmreg3(2)}
-    - form: memory into xmmreg3
-      bits:
-        - \bits{66}
-        - \bits{0F}
-        - \bits{54}
-        - \bits{mod xmmreg3 r/m}
 description: >-
   The \c{(V)ANDPD} instruction ANDs two, four, or eight double-precision floating-point values from the first source operand to the second source operand.
   The result is stored in in the destination operand.

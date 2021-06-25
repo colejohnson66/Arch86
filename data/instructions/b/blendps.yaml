@@ -48,24 +48,6 @@ encoding:
       - VEX.vvvv[r]
       - ModRM.r/m[r]
       - imm8
-bitEncoding:
-  list:
-    - form: xmmreg3(2) into xmmreg3(1)
-      bits:
-        - \bits{66}
-        - \bits{0F}
-        - \bits{3A}
-        - \bits{0C}
-        - \bits{11 xmmreg3(1) xmmreg3(2)}
-        - \bits{imm8}
-    - form: memory into xmmreg3
-      bits:
-        - \bits{66}
-        - \bits{0F}
-        - \bits{3A}
-        - \bits{0D}
-        - \bits{mod xmmreg3 r/m}
-        - \bits{imm8}
 description: >-
   The \c{(V)BLENDPS} instruction conditionally moves single-precision floating-point values from the second source operand into the first source operand.
   The result is stored in the destination operand.

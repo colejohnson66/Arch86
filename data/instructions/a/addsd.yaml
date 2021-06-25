@@ -54,20 +54,6 @@ encoding:
       - ModRM.reg[w]
       - EVEX.vvvv[r]
       - ModRM.r/m[r]
-bitEncoding:
-  list:
-    - form: xmmreg3(2) into xmmreg3(1)
-      bits:
-        - \bits{F2}
-        - \bits{0F}
-        - \bits{58}
-        - \bits{11 xmmreg3(1) xmmreg3(2)}
-    - form: memory into xmmreg3
-      bits:
-        - \bits{F2}
-        - \bits{0F}
-        - \bits{58}
-        - \bits{mod xmmreg3 r/m}
 description: >-
   The \c{(V)ADDSD} instruction adds a single double-precision floating-point from the first source operand and the second source operand.
   The result is stored in in the destination operand.

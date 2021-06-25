@@ -16,11 +16,6 @@ encoding:
   encodings:
     ZO:
       - None
-bitEncoding:
-  list:
-    - form: sign extend \reg{EAX} into \reg{RAX}
-      bits:
-        - \bits{98}
 description: >-
   The \c{CDQE} instruction sign extends \reg{EAX} into \reg{RAX}.
 operation: |-

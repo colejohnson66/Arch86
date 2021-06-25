@@ -16,11 +16,6 @@ encoding:
   encodings:
     ZO:
       - None
-bitEncoding:
-  list:
-    - form: clear direction flag
-      bits:
-        - \bits{FC}
 description: >-
   The \c{CLD} instruction clears the \reg{DF} (direction) flag in the \reg{EFLAGS} register.
 

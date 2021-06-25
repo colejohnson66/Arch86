@@ -63,14 +63,6 @@ type Encoding = {
     hasTuple?: boolean;
     encodings: IDictionary<string[]>;
 };
-type BitEncoding = {
-    list: BitEncodingEntry[];
-};
-type BitEncodingEntry = {
-    form: string;
-    limits?: string;
-    bits: MaybeArray<string>;
-};
 type Flags = {
     CF: string;
     PF: string;
@@ -106,7 +98,6 @@ type PageProps = {
     opcode: Opcode[];
     opcodeNote?: MaybeArray<string>;
     encoding: Encoding;
-    bitEncoding?: BitEncoding;
     description: string;
     operation: string;
     operationImage?: string;
@@ -173,26 +164,6 @@ function formatEncodingCell(operand: string): JSX.Element {
     return <code>{operand}</code>;
 }
 
-function bitEncodings(encodings: BitEncodingEntry[]): JSX.Element {
-    const rows = encodings.map((entry, idx) => {
-        const bits = coerceArray(entry.bits).map((byte, idx, arr) => (
-            <React.Fragment key={idx}>
-                {formatStringToJsx(byte)}
-                {idx !== arr.length - 1 && " : "}
-            </React.Fragment>
-        ));
-
-        return (
-            <React.Fragment key={idx}>
-                <dt>{formatStringToJsx(entry.form)}</dt>
-                <dd>{bits}</dd>
-                {entry.limits && <dd>{entry.limits}</dd>}
-            </React.Fragment>
-        );
-    });
-    return <dl>{rows}</dl>;
-}
-
 function regularExceptionList(ex: string | ExceptionList): JSX.Element {
     if (typeof ex === "string")
         return <p>{brTagsFromString(ex)}</p>;
@@ -227,8 +198,6 @@ export default function Page(props: PageProps): JSX.Element {
                 <Row>
                     <TOC.Root>
                         <TOC.Entry href="#headingEncoding" text="Encoding" />
-                        {props.bitEncoding &&
-                            <TOC.Entry href="#headingBitEncoding" text="Bit Encoding" />}
                         <TOC.Entry href="#headingDescription" text="Description" />
                         {props.operationNotes
                             ? <TOC.Entry href="#headingOperation" text="Operation">
@@ -354,12 +323,6 @@ export default function Page(props: PageProps): JSX.Element {
                                 </tbody>
                             </Table>
                         </Scrollable>
-
-                        {props.bitEncoding &&
-                            <>
-                                <h2 id="headingBitEncoding">Bit Encoding</h2>
-                                {bitEncodings(props.bitEncoding.list)}
-                            </>}
 
                         <h2 id="headingDescription">Description</h2>
                         {paragraphsFromString(props.description)}

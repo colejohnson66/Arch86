@@ -17,13 +17,6 @@ encoding:
   encodings:
     M:
       - ModRM.r/m[w]
-bitEncoding:
-  list:
-    - form: demote a cache line
-      bits:
-        - \bits{0F}
-        - \bits{1C}
-        - \bits{mod 000 r/m}
 description: >-
   The \c{CLDEMOTE} instruction hints to the processor that the cache line containing the operand's effective address should be moved ("demoted") to a cache further away from the core.
 

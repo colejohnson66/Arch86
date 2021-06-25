@@ -18,13 +18,6 @@ encoding:
     RM:
       - ModRM.reg[w]
       - SIB.base[r] + SIB.index[r]
-bitEncoding:
-  list:
-    - form: memory into bound3
-      bits:
-        - \bits{0F}
-        - \bits{1A}
-        - \bits{mod bound3 r/m}
 description: >-
   The \c{BNDLDX} instruction conditionally loads the destination operand with the bounds referenced at the address pointed to by the source operand.
   This is conditional on the value contained in the register referenced in the SIB's index field matching the value stored in the bounds table entry.

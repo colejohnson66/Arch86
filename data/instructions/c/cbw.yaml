@@ -16,11 +16,6 @@ encoding:
   encodings:
     ZO:
       - None
-bitEncoding:
-  list:
-    - form: sign extend \reg{AL} into \reg{AX}
-      bits:
-        - \bits{98}
 description: >-
   The \c{CBW} instruction sign extends \reg{AL} into \reg{AX}.
 

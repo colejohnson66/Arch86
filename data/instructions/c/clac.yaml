@@ -18,13 +18,6 @@ encoding:
   encodings:
     ZO:
       - None
-bitEncoding:
-  list:
-    - form: clear the \reg{AC} flag
-      bits:
-        - \bits{0F}
-        - \bits{01}
-        - \bits{CA}
 description: >-
   The \c{CLAC} instruction clears the \reg{AC} (alignment check) flag in the \reg{EFLAGS} register.
   If the \c{SMAP} bit is set in the \reg{CR4} register, this also disallows explicit supervisor-mode data access of user-mode pages.

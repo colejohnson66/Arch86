@@ -16,16 +16,6 @@ encoding:
     MR:
       - ModRM.r/m[rw]
       - ModRM.reg[r]
-bitEncoding:
-  list:
-    - form: reg3(1) (src) against reg3(2) (dest)
-      bits:
-        - \c{0110 0011}
-        - \c{11 reg3(1) reg3(2)}
-    - form: reg3 (src) against memory
-      bits:
-        - \c{0110 0011}
-        - \c{mod reg3 r/m}
 description: >-
   The \c{ARPL} instruction compares the \c{RPL} (requested privilege level) field (bits 0 and 1) of two segment selectors.
   If the \c{RPL} field of the destination operand is less than the \c{RPL} field of the source operand, the \reg{ZF} flag is set and the \c{RPL} field of the destination is increased to match the source's.

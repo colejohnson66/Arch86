@@ -31,24 +31,6 @@ encoding:
       - ModRM.reg[w]
       - ModRM.r/m[r]
       - imm8
-bitEncoding:
-  list:
-    - form: xmmreg3(2) into xmmreg3(1) with immediate
-      bits:
-        - \bits{66}
-        - \bits{0F}
-        - \bits{3A}
-        - \bits{DF}
-        - \bits{11 xmmreg3(1) xmmreg3(2)}
-        - immediate
-    - form: memory into xmmreg3 with immediate
-      bits:
-        - \bits{66}
-        - \bits{0F}
-        - \bits{3A}
-        - \bits{DF}
-        - \bits{mod xmmreg3 r/m}
-        - immediate
 description: >-
   The \c{(V)AESKEYGENASSIST} instruction assists in expanding the AES cipher key using an 8 bit round constant (RCON) and 128 bits of data from the source operand.
   The result is stored in the destination operand.

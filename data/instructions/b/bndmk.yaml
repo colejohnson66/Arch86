@@ -28,14 +28,6 @@ encoding:
     RM:
       - ModRM.reg[w]
       - ModRM.r/m[r]
-bitEncoding:
-  list:
-    - form: memory into bound3
-      bits:
-        - \bits{F3}
-        - \bits{0F}
-        - \bits{1B}
-        - \bits{mod bound3 r/m}
 description: >-
   The \c{BNDMK} instruction creates lower and upper bounds from the source operand and stores them into the bounds register in the destination operand.
 

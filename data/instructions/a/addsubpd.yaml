@@ -46,20 +46,6 @@ encoding:
       - ModRM.reg[w]
       - VEX.vvvv[r]
       - ModRM.r/m[r]
-bitEncoding:
-  list:
-    - form: xmmreg3(2) into xmmreg3(1)
-      bits:
-        - \bits{66}
-        - \bits{0F}
-        - \bits{D0}
-        - \bits{11 xmmreg3(1) xmmreg3(2)}
-    - form: memory into xmmreg3
-      bits:
-        - \bits{66}
-        - \bits{0F}
-        - \bits{D0}
-        - \bits{mod xmmreg3 r/m}
 description: >-
   The \c{(V)ADDSUBPD} instruction performs two operations:
   It subtracts the odd numbered double-precision floating-point values, and adds the even numbered ones.

@@ -35,18 +35,6 @@ encoding:
     RM:
       - ModRM.reg[w]
       - ModRM.r/m[r]
-bitEncoding:
-  list:
-    - form: reg3(1) into reg3(2)
-      bits:
-        - \bits{0F}
-        - \bits{BC}
-        - \bits{11 reg3(2) reg3(1)}
-    - form: memory into reg3
-      bits:
-        - \bits{0F}
-        - \bits{BC}
-        - \bits{mod reg3 r/m}
 description: >-
   The \c{BSF} instruction searches the source operand for the least significant set bit.
   The zero-based index of this bit is stored in the destination operand.

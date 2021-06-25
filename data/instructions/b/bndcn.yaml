@@ -28,20 +28,6 @@ encoding:
     RM:
       - ModRM.reg[r]
       - ModRM.r/m[r]
-bitEncoding:
-  list:
-    - form: reg3 into bound3
-      bits:
-        - \bits{F2}
-        - \bits{0F}
-        - \bits{1B}
-        - \bits{11 bound3 reg3}
-    - form: memory into bound3
-      bits:
-        - \bits{F2}
-        - \bits{0F}
-        - \bits{1B}
-        - \bits{mod bound3 r/m}
 description: >-
   The \c{BNDCN} instruction compares the address in the second source operand (a GPR or memory location) against the upper bound (\c{UB}) of the first source operand (a bound register).
   If the second source operand is greater, a \c{#BR} exception is thrown, and \c{BNDSTATUS} is set to \c{1h}.

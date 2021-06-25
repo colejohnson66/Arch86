@@ -48,22 +48,6 @@ encoding:
       - VEX.vvvv[r]
       - ModRM.r/m[r]
       - imm8[7:4]
-bitEncoding:
-  list:
-    - form: xmmreg3(2) into xmmreg3(1)
-      bits:
-        - \bits{66}
-        - \bits{0F}
-        - \bits{38}
-        - \bits{14}
-        - \bits{11 xmmreg3(1) xmmreg3(2)}
-    - form: memory into xmmreg3
-      bits:
-        - \bits{66}
-        - \bits{0F}
-        - \bits{38}
-        - \bits{14}
-        - \bits{mod xmmreg3 r/m}
 description: >-
   The \c{(V)BLENDVPS} instruction conditionally moves single-precision floating-point values from the second source operand into the first source operand.
   The result is stored in the destination operand.

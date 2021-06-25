@@ -19,15 +19,6 @@ encoding:
     RM:
       - ModRM.reg[rw]
       - ModRM.r/m[r]
-bitEncoding:
-  list:
-    - form: RM
-      bits:
-        - \bits{F3}
-        - \bits{0F}
-        - \bits{38}
-        - \bits{DD}
-        - \bits{mod xmm3 r/m}
 description: >-
   The \c{AESDEC128KL} instruction performs ten rounds of AES decryption on the first operand using the 128 bit key indicated by the handle in the second operand.
   If a handle violation occurs, the \reg{ZF} flag is set.

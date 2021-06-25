@@ -65,30 +65,6 @@ encoding:
     MI:
       - ModRM.r/m[r]
       - imm8[r]
-bitEncoding:
-  list:
-    - form: reg3(1) selects from reg3(2)
-      bits:
-        - \bits{0F}
-        - \bits{A3}
-        - \bits{11 reg3(1) reg3(2)}
-    - form: reg3 selects from memory
-      bits:
-        - \bits{0F}
-        - \bits{A3}
-        - \bits{mod reg3 r/m}
-    - form: imm8 selects from reg3
-      bits:
-        - \bits{0F}
-        - \bits{BA}
-        - \bits{11 100 reg3}
-        - \bits{imm8}
-    - form: imm8 selects from memory
-      bits:
-        - \bits{0F}
-        - \bits{BA}
-        - \bits{mod 100 r/m}
-        - \bits{imm8}
 description: >-
   The \c{BT} instruction selects a bit from the first source operand and stores it in the \reg{CF} flag.
   The specific bit selected is specified in the second source operand.

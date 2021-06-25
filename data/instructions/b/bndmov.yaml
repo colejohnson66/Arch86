@@ -51,32 +51,6 @@ encoding:
     RM:
       - ModRM.r/m[w]
       - ModRM.reg[r]
-bitEncoding:
-  list:
-    - form: reg3(1) into reg3(2)
-      bits:
-        - \bits{66}
-        - \bits{0F}
-        - \bits{1A}
-        - \bits{11 reg3(2) reg3(1)}
-    - form: memory into reg3
-      bits:
-        - \bits{66}
-        - \bits{0F}
-        - \bits{1A}
-        - \bits{mod reg3 r/m}
-    - form: reg3(2) into reg3(1)
-      bits:
-        - \bits{66}
-        - \bits{0F}
-        - \bits{1B}
-        - \bits{11 reg3(2) reg3(1)}
-    - form: reg3 into memory
-      bits:
-        - \bits{66}
-        - \bits{0F}
-        - \bits{1B}
-        - \bits{mod reg3 r/m}
 description: >-
   The \c{BNDMOV} instruction moves a pair of lower and upper bounds from the source operand into the destination operand.
 

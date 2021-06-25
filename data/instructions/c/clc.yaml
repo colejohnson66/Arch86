@@ -16,11 +16,6 @@ encoding:
   encodings:
     ZO:
       - None
-bitEncoding:
-  list:
-    - form: clear carry flag
-      bits:
-        - \bits{F8}
 description: >-
   The \c{CLC} instruction clears the \reg{CF} (carry) flag in the \reg{EFLAGS} register.
 operation: |-

@@ -110,29 +110,6 @@ encoding:
       - Offset[r]
     M:
       - ModRM.r/m[r]
-bitEncoding:
-  list:
-    - form: near procedure with encoded relative offset
-      bits:
-        - \bits{E8}
-        - \bits{offset}
-    - form: near procedure with relative offset in register
-      bits:
-        - \bits{FF}
-        - \bits{11 010 reg}
-    - form: near procedure with relative offset in memory
-      bits:
-        - \bits{FF}
-        - \bits{mod 010 r/m}
-    - form: far procedure with encoded absolute address
-      bits:
-        - \bits{9A}
-        - \bits{offset}
-        - \bits{selector}
-    - form: far procedure with absolute address in memory
-      bits:
-        - \bits{FF}
-        - \bits{mod 011 r/m}
 description: >-
   The \c{CALL} instruction saves a return address on the stack before jumping to the called procedure whose address is specified in the operand.
 operation: |-

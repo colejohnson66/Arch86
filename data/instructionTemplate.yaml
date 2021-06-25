@@ -18,11 +18,6 @@ encoding:
     MI:
       -
       -
-bitEncoding:
-  list:
-    - form:
-      limits:
-      bits:
 description: >-
 operation: |-
 operationImage:

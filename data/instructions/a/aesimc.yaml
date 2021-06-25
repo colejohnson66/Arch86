@@ -30,22 +30,6 @@ encoding:
     RM:
       - ModRM.reg[w]
       - ModRM.r/m[r]
-bitEncoding:
-  list:
-    - form: xmmreg3(2) into xmmreg3(1)
-      bits:
-        - \bits{66}
-        - \bits{0F}
-        - \bits{38}
-        - \bits{DB}
-        - \bits{11 xmmreg3(1) xmmreg3(2)}
-    - form: memory into xmmreg3
-      bits:
-        - \bits{66}
-        - \bits{0F}
-        - \bits{38}
-        - \bits{DB}
-        - \bits{mod xmmreg3 r/m}
 description: >-
   The \c{(V)AESIMC} instruction performs the "inverse mix columns" (\c{InvMixColumns}) transformation on a round key stored in the source operand.
   The result is stored in in the destination operand.

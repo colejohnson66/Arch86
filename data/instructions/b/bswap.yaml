@@ -25,12 +25,6 @@ encoding:
   encodings:
     O:
       - opcode[rw]
-bitEncoding:
-  list:
-    - form: reg3
-      bits:
-        - \bits{0F}
-        - \bits{1100 1 reg3}
 description: >-
   The \c{BSWAP} instruction reverses the byte order of the operand.
   This instruction can be used to change the endianness of the operand from little to big (or visa versa).

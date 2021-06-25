@@ -18,13 +18,6 @@ encoding:
     RM:
       - SIB.base[r] + SIB.index[r]
       - ModRM.reg[w]
-bitEncoding:
-  list:
-    - form: bound3 into memory
-      bits:
-        - \bits{0F}
-        - \bits{1B}
-        - \bits{mod bound3 r/m}
 description: >-
   The \c{BNDSTX} instruction stores the bounds at the source operand to the address pointed to by the destination operand.
   This is conditional on the value contained in the register referenced in the SIB's index field matching the value stored in the bounds table entry.
