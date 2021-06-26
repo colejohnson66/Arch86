@@ -102,6 +102,9 @@ export default function Page(props: PageProps): JSX.Element {
                             x86 is home to a few hundred instructions with over 3,000 different encodings.
                             An up-to-date list is available in PDF form on <A href="https://software.intel.com/content/www/us/en/develop/articles/intel-sdm.html">Intel&apos;s website</A> (see volume 2).
                         </p>
+                        <p>
+                            <A href="/instruction/map">Opcode maps</A> are available as well.
+                        </p>
 
                         <h2 id="headingList">List</h2>
                         <WIP section />
