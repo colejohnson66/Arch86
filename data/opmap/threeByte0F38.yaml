@@ -1,0 +1,43 @@
+%YAML 1.2
+---
+map:
+  14:
+    66: [BLENDVPS, Vpv, Wpv]
+  15:
+    66: [BLENDVPD, Vpv, Wpv]
+  # [D8] is in extensions
+  DB:
+    66: [AESIMC, Vpv, Wpv]
+  DC:
+    66: [AESENC, Vpv, Wpv]
+    F3: [AESENC128KL, Vdq, M384]
+  DD:
+    66: [AESENCLAST, Vpv, Wpv]
+    F3: [AESDEC128KL, Vdq, M384]
+  DE:
+    66: [AESDEC, Vpv, Wpv]
+    F3: [AESENC256KL, Vdq, Mdqq]
+  DF:
+    66: [AESDECLAST, Vpv, Wpv]
+    F3: [AESDEC256KL, Vdq, Mdqq]
+  F0:
+    F2: [CRC32, Gy, Eb]
+  F1:
+    F2: [CRC32, Gy, Ev]
+  F6:
+    66: [ADCX, Gv, Ev]
+    F3: [ADOX, Gv, Ev]
+  FA:
+    F3: [ENCODEKEY128, Gd, Rd]
+  FB:
+    F3: [ENCODEKEY256, Gd, Rd]
+extensions:
+  D8:
+    form: m/r
+    M/0: [AESENCWIDE128KL, M384]
+    M/1: [AESDECWIDE128KL, M384]
+    M/2: [AESDECWIDE256KL, Mdqq]
+    M/3: [AESDECWIDE256KL, Mdqq]
+
+notes:
+  - ENCODEKEY*** is modC0 only

@@ -1,0 +1,16 @@
+%YAML 1.2
+---
+map:
+  0C:
+    66: [BLENDPS, Vpv, Wpv, Ib]
+  0D:
+    66: [BLENDPD, Vpv, Wpv, Ib]
+  17:
+    66: [EXTRACTPS, Ed, Vpv, Ib]
+  40:
+    66: [DPPS, Vpv, Wpv, Ib]
+  41:
+    66: [DPPD, Vpv, Wpv, Ib]
+  DF:
+    66: [AESKEYGENASSIST, Vpv, Wpv, Ib]
+extensions:

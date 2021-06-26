@@ -1,0 +1,134 @@
+%YAML 1.2
+---
+map:
+  # [01] is in extensions
+  06: [CLTS]
+  1A:
+    NP: [BNDLDX, BGdq, M]
+    66: [BNDMOV, BGdq, BEy]
+    F3: [BNDCL, BGdq, Ey]
+    F2: [BNDCU, BGdq, Ey]
+  1B:
+    NP: [BNDSTX, M, BGdq]
+    66: [BNDMOV, BEy, BGdq]
+    F3: [BNDMK, BGdq, My]
+    F2: [BNDCN, BGdq, Ey]
+  # [1C] is in extensions
+  # [1E] is in extensions
+  2A:
+    NP: [CVTPI2PS, Vpv, Qpi]
+    66: [CVTPI2PD, Vpv, Qpi]
+    F3: [CVTSI2SS, Vsv, Ey]
+    F2: [CVTSI2SD, Vsv, Ey]
+  2C:
+    NP: [CVTTPS2PI, Ppi, Wpv]
+    66: [CVTTPD2PI, Ppi, Wpv]
+    F3: [CVTTSS2SI, Gy, Wsv]
+    F2: [CVTTSD2SI, Gy, Wsv]
+  2D:
+    NP: [CVTPS2PI, Ppi, Wpv]
+    66: [CVTPD2PI, Ppi, Wpv]
+    F3: [CVTSS2SI, Gy, Wsv]
+    F2: [CVTSD2SI, Gy, Wsv]
+  2F:
+    NP: [COMISS, Vpv, Wpv]
+    66: [COMISD, Vpv, Wpv]
+  # [40-4F] is in spans
+  54:
+    NP: [ANDPS, Vpv, Wpv]
+    66: [ANDPD, Vpv, Wpv]
+  55:
+    NP: [ANDNPS, Vpv, Wpv]
+    66: [ANDNPD, Vpv, Wpv]
+  58:
+    NP: [ADDPS, Vpv, Wpv]
+    66: [ADDPD, Vpv, Wpv]
+    F3: [ADDSS, Vsv, Wsv]
+    F2: [ADDSD, Vsv, Wsv]
+  5A:
+    NP: [CVTPS2PD, Vpv, Wpv]
+    66: [CVTPD2PS, Vpv, Wpv]
+    F3: [CVTSS2SD, Vpv, Wsv]
+    F2: [CVTSD2SS, Vpv, Wsv]
+  5B:
+    NP: [CVTDQ2PS, Vpv, Wpv]
+    66: [CVTPS2DQ, Vpv, Wpv]
+    F3: [CVTTPS2DQ, Vpv, Wpv]
+    F2:
+  5E:
+    NP: [DIVPS, Vpv, Wpv]
+    66: [DIVPD, Vpv, Wpv]
+    F3: [DIVSS, Vsv, Wsv]
+    F2: [DIVSD, Vsv, Wsv]
+  77:
+    NP: [EMMS]
+  A2:
+    NP: [CPUID]
+  A3:
+    NP: [BT, Ev, Gv]
+  AB:
+    NP: [BTS, Ev, Gv]
+  # [AE] is in extensions
+  B0:
+    NP: [CMPXCHG, Eb, Gb] # TODO: no prefix is mentioned
+  B1:
+    NP: [CMPXCHG, Ev, Gv] # TODO: no prefix is mentioned
+  B3:
+    NP: [BTR, Ev, Gv]
+  # [BA] is in extensions
+  BB:
+    NP: [BTC, Ev, Gv]
+  BC:
+    NP: [BSF, Gv, Ev]
+  BD:
+    NP: [BSR, Gv, Ey]
+  C2:
+    NP: [CMPPS, Vpv, Wpv, Ib]
+    66: [CMPPD, Vpv, Wpv, Ib]
+    F3: [CMPSS, Vsv, Wsv, Ib]
+    F2: [CMPSD, Vsv, Wsv, Ib]
+  # [C7] is in extensions
+  # [C8-CF] is in spans
+  D0:
+    66: [ADDSUBPD, Vpv, Wpv]
+    F2: [ADDSUBPS, Vpv, Wpv]
+  E6:
+    66: [CVTTPD2DQ, Vpv, Wpv]
+    F3: [CVTDQ2PD, Vpv, Wpv]
+    F2: [CVTPD2DQ, Vpv, Wpv]
+spans:
+  40:
+    length: 16
+    instr: [CMOVcc, Gv, Ev]
+  C8:
+    length: 8
+    instr: [BSWAP, Zy]
+extensions:
+  01:
+    form: m/r/b
+    R/1/2: [CLAC]
+  1C:
+    form: pfx-m/r
+    NP-M/0: [CLDEMOTE, Mb]
+  1E:
+    form: pfx-m/r/b
+    F3-r/7/2: [ENDBR64]
+    F3-r/7/3: [ENDBR32]
+  AE:
+    form: pfx-m/r
+    NP-M/7: [CLFLUSH, Mb]
+    66-M/6: [CLWB, Mb]
+    66-M/7: [CLFLUSHOPT, Mb]
+    F3-M/6: [CLRSSBSY, Mq]
+  BA:
+    form: /r
+    /4: [BT, Ev, Ib]
+    /5: [BTS, Ev, Ib]
+    /6: [BTR, Ev, Ib]
+    /7: [BTC, Ev, Ib]
+  C7:
+    form: m/r
+    M/1: [CMPXCHG8B, Mq] # TODO: CMPXCHG16B_Mdq is 64 bit mode
+
+notes:
+  - CLFLUSHOPT_Mb is `NFx 66` for prefix

@@ -1,0 +1,137 @@
+%YAML 1.2
+---
+map0F:
+  2A:
+    F3: [VCVTSI2SS, Vsv, Hsv, Ey]
+    F2: [VCVTSI2SD, Vsv, Hsv, Ey]
+  2C:
+    NP:
+    66:
+    F3: [VCVTTSS2SI, Gy, Wsv]
+    F2: [VCVTTSD2SI, Gy, Wsv]
+  2D:
+    F3: [VCVTSS2SI, Gy, Wsv]
+    F2: [VCVTSD2SI, Gy, Wsv]
+  2F:
+    NP: [COMISS, Vpv, Wpv]
+    66: [COMISD, Vpv, Wpv]
+  54:
+    NP: [VANDPS, Vpv, Hpv, Wpv]
+    66: [VANDPD, Vpv, Hpv, Wpv]
+  55:
+    NP: [VANDNPS, Vpv, Hpv, Wpv]
+    66: [VANDNPD, Vpv, Hpv, Wpv]
+  58:
+    NP: [VADDPS, Vpv, Hpv, Wpv]
+    66: [VADDPD, Vpv, Hpv, Wpv]
+    F3: [VADDSS, Vsv, Hsv, Wsv]
+    F2: [VADDSD, Vsv, Hsv, Wsv]
+  5A:
+    NP: [VCVTPS2PD, Vpv, Wpv]
+    66: [VCVTPD2PS, Vpv, Wpv]
+    F3: [VCVTSS2SS, Vsv, Hsv, Wsv]
+    F2: [VCVTSD2SS, Vsv, Hsv, Wsv]
+  5B:
+    NP: [VCVTDQ2PS, Vpv, Wpv]
+    66: [VCVTPS2DQ, Vpv, Wpv]
+    F3: [VCVTTPS2DQ, Vpv, Wpv]
+    F2:
+  5E:
+    NP: [VDIVPS, Vpv, Hpv, Wpv]
+    66: [VDIVPD, Vpv, Hpv, Wpv]
+    F3: [VDIVSS, Vsv, Hsv, Wsv]
+    F2: [VDIVSD, Vsv, Hsv, Wsv]
+  C2:
+    NP: [VCMPPS, Vpv, Hpv, Wpv, Ib]
+    66: [VCMPPD, Vpv, Hpv, Wpv, Ib]
+    F3: [VCMPSS, Vsv, Hsv, Wsv, Ib]
+    F2: [VCMPSD, Vsv, Hsv, Wsv, Ib]
+  D0:
+    66: [VADDSUBPD, Vpv, Hpv, Wpv]
+    F2: [VADDSUBPS, Vpv, Hpv, Wpv]
+  E6:
+    NP:
+    66: [VCVTTPD2DQ, Vpv, Wpv]
+    F3: [VCVTDQ2PD, Vpv, Wpv]
+    F2: [VCVTPD2DQ, Vpv, Wpv]
+map0F38:
+  DB:
+    66: [VAESIMC, Vpv, Wpv]
+  DC:
+    66: [VAESENC, Vpv, Hpv, Wpv]
+  DD:
+    66: [VAESDECLAST, Vpv, Hpv, Wpv]
+  DE:
+    66: [VAESDEC, Vpv, Hpv, Wpv]
+  DF:
+    66: [VAESDECLAST, Vpv, Hpv, Wpv]
+  F2:
+    NP: [ANDN, Gy, By, Ey]
+  # [F3] is in extensions
+  F5:
+    NP: [BZHI, Gy, Ey, By]
+  F7:
+    NP: [BEXTR, Gy, By, Ey]
+map0F3A:
+  0C:
+    66: [VBLENDPS, Vpv, Hpv, Wpv, Ib]
+  0D:
+    66: [VBLENDPD, Vpv, Hpv, Wpv, Ib]
+  17:
+    66: [VEXTRACTPS, Ed, Vpv, Ib]
+  40:
+    66: [VDDPS, Vpv, Hpv, Wpv, Ib]
+  41:
+    66: [VDDPD, Vpv, Hpv, Wpv, Ib]
+  4A:
+    66: [VBLENDVPS, Vpv, Hpv, Wpv, Lpv]
+  4B:
+    66: [VBLENDVPD, Vpv, Hpv, Wpv, Lpv]
+  DF:
+    66: [VAESKEYGENASSIST, Vpv, Wpv, Ib]
+extensions0F:
+extensions0F38:
+  F3:
+    form: /r
+    /1: [BLSR, Gy, Ey]
+    /2: [BLSMSK, Gy, Ey]
+    /3: [BLSI, Gy, Ey]
+extensions0F3A:
+
+notes:
+  - VADDxD is W1 in EVEX
+  - VADDxS is W0 in EVEX
+  - VADDSUBPx is VEX only
+  - VAESIMC is VEX.128 only
+  - VAESKEYGENASSIST is VEX.128 only
+  - VAND[N]PD is W1 in EVEX
+  - VAND[N]PS is W0 in EVEX
+  - ANDN is VEX.LZ (128) only (W0 for 32, W1 for 64)
+
+  - BEXTR is same as ANDN
+  - VBLEND[V]Px is VEX only
+  - 0F-38-F3 is same as ANDN
+  - BZHI is same as ANDN
+
+  - VCMPxD is W1 in EVEX
+  - VCMPxS is W0 in EVEX
+  - VCOMISS is (E)VEX.LIG and W0 in EVEX
+  - VCOMISD is (E)VEX.LIG and W1 in EVEX
+  - VCVTDQ2Px is W0 in EVEX
+  - VCVTPD2xx is W1 in EVEX
+  - VCVTPS2xx is W0 in EVEX
+  - VCVTSD2SI is (E)VEX.LIG only (W0 for 32, W1 for 64)
+  - VCVTSD2SS is (E)VEX.LIG only (W1 for EVEX)
+  - VCVTSI2SD is (E)VEX.LIG only (W0 for 32, W1 for 64)
+  - VCVTSS2SD is (E)VEX.LIG only (W0 for EVEX)
+  - VCVTSS2SI is (E)VEX.LIG only (W0 for 32, W1 for 64)
+  - VCVTTPD2DQ is W1 in EVEX
+  - VCVTTPS2DQ is W0 in EVEX
+  - VCVTTSx2SI is (E)VEX.LIG only (W0 for 32, W1 for 64)
+
+  - VDIVxD is W1 in EVEX
+  - VDIVxS is W0 in EVEX
+  - VDPPD is VEX.128 only
+  - VDPPS is VEX only
+
+  - EXTRACTPS is (E)VEX.128 only
