@@ -1,0 +1,264 @@
+%YAML 1.2
+---
+# This tree is organized by the first byte (the ESC byte), then the
+#   second byte (the ModR/M one)
+# The ModR/M byte is organized as follows: the reg field, then the
+#   mod field (`m` or `r`). If this needs to be specified further
+#   (using the r/m field), those bits come underneath the mod field.
+# For example, [D9 F0] (F2XM1) is underneath [D9 /6 r /0] to signify
+#   that it's ESC byte is [D9], the reg field is `/6`, the mod field
+#   must signify a "register" (`b11` or `r`), and the r/m field is
+#   `/0`.
+
+# Note from the author: there is almost no rhyme or reason to the
+#   organization of this opmap. *Maybe* in [D8 /r] and [DC /r], but
+#   that's about it. Okay, maybe [D9 /4-7], but really... It seems like
+#   Intel's designers just threw new opcodes in random spots.
+# I'd wager the reason this map is laid out how it is is probably lost
+#   to history... But I'd love to be wrong.
+
+map:
+  D8:
+    /0:
+      m: [FADD, Md]
+      r: [FADD, ST(0), ST(i)]
+    /1:
+      m: [FMUL, Md]
+      r: [FMUL, ST(0), ST(i)]
+    /2:
+      m: [FCOM, Md]
+      r: [FCOM, ST(0), ST(i)]
+    /3:
+      m: [FCOMP, Md]
+      r: [FCOMP, ST(0), ST(i)]
+    /4:
+      m: [FSUB, Md]
+      r: [FSUB, ST(0), ST(i)]
+    /5:
+      m: [FSUBR, Md]
+      r: [FSUBR, ST(0), ST(i)]
+    /6:
+      m: [FDIV, Md]
+      r: [FDIV, ST(0), ST(i)]
+    /7:
+      m: [FDIVR, Md]
+      r: [FDIVR, ST(0), ST(i)]
+  D9:
+    /0:
+      m: [FLD, Md]
+      r: [FLD, ST(i)]
+    /1:
+      # mem is undefined
+      r: [FXCH, ST(i)]
+    /2:
+      m: [FST, Md]
+      r:
+        /0: [FNOP]
+        # /1-7 are undefined
+    /3:
+      m: [FSTP, Md]
+      # reg is undefined
+    /4:
+      m: [FLDENV, M]
+      r:
+        /0: [FCHS]
+        /1: [FABS]
+        # /2-3 are undefined
+        /4: [FTST]
+        /5: [FXAM]
+        # /6-7 are undefined
+    /5:
+      m: [FLDCW, Mw]
+      r:
+        /0: [FLD1]
+        /1: [FLDL2T]
+        /2: [FLDL2E]
+        /3: [FLDPI]
+        /4: [FLDLG2]
+        /5: [FLDLN2]
+        /6: [FLDZ]
+        # /7 is undefined
+    /6:
+      m: [FSTENV, M]
+      r:
+        /0: [F2XM1]
+        /1: [FYL2X]
+        /2: [FPTAN]
+        /3: [FPATAN]
+        /4: [FXTRACT]
+        /5: [FPREM1]
+        /6: [FDECSTP]
+        /7: [FINCSTP]
+    /7:
+      m: [FSTCW, Mw]
+      r:
+        /0: [FPREM]
+        /1: [FYL2XP1]
+        /2: [FSQRT]
+        /3: [FSINCOS]
+        /4: [FRNDINT]
+        /5: [FSCALE]
+        /6: [FSIN]
+        /7: [FCOS]
+  DA:
+    /0:
+      m: [FIADD, Md]
+      r: [FCMOVb, ST(0), ST(i)]
+    /1:
+      m: [FIMUL, Md]
+      r: [FCMOVe, ST(0), ST(i)]
+    /2:
+      m: [FICOM, Md]
+      r: [FCMOVbe, ST(0), ST(i)]
+    /3:
+      m: [FICOMP, Md]
+      r: [FCMOVu, ST(0), ST(i)]
+    /4:
+      m: [FISUB, Md]
+      # reg is undefined
+    /5:
+      m: [FISUBR, Md]
+      r:
+        # /0 is undefined
+        /1: [FUCOMPP]
+        # /2-7 are undefined
+    /6:
+      m: [FIDIV, Md]
+      # reg is undefined
+    /7:
+      m: [FIDIVR, Md]
+      # reg is undefined
+  DB:
+    /0:
+      m: [FILD, Md]
+      r: [FCMOVnb, ST(0), ST(i)]
+    /1:
+      m: [FISTTP, Md]
+      r: [FCMOVne, ST(0), ST(i)]
+    /2:
+      m: [FIST, Md]
+      r: [FCMOVnbe, ST(0), ST(i)]
+    /3:
+      m: [FISTP, Md]
+      r: [FCMOVnu, ST(0), ST(i)]
+    /4:
+      # mem is undefined
+      r:
+        # /0-1 are undefined
+        /2: [FNCLEX]
+        /3: [FNINIT]
+        # /4-7 are undefined
+    /5:
+      m: [FLD, Mt]
+      r: [FUCOMI, ST(0), ST(i)]
+    /6:
+      # mem is undefined
+      r: [FCOMI, ST(0), ST(i)]
+    /7:
+      m: [FSTP, Mt]
+      # reg is undefined
+  DC:
+    /0:
+      m: [FADD, Mq]
+      r: [FADD, ST(i), ST(0)]
+    /1:
+      m: [FMUL, Mq]
+      r: [FMUL, ST(i), ST(0)]
+    /2:
+      m: [FCOM, Mq]
+      # reg is undefined
+    /3:
+      m: [FCOMP, Mq]
+      # reg is undefined
+    /4:
+      m: [FSUB, Mq]
+      r: [FSUBR, ST(i), ST(0)]
+    /5:
+      m: [FSUBR, Mq]
+      r: [FSUB, ST(i), ST(0)]
+    /6:
+      m: [FDIV, Mq]
+      r: [FDIVR, ST(i), ST(0)]
+    /7:
+      m: [FDIVR, Mq]
+      r: [FDIV, ST(i), ST(0)]
+  DD:
+    /0:
+      m: [FLD, Mq]
+      r: [FFREE, ST(i)]
+    /1:
+      m: [FISTTP, Mq]
+      # reg is undefined
+    /2:
+      m: [FST, Mq]
+      r: [FST, ST(i)]
+    /3:
+      m: [FSTP, Mq]
+      r: [FSTP, ST(i)]
+    /4:
+      m: [FRSTOR, M]
+      r: [FUCOM, ST(i)]
+    /5:
+      # mem is undefined
+      r: [FUCOMP, ST(i)]
+    /6:
+      m: [FSAVE, M]
+      # reg is undefined
+    /7:
+      m: [FSTSW, Mw]
+      # reg is undefined
+  DE:
+    /0:
+      m: [FIADD, Mw]
+      r: [FADDP, ST(i), ST(0)]
+    /1:
+      m: [FIMUL, Mw]
+      r: [FMULP, ST(i), ST(0)]
+    /2:
+      m: [FICOM, Mw]
+      # reg is undefined
+    /3:
+      m: [FICOMP, Mw]
+      r:
+        # /0 is undefined
+        /1: [FCOMPP]
+        # /2-7 are undefined
+    /4:
+      m: [FISUB, Mw]
+      r: [FISUBRP, ST(i), ST(0)]
+    /5:
+      m: [FISUBR, Mw]
+      r: [FSUBP, ST(i), ST(0)]
+    /6:
+      m: [FIDIV, Mw]
+      r: [FDIVRP, ST(i), ST(0)]
+    /7:
+      m: [FIDIVR, Mw]
+      r: [FDIVP, ST(i), ST(0)]
+  DF:
+    /0:
+      m: [FILD, Mw]
+      # reg is undefined
+    /1:
+      m: [FISTTP, Mw]
+      # reg is undefined
+    /2:
+      m: [FIST, Mw]
+      # reg is undefined
+    /3:
+      m: [FISTP, Mw]
+      # reg is undefined
+    /4:
+      m: [FBLD, Mt]
+      r:
+        /0: [FNSTSW, AX]
+        # /1-7 are undefined
+    /5:
+      m: [FILD, Mq]
+      r: [FUCOMIP, ST(0), ST(i)]
+    /6:
+      m: [FBSTP, Mt]
+      r: [FCOMIP, ST(0), ST(i)]
+    /7:
+      m: [FISTP, Mq]
+      # reg is undefined
