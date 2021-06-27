@@ -18,7 +18,9 @@
 import { Breadcrumb, Container, ContentCol, Row, Table } from "../../../components/Bootstrap";
 import Layout, { Title } from "../../../components/Layout";
 
+import A from "../../../components/A";
 import { GetStaticProps } from "next";
+import Instruction from "../../../components/Instruction";
 import React from "react";
 import Scrollable from "../../../components/Scrollable";
 import TOC from "../../../components/TOC";
@@ -222,6 +224,7 @@ export default function Page(props: PageProps): JSX.Element {
                 </Breadcrumb.Root>
                 <Row>
                     <TOC.Root>
+                        <TOC.Entry href="#headingHistory" text="Quick History" />
                         <TOC.Entry href="#headingTable" text="Tables">
                             <TOC.Entry href="#headingTableD8" text="D8 Opcode Map" />
                             <TOC.Entry href="#headingTableD9" text="D9 Opcode Map" />
@@ -239,8 +242,38 @@ export default function Page(props: PageProps): JSX.Element {
                         <p>
                             This page details all x87 FPU opcodes.
                         </p>
+                        <p>
+                            The x87 is peculiar in how its opcodes are decoded.
+                            Three bits from the first byte, determine an opcode grouping (of sorts).
+                            Each of these groups has a ModR/M byte that follows and extends the opcode.
+                            This ModR/M byte can refer to either memory or a register (through the <code>mod</code> field).
+                            Taken together, these bits form an 11 bit opcode with the three bits from the escape byte in the most significant bit positions and the eight from the ModR/M in the least significant ones.
+                        </p>
 
-                        <h2 id="headingTable">Table</h2>
+                        <h2 id="headingHistory">Quick History</h2>
+                        <p>
+                            The x87 FPU is a legacy holdover from the <A href="/architecture/8086">original 8086</A> days.
+                            It was initially an (optional) coprocessor that could be purchased separately.
+                            The <A href="/architecture/80486">80486</A> began including it internally (on non-SX models).
+                        </p>
+                        <p>
+                            In 1999, it was supersceded by <A href="/extension/sse">SSE</A> (Streaming SIMD Extentions), but continues to be included in x86 (and x86-64) processors to this day.
+                            Intel discourages use of these opcodes as they are potentially slower than SSE-based opcodes.
+                            Despite this, the x87 is the only way to use 80 bit floating point numbers (vector based instructions are 32 or 64 bits).
+                            Therefore, if 80 bits of precision are needed, the x87 is the only way to achieve this in hardware.
+                        </p>
+
+                        <h2 id="headingTable">Tables</h2>
+                        <p>
+                            These tables are organized by the first opcode byte (the <Instruction name="ESC" noTitle /> &quot;instruction&quot;), and whether the ModR/M byte refers to memory or a register.
+                            Any blanks in these tables are undefined opcodes, and could cause an error.
+                            Despite this, Intel has abandoned the x87 FPU in favor of SIMD instructions
+                        </p>
+                        <p>
+                            In the register form tables, the <code>ST(0)</code> operand refers to the <A href="/register/fpu">x87 register</A> at the top of the stack.
+                            The <code>ST(i)</code> operand refers to an x87 register at the &quot;<em>i</em>th&quot; position on the stack;
+                            It can be any value from zero through seven (for the eight registers), and is encoded in the <code>r/m</code> field of the ModR/M byte.
+                        </p>
                         {buildSection(props.map.D8, "D8")}
                         {buildSection(props.map.D9, "D9")}
                         {buildSection(props.map.DA, "DA")}
