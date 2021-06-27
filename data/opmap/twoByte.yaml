@@ -3,6 +3,7 @@
 map:
   # [01] is in extensions
   06: [CLTS]
+  08: [INVD]
   1A:
     NP: [BNDLDX, BGdq, M]
     66: [BNDMOV, BGdq, BEy]
@@ -33,7 +34,7 @@ map:
   2F:
     NP: [COMISS, Vpv, Wpv]
     66: [COMISD, Vpv, Wpv]
-  # [40-4F] is in spans
+  # [40-4F] are in spans
   54:
     NP: [ANDPS, Vpv, Wpv]
     66: [ANDPD, Vpv, Wpv]
@@ -62,33 +63,32 @@ map:
     F2: [DIVSD, Vsv, Wsv]
   77:
     NP: [EMMS]
-  A2:
-    NP: [CPUID]
-  A3:
-    NP: [BT, Ev, Gv]
-  AB:
-    NP: [BTS, Ev, Gv]
+  7C:
+    66: [HADDPD, Vpv, Wpv]
+    F2: [HADDPS, Vpv, Wpv]
+  7D:
+    66: [HSUBPD, Vpv, Wpv]
+    F2: [HSUBPS, Vpv, Wpv]
+  # [80-8F] are in spans
+  A2: [CPUID]
+  A3: [BT, Ev, Gv]
+  AB: [BTS, Ev, Gv]
   # [AE] is in extensions
-  B0:
-    NP: [CMPXCHG, Eb, Gb] # TODO: no prefix is mentioned
-  B1:
-    NP: [CMPXCHG, Ev, Gv] # TODO: no prefix is mentioned
-  B3:
-    NP: [BTR, Ev, Gv]
+  AF: [IMUL, Gv, Ev]
+  B0: [CMPXCHG, Eb, Gb]
+  B1: [CMPXCHG, Ev, Gv]
+  B3: [BTR, Ev, Gv]
   # [BA] is in extensions
-  BB:
-    NP: [BTC, Ev, Gv]
-  BC:
-    NP: [BSF, Gv, Ev]
-  BD:
-    NP: [BSR, Gv, Ey]
+  BB: [BTC, Ev, Gv]
+  BC: [BSF, Gv, Ev]
+  BD: [BSR, Gv, Ey]
   C2:
     NP: [CMPPS, Vpv, Wpv, Ib]
     66: [CMPPD, Vpv, Wpv, Ib]
     F3: [CMPSS, Vsv, Wsv, Ib]
     F2: [CMPSD, Vsv, Wsv, Ib]
   # [C7] is in extensions
-  # [C8-CF] is in spans
+  # [C8-CF] are in spans
   D0:
     66: [ADDSUBPD, Vpv, Wpv]
     F2: [ADDSUBPS, Vpv, Wpv]
@@ -100,6 +100,9 @@ spans:
   40:
     length: 16
     instr: [CMOVcc, Gv, Ev]
+  80:
+    length: 16
+    instr: [Jcc, Jv]
   C8:
     length: 8
     instr: [BSWAP, Zy]
@@ -107,6 +110,7 @@ extensions:
   01:
     form: m/r/b
     R/1/2: [CLAC]
+    M/7/b: [INVLPG, M]
   1C:
     form: pfx-m/r
     NP-M/0: [CLDEMOTE, Mb]
@@ -116,10 +120,13 @@ extensions:
     F3-r/7/3: [ENDBR32]
   AE:
     form: pfx-m/r
+    NP-M/0: [FXSAVE, Mdqq]
+    NP-M/1: [FXRSTOR, Mdqq]
     NP-M/7: [CLFLUSH, Mb]
     66-M/6: [CLWB, Mb]
-    66-M/7: [CLFLUSHOPT, Mb]
+    66-M/7: [CLFLUSHOPT, Mb] # TODO: Prefix is listed as [NFx 66 ...]
     F3-M/6: [CLRSSBSY, Mq]
+    F3-R/5: [INCSSPD, Gy] # TODO: INCSSPQ for 64 bit operands
   BA:
     form: /r
     /4: [BT, Ev, Ib]
@@ -128,7 +135,4 @@ extensions:
     /7: [BTC, Ev, Ib]
   C7:
     form: m/r
-    M/1: [CMPXCHG8B, Mq] # TODO: CMPXCHG16B_Mdq is 64 bit mode
-
-notes:
-  - CLFLUSHOPT_Mb is `NFx 66` for prefix
+    M/1: [CMPXCHG8B, Mq] # TODO: CMPXCHG16B_Mdq with REX prefix

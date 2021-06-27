@@ -7,10 +7,16 @@ map:
     66: [BLENDPD, Vpv, Wpv, Ib]
   17:
     66: [EXTRACTPS, Ed, Vpv, Ib]
+  21:
+    66: [INSERTPS, Vpv, Wpv, Ib]
   40:
     66: [DPPS, Vpv, Wpv, Ib]
   41:
     66: [DPPD, Vpv, Wpv, Ib]
+  CE:
+    66: [GF2P8AFFINEQB, Vpv, Wpv, Ib]
+  CF:
+    66: [GF2P8AFFINEINVQB, Vpv, Wpv, Ib]
   DF:
     66: [AESKEYGENASSIST, Vpv, Wpv, Ib]
 extensions:
