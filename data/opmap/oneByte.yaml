@@ -40,18 +40,28 @@ map:
   6D: [INS, Yv, DX] # Aliased as INSW/D
   # [70-7F] are in spans
   # [80-84] is in extensions
+  8D: [LEA, Gv, M]
   # TODO: [98] is CBW/CWDE/CDQE
   # TODO: [99] is CWD/CDQ/CQO
   9A: [CALLF, Ap]
+  9F: [LAHF]
   A6: [CMPS, Xb, Yb] # or CMPSB
   A7: [CMPS, Xv, Yv] # or CMPS[WDQ]
+  AC: [LODS, Xb] # Aliased as LODSB
+  AD: [LODS, Xv] # Aliased as LODSW/D/Q
+  C4: [LES, Sv, Mp]
+  C5: [LDS, Sv, Mp]
   C8: [ENTER, Iw, Ib]
+  C9: [LEAVE]
   CC: [INT, "3"]
   CD: [INT, Ib]
   CE: [INTO]
   CF: [IRET]
   D4: [AAM, Ib]
   D5: [AAD, Ib]
+  E0: [LOOPNE, Jb]
+  E1: [LOOPE, Jb]
+  E2: [LOOP, Jb]
   E4: [IN, AL, Ib]
   E5: [IN, eAX, Ib]
   E8: [CALL, Jv]
@@ -60,6 +70,7 @@ map:
   EB: [JMP, Jb]
   EC: [IN, AL, DX]
   ED: [IN, eAX, DX]
+  F0: [LOCK]
   F1: [INT, "1"]
   F4: [HLT]
   F5: [CMC]

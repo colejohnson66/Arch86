@@ -1,7 +1,10 @@
 %YAML 1.2
 ---
 map:
+  # [00] is in extensions
   # [01] is in extensions
+  02: [LAR, Gw, Ew]
+  03: [LSL, Gw, Ew]
   06: [CLTS]
   08: [INVD]
   1A:
@@ -77,11 +80,16 @@ map:
   AF: [IMUL, Gv, Ev]
   B0: [CMPXCHG, Eb, Gb]
   B1: [CMPXCHG, Ev, Gv]
+  B2: [LSS, Sv, Mp]
   B3: [BTR, Ev, Gv]
+  B4: [LFS, Sv, Mp]
+  B5: [LGS, Sv, Mp]
   # [BA] is in extensions
   BB: [BTC, Ev, Gv]
   BC: [BSF, Gv, Ev]
-  BD: [BSR, Gv, Ey]
+  BD:
+    N/A: [BSR, Gv, Ey] # TODO: BSR is not the same as LZCNT, but LZCNT will execute
+    F3: [LZCNT, Gv, Ey] # as BSR if LZCNT isn't supported
   C2:
     NP: [CMPPS, Vpv, Wpv, Ib]
     66: [CMPPD, Vpv, Wpv, Ib]
@@ -96,6 +104,8 @@ map:
     66: [CVTTPD2DQ, Vpv, Wpv]
     F3: [CVTDQ2PD, Vpv, Wpv]
     F2: [CVTPD2DQ, Vpv, Wpv]
+  F0:
+    F2: [LDDQU, Vpv, M]
 spans:
   40:
     length: 16
@@ -107,10 +117,18 @@ spans:
     length: 8
     instr: [BSWAP, Zy]
 extensions:
+  00:
+    form: /r
+    /2: [LLDT, Ew]
+    /3: [LTR, Ew]
   01:
     form: m/r/b
-    R/1/2: [CLAC]
+    M/2/b: [LGDT, Ms]
+    M/3/b: [LIDT, Ms]
+    M/6/b: [LMSW, Ew] # See also `R/6/b`
     M/7/b: [INVLPG, M]
+    R/1/2: [CLAC]
+    R/6/b: [LMSW, Ew] # See also `M/6/b`
   1C:
     form: pfx-m/r
     NP-M/0: [CLDEMOTE, Mb]
@@ -119,14 +137,16 @@ extensions:
     F3-r/7/2: [ENDBR64]
     F3-r/7/3: [ENDBR32]
   AE:
-    form: pfx-m/r
-    NP-M/0: [FXSAVE, Mdqq]
-    NP-M/1: [FXRSTOR, Mdqq]
-    NP-M/7: [CLFLUSH, Mb]
-    66-M/6: [CLWB, Mb]
-    66-M/7: [CLFLUSHOPT, Mb] # TODO: Prefix is listed as [NFx 66 ...]
-    F3-M/6: [CLRSSBSY, Mq]
-    F3-R/5: [INCSSPD, Gy] # TODO: INCSSPQ for 64 bit operands
+    form: pfx-m/r/b
+    NP-M/0/b: [FXSAVE, Mdqq]
+    NP-M/1/b: [FXRSTOR, Mdqq]
+    NP-M/2/b: [LDMXCSR, Md]
+    NP-M/7/b: [CLFLUSH, Mb]
+    NP-R/5/0: [LFENCE]
+    66-M/6/b: [CLWB, Mb]
+    66-M/7/b: [CLFLUSHOPT, Mb] # TODO: Prefix is listed as [NFx 66 ...]
+    F3-M/6/b: [CLRSSBSY, Mq]
+    F3-R/5/b: [INCSSPD, Ry] # TODO: INCSSPQ for 64 bit operands
   BA:
     form: /r
     /4: [BT, Ev, Ib]
@@ -136,3 +156,9 @@ extensions:
   C7:
     form: m/r
     M/1: [CMPXCHG8B, Mq] # TODO: CMPXCHG16B_Mdq with REX prefix
+
+notes:
+  - LAR has a 32 bit form listed, but always operates in 16 bit form
+  - >-
+    LSL has 32 and 64 bit forms listed, but always operates in 16 bit form
+    A REX.W prefix will turn this into "64" bit form, but the only difference will be zeroing the upper 32 bits in the destination

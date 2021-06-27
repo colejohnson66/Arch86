@@ -13,8 +13,10 @@ map:
   DB:
     66: [AESIMC, Vpv, Wpv]
   DC:
-    66: [AESENC, Vpv, Wpv]
-    F3: [AESENC128KL, Vdq, M384]
+    form: pfx-M
+    66-x: [AESENC, Vpv, Wpv]
+    F3-M: [AESENC128KL, Vdq, M384]
+    F3-R: [LOADIWKEY, Vdq, Wdq]
   DD:
     66: [AESENCLAST, Vpv, Wpv]
     F3: [AESDEC128KL, Vdq, M384]

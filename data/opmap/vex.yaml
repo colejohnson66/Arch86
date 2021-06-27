@@ -144,6 +144,7 @@ map0F:
     NP-0: [KTESTW, KGw, KRw]
     66-1: [KTESTD, KGd, KRd]
     NP-1: [KTESTQ, KGq, KRq]
+  # [AE] is in extensions
   C2:
     NP: [VCMPPS, Vpv, Hpv, Wpv, Ib]
     66: [VCMPPD, Vpv, Hpv, Wpv, Ib]
@@ -157,6 +158,8 @@ map0F:
     66: [VCVTTPD2DQ, Vpv, Wpv]
     F3: [VCVTDQ2PD, Vpv, Wpv]
     F2: [VCVTPD2DQ, Vpv, Wpv]
+  F0:
+    F2: [VLDDQU, Vpv, M]
 map0F38:
   CF:
     66: [VGF2P8MULB, Vpv, Hpw, Wpv]
@@ -201,6 +204,9 @@ map0F3A:
   DF:
     66: [VAESKEYGENASSIST, Vpv, Wpv, Ib]
 extensions0F:
+  AE:
+    form: pfx-m/r
+    NP-M/2: [VLDMXCSR, Md]
 extensions0F38:
   F3:
     form: /r
@@ -257,3 +263,6 @@ notes:
 
   - KMOVx/KNOTx/KORTESTx/KSHIFTxx/KTESTx are all VEX.L0 (128 bit) only
   - KADDx/KAND[N]x/KORx/KUNPCKx/KX[N]ORx are all VEX.L1 (256 bit) only
+
+  - VLDDQU is VEX only
+  - VLDMXCSR is VEX.LZ only
