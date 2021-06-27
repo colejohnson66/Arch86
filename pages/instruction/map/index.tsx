@@ -14,6 +14,7 @@
  * You should have received a copy of the GNU Affero General Public License
  *   along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
+
 import { Breadcrumb, Container, ContentCol, Row } from "../../../components/Bootstrap";
 import Layout, { Title } from "../../../components/Layout";
 
@@ -315,6 +316,7 @@ export default function Page(): JSX.Element {
                             <dt className="col-sm-1"><code>sv</code><Ref.Link name="custom" /></dt>
                             <dd className="col-sm-11">
                                 A scalar element from a vector register.
+                                How many bits depends on the operand size.
                             </dd>
                             <dt className="col-sm-1"><code>v</code></dt>
                             <dd className="col-sm-11">
