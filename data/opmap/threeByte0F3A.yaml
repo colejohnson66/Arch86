@@ -13,6 +13,8 @@ map:
     66: [DPPS, Vpv, Wpv, Ib]
   41:
     66: [DPPD, Vpv, Wpv, Ib]
+  42:
+    66: [MPSADBW, Vpv, Wpv, Ib]
   CE:
     66: [GF2P8AFFINEQB, Vpv, Wpv, Ib]
   CF:

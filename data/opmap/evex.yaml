@@ -1,10 +1,25 @@
 %YAML 1.2
 ---
 map0F:
+  10:
+    W0:
+      NP: [VMOVUPS, Vpv, Wpv]
+      F3: [VMOVSS, Vpv, Hpv, Upv] # TODO: two operand form is VpvMd
+    W1:
+      66: [VMOVUPD, Vpv, Wpv]
+      F2: [VMOVSD, Vpv, Hpv, Upv] # TODO: two operand form is VpvMq
+  11:
+    W0:
+      NP: [VMOVUPS, Vpv, Wpv]
+      F3: [VMOVSS, Upv, Hpv, Vpv] # TODO: two operand form is VpvMd
+    W1:
+      66: [VMOVUPD, Vpv, Wpv]
+      F2: [VMOVSD, Upv, Hpv, Vpv] # TODO: two operand form is MqVpv
   12:
     W0:
-    # NP-M: [VMOVLPS, Vpv, Hpv, Mq]
-    # NP-R: [VMOVHLPS, Vpv, Hpv, Upv]
+      # NP-M: [VMOVLPS, Vpv, Hpv, Mq]
+      # NP-R: [VMOVHLPS, Vpv, Hpv, Upv]
+      F3: [VMOVSLDUP, Vpv, Wpv]
     W1:
       66: [VMOVLPD, Vpv, Hpv, Mq]
       F2: [VMOVDDUP, Vpv, Wpv]
@@ -15,8 +30,9 @@ map0F:
       66: [VMOVLPD, Mq, Vpv]
   16:
     W0:
-    # NP-M: [VMOVHPS, Vpv, Hpv, Mq]
-    # NP-R: [VMOVLHPS, Vpv, Hpv, Upv]
+      # NP-M: [VMOVHPS, Vpv, Hpv, Mq]
+      # NP-R: [VMOVLHPS, Vpv, Hpv, Upv]
+      F3: [VMOVSHDUP, Vpv, Wpv]
     W1:
       66: [VMOVHPD, Vpv, Hpv, Mq]
   17:
@@ -40,6 +56,11 @@ map0F:
     W1:
       F3: [VCVTSI2SS, Vsv, Hsv, Eq]
       F2: [VCVTSI2SD, Vsv, Hsv, Eq]
+  2B:
+    W0:
+      NP: [VMOVNTPS, Mpv, Vpv]
+    W1:
+      66: [VMOVNTPD, Mpv, Vpv]
   2C:
     W0:
       F3: [VCVTTSS2SI, Gd, Wsv]
@@ -69,13 +90,25 @@ map0F:
       NP: [VANDNPS, Vpv, Hpv, Wpv]
     W1:
       66: [VANDNPD, Vpv, Hpv, Wpv]
-  58:
+  56:
+    W0:
+      NP: [ORPS, Vpv, Wpv]
     W1:
-      66: [VADDPD, Vpv, Hpv, Wpv]
-      F2: [VADDSD, Vsv, Hsv, Wsv]
+      66: [ORPD, Vpv, Wpv]
+  58:
     W0:
       NP: [VADDPS, Vpv, Hpv, Wpv]
       F3: [VADDSS, Vsv, Hsv, Wsv]
+    W1:
+      66: [VADDPD, Vpv, Hpv, Wpv]
+      F2: [VADDSD, Vsv, Hsv, Wsv]
+  59:
+    W0:
+      NP: [MULPS, Vpv, Hpv, Wpv]
+      F3: [MULSS, Vsv, Hsv, Wsv]
+    W1:
+      66: [MULPD, Vpv, Wpv, Wpv]
+      F2: [MULSD, Vsv, Hsv, Wsv]
   5A:
     W0:
       NP: [VCVTPS2PD, Vpv, Wpv]
@@ -128,6 +161,7 @@ map0F:
       66: [VMOVD, Ed, Vpv]
     W1:
       66: [VMOVD, Eq, Vpv]
+      F3: [MOVQ, Vpv, Wpv]
   7F:
     W0:
       66: [VMOVDQA32, Wpv, Vpv]
@@ -144,13 +178,22 @@ map0F:
     W1:
       66: [VCMPPD, Vpv, Hpv, Wpv, Ib]
       F2: [VCMPSD, Vsv, Hsv, Wsv, Ib]
+  D6:
+    W1:
+      F3: [MOVQ, Wpv, Vpv]
   E6:
     W0:
       F3: [VCVTDQ2PD, Vpv, Wpv]
     W1:
       66: [VCVTTPD2DQ, Vpv, Wpv]
       F2: [VCVTPD2DQ, Vpv, Wpv]
+  E7:
+    W0:
+      66: [VMOVNTDQ, Mpv, Vpv]
 map0F38:
+  2A:
+    W0:
+      66: [VMOVNTDQA, Vpv, Mpv]
   CF:
     W0:
       66: [VGF2P8MULB, Vpv, Hpw, Wpv]

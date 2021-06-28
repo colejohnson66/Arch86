@@ -5,6 +5,7 @@ map:
     66: [BLENDVPS, Vpv, Wpv]
   15:
     66: [BLENDVPD, Vpv, Wpv]
+  2A: [MOVNTDQA, Vpv, Mdqq]
   82:
     66: [INVPCID, Gy, Mdqq]
   CF:
