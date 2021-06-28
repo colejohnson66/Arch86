@@ -7,6 +7,18 @@ map:
   03: [LSL, Gw, Ew]
   06: [CLTS]
   08: [INVD]
+  12:
+    NP: [MOVHLPS, Vpv, Upv] # TODO: When used in mem form, it's MOVLPS_VpvMq
+    66: [MOVLPD, Vpv, Mq]
+    F2: [MOVDDUP, Vpv, Wpv]
+  13:
+    66: [MOVLPD, Mq, Vpv]
+  16:
+    NP: [MOVHPS, Vpv, Mq] # TODO: When used in reg form, it's MOVLHPS_VpvUpv
+    66: [MOVHPD, Vpv, Mq]
+  17:
+    NP: [MOVHPS, Mq, Vpv]
+    66: [MOVHPD, Mq, Vpv]
   1A:
     NP: [BNDLDX, BGdq, M]
     66: [BNDMOV, BGdq, BEy]
@@ -19,6 +31,18 @@ map:
     F2: [BNDCN, BGdq, Ey]
   # [1C] is in extensions
   # [1E] is in extensions
+  20: [MOV, Ry, Cy]
+  21: [MOV, Ry, Dy]
+  22: [MOV, Cy, Ry]
+  23: [MOV, Dy, Ry]
+  24: [MOV, Ry, Ty]
+  26: [MOV, Ty, Ry]
+  28:
+    NP: [MOVAPS, Vpv, Wpv]
+    66: [MOVAPD, Vpv, Wpv]
+  29:
+    NP: [MOVAPS, Wpv, Vpv]
+    66: [MOVAPD, Wpv, Vpv]
   2A:
     NP: [CVTPI2PS, Vpv, Qpi]
     66: [CVTPI2PD, Vpv, Qpi]
@@ -38,6 +62,8 @@ map:
     NP: [COMISS, Vpv, Wpv]
     66: [COMISD, Vpv, Wpv]
   # [40-4F] are in spans
+  50:
+    66: [MOVMSKPD, Gy, Vpv]
   54:
     NP: [ANDPS, Vpv, Wpv]
     66: [ANDPD, Vpv, Wpv]
@@ -64,6 +90,22 @@ map:
     66: [DIVPD, Vpv, Wpv]
     F3: [DIVSS, Vsv, Wsv]
     F2: [DIVSD, Vsv, Wsv]
+  5D:
+    NP: [MINPS, Vpv, Wpv]
+    66: [MINPD, Vpv, Wpv]
+    F3: [MINSS, Vsv, Wsv]
+    F2: [MINSD, Vsv, Wsv]
+  5F:
+    NP: [MAXPS, Vpv, Wpv]
+    66: [MAXPD, Vpv, Wpv]
+    F3: [MAXSS, Vsv, Wsv]
+    F2: [MAXSD, Vsv, Wsv]
+  6E:
+    NP: [MOVD, Ppi, Ey] # TODO: MOVQ for 64 bit opsize
+    66: [MOVD, Vpv, Ey]
+  6F:
+    66: [MOVDQA, Vpv, Wpv]
+    F3: [MOVDQU, Vpv, Wpv]
   77:
     NP: [EMMS]
   7C:
@@ -72,6 +114,12 @@ map:
   7D:
     66: [HSUBPD, Vpv, Wpv]
     F2: [HSUBPS, Vpv, Wpv]
+  7E:
+    NP: [MOVD, Ey, Ppi] # TODO: MOVQ for 64 bit opsize
+    66: [MOVD, Ey, Vpv]
+  7F:
+    66: [MOVDQA, Wpv, Vpv]
+    F3: [MOVDQU, Wpv, Vpv]
   # [80-8F] are in spans
   A2: [CPUID]
   A3: [BT, Ev, Gv]
@@ -100,12 +148,17 @@ map:
   D0:
     66: [ADDSUBPD, Vpv, Wpv]
     F2: [ADDSUBPS, Vpv, Wpv]
+  D6:
+    F2: [MOVDQ2Q, Ppi, Upv]
   E6:
     66: [CVTTPD2DQ, Vpv, Wpv]
     F3: [CVTDQ2PD, Vpv, Wpv]
     F2: [CVTPD2DQ, Vpv, Wpv]
   F0:
     F2: [LDDQU, Vpv, M]
+  F7:
+    NP: [MASKMOVQ, Ppi, Qpi]
+    66: [MASKMOVDQU, Vpv, Upv]
 spans:
   40:
     length: 16
@@ -127,6 +180,7 @@ extensions:
     M/3/b: [LIDT, Ms]
     M/6/b: [LMSW, Ew] # See also `R/6/b`
     M/7/b: [INVLPG, M]
+    R/1/0: [MONITOR]
     R/1/2: [CLAC]
     R/6/b: [LMSW, Ew] # See also `M/6/b`
   1C:
@@ -143,6 +197,7 @@ extensions:
     NP-M/2/b: [LDMXCSR, Md]
     NP-M/7/b: [CLFLUSH, Mb]
     NP-R/5/0: [LFENCE]
+    NP-R/6/0: [MFENCE]
     66-M/6/b: [CLWB, Mb]
     66-M/7/b: [CLFLUSHOPT, Mb] # TODO: Prefix is listed as [NFx 66 ...]
     F3-M/6/b: [CLRSSBSY, Mq]

@@ -27,12 +27,18 @@ map:
     66: [AESDECLAST, Vpv, Wpv]
     F3: [AESDEC256KL, Vdq, Mdqq]
   F0:
+    N/A: [MOVBE, Gv, Mv] # TODO: No prefix listed
     F2: [CRC32, Gy, Eb]
   F1:
+    N/A: [MOVBE, Mv, Gv] # TODO: No prefix listed
     F2: [CRC32, Gy, Ev]
   F6:
     66: [ADCX, Gv, Ev]
     F3: [ADOX, Gv, Ev]
+  F8:
+    66: [MOVDIR64B, Gv, Mdqq]
+  F9:
+    NP: [MOVDIRI, My, Gy]
   FA:
     F3: [ENCODEKEY128, Gd, Rd]
   FB:

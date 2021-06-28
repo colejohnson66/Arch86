@@ -1,0 +1,251 @@
+%YAML 1.2
+---
+map0F:
+  12:
+    W0:
+    # NP-M: [VMOVLPS, Vpv, Hpv, Mq]
+    # NP-R: [VMOVHLPS, Vpv, Hpv, Upv]
+    W1:
+      66: [VMOVLPD, Vpv, Hpv, Mq]
+      F2: [VMOVDDUP, Vpv, Wpv]
+  13:
+    W0:
+      NP: [VMOVLPS, Mq, Vpv]
+    W1:
+      66: [VMOVLPD, Mq, Vpv]
+  16:
+    W0:
+    # NP-M: [VMOVHPS, Vpv, Hpv, Mq]
+    # NP-R: [VMOVLHPS, Vpv, Hpv, Upv]
+    W1:
+      66: [VMOVHPD, Vpv, Hpv, Mq]
+  17:
+    NP: [VMOVHPS, Mq, Vpv]
+    W1:
+      66: [VMOVHPD, Mq, Vpv]
+  28:
+    W0:
+      66: [VMOVAPD, Vpv, Wpv]
+    W1:
+      NP: [VMOVAPS, Vpv, Wpv]
+  29:
+    W0:
+      66: [VMOVAPD, Wpv, Vpv]
+    W1:
+      NP: [VMOVAPS, Wpv, Vpv]
+  2A:
+    W0:
+      F3: [VCVTSI2SS, Vsv, Hsv, Ed]
+      F2: [VCVTSI2SD, Vsv, Hsv, Ed]
+    W1:
+      F3: [VCVTSI2SS, Vsv, Hsv, Eq]
+      F2: [VCVTSI2SD, Vsv, Hsv, Eq]
+  2C:
+    W0:
+      F3: [VCVTTSS2SI, Gd, Wsv]
+      F2: [VCVTTSD2SI, Gd, Wsv]
+    W1:
+      F3: [VCVTTSS2SI, Gq, Wsv]
+      F2: [VCVTTSD2SI, Gq, Wsv]
+  2D:
+    W0:
+      F2: [VCVTSD2SI, Gd, Wsv]
+      F3: [VCVTSS2SI, Gd, Wsv]
+    W1:
+      F2: [VCVTSD2SI, Gq, Wsv]
+      F3: [VCVTSS2SI, Gq, Wsv]
+  2F:
+    W0:
+      NP: [COMISS, Vpv, Wpv]
+    W1:
+      66: [COMISD, Vpv, Wpv]
+  54:
+    W0:
+      NP: [VANDPS, Vpv, Hpv, Wpv]
+    W1:
+      66: [VANDPD, Vpv, Hpv, Wpv]
+  55:
+    W0:
+      NP: [VANDNPS, Vpv, Hpv, Wpv]
+    W1:
+      66: [VANDNPD, Vpv, Hpv, Wpv]
+  58:
+    W1:
+      66: [VADDPD, Vpv, Hpv, Wpv]
+      F2: [VADDSD, Vsv, Hsv, Wsv]
+    W0:
+      NP: [VADDPS, Vpv, Hpv, Wpv]
+      F3: [VADDSS, Vsv, Hsv, Wsv]
+  5A:
+    W0:
+      NP: [VCVTPS2PD, Vpv, Wpv]
+      F3: [VCVTSS2SS, Vsv, Hsv, Wsv]
+    W1:
+      66: [VCVTPD2PS, Vpv, Wpv]
+      F2: [VCVTSD2SS, Vsv, Hsv, Wsv]
+  5B:
+    W0:
+      NP: [VCVTDQ2PS, Vpv, Wpv]
+      66: [VCVTPS2DQ, Vpv, Wpv]
+      F3: [VCVTTPS2DQ, Vpv, Wpv]
+  5D:
+    W0:
+      NP: [VMINPS, Vpv, Hpv, Wpv]
+      F3: [VMINSS, Vsv, Hsv, Wsv]
+    W1:
+      66: [VMINPD, Vpv, Hpv, Wpv]
+      F2: [VMINSD, Vsv, Hsv, Wsv]
+  5E:
+    W0:
+      NP: [VDIVPS, Vpv, Hpv, Wpv]
+      F3: [VDIVSS, Vsv, Hsv, Wsv]
+    W1:
+      66: [VDIVPD, Vpv, Hpv, Wpv]
+      F2: [VDIVSD, Vsv, Hsv, Wsv]
+  5F:
+    W0:
+      NP: [VMAXPS, Vpv, Hpv, Wpv]
+      F3: [VMAXSS, Vsv, Hsv, Wsv]
+    W1:
+      66: [VMAXPD, Vpv, Hpv, Wpv]
+      F2: [VMAXSD, Vsv, Hsv, Wsv]
+  6E:
+    W0:
+      66: [VMOVD, Vpv, Ed]
+    W1:
+      66: [VMOVQ, Vpv, Ed]
+  6F:
+    W0:
+      66: [VMOVDQA32, Vpv, Wpv]
+      F3: [VMOVDQU32, Vpv, Wpv]
+      F2: [VMOVDQU8, Vpv, Wpv]
+    W1:
+      66: [VMOVDQA64, Vpv, Wpv]
+      F3: [VMOVDQU64, Vpv, Wpv]
+      F2: [VMOVDQU16, Vpv, Wpv]
+  7E:
+    W0:
+      66: [VMOVD, Ed, Vpv]
+    W1:
+      66: [VMOVD, Eq, Vpv]
+  7F:
+    W0:
+      66: [VMOVDQA32, Wpv, Vpv]
+      F3: [VMOVDQU32, Wpv, Vpv]
+      F2: [VMOVDQU8, Wpv, Vpv]
+    W1:
+      66: [VMOVDQA64, Wpv, Vpv]
+      F3: [VMOVDQU64, Wpv, Vpv]
+      F2: [VMOVDQU16, Wpv, Vpv]
+  C2:
+    W0:
+      NP: [VCMPPS, Vpv, Hpv, Wpv, Ib]
+      F3: [VCMPSS, Vsv, Hsv, Wsv, Ib]
+    W1:
+      66: [VCMPPD, Vpv, Hpv, Wpv, Ib]
+      F2: [VCMPSD, Vsv, Hsv, Wsv, Ib]
+  E6:
+    W0:
+      F3: [VCVTDQ2PD, Vpv, Wpv]
+    W1:
+      66: [VCVTTPD2DQ, Vpv, Wpv]
+      F2: [VCVTPD2DQ, Vpv, Wpv]
+map0F38:
+  CF:
+    W0:
+      66: [VGF2P8MULB, Vpv, Hpw, Wpv]
+  DC:
+    WIG:
+      66: [VAESENC, Vpv, Hpv, Wpv]
+  DD:
+    WIG:
+      66: [VAESDECLAST, Vpv, Hpv, Wpv]
+  DE:
+    WIG:
+      66: [VAESDEC, Vpv, Hpv, Wpv]
+  DF:
+    WIG:
+      66: [VAESDECLAST, Vpv, Hpv, Wpv]
+  F2:
+    W0:
+      NP: [ANDN, Gd, Bd, Ed]
+    W1:
+      NP: [ANDN, Gq, Bq, Eq]
+map0F3A:
+  17:
+    WIG:
+      66: [VEXTRACTPS, Ed, Vpv, Ib]
+  21:
+    W0:
+      66: [VINSERTPS, Vpv, Hpv, Wpv, Ib]
+  CE:
+    W1:
+      66: [VGF2P8AFFINEQB, Vpv, Hpv, Wpv, Ib]
+  CF:
+    W1:
+      66: [VGF2P8AFFINEINVQB, Vpv, Hpv, Wpv, Ib]
+extensions0F:
+extensions0F38:
+extensions0F3A:
+
+notes:
+  - ANDN is VEX.LZ (128) only (W0 for 32, W1 for 64)
+
+  - BEXTR is same as ANDN
+  - VBLEND[V]Px is VEX only
+  - 0F-38-F3 is same as ANDN
+  - BZHI is same as ANDN
+
+  - VCMPxD is W1 in EVEX
+  - VCMPxS is W0 in EVEX
+  - VCOMISS is (E)VEX.LIG and W0 in EVEX
+  - VCOMISD is (E)VEX.LIG and W1 in EVEX
+  - VCVTDQ2Px is W0 in EVEX
+  - VCVTPD2xx is W1 in EVEX
+  - VCVTPS2xx is W0 in EVEX
+  - VCVTSD2SI is (E)VEX.LIG only (W0 for 32, W1 for 64)
+  - VCVTSD2SS is (E)VEX.LIG only (W1 for EVEX)
+  - VCVTSI2SD is (E)VEX.LIG only (W0 for 32, W1 for 64)
+  - VCVTSS2SD is (E)VEX.LIG only (W0 for EVEX)
+  - VCVTSS2SI is (E)VEX.LIG only (W0 for 32, W1 for 64)
+  - VCVTTPD2DQ is W1 in EVEX
+  - VCVTTPS2DQ is W0 in EVEX
+  - VCVTTSx2SI is (E)VEX.LIG only (W0 for 32, W1 for 64)
+
+  - VDIVxD is W1 in EVEX
+  - VDIVxS is W0 in EVEX
+  - VDPPD is VEX.128 only
+  - VDPPS is VEX only
+
+  - EXTRACTPS is (E)VEX.128 only
+
+  - VGF2P8AFFINE[INV]QB is W1 in VEX and EVEX
+  - VGF2P8MULB is W0 in VEX and EVEX
+
+  - VHADDPx is VEX only
+  - VHSUBPx is VEX only
+
+  - VINSERTPS is VEX only
+
+  - KMOVx/KNOTx/KORTESTx/KSHIFTxx/KTESTx are all VEX.L0 (128 bit) only
+  - KADDx/KAND[N]x/KORx/KUNPCKx/KX[N]ORx are all VEX.L1 (256 bit) only
+
+  - VLDDQU is VEX only
+  - VLDMXCSR is VEX.LZ only
+
+  - VMASKMOVDQU is VEX.128 only
+  - VMAXxD is W1 in EVEX
+  - VMAXxS is W0 in EVEX
+  - VMINxD is W1 in EVEX
+  - VMINxS is W0 in EVEX
+  - VMOVAPD is W1 in EVEX
+  - VMOVAPS is W0 in EVEX
+  - VMOVD/Q is (E)VEX.128 only (W0 for 32, W1 for 64)
+  - VMOVDDUP is W1 in EVEX
+  - VMOVHLPS is VEX only
+  - VMOVHPD is (E)VEX.128 only (W1 in EVEX)
+  - VMOVHPS is (E)VEX.128 only (W0 in EVEX)
+  - VMOVLHPS is (E)VEX.128 only (W0 in EVEX)
+  - VMOVLPD is (E)VEX.128 only (W1 in EVEX)
+  - VMOVLPS is (E)VEX.128 only (W0 in EVEX)
+  - VMOVMSKPx is VEX only
