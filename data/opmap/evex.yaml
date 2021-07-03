@@ -143,6 +143,8 @@ map0F:
       NP: [VCVTDQ2PS, Vpv, Wpv]
       66: [VCVTPS2DQ, Vpv, Wpv]
       F3: [VCVTTPS2DQ, Vpv, Wpv]
+    W1:
+      NP: [VCVTQQ2PS, Vpv, Wpv]
   5C:
     W0:
       NP: [VSUBPS, Vpv, Hpv, Wpv]
@@ -243,6 +245,46 @@ map0F:
   76:
     W0:
       66: [VPCMPEQD, KGq, Hpv, Wpv]
+  78:
+    W0:
+      NP: [VCVTTPS2UDQ, Vpv, Wpv]
+      66: [VCVTTPS2UQQ, Vpv, Wpv]
+      F3: [VCVTTSS2USI, Gd, Wsv]
+      F2: [VCVTTSD2USI, Gd, Wsv]
+    W1:
+      NP: [VCVTTPD2UDQ, Vpv, Wpv]
+      66: [VCVTTPD2UQQ, Vpv, Wpv]
+      F3: [VCVTTSS2USI, Gq, Wsv]
+      F2: [VCVTTSD2USI, Gq, Wsv]
+  79:
+    W0:
+      NP: [VCVTPS2UDQ, Vpv, Wpv]
+      66: [VCVTPS2UQQ, Vpv, Wpv]
+      F3: [VCVTSS2USI, Gd, Wsv]
+      F2: [VCVTSD2USI, Gd, Wsv]
+    W1:
+      NP: [VCVTPD2UDQ, Vpv, Wpv]
+      66: [VCVTPD2UQQ, Vpv, Wpv]
+      F3: [VCVTSS2USI, Gq, Wsv]
+      F2: [VCVTSD2USI, Gq, Wsv]
+  7A:
+    W0:
+      66: [VCVTTPS2QQ, Vpv, Wpv]
+      F3: [VCVTUDQ2PD, Vpv, Wpv]
+      F2: [VCVTUDQ2PS, Vpv, Wpv]
+    W1:
+      66: [VCVTTPD2QQ, Vpv, Wpv]
+      F3: [VCVTUQQ2PD, Vpv, Wpv]
+      F2: [VCVTUQQ2PS, Vpv, Wpv]
+  7B:
+    W0:
+      66: [VCVTPS2QQ, Vpv, Wpv]
+      F3: [VCVTUSI2SS, Vsv, Hsv, Ed]
+      F2: [VCVTUSI2SD, Vsv, Hsv, Ed]
+    W1:
+      66: [VCVTPD2QQ, Vpv, Wpv]
+      F3: [VCVTUSI2SS, Vsv, Hsv, Eq]
+      F2: [VCVTUSI2SD, Vsv, Hsv, Eq]
   7E:
     W0:
       66: [VMOVD, Ed, Vpv]
@@ -347,6 +389,7 @@ map0F:
       F3: [VCVTDQ2PD, Vpv, Wpv]
     W1:
       66: [VCVTTPD2DQ, Vpv, Wpv]
+      F3: [VCVTQQ2PD, Vpv, Wpv]
       F2: [VCVTPD2DQ, Vpv, Wpv]
   E7:
     W0:
@@ -428,6 +471,27 @@ map0F38:
   0B:
     WIG:
       66: [VPMULHRSW, Vpv, Hpv, Wpv]
+  13:
+    W0:
+      66: [VCVTPH2PS, Vpv, Wpv]
+  18:
+    W0:
+      66: [VBROADCASTSS, Vpv, Wpv]
+  19:
+    W0:
+      66: [VBROADCASTF32X2, Vpv, Wpv]
+    W1:
+      66: [VBROADCASTSD, Vpv, Wpv]
+  1A:
+    W0:
+      66: [VBROADCASTF32X4, Vpv, Wpv]
+    W1:
+      66: [VBROADCASTF64X2, Vpv, Wpv] # TODO: VBROADCASTF64X2 in EVEX.512
+  1B:
+    W0:
+      66: [VBROADCASTF32X8, Vpv, Mpv]
+    W1:
+      66: [VBROADCASTF64X4, Vpv, Mpv]
   1C:
     WIG:
       66: [VPABSB, Vpv, Wpv]
@@ -528,6 +592,28 @@ map0F38:
       66: [VPMULLD, Vpv, Hpv, Wpv]
     W1:
       66: [VPMULLQ, Vpv, Hpv, Wpv]
+  52:
+    W0:
+      F3: [VDPBF16PS, Vpv, Hpv, Wpv]
+  65:
+    W0:
+      66: [VBLENDMPS, Vpv, Hpv, Wpv]
+    W1:
+      66: [VBLENDMPD, Vpv, Hpv, Wpv]
+  72:
+    W0:
+      F3: [VCVTNEPS2BF16, Vpv, Wpv]
+      F2: [VCVTNE2PS2BF16, Vpv, Hpv, Wpv]
+  88:
+    W0:
+      66: [VEXPANDPS, Vpv, Wpv]
+    W1:
+      66: [VEXPANDPD, Vpv, Wpv]
+  8A:
+    W0:
+      66: [VCOMPRESSPS, Wpv, Vpv]
+    W1:
+      66: [VCOMPRESSPD, Wpv, Vpv]
   CF:
     W0:
       66: [VGF2P8MULB, Vpv, Hpw, Wpv]
@@ -549,6 +635,11 @@ map0F38:
     W1:
       NP: [ANDN, Gq, Bq, Eq]
 map0F3A:
+  03:
+    W0:
+      66: [VALIGND, Vpv, Hpv, Wpv, Ib]
+    W1:
+      66: [VALIGNQ, Vpv, Hpv, Wpv, Ib]
   0F:
     WIG:
       66: [VPALIGNR, Vpv, Hpv, Wpv, Ib]
@@ -566,6 +657,19 @@ map0F3A:
   17:
     WIG:
       66: [VEXTRACTPS, Ed, Vpv, Ib]
+  19:
+    W0:
+      66: [VEXTRACTF32X4, Wpv, Vpv, Ib]
+    W1:
+      66: [VEXTRACTF64X2, Wpv, Vpv, Ib]
+  1B:
+    W0:
+      66: [VEXTRACTF32X8, Wpv, Vpv, Ib]
+    W1:
+      66: [VEXTRACTF64X4, Wpv, Vpv, Ib]
+  1D:
+    W0:
+      66: [VCVTPS2PH, Wpv, Vpv, Ib]
   20:
     WIG:
       66: [VPINSRB, Vpv, Hpv, Eb, Ib] # TODO :VEX is W0. Which is correct?
@@ -577,9 +681,32 @@ map0F3A:
       66: [VPINSRD, Vpv, Hpv, Ed, Ib]
     W1:
       66: [VPINSRQ, Vpv, Hpv, Eq, Ib]
+  39:
+    W0:
+      66: [VEXTRACTI32X4, Wpv, Vpv, Ib]
+    W1:
+      66: [VEXTRACTI64X2, Wpv, Vpv, Ib]
+  3B:
+    W0:
+      66: [VEXTRACTI32X8, Wpv, Vpv, Ib]
+    W1:
+      66: [VEXTRACTI64X4, Wpv, Vpv, Ib]
+  42:
+    W0:
+      66: [VDBPSADBW, Vpv, Hpv, Wpv, Ib]
   44:
     WIG:
       66: [VPCLMULQDQ, Vpv, Hpv, Wpv, Ib]
+  54:
+    W0:
+      66: [VFIXUPIMMPS, Vpv, Hpv, Wpv, Ib]
+    W1:
+      66: [VFIXUPIMMPD, Vpv, Hpv, Wpv, Ib]
+  55:
+    W0:
+      66: [VFIXUPIMMSS, Vpv, Hpv, Wpv, Ib]
+    W1:
+      66: [VFIXUPIMMSD, Vpv, Hpv, Wpv, Ib]
   CE:
     W1:
       66: [VGF2P8AFFINEQB, Vpv, Hpv, Wpv, Ib]

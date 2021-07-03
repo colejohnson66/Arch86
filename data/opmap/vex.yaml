@@ -562,9 +562,21 @@ map0F38:
   0B:
     WIG:
       66: [VPMULHRSW, Vpv, Hpv, Wpv]
+  13:
+    W0:
+      66: [VCVTPH2PS, Vpv, Wpv]
   17:
     WIG:
       66: [VPTEST, Vpv, Wpv]
+  18:
+    W0:
+      66: [VBROADCASTSS, Vpv, Wpv]
+  19:
+    W0:
+      66: [VBROADCASTSD, Vpv, Wpv]
+  1A:
+    W0:
+      66: [VBROADCASTF128, Vpv, Wpv]
   1C:
     WIG:
       66: [VPABSB, Vpv, Wpv]
@@ -743,6 +755,12 @@ map0F3A:
   17:
     WIG:
       66: [VEXTRACTPS, Ed, Vpv, Ib]
+  19:
+    W0:
+      66: [VEXTRACTF128, Wpv, Vpv, Ib]
+  1D:
+    W0:
+      66: [VCVTPS2PH, Wpv, Vpv, Ib]
   20:
     W0:
       66: [VPINSRB, Vpv, Hpv, Eb, Ib] # TODO: EVEX is WIG. Which is correct?
@@ -754,6 +772,9 @@ map0F3A:
       66: [VPINSRD, Vpv, Hpv, Ed, Ib]
     W1:
       66: [VPINSRQ, Vpv, Hpv, Eq, Ib]
+  39:
+    W0:
+      66: [VEXTRACTI128, Wpv, Vpv, Ib]
   40:
     WIG:
       66: [VDDPS, Vpv, Hpv, Wpv, Ib]

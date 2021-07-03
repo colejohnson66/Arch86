@@ -456,6 +456,8 @@ extensions:
     /1: [STR, Ew]
     /2: [LLDT, Ew]
     /3: [LTR, Ew]
+    /4: [VERR, Ew]
+    /5: [VERW, Ew]
   01:
     form: m/r/b
     M/0/b: [SGDT, Ms]
