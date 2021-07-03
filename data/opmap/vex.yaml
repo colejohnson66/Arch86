@@ -21,8 +21,8 @@ map0F:
       F2: [VMOVDDUP, Vpv, Wpv]
       F3: [VMOVSLDUP, Vpv, Wpv]
   13:
-    NP: [VMOVLPS, Mq, Vpv]
     WIG:
+      NP: [VMOVLPS, Mq, Vpv]
       66: [VMOVLPD, Mq, Vpv]
   16:
     WIG:
@@ -346,8 +346,9 @@ map0F:
     W0:
       66: [VPEXTRW, Gv, Upv, Ib]
   D0:
-    66: [VADDSUBPD, Vpv, Hpv, Wpv]
-    F2: [VADDSUBPS, Vpv, Hpv, Wpv]
+    WIG:
+      66: [VADDSUBPD, Vpv, Hpv, Wpv]
+      F2: [VADDSUBPS, Vpv, Hpv, Wpv]
   D1:
     WIG:
       66: [VPSRLW, Vpv, Hpv, Wpv]
