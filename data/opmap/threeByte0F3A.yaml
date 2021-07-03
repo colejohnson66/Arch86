@@ -5,8 +5,23 @@ map:
     66: [BLENDPS, Vpv, Wpv, Ib]
   0D:
     66: [BLENDPD, Vpv, Wpv, Ib]
+  0E:
+    66: [PBLENDW, Vpv, Wpv, Ib]
+  0F:
+    NP: [PALIGNR, Ppi, Qpi, Ib]
+    66: [PALIGNR, Vpv, Wpv, Ib]
+  14:
+    66: [PEXTRB, Eb, Vpv, Ib]
+  15:
+    66: [PEXTRW, Ev, Vpv, Ib]
+  16:
+    66: [PEXTRD, Ed, Vpv, Ib] # TODO: REX.W is PEXTRQ
   17:
     66: [EXTRACTPS, Ed, Vpv, Ib]
+  20:
+    66: [PINSRB, Vpv, Eb, Ib]
+  22:
+    66: [PINSRD, Vpv, Ed, Ib] # TODO: REX.W is PINSRQ
   21:
     66: [INSERTPS, Vpv, Wpv, Ib]
   40:
@@ -15,6 +30,16 @@ map:
     66: [DPPD, Vpv, Wpv, Ib]
   42:
     66: [MPSADBW, Vpv, Wpv, Ib]
+  44:
+    66: [PCLMULQDQ, Vpv, Wpv, Ib]
+  60:
+    66: [PCMPESTRM, Vpv, Wpv, Ib]
+  61:
+    66: [PCMPESTRI, Vpv, Wpv, Ib]
+  62:
+    66: [PCMPISTRM, Vpv, Wpv, Ib]
+  63:
+    66: [PCMPISTRI, Vpv, Wpv, Ib]
   CE:
     66: [GF2P8AFFINEQB, Vpv, Wpv, Ib]
   CF:

@@ -7,6 +7,7 @@ map:
   03: [LSL, Gw, Ew]
   06: [CLTS]
   08: [INVD]
+  # [0D] is in extensions
   10:
     NP: [MOVUPS, Vpv, Wpv]
     66: [MOVUPD, Vpv, Wpv]
@@ -31,6 +32,7 @@ map:
   17:
     NP: [MOVHPS, Mq, Vpv]
     66: [MOVHPD, Mq, Vpv]
+  # [18] is in extensions
   1A:
     NP: [BNDLDX, BGdq, M]
     66: [BNDMOV, BGdq, BEy]
@@ -124,6 +126,46 @@ map:
     66: [MAXPD, Vpv, Wpv]
     F3: [MAXSS, Vsv, Wsv]
     F2: [MAXSD, Vsv, Wsv]
+  60:
+    NP: [PUNPCKLBW, Ppi, Qpi]
+    66: [PUNPCKLBW, Vpv, Wpv]
+  61:
+    NP: [PUNPCKLWD, Ppi, Qpi]
+    66: [PUNPCKLWD, Vpv, Wpv]
+  62:
+    NP: [PUNPCKLDQ, Ppi, Qpi]
+    66: [PUNPCKLDQ, Vpv, Wpv]
+  63:
+    NP: [PACKSSWB, Ppi, Qpi]
+    66: [PACKSSWB, Vpv, Wpv]
+  64:
+    NP: [PCMPGTB, Ppi, Qpi]
+    66: [PCMPGTB, Vpv, Wpv]
+  65:
+    NP: [PCMPGTW, Ppi, Qpi]
+    66: [PCMPGTW, Vpv, Wpv]
+  66:
+    NP: [PCMPGTD, Ppi, Qpi]
+    66: [PCMPGTD, Vpv, Wpv]
+  67:
+    NP: [PACKUSWB, Ppi, Qpi]
+    66: [PACKUSWB, Vpv, Wpv]
+  68:
+    NP: [PUNPCKHBW, Ppi, Qpi]
+    66: [PUNPCKHBW, Vpv, Wpv]
+  69:
+    NP: [PUNPCKHWD, Ppi, Qpi]
+    66: [PUNPCKHWD, Vpv, Wpv]
+  6A:
+    NP: [PUNPCKHDQ, Ppi, Qpi]
+    66: [PUNPCKHDQ, Vpv, Wpv]
+  6B:
+    NP: [PACKSSDW, Ppi, Qpi]
+    66: [PACKSSDW, Vpv, Wpv]
+  6C:
+    66: [PUNPCKLQDQ, Vpv, Wpv]
+  6D:
+    66: [PUNPCKHQDQ, Vpv, Wpv]
   6E:
     NP: [MOVD, Ppi, Ey] # TODO: MOVQ for 64 bit opsize
     66: [MOVD, Vpv, Ey]
@@ -131,6 +173,23 @@ map:
     NP: [MOVQ, Ppi, Qpi]
     66: [MOVDQA, Vpv, Wpv]
     F3: [MOVDQU, Vpv, Wpv]
+  70:
+    NP: [PSHUFW, Ppi, Qpi, Ib]
+    66: [PSHUFD, Vpv, Wpv, Ib]
+    F3: [PSHUFHW, Vpv, Wpv, Ib]
+    F2: [PSHUFLW, Vpv, Wpv, Ib]
+  # [71] is in extensions
+  # [72] is in extensions
+  # [73] is in extensions
+  74:
+    NP: [PCMPEQB, Ppi, Qpi]
+    66: [PCMPEQB, Vpv, Wpv]
+  75:
+    NP: [PCMPEQW, Ppi, Qpi]
+    66: [PCMPEQW, Vpv, Wpv]
+  76:
+    NP: [PCMPEQD, Ppi, Qpi]
+    66: [PCMPEQD, Vpv, Wpv]
   77:
     NP: [EMMS]
   7C:
@@ -148,8 +207,12 @@ map:
     66: [MOVDQA, Wpv, Vpv]
     F3: [MOVDQU, Wpv, Vpv]
   # [80-8F] are in spans
+  A0: [PUSH, FS]
+  A1: [POP, FS]
   A2: [CPUID]
   A3: [BT, Ev, Gv]
+  A8: [POP, GS]
+  A9: [POP, GS]
   AB: [BTS, Ev, Gv]
   # [AE] is in extensions
   AF: [IMUL, Gv, Ev]
@@ -161,6 +224,8 @@ map:
   B5: [LGS, Sv, Mp]
   B6: [MOVZX, Gv, Eb]
   B7: [MOVZX, Gy, Ew]
+  B8:
+    F3: [POPCNT, Gv, Ev]
   # [BA] is in extensions
   BB: [BTC, Ev, Gv]
   BC: [BSF, Gv, Ev]
@@ -176,14 +241,80 @@ map:
     F2: [CMPSD, Vsv, Wsv, Ib]
   C3:
     NP: [MOVNTI, My, Gy]
+  C4:
+    NP: [PINSRW, Ppi, Ew, Ib]
+    66: [PINSRW, Vpv, Ew, Ib]
+  C5:
+    NP: [PEXTRW, Gv, Npi, Ib]
+    66: [PEXTRW, Gv, Upv, Ib]
   # [C7] is in extensions
   # [C8-CF] are in spans
   D0:
     66: [ADDSUBPD, Vpv, Wpv]
     F2: [ADDSUBPS, Vpv, Wpv]
+  D1:
+    NP: [PSRLW, Ppi, Qpi]
+    66: [PSRLW, Vpv, Wpv]
+  D2:
+    NP: [PSRLD, Ppi, Qpi]
+    66: [PSRLD, Vpv, Wpv]
+  D3:
+    NP: [PSRLQ, Ppi, Qpi]
+    66: [PSRLQ, Vpv, Wpv]
+  D4:
+    NP: [PADDQ, Ppi, Qpi]
+    66: [PADDQ, Vpv, Wpv]
+  D5:
+    NP: [PMULLW, Ppi, Qpi]
+    66: [PMULLW, Vpv, Wpv]
   D6:
     F3: [MOVQ2DQ, Vpv, Npi]
     F2: [MOVDQ2Q, Ppi, Upv]
+  D7:
+    NP: [MOVMSKB, Gy, Npi]
+    66: [MOVMSKB, Gy, Upv]
+  D8:
+    NP: [PSUBUSB, Ppi, Qpi]
+    66: [PSUBUSB, Vpv, Wpv]
+  D9:
+    NP: [PSUBUSW, Ppi, Qpi]
+    66: [PSUBUSW, Vpv, Wpv]
+  DA:
+    NP: [PMINUB, Ppi, Qpi]
+    66: [PMINUB, Vpv, Wpv]
+  DB:
+    NP: [PAND, Ppi, Qpi]
+    66: [PAND, Vpv, Wpv]
+  DC:
+    NP: [PADDUSB, Ppi, Qpi]
+    66: [PADDUSB, Vpv, Wpv]
+  DD:
+    NP: [PADDUSW, Ppi, Qpi]
+    66: [PADDUSW, Vpv, Wpv]
+  DE:
+    NP: [PMAXUB, Ppi, Qpi]
+    66: [PMAXUB, Vpv, Wpv]
+  DF:
+    NP: [PANDN, Ppi, Qpi]
+    66: [PANDN, Vpv, Wpv]
+  E0:
+    NP: [PAVGB, Ppi, Qpi]
+    66: [PAVGB, Vpv, Wpv]
+  E1:
+    NP: [PSRAW, Ppi, Qpi]
+    66: [PSRAW, Vpv, Wpv]
+  E2:
+    NP: [PSRAD, Ppi, Qpi]
+    66: [PSRAD, Vpv, Wpv]
+  E3:
+    NP: [PAVGW, Ppi, Qpi]
+    66: [PAVGW, Vpv, Wpv]
+  E4:
+    NP: [PMULHUW, Ppi, Qpi]
+    66: [PMULHUW, Vpv, Wpv]
+  E5:
+    NP: [PMULHW, Ppi, Qpi]
+    66: [PMULHW, Vpv, Wpv]
   E6:
     66: [CVTTPD2DQ, Vpv, Wpv]
     F3: [CVTDQ2PD, Vpv, Wpv]
@@ -191,11 +322,74 @@ map:
   E7:
     NP: [MOVNTQ, Mq, Ppi]
     66: [MOVNTDQ, Mdqq, Vpv]
+  E8:
+    NP: [PSUBSB, Ppi, Qpi]
+    66: [PSUBSB, Vpv, Wpv]
+  E9:
+    NP: [PSUBSW, Ppi, Qpi]
+    66: [PSUBSW, Vpv, Wpv]
+  EA:
+    NP: [PMINSW, Ppi, Qpi]
+    66: [PMINSW, Vpv, Wpv]
+  EB:
+    NP: [POR, Ppi, Qpi]
+    66: [POR, Vpv, Wpv]
+  EC:
+    NP: [PADDSB, Ppi, Qpi]
+    66: [PADDSB, Vpv, Wpv]
+  ED:
+    NP: [PADDSW, Ppi, Qpi]
+    66: [PADDSW, Vpv, Wpv]
+  EE:
+    NP: [PMAXSW, Ppi, Qpi]
+    66: [PMAXSW, Vpv, Wpv]
+  EF:
+    NP: [PXOR, Ppi, Qpi]
+    66: [PXOR, Vpv, Wpv]
   F0:
     F2: [LDDQU, Vpv, M]
+  F1:
+    NP: [PSLLW, Ppi, Qpi]
+    66: [PSLLW, Vpv, Wpv]
+  F2:
+    NP: [PSLLD, Ppi, Qpi]
+    66: [PSLLD, Vpv, Wpv]
+  F3:
+    NP: [PSLLQ, Ppi, Qpi]
+    66: [PSLLQ, Vpv, Wpv]
+  F4:
+    NP: [PMULUDQ, Ppi, Qpi]
+    66: [PMULUDQ, Vpv, Wpv]
+  F5:
+    NP: [PMADDWD, Ppi, Qpi]
+    66: [PMADDWD, Vpv, Wpv]
+  F6:
+    NP: [PSADBW, Ppi, Qpi]
+    66: [PSADBW, Vpv, Wpv]
   F7:
     NP: [MASKMOVQ, Ppi, Qpi]
     66: [MASKMOVDQU, Vpv, Upv]
+  F8:
+    NP: [PSUBB, Ppi, Qpi]
+    66: [PSUBB, Vpv, Wpv]
+  F9:
+    NP: [PSUBW, Ppi, Qpi]
+    66: [PSUBW, Vpv, Wpv]
+  FA:
+    NP: [PSUBD, Ppi, Qpi]
+    66: [PSUBD, Vpv, Wpv]
+  FB:
+    NP: [PSUBQ, Ppi, Qpi]
+    66: [PSUBQ, Vpv, Wpv]
+  FC:
+    NP: [PADDB, Ppi, Qpi]
+    66: [PADDB, Vpv, Wpv]
+  FD:
+    NP: [PADDW, Ppi, Qpi]
+    66: [PADDW, Vpv, Wpv]
+  FE:
+    NP: [PADDD, Ppi, Qpi]
+    66: [PADDD, Vpv, Wpv]
 spans:
   40:
     length: 16
@@ -217,20 +411,54 @@ extensions:
     M/3/b: [LIDT, Ms]
     M/6/b: [LMSW, Ew] # See also `R/6/b`
     M/7/b: [INVLPG, M]
+    R/0/5: [PCONFIG]
     R/1/0: [MONITOR]
     R/1/1: [MWAIT]
     R/1/2: [CLAC]
     R/6/b: [LMSW, Ew] # See also `M/6/b`
+  0D:
+    form: m/r
+    M/1: [PREFETCHW, Mb]
+  18:
+    form: m/r
+    M/0: [PREFETCHNTA, Mb]
+    M/1: [PREFETCH0, Mb]
+    M/2: [PREFETCH1, Mb]
+    M/3: [PREFETCH2, Mb]
   1C:
     form: pfx-m/r
     NP-M/0: [CLDEMOTE, Mb]
   1E:
     form: pfx-m/r/b
-    F3-r/7/2: [ENDBR64]
-    F3-r/7/3: [ENDBR32]
+    F3-R/7/2: [ENDBR64]
+    F3-R/7/3: [ENDBR32]
   1F:
     form: pfx-/r
     NP-/0: [NOP, Ez]
+  71:
+    form: pfx-m/r
+    NP-R/2: [PSRLW, Npi, Ib]
+    NP-R/4: [PSRAW, Npi, Ib]
+    NP-R/6: [PSLLW, Npi, Ib]
+    66-R/2: [PSRLW, Upv, Ib]
+    66-R/4: [PSRAW, Upv, Ib]
+    66-R/6: [PSLLW, Upv, Ib]
+  72:
+    form: pfx-m/r
+    NP-R/2: [PSRLD, Npi, Ib]
+    NP-R/4: [PSRAD, Npi, Ib]
+    NP-R/6: [PSLLD, Npi, Ib]
+    66-R/2: [PSRLD, Upv, Ib]
+    66-R/4: [PSRAD, Upv, Ib]
+    66-R/6: [PSLLD, Upv, Ib]
+  73:
+    form: pfx-m/r
+    NP-R/2: [PSRLD, Npi, Ib]
+    NP-R/6: [PSLLQ, Npi, Ib]
+    66-R/2: [PSRLD, Upv, Ib]
+    66-R/3: [PSRLDQ, Upv, Ib]
+    66-R/6: [PSLLQ, Upv, Ib]
+    66-R/7: [PSLLDQ, Upv, Ib]
   AE:
     form: pfx-m/r/b
     NP-M/0/b: [FXSAVE, Mdqq]
@@ -241,7 +469,9 @@ extensions:
     NP-R/6/0: [MFENCE]
     66-M/6/b: [CLWB, Mb]
     66-M/7/b: [CLFLUSHOPT, Mb] # TODO: Prefix is listed as [NFx 66 ...]
+    F3-M/4/b: [PTWRITE, Ey] # See also `F3-R/4/b`
     F3-M/6/b: [CLRSSBSY, Mq]
+    F3-R/4/b: [PTWRITE, Ey] # See also `F3-M/4/b`
     F3-R/5/b: [INCSSPD, Ry] # TODO: INCSSPQ for 64 bit operands
   BA:
     form: /r

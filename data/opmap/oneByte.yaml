@@ -7,31 +7,32 @@ map:
   03: [ADD, Gv, Ev]
   04: [ADD, AL, Ib]
   05: [ADD, rAX, Iz]
-  06:
-  07:
+  06: [PUSH, ES]
+  07: [POP, ES]
   08: [OR, Eb, Gb]
   09: [OR, Ev, Gv]
   0A: [OR, Gb, Eb]
   0B: [OR, Gv, Ev]
   0C: [OR, AL, Ib]
   0D: [OR, rAX, Iz]
-  0E:
-  # [0F] is two byte escape
+  0E: [PUSH, CS]
+  # [0F] is two byte escape, but on 80[1]86, POP CS
   10: [ADC, Eb, Gb]
   11: [ADC, Ev, Gv]
   12: [ADC, Gb, Eb]
   13: [ADC, Gv, Ev]
   14: [ADC, AL, Ib]
   15: [ADC, rAX, Iz]
-  16:
-  17:
+  16: [PUSH, SS]
+  17: [POP, SS]
   18:
   19:
   1A:
   1B:
   1C:
   1D:
-  1E:
+  1E: [PUSH, DS]
+  1F: [POP, DS]
   20: [AND, Eb, Gb]
   21: [AND, Ev, Gv]
   22: [AND, Gb, Eb]
@@ -66,33 +67,19 @@ map:
   3F: [AAS]
   # [40-47] are in spans
   # [48-4F] are in spans
-  50:
-  51:
-  52:
-  53:
-  54:
-  55:
-  56:
-  57:
-  58:
-  59:
-  5A:
-  5B:
-  5C:
-  5D:
-  5E:
-  5F:
-  60:
-  61:
+  # [50-57] are in spans
+  # [58-5F] are in spans
+  60: [PUSHA] # TODO: PUSHAD
+  61: [POPA] # TODO: POPAD
   62: [BOUND, Gv, Ma]
   63: [ARPL, Ew, Gw] # TODO: MOVSXD_GvEv somehow goes here also???
   64:
   65:
   66:
   67:
-  68:
+  68: [PUSH, Iz]
   69: [IMUL, Gv, Ev, Iv]
-  6A:
+  6A: [PUSH, Ib]
   6B: [IMUL, Gv, Ev, Ib]
   6C: [INS, Yb, DX] # Aliased as INSB
   6D: [INS, Yz, DX] # Aliased as INSW/D
@@ -110,8 +97,8 @@ map:
   8C: [MOV, Ev, Sw]
   8D: [LEA, Gv, M]
   8E: [MOV, Sw, Ev]
-  8F:
-  90: [NOP]
+  # [8F] is in extensions
+  90: [NOP] # TODO: [F3 90] is PAUSE
   91:
   92:
   93:
@@ -123,8 +110,8 @@ map:
   # TODO: [99] is CWD/CDQ/CQO
   9A: [CALLF, Ap]
   9B:
-  9C:
-  9D:
+  9C: [PUSHF] # TODO: PUSHFD/Q
+  9D: [POPF] # TODO: POPFD/Q
   9E:
   9F: [LAHF]
   A0: [MOV, AL, Ob]
@@ -209,6 +196,12 @@ spans:
   48:
     length: 8
     instr: [DEC, Zz]
+  50:
+    length: 8
+    instr: [PUSH, Gv]
+  58:
+    length: 8
+    instr: [POP, Gv]
   70:
     length: 16
     instr: [Jcc, Jb]
@@ -247,6 +240,9 @@ extensions:
     /2: [ADC, Ev, Ib]
     /4: [AND, Ev, Ib]
     /7: [CMP, Ev, Ib]
+  8F:
+    form: /r
+    /0: [POP, Ev]
   C6:
     form: /r
     /0: [MOV, Eb, Ib]
@@ -281,3 +277,4 @@ extensions:
     /3: [CALLF, Mp]
     /4: [JMP, Ev]
     /5: [JMPF, Ap]
+    /6: [PUSH, Ev]

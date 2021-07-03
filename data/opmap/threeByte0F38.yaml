@@ -1,11 +1,112 @@
 %YAML 1.2
 ---
 map:
+  00:
+    NP: [PSHUFB, Ppi, Qpi]
+    66: [PSHUFB, Vpv, Wpv]
+  01:
+    NP: [PHADDW, Ppi, Qpi]
+    66: [PHADDW, Vpv, Wpv]
+  02:
+    NP: [PHADDD, Ppi, Qpi]
+    66: [PHADDD, Vpv, Wpv]
+  03:
+    NP: [PHADDSW, Ppi, Qpi]
+    66: [PHADDSW, Vpv, Wpv]
+  04:
+    NP: [PMADDUBSW, Ppi, Qpi]
+    66: [PMADDUBSW, Vpv, Wpv]
+  05:
+    NP: [PHSUBW, Ppi, Qpi]
+    66: [PHSUBW, Vpv, Wpv]
+  06:
+    NP: [PHSUBD, Ppi, Qpi]
+    66: [PHSUBD, Vpv, Wpv]
+  07:
+    NP: [PHSUBSW, Ppi, Qpi]
+    66: [PHSUBSW, Vpv, Wpv]
+  08:
+    NP: [PSIGNB, Ppi, Qpi]
+    66: [PSIGNB, Vpv, Wpv]
+  09:
+    NP: [PSIGNW, Ppi, Qpi]
+    66: [PSIGNW, Vpv, Wpv]
+  0A:
+    NP: [PSIGND, Ppi, Qpi]
+    66: [PSIGND, Vpv, Wpv]
+  0B:
+    NP: [PMULHRSW, Ppi, Qpi]
+    66: [PMULHRSW, Vpv, Wpv]
+  10:
+    66: [PBLENDVB, Vpv, Wpv]
   14:
     66: [BLENDVPS, Vpv, Wpv]
   15:
     66: [BLENDVPD, Vpv, Wpv]
+  17:
+    66: [PTEST, Vpv, Wpv]
+  1C:
+    NP: [PABSB, Ppi, Qpi]
+    66: [PABSB, Vpv, Wpv]
+  1D:
+    NP: [PABSW, Ppi, Qpi]
+    66: [PABSW, Vpv, Wpv]
+  1E:
+    NP: [PABSD, Ppi, Qpi]
+    66: [PABSD, Vpv, Wpv]
+  20:
+    66: [PMOVSXBW, Vpv, Wpv]
+  21:
+    66: [PMOVSXBD, Vpv, Wpv]
+  22:
+    66: [PMOVSXBQ, Vpv, Wpv]
+  23:
+    66: [PMOVSXWD, Vpv, Wpv]
+  24:
+    66: [PMOVSXWQ, Vpv, Wpv]
+  25:
+    66: [PMOVSXDQ, Vpv, Wpv]
+  28:
+    66: [PMULDQ, Vpv, Wpv]
+  29:
+    66: [PCMPEQQ, Vpv, Wpv]
   2A: [MOVNTDQA, Vpv, Mdqq]
+  2B:
+    66: [PACKUSDW, Vpv, Wpv]
+  30:
+    66: [PMOVZXBW, Vpv, Wpv]
+  31:
+    66: [PMOVZXBD, Vpv, Wpv]
+  32:
+    66: [PMOVZXBQ, Vpv, Wpv]
+  33:
+    66: [PMOVZXWD, Vpv, Wpv]
+  34:
+    66: [PMOVZXWQ, Vpv, Wpv]
+  35:
+    66: [PMOVZXDQ, Vpv, Wpv]
+  37:
+    66: [PCMPGTQ, Vpv, Wpv]
+  38:
+    66: [PMINSB, Vpv, Wpv]
+  39:
+    66: [PMINSD, Vpv, Wpv]
+  3A:
+    66: [PMINUW, Vpv, Wpv]
+  3B:
+    66: [PMINUD, Vpv, Wpv]
+  3C:
+    66: [PMAXSB, Vpv, Wpv]
+  3D:
+    66: [PMAXSD, Vpv, Wpv]
+  3E:
+    66: [PMAXUW, Vpv, Wpv]
+  3F:
+    66: [PMAXUD, Vpv, Wpv]
+  40:
+    66: [PMULLD, Vpv, Wpv]
+  41:
+    66: [PHMINPOSUW, Vpv, Wpv]
   82:
     66: [INVPCID, Gy, Mdqq]
   CF:
