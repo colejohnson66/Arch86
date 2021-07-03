@@ -24,6 +24,14 @@ map0F:
     WIG:
       NP: [VMOVLPS, Mq, Vpv]
       66: [VMOVLPD, Mq, Vpv]
+  14:
+    WIG:
+      NP: [UNPCKLPS, Vpv, Hpv, Wpv]
+      66: [UNPCKLPD, Vpv, Hpv, Wpv]
+  15:
+    WIG:
+      NP: [UNPCKHPS, Vpv, Hpv, Wpv]
+      66: [UNPCKHPD, Vpv, Hpv, Wpv]
   16:
     WIG:
       # NP-M: [VMOVHPS, Vpv, Hpv, Mq]
@@ -67,6 +75,10 @@ map0F:
     W1:
       F2: [VCVTSD2SI, Gq, Wsv]
       F3: [VCVTSS2SI, Gq, Wsv]
+  2E:
+    WIG:
+      NP: [VUCOMISS, Vsv, Wsv]
+      66: [VUCOMISD, Vsv, Wsv]
   2F:
     WIG:
       NP: [COMISS, Vpv, Wpv]
@@ -150,6 +162,20 @@ map0F:
     WIG:
       NP: [VMOVMSKPS, Gy, Vpv]
       66: [VMOVMSKPD, Gy, Vpv]
+  51:
+    WIG:
+      NP: [VSQRTPS, Vpv, Hpv, Wpv]
+      66: [VSQRTPD, Vpv, Hpv, Wpv]
+      F3: [VSQRTSS, Vsv, Hsv, Wsv]
+      F2: [VSQRTSD, Vsv, Hsv, Wsv]
+  52:
+    WIG:
+      NP: [VRSQRTPS, Vpv, Hpv, Wpv] # NOTE: Intel SDM doesn't mention Hpv
+      F3: [VRSQRTSS, Vsv, Hsv, Wsv]
+  53:
+    WIG:
+      NP: [VRCPPS, Vpv, Hpv, Wpv]
+      F3: [VRCPSS, Vsv, Hsv, Wsv]
   54:
     WIG:
       NP: [VANDPS, Vpv, Hpv, Wpv]
@@ -185,6 +211,12 @@ map0F:
       NP: [VCVTDQ2PS, Vpv, Wpv]
       66: [VCVTPS2DQ, Vpv, Wpv]
       F3: [VCVTTPS2DQ, Vpv, Wpv]
+  5C:
+    WIG:
+      NP: [VSUBPS, Vpv, Hpv, Wpv]
+      66: [VSUBPD, Vpv, Hpv, Wpv]
+      F3: [VSUBSS, Vsv, Hsv, Wsv]
+      F2: [VSUBSD, Vsv, Hsv, Wsv]
   5D:
     WIG:
       NP: [VMINPS, Vpv, Hpv, Wpv]
@@ -345,6 +377,10 @@ map0F:
   C5:
     W0:
       66: [VPEXTRW, Gv, Upv, Ib]
+  C6:
+    WIG:
+      NP: [VSHUFPS, Vpv, Hpv, Wpv, Ib]
+      66: [VSHUFPD, Vpv, Hpv, Wpv, Ib]
   D0:
     WIG:
       66: [VADDSUBPD, Vpv, Hpv, Wpv]
@@ -660,9 +696,27 @@ map0F38:
   F7:
     W0:
       NP: [BEXTR, Gd, Bd, Ed]
+      66: [SHLX, Gd, Bd, Ed]
+      F3: [SARX, Gd, Bd, Ed]
+      F2: [SHRX, Gd, Bd, Ed]
     W1:
       NP: [BEXTR, Gq, Bq, Eq]
+      66: [SHLX, Gq, Bq, Eq]
+      F3: [SARX, Gq, Bq, Eq]
+      F2: [SHRX, Gq, Bq, Eq]
 map0F3A:
+  08:
+    WIG:
+      66: [VROUNDPS, Vpv, Wpv, Ib]
+  09:
+    WIG:
+      66: [VROUNDPD, Vpv, Wpv, Ib]
+  0A:
+    WIG:
+      66: [VROUNDSS, Vsv, Wsv, Ib]
+  0B:
+    WIG:
+      66: [VROUNDSD, Vsv, Wsv, Ib]
   0C:
     WIG:
       66: [VBLENDPS, Vpv, Hpv, Wpv, Ib]
@@ -742,6 +796,11 @@ map0F3A:
   DF:
     WIG:
       66: [VAESKEYGENASSIST, Vpv, Wpv, Ib]
+  F0:
+    W0:
+      F2: [RORX, Gd, Ed, Ib]
+    W1:
+      F2: [RORX, Gq, Eq, Ib]
 extensions0F:
   71:
     form: pfx-W-m/r
@@ -762,6 +821,7 @@ extensions0F:
   AE:
     form: pfx-W-m/r
     NP-WIG-M/2: [VLDMXCSR, Md]
+    NP-WIG-M/3: [VSTMXCSR, Md]
 extensions0F38:
   F3:
     form: W-/r

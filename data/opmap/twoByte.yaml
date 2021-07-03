@@ -5,8 +5,11 @@ map:
   # [01] is in extensions
   02: [LAR, Gw, Ew]
   03: [LSL, Gw, Ew]
+  05: [SYSCALL]
   06: [CLTS]
+  07: [SYSRET]
   08: [INVD]
+  0B: [UD2]
   # [0D] is in extensions
   10:
     NP: [MOVUPS, Vpv, Wpv]
@@ -25,6 +28,12 @@ map:
     F2: [MOVDDUP, Vpv, Wpv]
   13:
     66: [MOVLPD, Mq, Vpv]
+  14:
+    NP: [UNPCKLPS, Vpv, Wpv]
+    66: [UNPCKLPD, Vpv, Wpv]
+  15:
+    NP: [UNPCKHPS, Vpv, Wpv]
+    66: [UNPCKHPD, Vpv, Wpv]
   16:
     NP: [MOVHPS, Vpv, Mq] # TODO: When used in reg form, it's MOVLHPS_VpvUpv
     66: [MOVHPD, Vpv, Mq]
@@ -76,12 +85,31 @@ map:
     66: [CVTPD2PI, Ppi, Wpv]
     F3: [CVTSS2SI, Gy, Wsv]
     F2: [CVTSD2SI, Gy, Wsv]
+  2E:
+    NP: [UCOMISS, Vsv, Wsv]
+    66: [UCOMISD, Vsv, Wsv]
   2F:
     NP: [COMISS, Vpv, Wpv]
     66: [COMISD, Vpv, Wpv]
+  31: [RDTSC]
+  32: [RDMSR]
+  33: [RDPMC]
+  34: [SYSENTER]
+  35: [SYSEXIT]
   # [40-4F] are in spans
   50:
     66: [MOVMSKPD, Gy, Vpv]
+  51:
+    NP: [SQRTPS, Vpv, Wpv]
+    66: [SQRTPD, Vpv, Wpv]
+    F3: [SQRTSS, Vsv, Wsv]
+    F2: [SQRTSD, Vsv, Wsv]
+  52:
+    NP: [RSQRTPS, Vpv, Wpv]
+    F3: [RSQRTSS, Vsv, Wsv]
+  53:
+    NP: [RCPPS, Vpv, Wpv]
+    F3: [RCPSS, Vsv, Wsv]
   54:
     NP: [ANDPS, Vpv, Wpv]
     66: [ANDPD, Vpv, Wpv]
@@ -111,6 +139,11 @@ map:
     66: [CVTPS2DQ, Vpv, Wpv]
     F3: [CVTTPS2DQ, Vpv, Wpv]
     F2:
+  5C:
+    NP: [SUBPS, Vpv, Wpv]
+    66: [SUBPD, Vpv, Wpv]
+    F3: [SUBSS, Vsv, Wsv]
+    F2: [SUBSD, Vsv, Wsv]
   5E:
     NP: [DIVPS, Vpv, Wpv]
     66: [DIVPD, Vpv, Wpv]
@@ -207,13 +240,19 @@ map:
     66: [MOVDQA, Wpv, Vpv]
     F3: [MOVDQU, Wpv, Vpv]
   # [80-8F] are in spans
+  # [90-9F] are in spans
   A0: [PUSH, FS]
   A1: [POP, FS]
   A2: [CPUID]
   A3: [BT, Ev, Gv]
+  A4: [SHLD, Ev, Gv, Ib]
+  A5: [SHLD, Ev, Gv, CL]
   A8: [POP, GS]
   A9: [POP, GS]
+  AA: [RSM]
   AB: [BTS, Ev, Gv]
+  AC: [SHRD, Ev, Gv, Ib]
+  AD: [SHRD, Ev, Gv, CL]
   # [AE] is in extensions
   AF: [IMUL, Gv, Ev]
   B0: [CMPXCHG, Eb, Gb]
@@ -226,9 +265,12 @@ map:
   B7: [MOVZX, Gy, Ew]
   B8:
     F3: [POPCNT, Gv, Ev]
+  B9: [UD1, Gd, Ed]
   # [BA] is in extensions
   BB: [BTC, Ev, Gv]
-  BC: [BSF, Gv, Ev]
+  BC:
+    NP: [BSF, Gv, Ev] # TODO: no prefix listed
+    F3: [TZCNT, Gv, Ev]
   BD:
     N/A: [BSR, Gv, Ey] # TODO: BSR is not the same as LZCNT, but LZCNT will execute
     F3: [LZCNT, Gv, Ey] # as BSR if LZCNT isn't supported
@@ -247,6 +289,9 @@ map:
   C5:
     NP: [PEXTRW, Gv, Npi, Ib]
     66: [PEXTRW, Gv, Upv, Ib]
+  C6:
+    NP: [SHUFPS, Vpv, Wpv, Ib]
+    66: [SHUFPD, Vpv, Wpv, Ib]
   # [C7] is in extensions
   # [C8-CF] are in spans
   D0:
@@ -390,6 +435,7 @@ map:
   FE:
     NP: [PADDD, Ppi, Qpi]
     66: [PADDD, Vpv, Wpv]
+  FF: [UD0, Gd, Ed]
 spans:
   40:
     length: 16
@@ -397,25 +443,40 @@ spans:
   80:
     length: 16
     instr: [Jcc, Jv]
+  90:
+    length: 16
+    instr: [SETcc, Eb]
   C8:
     length: 8
     instr: [BSWAP, Zy]
 extensions:
   00:
     form: /r
+    /0: [SLDT, Ew]
+    /1: [STR, Ew]
     /2: [LLDT, Ew]
     /3: [LTR, Ew]
   01:
     form: m/r/b
+    M/0/b: [SGDT, Ms]
+    M/1/b: [SIDT, Ms]
     M/2/b: [LGDT, Ms]
     M/3/b: [LIDT, Ms]
+    M/4/b: [SMSW, Ev]
+    M/5/b: [RSTORSSP, Mq]
     M/6/b: [LMSW, Ew] # See also `R/6/b`
     M/7/b: [INVLPG, M]
     R/0/5: [PCONFIG]
     R/1/0: [MONITOR]
     R/1/1: [MWAIT]
     R/1/2: [CLAC]
+    R/1/3: [STAC] # TODO: NP
+    R/5/0: [SETSSBSY]
+    R/5/2: [SAVEPREVSSP]
+    R/5/6: [RDPKRU] # TODO: NP
     R/6/b: [LMSW, Ew] # See also `M/6/b`
+    R/7/0: [SWAPGS]
+    R/7/1: [RDTSCP]
   0D:
     form: m/r
     M/1: [PREFETCHW, Mb]
@@ -430,6 +491,7 @@ extensions:
     NP-M/0: [CLDEMOTE, Mb]
   1E:
     form: pfx-m/r/b
+    F3-R/1/b: [RDSSPD, Gy] # TODO: RDSSPQ_Gy in 64 bit mode
     F3-R/7/2: [ENDBR64]
     F3-R/7/3: [ENDBR32]
   1F:
@@ -464,15 +526,22 @@ extensions:
     NP-M/0/b: [FXSAVE, Mdqq]
     NP-M/1/b: [FXRSTOR, Mdqq]
     NP-M/2/b: [LDMXCSR, Md]
+    NP-M/3/b: [STMXCSR, Md]
     NP-M/7/b: [CLFLUSH, Mb]
     NP-R/5/0: [LFENCE]
     NP-R/6/0: [MFENCE]
+    NP-R/7/0: [SFENCE]
     66-M/6/b: [CLWB, Mb]
     66-M/7/b: [CLFLUSHOPT, Mb] # TODO: Prefix is listed as [NFx 66 ...]
+    66-R/6/b: [TPAUSE, Rd]
     F3-M/4/b: [PTWRITE, Ey] # See also `F3-R/4/b`
     F3-M/6/b: [CLRSSBSY, Mq]
+    F3-R/0/b: [RDFSBASE, Ry]
+    F3-R/1/b: [RDGSBASE, Ry]
     F3-R/4/b: [PTWRITE, Ey] # See also `F3-M/4/b`
     F3-R/5/b: [INCSSPD, Ry] # TODO: INCSSPQ for 64 bit operands
+    F3-R/6/b: [UMONITOR, Ry]
+    F2-R/6/b: [UMWAIT, Rd]
   BA:
     form: /r
     /4: [BT, Ev, Ib]
@@ -480,11 +549,17 @@ extensions:
     /6: [BTR, Ev, Ib]
     /7: [BTC, Ev, Ib]
   C7:
-    form: m/r
-    M/1: [CMPXCHG8B, Mq] # TODO: CMPXCHG16B_Mdq with REX prefix
+    form: pfx-m/r
+    xx-M/1: [CMPXCHG8B, Mq] # TODO: CMPXCHG16B_Mdq with REX prefix
+    NP-R/6: [RDRAND, Gv]
+    NP-R/7: [RDSEED, Gv]
+    66-R/6: [RDRAND, Gv]
+    66-R/7: [RDSEED, Gv]
+    F3-R/7: [RDPID, Ry]
 
 notes:
   - LAR has a 32 bit form listed, but always operates in 16 bit form
   - >-
     LSL has 32 and 64 bit forms listed, but always operates in 16 bit form
     A REX.W prefix will turn this into "64" bit form, but the only difference will be zeroing the upper 32 bits in the destination
+  - RDRAND/RDSEED have a `NFx` prefix

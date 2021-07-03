@@ -1,6 +1,14 @@
 %YAML 1.2
 ---
 map:
+  08:
+    66: [ROUNDPS, Vpv, Wpv, Ib]
+  09:
+    66: [ROUNDPD, Vpv, Wpv, Ib]
+  0A:
+    66: [ROUNDSS, Vsv, Wsv, Ib]
+  0B:
+    66: [ROUNDSD, Vsv, Wsv, Ib]
   0C:
     66: [BLENDPS, Vpv, Wpv, Ib]
   0D:
@@ -40,6 +48,8 @@ map:
     66: [PCMPISTRM, Vpv, Wpv, Ib]
   63:
     66: [PCMPISTRI, Vpv, Wpv, Ib]
+  CC:
+    NP: [SHA1RNDS4, Vpv, Wpv, Ib]
   CE:
     66: [GF2P8AFFINEQB, Vpv, Wpv, Ib]
   CF:

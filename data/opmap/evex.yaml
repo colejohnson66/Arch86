@@ -28,6 +28,16 @@ map0F:
       NP: [VMOVLPS, Mq, Vpv]
     W1:
       66: [VMOVLPD, Mq, Vpv]
+  14:
+    W0:
+      NP: [UNPCKLPS, Vpv, Hpv, Wpv]
+    W1:
+      66: [UNPCKLPD, Vpv, Hpv, Wpv]
+  15:
+    W0:
+      NP: [UNPCKHPS, Vpv, Hpv, Wpv]
+    W1:
+      66: [UNPCKHPD, Vpv, Hpv, Wpv]
   16:
     W0:
       # NP-M: [VMOVHPS, Vpv, Hpv, Mq]
@@ -75,11 +85,23 @@ map0F:
     W1:
       F2: [VCVTSD2SI, Gq, Wsv]
       F3: [VCVTSS2SI, Gq, Wsv]
+  2E:
+    W0:
+      NP: [VUCOMISS, Vsv, Wsv]
+    W1:
+      66: [VUCOMISD, Vsv, Wsv]
   2F:
     W0:
       NP: [COMISS, Vpv, Wpv]
     W1:
       66: [COMISD, Vpv, Wpv]
+  51:
+    W0:
+      NP: [VSQRTPS, Vpv, Hpv, Wpv]
+      F3: [VSQRTSS, Vsv, Hsv, Wsv]
+    W1:
+      66: [VSQRTPD, Vpv, Hpv, Wpv]
+      F2: [VSQRTSD, Vsv, Hsv, Wsv]
   54:
     W0:
       NP: [VANDPS, Vpv, Hpv, Wpv]
@@ -121,6 +143,13 @@ map0F:
       NP: [VCVTDQ2PS, Vpv, Wpv]
       66: [VCVTPS2DQ, Vpv, Wpv]
       F3: [VCVTTPS2DQ, Vpv, Wpv]
+  5C:
+    W0:
+      NP: [VSUBPS, Vpv, Hpv, Wpv]
+      F3: [VSUBSS, Vsv, Hsv, Wsv]
+    W1:
+      66: [VSUBPD, Vpv, Hpv, Wpv]
+      F2: [VSUBSD, Vsv, Hsv, Wsv]
   5D:
     W0:
       NP: [VMINPS, Vpv, Hpv, Wpv]
@@ -242,6 +271,11 @@ map0F:
   C5:
     WIG:
       66: [VPEXTRW, Gv, Upv, Ib]
+  C6:
+    W0:
+      NP: [VSHUFPS, Vpv, Hpv, Wpv, Ib]
+    W1:
+      66: [VSHUFPD, Vpv, Hpv, Wpv, Ib]
   D1:
     WIG:
       66: [VPSRLW, Vpv, Hpv, Wpv]

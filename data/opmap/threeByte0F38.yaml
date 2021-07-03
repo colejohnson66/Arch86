@@ -109,6 +109,18 @@ map:
     66: [PHMINPOSUW, Vpv, Wpv]
   82:
     66: [INVPCID, Gy, Mdqq]
+  C8:
+    NP: [SHA1NEXTE, Vpv, Wpv]
+  C9:
+    NP: [SHA1MSG1, Vpv, Wpv]
+  CA:
+    NP: [SHA1MSG2, Vpv, Wpv]
+  CB:
+    NP: [SHA256RNDS2, Vpv, Wpv]
+  CC:
+    NP: [SHA256MSG1, Vpv, Wpv]
+  CD:
+    NP: [SHA256MSG2, Vpv, Wpv]
   CF:
     66: [GF2P8MULB, Vpv, Wpv]
   # [D8] is in extensions
