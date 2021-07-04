@@ -100,6 +100,8 @@ map:
   33: [RDPMC]
   34: [SYSENTER]
   35: [SYSEXIT]
+  37:
+    NP: [GETSEC]
   # [40-4F] are in spans
   50:
     66: [MOVMSKPD, Gy, Vpv]
