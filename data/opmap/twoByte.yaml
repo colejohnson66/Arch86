@@ -498,6 +498,7 @@ extensions:
   0D:
     form: m/r
     M/1: [PREFETCHW, Mb]
+    M/2: [PREFETCHWT1, Mb]
   18:
     form: m/r
     M/0: [PREFETCHNTA, Mb]

@@ -765,9 +765,11 @@ map0F38:
     W0:
       66: [VPDPWSSD, Vpv, Hpv, Wpv]
       F3: [VDPBF16PS, Vpv, Hpv, Wpv]
+      F2: [VP4DPWSSD, Vpv, Hpv, Mpv]
   53:
     W0:
       66: [VPDPWSSDS, Vpv, Hpv, Wpv]
+      F2: [VP4DPWSSDS, Vpv, Hpv, Mpv]
   54:
     W0:
       66: [VPOPCNTB, Vpv, Wpv]
@@ -966,11 +968,13 @@ map0F38:
   9A:
     W0:
       66: [VFMSUB132PS, Vpv, Hpv, Wpv]
+      F2: [V4FMADDPS, Vpv, Hpv, Mpv]
     W1:
       66: [VFMSUB132PD, Vpv, Hpv, Wpv]
   9B:
     W0:
       66: [VFMSUB132SS, Vsv, Hsv, Wsv]
+      F2: [V4FMADDSS, Vsv, Hsv, Msv]
     W1:
       66: [VFMSUB132SD, Vsv, Hsv, Wsv]
   9C:
@@ -1036,11 +1040,13 @@ map0F38:
   AA:
     W0:
       66: [VFMSUB213PS, Vpv, Hpv, Wpv]
+      F2: [V4FNMADDPS, Vpv, Hpv, Mpv]
     W1:
       66: [VFMSUB213PD, Vpv, Hpv, Wpv]
   AB:
     W0:
       66: [VFMSUB213SS, Vsv, Hsv, Wsv]
+      F2: [V4FNMADDSS, Vsv, Hsv, Msv]
     W1:
       66: [VFMSUB213SD, Vsv, Hsv, Wsv]
   AC:
@@ -1124,6 +1130,32 @@ map0F38:
       66: [VPCONFLICTD, Vpv, Wpv]
     W1:
       66: [VPCONFLICTQ, Vpv, Wpv]
+  # [C6-C7] are in extensions
+  C8:
+    W0:
+      66: [VEXP2PS, Vpv, Wpv]
+    W1:
+      66: [VEXP2PD, Vpv, Wpv]
+  CA:
+    W0:
+      66: [VRCP28PS, Vpv, Wpv]
+    W1:
+      66: [VRCP28PD, Vpv, Wpv]
+  CB:
+    W0:
+      66: [VRCP28SS, Vsv, Hsv, Wsv]
+    W1:
+      66: [VRCP28SD, Vsv, Hsv, Wsv]
+  CC:
+    W0:
+      66: [VRSQRT28PS, Vpv, Wpv]
+    W1:
+      66: [VRSQRT28PD, Vpv, Wpv]
+  CD:
+    W0:
+      66: [VRSQRT28SS, Vsv, Hsv, Wsv]
+    W1:
+      66: [VRSQRT28SD, Vsv, Hsv, Wsv]
   CF:
     W0:
       66: [VGF2P8MULB, Vpv, Hpw, Wpv]
@@ -1381,4 +1413,24 @@ extensions0F:
     66-W1-/6: [VPSLLQ, Hpv, Wpv, Ib]
     66-WIG-/7: [VPSLLDQ, Hpv, Wpv, Ib]
 extensions0F38:
+  C6:
+    form: pfx-W-/r
+    66-W0-/1: [VGATHERPF0DPS, VMd]
+    66-W0-/2: [VGATHERPF1DPS, VMd]
+    66-W0-/5: [VSCATTERPF0DPS, VMd]
+    66-W0-/6: [VSCATTERPF1DPS, VMd]
+    66-W1-/1: [VGATHERPF0DPD, VMd]
+    66-W1-/2: [VGATHERPF1DPD, VMd]
+    66-W1-/5: [VSCATTERPF0DPD, VMd]
+    66-W1-/6: [VSCATTERPF1DPD, VMd]
+  C7:
+    form: pfx-W-/r
+    66-W0-/1: [VGATHERPF0QPS, VMq]
+    66-W0-/2: [VGATHERPF1QPS, VMq]
+    66-W0-/5: [VSCATTERPF0QPS, VMq]
+    66-W0-/6: [VSCATTERPF1QPS, VMq]
+    66-W1-/1: [VGATHERPF0QPD, VMq]
+    66-W1-/2: [VGATHERPF1QPD, VMq]
+    66-W1-/5: [VSCATTERPF0QPD, VMq]
+    66-W1-/6: [VSCATTERPF1QPD, VMq]
 extensions0F3A:
