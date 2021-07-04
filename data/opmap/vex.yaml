@@ -188,6 +188,10 @@ map0F:
     WIG:
       NP: [ORPS, Vpv, Wpv]
       66: [ORPD, Vpv, Wpv]
+  57:
+    WIG:
+      NP: [XORPS, Vpv, Hpv, Wpv]
+      66: [XORPD, Vpv, Hpv, Wpv]
   58:
     WIG:
       NP: [VADDPS, Vpv, Hpv, Wpv]
@@ -303,6 +307,9 @@ map0F:
   76:
     WIG:
       66: [VPCMPEQD, Vpv, Hpv, Wpv]
+  77:
+    WIG:
+      NP: # TODO: VEX.128==VZEROUPPER & VEX.256==VZEROALL
   7C:
     WIG:
       66: [VHADDPD, Vpv, Hpv, Wpv]
@@ -562,9 +569,24 @@ map0F38:
   0B:
     WIG:
       66: [VPMULHRSW, Vpv, Hpv, Wpv]
+  0C:
+    W0:
+      66: [VPERMILPS, Vpv, Hpv, Wpv]
+  0D:
+    W0:
+      66: [VPERMILPD, Vpv, Hpv, Wpv]
+  0E:
+    W0:
+      66: [VTESTPS, Vpv, Wpv]
+  0F:
+    W0:
+      66: [VTESTPD, Vpv, Wpv]
   13:
     W0:
       66: [VCVTPH2PS, Vpv, Wpv]
+  16:
+    W0:
+      66: [VPERMPS, Vpv, Hpv, Wpv]
   17:
     WIG:
       66: [VPTEST, Vpv, Wpv]
@@ -646,6 +668,9 @@ map0F38:
   35:
     WIG:
       66: [VPMOVZXDQ, Vpv, Wpv]
+  36:
+    W0:
+      66: [VPERMD, Vpv, Hpv, Wpv]
   37:
     WIG:
       66: [VPCMPGTQ, Vpv, Hpv, Wpv]
@@ -679,6 +704,19 @@ map0F38:
   41:
     WIG:
       66: [VPHMINPOSUW, Vpv, Wpv]
+  45:
+    W0:
+      66: [VPSRLVD, Vpv, Hpv, Wpv]
+    W1:
+      66: [VPSRLVQ, Vpv, Hpv, Wpv]
+  46:
+    W0:
+      66: [VPSRAVD, Vpv, Hpv, Wpv]
+  47:
+    W0:
+      66: [VPSLLVD, Vpv, Hpv, Wpv]
+    W1:
+      66: [VPSLLVQ, Vpv, Hpv, Wpv]
   58:
     W0:
       66: [VPBROADCASTD, Vpv, Wsv]
@@ -694,6 +732,26 @@ map0F38:
   79:
     W0:
       66: [VPBROADCASTW, Vpv, Wsv]
+  8C:
+    W0:
+      66: [VPMASKMOVD, Vpv, Hpv, Mpv]
+    W1:
+      66: [VPMASKMOVQ, Vpv, Hpv, Mpv]
+  8E:
+    W0:
+      66: [VPMASKMOVD, Mpv, Hpv, Vpv]
+    W1:
+      66: [VPMASKMOVQ, Mpv, Hpv, Vpv]
+  90:
+    W0:
+      66: [VPGATHERDD, Vpv, VMd, Hpv]
+    W1:
+      66: [VPGATHERDQ, Vpv, VMd, Hpv]
+  91:
+    W0:
+      66: [VPGATHERQD, Vpv, VMq, Hpv]
+    W1:
+      66: [VPGATHERQQ, Vpv, VMq, Hpv]
   92:
     W0:
       66: [VGATHERDPS, Vpv, VMd, Hpv]
@@ -904,9 +962,21 @@ map0F38:
       F3: [SARX, Gq, Bq, Eq]
       F2: [SHRX, Gq, Bq, Eq]
 map0F3A:
+  00:
+    W1:
+      66: [VPERMQ, Vpv, Wpv, Ib]
+  01:
+    W1:
+      66: [VPERMPD, Vpv, Wpv, Ib]
   02:
     W0:
       66: [VPBLENDD, Vpv, Hpv, Wpv, Ib]
+  04:
+    W0:
+      66: [VPERMILPS, Vpv, Wpv, Ib]
+  05:
+    W0:
+      66: [VPERMILPD, Vpv, Wpv, Ib]
   06:
     W0:
       66: [VPERM2F128, Vpv, Hpv, Wpv, Ib]

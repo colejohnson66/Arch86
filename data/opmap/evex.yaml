@@ -117,6 +117,11 @@ map0F:
       NP: [ORPS, Vpv, Wpv]
     W1:
       66: [ORPD, Vpv, Wpv]
+  57:
+    W0:
+      NP: [XORPS, Vpv, Hpv, Wpv]
+    W1:
+      66: [XORPD, Vpv, Hpv, Wpv]
   58:
     W0:
       NP: [VADDPS, Vpv, Hpv, Wpv]
@@ -235,6 +240,8 @@ map0F:
       F2: [VPSHUFLW, Vpv, Wpv, Ib]
     W0:
       66: [VPSHUFD, Vpv, Wpv, Ib]
+  # [71] is in extensions
+  # [72] is in extensions
   # [73] is in extensions
   74:
     WIG:
@@ -471,9 +478,48 @@ map0F38:
   0B:
     WIG:
       66: [VPMULHRSW, Vpv, Hpv, Wpv]
+  0C:
+    W0:
+      66: [VPERMILPS, Vpv, Hpv, Wpv]
+  0D:
+    W1:
+      66: [VPERMILPD, Vpv, Hpv, Wpv]
+  10:
+    W0:
+      F3: [VPMOVUSWB, Wpv, Vpv]
+    W1:
+      66: [VPSRLVW, Vpv, Hpv, Wpv]
+  11:
+    W0:
+      66: [VPMOVUSDB, Wpv, Vpv]
+    W1:
+      66: [VPSRAVW, Vpv, Hpv, Wpv]
+  12:
+    W0:
+      F3: [VPMOVUSQB, Wpv, Vpv]
+    W1:
+      66: [VPSLLVW, Vpv, Hpv, Wpv]
   13:
     W0:
       66: [VCVTPH2PS, Vpv, Wpv]
+      F3: [VPMOVUSDW, Wpv, Vpv]
+  14:
+    W0:
+      66: [VPRORVD, Vpv, Hpv, Wpv]
+      F3: [VPMOVUSQW, Wpv, Vpv]
+    W1:
+      66: [VPRORVQ, Vpv, Hpv, Wpv]
+  15:
+    W0:
+      66: [VPROLVD, Vpv, Hpv, Wpv]
+      F3: [VPMOVUSQD, Wpv, Vpv]
+    W1:
+      66: [VPROLVQ, Vpv, Hpv, Wpv]
+  16:
+    W0:
+      66: [VPERMPS, Vpv, Hpv, Wpv]
+    W1:
+      66: [VPERMPD, Vpv, Hpv, Wpv]
   18:
     W0:
       66: [VBROADCASTSS, Vpv, Wpv]
@@ -505,29 +551,60 @@ map0F38:
     W1:
       66: [VPABSQ, Vpv, Wpv]
   20:
+    W0:
+      F3: [VPMOVSWB, Wpv, Vpv]
     WIG:
       66: [VPMOVSXBW, Vpv, Wpv]
   21:
+    W0:
+      F3: [VPMOVSDB, Wpv, Vpv]
     WIG:
       66: [VPMOVSXBD, Vpv, Wpv]
   22:
+    W0:
+      F3: [VPMOVSQB, Wpv, Vpv]
     WIG:
       66: [VPMOVSXBQ, Vpv, Wpv]
   23:
+    W0:
+      F3: [VPMOVSDW, Wpv, Vpv]
     WIG:
       66: [VPMOVSXWD, Vpv, Wpv]
   24:
+    W0:
+      F3: [VPMOVSQW, Wpv, Vpv]
     WIG:
       66: [VPMOVSXWQ, Vpv, Wpv]
   25:
     W0:
       66: [VPMOVSXDQ, Vpv, Wpv]
+      F3: [VPMOVSQD, Wpv, Vpv]
+  26:
+    W0:
+      66: [VPTESTMB, KGq, Hpv, Wpv]
+      F3: [VPTESTNMB, KGq, Hpv, Wpv]
+    W1:
+      66: [VPTESTMW, KGq, Hpv, Wpv]
+      F3: [VPTESTNMW, KGq, Hpv, Wpv]
+  27:
+    W0:
+      66: [VPTESTMD, KGq, Hpv, Wpv]
+      F3: [VPTESTNMD, KGq, Hpv, Wpv]
+    W1:
+      66: [VPTESTMQ, KGq, Hpv, Wpv]
+      F3: [VPTESTNMQ, KGq, Hpv, Wpv]
   28:
+    W0:
+      F3: [VPMOVM2B, Vpv, KRq]
     W1:
       66: [VPMULDQ, Vpv, Hpv, Wpv]
+      F3: [VPMOVM2W, Vpv, KRq]
   29:
+    W0:
+      F3: [VPMOVB2M, KGq, Upv]
     W1:
       66: [VPCMPEQQ, KGq, Hpv, Wpv]
+      F3: [VPMOVW2M, KGq, Upv]
   2A:
     W0:
       66: [VMOVNTDQA, Vpv, Mpv]
@@ -536,35 +613,67 @@ map0F38:
   2B:
     W0:
       66: [VPACKUSDW, KGq, Hpv, Wpv]
+  2C:
+    W0:
+      66: [VSCALEFPS, Vpv, Hpv, Wpv]
+    W1:
+      66: [VSCALEFPD, Vpv, Hpv, Wpv]
+  2D:
+    W0:
+      66: [VSCALEFSS, Vsv, Hsv, Wsv]
+    W1:
+      66: [VSCALEFSD, Vsv, Hsv, Wsv]
   30:
+    W0:
+      F3: [VPMOVWB, Wpv, Vpv]
     WIG:
       66: [VPMOVZXBW, Vpv, Wpv]
   31:
+    W0:
+      F3: [VPMOVDB, Wpv, Vpv]
     WIG:
       66: [VPMOVZXBD, Vpv, Wpv]
   32:
+    W0:
+      F3: [VPMOVQB, Wpv, Vpv]
     WIG:
       66: [VPMOVZXBQ, Vpv, Wpv]
   33:
+    W0:
+      F3: [VPMOVDW, Wpv, Vpv]
     WIG:
       66: [VPMOVZXWD, Vpv, Wpv]
   34:
+    W0:
+      F3: [VPMOVQW, Wpv, Vpv]
     WIG:
       66: [VPMOVZXWQ, Vpv, Wpv]
   35:
     W0:
       66: [VPMOVZXDQ, Vpv, Wpv]
+      F3: [VPMOVQD, Wpv, Vpv]
+  36:
+    W0:
+      66: [VPERMD, Vpv, Hpv, Wpv]
+    W1:
+      66: [VPERMQ, Vpv, Hpv, Wpv]
   37:
     W1:
       66: [VPCMPGTQ, KGq, Hpv, Wpv]
   38:
+    W0:
+      F3: [VPMOVM2D, Vpv, KRq]
+    W1:
+      F3: [VPMOVM2Q, Vpv, KRq]
     WIG:
       66: [VPMINSB, Vpv, Hpv, Wpv]
   39:
     W0:
       66: [VPMINSD, Vpv, Hpv, Wpv]
+      F3: [VPMOVD2M, KGq, Upv]
     W1:
       66: [VPMINSQ, Vpv, Hpv, Wpv]
+      F3: [VPMOVD2Q, KGq, Upv]
   3A:
     WIG:
       66: [VPMINUW, Vpv, Hpv, Wpv]
@@ -606,6 +715,46 @@ map0F38:
       66: [VGETEXPSS, Vsv, Hsv, Wsv]
     W1:
       66: [VGETEXPSD, Vsv, Hsv, Wsv]
+  44:
+    W0:
+      66: [VPLZCNTD, Vpv, Wpv]
+    W1:
+      66: [VPLZCNTQ, Vpv, Wpv]
+  45:
+    W0:
+      66: [VPSRLVD, Vpv, Hpv, Wpv]
+    W1:
+      66: [VPSRLVQ, Vpv, Hpv, Wpv]
+  46:
+    W0:
+      66: [VPSRAVD, Vpv, Hpv, Wpv]
+    W1:
+      66: [VPSRAVQ, Vpv, Hpv, Wpv]
+  47:
+    W0:
+      66: [VPSLLVD, Vpv, Hpv, Wpv]
+    W1:
+      66: [VPSLLVQ, Vpv, Hpv, Wpv]
+  4C:
+    W0:
+      66: [VRCP14PS, Vpv, Wpv]
+    W1:
+      66: [VRCP14PD, Vpv, Wpv]
+  4D:
+    W0:
+      66: [VRCP14SS, Vsv, Hsv, Wsv]
+    W1:
+      66: [VRCP14SD, Vsv, Hsv, Wsv]
+  4E:
+    W0:
+      66: [VRSQRT14PS, Vpv, Wpv]
+    W1:
+      66: [VRSQRT14PD, Vpv, Wpv]
+  4F:
+    W0:
+      66: [VRSQRT14SS, Vsv, Hsv, Wsv]
+    W1:
+      66: [VRSQRT14SD, Vsv, Hsv, Wsv]
   50:
     W0:
       66: [VPDPBUSD, Vpv, Hpv, Wpv]
@@ -619,6 +768,16 @@ map0F38:
   53:
     W0:
       66: [VPDPWSSDS, Vpv, Hpv, Wpv]
+  54:
+    W0:
+      66: [VPOPCNTB, Vpv, Wpv]
+    W1:
+      66: [VPOPCNTW, Vpv, Wpv]
+  55:
+    W0:
+      66: [VPOPCNTD, Vpv, Wpv]
+    W1:
+      66: [VPOPCNTQ, Vpv, Wpv]
   58:
     W0:
       66: [VPBROADCASTD, Vpv, Wsv]
@@ -637,6 +796,11 @@ map0F38:
       66: [VBROADCASTI32X8, Vpv, Mdq]
     W1:
       66: [VBROADCASTI64X4, Vpv, Mdq]
+  62:
+    W0:
+      66: [VPEXPANDB, Vpv, Wpv]
+    W1:
+      66: [VPEXPANDW, Vpv, Wpv]
   63:
     W0:
       66: [VPCOMPRESSB, Wpv, Vpv]
@@ -662,10 +826,40 @@ map0F38:
       F2: [VP2INTERSECTD, KGq, Hpv, Wpv]
     W1:
       F2: [VP2INTERSECTQ, KGq, Hpv, Wpv]
+  70:
+    W1:
+      66: [VPSHLDVW, Vpv, Hpv, Wpv]
+  71:
+    W0:
+      66: [VPSHLDVD, Vpv, Hpv, Wpv]
+    W1:
+      66: [VPSHLDVQ, Vpv, Hpv, Wpv]
   72:
     W0:
       F3: [VCVTNEPS2BF16, Vpv, Wpv]
       F2: [VCVTNE2PS2BF16, Vpv, Hpv, Wpv]
+    W1:
+      66: [VPSHRDVW, Vpv, Hpv, Wpv]
+  73:
+    W0:
+      66: [VPSHRDVD, Vpv, Hpv, Wpv]
+    W1:
+      66: [VPSHRDVQ, Vpv, Hpv, Wpv]
+  75:
+    W0:
+      66: [VPERMI2B, Vpv, Hpv, Wpv]
+    W1:
+      66: [VPERMI2W, Vpv, Hpv, Wpv]
+  76:
+    W0:
+      66: [VPERMI2D, Vpv, Hpv, Wpv]
+    W1:
+      66: [VPERMI2Q, Vpv, Hpv, Wpv]
+  77:
+    W0:
+      66: [VPERMI2PS, Vpv, Hpv, Wpv]
+    W1:
+      66: [VPERMI2PD, Vpv, Hpv, Wpv]
   78:
     W0:
       66: [VPBROADCASTB, Vpv, Wsv]
@@ -683,11 +877,34 @@ map0F38:
       66: [VPBROADCASTD, Vpv, Rd]
     W1:
       66: [VPBROADCASTQ, Vpv, Rq]
+  7D:
+    W0:
+      66: [VPERMT2B, Vpv, Hpv, Wpv]
+    W1:
+      66: [VPERMT2W, Vpv, Hpv, Wpv]
+  7E:
+    W0:
+      66: [VPERMT2D, Vpv, Hpv, Wpv]
+    W1:
+      66: [VPERMT2Q, Vpv, Hpv, Wpv]
+  7F:
+    W0:
+      66: [VPERMT2PS, Vpv, Hpv, Wpv]
+    W1:
+      66: [VPERMT2PD, Vpv, Hpv, Wpv]
+  83:
+    W1:
+      66: [VPMULTISHIFTQB, Vpv, Hpv, Wpv]
   88:
     W0:
       66: [VEXPANDPS, Vpv, Wpv]
     W1:
       66: [VEXPANDPD, Vpv, Wpv]
+  89:
+    W0:
+      66: [VPEXPANDD, Vpv, Wpv]
+    W1:
+      66: [VPEXPANDQ, Vpv, Wpv]
   8A:
     W0:
       66: [VCOMPRESSPS, Wpv, Vpv]
@@ -698,6 +915,24 @@ map0F38:
       66: [VPCOMPRESSD, Wpv, Vpv]
     W1:
       66: [VPCOMPRESSQ, Wpv, Vpv]
+  8D:
+    W0:
+      66: [VPERMB, Vpv, Hpv, Wpv]
+    W1:
+      66: [VPERMW, Vpv, Hpv, Wpv]
+  8F:
+    W0:
+      66: [VPSHUFBITQMB, Vpv, Hpv, Wpv]
+  90:
+    W0:
+      66: [VPGATHERDD, Vpv, VMd]
+    W1:
+      66: [VPGATHERDQ, Vpv, VMd]
+  91:
+    W0:
+      66: [VPGATHERQD, Vpv, VMq]
+    W1:
+      66: [VPGATHERQQ, Vpv, VMq]
   92:
     W0:
       66: [VGATHERDPS, Vpv, VMd]
@@ -758,6 +993,26 @@ map0F38:
       66: [VFMNSUB132SS, Vsv, Hsv, Wsv]
     W1:
       66: [VFMNSUB132SD, Vsv, Hsv, Wsv]
+  A0:
+    W0:
+      66: [VPSCATTERDD, VMd, Vpv]
+    W1:
+      66: [VPSCATTERDQ, VMd, Vpv]
+  A1:
+    W0:
+      66: [VPSCATTERQD, VMq, Vpv]
+    W1:
+      66: [VPSCATTERQQ, VMq, Vpv]
+  A2:
+    W0:
+      66: [VSCATTERDPS, VMd, Vpv]
+    W1:
+      66: [VSCATTERDPD, VMd, Vpv]
+  A3:
+    W0:
+      66: [VSCATTERQPS, VMq, Vpv]
+    W1:
+      66: [VSCATTERQPD, VMq, Vpv]
   A6:
     W0:
       66: [VFMADDSUB213PS, Vpv, Hpv, Wpv]
@@ -808,6 +1063,12 @@ map0F38:
       66: [VFMNSUB213SS, Vsv, Hsv, Wsv]
     W1:
       66: [VFMNSUB213SD, Vsv, Hsv, Wsv]
+  B4:
+    W1:
+      66: [VPMADD52LUQ, Vpv, Hpv, Wpv]
+  B5:
+    W1:
+      66: [VPMADD52HUQ, Vpv, Hpv, Wpv]
   B6:
     W0:
       66: [VFMADDSUB231PS, Vpv, Hpv, Wpv]
@@ -884,11 +1145,35 @@ map0F38:
     W1:
       NP: [ANDN, Gq, Bq, Eq]
 map0F3A:
+  00:
+    W1:
+      66: [VPERMQ, Vpv, Wpv, Ib]
+  01:
+    W1:
+      66: [VPERMPD, Vpv, Wpv, Ib]
   03:
     W0:
       66: [VALIGND, Vpv, Hpv, Wpv, Ib]
     W1:
       66: [VALIGNQ, Vpv, Hpv, Wpv, Ib]
+  04:
+    W0:
+      66: [VPERMILPS, Vpv, Wpv, Ib]
+  05:
+    W1:
+      66: [VPERMILPD, Vpv, Wpv, Ib]
+  08:
+    W0:
+      66: [VRNDSCALEPS, Vpv, Wpv, Ib]
+  09:
+    W1:
+      66: [VRNDSCALEPD, Vpv, Wpv, Ib]
+  0A:
+    W0:
+      66: [VRNDSCALESS, Vsv, Hsv, Wsv, Ib]
+  0B:
+    W1:
+      66: [VRNDSCALESD, Vsv, Hsv, Wsv, Ib]
   0F:
     WIG:
       66: [VPALIGNR, Vpv, Hpv, Wpv, Ib]
@@ -950,6 +1235,16 @@ map0F3A:
       66: [VPINSRD, Vpv, Hpv, Ed, Ib]
     W1:
       66: [VPINSRQ, Vpv, Hpv, Eq, Ib]
+  23:
+    W0:
+      66: [VSHUFF32X4, Vpv, Hpv, Wpv, Ib]
+    W1:
+      66: [VSHUFF64X2, Vpv, Hpv, Wpv, Ib]
+  25:
+    W0:
+      66: [VPTERNLOGD, Vpv, Hpv, Wpv, Ib]
+    W1:
+      66: [VPTERNLOGQ, Vpv, Hpv, Wpv, Ib]
   26:
     W0:
       66: [VGETMANTPS, Vpv, Wpv, Ib]
@@ -993,9 +1288,24 @@ map0F3A:
   42:
     W0:
       66: [VDBPSADBW, Vpv, Hpv, Wpv, Ib]
+  43:
+    W0:
+      66: [VSHUFI32X4, Vpv, Hpv, Wpv, Ib]
+    W1:
+      66: [VSHUFI64X2, Vpv, Hpv, Wpv, Ib]
   44:
     WIG:
       66: [VPCLMULQDQ, Vpv, Hpv, Wpv, Ib]
+  50:
+    W0:
+      66: [VRANGEPS, Vpv, Hpv, Wpv, Ib]
+    W1:
+      66: [VRANGEPD, Vpv, Hpv, Wpv, Ib]
+  51:
+    W0:
+      66: [VRANGESS, Vsv, Hsv, Wsv, Ib]
+    W1:
+      66: [VRANGESD, Vsv, Hsv, Wsv, Ib]
   54:
     W0:
       66: [VFIXUPIMMPS, Vpv, Hpv, Wpv, Ib]
@@ -1006,6 +1316,16 @@ map0F3A:
       66: [VFIXUPIMMSS, Vpv, Hpv, Wpv, Ib]
     W1:
       66: [VFIXUPIMMSD, Vpv, Hpv, Wpv, Ib]
+  56:
+    W0:
+      66: [VREDUCEPS, Vpv, Wpv, Ib]
+    W1:
+      66: [VREDUCEPD, Vpv, Wpv, Ib]
+  57:
+    W0:
+      66: [VREDUCESS, Vsv, Wsv, Ib]
+    W1:
+      66: [VREDUCESD, Vsv, Wsv, Ib]
   66:
     W0:
       66: [VFPCLASSPS, KGq, Wpv, Ib]
@@ -1016,6 +1336,22 @@ map0F3A:
       66: [VFPCLASSSS, KGq, Wpv, Ib]
     W1:
       66: [VFPCLASSSD, KGq, Wpv, Ib]
+  70:
+    W1:
+      66: [VPSHLDW, Vpv, Hpv, Wpv, Ib]
+  71:
+    W0:
+      66: [VPSHLDD, Vpv, Hpv, Wpv, Ib]
+    W1:
+      66: [VPSHLDQ, Vpv, Hpv, Wpv, Ib]
+  72:
+    W1:
+      66: [VPSHRDW, Vpv, Hpv, Wpv, Ib]
+  73:
+    W0:
+      66: [VPSHRDD, Vpv, Hpv, Wpv, Ib]
+    W1:
+      66: [VPSHRDQ, Vpv, Hpv, Wpv, Ib]
   CE:
     W1:
       66: [VGF2P8AFFINEQB, Vpv, Hpv, Wpv, Ib]
@@ -1025,6 +1361,10 @@ map0F3A:
 extensions0F:
   71:
     form: pfx-W-/r
+    66-W0-/0: [VPRORD, Hpv, Wpv, Ib]
+    66-W0-/1: [VPROLD, Hpv, Wpv, Ib]
+    66-W1-/0: [VPRORQ, Hpv, Wpv, Ib]
+    66-W1-/1: [VPROLQ, Hpv, Wpv, Ib]
     66-WIG-/2: [VPSRLW, Hpv, Wpv, Ib]
     66-WIG-/4: [VPSRAW, Hpv, Wpv, Ib]
     66-WIG-/6: [VPSLLW, Hpv, Wpv, Ib]

@@ -49,12 +49,12 @@ map:
   2D: [SUB, rAX, Iz]
   2E:
   2F: [DAS]
-  30:
-  31:
-  32:
-  33:
-  34:
-  35:
+  30: [XOR, Eb, Gb]
+  31: [XOR, Ev, Gv]
+  32: [XOR, Gb, Eb]
+  33: [XOR, Gv, Ev]
+  34: [XOR, AL, Ib]
+  35: [XOR, rAX, Iz]
   36:
   37: [AAA]
   38: [CMP, Eb, Gb]
@@ -88,8 +88,8 @@ map:
   # [70-7F] are in spans
   # [80-84] is in extensions
   85:
-  86:
-  87:
+  86: [XCHG, Eb, Gb]
+  87: [XCHG, Ev, Gv]
   88: [MOV, Eb, Gb]
   89: [MOV, Ev, Gv]
   8A: [MOV, Gb, Eb]
@@ -99,17 +99,11 @@ map:
   8E: [MOV, Sw, Ev]
   # [8F] is in extensions
   90: [NOP] # TODO: [F3 90] is PAUSE
-  91:
-  92:
-  93:
-  94:
-  95:
-  96:
-  97:
+  # [91-97] are in spans
   # TODO: [98] is CBW/CWDE/CDQE
   # TODO: [99] is CWD/CDQ/CQO
   9A: [CALLF, Ap]
-  9B:
+  9B: [WAIT] # TODO: Aliased as FWAIT
   9C: [PUSHF] # TODO: PUSHFD/Q
   9D: [POPF] # TODO: POPFD/Q
   9E: [SAHF]
@@ -150,7 +144,7 @@ map:
   D4: [AAM, Ib]
   D5: [AAD, Ib]
   D6:
-  D7:
+  D7: [XLAT]
   D8:
   D9:
   DA:
@@ -205,6 +199,9 @@ spans:
   70:
     length: 16
     instr: [Jcc, Jb]
+  91:
+    length: 7
+    instr: [XCHG, rAX, Zv]
   B0:
     length: 8
     instr: [MOV, Zb, Ib]
@@ -220,6 +217,7 @@ extensions:
     /3: [SBB, Eb, Ib]
     /4: [AND, Eb, Ib]
     /5: [SUB, Eb, Ib]
+    /6: [XOR, Eb, Ib]
     /7: [CMP, Eb, Ib]
   81:
     form: /r
@@ -229,6 +227,7 @@ extensions:
     /3: [SBB, Ev, Iz]
     /4: [AND, Ev, Iz]
     /5: [SUB, Ev, Iz]
+    /6: [XOR, Ev, Iz]
     /7: [CMP, Ev, Iz]
   82:
     form: /r
@@ -238,6 +237,7 @@ extensions:
     /3: [SBB, Eb, Ib]
     /4: [AND, Eb, Ib]
     /5: [SUB, Eb, Ib]
+    /6: [XOR, Eb, Ib]
     /7: [CMP, Eb, Ib]
   83:
     form: /r
@@ -247,6 +247,7 @@ extensions:
     /3: [SBB, Ev, Ib]
     /4: [AND, Ev, Ib]
     /5: [SUB, Ev, Ib]
+    /6: [XOR, Ev, Ib]
     /7: [CMP, Ev, Ib]
   8F:
     form: /r
@@ -272,11 +273,13 @@ extensions:
     /6: [SAL, Ev, Ib]
     /7: [SAR, Ev, Ib]
   C6:
-    form: /r
-    /0: [MOV, Eb, Ib]
+    form: m/r/b
+    x/0/b: [MOV, Eb, Ib]
+    R/7/0: [XABORT, Ib]
   C7:
-    form: /r
-    /0: [MOV, Ev, Iz]
+    form: m/r/b
+    x/0/b: [MOV, Ev, Iz]
+    R/7/0: [XBEGIN, Jz]
   D0:
     form: /r
     /0: [ROL, Eb, 1]

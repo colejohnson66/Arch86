@@ -9,6 +9,9 @@ map:
   06: [CLTS]
   07: [SYSRET]
   08: [INVD]
+  09:
+    NP: [WBINVD] # TODO: no prefix mentioned
+    F3: [WBNOINVD]
   0B: [UD2]
   # [0D] is in extensions
   10:
@@ -91,6 +94,7 @@ map:
   2F:
     NP: [COMISS, Vpv, Wpv]
     66: [COMISD, Vpv, Wpv]
+  30: [WRMSR]
   31: [RDTSC]
   32: [RDMSR]
   33: [RDPMC]
@@ -119,6 +123,9 @@ map:
   56:
     NP: [ORPS, Vpv, Wpv]
     66: [ORPD, Vpv, Wpv]
+  57:
+    NP: [XORPS, Vpv, Wpv]
+    66: [XORPD, Vpv, Wpv]
   58:
     NP: [ADDPS, Vpv, Wpv]
     66: [ADDPD, Vpv, Wpv]
@@ -276,6 +283,8 @@ map:
     F3: [LZCNT, Gv, Ey] # as BSR if LZCNT isn't supported
   BE: [MOVSX, Gv, Eb]
   BF: [MOVSX, Gv, Ev]
+  C0: [XADD, Eb, Gb]
+  C1: [XADD, Ev, Gv]
   C2:
     NP: [CMPPS, Vpv, Wpv, Ib]
     66: [CMPPD, Vpv, Wpv, Ib]
@@ -473,9 +482,14 @@ extensions:
     R/1/1: [MWAIT]
     R/1/2: [CLAC]
     R/1/3: [STAC] # TODO: NP
+    R/2/0: [XGETBV]
+    R/2/1: [XSETBV]
+    R/2/5: [XEND]
+    R/2/6: [XTEST]
     R/5/0: [SETSSBSY]
     R/5/2: [SAVEPREVSSP]
     R/5/6: [RDPKRU] # TODO: NP
+    R/5/7: [WRPKRU]
     R/6/b: [LMSW, Ew] # See also `M/6/b`
     R/7/0: [SWAPGS]
     R/7/1: [RDTSCP]
@@ -529,6 +543,9 @@ extensions:
     NP-M/1/b: [FXRSTOR, Mdqq]
     NP-M/2/b: [LDMXCSR, Md]
     NP-M/3/b: [STMXCSR, Md]
+    NP-M/4/b: [XSAVE, M] # TODO: XSAVE64 for REX.W
+    NP-M/5/b: [XRSTOR, M] # TODO: XRSTOR64 for REX.W
+    NP-M/6/b: [XSAVEOPT, M] # TODO: XSAVEOPT64 for REX.W
     NP-M/7/b: [CLFLUSH, Mb]
     NP-R/5/0: [LFENCE]
     NP-R/6/0: [MFENCE]
@@ -540,6 +557,8 @@ extensions:
     F3-M/6/b: [CLRSSBSY, Mq]
     F3-R/0/b: [RDFSBASE, Ry]
     F3-R/1/b: [RDGSBASE, Ry]
+    F3-R/2/b: [WRFSBASE, Ry]
+    F3-R/3/b: [WRGSBASE, Ry]
     F3-R/4/b: [PTWRITE, Ey] # See also `F3-M/4/b`
     F3-R/5/b: [INCSSPD, Ry] # TODO: INCSSPQ for 64 bit operands
     F3-R/6/b: [UMONITOR, Ry]
@@ -553,6 +572,9 @@ extensions:
   C7:
     form: pfx-m/r
     xx-M/1: [CMPXCHG8B, Mq] # TODO: CMPXCHG16B_Mdq with REX prefix
+    NP-M/3: [XRSTORS, M] # TODO: XRSTORS64 for REX.W
+    NP-M/4: [XSAVEC, M] # TODO: XSAVEC64 for REX.W
+    NP-M/5: [XSAVES, M] # TODO: XSAVES64 for REX.W
     NP-R/6: [RDRAND, Gv]
     NP-R/7: [RDSEED, Gv]
     66-R/6: [RDRAND, Gv]

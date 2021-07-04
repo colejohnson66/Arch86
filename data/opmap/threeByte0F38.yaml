@@ -146,9 +146,12 @@ map:
   F1:
     N/A: [MOVBE, Mv, Gv] # TODO: No prefix listed
     F2: [CRC32, Gy, Ev]
+  F5:
+    66: [WRUSSD, Ey, Gy] # TODO: WRUSSQ with REX.W
   F6:
-    66: [ADCX, Gv, Ev]
-    F3: [ADOX, Gv, Ev]
+    NP: [WRSSD, Ey, Gy] # TODO: No prefix listed; WRSSQ with REX.W
+    66: [ADCX, Gy, Ey]
+    F3: [ADOX, Gy, Ey]
   F8:
     66: [MOVDIR64B, Gv, Mdqq]
   F9:
