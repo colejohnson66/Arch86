@@ -616,6 +616,18 @@ map0F38:
   2B:
     WIG:
       66: [VPACKUSDW, Vpv, Hpv, Wpv]
+  2C:
+    W0:
+      66: [VMASKMOVPS, Vpv, Wpv, Mpv]
+  2D:
+    W0:
+      66: [VMASKMOVPD, Vpv, Wpv, Mpv]
+  2E:
+    W0:
+      66: [VMASKMOVPS, Mpv, Hpv, Vpv]
+  2F:
+    W0:
+      66: [VMASKMOVPD, Mpv, Hpv, Vpv]
   30:
     WIG:
       66: [VPMOVZXBW, Vpv, Wpv]
@@ -667,6 +679,181 @@ map0F38:
   41:
     WIG:
       66: [VPHMINPOSUW, Vpv, Wpv]
+  58:
+    W0:
+      66: [VPBROADCASTD, Vpv, Wsv]
+  59:
+    W1:
+      66: [VPBROADCASTQ, Vpv, Wsv]
+  5A:
+    W0:
+      66: [VBROADCASTI128, Vpv, Mdq]
+  78:
+    W0:
+      66: [VPBROADCASTB, Vpv, Wsv]
+  79:
+    W0:
+      66: [VPBROADCASTW, Vpv, Wsv]
+  92:
+    W0:
+      66: [VGATHERDPS, Vpv, VMd, Hpv]
+    W1:
+      66: [VGATHERDPD, Vpv, VMd, Hpv]
+  93:
+    W0:
+      66: [VGATHERQPS, Vpv, VMq, Hpv]
+    W1:
+      66: [VGATHERQPD, Vpv, VMq, Hpv]
+  96:
+    W0:
+      66: [VFMADDSUB132PS, Vpv, Hpv, Wpv]
+    W1:
+      66: [VFMADDSUB132PD, Vpv, Hpv, Wpv]
+  97:
+    W0:
+      66: [VFMSUBADD132PS, Vpv, Hpv, Wpv]
+    W1:
+      66: [VFMSUBADD132PD, Vpv, Hpv, Wpv]
+  98:
+    W0:
+      66: [VFMADD132PS, Vpv, Hpv, Wpv]
+    W1:
+      66: [VFMADD132PD, Vpv, Hpv, Wpv]
+  99:
+    W0:
+      66: [VFMADD132SS, Vsv, Hsv, Wsv]
+    W1:
+      66: [VFMADD132SD, Vsv, Hsv, Wsv]
+  9A:
+    W0:
+      66: [VFMSUB132PS, Vpv, Hpv, Wpv]
+    W1:
+      66: [VFMSUB132PD, Vpv, Hpv, Wpv]
+  9B:
+    W0:
+      66: [VFMSUB132SS, Vsv, Hsv, Wsv]
+    W1:
+      66: [VFMSUB132SD, Vsv, Hsv, Wsv]
+  9C:
+    W0:
+      66: [VFNMADD132PS, Vpv, Hpv, Wpv]
+    W1:
+      66: [VFNMADD132PD, Vpv, Hpv, Wpv]
+  9D:
+    W0:
+      66: [VFMNADD132SS, Vsv, Hsv, Wsv]
+    W1:
+      66: [VFMNADD132SD, Vsv, Hsv, Wsv]
+  9E:
+    W0:
+      66: [VFMNSUB132PS, Vpv, Hpv, Wpv]
+    W1:
+      66: [VFMNSUB132PD, Vpv, Hpv, Wpv]
+  9F:
+    W0:
+      66: [VFMNSUB132SS, Vsv, Hsv, Wsv]
+    W1:
+      66: [VFMNSUB132SD, Vsv, Hsv, Wsv]
+  A6:
+    W0:
+      66: [VFMADDSUB213PS, Vpv, Hpv, Wpv]
+    W1:
+      66: [VFMADDSUB213PD, Vpv, Hpv, Wpv]
+  A7:
+    W0:
+      66: [VFMSUBADD213PS, Vpv, Hpv, Wpv]
+    W1:
+      66: [VFMSUBADD213PD, Vpv, Hpv, Wpv]
+  A8:
+    W0:
+      66: [VFMADD213PS, Vpv, Hpv, Wpv]
+    W1:
+      66: [VFMADD213PD, Vpv, Hpv, Wpv]
+  A9:
+    W0:
+      66: [VFMADD213SS, Vsv, Hsv, Wsv]
+    W1:
+      66: [VFMADD213SD, Vsv, Hsv, Wsv]
+  AA:
+    W0:
+      66: [VFMSUB213PS, Vpv, Hpv, Wpv]
+    W1:
+      66: [VFMSUB213PD, Vpv, Hpv, Wpv]
+  AB:
+    W0:
+      66: [VFMSUB213SS, Vsv, Hsv, Wsv]
+    W1:
+      66: [VFMSUB213SD, Vsv, Hsv, Wsv]
+  AC:
+    W0:
+      66: [VFNMADD213PS, Vpv, Hpv, Wpv]
+    W1:
+      66: [VFNMADD213PD, Vpv, Hpv, Wpv]
+  AD:
+    W0:
+      66: [VFMNADD213SS, Vsv, Hsv, Wsv]
+    W1:
+      66: [VFMNADD213SD, Vsv, Hsv, Wsv]
+  AE:
+    W0:
+      66: [VFMNSUB213PS, Vpv, Hpv, Wpv]
+    W1:
+      66: [VFMNSUB213PD, Vpv, Hpv, Wpv]
+  AF:
+    W0:
+      66: [VFMNSUB213SS, Vsv, Hsv, Wsv]
+    W1:
+      66: [VFMNSUB213SD, Vsv, Hsv, Wsv]
+  B6:
+    W0:
+      66: [VFMADDSUB231PS, Vpv, Hpv, Wpv]
+    W1:
+      66: [VFMADDSUB231PD, Vpv, Hpv, Wpv]
+  B7:
+    W0:
+      66: [VFMSUBADD231PS, Vpv, Hpv, Wpv]
+    W1:
+      66: [VFMSUBADD231PD, Vpv, Hpv, Wpv]
+  B8:
+    W0:
+      66: [VFMADD231PS, Vpv, Hpv, Wpv]
+    W1:
+      66: [VFMADD231PD, Vpv, Hpv, Wpv]
+  B9:
+    W0:
+      66: [VFMADD231SS, Vsv, Hsv, Wsv]
+    W1:
+      66: [VFMADD231SD, Vsv, Hsv, Wsv]
+  BA:
+    W0:
+      66: [VFMSUB231PS, Vpv, Hpv, Wpv]
+    W1:
+      66: [VFMSUB231PD, Vpv, Hpv, Wpv]
+  BB:
+    W0:
+      66: [VFMSUB231SS, Vsv, Hsv, Wsv]
+    W1:
+      66: [VFMSUB231SD, Vsv, Hsv, Wsv]
+  BC:
+    W0:
+      66: [VFNMADD231PS, Vpv, Hpv, Wpv]
+    W1:
+      66: [VFNMADD231PD, Vpv, Hpv, Wpv]
+  BD:
+    W0:
+      66: [VFMNADD231SS, Vsv, Hsv, Wsv]
+    W1:
+      66: [VFMNADD231SD, Vsv, Hsv, Wsv]
+  BE:
+    W0:
+      66: [VFMNSUB231PS, Vpv, Hpv, Wpv]
+    W1:
+      66: [VFMNSUB231PD, Vpv, Hpv, Wpv]
+  BF:
+    W0:
+      66: [VFMNSUB231SS, Vsv, Hsv, Wsv]
+    W1:
+      66: [VFMNSUB231SD, Vsv, Hsv, Wsv]
   CF:
     W0:
       66: [VGF2P8MULB, Vpv, Hpw, Wpv]
@@ -717,6 +904,12 @@ map0F38:
       F3: [SARX, Gq, Bq, Eq]
       F2: [SHRX, Gq, Bq, Eq]
 map0F3A:
+  02:
+    W0:
+      66: [VPBLENDD, Vpv, Hpv, Wpv, Ib]
+  06:
+    W0:
+      66: [VPERM2F128, Vpv, Hpv, Wpv, Ib]
   08:
     WIG:
       66: [VROUNDPS, Vpv, Wpv, Ib]
@@ -755,6 +948,9 @@ map0F3A:
   17:
     WIG:
       66: [VEXTRACTPS, Ed, Vpv, Ib]
+  18:
+    W0:
+      66: [VINSERTF128, Vpv, Hpv, Wpv, Ib]
   19:
     W0:
       66: [VEXTRACTF128, Wpv, Vpv, Ib]
@@ -772,6 +968,9 @@ map0F3A:
       66: [VPINSRD, Vpv, Hpv, Ed, Ib]
     W1:
       66: [VPINSRQ, Vpv, Hpv, Eq, Ib]
+  38:
+    W0:
+      66: [VINSERTI128, Vpv, Hpv, Wpv, Ib]
   39:
     W0:
       66: [VEXTRACTI128, Wpv, Vpv, Ib]
@@ -787,6 +986,9 @@ map0F3A:
   44:
     WIG:
       66: [VPCLMULQDQ, Vpv, Hpv, Wpv, Ib]
+  46:
+    W0:
+      66: [VPERM2I128, Vpv, Hpv, Wpv, Ib]
   4A:
     W0:
       66: [VBLENDVPS, Vpv, Hpv, Wpv, Lpv]
