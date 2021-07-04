@@ -5,6 +5,7 @@ map:
   # [01] is in extensions
   02: [LAR, Gw, Ew]
   03: [LSL, Gw, Ew]
+  # [04]
   05: [SYSCALL]
   06: [CLTS]
   07: [SYSRET]
@@ -12,8 +13,12 @@ map:
   09:
     NP: [WBINVD] # TODO: no prefix mentioned
     F3: [WBNOINVD]
+  # [0A]
   0B: [UD2]
+  # [0C]
   # [0D] is in extensions
+  # [0E]
+  # [0F]
   10:
     NP: [MOVUPS, Vpv, Wpv]
     66: [MOVUPD, Vpv, Wpv]
@@ -45,6 +50,7 @@ map:
     NP: [MOVHPS, Mq, Vpv]
     66: [MOVHPD, Mq, Vpv]
   # [18] is in extensions
+  # TODO: [19] is reserved NOP???
   1A:
     NP: [BNDLDX, BGdq, M]
     66: [BNDMOV, BGdq, BEy]
@@ -55,15 +61,18 @@ map:
     66: [BNDMOV, BEy, BGdq]
     F3: [BNDMK, BGdq, My]
     F2: [BNDCN, BGdq, Ey]
-  # [1C] is in extensions
-  # [1E] is in extensions
+  # [1C] is in extensions # TODO: Also reserved NOP???
+  # TODO: [1D] is reserved NOP???
+  # [1E] is in extensions # TODO: Also reserved NOP???
   # [1F] is in extensions
   20: [MOV, Ry, Cy]
   21: [MOV, Ry, Dy]
   22: [MOV, Cy, Ry]
   23: [MOV, Dy, Ry]
-  24: [MOV, Ry, Ty]
-  26: [MOV, Ty, Ry]
+  24: [MOV, Ry, Ty] # TODO: undocumented
+  # [25]
+  26: [MOV, Ty, Ry] # TODO: undocumented
+  # [27]
   28:
     NP: [MOVAPS, Vpv, Wpv]
     66: [MOVAPD, Vpv, Wpv]
@@ -100,8 +109,17 @@ map:
   33: [RDPMC]
   34: [SYSENTER]
   35: [SYSEXIT]
+  # [36]
   37:
     NP: [GETSEC]
+  # [38] is three byte escape (`threeByte0F38.yaml`)
+  # [39]
+  # [3A] is three byte escape (`threeByte0F3A.yaml`)
+  # [3B]
+  # [3C]
+  # [3D]
+  # [3E]
+  # [3F]
   # [40-4F] are in spans
   50:
     66: [MOVMSKPD, Gy, Vpv]
@@ -153,16 +171,16 @@ map:
     66: [SUBPD, Vpv, Wpv]
     F3: [SUBSS, Vsv, Wsv]
     F2: [SUBSD, Vsv, Wsv]
-  5E:
-    NP: [DIVPS, Vpv, Wpv]
-    66: [DIVPD, Vpv, Wpv]
-    F3: [DIVSS, Vsv, Wsv]
-    F2: [DIVSD, Vsv, Wsv]
   5D:
     NP: [MINPS, Vpv, Wpv]
     66: [MINPD, Vpv, Wpv]
     F3: [MINSS, Vsv, Wsv]
     F2: [MINSD, Vsv, Wsv]
+  5E:
+    NP: [DIVPS, Vpv, Wpv]
+    66: [DIVPD, Vpv, Wpv]
+    F3: [DIVSS, Vsv, Wsv]
+    F2: [DIVSD, Vsv, Wsv]
   5F:
     NP: [MAXPS, Vpv, Wpv]
     66: [MAXPD, Vpv, Wpv]
@@ -234,6 +252,10 @@ map:
     66: [PCMPEQD, Vpv, Wpv]
   77:
     NP: [EMMS]
+  # TODO: [78] is VMREAD
+  # TODO: [79] is VMWRITE
+  # [7A]
+  # [7B]
   7C:
     66: [HADDPD, Vpv, Wpv]
     F2: [HADDPS, Vpv, Wpv]
@@ -256,6 +278,8 @@ map:
   A3: [BT, Ev, Gv]
   A4: [SHLD, Ev, Gv, Ib]
   A5: [SHLD, Ev, Gv, CL]
+  # [A6]
+  # [A7]
   A8: [POP, GS]
   A9: [POP, GS]
   AA: [RSM]
