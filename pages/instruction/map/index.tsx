@@ -412,7 +412,8 @@ export default function Page(): JSX.Element {
                             <li><A href="/instruction/map/threeByte0F38">Three Byte (<code>0F 38</code>) Opcode Map</A></li>
                             <li><A href="/instruction/map/threeByte0F3A">Three Byte (<code>0F 3A</code>) Opcode Map</A></li>
                             <li><A href="/instruction/map/x87">x87 FPU (<code>ESC</code>) Opcode Map</A></li>
-                            <li><A href="/instruction/map/vex">(E)VEX Opcode Map</A></li>
+                            <li><A href="/instruction/map/vex">VEX Opcode Map</A></li>
+                            <li><A href="/instruction/map/evex">EVEX Opcode Map</A></li>
                         </ul>
                     </ContentCol>
                 </Row>
