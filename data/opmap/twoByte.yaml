@@ -280,7 +280,7 @@ map:
   A5: [SHLD, Ev, Gv, CL]
   # [A6]
   # [A7]
-  A8: [POP, GS]
+  A8: [PUSH, GS]
   A9: [POP, GS]
   AA: [RSM]
   AB: [BTS, Ev, Gv]
