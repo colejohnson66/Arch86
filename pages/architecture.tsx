@@ -14,6 +14,7 @@
  * You should have received a copy of the GNU Affero General Public License
  *   along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
+
 import { Breadcrumb, Container, ContentCol, Row } from "../components/Bootstrap";
 import Layout, { Title } from "../components/Layout";
 
@@ -33,17 +34,17 @@ export default function Page(): JSX.Element {
                 </Breadcrumb.Root>
                 <Row>
                     <TOC.Root>
-                        <TOC.Entry href="#headingHistory" text="History" />
-                        <TOC.Entry href="#headingRegisters" text="Registers" />
+                        {/* <TOC.Entry href="#headingHistory" text="History" /> */}
                     </TOC.Root>
                     <ContentCol>
                         <h1>Microarchitecture</h1>
+                        <WIP page />
                         <p>
                             Over the years, there have been many versions of the x86 microarchitecture.
                             It began with the <A href="/architecture/8086">8086</A> (released <DateTime dateTime="1979-06-08" />), and continues to this day with the various &quot;Intel Core&quot; microarchitectures.
                         </p>
 
-                        <h2 id="headingHistory">History</h2>
+                        {/* <h2 id="headingHistory">History</h2>
                         <WIP section />
                         <ul>
                             <li><A href="/architecture/8086">8086</A></li>
@@ -67,7 +68,7 @@ export default function Page(): JSX.Element {
                                 </ul>
                             </li>
                             <li>...</li>
-                        </ul>
+                        </ul> */}
                     </ContentCol>
                 </Row>
             </Container>
