@@ -1,8 +1,9 @@
 module.exports = {
     reactStrictMode: true,
     webpack: (config, { isServer }) => {
-        if (isServer)
-            require("./scripts/generateSitemap");
+        // `globby` now requires ESM
+        // if (isServer)
+        //     require("./scripts/generateSitemap");
         return config;
     }
 };

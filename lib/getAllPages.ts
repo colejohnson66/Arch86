@@ -14,15 +14,16 @@
  * You should have received a copy of the GNU Affero General Public License
  *   along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
+
 import { getAllInstructionsArray } from "./instruction";
-import globby from "globby";
+import { globbySync as globby } from "globby";
 import path from "path";
 
 const pagesDirectory = path.join(process.cwd(), "pages");
 
 export function getAllPages(): string[] {
     // basic pages
-    const ret: string[] = globby.sync([
+    const ret: string[] = globby([
         "**/*",
         "!404",
         "!_*",
