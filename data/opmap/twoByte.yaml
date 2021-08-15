@@ -499,26 +499,38 @@ extensions:
     M/1/b: [SIDT, Ms]
     M/2/b: [LGDT, Ms]
     M/3/b: [LIDT, Ms]
-    M/4/b: [SMSW, Ev]
-    M/5/b: [RSTORSSP, Mq]
+    M/4/b: [SMSW, Ev] # See also `R/4/b`
+    M/5/b: [RSTORSSP, Mq] # TODO: F3
     M/6/b: [LMSW, Ew] # See also `R/6/b`
     M/7/b: [INVLPG, M]
-    R/0/5: [PCONFIG]
-    R/1/0: [MONITOR]
-    R/1/1: [MWAIT]
-    R/1/2: [CLAC]
+    R/0/0: [ENCLV] # TODO: NP
+    R/0/1: [VMCALL] # TODO: NP
+    R/0/2: [VMLAUNCH] # TODO: NP
+    R/0/3: [VMRESUME] # TODO: NP
+    R/0/4: [VMXOFF] # TODO: NP
+    R/0/5: [PCONFIG] # TODO: NP
+    R/1/0: [MONITOR] # TODO: NP
+    R/1/1: [MWAIT] # TODO: NP
+    R/1/2: [CLAC] # TODO: NP
     R/1/3: [STAC] # TODO: NP
-    R/2/0: [XGETBV]
-    R/2/1: [XSETBV]
-    R/2/5: [XEND]
-    R/2/6: [XTEST]
-    R/5/0: [SETSSBSY]
-    R/5/2: [SAVEPREVSSP]
+    R/1/7: [ENCLS] # TODO: NP
+    R/2/0: [XGETBV] # TODO: NP
+    R/2/1: [XSETBV] # TODO: NP
+    R/2/4: [VMFUNC] # TODO: NP
+    R/2/5: [XEND] # TODO: NP
+    R/2/6: [XTEST] # TODO: NP
+    R/2/7: [ENCLU] # TODO: NP
+    R/4/b: [SMSW, Ev] # See also `M/4/b`
+    R/5/0: [SETSSBSY] # TODO: F3
+    R/5/2: [SAVEPREVSSP] # TODO: F3
     R/5/6: [RDPKRU] # TODO: NP
     R/5/7: [WRPKRU]
     R/6/b: [LMSW, Ew] # See also `M/6/b`
     R/7/0: [SWAPGS]
     R/7/1: [RDTSCP]
+    R/7/2: [MONITORX]
+    R/7/3: [MWAITX]
+    R/7/4: [CLZERO]
   0D:
     form: m/r
     M/1: [PREFETCHW, Mb]

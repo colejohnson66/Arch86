@@ -28,6 +28,7 @@ map:
     66: [EXTRACTPS, Ed, Vpv, Ib]
   20:
     66: [PINSRB, Vpv, Eb, Ib]
+    # TODO: !!!
   22:
     66: [PINSRD, Vpv, Ed, Ib] # TODO: REX.W is PINSRQ
   21:
