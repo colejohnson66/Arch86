@@ -1,5 +1,5 @@
 /* This file is part of 80x86.
- * Copyright (c) 2021 Cole Johnson
+ * Copyright (c) 2021 Cole Tobin
  *
  * This program is free software: you can redistribute it and/or modify it under
  *   the terms of the GNU Affero General Public License as published by the Free
@@ -174,7 +174,7 @@ const functions: IDictionary<(arg: string) => JSX.Element> = {
 };
 
 /**
- * Formats a string using functions following a syntax similar to Tex
+ * Formats a string using functions following a syntax similar to TeX
  *
  * @param str The string to format
  *

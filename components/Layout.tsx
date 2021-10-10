@@ -1,5 +1,5 @@
 /* This file is part of 80x86.
- * Copyright (c) 2020-2021 Cole Johnson
+ * Copyright (c) 2020-2021 Cole Tobin
  *
  * This program is free software: you can redistribute it and/or modify it under
  *   the terms of the GNU Affero General Public License as published by the Free
@@ -14,6 +14,7 @@
  * You should have received a copy of the GNU Affero General Public License
  *   along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
+
 import { Col, Container, Nav, Navbar, Row } from "./Bootstrap";
 
 import A from "./A";
@@ -100,7 +101,7 @@ export default function Layout(props: LayoutProps): JSX.Element {
                                     <A href="/contact">Contact</A>.
                                 </p>
                                 <p>
-                                    Website copyright &copy; Cole Johnson 2020-2021.
+                                    Website copyright &copy; Cole Tobin 2020-2021.
                                 </p>
                             </small>
                         </Col>

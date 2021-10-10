@@ -166,7 +166,7 @@ const InstructionTitles: IDictionary<string> = {
     endbr32: `Terminate an Indirect Branch in 32 bit Mode`,
     endbr64: `Terminate an Indirect Branch in 64 bit Mode`,
     enter: `Make Stack Frame for Procedure Parameters`,
-    extractps: `Extract Packed Floating-Point Values`,
+    extractps: `Extract ${pspfp}`,
 };
 
 export default InstructionTitles;
