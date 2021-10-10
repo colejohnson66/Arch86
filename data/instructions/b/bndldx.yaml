@@ -2,7 +2,7 @@
 ---
 title: Load Extended Bounds Using Address Translation
 opcode:
-  - opcode: NP 0F 1A /r
+  - opcode: NP 0F 1A !(11):rrr:100
     mnemonic: BNDLDX \i{bnd}, \i{mib}
     encoding: RM
     validity:
@@ -20,18 +20,14 @@ encoding:
       - SIB.base[r] + SIB.index[r]
 description: >-
   The \c{BNDLDX} instruction conditionally loads the destination operand with the bounds referenced at the address pointed to by the source operand.
-  This is conditional on the value contained in the register referenced in the SIB's index field matching the value stored in the bounds table entry.
+  This is conditional on the value contained in the register referenced in the SIB byte's \c{index} field matching the value stored in the bounds table entry.
   If the check fails, the destination is set to the \c{INIT} bounds value (lower = \c{0}, upper = \c{0}), allowing access to all available memory.
 
   The second source operand \i{must} be a memory operand encoded using an SIB byte.
   The \c{base} field of the SIB byte contains the address of the bounds table, and the \c{index} field contains the buffer's offset.
-  The \c{scale} field is ignored (treated as \c{0b00} (scale of 1)).
+  The \c{scale} field is ignored.
   If a displacement is provided, it is added to the \c{base} register's value.
-  At no time is memory referenced by the SIB byte accessed (the memory contained at the address referenced by the \c{base} \i{is}, however), and the flags are untouched.
-
-  Which instruction form (32 or 64 bit) is used depends on the operating mode of the processor.
-  In 16 and 32 bit mode, the 32 bit form is used, and, in 64 bit mode, the 64 bit form is used.
-  If a memory address is used as the second source operand, this distinction is irrelevant.
+  At no time is memory directly referenced by the SIB byte accessed (the memory contained at the address referenced by the \c{base} \i{is}, however), and the flags are untouched.
 operation: |-
   public void BNDLDX_1632(Bound dest, Sib addr)
   {
@@ -42,7 +38,8 @@ operation: |-
     uint a_bt = mem[a_bde];
     if (a_bt.Bit[0] == 0)
     {
-      BNDSTATUS = a_bde | 0x02;
+      BNDSTATUS.bde = a_bde;
+      BNDSTATUS.ec = 2; // Invalid BD entry
       #BR;
     }
 
@@ -71,7 +68,8 @@ operation: |-
     ulong a_bt = mem[a_bde];
     if (a_bt.Bit[0] == 0)
     {
-      BNDSTATUS = a_bde | 0x02;
+      BNDSTATUS.bde = a_bde;
+      BNDSTATUS.ec = 2; // Invalid BD entry
       #BR;
     }
 
@@ -93,52 +91,45 @@ operation: |-
 operationNotes:
   - >-
     If \c{CPL} (protection ring) is less than 3, the supervisor \c{MAWA} (\c{MAWAS}) is used, which is 0.
-    Otherwise, the user \c{MAWA} (\c{MAWAU}) is used; it's value is enumerated in \cpuid{eax,07,ecx,00,,ecx,mawau,21..17}.
+    Otherwise, the user \c{MAWA} (\c{MAWAU}) is used; it's value is enumerated in \cpuid{eax=07,ecx=00,,ecx=17..23=mawau}.
 exceptions:
   protected:
     "#BR": If the bound directory entry is invalid.
     "#UD":
-      - If the \instr{LOCK} prefix is used.
-      - If \c{ModRM.r/m} does not encode \c{BND0} through \c{BND3} (i.e. contains a 4, 5, 6, or 7).
-      - If the address size overload prefix (\c{67h}) is used when \c{CS.D} is \c{1}.
-      - If the address size overload prefix is \i{not} used when \c{CS.D} is \c{0}.
+      - \exception{lock}
+      - If \cpuid{eax=07,ecx=00,,ebx=14=mpx} is \c{0}.
+      - If \c{ModRM.reg} does not encode \c{BND0} through \c{BND3} (i.e. contains a 4 or higher).
+      - If 16 bit addressing is used.
     "#GP(0)":
       - If the destination's effective address of the Bound Table entry is outside the \reg{DS} segment limit.
       - If the \reg{DS} segment contains a \c{NULL} segment selector.
-    "#PF(fault-code)": If a page fault occurs.
+    "#PF(fc)": \exception{pf}
   real:
     "#BR": If the bound directory entry is invalid.
     "#UD":
-      - If the \instr{LOCK} prefix is used.
-      - If \c{ModRM.r/m} does not encode \c{BND0} through \c{BND3} (i.e. contains a 4, 5, 6, or 7).
+      - \exception{lock}
+      - If \cpuid{eax=07,ecx=00,,ebx=14=mpx} is \c{0}.
+      - If \c{ModRM.reg} does not encode \c{BND0} through \c{BND3} (i.e. contains a 4 or higher).
       - If 16 bit addressing is used.
     "#GP(0)":
       - If the destination's effective address of the Bound Table entry is outside the \reg{DS} segment limit.
       - If the \reg{DS} segment contains a \c{NULL} segment selector.
-  virtual:
-    "#BR": If the bound directory entry is invalid.
-    "#UD":
-      - If the \instr{LOCK} prefix is used.
-      - If \c{ModRM.r/m} does not encode \c{BND0} through \c{BND3} (i.e. contains a 4, 5, 6, or 7).
-      - If 16 bit addressing is used.
-    "#GP(0)":
-      - If the destination's effective address of the Bound Table entry is outside the \reg{DS} segment limit.
-      - If the \reg{DS} segment contains a \c{NULL} segment selector.
-    "#PF(fault-code)": If a page fault occurs.
+  virtual: Same exceptions as protected mode.
   compatibility: Same exceptions as protected mode.
   long:
     "#BR": If the bound directory entry is invalid.
     "#UD":
-      - If the \instr{LOCK} prefix is used.
-      - If \c{ModRM.r/m} does not encode \c{BND0} through \c{BND3} (i.e. contains any of 4 through 15).
-      - If the address size overload prefix (\c{67h}) is used when \c{CS.D} is \c{1}.
-      - If the address size overload prefix is \i{not} used when \c{CS.D} is \c{0}.
+      - \exception{lock}
+      - If \cpuid{eax=07,ecx=00,,ebx=14=mpx} is \c{0}.
+      - If \c{ModRM.reg} does not encode \c{BND0} through \c{BND3} (i.e. contains a 4 or higher).
+      - If 16 bit addressing is used.
     "#GP(0)": If the memory address (\c{A_BDE} or \c{A_BTE}) is in non-canonical form.
-    "#PF(fault-code)": If a page fault occurs.
+    "#PF(fc)": \exception{pf}
 changes:
-  version: 73
-  date: 2020-11
+  version: 75
+  date: 2021-06
   list:
     - >-
       The overview table only mentions 32 and 64 bit mode support.
       However, this instruction is supported in all modes.
+    - The encoding of the ModR/M byte has been changed from \c{/r} to show the restrictions on it.

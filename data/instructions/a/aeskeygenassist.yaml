@@ -35,8 +35,9 @@ description: >-
   The \c{(V)AESKEYGENASSIST} instruction assists in expanding the AES cipher key using an 8 bit round constant (RCON) and 128 bits of data from the source operand.
   The result is stored in the destination operand.
 
-  The VEX form of this instruction reserves \c{VEX.vvvv} (i.e. it must be set to \c{0b1111}).
-  Failure to do so will result in a \c{#UD} exception.
+  \canned{vvvvReserved,vex}
+
+  \canned{zeroUpperSimd}
 operation: |-
   public void AESKEYGENASSIST(SimdU32 dest, SimdU32 src, byte roundConstant)
   {
@@ -50,7 +51,7 @@ operation: |-
     dest[1] = RotWord(SubWord(x1)) ^ rcon;
     dest[2] = SubWord(x3);
     dest[3] = RotWord(SubWord(x3)) ^ rcon;
-    // dest[4..Simd.MAX] (unmodified)
+    // dest[4..SimdU32.MAX] (unmodified)
   }
 
   public void VAESKEYGENASSIST_Vex128(SimdU32 dest, SimdU32 src, byte roundConstant)
@@ -65,12 +66,12 @@ operation: |-
     dest[1] = RotWord(SubWord(x1)) ^ rcon;
     dest[2] = SubWord(x3);
     dest[3] = RotWord(SubWord(x3)) ^ rcon;
-    dest[4..Simd.MAX] = 0;
+    dest[4..SimdU32.MAX] = 0;
   }
 intrinsics: |-
   __m128i _mm_aeskeygenassist(__m128i data, uint8_t roundConstant)
 exceptions:
   floating: None
-  other: See Exceptions Type 4.
+  other: \exceptionVex{4}
   otherAdditional:
-    "#UD": If \c{VEX.vvvv} is not \c{0b1111}.
+    "#UD": \exception{vex.vvvv}

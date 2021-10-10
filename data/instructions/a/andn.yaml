@@ -33,11 +33,9 @@ description: >-
   The \c{ANDN} instruction performs a logical AND against the inverted form of the first source operand with the unchanged second source operand.
   The result is stored in in the destination operand.
 
-  The operand size (\c{W} bit) is always 32 bits if not in Long Mode.
-  In other words, in Protected and Compatibility Mode, \c{VEX.W1} is treated as \c{VEX.W0}.
+  \canned{vexWIgnoredIn32}
 
-  The length field (\c{L} bit) \i{must} be zero (signifying 128 bit vectors).
-  Attempts to execute with \c{VEX.L1} (256 bit vectors) will cause a \c{#UD} exception.
+  \canned{vexLMustBe0}
 operation: |-
   public void ANDN_32(ref uint dest, uint src1, uint src2)
   {
@@ -57,15 +55,15 @@ flags:
   OF: Cleared.
 exceptions:
   floating: None
-  other: See Exceptions Type 13.
+  other: \exceptionVex{13}
   otherAdditional:
-    "#UD": If \c{VEX.L} is not \c{0}.
+    "#UD": \exception{vex.l}
 changes:
-  version: 73
-  date: 2020-11
+  version: 75
+  date: 2021-06
   list:
     - >-
-      The \c{ANDN r64a, r64b, r/m64} form is incorrectly documented as being "not encodable" in 32 bit mode.
+      The \c{ANDN r64a, r64b, r/m64} form is documented as being "not encodable" in 32 bit mode.
       This is misleading as it \i{is} encodable, but is defined to be treated as the 32 bit form.
     - >-
       The \c{#UD} exception is not present in their exceptions list.

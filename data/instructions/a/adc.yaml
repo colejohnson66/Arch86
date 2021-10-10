@@ -209,9 +209,7 @@ description: >-
   This instruction is designed for use in multibyte additions such as in arbitrary precision arithmetic.
   It does not differentiate between signed and unsigned operands, but will set the \reg{OF} and \reg{CF} to indicate a carry for signed and unsigned results (respectively).
 
-  This instruction can be used with the \instr{LOCK} prefix to allow atomic execution.
-
-  In 64 bit mode, the default operand size is 32 bits, but \c{REX.W} will change it to 64 bits.
+  \canned{lockable}
 operation: >-
   // `src` is sign extended to the width of `dest`
 
@@ -249,27 +247,27 @@ intrinsics: |-
 exceptions:
   protected:
     "#GP(0)":
-      - If the destination is located in a non-writable segment.
-      - If a memory operand effective address is outside the \reg{CS}, \reg{DS}, \reg{ES}, \reg{FS}, or \reg{GS} segment limit.
-      - If the \reg{DS}, \reg{ES}, \reg{FS}, or \reg{GS} register is used to access memory and it contains a \c{NULL} segment selector.
-    "#SS(0)": If a memory operand effective address is outside the \reg{SS} segment limit.
-    "#PF(fault-code)": If a page fault occurs.
-    "#AC(0)": If alignment checking is enabled and an unaligned memory reference is made while the current privilege level is 3.
-    "#UD": If the \instr{LOCK} prefix is used but the destination is not a memory operand.
+      - \exception{nonWritableSegment}
+      - \exception{segLimit}
+      - \exception{nullSelector}
+    "#SS(0)": \exception{segLimitSS}
+    "#PF(fc)": \exception{pf}
+    "#AC(0)": \exception{ac}
+    "#UD": \exception{lockNoMem}
   real:
-    "#GP": If a memory operand effective address is outside the \reg{CS}, \reg{DS}, \reg{ES}, \reg{FS}, or \reg{GS} segment limit.
-    "#SS": If a memory operand effective address is outside the \reg{SS} segment limit.
-    "#UD": If the \instr{LOCK} prefix is used but the destination is not a memory operand.
+    "#GP": \exception{segLimit}
+    "#SS": \exception{segLimitSS}
+    "#UD": \exception{lockNoMem}
   virtual:
-    "#GP(0)": If a memory operand effective address is outside the \reg{CS}, \reg{DS}, \reg{ES}, \reg{FS}, or \reg{GS} segment limit.
-    "#SS(0)": If a memory operand effective address is outside the \reg{SS} segment limit.
-    "#PF(fault-code)": If a page fault occurs.
-    "#AC(0)": If alignment checking is enabled and an unaligned memory reference is made.
-    "#UD": If the \instr{LOCK} prefix is used but the destination is not a memory operand.
+    "#GP(0)": \exception{segLimit}
+    "#SS(0)": \exception{segLimitSS}
+    "#PF(fc)": \exception{pf}
+    "#AC(0)": \exception{ac}
+    "#UD": \exception{lockNoMem}
   compatibility: Same exceptions as in protected mode.
   long:
-    "#SS(0)": If a memory address referencing the \reg{SS} segment is in a non-canonical form.
-    "#GP(0)": If a memory operand address is in a non-canonical form.
-    "#PF(fault-code)": If a page fault occurs.
-    "#AC(0)": If alignment checking is enabled and an unaligned memory reference is made while the current privilege level is 3.
-    "#UD": If the \instr{LOCK} prefix is used but the destination is not a memory operand.
+    "#SS(0)": \exception{nonCanonSS}
+    "#GP(0)": \exception{nonCanon}
+    "#PF(fc)": \exception{pf}
+    "#AC(0)": \exception{ac}
+    "#UD": \exception{lockNoMem}

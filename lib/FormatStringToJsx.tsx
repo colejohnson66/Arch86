@@ -15,53 +15,143 @@
  *   along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 /* eslint-disable react/display-name */
+
 import IDictionary from "../types/IDictionary";
 import Instruction from "../components/Instruction";
 import React from "react";
 import { strict as assert } from "assert";
+
+const cannedNoArg: IDictionary<JSX.Element> = {
+    evexNoER: <>The EVEX form of this instruction does <i>not</i> support memory fault suppression.</>,
+
+    lockable: <>This instruction can be used with the <Instruction name="LOCK" noTitle /> prefix to allow atomic exectution.</>,
+
+    vexLMustBe0: (
+        <>
+            The length field (the <code>L</code> bit) <i>must</i> be zero (signifying 128 bit vectors).
+            Using <code>L1</code> will raise a <code>#UD</code> exception.
+        </>
+    ),
+
+    vexLShouldBe0: (
+        <>
+            Although this instruction works with any value of <code>(E)VEX.L</code> (<code>LIG</code>), Intel reccomends that assemblers set <code>(E)VEX.L</code> to 0.
+        </>
+    ),
+
+    vexWIgnoredIn32: (
+        <>
+            The operand size is always 32 bits if not in 64 bit mode.
+            In other words, <code>VEX.W1</code> is treated as <code>VEX.W0</code> outside 64 bit mode.
+        </>
+    ),
+
+    zeroUpperSimd: <>All versions <i>except</i> the legacy SSE form will zero the upper (unused) SIMD register bits.</>,
+};
+
+const cannedArgs: IDictionary<(arg: string) => JSX.Element> = {
+    no16: (arg) => {
+        if (arg === "invalid")
+            return <>This instruction is invalid in 16 bit mode, and, if encountered, the processor will raise a <code>#UD</code> exception.</>;
+        assert(false);
+    },
+
+    no64: (arg) => {
+        if (arg === "invalid")
+            return <>This instruction is invalid in 64 bit mode, and, if encountered, the processor will raise a <code>#UD</code> exception.</>;
+        if (arg.startsWith("ne,"))
+            return <>This instruction is not encodable in 64 bit mode, and, if encountered, will be treated as the <Instruction name={arg.substring(3)} /> instruction.</>;
+        assert(false);
+    },
+
+    vvvvReserved: (arg) => {
+        if (arg === "both")
+            return <><code>VEX.vvvv</code> and <code>EVEX.vvvvv</code> are reserved and must be <code>b1111</code> and <code>b11111</code> (respectively). Any other values will raise a <code>#UD</code> exception.</>;
+        else if (arg === "vex")
+            return <><code>VEX.vvvv</code> is reserved and must be <code>b1111</code>. Any other values will raise a <code>#UD</code> exception.</>;
+        else if (arg === "evex")
+            return <><code>EVEX.vvvvv</code> is reserved and must be <code>b11111</code>. Any other values will raise a <code>#UD</code> exception.</>;
+        assert(false);
+    },
+};
+
+// "canned" exception responses
+const exceptions: IDictionary<JSX.Element> = {
+    ac: <>If alignment checking is enabled and an unaligned memory reference is made while the current privilege level is 3.</>,
+    "evex.vvvvv": <>If <code>EVEX.vvvvv</code> is not <code>b11111</code>.</>,
+    in64: <>If in 64 bit mode.</>,
+    lock: <>If the <Instruction name="LOCK" noTitle /> prefix is used.</>,
+    lockNoMem: <>If the <Instruction name="LOCK" noTitle /> prefix is used, but the destination is not a memory operand.</>,
+    nonCanon: <>If a memory operand address is in non-canonical form.</>, // TODO: link to a page on what canonical addressing is
+    nonCanonSS: <>If a memory operand addressing the <code>SS</code> segment is in non-canonical form.</>,
+    pf: <>If a page fault occurs.</>,
+    nonWritableSegment: <>If the destination is located in a non-writable segment.</>,
+    nullSelector: <>If a memory access uses a semgent containing a <code>NULL</code> selector.</>,
+    segLimit: <>If a memory operand (using a segment that isn&apos;t <code>SS</code>) has an effective address is outside that segment&apos;s limit.</>,
+    segLimitSS: <>If a memory operand&apos;s using the <code>SS</code> segment has an effective address is outside the <code>SS</code> segment limit.</>,
+    "vex.l": <>If <code>VEX.L</code> is not 0.</>,
+    "vex.vvvv": <>If <code>VEX.vvvv</code> is not <code>b1111</code>.</>,
+};
 
 // `\bits` may change, so don't combine with `\c`
 // `\reg` may change, so don't combine with `\c`
 // `\cpuid` is currently fancy syntax around `\c`, but this may change
 const functions: IDictionary<(arg: string) => JSX.Element> = {
     bits: (arg) => (<code>{arg}</code>),
+
     bitRef: (arg) => (<sup>[{arg}]</sup>),
+
     c: (arg) => (<code>{arg}</code>),
+
+    canned: (arg) => {
+        const split = arg.split(",");
+        if (split.length === 1)
+            return cannedNoArg[split[0]];
+
+        const args = split.slice(1).join(",");
+        return cannedArgs[split[0]](args);
+    },
+
     cpuid: (arg) => {
         /**
-         * arg is a comma separated list with an empty parameter for separation of CPUID arguments and result.
-         * For example, `eax,07,ecx,00,,ebx,adx,19` will become `CPUID[EAX=07h,ECX=0]:EBX.ADX[bit 19]`.
-         * Multiple bit results will use "range syntax" (eg. `0..=1` for the two LSB).
-         * Currently, the result portion must only have 3 parameters.
+         * arg is formatted as follows:
+         *   reg1=val1,,reg=bit=name
+         *   reg1=val1,reg2=val2,,reg=bit=name
+         *   ...
+         * For example, `eax=07,ecx=00,,ebx=19=adx` will become `CPUID[EAX=07h,ECX=0]:EBX[bit 19 (ADX)]`.
+         * Currently, the result portion must only have 1 value.
          */
         const args = arg.split(",,");
         assert(args.length === 2);
 
-        const cpuidArgs = args[0].split(",");
-        assert(cpuidArgs.length !== 0 && cpuidArgs.length % 2 === 0);
-        const cpuidArgsStr: string[] = [];
-        for (let i = 0; i < cpuidArgs.length; i += 2)
-            cpuidArgsStr.push(`${cpuidArgs[i].toUpperCase()}=${cpuidArgs[i + 1]}h`);
+        let cpuidArgs = args[0].split(",");
+        assert(cpuidArgs.length !== 0);
+        cpuidArgs = cpuidArgs.map((arg) => `${arg.toUpperCase()}h`);
 
-        const cpuidResult = args[1].split(",");
-        assert(cpuidResult.length === 3);
-        let cpuidResultStr = `${cpuidResult[0].toUpperCase()}.${cpuidResult[1].toUpperCase()}[`;
-        cpuidResultStr += (cpuidResult[2].indexOf("..") === -1) ? "bit " : "bits ";
-        cpuidResultStr += `${cpuidResult[2]}]`;
+        let cpuidResult = args[1].split(",");
+        assert(cpuidResult.length === 1);
+        cpuidResult = cpuidResult[0].split("=").map((item) => item.toUpperCase());
 
         return (
             <code>
-                {"CPUID.("}
-                {cpuidArgsStr.join(",")}
-                {"):"}
-                {cpuidResultStr}
+                CPUID.[{cpuidArgs}]:{cpuidResult[0]}[bit {cpuidResult[1]}] ({cpuidResult[2]})
             </code>
         );
     },
+
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     en: (_) => (<>&ndash;</>),
+
     error: (arg) => (<b className="text-danger">{arg}</b>),
+
+    exception: (arg) => (exceptions[arg]),
+
+    exceptionEvex: (arg) => (<>EVEX encoded form: see &quot;Exception Type {arg}&quot;.</>),
+
+    exceptionVex: (arg) => (<>VEX encoded form: see &quot;Exception Type {arg}&quot;.</>),
+
     i: (arg) => (<i>{arg}</i>),
+
     img: (arg) => {
         /**
          * arg is a comma separated list of parameters of the form:
@@ -74,9 +164,12 @@ const functions: IDictionary<(arg: string) => JSX.Element> = {
             return <img src={args[0]} alt="" />;
         return <img src={args[0]} alt={args[1]} />;
     },
+
     instr: (arg) => (<Instruction name={arg} />),
+
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     nbsp: (_) => (<>&nbsp;</>),
+
     reg: (arg) => (<code>{arg}</code>),
 };
 
@@ -99,7 +192,7 @@ export function formatStringToJsx(str?: string): JSX.Element {
     // [idx % 3 === 0]: plaintext
     // [idx % 3 === 1]: "func"
     // [idx % 3 === 2]: "data"
-    const arr = str.split(/\\([a-z]+){([^}]*)}/);
+    const arr = str.split(/\\([a-zA-Z0-9]+){([^}]*)}/);
     assert(arr.length % 3 === 1);
 
     const ret: JSX.Element[] = [];

@@ -38,13 +38,10 @@ description: >-
   The control register contains 16 bits: the lower eight are the starting index into the slice, and the upper eight is the amount of bits to extract.
   In other words, the destination register will be filled least significant to most significant by copying from the source, beginning at the starting position (where 0 indicates the least significant bit).
   The length field determines how many bits are extracted.
-  This operation can be thought of as shifting the source right by "start" bits and then zeroing all bits with positions greater than or equal to "length".
 
-  The operand size (\c{W} bit) is always 32 bits if not in Long Mode.
-  In other words, in Protected and Compatibility Mode, \c{VEX.W1} is treated as \c{VEX.W0}.
+  \canned{vexWIgnoredIn32}
 
-  The length field (\c{L} bit) \i{must} be zero (signifying 128 bit vectors).
-  Attempts to execute with \c{VEX.L1} (256 bit vectors) will cause a \c{#UD} exception.
+  \canned{vexLMustBe0}
 operation: |-
   public void BEXTR_32(ref uint dest, uint src1, uint src2)
   {
@@ -73,17 +70,16 @@ intrinsics: |-
   uint64_t _bextr_u64(uint64_t src, uint32_t start, uint32_t len)
 exceptions:
   floating: None
-  other: See Exceptions Type 13.
+  other: \exceptionVex{13}
   otherAdditional:
-    "#UD": If \c{VEX.L} is not \c{0}.
+    "#UD": \exception{vex.l}
 changes:
-  version: 73
-  date: 2020-11
+  version: 75
+  date: 2021-06
   list:
     - >-
       The "Exceptions" section lists the \c{#UD} as occurring when \c{VEX.W = 1}.
-      Assuming they forgot to say "when in 32 bit mode", it still wouldn't make sense as their description lists \c{VEX.W = 1} to be treated as \c{VEX.W = 0} in 32 bit mode.
-      The most likely typo seems to be that it should be \c{VEX.L}.
+      The most likely typo seems to be that it should be when \c{VEX.L = 1}.
     - >-
-      The \c{BEXTR r64a, r/m64, r64b} form is incorrectly documented as being "not encodable" in 32 bit mode.
+      The \c{BEXTR r64a, r/m64, r64b} form is documented as being "not encodable" in 32 bit mode.
       This is misleading as it \i{is} encodable, but is defined to be treated as the 32 bit form.

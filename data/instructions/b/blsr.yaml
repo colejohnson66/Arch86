@@ -33,13 +33,10 @@ description: >-
   All other bits in the source operand are untouched.
 
   The \reg{CF} flag is set if the source is not zero.
-  This can be useful to detect if the destination operand will have anything set without actually testing it.
 
-  The operand size (\c{W} bit) is always 32 bits if not in Long Mode.
-  In other words, in Protected and Compatibility Mode, \c{VEX.W1} is treated as \c{VEX.W0}.
+  \canned{vexWIgnoredIn32}
 
-  The length field (\c{L} bit) \i{must} be zero (signifying 128 bit vectors).
-  Attempts to execute with \c{VEX.L1} (256 bit vectors) will cause a \c{#UD} exception.
+  \canned{vexLMustBe0}
 operation: |-
   public void BLSR_32(ref uint dest, uint src)
   {
@@ -64,14 +61,14 @@ intrinsics: |-
   uint64_t _blsr_u64(uint64_t src)
 exceptions:
   floating: None
-  other: See Exceptions Type 13.
+  other: \exceptionVex{13}
 changes:
-  version: 73
-  date: 2020-11
+  version: 75
+  date: 2021-06
   list:
     - >-
       Officially, this instruction is titled "Reset Lowest Set Bit".
       This is changed here for consistency (clearing a bit sets it to 0).
     - >-
-      The \c{BLSR r64, r/m64} form is incorrectly documented as being "not encodable" in 32 bit mode.
+      The \c{BLSR r64, r/m64} form is documented as being "not encodable" in 32 bit mode.
       This is misleading as it \i{is} encodable, but is defined to be treated as the 32 bit form.

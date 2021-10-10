@@ -36,24 +36,25 @@ description: >-
 
   This instruction should be applied to the expanded AES round keys (excepting the first and last) to prepare them for decryption using the "Equivalent Inverse Cipher" (see FIPS 197).
 
-  The VEX form of this instruction reserves \c{VEX.vvvv} (i.e. it must be set to \c{0b1111}).
-  Failure to do so will result in a \c{#UD} exception.
+  \canned{vvvvReserved,vex}
+
+  \canned{zeroUpperSimd}
 operation: |-
   public void AESIMC(SimdU128 dest, SimdU128 src)
   {
     dest[0] = AesInvMixColumns(src[0]);
-    // dest[1..Simd.MAX] (unmodified)
+    // dest[1..SimdU128.MAX] (unmodified)
   }
 
   public void VAESIMC_Vex128(SimdU128 dest, SimdU128 src)
   {
     dest[0] = AesInvMixColumns(src[0]);
-    dest[1..Simd.MAX] = 0;
+    dest[1..SimdU128.MAX] = 0;
   }
 intrinsics: |-
   __m128i _mm_aesimc(__m128i key)
 exceptions:
   floating: None
-  other: See Exceptions Type 4.
+  other: \exceptionVex{4}
   otherAdditional:
-    "#UD": If \c{VEX.vvvv} is not \c{0b1111}.
+    "#UD": \exception{vex.vvvv}

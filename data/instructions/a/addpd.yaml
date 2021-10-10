@@ -85,26 +85,26 @@ encoding:
     EVEX:
       - Full
       - ModRM.reg[w]
-      - EVEX.vvvv[r]
+      - EVEX.vvvvv[r]
       - ModRM.r/m[r]
 description: >-
   The \c{(V)ADDPD} instruction adds two, four, or eight double-precision floating-point values from the first source operand to the second source operand.
   The result is stored in in the destination operand.
 
-  All versions \i{except} the legacy SSE version zero the unused upper SIMD register bits.
+  \canned{zeroUpperSimd}
 operation: |-
   public void ADDPD(SimdF64 dest, SimdF64 src)
   {
     dest[0] += src[0];
     dest[1] += src[1];
-    // dest[2..Simd.Max] (unmodified)
+    // dest[2..SimdF64.MAX] (unmodified)
   }
 
   void VADDPD_Vex(SimdF64 dest, SimdF64 src1, SimdF64 src2, int kl)
   {
     for (int n = 0; n < kl, n++)
       dest[n] = src1[n] + src2[n];
-    dest[kl..Simd.MAX] = 0;
+    dest[kl..SimdF64.MAX] = 0;
   }
   public void VADDPD_Vex128(SimdF64 dest, SimdF64 src1, SimdF64 src2)
   {
@@ -131,7 +131,7 @@ operation: |-
         dest[n] = 0;
       }
     }
-    dest[kl..Simd.MAX] = 0;
+    dest[kl..SimdF64.MAX] = 0;
   }
   public void VADDPD_Evex128Memory(SimdF64 dest, SimdF64 src1, SimdF64 src2, KMask k)
   {
@@ -160,7 +160,7 @@ operation: |-
       else if (EVEX.z)
         dest[n] = 0;
     }
-    dest[kl..Simd.MAX] = 0;
+    dest[kl..SimdF64.MAX] = 0;
   }
   public void VADDPD_Evex128Register(SimdF64 dest, SimdF64 src1, SimdF64 src2, KMask k)
   {
@@ -192,5 +192,5 @@ intrinsics: |-
 exceptions:
   floating: Overflow, Underflow, Invalid, Precision, Denormal
   other:
-    - "VEX encoded form: see Exceptions Type 2."
-    - "EVEX encoded form: see Exceptions Type E2."
+    - \exceptionVex{2}
+    - \exceptionEvex{E2}

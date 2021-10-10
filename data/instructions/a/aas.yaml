@@ -20,14 +20,12 @@ description: >-
 
   This instruction will not be useful unless it immediately follows an \instr{ADD} instruction using the \reg{AL} register and a single digit operand (either register or immediate).
 
-  Traditionally, this instruction is ASCII Adjust After Subtraction.
+  Traditionally, this instruction is "ASCII Adjust After Subtraction".
   This would lead one to believe that it works on ASCII digits (\c{030h} (\c{0}) through \c{039h} (\c{9})), however this would be incorrect.
   This instruction \i{actually} operates on BCD digits (\c{00h} (\c{0}) through \c{09h} (\c{9})).
 
-  This instruction is not valid in 64 bit mode, and if encountered, the processor will raise a \c{#UD} exception.
-  In 16 or 32 bit mode, this instruction will only modify the \reg{AF} and \reg{CF} flags.
-  The other arithmetic flags are undefined and undocumented.
-operation: >-
+  \canned{no64,invalid}
+operation: |-
   public void AAS()
   {
     if (((AL & 0xF) > 9) || AF)
@@ -46,9 +44,9 @@ flags:
   OF: Undefined.
 exceptions:
   protected:
-    "#UD": If the \instr{LOCK} prefix is used.
+    "#UD": \exception{lock}
   real: Same exceptions as protected mode.
   virtual: Same exceptions as protected mode.
   compatibility: Same exceptions as protected mode.
   long:
-    "#UD": If in 64 bit mode.
+    "#UD": \exception{in64}

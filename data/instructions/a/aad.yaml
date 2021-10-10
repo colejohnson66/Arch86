@@ -41,7 +41,7 @@ description: >-
   As such, it is possible to have this instruction work on other bases through an immediate 8 bit operand.
   Such methods are not guaranteed to be supported by your assembler, and in such situations, one must encode the instruction directly.
 
-  This instruction is not valid in 64 bit mode, and if encountered, the processor will raise a \c{#UD} exception.
+  \canned{no64,invalid}
 operation: |-
   public void AAD(byte imm8)
   {
@@ -52,7 +52,6 @@ operationImage: /img/instruction/a/aad.png
 operationNotes:
   - >-
     According to the source code for Bochs' (\c{/cpu/bcd.cc}), this instruction actually performs the operation on the \reg{AX} register, not \reg{AL}.
-    This is currently untested.
 flags:
   CF: Undefined.
   PF: Set based on the resulting value in \reg{AL}.
@@ -62,9 +61,9 @@ flags:
   OF: Undefined.
 exceptions:
   protected:
-    "#UD": If the \instr{LOCK} prefix is used.
+    "#UD": \exception{lock}
   real: Same exceptions as protected mode.
   virtual: Same exceptions as protected mode.
   compatibility: Same exceptions as protected mode.
   long:
-    "#UD": If in 64 bit mode.
+    "#UD": \exception{in64}

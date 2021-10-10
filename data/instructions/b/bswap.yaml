@@ -56,7 +56,7 @@ operation: |-
   }
 exceptions:
   protected:
-    "#UD": If the \instr{LOCK} prefix is used.
+    "#UD": \exception{lock}
   real: Same as protected mode.
   virtual: Same as protected mode.
   compatibility: Same as protected mode.

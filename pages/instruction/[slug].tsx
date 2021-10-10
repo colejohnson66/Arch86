@@ -14,6 +14,7 @@
  * You should have received a copy of the GNU Affero General Public License
  *   along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
+
 import { Alert, Breadcrumb, Container, ContentCol, Row, Table } from "../../components/Bootstrap";
 import { GetStaticPaths, GetStaticProps } from "next";
 import Layout, { Title } from "../../components/Layout";

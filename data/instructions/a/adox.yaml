@@ -32,8 +32,6 @@ description: >-
 
   This instruction is designed for use in multibyte additions such as in arbitrary precision arithmetic.
   The difference between this instruction and \instr{ADC} is that this one allows the creation of two "carry chains" \en{} one using \reg{OF} (this one) and one using \reg{CF} (\instr{ADCX}).
-
-  In 64 bit mode, the default operand size is 32 bits, but \c{REX.W} will change it to 64 bits.
 operation: >-
   public void ADOX_32(ref uint dest, uint src)
   {
@@ -57,34 +55,34 @@ intrinsics: |-
 exceptions:
   protected:
     "#UD":
-      - If the \instr{LOCK} prefix is used.
-      - If \cpuid{eax,07,ecx,00,,ebx,adx,19} is 0.
-    "#SS(0)": For an illegal address in the \reg{SS} segment.
+      - \exception{lock}
+      - If \cpuid{eax=07,ecx=00,,ebx=19=adx} is 0.
+    "#SS(0)": \exception{segLimitSS}
     "#GP(0)":
-      - For an illegal memory operand effective address in the \reg{CS}, \reg{DS}, \reg{ES}, \reg{FS}, or \reg{GS} segments.
-      - If the \reg{DS}, \reg{ES}, \reg{FS}, or \reg{GS} register is used to access memory and it contains a \c{NULL} segment selector.
-    "#PF(fault-code)": If a page fault occurs.
-    "#AC(0)": If alignment checking is enabled and an unaligned memory reference is made while the current privilege level is 3.
+      - \exception{segLimit}
+      - \exception{nullSelector}
+    "#PF(fc)": \exception{pf}
+    "#AC(0)": \exception{ac}
   real:
     "#UD":
-      - If the \instr{LOCK} prefix is used.
-      - If \cpuid{eax,07,ecx,00,,ebx,adx,19} is 0.
-    "#SS(0)": For an illegal address in the \reg{SS} segment.
-    "#GP(0)": If any part of the operand lies outside the effective address space from 0 to 0xFFFF.
+      - \exception{lock}
+      - If \cpuid{eax=07,ecx=00,,ebx=19=adx} is 0.
+    "#SS(0)": \exception{segLimitSS}
+    "#GP(0)": \exception{segLimit}
   virtual:
     "#UD":
-      - If the \instr{LOCK} prefix is used.
-      - If \cpuid{eax,07,ecx,00,,ebx,adx,19} is 0.
-    "#SS(0)": For an illegal address in the \reg{SS} segment.
-    "#GP(0)": If any part of the operand lies outside the effective address space from 0 to 0xFFFF.
-    "#PF(fault-code)": If a page fault occurs.
-    "#AC(0)": If alignment checking is enabled and an unaligned memory reference is made while the current privilege level is 3.
+      - \exception{lock}
+      - If \cpuid{eax=07,ecx=00,,ebx=19=adx} is 0.
+    "#SS(0)": \exception{segLimitSS}
+    "#GP(0)": \exception{segLimit}
+    "#PF(fc)": \exception{pf}
+    "#AC(0)": \exception{ac}
   compatibility: Same exceptions as in protected mode.
   long:
     "#UD":
-      - If the \instr{LOCK} prefix is used.
-      - If \cpuid{eax,07,ecx,00,,ebx,adx,19} is 0.
-    "#SS(0)": If a memory address referencing the \reg{SS} segment is in non-canonical form.
-    "#GP(0)": If the memory address is in a non-canonical form.
-    "#PF(fault-code)": If a page fault occurs.
-    "#AC(0)": If alignment checking is enabled and an unaligned memory reference is made while the current privilege level is 3.
+      - \exception{lock}
+      - If \cpuid{eax=07,ecx=00,,ebx=19=adx} is 0.
+    "#SS(0)": \exception{nonCanonSS}
+    "#GP(0)": \exception{nonCanon}
+    "#PF(fc)": \exception{pf}
+    "#AC(0)": \exception{ac}

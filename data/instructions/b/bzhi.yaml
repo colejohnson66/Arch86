@@ -39,15 +39,13 @@ description: >-
   In other words, for the 32 bit form, the second source operand's low 8 bits must be 31 or less.
   The 64 bit form changes this requirement to 63 or less.
 
-  The operand size (\c{W} bit) is always 32 bits if not in Long Mode.
-  In other words, in Protected and Compatibility Mode, \c{VEX.W1} is treated as \c{VEX.W0}.
+  \canned{vexWIgnoredIn32}
 
-  The length field (\c{L} bit) \i{must} be zero (signifying 128 bit vectors).
-  Attempts to execute with \c{VEX.L1} (256 bit vectors) will cause a \c{#UD} exception.
+  \canned{vexLMustBe0}
 operation: |-
   public void BZHI_32(ref uint dest, uint src, uint idx)
   {
-    uint n = idx.Bit[0..8];
+    uint n = idx & 0xFF;
     if (n < 32)
     {
       dest[n..32] = 0;
@@ -61,7 +59,7 @@ operation: |-
 
   public void BZHI_64(ref uint dest, uint src, uint idx)
   {
-    uint n = idx.Bit[0..8];
+    uint n = idx & 0xFF;
     if (n < 64)
     {
       dest[n..64] = 0;
@@ -84,7 +82,7 @@ intrinsics: |-
   uint64_t _bzhi_u64(uint64_t src, uint64_t index)
 exceptions:
   floating: None
-  other: See Exceptions Type 13.
+  other: \exceptionVex{13}
 changes:
   version: 73
   date: 2020-11

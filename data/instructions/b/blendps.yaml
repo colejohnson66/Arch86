@@ -54,7 +54,7 @@ description: >-
 
   This instruction, despite being named as if it operates on floating-point numbers, will work on 32 bit integers as well.
 
-  All versions \i{except} the legacy SSE version zero the unused upper SIMD register bits.
+  \canned{zeroUpperSimd}
 operation: |-
   public void BLENDPS(SimdF32 dest, SimdF32 src, byte mask)
   {
@@ -67,7 +67,7 @@ operation: |-
       dest[2] = src[2];
     if (mask[3])
       dest[3] = src[3];
-    // dest[4..Simd.MAX] (unmodified)
+    // dest[4..SimdF32.MAX] (unmodified)
   }
 
   void VBLENDPS_Vex(SimdF32 dest, SimdF32 src1, SimdF32 src2, byte mask, int kl)
@@ -78,7 +78,7 @@ operation: |-
       else
         dest[n] = src1[n];
     }
-    dest[kl..Simd.MAX] = 0;
+    dest[kl..SimdF32.MAX] = 0;
   }
   public void VBLENDPS_Vex128(SimdF32 dest, SimdF32 src1, SimdF32 src2, byte mask)
   {
@@ -90,7 +90,8 @@ operation: |-
   }
 intrinsics: |-
   __m128 _mm_blend_ps(__m128 v1, __m128 v2, const uint32_t mask)
+
   __m256 _mm256_blend_ps(__m256 a, __m256 b, const uint32_t mask)
 exceptions:
   floating: None
-  other: See Exceptions Type 4.
+  other: \exceptionVex{4}

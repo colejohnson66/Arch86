@@ -54,13 +54,6 @@ operation: |-
     OF = SF = AF = PF = CF = 0;
   }
 flags:
-  # Common values:
-  # Set according to the result.
-  # Set.
-  # Cleared.
-  # Undefined.
-  # Unmodified.
-  # Set if ... Cleared otherwise.
   CF: Cleared.
   PF: Cleared.
   AF: Cleared.
@@ -72,22 +65,22 @@ intrinsics: |-
 exceptions:
   protected:
     "#UD":
-      - If the \instr{LOCK} prefix is used.
-      - If \cpuid{eax,00,,ecx,kl,23} is \c{0}.
+      - \exception{lock}
+      - If \cpuid{eax=00,,ecx=23=kl} is \c{0}.
+      - If \cpuid{eax=19,,ebx=0=aeskle} is \c{0}.
       - If \c{CR4.KL} is \c{0}.
-      - If \cpuid{eax,19,,ebx,aeskle,0} is \c{0}.
       - If \c{CR0.EM} is \c{1}.
       - If \c{CR4.OSFXSR} is \c{1}.
     "#NM": If \c{CR0.TS} is \c{1}.
-    "#PF": If a page fault occurs.
+    "#PF": \exception{pf}
     "#GP(0)":
-      - If a memory operand effective address is outside the \reg{CS}, \reg{DS}, \reg{ES}, \reg{FS}, or \reg{GS} segment limit.
-      - If the \reg{DS}, \reg{ES}, \reg{FS}, or \reg{GS} segment is used to access memory and it contains a \c{NULL} segment selector.
-      - If the memory address is in non-canonical form.
+      - \exception{segLimit}
+      - \exception{nullSelector}
+      - \exception{nonCanon}
     "#SS(0)":
-      - If a memory operand effective address is outside the \reg{SS} segment limit.
-      - If a memory address referencing the \reg{SS} segment is in non-canonical form.
-  real: Same exceptions as protected mode.
+      - \exception{segLimitSS}
+      - \exception{nonCanonSS}
+  real: Same exceptions as protected mode. # TODO: is it even valid?
   virtual: Same exceptions as protected mode.
   compatibility: Same exceptions as protected mode.
   long: Same exceptions as protected mode.

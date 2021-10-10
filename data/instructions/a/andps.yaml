@@ -94,7 +94,7 @@ description: >-
   This instruction, despite being named as if it operates on floating-point numbers, internally operates on 32 bit integers.
   The "Operation" section below has been updated to reflect this (using \c{SimdU32} instead of \c{SimdF32}).
 
-  All versions \i{except} the legacy SSE version zero the unused upper SIMD register bits.
+  \canned{zeroUpperSimd}
 operation: |-
   public void ANDPS(SimdU32 dest, SimdU32 src)
   {
@@ -102,14 +102,14 @@ operation: |-
     dest[1] &= src[1];
     dest[2] &= src[2];
     dest[3] &= src[3];
-    // dest[4..Simd.Max] (unmodified)
+    // dest[4..SimdU32.Max] (unmodified)
   }
 
   void VANDPS_Vex(SimdU32 dest, SimdU32 src1, SimdU32 src2, int kl)
   {
     for (int n = 0; n < kl, n++)
       dest[n] = src1[n] & src2[n];
-    dest[kl..Simd.MAX] = 0;
+    dest[kl..SimdU32.MAX] = 0;
   }
   public void VANDPS_Vex128(SimdU32 dest, SimdU32 src1, SimdU32 src2)
   {
@@ -136,7 +136,7 @@ operation: |-
         dest[n] = 0;
       }
     }
-    dest[kl..Simd.MAX] = 0;
+    dest[kl..SimdU32.MAX] = 0;
   }
   public void VANDPS_Evex128Memory(SimdU32 dest, SimdU32 src1, SimdU32 src2, KMask k)
   {
@@ -160,7 +160,7 @@ operation: |-
       else if (EVEX.z)
         dest[n] = 0;
     }
-    dest[kl..Simd.MAX] = 0;
+    dest[kl..SimdU32.MAX] = 0;
   }
   public void VANDPS_Evex128Register(SimdU32 dest, SimdU32 src1, SimdU32 src2, KMask k)
   {
@@ -189,5 +189,5 @@ intrinsics: |-
 exceptions:
   floating: None
   other:
-    - "VEX encoded form: see Exceptions Type 4."
-    - "EVEX encoded form: see Exceptions Type E4."
+    - \exceptionVex{4}
+    - \exceptionEvex{E4}

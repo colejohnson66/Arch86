@@ -2,7 +2,7 @@
 ---
 title: Clear Alignment Check Flag
 opcode:
-  - opcode: NP 0F 01 CA
+  - opcode: NP 0F 01 CA (11:001:010)
     mnemonic: CLAC
     encoding: ZO
     validity:
@@ -23,7 +23,7 @@ description: >-
   If the \c{SMAP} bit is set in the \reg{CR4} register, this also disallows explicit supervisor-mode data access of user-mode pages.
 
   This instruction can only be executed when \c{CPL} is \c{0} (ring 0).
-  Attempts to execute this instruction is less privileged rings will cause a \c{#UD} exception to be thrown.
+  Attempts to execute this instruction is less privileged rings will cause a \c{#UD} exception to be raised.
 operation: |-
   public void CLAC()
   {
@@ -32,23 +32,15 @@ operation: |-
 exceptions:
   protected:
     "#UD":
-      - If the \instr{LOCK} prefix is used.
+      - \exception{lock}
+      - If \cpuid{eax=07,ecx=00,,ebx=20=smap} is \c{0}.
       - If \c{CPL} is greater than \c{0}.
-      - If \cpuid{eax,07,ecx,00,,ebx,smap,20} is \c{0}.
   real:
     "#UD":
       - If the \instr{LOCK} prefix is used.
-      - If \cpuid{eax,07,ecx,00,,ebx,smap,20} is \c{0}.
+      - If \cpuid{eax=07,ecx=00,,ebx=20=smap} is \c{0}.
   virtual:
     "#UD":
       - The \c{CLAC} instruction is not recognized in virtual 8086 mode.
-  compatibility:
-    "#UD":
-      - If the \instr{LOCK} prefix is used.
-      - If \c{CPL} is greater than \c{0}.
-      - If \cpuid{eax,07,ecx,00,,ebx,smap,20} is \c{0}.
-  long:
-    "#UD":
-      - If the \instr{LOCK} prefix is used.
-      - If \c{CPL} is greater than \c{0}.
-      - If \cpuid{eax,07,ecx,00,,ebx,smap,20} is \c{0}.
+  compatibility: Same exceptions as protected mode.
+  long: Same exceptions as protected mode.

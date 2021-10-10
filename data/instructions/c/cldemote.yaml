@@ -2,7 +2,7 @@
 ---
 title: Demote Cache Line
 opcode:
-  - opcode: NP 0F 1C /0
+  - opcode: NP 0F 1C !(11):000:bbb
     mnemonic: CLDEMOTE \i{m8}
     encoding: M
     validity:
@@ -36,12 +36,13 @@ intrinsics: |-
   void _cldemote(const void* ptr)
 exceptions:
   protected:
-    "#UD": If the \instr{LOCK} prefix is used.
-  real:
-    "#UD": If the \instr{LOCK} prefix is used.
-  virtual:
-    "#UD": If the \instr{LOCK} prefix is used.
-  compatibility:
-    "#UD": If the \instr{LOCK} prefix is used.
-  long:
-    "#UD": If the \instr{LOCK} prefix is used.
+    "#UD": \exception{lock}
+  real: Same exceptions as protected mode.
+  virtual: Same exceptions as protected mode.
+  compatibility: Same exceptions as protected mode.
+  long: Same exceptions as protected mode.
+changes:
+  version: 75
+  date: 2021-06
+  list:
+    - The encoding of the ModR/M byte has been changed from \c{/r} to show the restrictions on it.

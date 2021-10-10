@@ -49,10 +49,9 @@ encoding:
 description: >-
   The \c{(V)ADDSUBPD} instruction performs two operations:
   It subtracts the odd numbered single-precision floating-point values, and adds the even numbered ones.
-  These operations are done as \c{src1 op src2} (where \c{op} is either addition or subtraction).
   The result is stored in in the destination operand.
 
-  All versions \i{except} the legacy SSE version zero the unused upper SIMD register bits.
+  \canned{zeroUpperSimd}
 operation: |-
   public void ADDSUBPS(SimdF32 dest, SimdF32 src)
   {
@@ -60,7 +59,7 @@ operation: |-
     dest[1] += src[1];
     dest[2] -= src[2];
     dest[3] += src[3];
-    // dest[4..Simd.Max] (unmodified)
+    // dest[4..SimdF32.MAX] (unmodified)
   }
 
   public void VADDSUBPS_Vex128(SimdF32 dest, SimdF32 src1, SimdF32 src2)
@@ -69,7 +68,7 @@ operation: |-
     dest[1] += src[1];
     dest[2] -= src[2];
     dest[3] += src[3];
-    dest[4..Simd.Max] = 0;
+    dest[4..SimdF32.MAX] = 0;
   }
   public void VADDSUBPS_Vex256(SimdF32 dest, SimdF32 src1, SimdF32 src2)
   {
@@ -81,16 +80,13 @@ operation: |-
     dest[5] += src[5];
     dest[6] -= src[6];
     dest[7] += src[7];
-    dest[8..Simd.Max] = 0; // see note 1
+    dest[8..SimdF32.MAX] = 0;
   }
-operationNotes:
-  - >-
-    The manual makes no mention of if this instruction form clears the upper bits or not.
-    It is assumed that it would.
+# Intel manual doesn't mention if V256 zeros upper bits; I assume it should
 intrinsics: |-
   __m128d _mm_addsub_ps(__m128d a, __m128d b)
 
   __m256d _mm256_addsub_ps(__m256d a, __m256d b)
 exceptions:
   floating: Overflow, Underflow, Invalid, Precision, Denormal
-  other: "See Exceptions Type 2."
+  other: \exceptionVex{2}

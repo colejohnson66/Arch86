@@ -63,13 +63,12 @@ description: >-
   The AVX versions (\c{VADDSS}) work on the lowest 32 bits, but also copy the next 96 bits from the first source operand to the destination.
   Afterwards, all unchanged bits in the destination are zeroed.
 
-  Although this instruction works with \c{(E)VEX.LIG}, Intel recommends that assemblers set \c{(E)VEX.L} to 0.
-  Encoding with \c{(E)VEX.L} being 1 may not be allowed in the future.
+  \canned{vexLShouldBe0}
 operation: |-
   public void ADDSS(SimdF32 dest, SimdF32 src)
   {
     dest[0] += src[0];
-    // dest[1..Simd.MAX] (unchanged)
+    // dest[1..SimdF32.MAX] (unchanged)
   }
 
   public void VADDSS_Vex(SimdF32 dest, SimdF32 src1, SimdF32 src2)
@@ -78,7 +77,7 @@ operation: |-
     dest[1] = src1[1];
     dest[2] = src1[2];
     dest[3] = src1[3];
-    dest[4..Simd.MAX] = 0;
+    dest[4..SimdF32.MAX] = 0;
   }
 
   public void VADDSS_EvexMemory(SimdF32 dest, SimdF32 src1, SimdF32 src2, KMask k)
@@ -90,7 +89,7 @@ operation: |-
     dest[1] = src1[1];
     dest[2] = src1[2];
     dest[3] = src1[3];
-    dest[4..Simd.MAX] = 0;
+    dest[4..SimdF32.MAX] = 0;
   }
 
   public void VADDSS_EvexRegister(SimdF32 dest, SimdF32 src1, SimdF32 src2, KMask k)
@@ -107,7 +106,7 @@ operation: |-
     dest[1] = src1[1];
     dest[2] = src1[2];
     dest[3] = src1[3];
-    dest[4..Simd.MAX] = 0;
+    dest[4..SimdF32.MAX] = 0;
   }
 intrinsics: |-
   __m128 _mm_add_ss(__m128 a, __m128 b)
@@ -119,5 +118,5 @@ intrinsics: |-
 exceptions:
   floating: Overflow, Underflow, Invalid, Precision, Denormal
   other:
-    - "VEX encoded form: see Exceptions Type 2."
-    - "EVEX encoded form: see Exceptions Type E2."
+    - \exceptionVex{2}
+    - \exceptionEvex{E2}

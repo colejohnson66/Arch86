@@ -2,7 +2,7 @@
 ---
 title: Check Array Index Against Bounds
 opcode:
-  - opcode: 62 /r
+  - opcode: 62 11:rrr:bbb
     mnemonic: BOUND \i{r16}, \i{m16&16}
     encoding: RM
     validity:
@@ -11,7 +11,7 @@ opcode:
       64: n/e
     description: >-
       Checks if \i{r16} (an array index) is within the bounds specified by \i{m16&16}.
-  - opcode: 62 /r
+  - opcode: 62 11:rrr:bbb
     mnemonic: BOUND \i{r32}, \i{m32&32}
     encoding: RM
     validity:
@@ -32,7 +32,7 @@ description: >-
   From these two memory values, the first is the lower bound of the array and the second is the upper bound of the array.
 
   If the index is within the bounds specified, this instruction executes with no side effects.
-  If, however, the index is \i{not} within the bounds, a \c{#BR} exception is throw.
+  If, however, the index is \i{not} within the bounds, a \c{#BR} exception is raised.
 
   This instruction is not encodable in 64 bit mode, and if encountered, will be interpreted as an EVEX prefix.
 operation: |-
@@ -51,14 +51,13 @@ exceptions:
   protected:
     "#BR": If the bounds test fails.
     "#UD":
-      - If the \instr{LOCK} prefix is used.
-      - If the second operand is not a memory location.
+      - \exception{lock}
     "#GP(0)":
       - If the destination's effective address of the Bound Table entry is outside the \reg{DS} segment limit.
       - If the \reg{DS} segment contains a \c{NULL} segment selector.
-    "#SS(0)": If a memory operand's effective address is outside the \reg{SS} segment limit.
-    "#PF(fault-code)": If a page fault occurs.
-    "#AC(0)": If alignment checking is enabled and an unaligned memory reference is made while the current privilege level is 3.
+    "#SS(0)": \exception{segLimitSS}
+    "#PF(fc)": \exception{pf}
+    "#AC(0)": \exception{ac}
   real:
     "#BR": If the bounds test fails.
     "#UD":
@@ -67,13 +66,13 @@ exceptions:
     "#GP(0)":
       - If the destination's effective address of the Bound Table entry is outside the \reg{DS} segment limit.
       - If the \reg{DS} segment contains a \c{NULL} segment selector.
-    "#SS(0)": If a memory operand's effective address is outside the \reg{SS} segment limit.
+    "#SS(0)": \exception{segLimitSS}
   virtual: Same exceptions as protected mode.
   compatibility: Same exceptions as protected mode.
-  long:
-    "#UD": If in 64 bit mode.
+  long: Not encodable.
 changes:
-  version: 73
-  date: 2020-11
+  version: 75
+  date: 2021-06
   list:
     - The overview table lists the encodings as "invalid" in 64 bit mode, but they are actually not encodable due to the EVEX prefix.
+    - The encoding of the ModR/M byte has been changed from \c{/r} to show the restrictions on it.

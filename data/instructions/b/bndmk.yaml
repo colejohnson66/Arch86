@@ -1,8 +1,8 @@
 %YAML 1.2
 ---
-title:
+title: Make Bounds
 opcode:
-  - opcode: F3 0F 1B /r
+  - opcode: F3 0F 1B !(11):rrr:bbb
     mnemonic: BNDMK \i{bnd}, \i{m32}
     encoding: RM
     validity:
@@ -12,7 +12,7 @@ opcode:
     cpuid: MPX
     description: >-
       Makes lower and upper bounds from \i{m32} and stores them into \i{bnd}.
-  - opcode: F3 0F 1B /r
+  - opcode: F3 0F 1B !(11):rrr:bbb
     mnemonic: BNDMK \i{bnd}, \i{m64}
     encoding: RM
     validity:
@@ -34,10 +34,6 @@ description: >-
   The lower bound is taken from the value contained in the register pointed to by the \c{base} field of the SIB byte.
   The upper bound is created by computing the effective address (see \instr{LEA}) of the referenced memory.
   At no time is memory accessed, and the flags are untouched.
-
-  Which instruction form (32 or 64 bit) is used depends on the operating mode of the processor.
-  In 16 and 32 bit mode, the 32 bit form is used, and, in 64 bit mode, the 64 bit form is used.
-  If a memory address is used as the second source operand, this distinction is irrelevant.
 operation: |-
   public void BNDMK(Bound dest, Sib addr)
   {
@@ -49,23 +45,24 @@ intrinsics: |-
 exceptions:
   protected:
     "#UD":
-      - If the \instr{LOCK} prefix is used.
-      - If \c{ModRM.r/m} does not encode \c{BND0} through \c{BND3} (i.e. contains a 4, 5, 6, or 7).
-      - If the address size overload prefix (\c{67h}) is used when \c{CS.D} is \c{1}.
-      - If the address size overload prefix is \i{not} used when \c{CS.D} is \c{0}.
-  real:
-    "#UD":
-      - If the \instr{LOCK} prefix is used.
-      - If \c{ModRM.r/m} does not encode \c{BND0} through \c{BND3} (i.e. contains a 4, 5, 6, or 7).
+      - \exception{lock}
+      - If \cpuid{eax=07,ecx=00,,ebx=14=mpx} is \c{0}.
+      - If \c{ModRM.reg} does not encode \c{BND0} through \c{BND3} (i.e. contains a 4 or higher).
       - If 16 bit addressing is used.
-  virtual: Same exceptions as real mode.
+  real: Same exceptions as protected mode.
+  virtual: Same exceptions as protected mode.
   compatibility: Same exceptions as protected mode.
   long:
     "#UD":
-      - If the \instr{LOCK} prefix is used.
-      - If \c{ModRM.r/m} does not encode \c{BND0} through \c{BND3} (i.e. contains any of 4 through 15).
-      - If the address size overload prefix (\c{67h}) is used when \c{CS.D} is \c{1}.
-      - If the address size overload prefix is \i{not} used when \c{CS.D} is \c{0}.
+      - \exception{lock}
+      - If \cpuid{eax=07,ecx=00,,ebx=14=mpx} is \c{0}.
+      - If \c{ModRM.reg} does not encode \c{BND0} through \c{BND3} (i.e. contains a 4 or higher).
+      - If 16 bit addressing is used.
       - If RIP-relative addressing is used.
-    "#SS(0)": If the memory address referencing the \reg{SS} segment is in non-canonical form.
-    "#GP(0)": If the memory address is in non-canonical form.
+    "#SS(0)": \exception{nonCanonSS}
+    "#GP(0)": \exception{nonCanon}
+changes:
+  version: 75
+  date: 2021-06
+  list:
+    - The encoding of the ModR/M byte has been changed from \c{/r} to show the restrictions on it.

@@ -85,13 +85,13 @@ encoding:
     EVEX:
       - Full
       - ModRM.reg[w]
-      - EVEX.vvvv[r]
+      - EVEX.vvvvv[r]
       - ModRM.r/m[r]
 description: >-
   The \c{(V)ADDPS} instruction adds four, eight, or sixteen single-precision floating-point values from the first source operand to the second source operand.
   The result is stored in in the destination operand.
 
-  All versions \i{except} the legacy SSE version zero the unused upper SIMD register bits.
+  \canned{zeroUpperSimd}
 operation: |-
   public void ADDPS(SimdF32 dest, SimdF32 src)
   {
@@ -99,7 +99,7 @@ operation: |-
     dest[1] += src[1];
     dest[2] += src[2];
     dest[3] += src[3];
-    // dest[4..Simd.Max] (unmodified)
+    // dest[4..SimdF32.Max] (unmodified)
   }
 
   void VADDPS_Vex(SimdF32 dest, SimdF32 src1, SimdF32 src2, int kl)
@@ -133,7 +133,7 @@ operation: |-
         dest[n] = 0;
       }
     }
-    dest[kl..Simd.MAX] = 0;
+    dest[kl..SimdF32.MAX] = 0;
   }
   public void VADDPS_Evex128Memory(SimdF32 dest, SimdF32 src1, SimdF32 src2, KMask k)
   {
@@ -162,7 +162,7 @@ operation: |-
       else if (EVEX.z)
         dest[n] = 0;
     }
-    dest[kl..Simd.MAX] = 0;
+    dest[kl..SimdF32.MAX] = 0;
   }
   public void VADDPS_Evex128Register(SimdF32 dest, SimdF32 src1, SimdF32 src2, KMask k)
   {
@@ -194,5 +194,5 @@ intrinsics: |-
 exceptions:
   floating: Overflow, Underflow, Invalid, Precision, Denormal
   other:
-    - "VEX encoded form: see Exceptions Type 2."
-    - "EVEX encoded form: see Exceptions Type E2."
+    - \exceptionVex{2}
+    - \exceptionEvex{E2}

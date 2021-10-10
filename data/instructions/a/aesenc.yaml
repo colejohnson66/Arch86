@@ -95,9 +95,9 @@ description: >-
   For the last round, use the \instr{AESENCLAST} instruction.
   Failure to do this correctly will result in an incorrect result after all the rounds.
 
-  The EVEX form of this instruction does \i{not} support memory fault suppression.
+  \canned{evexNoER}
 
-  All versions \i{except} the legacy SSE version zero the unused upper SIMD register bits.
+  \canned{zeroUpperSimd}
 operation: |-
   public void AESENC(SimdU128 dest, SimdU128 src)
   {
@@ -106,7 +106,7 @@ operation: |-
     state = AesSubBytes(state);
     state = AesMixColumns(state);
     dest[0] = state ^ src[0];
-    // dest[1..Simd.MAX] (unmodified)
+    // dest[1..SimdU128.MAX] (unmodified)
   }
 
   void VAESENC(SimdU128 dest, SimdU128 src1, SimdU128 src2, int kl)
@@ -119,7 +119,7 @@ operation: |-
       state = AesMixColumns(state);
       dest[n] = state ^ src2[n];
     }
-    dest[kl..Simd.MAX] = 0;
+    dest[kl..SimdU128.MAX] = 0;
   }
   public void VAESENC_Vex128(SimdU128 dest, SimdU128 src1, SimdU128 src2)
   {
@@ -151,5 +151,5 @@ intrinsics: |-
 exceptions:
   floating: None
   other:
-    - "VEX encoded form: see Exceptions Type 4."
-    - "EVEX encoded form: see Exceptions Type E4NF."
+    - \exceptionVex{4}
+    - \exceptionEvex{E4NF}

@@ -32,4 +32,4 @@ flags:
   OF: Unmodified.
 exceptions:
   long:
-    "#UD": If the \instr{LOCK} prefix is used.
+    "#UD": \exception{lock}

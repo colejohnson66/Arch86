@@ -38,8 +38,8 @@ description: >-
   As such, it is possible to have this instruction work on other bases through an immediate 8 bit operand.
   Such methods are not guaranteed to be supported by your assembler, and in such situations, one must encode the instruction directly.
 
-  This instruction is not valid in 64 bit mode, and if encountered, the processor will raise a \c{#UD} exception.
-operation: >-
+  \canned{no64,invalid}
+operation: |-
   public void AAM(byte imm8)
   {
     AH = AL / imm8;
@@ -55,9 +55,9 @@ flags:
 exceptions:
   protected:
     "#DE": If an immediate value of 0 is used.
-    "#UD": If the \instr{LOCK} prefix is used.
+    "#UD": \exception{lock}
   real: Same exceptions as protected mode.
   virtual: Same exceptions as protected mode.
   compatibility: Same exceptions as protected mode.
   long:
-    "#UD": If in 64 bit mode.
+    "#UD": \exception{in64}

@@ -32,12 +32,8 @@ flags:
   OF: Unmodified.
 exceptions:
   protected:
-    "#UD": If the \instr{LOCK} prefix is used.
-  real:
-    "#UD": If the \instr{LOCK} prefix is used.
-  virtual:
-    "#UD": If the \instr{LOCK} prefix is used.
-  compatibility:
-    "#UD": If the \instr{LOCK} prefix is used.
-  long:
-    "#UD": If the \instr{LOCK} prefix is used.
+    "#UD": \exception{lock}
+  real: Same exceptions as protected mode.
+  virtual: Same exceptions as protected mode.
+  compatibility: Same exceptions as protected mode.
+  long: Same exceptions as protected mode.

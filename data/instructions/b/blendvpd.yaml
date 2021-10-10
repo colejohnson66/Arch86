@@ -57,12 +57,9 @@ description: >-
   This instruction, despite being named as if it operates on floating-point numbers, will work on 64 bit integers as well.
 
   The VEX encoded instruction forms have a different opcode than the legacy SSE form.
-  All versions \i{except} the legacy SSE version zero the unused upper SIMD register bits.
+  \canned{upperZeroSimd}
 
-  In 32 bit mode, \c{imm8[7]} is treated as a 0, preventing access to more than 8 vector registers.
-
-  The VEX form of this instruction reserves \c{VEX.W = 1} (i.e. it must be set to \c{0}).
-  Failure to do so will result in a \c{#UD} exception.
+  In 32 bit mode, \c{imm8[7]} is ignored (treated as a 0), preventing access to more than 8 vector registers.
 operation: |-
   public void BLENDVPD(SimdF64 dest, SimdF64 src)
   {
@@ -71,7 +68,7 @@ operation: |-
       dest[0] = src[0];
     if (XMM0.Bit[1])
       dest[1] = src[1];
-    // dest[2..Simd.MAX] (unmodified)
+    // dest[2..SimdF64.MAX] (unmodified)
   }
 
   void VBLENDVPD_Vex(SimdF64 dest, SimdF64 src1, SimdF64 src2, SimdF64 src3, int kl)
@@ -82,7 +79,7 @@ operation: |-
       else
         dest[n] = src1[n];
     }
-    dest[kl..Simd.MAX] = 0;
+    dest[kl..SimdF64.MAX] = 0;
   }
   public void VBLENDVPD_Vex128(SimdF64 dest, SimdF64 src1, SimdF64 src2, SimdF64 src3)
   {
@@ -94,9 +91,8 @@ operation: |-
   }
 intrinsics: |-
   __m128 _mm_blendv_pd(__m128d a, __m128d b, __m128d mask)
+
   __m256 _mm256_blendv_pd(__m256d a, __m256d b, __m256d mask)
 exceptions:
   floating: None
-  other: See Exceptions Type 4.
-  otherAdditional:
-    "#UD": If \c{VEX.W} is \c{1}.
+  other: \exceptionVex{4}

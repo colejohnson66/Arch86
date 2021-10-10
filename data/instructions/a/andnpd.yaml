@@ -94,20 +94,20 @@ description: >-
   This instruction, despite being named as if it operates on floating-point numbers, internally operates on 64 bit integers.
   The "Operation" section below has been updated to reflect this (using \c{SimdU64} instead of \c{SimdF64}).
 
-  All versions \i{except} the legacy SSE version zero the unused upper SIMD register bits.
+  \canned{zeroUpperSimd}
 operation: |-
   public void ANDNPD(SimdU64 dest, SimdU64 src)
   {
     dest[0] = ~dest[0] & src[0];
     dest[1] = ~dest[1] & src[1];
-    // dest[2..Simd.Max] (unmodified)
+    // dest[2..SimdU64.Max] (unmodified)
   }
 
   void VANDNPD_Vex(SimdU64 dest, SimdU64 src1, SimdU64 src2, int kl)
   {
     for (int n = 0; n < kl, n++)
       dest[n] = ~src1[n] & src2[n];
-    dest[kl..Simd.MAX] = 0;
+    dest[kl..SimdU64.MAX] = 0;
   }
   public void VANDNPD_Vex128(SimdU64 dest, SimdU64 src1, SimdU64 src2)
   {
@@ -134,7 +134,7 @@ operation: |-
         dest[n] = 0;
       }
     }
-    dest[kl..Simd.MAX] = 0;
+    dest[kl..SimdU64.MAX] = 0;
   }
   public void VANDNPD_Evex128Memory(SimdU64 dest, SimdU64 src1, SimdU64 src2, KMask k)
   {
@@ -158,7 +158,7 @@ operation: |-
       else if (EVEX.z)
         dest[n] = 0;
     }
-    dest[kl..Simd.MAX] = 0;
+    dest[kl..SimdU64.MAX] = 0;
   }
   public void VANDNPD_Evex128Register(SimdU64 dest, SimdU64 src1, SimdU64 src2, KMask k)
   {
@@ -187,10 +187,10 @@ intrinsics: |-
 exceptions:
   floating: None
   other:
-    - "VEX encoded form: see Exceptions Type 4."
-    - "EVEX encoded form: see Exceptions Type E4."
+    - \exceptionVex{4}
+    - \exceptionEvex{E4}
 changes:
-  version: 73
-  date: 2020-11
+  version: 75
+  date: 2021-06
   list:
-    - The VEX form mnemonics (\c{VEX.###.66.0F.WIG 55 /r}) are incorrectly written as \c{VEX.###.66.0F 55 /r} (no \c{WIG})
+    - The VEX form mnemonics (\c{VEX.###.66.0F.WIG 55 /r}) are not listed with \c{WIG}.

@@ -21,9 +21,9 @@ description: >-
   If the \c{RPL} field of the destination operand is less than the \c{RPL} field of the source operand, the \reg{ZF} flag is set and the \c{RPL} field of the destination is increased to match the source's.
   Otherwise, the \reg{ZF} flag is cleared and no change to the destination occurs.
 
-  This instruction is is not valid in 16 bit mode, and, if encountered, the processor will raise a \c{#UD} exception.
+  \canned{no16,invalid}
 
-  This instruction is not encodable in 64 bit mode, and, if encountered, will be treated as the \instr{MOVSXD} instruction.
+  \canned{no64,ne,MOVSXD}
 operation: |-
   public void ARPL(ref ushort dest, ushort src)
   {
@@ -39,22 +39,22 @@ operation: |-
     }
   }
 flags:
-  CF: "???"
-  PF: "???"
-  AF: "???"
+  CF: Unmodified.
+  PF: Unmodified.
+  AF: Unmodified.
   ZF: Set if the destination operand is changed.
-  SF: "???"
-  OF: "???"
+  SF: Unmodified.
+  OF: Unmodified.
 exceptions:
   protected:
     "#GP(0)":
-      - If the destination is located in a non-writable segment.
-      - If a memory operand effective address is outside the \reg{CS}, \reg{DS}, \reg{ES}, \reg{FS}, or \reg{GS} segment limit.
-      - If the \reg{DS}, \reg{ES}, \reg{FS}, or \reg{GS} register is used to access memory and it contains a \c{NULL} segment selector.
-    "#SS(0)": If a memory operand effective address is outside the \reg{SS} segment limit.
-    "#PF(fault-code)": If a page fault occurs.
-    "#AC(0)": If alignment checking is enabled and an unaligned memory reference is made while the current privilege level is 3.
-    "#UD": If the \instr{LOCK} prefix is used.
+      - \exception{nonWriteableSegment}
+      - \exception{segLimit}
+      - \exception{nullSelector}
+    "#SS(0)": \exception{segLimitSS}
+    "#PF(fc)": \exception{pf}
+    "#AC(0)": \exception{ac}
+    "#UD": \exception{lock}
   real:
     "#UD": If in 16 bit mode.
   virtual:
