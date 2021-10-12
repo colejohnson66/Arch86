@@ -66,7 +66,7 @@ opcode:
       64: invalid
     description: >-
       Call a far procedure with an absolute address stored in \i{ptr16:32}.
-  - opcode: FF /3
+  - opcode: FF !(11):011:bbb
     mnemonic: CALL \i{m16:16}
     encoding: M
     validity:
@@ -78,7 +78,7 @@ opcode:
 
       In 32 bit mode, if the selector points to a gate, then \c{RIP} is set to the zero extended 32 bit displacement taken from the gate.
       If not, then \c{RIP} is set to the zero extended 16 bit offset from the far pointer in the instruction.
-  - opcode: FF /3
+  - opcode: FF !(11):011:bbb
     mnemonic: CALL \i{m16:32}
     encoding: M
     validity:
@@ -90,7 +90,7 @@ opcode:
 
       In 64 bit mode, if the selector points to a gate, then \c{RIP} is set to the 64 bit displacement taken from the gate.
       If not, then \c{RIP} is set to the zero extended 32 bit offset from the far pointer in the instruction.
-  - opcode: REX.W FF /3
+  - opcode: REX.W FF !(11):011:bbb
     mnemonic: CALL \i{m16:64}
     encoding: M
     validity:

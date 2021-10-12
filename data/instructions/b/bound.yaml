@@ -2,7 +2,7 @@
 ---
 title: Check Array Index Against Bounds
 opcode:
-  - opcode: 62 11:rrr:bbb
+  - opcode: 62 !(11):rrr:bbb
     mnemonic: BOUND \i{r16}, \i{m16&16}
     encoding: RM
     validity:
@@ -11,7 +11,7 @@ opcode:
       64: n/e
     description: >-
       Checks if \i{r16} (an array index) is within the bounds specified by \i{m16&16}.
-  - opcode: 62 11:rrr:bbb
+  - opcode: 62 !(11):rrr:bbb
     mnemonic: BOUND \i{r32}, \i{m32&32}
     encoding: RM
     validity:
