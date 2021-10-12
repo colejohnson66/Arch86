@@ -1,0 +1,62 @@
+%YAML 1.2
+---
+title: Flush Cache Line
+opcode:
+  - opcode: NP 0F AE 11:111:bbb
+    mnemonic: CLFLUSH \i{m8}
+    encoding: M
+    validity:
+      16: valid
+      32: valid
+      64: valid
+    cpuid: CLFSH
+    description: Flushes the cache line containing \i{m8}.
+opcodeNote: >-
+encoding:
+  operands: 1
+  encodings:
+    M:
+      - ModRM.r/m
+description: >-
+  The \c{CLFLUSH} instruction invalidates every level of the cache hierarchy containing the operand's effective address.
+
+  TODO
+operation: |-
+  public void CLFLUSH(IntPtr ptr)
+  {
+    CacheLineFlush(ptr);
+  }
+intrinsics: |-
+  void _mm_clflush(const void *ptr)
+exceptions:
+  protected:
+    "#UD":
+      - \exception{lock}
+      - If \cpuid{eax=01,,edx=19=clfsh} is \c{0}.
+    "#PF(fc)": \exception{pf}
+    "#SS(0)": \exception{segLimitSS}
+    "#GP(0)": \exception{segLimit}
+  real:
+    "#UD":
+      - \exception{lock}
+      - If \cpuid{eax=01,,edx=19=clfsh} is \c{0}.
+    "#GP": \exception{segLimit}
+  virtual:
+    "#UD":
+      - \exception{lock}
+      - If \cpuid{eax=01,,edx=19=clfsh} is \c{0}.
+    "#PF(fc)": \exception{pf}
+    "#GP(0)": \exception{segLimit}
+  compatibility: Same exceptions as protected mode.
+  long:
+    "#UD":
+      - \exception{lock}
+      - If \cpuid{eax=01,,edx=19=clfsh} is \c{0}.
+    "#PF(fc)": \exception{pf}
+    "#SS(0)": \exception{nonCanonSS}
+    "#GP(0)": \exception{nonCanon}
+changes:
+  version: 75
+  date: 2021-06
+  list:
+    - The encoding of the ModR/M byte has been changed from \c{/r} to show the restrictions on it.

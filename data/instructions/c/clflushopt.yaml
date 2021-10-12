@@ -1,0 +1,62 @@
+%YAML 1.2
+---
+title: Flush Cache Line Optimized
+opcode:
+  - opcode: 66 0F AE 11:111:bbb
+    mnemonic: CLFLUSHOPT \i{m8}
+    encoding: M
+    validity:
+      16: valid
+      32: valid
+      64: valid
+    cpuid: CLFLUSHOPT
+    description: Flushes the cache line containing \i{m8}.
+opcodeNote: >-
+encoding:
+  operands: 1
+  encodings:
+    M:
+      - ModRM.r/m
+description: >-
+  The \c{CLFLUSHOPT} instruction invalidates every level of the cache hierarchy containing the operand's effective address.
+
+  TODO
+operation: |-
+  public void CLFLUSHOPT(IntPtr ptr)
+  {
+    CacheLineFlushOptimized(ptr);
+  }
+intrinsics: |-
+  void _mm_clflushopt(const void *ptr)
+exceptions:
+  protected:
+    "#UD":
+      - \exception{lock}
+      - If \cpuid{eax=07,ecx=00,,ebx=23=clflushopt} is \c{0}.
+    "#PF(fc)": \exception{pf}
+    "#SS(0)": \exception{segLimitSS}
+    "#GP(0)": \exception{segLimit}
+  real:
+    "#UD":
+      - \exception{lock}
+      - If \cpuid{eax=07,ecx=00,,ebx=23=clflushopt} is \c{0}.
+    "#GP": \exception{segLimit}
+  virtual:
+    "#UD":
+      - \exception{lock}
+      - If \cpuid{eax=07,ecx=00,,ebx=23=clflushopt} is \c{0}.
+    "#PF(fc)": \exception{pf}
+    "#GP(0)": \exception{segLimit}
+  compatibility: Same exceptions as protected mode.
+  long:
+    "#UD":
+      - \exception{lock}
+      - If \cpuid{eax=07,ecx=00,,ebx=23=clflushopt} is \c{0}.
+    "#PF(fc)": \exception{pf}
+    "#SS(0)": \exception{nonCanonSS}
+    "#GP(0)": \exception{nonCanon}
+changes:
+  version: 75
+  date: 2021-06
+  list:
+    - The encoding of the ModR/M byte has been changed from \c{/r} to show the restrictions on it.

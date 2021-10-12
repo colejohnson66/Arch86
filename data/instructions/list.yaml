@@ -56,3 +56,5 @@ c:
   - clc
   - cld
   - cldemote
+  - clflush
+  - clflushopt
