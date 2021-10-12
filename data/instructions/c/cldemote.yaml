@@ -16,7 +16,7 @@ encoding:
   operands: 1
   encodings:
     M:
-      - ModRM.r/m[w]
+      - ModRM.r/m
 description: >-
   The \c{CLDEMOTE} instruction hints to the processor that the cache line containing the operand's effective address should be moved ("demoted") to a cache further away from the core.
 
@@ -33,7 +33,7 @@ operation: |-
     CacheLineDemote(ptr);
   }
 intrinsics: |-
-  void _cldemote(const void* ptr)
+  void _cldemote(const void *ptr)
 exceptions:
   protected:
     "#UD": \exception{lock}
