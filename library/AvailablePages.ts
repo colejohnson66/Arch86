@@ -1,5 +1,5 @@
 /* =============================================================================
- * File:   DateTime.tsx
+ * File:   AvailablePagesContext.ts
  * Author: Cole Tobin
  * =============================================================================
  * Copyright (c) 2021 Cole Tobin
@@ -21,17 +21,10 @@
  * =============================================================================
  */
 
-type DateTimeProps = {
-    dateTime: string;
-    text?: string; // override text
-};
+import { createContext } from "react";
 
-export default function DateTime(props: DateTimeProps): React.ReactElement {
-    // TODO: verify if `props.dateTime` is valid
-    // see: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/time
-    return (
-        <time dateTime={props.dateTime} className="whitespace-nowrap">
-            {props.text ? props.text : props.dateTime}
-        </time>
-    );
-}
+const list: string[] = [];
+// TODO: populate it and use <https://reacttricks.com/sharing-global-data-in-next-with-custom-app-and-usecontext-hook/>
+const AvailablePagesContext = createContext(list);
+
+export default AvailablePagesContext;

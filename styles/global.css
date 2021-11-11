@@ -1,0 +1,74 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    html {
+        @apply h-full bg-gray-100;
+    }
+    #__next, body {
+        @apply h-full;
+    }
+
+
+    /* basic setup that people expect a website to look like */
+    a {
+        @apply text-blue-500;
+    }
+    /* a:visited {
+        @apply text-purple-800;
+    } */
+    h1 {
+        @apply text-3xl;
+    }
+    h2 {
+        @apply text-2xl pt-2;
+    }
+    h3 {
+        @apply text-xl pt-2;
+    }
+    h4 {
+        @apply text-lg pt-2;
+    }
+    h5 {
+        @apply text-sm pt-2;
+    }
+    h6 {
+        @apply text-xs pt-2;
+    }
+    ol {
+        @apply list-inside list-decimal;
+    }
+    ul {
+        @apply list-inside list-disc;
+    }
+
+
+    /* external links */
+    [rel=external] {
+        background: url(/img/external-ltr.png) center right no-repeat;
+        padding-right: 15px;
+    }
+
+
+    nav .activeNavItem {
+        @apply bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium;
+    }
+    nav .inactiveNavItem {
+        @apply text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium
+    }
+
+
+    #breadcrumbs li + li::before {
+        @apply float-left px-4;
+        content: "/";
+    }
+
+
+    p {
+        @apply py-2;
+    }
+    p:first-of-type {
+        @apply pt-0;
+    }
+}

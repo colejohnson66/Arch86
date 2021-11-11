@@ -16,12 +16,11 @@
  */
 /* eslint-disable react/display-name */
 
-import IDictionary from "../types/IDictionary";
 import Instruction from "../components/Instruction";
 import React from "react";
 import { strict as assert } from "assert";
 
-const cannedNoArg: IDictionary<JSX.Element> = {
+const cannedNoArg: Record<string, React.ReactElement> = {
     evexNoER: <>The EVEX form of this instruction does <i>not</i> support memory fault suppression.</>,
 
     lockable: <>This instruction can be used with the <Instruction name="LOCK" noTitle /> prefix to allow atomic exectution.</>,
@@ -49,7 +48,7 @@ const cannedNoArg: IDictionary<JSX.Element> = {
     zeroUpperSimd: <>All versions <i>except</i> the legacy SSE form will zero the upper (unused) SIMD register bits.</>,
 };
 
-const cannedArgs: IDictionary<(arg: string) => JSX.Element> = {
+const cannedArgs: Record<string, (arg: string) => React.ReactElement> = {
     no16: (arg) => {
         if (arg === "invalid")
             return <>This instruction is invalid in 16 bit mode, and, if encountered, the processor will raise a <code>#UD</code> exception.</>;
@@ -76,7 +75,7 @@ const cannedArgs: IDictionary<(arg: string) => JSX.Element> = {
 };
 
 // "canned" exception responses
-const exceptions: IDictionary<JSX.Element> = {
+const exceptions: Record<string, React.ReactElement> = {
     ac: <>If alignment checking is enabled and an unaligned memory reference is made while the current privilege level is 3.</>,
     "evex.vvvvv": <>If <code>EVEX.vvvvv</code> is not <code>b11111</code>.</>,
     in64: <>If in 64 bit mode.</>,
@@ -96,7 +95,7 @@ const exceptions: IDictionary<JSX.Element> = {
 // `\bits` may change, so don't combine with `\c`
 // `\reg` may change, so don't combine with `\c`
 // `\cpuid` is currently fancy syntax around `\c`, but this may change
-const functions: IDictionary<(arg: string) => JSX.Element> = {
+const functions: Record<string, (arg: string) => React.ReactElement> = {
     bits: (arg) => (<code>{arg}</code>),
 
     bitRef: (arg) => (<sup>[{arg}]</sup>),
@@ -124,9 +123,9 @@ const functions: IDictionary<(arg: string) => JSX.Element> = {
         const args = arg.split(",,");
         assert(args.length === 2);
 
-        let cpuidArgs = args[0].split(",");
+        const cpuidArgs = args[0].split(",");
         assert(cpuidArgs.length !== 0);
-        cpuidArgs = cpuidArgs.map((arg) => `${arg.toUpperCase()}h`);
+        const cpuidArgsString = cpuidArgs.map((arg) => `${arg.toUpperCase()}h`).join(",");
 
         let cpuidResult = args[1].split(",");
         assert(cpuidResult.length === 1);
@@ -134,7 +133,7 @@ const functions: IDictionary<(arg: string) => JSX.Element> = {
 
         return (
             <code>
-                CPUID.[{cpuidArgs}]:{cpuidResult[0]}[bit {cpuidResult[1]}] ({cpuidResult[2]})
+                CPUID.[{cpuidArgsString}]:{cpuidResult[0]}[bit {cpuidResult[1]}] ({cpuidResult[2]})
             </code>
         );
     },
@@ -185,7 +184,7 @@ const functions: IDictionary<(arg: string) => JSX.Element> = {
  * Due to this, arguments to `func` *must not* contain a closing brace (`}`) or other function calls.
  * For example, `\c{\i{abc}}` will actually output `<code>\i{abc</code>}`.
  */
-export function formatStringToJsx(str?: string): JSX.Element {
+export function FormatStringToJsx(str?: string): React.ReactElement {
     if (str === null || str === undefined)
         return <></>;
 
@@ -195,7 +194,7 @@ export function formatStringToJsx(str?: string): JSX.Element {
     const arr = str.split(/\\([a-zA-Z0-9]+){([^}]*)}/);
     assert(arr.length % 3 === 1);
 
-    const ret: JSX.Element[] = [];
+    const ret: React.ReactElement[] = [];
     for (let i = 0; i < arr.length; i++) {
         if (i % 3 === 0) {
             ret.push(<React.Fragment key={i}>{arr[i]}</React.Fragment>);
@@ -221,10 +220,10 @@ export function formatStringToJsx(str?: string): JSX.Element {
         i++;
     }
 
-    return (<>{ret}</>);
+    return <>{ret}</>;
 }
 
-export function formatStringPlaintext(str: string): string {
+export function FormatStringPlaintext(str: string): string {
     // takes a string, and removes all "function" calls
     if (str === null || str === undefined)
         return "";

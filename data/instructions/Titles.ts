@@ -1,5 +1,3 @@
-import IDictionary from "../../types/IDictionary";
-
 const pdpfp = "Packed Double-Precision Floating-Point Values";
 const pspfp = "Packed Single-Precision Floating-Point Values";
 const sdpfp = "Scalar Double-Precision Floating-Point Value";
@@ -8,7 +6,7 @@ const sspfp = "Scalar Single-Precision Floating-Point Value";
 const pdwi = "Packed Doubleword Integers";
 const dwi = /* Scalar */ "Doubleword Integer";
 
-const InstructionTitles: IDictionary<string> = {
+const InstructionTitles: Record<string, string> = {
     aaa: `ASCII Adjust \\reg{AL} After Addition`,
     aad: `ASCII Adjust \\reg{AX} Before Division`,
     aam: `ASCII Adjust \\reg{AX} After Multiplication`,

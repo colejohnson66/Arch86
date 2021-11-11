@@ -1,21 +1,27 @@
-/* This file is part of 80x86.
+/* =============================================================================
+ * File:   Instruction.tsx
+ * Author: Cole Tobin
+ * =============================================================================
  * Copyright (c) 2021 Cole Tobin
  *
- * This program is free software: you can redistribute it and/or modify it under
- *   the terms of the GNU Affero General Public License as published by the Free
+ * This file is part of 80x86.
+ *
+ * 80x86 is free software: you can redistribute it and/or modify it under the
+ *   terms of the GNU Affero General Public License as published by the Free
  *   Software Foundation, either version 3 of the License, or (at your option)
  *   any later version.
  *
- * This program is distributed in the hope that it will be useful, but WITHOUT
- *   ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
- *   FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License
- *   for more details.
+ * 80x86 is distributed in the hope that it will be useful, but WITHOUT ANY
+ *   WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ *   FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for
+ *   more details.
  *
  * You should have received a copy of the GNU Affero General Public License
- *   along with this program. If not, see <https://www.gnu.org/licenses/>.
+ *   along with 80x86. If not, see <http://www.gnu.org/licenses/>.
+ * =============================================================================
  */
 
-import { formatStringPlaintext, formatStringToJsx } from "../lib/FormatStringToJsx";
+import { FormatStringPlaintext, FormatStringToJsx } from "@library/FormatString";
 
 import A from "./A";
 import InstructionTitles from "../data/instructions/Titles";
@@ -69,9 +75,9 @@ type InstructionProps = {
      * Don't format the instruction name (clean it)
      *
      * By default, instructions titles containing formatting directives are ran
-     *   through a formatter (see `/lib/FormatStringToJsx.tsx`).
+     *   through a formatter (see `@library/FormatStringToJsx.tsx`).
      * Set this prop to format "cleanly".
-     * In other words, `formatStringPlaintext` is used if this prop is set.
+     * In other words, `FormatStringPlaintext` is used if this prop is set.
      *
      * Ignored if the title is not shown (suppressed by `noLink` or `noTitle`)
      */
@@ -112,20 +118,20 @@ type InstructionProps = {
  * <Instruction name="Jcc" />                          // ("/instruction/jcc", "Jcc", true)
  * <Instruction name="VFMADD132PD" as="vfmaddnnnpd" /> // ("/instruction/vfmaddnnnpd", "VFMADD132PD", true)
  */
-export default function Instruction(props: InstructionProps): JSX.Element {
+export default function Instruction(props: InstructionProps): React.ReactElement {
     const name = getInstructionName(props.name);
-    let nameJsx: JSX.Element = <></>;
+    let nameJsx: React.ReactElement = <></>;
     if (name) {
         if (props.useHyphen) {
             if (props.clean)
-                nameJsx = <> - {formatStringPlaintext(name)}</>;
+                nameJsx = <> - {FormatStringPlaintext(name)}</>;
             else
-                nameJsx = <> - {formatStringToJsx(name)}</>;
+                nameJsx = <> - {FormatStringToJsx(name)}</>;
         } else {
             if (props.clean)
-                nameJsx = <> ({formatStringPlaintext(name)})</>;
+                nameJsx = <> ({FormatStringPlaintext(name)})</>;
             else
-                nameJsx = <> ({formatStringToJsx(name)})</>;
+                nameJsx = <> ({FormatStringToJsx(name)})</>;
         }
     }
     if (props.noLink) {

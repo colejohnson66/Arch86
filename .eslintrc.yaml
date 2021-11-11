@@ -7,6 +7,7 @@ env:
 extends:
   - "eslint:recommended"
   - "plugin:react/recommended"
+  - "plugin:react/jsx-runtime"
   - "plugin:@typescript-eslint/recommended"
   - "plugin:@next/next/recommended"
 parser: "@typescript-eslint/parser"
@@ -109,4 +110,5 @@ rules:
   unicode-bom: error
   yoda: error
   "@next/next/no-img-element": "off"
+
   "@typescript-eslint/no-use-before-define": error

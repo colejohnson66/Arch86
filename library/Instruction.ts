@@ -1,18 +1,24 @@
-/* This file is part of 80x86.
+/* =============================================================================
+ * File:   Instruction.tsx
+ * Author: Cole Tobin
+ * =============================================================================
  * Copyright (c) 2020-2021 Cole Tobin
  *
- * This program is free software: you can redistribute it and/or modify it under
- *   the terms of the GNU Affero General Public License as published by the Free
+ * This file is part of 80x86.
+ *
+ * 80x86 is free software: you can redistribute it and/or modify it under the
+ *   terms of the GNU Affero General Public License as published by the Free
  *   Software Foundation, either version 3 of the License, or (at your option)
  *   any later version.
  *
- * This program is distributed in the hope that it will be useful, but WITHOUT
- *   ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
- *   FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License
- *   for more details.
+ * 80x86 is distributed in the hope that it will be useful, but WITHOUT ANY
+ *   WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ *   FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for
+ *   more details.
  *
  * You should have received a copy of the GNU Affero General Public License
- *   along with this program. If not, see <https://www.gnu.org/licenses/>.
+ *   along with 80x86. If not, see <http://www.gnu.org/licenses/>.
+ * =============================================================================
  */
 
 /**
@@ -41,23 +47,23 @@
  * This is to avoid issues with `#` in URLs.
  */
 
-import IDictionary from "../types/IDictionary";
+import MaybeArray from "@myTypes/MaybeArray";
 import YAML from "yaml";
 import fs from "fs";
 import path from "path";
 
-const dataDirectory = path.join(process.cwd(), "data", "instructions");
+const DataDirectory = path.join(process.cwd(), "data", "instructions");
 
 // Gets a list of all the instructions in `data/instructions/*`
 // Returns `[ "aaa", "aad", ... ]`
-export function getAllInstructionsArray(): string[] {
+export function GetAllInstructionsArray(): string[] {
     const ret: string[] = [];
-    fs.readdirSync(dataDirectory).forEach((char) => {
+    fs.readdirSync(DataDirectory).forEach((char) => {
         // skip anything that's not just a character (this removes, eg. `list.yaml`)
         if (char.length !== 1)
             return;
         // get all files in `data/instructions/${char}`, then remove `.yaml` from the end
-        const newDir = path.join(dataDirectory, char);
+        const newDir = path.join(DataDirectory, char);
         const files = fs.readdirSync(newDir).map((file) => (file.replace(/\.yaml$/, "")));
         ret.push(...files);
     });
@@ -71,8 +77,8 @@ type GetAllInstructionsAsParamsReturnType = {
         slug: string;
     };
 };
-export function getAllInstructionsAsParams(): GetAllInstructionsAsParamsReturnType[] {
-    return getAllInstructionsArray().map((filename) => (
+export function GetAllInstructionsAsParams(): GetAllInstructionsAsParamsReturnType[] {
+    return GetAllInstructionsArray().map((filename) => (
         {
             params: {
                 slug: filename,
@@ -82,17 +88,16 @@ export function getAllInstructionsAsParams(): GetAllInstructionsAsParamsReturnTy
 }
 
 // Gets the list from `list.yaml` for `/instruction`
-type GetGroupedInstructionListReturnType = IDictionary<(string | string[])[]>;
-export function getGroupedInstructionList(): GetGroupedInstructionListReturnType {
-    const fullPath = path.join(dataDirectory, "list.yaml");
+export function GetGroupedInstructionList(): Record<string, MaybeArray<string>[]> {
+    const fullPath = path.join(DataDirectory, "list.yaml");
     const contents = fs.readFileSync(fullPath);
     const yaml = YAML.parse(contents.toString());
-    return yaml as GetGroupedInstructionListReturnType;
+    return yaml as Record<string, MaybeArray<string>[]>;
 }
 
 // Reads out the instruction
-export async function getInstructionData(id: string): Promise<unknown> {
-    const fullPath = path.join(dataDirectory, id[0], `${id}.yaml`);
+export async function GetInstructionData(id: string): Promise<unknown> {
+    const fullPath = path.join(DataDirectory, id[0], `${id}.yaml`);
     const contents = fs.readFileSync(fullPath);
     const yaml = YAML.parse(contents.toString());
     return {

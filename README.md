@@ -5,8 +5,7 @@
 ## Technology
 
 80x86 is built on Node.js with [Next.js](https://nextjs.org/) and deployed on [Vercel](https://vercel.com).
-TypeScript is used *extensively.*
-The website's theme is built on [Bootstrap](https://getbootstrap.com/).
+The website's theme is custom built with [Tailwind CSS](https://tailwindcss.com).
 Data files are stored in [YAML](https://yaml.org/) (see below).
 
 ### Why YAML?

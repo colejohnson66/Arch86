@@ -1,44 +1,45 @@
 {
-  "name": "80x86",
-  "version": "0.1.0",
-  "description": "Source code for 80x86.dev",
-  "author": "Cole Tobin <coleharrisjohnson@gmail.com>",
-  "license": "AGPL-3.0-or-later",
-  "private": true,
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/colejohnson66/80x86.git"
-  },
-  "bugs": {
-    "url": "https://github.com/colejohnson66/80x86/issues"
-  },
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
-  "dependencies": {
-    "bootstrap": "^5.1.1",
-    "globby": "^12.0.2",
-    "next": "^11.1.2",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-syntax-highlighter": "^15.4.4",
-    "styled-jsx": "^4.0.1",
-    "yaml": "^1.10.2"
-  },
-  "devDependencies": {
-    "@types/node": "^16.10.2",
-    "@types/react": "^17.0.26",
-    "@types/react-dom": "^17.0.9",
-    "@types/react-syntax-highlighter": "^13.5.2",
-    "@typescript-eslint/eslint-plugin": "^4.32.0",
-    "@typescript-eslint/parser": "^4.32.0",
-    "chalk": "^4.1.2",
-    "eslint": "^7.32.0",
-    "eslint-config-next": "^11.1.2",
-    "eslint-plugin-react": "^7.26.1",
-    "typescript": "^4.4.3"
-  }
+    "name": "80x86",
+    "version": "0.1.0",
+    "description": "Source code for 80x86.dev",
+    "author": "Cole Tobin <coleharrisjohnson@gmail.com>",
+    "license": "AGPL-3.0-or-later",
+    "private": true,
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/colejohnson66/80x86.git"
+    },
+    "bugs": {
+        "url": "https://github.com/colejohnson66/80x86/issues"
+    },
+    "scripts": {
+        "dev": "next",
+        "build": "next build",
+        "start": "next start",
+        "type-check": "tsc"
+    },
+    "dependencies": {
+        "@headlessui/react": "^1.4.2",
+        "@heroicons/react": "^1.0.5",
+        "next": "^12.0.3",
+        "react": "^17.0.2",
+        "react-dom": "^17.0.2",
+        "react-syntax-highlighter": "^15.4.4",
+        "yaml": "^1.10.2"
+    },
+    "devDependencies": {
+        "@types/node": "^16.11.7",
+        "@types/react": "^17.0.34",
+        "@types/react-dom": "^17.0.11",
+        "@types/react-syntax-highlighter": "^13.5.2",
+        "@typescript-eslint/eslint-plugin": "^5.3.1",
+        "@typescript-eslint/parser": "^5.3.1",
+        "autoprefixer": "^10.4.0",
+        "eslint": "^8.2.0",
+        "eslint-config-next": "^12.0.3",
+        "eslint-plugin-react": "^7.26.1",
+        "postcss": "^8.3.11",
+        "tailwindcss": "^2.2.19",
+        "typescript": "^4.4.4"
+    }
 }

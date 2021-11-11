@@ -1,8 +1,8 @@
 /* =============================================================================
- * File:   DateTime.tsx
+ * File:   UppercaseMnemonic.ts
  * Author: Cole Tobin
  * =============================================================================
- * Copyright (c) 2021 Cole Tobin
+ * Copyright (c) 2020-2021 Cole Tobin
  *
  * This file is part of 80x86.
  *
@@ -21,17 +21,23 @@
  * =============================================================================
  */
 
-type DateTimeProps = {
-    dateTime: string;
-    text?: string; // override text
-};
+/* The rules for capitalizing instruction mnemonics are:
+ *
+ * If it's a conditional instruction (ends in `cc`), uppercase it, but
+ *   keep `cc` lowercase.
+ *
+ * If it's an FMA instruction (contains `nnn`), replace `nnn` with `###`,
+ *   then uppercase.
+ *
+ * Otherwise, simply uppercase it.
+ */
 
-export default function DateTime(props: DateTimeProps): React.ReactElement {
-    // TODO: verify if `props.dateTime` is valid
-    // see: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/time
-    return (
-        <time dateTime={props.dateTime} className="whitespace-nowrap">
-            {props.text ? props.text : props.dateTime}
-        </time>
-    );
+export default function UppercaseMnemonic(mnemonic: string): string {
+    if (mnemonic.endsWith("cc"))
+        return `${mnemonic.substring(0, mnemonic.length - 2).toUpperCase()}cc`;
+
+    if (mnemonic.includes("nnn"))
+        return mnemonic.replace("nnn", "###").toUpperCase();
+
+    return mnemonic.toUpperCase();
 }

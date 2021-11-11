@@ -1,135 +1,171 @@
-/* This file is part of 80x86.
+/* =============================================================================
+ * File:   Layout.tsx
+ * Author: Cole Tobin
+ * =============================================================================
  * Copyright (c) 2020-2021 Cole Tobin
  *
- * This program is free software: you can redistribute it and/or modify it under
- *   the terms of the GNU Affero General Public License as published by the Free
+ * This file is part of 80x86.
+ *
+ * 80x86 is free software: you can redistribute it and/or modify it under the
+ *   terms of the GNU Affero General Public License as published by the Free
  *   Software Foundation, either version 3 of the License, or (at your option)
  *   any later version.
  *
- * This program is distributed in the hope that it will be useful, but WITHOUT
- *   ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
- *   FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License
- *   for more details.
+ * 80x86 is distributed in the hope that it will be useful, but WITHOUT ANY
+ *   WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ *   FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for
+ *   more details.
  *
  * You should have received a copy of the GNU Affero General Public License
- *   along with this program. If not, see <https://www.gnu.org/licenses/>.
+ *   along with 80x86. If not, see <http://www.gnu.org/licenses/>.
+ * =============================================================================
  */
 
-import { Col, Container, Nav, Navbar, Row } from "./Bootstrap";
+import { MenuIcon, XIcon } from "@heroicons/react/outline";
 
-import A from "./A";
+import A from "@components/A";
+import { Disclosure } from "@headlessui/react";
 import Head from "next/head";
-import React from "react";
-import { strict as assert } from "assert";
 
-type NavGroup = "home" | "history" | "architecture" | "register" | "mode" | "extension" | "instruction" | "about";
-type LayoutProps = {
-    canonical?: string;
+type NavGroup = "home" | "history" | "architecture" | "register" | "mode" | "extension" | "instruction" | "instruction" | "about";
+
+type LayoutRootProps = {
     navGroup?: NavGroup;
-    homePage?: boolean;
-    src?: string;
-    dataSrc?: string;
+    pageTitle: string | React.ReactNode;
+    canonical?: string;
     children?: React.ReactNode;
 };
 
-export default function Layout(props: LayoutProps): JSX.Element {
-    function navItem(group: NavGroup, href: string, text: string) {
-        return (
-            <Nav.Item href={href} active={props.navGroup === group}>
-                {text}
-                {props.navGroup === group && <span className="visually-hidden">(current)</span>}
-            </Nav.Item>
-        );
-    }
+/* eslint-disable object-property-newline */
+const Navigation = [
+    { name: "80x86", href: "/", navGroup: "home" },
+    { name: "History", href: "/history", navGroup: "history" },
+    { name: "Microarchitecture", href: "/architecture", navGroup: "architecture" },
+    { name: "Registers", href: "/register", navGroup: "register" },
+    { name: "Operating Modes", href: "/mode", navGroup: "mode" },
+    { name: "ISA Extensions", href: "/extension", navGroup: "extension" },
+    { name: "Instructions", href: "/instruction", navGroup: "instruction" },
+    { name: "About", href: "/about", navGroup: "about" },
+];
+/* eslint-enable object-property-newline */
 
-    // Sanity checks
-    // Existence of `props.src` and `props.dataSrc` can't be done as webpack
-    //   can't resolve the `fs` module (client can't see the filesystem).
-    //   Otherwise, `fs.existsSync(...)` could be used.
-    if (props.canonical)
-        assert(props.canonical[0] === "/");
-    if (props.src)
-        assert(props.src[0] === "/");
-    if (props.dataSrc)
-        assert(props.dataSrc[0] === "/");
-
+function LayoutRoot(props: LayoutRootProps): React.ReactElement {
     return (
         <>
             <Head>
-                {props.homePage && <title>80x86</title>}
+                {props.navGroup === "home" && <title>80x86</title>}
                 {props.canonical && <link rel="canonical" href={`https://80x86.dev${props.canonical}`} />}
                 <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
             </Head>
-            <header>
-                <Navbar>
-                    <Container fluid>
-                        <Nav.Root>
-                            {navItem("home", "/", "80x86")}
-                            {navItem("history", "/history", "History")}
-                            {navItem("architecture", "/architecture", "Microarchitecture")}
-                            {navItem("register", "/register", "Registers")}
-                            {navItem("mode", "/mode", "Modes")}
-                            {navItem("extension", "/extension", "Extensions")}
-                            {navItem("instruction", "/instruction", "Instructions")}
-                            {navItem("about", "/about", "About")}
-                        </Nav.Root>
-                    </Container>
-                </Navbar>
-            </header>
-            <main>
-                {props.children}
-            </main>
-            <hr />
-            <footer>
-                <Container fluid>
-                    <Row>
-                        <Col>
-                            <small>
-                                {props.src &&
-                                    <p>
-                                        <A href={`https://github.com/colejohnson66/80x86/blob/main${props.src}`}>
-                                            View this page&apos;s source code
+            <div className="min-h-full flex flex-col">
+                {/* the actual navbar */}
+                <Disclosure as="nav" className="bg-gray-800 flex-initial">
+                    {({ open }) => (
+                        <>
+                            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                                <div className="flex items-center justify-between h-16">
+                                    <div className="flex items-center">
+                                        {/* logo */}
+                                        <div className="flex-shrink-0">
+                                            <A href="/">
+                                                <img className="bg-white rounded-lg p-0.5 h-10 w-10" src="/img/icon.svg" alt="80x86 Icon Linking to the Homepage" />
+                                            </A>
+                                        </div>
+                                        {/* nav items */}
+                                        <div className="hidden lg:block">
+                                            <div className="ml-6 flex items-baseline space-x-4">
+                                                {Navigation.map((navItem) => (
+                                                    <A key={navItem.navGroup} href={navItem.href} aria-current={navItem.navGroup === props.navGroup && "page"} className={
+                                                        navItem.navGroup === props.navGroup
+                                                            ? "activeNavItem"
+                                                            : "inactiveNavItem"}>
+                                                        {navItem.name}
+                                                    </A>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="-mr-2 flex lg:hidden">
+                                        {/* nav items when collapsed */}
+                                        <Disclosure.Button className="bg-gray-800 inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+                                            <span className="sr-only">Open main menu</span>
+                                            {open
+                                                ? <XIcon className="block h-6 w-6" aria-hidden="true" />
+                                                : <MenuIcon className="block h-6 w-6" aria-hidden="true" />}
+                                        </Disclosure.Button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <Disclosure.Panel className="lg:hidden">
+                                {Navigation.map((navItem) => (
+                                    <div key={navItem.navGroup} className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                                        <A href={navItem.href} aria-current={navItem.navGroup === props.navGroup && "page"} className=
+                                            {navItem.navGroup === props.navGroup
+                                                ? "activeNavItem"
+                                                : "inactiveNavItem"}>
+                                            {navItem.name}
                                         </A>
-                                        {props.dataSrc ? ", and " : "."}
-                                        {props.dataSrc &&
-                                            <A href={`https://github.com/colejohnson66/80x86/blob/main${props.dataSrc}`}>
-                                                the data used to generate it
-                                            </A>}
-                                        {props.dataSrc && "."}
-                                    </p>}
-                                <p>
-                                    <A href="/contact">Contact</A>.
-                                </p>
-                                <p>
-                                    Website copyright &copy; Cole Tobin 2020-2021.
-                                </p>
-                            </small>
-                        </Col>
-                    </Row>
-                </Container>
-            </footer>
+                                    </div>
+                                ))}
+                            </Disclosure.Panel>
+                        </>
+                    )}
+                </Disclosure>
+
+                {/* page title */}
+                <header className="bg-white shadow flex-initial">
+                    <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                        <h1 className="font-bold text-gray-800">{props.pageTitle}</h1>
+                    </div>
+                </header>
+
+                {/* content */}
+                <main className="flex-1">
+                    <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+                        {props.children}
+                    </div>
+                </main>
+
+                {/* footer */}
+                <footer className="bg-white shadow flex-initial">
+                    <div className="text-sm max-w-7xl mx-auto pt-6 pb-10 px-4 sm:px-6 lg:px-8">
+                        <p>
+                            Website copyright &copy; Cole Tobin 2020-2021.
+                        </p>
+                    </div>
+                </footer>
+            </div>
         </>
     );
 }
 
-type TitleProps = {
+type LayoutTitleProps = {
     title: string;
-};
-export function Title(props: TitleProps): JSX.Element {
+}
+
+function LayoutTitle(props: LayoutTitleProps): React.ReactElement {
     return (
         <Head>
-            <title>80x86 - {props.title}</title>
+            <title>{props.title} | 80x86</title>
         </Head>
     );
 }
 
-type DescriptionProps = {
-    text: string;
-};
-export function Description(props: DescriptionProps): JSX.Element {
+type LayoutContentProps = {
+    children: React.ReactNode;
+}
+
+function LayoutContent(props: LayoutContentProps): React.ReactElement {
     return (
-        <Head>
-            <meta name="description" content={props.text} />
-        </Head>
+        <div className="px-4 py-6 sm:px-0">
+            {props.children}
+        </div>
     );
 }
+
+export default {
+    Root: LayoutRoot,
+    Title: LayoutTitle,
+    Content: LayoutContent,
+};

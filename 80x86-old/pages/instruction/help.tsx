@@ -367,6 +367,10 @@ export default function Page(): JSX.Element {
 
                         <h2 id="headingExceptions">Exceptions</h2>
                         <p>
+                            Every instruction can cause an exception based on certain criteria.
+                            Rather than list each of these on every instruction&apos;s individual page, these &quot;general exceptions&quot; are listed here:
+                        </p>
+                        <p>
                             The &quot;Exceptions&quot; sections contain a list of possible processor exceptions that can result from execution of the instruction.
                             For regular (non-vector) instructions, each subsection will be for the various processor modes.
                             Vector instructions, on the other hand, will typically only have two subsections: &quot;SIMD Floating-Point&quot; and &quot;Other&quot;.

@@ -1,5 +1,5 @@
 /* =============================================================================
- * File:   DateTime.tsx
+ * File:   Clear.tsx
  * Author: Cole Tobin
  * =============================================================================
  * Copyright (c) 2021 Cole Tobin
@@ -21,17 +21,8 @@
  * =============================================================================
  */
 
-type DateTimeProps = {
-    dateTime: string;
-    text?: string; // override text
-};
-
-export default function DateTime(props: DateTimeProps): React.ReactElement {
-    // TODO: verify if `props.dateTime` is valid
-    // see: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/time
+export default function Clear(): React.ReactElement {
     return (
-        <time dateTime={props.dateTime} className="whitespace-nowrap">
-            {props.text ? props.text : props.dateTime}
-        </time>
+        <div className="clear-both" />
     );
 }

@@ -15,28 +15,27 @@
  *   along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { Breadcrumb, Col, Container, Row } from "../components/Bootstrap";
+import { Col, Container, Row } from "../components/Bootstrap";
 import Layout, { Title } from "../components/Layout";
 
+import A from "../components/A";
 import React from "react";
 
 export default function Page(): JSX.Element {
     return (
-        <Layout canonical="/contact" src="/pages/contact.tsx">
-            <Title title="Contact" />
+        <Layout>
+            <Title title="404" />
             <Container fluid>
-                <Breadcrumb.Root>
-                    <Breadcrumb.Item>Contact</Breadcrumb.Item>
-                </Breadcrumb.Root>
                 <Row>
                     <Col id="content">
-                        <h1>Contact</h1>
+                        <h1>404</h1>
                         <p>
-                            To contact me, please use the following method:
+                            That means whatever you were trying to reach doesn&apos;t exist.
                         </p>
-                        <ul>
-                            <li>Email: <i>coleharrisjohnson at gmail dot com</i></li>
-                        </ul>
+                        <p>
+                            This site is currently under active development, so many pages may not exist yet.
+                            If you believe you were linked here <em>in error</em>, please <A href="/contact">contact me</A> to report the problem.
+                        </p>
                     </Col>
                 </Row>
             </Container>

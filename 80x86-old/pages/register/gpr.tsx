@@ -86,7 +86,7 @@ export default function Page(): JSX.Element {
                         <p>
                             This is a list of the general purpose registers.
                             The register number listed alongside each one is the number that would be encoded in an instruction to access it.
-                            For example, if an instruction calls for an operand to be encoded into <code>ModRM.reg</code>, and the provided operand is <code>EBX</code>, <code>ModRM.reg</code> will be set to 4 (<code>100</code> in binary).
+                            For example, if an instruction calls for an operand to be encoded into <code>ModRM.reg</code>, and the provided operand is <code>EBX</code>, <code>ModRM.reg</code> will be set to 3 (<code>011</code> in binary).
                         </p>
                         <div className="columns">
                             <div className="column">
