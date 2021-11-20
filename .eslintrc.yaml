@@ -110,5 +110,4 @@ rules:
   unicode-bom: error
   yoda: error
   "@next/next/no-img-element": "off"
-
   "@typescript-eslint/no-use-before-define": error
