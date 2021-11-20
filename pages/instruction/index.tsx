@@ -91,9 +91,6 @@ export default function Page(props: PageProps): React.ReactElement {
                     Up-to-date lists are available from <A href="https://software.intel.com/content/www/us/en/develop/articles/intel-sdm.html">Intel</A> and <A href="https://developer.amd.com/resources/developer-guides-manuals/">AMD</A>, however, they may be incomplete;
                     Undocumented and removed instructions may be missing from these manuals.
                 </p>
-                <p>
-                    <A href="/instruction/map">Opcode maps</A> are available as well.
-                </p>
                 <Clear />
 
                 <h2 id="headingList">Mnemonic List</h2>
