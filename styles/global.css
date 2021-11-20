@@ -19,22 +19,22 @@
         @apply text-purple-800;
     } */
     h1 {
-        @apply text-3xl;
+        @apply text-4xl;
     }
     h2 {
-        @apply text-2xl pt-2;
+        @apply text-3xl pt-2 border-gray-400 border-b-2;
     }
     h3 {
-        @apply text-xl pt-2;
+        @apply text-2xl pt-2;
     }
     h4 {
-        @apply text-lg pt-2;
+        @apply text-xl pt-2;
     }
     h5 {
-        @apply text-sm pt-2;
+        @apply text-lg pt-2;
     }
     h6 {
-        @apply text-xs pt-2;
+        @apply text-sm pt-2;
     }
     ol {
         @apply list-inside list-decimal;

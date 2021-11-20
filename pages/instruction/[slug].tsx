@@ -32,7 +32,7 @@ import Layout from "@components/Layout";
 import MaybeArray from "@myTypes/MaybeArray";
 import React from "react";
 import SyntaxHighlighter from "react-syntax-highlighter";
-import SyntaxHighlighterDarkTheme from "react-syntax-highlighter/dist/cjs/styles/hljs/atom-one-dark";
+import SyntaxHighlighterTheme from "react-syntax-highlighter/dist/cjs/styles/hljs/atom-one-light";
 import Toc from "@components/Toc";
 import UppercaseMnemonic from "@library/UppercaseMnemonic";
 import assert from "assert";
@@ -233,7 +233,7 @@ export default function Page(props: PageProps): React.ReactElement {
                                 <td>
                                     <code className="mnemonic-encoding">{FormatStringToJsx(row.opcode)}</code>
                                     <hr />
-                                    <code className="mnemonic">{FormatStringToJsx(row.mnemonic)}</code>
+                                    <code className="whitespace-nowrap">{FormatStringToJsx(row.mnemonic)}</code>
                                 </td>
                                 <td><code>{row.encoding}</code></td>
                                 <td>{OpcodeValidityMap[row.validity[16]]}</td>
@@ -243,7 +243,7 @@ export default function Page(props: PageProps): React.ReactElement {
                                     <td>
                                         {BreakTagsFromArray(CoerceArray(row.cpuid))}
                                     </td>}
-                                <td className="overviewDescription">{FormatStringToJsx(row.description)}</td>
+                                <td className="w-72">{FormatStringToJsx(row.description)}</td>
                             </tr>
                         ))}
                     </tbody>
@@ -296,9 +296,11 @@ export default function Page(props: PageProps): React.ReactElement {
                 {ParagraphsFromNewLines(props.description)}
 
                 <h2 id="headingOperation">Operation</h2>
-                <SyntaxHighlighter language="csharp" style={SyntaxHighlighterDarkTheme}>
-                    {props.operation}
-                </SyntaxHighlighter>
+                <div className="pt-2">
+                    <SyntaxHighlighter language="csharp" style={SyntaxHighlighterTheme}>
+                        {props.operation}
+                    </SyntaxHighlighter>
+                </div>
                 {props.operationNotes &&
                     <>
                         <h3 id="headingOperationNotes">Notes</h3>
@@ -313,7 +315,7 @@ export default function Page(props: PageProps): React.ReactElement {
                     <>
                         <h2 id="headingExamples">{Plural(props.examples, "Example", "Examples")}</h2>
                         {CoerceArray(props.examples).map((example, idx) => (
-                            <SyntaxHighlighter key={idx} language="x86asm" style={SyntaxHighlighterDarkTheme}>
+                            <SyntaxHighlighter key={idx} language="x86asm" style={SyntaxHighlighterTheme}>
                                 {example}
                             </SyntaxHighlighter>
                         ))}
@@ -341,7 +343,7 @@ export default function Page(props: PageProps): React.ReactElement {
                 {props.intrinsics &&
                     <>
                         <h2 id="headingIntrinsics">C Intrinsics</h2>
-                        <SyntaxHighlighter language="c-like" style={SyntaxHighlighterDarkTheme}>
+                        <SyntaxHighlighter language="c-like" style={SyntaxHighlighterTheme}>
                             {props.intrinsics}
                         </SyntaxHighlighter>
                     </>}

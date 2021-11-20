@@ -1,58 +1,5 @@
-/* This file is part of 80x86.
- * Copyright (c) 2021 Cole Tobin
- *
- * This program is free software: you can redistribute it and/or modify it under
- *   the terms of the GNU Affero General Public License as published by the Free
- *   Software Foundation, either version 3 of the License, or (at your option)
- *   any later version.
- *
- * This program is distributed in the hope that it will be useful, but WITHOUT
- *   ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
- *   FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License
- *   for more details.
- *
- * You should have received a copy of the GNU Affero General Public License
- *   along with this program. If not, see <https://www.gnu.org/licenses/>.
- */
-
-/* CSS rules that apply to every page
- *
- * Despite being "modularized", all CSS files are included in `/pages/_app.tsx`.
- */
-
-html,
-body,
-#__next {
-    height: 100%;
-    width: 100%;
-}
-
-/* Contains everything (`header`, `main`, and `footer`) */
-#all {
-    border-radius: 0;
-    min-height: 100%;
-}
-
-header {
-    margin-bottom: 20px;
-}
-
 /* <li> tags don't contain <p> blocks sometimes; add a margin */
 li > br {
     display: block;
     margin-bottom: 5px;
-}
-
-[rel=external] {
-    background: url(/img/external-ltr.png) center right no-repeat;
-    padding-right: 15px;
-}
-
-h2 {
-    border-width: 0 0 1px 0;
-    border-style: solid;
-}
-
-footer {
-    margin: 1em 0 0 5em;
 }
