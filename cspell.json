@@ -1,5 +1,5 @@
 {
-    "version": "0.1",
+    "version": "0.2",
     "language": "en",
     "dictionaryDefinitions": [
         {
@@ -87,6 +87,7 @@
         "octoword",
         "operand's",
         "quadword",
+        "Ryzen",
         "scrollable",
         "simd",
         "Vercel",
