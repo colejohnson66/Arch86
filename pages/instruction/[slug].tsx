@@ -37,14 +37,14 @@ import Toc from "@components/Toc";
 import UppercaseMnemonic from "@library/UppercaseMnemonic";
 import assert from "assert";
 
-type OpcodeValidityValues = "valid" | "valid*" | "invalid" | "n/e" | "n/s";
-const OpcodeValidityMap: Record<string, string> = {
-    "valid": "Valid",
-    "valid*": "Valid*",
-    "invalid": "Invalid",
-    "n/e": "Not Encodable",
-    "n/p": "Not Prefixable",
-    "n/s": "Not Supported",
+type OpcodeValidityValues = "valid" | "valid*" | "invalid" | "n/e" | "n/p" | "n/s";
+const OpcodeValidityMap: Record<OpcodeValidityValues, React.ReactNode> = {
+    "valid": <td className="text-center bg-green-300">Valid</td>,
+    "valid*": <td className="text-center bg-green-300">Valid*</td>,
+    "invalid": <td className="text-center bg-red-300">Invalid</td>,
+    "n/e": <td className="text-center bg-red-300"><abbr title="Not Encodable">N/E</abbr></td>,
+    "n/p": <td className="text-center bg-red-300"><abbr title="Not Prefixable">N/P</abbr></td>,
+    "n/s": <td className="text-center bg-red-300"><abbr title="Not Encodable">N/S</abbr></td>,
 };
 type OpcodeValidity = {
     16: OpcodeValidityValues;
@@ -213,7 +213,7 @@ export default function Page(props: PageProps): React.ReactElement {
                             <Toc.Entry href="#headingExceptionsOther" text="Other" />}
                     </Toc.Entry>
                 </Toc.Root>
-                <table>
+                <table className="border-2 border-gray-400">
                     <thead>
                         <tr>
                             <th>Opcode and Mnemonic</th>
@@ -236,9 +236,9 @@ export default function Page(props: PageProps): React.ReactElement {
                                     <code className="whitespace-nowrap">{FormatStringToJsx(row.mnemonic)}</code>
                                 </td>
                                 <td><code>{row.encoding}</code></td>
-                                <td>{OpcodeValidityMap[row.validity[16]]}</td>
-                                <td>{OpcodeValidityMap[row.validity[32]]}</td>
-                                <td>{OpcodeValidityMap[row.validity[64]]}</td>
+                                {OpcodeValidityMap[row.validity[16]]}
+                                {OpcodeValidityMap[row.validity[32]]}
+                                {OpcodeValidityMap[row.validity[64]]}
                                 {row.cpuid &&
                                     <td>
                                         {BreakTagsFromArray(CoerceArray(row.cpuid))}
