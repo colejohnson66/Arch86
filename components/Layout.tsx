@@ -4,20 +4,20 @@
  * =============================================================================
  * Copyright (c) 2020-2021 Cole Tobin
  *
- * This file is part of 80x86.
+ * This file is part of Arch86.
  *
- * 80x86 is free software: you can redistribute it and/or modify it under the
+ * Arch86 is free software: you can redistribute it and/or modify it under the
  *   terms of the GNU Affero General Public License as published by the Free
  *   Software Foundation, either version 3 of the License, or (at your option)
  *   any later version.
  *
- * 80x86 is distributed in the hope that it will be useful, but WITHOUT ANY
+ * Arch86 is distributed in the hope that it will be useful, but WITHOUT ANY
  *   WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  *   FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for
  *   more details.
  *
  * You should have received a copy of the GNU Affero General Public License
- *   along with 80x86. If not, see <http://www.gnu.org/licenses/>.
+ *   along with Arch86. If not, see <http://www.gnu.org/licenses/>.
  * =============================================================================
  */
 
@@ -38,7 +38,7 @@ type LayoutRootProps = {
 
 /* eslint-disable object-property-newline */
 const Navigation = [
-    { name: "80x86", href: "/", navGroup: "home" },
+    { name: "Arch86", href: "/", navGroup: "home" },
     { name: "History", href: "/history", navGroup: "history" },
     { name: "Microarchitecture", href: "/architecture", navGroup: "architecture" },
     { name: "Registers", href: "/register", navGroup: "register" },
@@ -53,8 +53,8 @@ function LayoutRoot(props: LayoutRootProps): React.ReactElement {
     return (
         <>
             <Head>
-                {props.navGroup === "home" && <title>80x86</title>}
-                {props.canonical && <link rel="canonical" href={`https://80x86.dev${props.canonical}`} />}
+                {props.navGroup === "home" && <title>Arch86</title>}
+                {props.canonical && <link rel="canonical" href={`https://arch86.com${props.canonical}`} />}
                 <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
             </Head>
             <div className="min-h-full flex flex-col">
@@ -68,7 +68,7 @@ function LayoutRoot(props: LayoutRootProps): React.ReactElement {
                                         {/* logo */}
                                         <div className="flex-shrink-0">
                                             <A href="/">
-                                                <img className="bg-white rounded-lg p-0.5 h-10 w-10" src="/img/icon.svg" alt="80x86 Icon Linking to the Homepage" />
+                                                <img className="bg-white rounded-lg p-0.5 h-10 w-10" src="/img/icon.svg" alt="Arch86 Icon Linking to the Homepage" />
                                             </A>
                                         </div>
                                         {/* nav items */}
@@ -147,7 +147,7 @@ type LayoutTitleProps = {
 function LayoutTitle(props: LayoutTitleProps): React.ReactElement {
     return (
         <Head>
-            <title>{props.title} | 80x86</title>
+            <title>{props.title} | Arch86</title>
         </Head>
     );
 }

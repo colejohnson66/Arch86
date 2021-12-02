@@ -1,19 +1,19 @@
-# 80x86
+# Arch86
 
-[80x86](https://80x86.dev/) is a digital reference of the x86 (and x86-64) processor architecture.
+[Arch86](https://arch86.com/) is a digital reference of the x86 (and x86-64) processor architecture.
 
 ## Technology
 
-80x86 is built on Node.js with [Next.js](https://nextjs.org/) and deployed on [Vercel](https://vercel.com).
+Arch86 is built on Node.js with [Next.js](https://nextjs.org/) and deployed on [Vercel](https://vercel.com).
 The website's theme is custom built with [Tailwind CSS](https://tailwindcss.com).
 Data files are stored in [YAML](https://yaml.org/) (see below).
 
 ### Why YAML?
 
-While JavaScript supports JSON "natively" (though `JSON.parse`), YAML was chosen instead for [data storage](https://github.com/colejohnson66/80x86/tree/main/data) for two reasons:
+While JavaScript supports JSON "natively" (though `JSON.parse`), YAML was chosen instead for [data storage](https://github.com/colejohnson66/Arch86/tree/main/data) for two reasons:
 
 1. It supports multiline strings without any "hacks" (using `"\n"`, an array of singleline strings joined in code, nonstandard JSON, etc.).
-For example, the "Operation" section of the [`ADDPD` instruction source](https://github.com/colejohnson66/80x86/blob/main/data/instructions/a/addpd.yaml) is about 100 lines long.
+For example, the "Operation" section of the [`ADDPD` instruction source](https://github.com/colejohnson66/Arch86/blob/main/data/instructions/a/addpd.yaml) is about 100 lines long.
 Encoding that in JSON while following the spec would be unwieldy.
 2. Its syntax is much less verbose.
 For some programmers, verbosity is desired as it avoids bugs, however, JSON's verbosity can be frustrating to work with when manually creating dozens or more files.
@@ -21,7 +21,7 @@ YAML's quirks (such as a value of a single (unquoted) `Y` character being interp
 
 ## Running a Copy
 
-Whenever a change is pushed to GitHub, [80x86.dev](https://80x86.dev) is automatically updated.
+Whenever a change is pushed to GitHub, [arch86.com](https://arch86.com) is automatically updated.
 Therefore, the code here is what is running *right now.*
 
 However, should you want to run your own copy, follow the following steps:
@@ -33,8 +33,8 @@ $ npm i -g yarn
 ```
 * Clone the repository:
 ```shell
-$ git clone https://github.com/colejohnson66/80x86
-$ cd 80x86
+$ git clone https://github.com/colejohnson66/Arch86
+$ cd Arch86
 ```
 * Download the dependencies and run:
 ```shell
@@ -51,4 +51,4 @@ In some terminals, clicking the URL while holding `Ctrl` will open it for you.
 
 ## License
 
-80x86 is licensed under [GNU Affero General Public License 3.0](https://www.gnu.org/licenses/agpl-3.0.en.html) or later.
+Arch86 is licensed under [GNU Affero General Public License 3.0](https://www.gnu.org/licenses/agpl-3.0.en.html) or later.

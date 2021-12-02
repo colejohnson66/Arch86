@@ -1,12 +1,35 @@
+/* =============================================================================
+ * File:   index.tsx
+ * Author: Cole Tobin
+ * =============================================================================
+ * Copyright (c) 2021 Cole Tobin
+ *
+ * This file is part of Arch86.
+ *
+ * Arch86 is free software: you can redistribute it and/or modify it under the
+ *   terms of the GNU Affero General Public License as published by the Free
+ *   Software Foundation, either version 3 of the License, or (at your option)
+ *   any later version.
+ *
+ * Arch86 is distributed in the hope that it will be useful, but WITHOUT ANY
+ *   WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ *   FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for
+ *   more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ *   along with Arch86. If not, see <http://www.gnu.org/licenses/>.
+ * =============================================================================
+ */
+
 import A from "@components/A";
-import Layout from "@components/Layout"
+import Layout from "@components/Layout";
 
 export default function Page(): React.ReactElement {
     return (
-        <Layout.Root navGroup="home" pageTitle="80x86">
+        <Layout.Root navGroup="home" pageTitle="Arch86">
             <Layout.Content>
                 <p>
-                    This is the 80x86 website;
+                    This is the Arch86 website;
                     A website for all things x86 related.
                 </p>
                 <p>
