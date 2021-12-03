@@ -29,7 +29,6 @@ description: >-
   The \c{AAD} instruction prepares a BCD number for division.
 
   This instruction will not be useful unless it is immediately followed by a \instr{DIV} instruction.
-  Before executing either this instruction or the \instr{DIV} one, one should ensure that \reg{DX} is 0.
 
   Traditionally, this instruction is "ASCII Adjust Before Division".
   This would lead one to believe that it works on ASCII digits (\c{030h} (\c{0}) through \c{039h} (\c{9})), however this would be incorrect.
