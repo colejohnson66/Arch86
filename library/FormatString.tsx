@@ -82,25 +82,46 @@ const cannedArgs: Record<string, (arg: string) => React.ReactElement> = {
 
 // "canned" exception responses
 const exceptions: Record<string, React.ReactElement> = {
-    ac: <>If alignment checking is enabled and an unaligned memory reference is made while the current privilege level is 3.</>,
-    "evex.vvvvv": <>If <code>EVEX.vvvvv</code> is not <code>b11111</code>.</>,
-    in64: <>If in 64 bit mode.</>,
+    // #UD
+    cpuid: <>If any of the required CPUID feature flags are note set.</>,
+    cpuidFeatureFlags: <>If any of the required CPUID feature flags need enabling, but are not.</>,
+    "evex.vvvvv": <>If <code>EVEX.vvvvv</code> is not <code>11111b</code>.</>,
+    inCompatibility: <>If in Compatibility Mode.</>,
+    inReal: <>If in Real Mode.</>,
+    inLong: <>If in Long Mode.</>,
+    inProtected: <>If in Protected Mode.</>,
+    inVirtual8086: <>If in Virtual-8086 Mode.</>,
     lock: <>If the <Instruction name="LOCK" noTitle /> prefix is used.</>,
     lockNoMem: <>If the <Instruction name="LOCK" noTitle /> prefix is used, but the destination is not a memory operand.</>,
-    nonCanon: <>If a memory operand address is in non-canonical form.</>, // TODO: link to a page on what canonical addressing is
-    nonCanonSS: <>If a memory operand addressing the <code>SS</code> segment is in non-canonical form.</>,
-    pf: <>If a page fault occurs.</>,
+    sib: <>If 16 bit addressing is used, or 32 or 64 bit addressing is used, but without an SIB byte (<code>rm</code> is not <code>100b</code>).</>,
+    "vex.l0": <>If <code>VEX.L</code> is not 0.</>,
+    "vex.l1": <>If <code>VEX.L</code> is not 1.</>,
+    "vex.vvvv": <>If <code>VEX.vvvv</code> is not <code>1111b</code>.</>,
+    "xop.vvvv": <>If <code>XOP.vvvv</code> is not <code>1111b</code>.</>, // TODO: is this a thing?
+
+    // #SS(0)
+    nonCanonSS: <>If a memory operand using the <code>SS</code> segment is in non-canonical form.</>, // TODO: link to a page on canonicalness
+    segLimitSS: <>If a memory operand using the <code>SS</code> segment has an effective address that is outside the <code>SS</code> segment limit.</>,
+
+    // #GP(0)
+    nonCanon: <>If a memory operand (using a semgent other than <code>SS</code>) is in non-canonical form.</>,
+    nullSelector: <>If a memory operand uses a segment containing a <code>NULL</code> selector.</>,
     nonWritableSegment: <>If the destination is located in a non-writable segment.</>,
-    nullSelector: <>If a memory access uses a semgent containing a <code>NULL</code> selector.</>,
-    segLimit: <>If a memory operand (using a segment that isn&apos;t <code>SS</code>) has an effective address is outside that segment&apos;s limit.</>,
-    segLimitSS: <>If a memory operand&apos;s using the <code>SS</code> segment has an effective address is outside the <code>SS</code> segment limit.</>,
+    segLimit: <>If a memory operand (using a segment other than <code>SS</code>) has an effective address that is outside the segment&apos; limit.</>,
+
+    // #PF(fc)
+    pf: <>If a page fault occurs.</>,
+
+    // #AC(0)
+    ac: <>If alignment checking is enabled while the current privilege level is 3 and an unaligned memory access is made.</>,
+
+    // old; remove
+    in64: <>If in 64 bit mode.</>,
     "vex.l": <>If <code>VEX.L</code> is not 0.</>,
-    "vex.vvvv": <>If <code>VEX.vvvv</code> is not <code>b1111</code>.</>,
 };
 
 // `\bits` may change, so don't combine with `\c`
 // `\reg` may change, so don't combine with `\c`
-// `\cpuid` is currently fancy syntax around `\c`, but this may change
 const functions: Record<string, (arg: string) => React.ReactElement> = {
     bits: (arg) => (<code>{arg}</code>),
 

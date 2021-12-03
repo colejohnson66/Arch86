@@ -292,54 +292,8 @@ export default function Page(): React.ReactElement {
 
                 <h2 id="headingExceptions">Exceptions</h2>
                 <p>
-                    Any <em>additional</em> exceptions that can occur in addition to the ones below.
+                    The &quot;Exceptions&quot; section contains a list of the possible exceptions that can be raised, along with the criteria for doing so.
                 </p>
-                <p>
-                    Every instruction can cause an exception based on certain criteria.
-                    Rather than list each of these on every instruction&apos;s individual page, these &quot;general exceptions&quot; are listed here:
-                </p>
-                <dl>
-                    <dt><code>#UD</code></dt>
-                    <dd>
-                        <ul>
-                            <li>If the <Instruction name="LOCK" noTitle /> prefix is used, but not allowed.</li>
-                            <li>If the <Instruction name="LOCK" noTitle noLink /> is allowed and used, but the destination is not a memory operand.</li>
-                            <li>If any of the required feature flags (CPUID bits) are not set.</li>
-                            <li>If any of the required feature flags are set, but the feature was not enabled.</li>
-                            <li>If an opcode requires SIB addressing (32 or 64 bit addressing), but an SIB byte was not present.</li>
-                            <li>If <code>VEX.vvvv</code> is reserved and is not <code>1111b</code>.</li>
-                            <li>If <code>EVEX.vvvvv</code> is reserved and is not <code>11111b</code>.</li>
-                        </ul>
-                    </dd>
-                    <dt><code>#SS(0)</code></dt>
-                    <dd>
-                        <ul>
-                            <li>If a memory operand using the <code>SS</code> segment has an effective address that is outside the <code>SS</code> segment limit.</li>
-                            <li>If, in <A href="/mode/long">Long Mode</A>, a memory operand using the <code>SS</code> segment is in non-canonical form.</li>
-                        </ul>
-                    </dd>
-                    <dt><code>#GP(0)</code></dt>
-                    <dd>
-                        <ul>
-                            <li>If a memory operand (using a segment other than <code>SS</code>) has an effective address that is outside that segment&apos;s limit.</li>
-                            <li>If, in <A href="/mode/long">Long Mode</A>, a memory operand (using a segment other than <code>SS</code>) is in non-canonical form.</li>
-                            <li>If a memory access uses a <code>NULL</code> segment selector.</li>
-                            <li>If the destination is a memory operand and is located in a non-writable segment.</li>
-                        </ul>
-                    </dd>
-                    <dt><code>#PF(<abbr title="fault code">fc</abbr>)</code></dt>
-                    <dd>
-                        <ul>
-                            <li>If a page fault occurs.</li>
-                        </ul>
-                    </dd>
-                    <dt><code>#AC(0)</code></dt>
-                    <dd>
-                        <ul>
-                            <li>If alignment checking is enabled while the current privilege level is 3 and an unaligned memory access is made.</li>
-                        </ul>
-                    </dd>
-                </dl>
             </Layout.Content>
         </Layout.Root>
     );
