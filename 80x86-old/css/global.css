@@ -1,5 +1,0 @@
-/* <li> tags don't contain <p> blocks sometimes; add a margin */
-li > br {
-    display: block;
-    margin-bottom: 5px;
-}
