@@ -25,7 +25,6 @@ import { FormatStringPlaintext, FormatStringToJsx } from "@library/FormatString"
 
 import A from "./A";
 import InstructionTitles from "../data/instructions/Titles";
-import React from "react";
 
 function getInstructionName(name: string): string | undefined {
     const nameLower = name.toLowerCase();

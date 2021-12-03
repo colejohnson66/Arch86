@@ -25,7 +25,7 @@ import A from "@components/A";
 import React from "react";
 
 type TocRootProps = {
-    children: React.ReactNode,
+    children: React.ReactNode;
 };
 
 function TocRoot(props: TocRootProps): React.ReactElement {
@@ -50,10 +50,10 @@ function TocRoot(props: TocRootProps): React.ReactElement {
 }
 
 type TocEntryProps = {
-    href: string,
-    text: string,
-    tocIndex?: string,
-    children?: React.ReactNode,
+    href: string;
+    text: string;
+    tocIndex?: string;
+    children?: React.ReactNode;
 };
 
 function TocEntry(props: TocEntryProps): React.ReactElement {
