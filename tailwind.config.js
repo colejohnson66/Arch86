@@ -1,5 +1,8 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+// eslint-disable-next-line no-undef
 const defaultTheme = require("tailwindcss/defaultTheme");
 
+// eslint-disable-next-line no-undef
 module.exports = {
     purge: [
         "./pages/**/*.{ts,tsx}",
