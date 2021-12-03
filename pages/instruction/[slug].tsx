@@ -182,7 +182,7 @@ export default function Page(props: PageProps): React.ReactElement {
                 <Breadcrumb.Item>{titleFormat}</Breadcrumb.Item>
             </Breadcrumb.Root>
             <Layout.Content>
-                <Toc.Root>
+                {/* <Toc.Root>
                     <Toc.Entry href="#headingEncoding" text="Encoding" />
                     <Toc.Entry href="#headingDescription" text="Description" />
                     {props.operationNotes
@@ -212,8 +212,8 @@ export default function Page(props: PageProps): React.ReactElement {
                         {props.exceptions.other &&
                             <Toc.Entry href="#headingExceptionsOther" text="Other" />}
                     </Toc.Entry>
-                </Toc.Root>
-                <table className="border-2 border-gray-400">
+                </Toc.Root> */}
+                <table className="instruction-overview">
                     <thead>
                         <tr>
                             <th>Opcode and Mnemonic</th>
@@ -235,7 +235,7 @@ export default function Page(props: PageProps): React.ReactElement {
                                     <hr />
                                     <code className="whitespace-nowrap">{FormatStringToJsx(row.mnemonic)}</code>
                                 </td>
-                                <td><code>{row.encoding}</code></td>
+                                <td className="text-center"><code>{row.encoding}</code></td>
                                 {OpcodeValidityMap[row.validity[16]]}
                                 {OpcodeValidityMap[row.validity[32]]}
                                 {OpcodeValidityMap[row.validity[64]]}
@@ -243,7 +243,7 @@ export default function Page(props: PageProps): React.ReactElement {
                                     <td>
                                         {BreakTagsFromArray(CoerceArray(row.cpuid))}
                                     </td>}
-                                <td className="w-72">{FormatStringToJsx(row.description)}</td>
+                                <td className="text-justify min-w-full">{FormatStringToJsx(row.description)}</td>
                             </tr>
                         ))}
                     </tbody>
@@ -258,7 +258,7 @@ export default function Page(props: PageProps): React.ReactElement {
                     </>}
 
                 <h2 id="headingEncoding">Encoding</h2>
-                <table>
+                <table className="instruction-encoding">
                     <thead>
                         <tr>
                             <th>Encoding</th>

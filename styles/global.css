@@ -45,25 +45,28 @@
         @apply text-4xl;
     }
     h2 {
-        @apply text-3xl pt-2 border-gray-400 border-b-2;
+        @apply text-3xl my-2 border-gray-400 border-b-2;
     }
     h3 {
-        @apply text-2xl pt-2;
+        @apply text-2xl my-2;
     }
     h4 {
-        @apply text-xl pt-2;
+        @apply text-xl my-2;
     }
     h5 {
-        @apply text-lg pt-2;
+        @apply text-lg my-2;
     }
     h6 {
-        @apply text-sm pt-2;
+        @apply text-sm my-2;
     }
     ol {
         @apply list-inside list-decimal;
     }
     ul {
         @apply list-inside list-disc;
+    }
+    code {
+        @apply whitespace-nowrap;
     }
 
 
@@ -89,9 +92,27 @@
 
 
     p {
-        @apply py-2;
+        @apply mb-2;
     }
-    p:first-of-type {
-        @apply pt-0;
+
+    table.instruction-overview th,
+    table.instruction-overview td {
+        @apply border border-gray-400 p-2;
+    }
+    table.instruction-encoding th,
+    table.instruction-encoding td {
+        @apply border border-gray-400 p-1 text-center;
+    }
+
+    dd {
+        /* definition list */
+    }
+    dt {
+        /* definition list term */
+        @apply font-bold;
+    }
+    dd {
+        /* definition list definition */
+        @apply pl-8;
     }
 }
