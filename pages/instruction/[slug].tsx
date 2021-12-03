@@ -33,7 +33,6 @@ import MaybeArray from "@myTypes/MaybeArray";
 import React from "react";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import SyntaxHighlighterTheme from "react-syntax-highlighter/dist/cjs/styles/hljs/atom-one-light";
-import Toc from "@components/Toc";
 import UppercaseMnemonic from "@library/UppercaseMnemonic";
 import assert from "assert";
 
@@ -43,8 +42,8 @@ const OpcodeValidityMap: Record<OpcodeValidityValues, React.ReactNode> = {
     "valid*": <td className="text-center bg-green-300">Valid*</td>,
     "invalid": <td className="text-center bg-red-300">Invalid</td>,
     "n/e": <td className="text-center bg-red-300"><abbr title="Not Encodable">N/E</abbr></td>,
-    "n/p": <td className="text-center bg-red-300"><abbr title="Not Prefixable">N/P</abbr></td>,
-    "n/s": <td className="text-center bg-red-300"><abbr title="Not Encodable">N/S</abbr></td>,
+    "n/p": <td className="text-center bg-yellow-300"><abbr title="Not Prefixable">N/P</abbr></td>,
+    "n/s": <td className="text-center bg-yellow-300"><abbr title="Not Supported">N/S</abbr></td>,
 };
 type OpcodeValidity = {
     16: OpcodeValidityValues;
@@ -195,7 +194,7 @@ export default function Page(props: PageProps): React.ReactElement {
                     {props.flags &&
                         <Toc.Entry href="#headingFlags" text="Flags Affected" />}
                     {props.intrinsics &&
-                        <Toc.Entry href="#headingIntrinsics" text="C Intrinsics" />}
+                        <Toc.Entry href="#headingIntrinsics" text="Intrinsics" />}
                     <Toc.Entry href="#headingExceptions" text="Exceptions">
                         {props.exceptions.protected &&
                             <Toc.Entry href="#headingExceptionsProtected" text="Protected Mode" />}
@@ -223,7 +222,7 @@ export default function Page(props: PageProps): React.ReactElement {
                             <th>64 bit Mode</th>
                             {props.opcode[0].cpuid &&
                                 /* Don't use <Instruction ... /> to avoid <code> block */
-                                <th><A href="/instruction/cpuid">CPUID</A> Feature Flag</th>}
+                                <th><A href="/instruction/cpuid">CPUID</A> Feature Flag(s)</th>}
                             <th>Description</th>
                         </tr>
                     </thead>
@@ -342,7 +341,7 @@ export default function Page(props: PageProps): React.ReactElement {
 
                 {props.intrinsics &&
                     <>
-                        <h2 id="headingIntrinsics">C Intrinsics</h2>
+                        <h2 id="headingIntrinsics">Intrinsics</h2>
                         <SyntaxHighlighter language="c-like" style={SyntaxHighlighterTheme}>
                             {props.intrinsics}
                         </SyntaxHighlighter>
