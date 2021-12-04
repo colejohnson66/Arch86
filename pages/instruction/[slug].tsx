@@ -83,8 +83,8 @@ type Exceptions = {
     otherAdditional?: string | ExceptionList;
 };
 type PageProps = {
-    id: string;
     wip?: boolean;
+    id: string;
     title: string;
     opcode: Opcode[];
     opcodeNote?: MaybeArray<string>;
