@@ -53,11 +53,17 @@ flags:
   SF: Set based on the resulting value in \reg{AL}.
   OF: Undefined.
 exceptions:
+  real:
+    "#DE": If an immediate value of 0 is used.
+    "#UD": \exception{lock}
+  virtual:
+    "#DE": If an immediate value of 0 is used.
+    "#UD": \exception{lock}
   protected:
     "#DE": If an immediate value of 0 is used.
     "#UD": \exception{lock}
-  real: Same exceptions as protected mode.
-  virtual: Same exceptions as protected mode.
-  compatibility: Same exceptions as protected mode.
+  compatibility:
+    "#DE": If an immediate value of 0 is used.
+    "#UD": \exception{lock}
   long:
     "#UD": \exception{in64}

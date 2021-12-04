@@ -43,13 +43,15 @@ opcode:
       64: valid
     description: Add with carry \i{imm8} to \i{r/m8}.
   - opcode: REX 80 /2 \i{ib}
-    mnemonic: ADC \i{r/m8*}, \i{imm8}
+    mnemonic: ADC \i{r/m8}, \i{imm8}
     encoding: MI
     validity:
       16: n/e
       32: n/e
       64: valid
-    description: Add with carry \i{imm8} to \i{r/m8}.
+    description: >-
+      Add with carry \i{r8} to \i{r/m8}.
+      \canned{alternateR8Encoding}
   - opcode: 81 /2 \i{iw}
     mnemonic: ADC \i{r/m16}, \i{imm16}
     encoding: MI
@@ -117,13 +119,15 @@ opcode:
       64: valid
     description: Add with carry \i{r8} to \i{r/m8}.
   - opcode: REX 10 /r
-    mnemonic: ADC \i{r/m8*}, \i{r8*}
+    mnemonic: ADC \i{r/m8}, \i{r8}
     encoding: MR
     validity:
       16: n/e
       32: n/e
       64: valid
-    description: Add with carry \i{r8} to \i{r/m8}.
+    description: >-
+      Add with carry \i{r8} to \i{r/m8}.
+      \canned{alternateR8Encoding}
   - opcode: 11 /r
     mnemonic: ADC \i{r/m16}, \i{r16}
     encoding: MR
@@ -157,13 +161,15 @@ opcode:
       64: valid
     description: Add with carry \i{r/m8} to \i{r8}.
   - opcode: REX 12 /r
-    mnemonic: ADC \i{r8*}, \i{r/m8*}
+    mnemonic: ADC \i{r8}, \i{r/m8}
     encoding: RM
     validity:
       16: n/e
       32: n/e
       64: valid
-    description: Add with carry \i{r/m8} to \i{r8}.
+    description: >-
+      Add with carry \i{r/m8} to \i{r8}.
+      \canned{alternateR8Encoding}
   - opcode: 13 /r
     mnemonic: ADC \i{r16}, \i{r/m16}
     encoding: RM
@@ -245,15 +251,6 @@ intrinsics: |-
   uint8_t _addcarry_u32(uint8_t c_in, uint32_t src1, uint32_t src2, uint32_t *sum_out)
   uint8_t _addcarry_u64(uint8_t c_in, uint64_t src1, uint64_t src2, uint64_t *sum_out)
 exceptions:
-  protected:
-    "#GP(0)":
-      - \exception{nonWritableSegment}
-      - \exception{segLimit}
-      - \exception{nullSelector}
-    "#SS(0)": \exception{segLimitSS}
-    "#PF(fc)": \exception{pf}
-    "#AC(0)": \exception{ac}
-    "#UD": \exception{lockNoMem}
   real:
     "#GP": \exception{segLimit}
     "#SS": \exception{segLimitSS}
@@ -264,10 +261,33 @@ exceptions:
     "#PF(fc)": \exception{pf}
     "#AC(0)": \exception{ac}
     "#UD": \exception{lockNoMem}
-  compatibility: Same exceptions as in protected mode.
+  protected:
+    "#GP(0)":
+      - \exception{nonWritableSegment}
+      - \exception{segLimit}
+      - \exception{nullSelector}
+    "#SS(0)": \exception{segLimitSS}
+    "#PF(fc)": \exception{pf}
+    "#AC(0)": \exception{ac}
+    "#UD": \exception{lockNoMem}
+  compatibility:
+    "#GP(0)":
+      - \exception{nonWritableSegment}
+      - \exception{segLimit}
+      - \exception{nullSelector}
+    "#SS(0)": \exception{segLimitSS}
+    "#PF(fc)": \exception{pf}
+    "#AC(0)": \exception{ac}
+    "#UD": \exception{lockNoMem}
   long:
-    "#SS(0)": \exception{nonCanonSS}
-    "#GP(0)": \exception{nonCanon}
+    "#GP(0)":
+      - \exception{nonWritableSegment}
+      - \exception{segLimit}
+      - \exception{nullSelector}
+      - \exception{nonCanon}
+    "#SS(0)":
+      - \exception{segLimitSS}
+      - \exception{nonCanonSS}
     "#PF(fc)": \exception{pf}
     "#AC(0)": \exception{ac}
     "#UD": \exception{lockNoMem}

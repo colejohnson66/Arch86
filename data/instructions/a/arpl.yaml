@@ -46,6 +46,10 @@ flags:
   SF: Unmodified.
   OF: Unmodified.
 exceptions:
+  real:
+    "#UD": If in 16 bit mode.
+  virtual:
+    "#UD": If in 16 bit mode.
   protected:
     "#GP(0)":
       - \exception{nonWriteableSegment}
@@ -55,9 +59,5 @@ exceptions:
     "#PF(fc)": \exception{pf}
     "#AC(0)": \exception{ac}
     "#UD": \exception{lock}
-  real:
-    "#UD": If in 16 bit mode.
-  virtual:
-    "#UD": If in 16 bit mode.
   compatibility: Same exceptions as in protected mode.
   long: Not encodable.

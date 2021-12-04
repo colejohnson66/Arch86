@@ -117,13 +117,15 @@ opcode:
       64: valid
     description: ANDs \i{r8} into \i{r/m8}.
   - opcode: REX 20 /r
-    mnemonic: AND \i{r/m8*}, \i{r8}
+    mnemonic: AND \i{r/m8}, \i{r8}
     encoding: MR
     validity:
       16: n/e
       32: n/e
       64: valid
-    description: ANDs \i{r8} into \i{r/m8}.
+    description: >-
+      ANDs \i{r8} into \i{r/m8}.
+      \canned{alternateR8Encoding}
   - opcode: 21 /r
     mnemonic: AND \i{r/m16}, \i{r16}
     encoding: MR
@@ -238,15 +240,6 @@ flags:
   SF: Set according to the result.
   OF: Cleared.
 exceptions:
-  protected:
-    "#GP(0)":
-      - \exception{nonWritableSegment}
-      - \exception{segLimit}
-      - \exception{nullSelector}
-    "#SS(0)": \exception{segLimitSS}
-    "#PF(fc)": \exception{pf}
-    "#AC(0)": \exception{ac}
-    "#UD": \exception{lockNoMem}
   real:
     "#GP": \exception{segLimit}
     "#SS": \exception{segLimitSS}
@@ -257,10 +250,33 @@ exceptions:
     "#PF(fc)": \exception{pf}
     "#AC(0)": \exception{ac}
     "#UD": \exception{lockNoMem}
-  compatibility: Same exceptions as in protected mode.
+  protected:
+    "#GP(0)":
+      - \exception{nonWritableSegment}
+      - \exception{segLimit}
+      - \exception{nullSelector}
+    "#SS(0)": \exception{segLimitSS}
+    "#PF(fc)": \exception{pf}
+    "#AC(0)": \exception{ac}
+    "#UD": \exception{lockNoMem}
+  compatibility:
+    "#GP(0)":
+      - \exception{nonWritableSegment}
+      - \exception{segLimit}
+      - \exception{nullSelector}
+    "#SS(0)": \exception{segLimitSS}
+    "#PF(fc)": \exception{pf}
+    "#AC(0)": \exception{ac}
+    "#UD": \exception{lockNoMem}
   long:
-    "#SS(0)": \exception{nonCanonSS}
-    "#GP(0)": \exception{nonCanon}
+    "#GP(0)":
+      - \exception{nonWritableSegment}
+      - \exception{segLimit}
+      - \exception{nullSelector}
+      - \exception{nonCanon}
+    "#SS(0)":
+      - \exception{segLimitSS}
+      - \exception{nonCanonSS}
     "#PF(fc)": \exception{pf}
     "#AC(0)": \exception{ac}
     "#UD": \exception{lockNoMem}

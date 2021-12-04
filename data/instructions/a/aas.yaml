@@ -28,7 +28,7 @@ description: >-
 operation: |-
   public void AAS()
   {
-    if (((AL & 0xF) > 9) || AF)
+    if ((AL & 0xF) > 9 || AF)
     {
       AX = AX - 6;
       AH = AH - 1;
@@ -43,10 +43,13 @@ flags:
   SF: Undefined.
   OF: Undefined.
 exceptions:
+  real:
+    "#UD": \exception{lock}
+  virtual:
+    "#UD": \exception{lock}
   protected:
     "#UD": \exception{lock}
-  real: Same exceptions as protected mode.
-  virtual: Same exceptions as protected mode.
-  compatibility: Same exceptions as protected mode.
+  compatibility:
+    "#UD": \exception{lock}
   long:
     "#UD": \exception{in64}

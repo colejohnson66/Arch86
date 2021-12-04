@@ -117,13 +117,15 @@ opcode:
       64: valid
     description: Adds \i{r8} into \i{r/m8}.
   - opcode: REX 00 /r
-    mnemonic: ADD \i{r/m8*}, \i{r8}
+    mnemonic: ADD \i{r/m8}, \i{r8}
     encoding: MR
     validity:
       16: n/e
       32: n/e
       64: valid
-    description: Adds \i{r8} into \i{r/m8}.
+    description: >-
+      Adds \i{r8} into \i{r/m8}.
+      \canned{alternateR8Encoding}
   - opcode: 01 /r
     mnemonic: ADD \i{r/m16}, \i{r16}
     encoding: MR
@@ -157,13 +159,15 @@ opcode:
       64: valid
     description: Adds \i{r/m8} into \i{r/8}.
   - opcode: REX 02 /r
-    mnemonic: ADD \i{r8}, \i{r/m8*}
+    mnemonic: ADD \i{r8}, \i{r/m8}
     encoding: RM
     validity:
       16: n/e
       32: n/e
       64: valid
-    description: Adds \i{r/m8} into \i{r8}.
+    description: >-
+      Adds \i{r/m8} into \i{r8}.
+      \canned{alternateR8Encoding}
   - opcode: 03 /r
     mnemonic: ADD \i{r16}, \i{r/m16}
     encoding: RM
@@ -237,15 +241,6 @@ flags:
   SF: Set according to the result.
   OF: Set according to the result.
 exceptions:
-  protected:
-    "#GP(0)":
-      - \exception{nonWritableSegment}
-      - \exception{segLimit}
-      - \exception{nullSelector}
-    "#SS(0)": \exception{segLimitSS}
-    "#PF(fc)": \exception{pf}
-    "#AC(0)": \exception{ac}
-    "#UD": \exception{lockNoMem}
   real:
     "#GP": \exception{segLimit}
     "#SS": \exception{segLimitSS}
@@ -256,10 +251,33 @@ exceptions:
     "#PF(fc)": \exception{pf}
     "#AC(0)": \exception{ac}
     "#UD": \exception{lockNoMem}
-  compatibility: Same exceptions as in protected mode.
+  protected:
+    "#GP(0)":
+      - \exception{nonWritableSegment}
+      - \exception{segLimit}
+      - \exception{nullSelector}
+    "#SS(0)": \exception{segLimitSS}
+    "#PF(fc)": \exception{pf}
+    "#AC(0)": \exception{ac}
+    "#UD": \exception{lockNoMem}
+  compatibility:
+    "#GP(0)":
+      - \exception{nonWritableSegment}
+      - \exception{segLimit}
+      - \exception{nullSelector}
+    "#SS(0)": \exception{segLimitSS}
+    "#PF(fc)": \exception{pf}
+    "#AC(0)": \exception{ac}
+    "#UD": \exception{lockNoMem}
   long:
-    "#SS(0)": \exception{nonCanonSS}
-    "#GP(0)": \exception{nonCanon}
+    "#GP(0)":
+      - \exception{nonWritableSegment}
+      - \exception{segLimit}
+      - \exception{nullSelector}
+      - \exception{nonCanon}
+    "#SS(0)":
+      - \exception{segLimitSS}
+      - \exception{nonCanonSS}
     "#PF(fc)": \exception{pf}
     "#AC(0)": \exception{ac}
     "#UD": \exception{lockNoMem}

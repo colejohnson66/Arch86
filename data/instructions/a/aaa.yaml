@@ -32,14 +32,12 @@ description: >-
 operation: |-
   public void AAA()
   {
-    if (((AL & 0xF) > 9) || AF)
+    if ((AL & 0xF) > 9 || AF)
     {
-      if (PROCESSOR == 8086 ||
-          PROCESSOR == 8088 ||
-          PROCESSOR == 80186)
+      if (PROCESSOR is "8086" or "8088" or "80186")
       {
-        AH = AH + 1; // see note 1
-        AL = AL + 6;
+        AH += 1; // see note 1
+        AL += 6;
       }
       else
       {
@@ -47,7 +45,6 @@ operation: |-
       }
     }
   }
-operationImage: /img/instruction/a/aaa.png
 operationNotes:
   - >-
     According to the source code for Bochs' (\c{/cpu/bcd.cc}), this instruction is implemented differently on the 80186 and prior.
@@ -70,10 +67,13 @@ flags:
   SF: Undefined.
   OF: Undefined.
 exceptions:
+  real:
+    "#UD": \exception{lock}
+  virtual:
+    "#UD": \exception{lock}
   protected:
     "#UD": \exception{lock}
-  real: Same exceptions as protected mode.
-  virtual: Same exceptions as protected mode.
-  compatibility: Same exceptions as protected mode.
+  compatibility:
+    "#UD": \exception{lock}
   long:
     "#UD": \exception{in64}

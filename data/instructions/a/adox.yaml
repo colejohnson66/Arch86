@@ -53,36 +53,53 @@ intrinsics: |-
   uint8_t _addcarryx_u32(uint8_t c_in, uint32_t src1, uint32_t src2, uint32_t *sum_out)
   uint8_t _addcarryx_u64(uint8_t c_in, uint64_t src1, uint64_t src2, uint64_t *sum_out)
 exceptions:
-  protected:
+  real:
+    "#GP": \exception{segLimit}
+    "#SS": \exception{segLimitSS}
     "#UD":
       - \exception{lock}
       - If \cpuid{eax=07,ecx=00,,ebx=19=adx} is 0.
+  virtual:
+    "#GP(0)": \exception{segLimit}
     "#SS(0)": \exception{segLimitSS}
+    "#PF(fc)": \exception{pf}
+    "#AC(0)": \exception{ac}
+    "#UD":
+      - \exception{lock}
+      - If \cpuid{eax=07,ecx=00,,ebx=19=adx} is 0.
+  protected:
     "#GP(0)":
+      - \exception{nonWritableSegment}
       - \exception{segLimit}
       - \exception{nullSelector}
+    "#SS(0)": \exception{segLimitSS}
     "#PF(fc)": \exception{pf}
     "#AC(0)": \exception{ac}
-  real:
     "#UD":
       - \exception{lock}
       - If \cpuid{eax=07,ecx=00,,ebx=19=adx} is 0.
+  compatibility:
+    "#GP(0)":
+      - \exception{nonWritableSegment}
+      - \exception{segLimit}
+      - \exception{nullSelector}
     "#SS(0)": \exception{segLimitSS}
-    "#GP(0)": \exception{segLimit}
-  virtual:
+    "#PF(fc)": \exception{pf}
+    "#AC(0)": \exception{ac}
     "#UD":
       - \exception{lock}
       - If \cpuid{eax=07,ecx=00,,ebx=19=adx} is 0.
-    "#SS(0)": \exception{segLimitSS}
-    "#GP(0)": \exception{segLimit}
-    "#PF(fc)": \exception{pf}
-    "#AC(0)": \exception{ac}
-  compatibility: Same exceptions as in protected mode.
   long:
+    "#GP(0)":
+      - \exception{nonWritableSegment}
+      - \exception{segLimit}
+      - \exception{nullSelector}
+      - \exception{nonCanon}
+    "#SS(0)":
+      - \exception{segLimitSS}
+      - \exception{nonCanonSS}
+    "#PF(fc)": \exception{pf}
+    "#AC(0)": \exception{ac}
     "#UD":
       - \exception{lock}
       - If \cpuid{eax=07,ecx=00,,ebx=19=adx} is 0.
-    "#SS(0)": \exception{nonCanonSS}
-    "#GP(0)": \exception{nonCanon}
-    "#PF(fc)": \exception{pf}
-    "#AC(0)": \exception{ac}
