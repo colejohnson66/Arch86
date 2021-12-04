@@ -221,22 +221,22 @@ operation: >-
 
   public void ADC_8(ref byte dest, byte src)
   {
-    CF:dest = dest + src + CF;
+    dest = dest + src + CF;
   }
 
   public void ADC_16(ref ushort dest, ushort src)
   {
-    CF:dest = dest + src + CF;
+    dest = dest + src + CF;
   }
 
   public void ADC_32(ref uint dest, uint src)
   {
-    CF:dest = dest + src + CF;
+    dest = dest + src + CF;
   }
 
   public void ADC_64(ref ulong dest, ulong src)
   {
-    CF:dest = dest + src + CF;
+    dest = dest + src + CF;
   }
 flags:
   CF: Set according to the result.
