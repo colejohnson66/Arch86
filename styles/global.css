@@ -68,6 +68,10 @@
     code {
         @apply whitespace-nowrap;
     }
+    hr {
+        /* border-t already applied by default */
+        @apply border-gray-400;
+    }
 
 
     /* external links */
