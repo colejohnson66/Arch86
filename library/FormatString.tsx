@@ -20,13 +20,15 @@
  *   along with Arch86. If not, see <http://www.gnu.org/licenses/>.
  * =============================================================================
  */
-/* eslint-disable react/display-name */
 
+import A from "@components/A";
 import Instruction from "../components/Instruction";
 import React from "react";
 import { strict as assert } from "assert";
 
 const cannedNoArg: Record<string, React.ReactElement> = {
+    alternateR8Encoding: <>Uses the <A href="/instruction/help#headingAlternateR8Encoding">alternate <i>reg8</i> encoding</A>.</>,
+
     evexNoER: <>The EVEX form of this instruction does <i>not</i> support memory fault suppression.</>,
 
     lockable: <>This instruction can be used with the <Instruction name="LOCK" noTitle /> prefix to allow atomic exectution.</>,
@@ -164,6 +166,8 @@ const functions: Record<string, (arg: string) => React.ReactElement> = {
             </code>
         );
     },
+
+    em: (arg) => (<em>{arg}</em>),
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     en: (_) => (<>&ndash;</>),
