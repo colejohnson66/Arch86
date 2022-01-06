@@ -43,7 +43,7 @@ operation: |-
   public void AAM(byte imm8)
   {
     AH = AL / imm8;
-    AL = AL & imm8;
+    AL = AL % imm8;
   }
 flags:
   CF: Undefined.
