@@ -45,5 +45,6 @@
         "node_modules",
         "postcss.config.js",
         "tailwind.config.js",
+        "tsconfig.json",
     ]
 }
