@@ -23,6 +23,7 @@
 
 import A from "@components/A";
 import Breadcrumb from "@components/Breadcrumb";
+import Clear from "@components/Clear";
 import Layout from "@components/Layout";
 import Toc from "@components/Toc";
 import Unit from "@components/Unit";
@@ -42,6 +43,8 @@ export default function Page(): React.ReactElement {
                     The x86 (and x86-64) architecture contains many different types of registers.
                     These range in size from a dozen or so bits, all the way to <Unit value={1024} unit="byte" /> <A href="/register/tile">&quot;tiles&quot;</A> with <A href="/extension/amx">AMX</A>.
                 </p>
+
+                <Clear />
 
                 <h2 id="headingTypes">Register Types</h2>
                 <p>

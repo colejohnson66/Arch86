@@ -23,6 +23,7 @@
 
 import A from "@components/A";
 import Breadcrumb from "@components/Breadcrumb";
+import Clear from "@components/Clear";
 import Instruction from "@components/Instruction";
 import Layout from "@components/Layout";
 import Toc from "@components/Toc";
@@ -47,6 +48,8 @@ export default function Page(): React.ReactElement {
                     This register is accessible through three overlapping &quot;registers&quot;: <code>FLAGS</code> for the lowest 16 bits, <code>EFLAGS</code> for the lower 32, and <code>RFLAGS</code> for the whole register.
                     Despite the fact that only bits 0 through 21 are defined, <code>RFLAGS</code> exists for consistency with the rest of the x86-64 <A href="/register/gpr">general purpose register</A> set.
                 </p>
+
+                <Clear />
 
                 <h2 id="headingList">List of Fields</h2>
                 <p>
