@@ -23,9 +23,11 @@
 
 import A from "@components/A";
 import Breadcrumb from "@components/Breadcrumb";
+import Cite from "@components/Cite";
 import Clear from "@components/Clear";
 import Instruction from "@components/Instruction";
 import Layout from "@components/Layout";
+import Ref from "@components/Ref";
 import Toc from "@components/Toc";
 
 export default function Page(): React.ReactElement {
@@ -39,6 +41,7 @@ export default function Page(): React.ReactElement {
             <Layout.Content>
                 <Toc.Root>
                     <Toc.Entry href="#headingList" text="List of Fields" />
+                    <Toc.Entry href="#headingReferences" text="References" />
                 </Toc.Root>
                 <p>
                     The flags register (<code>RFLAGS</code>) is a 64 bit bitfield register, of which the first 21 are defined.
@@ -67,7 +70,9 @@ export default function Page(): React.ReactElement {
                     <dd>
                         Reserved.
                         Always set.
-                        {/* TODO: http://www.righto.com/2013/02/looking-at-silicon-to-understanding.html */}
+                        <br />
+                        Historically, this <em>undocumented</em> flag signaled an overflow or underflow for 8 bit signed arithmetic.
+                        <Ref.Link name="vkFlags" />
                     </dd>
                     <dt><code>PF</code> - Parity Flag (bit 2)</dt>
                     <dd>
@@ -94,7 +99,9 @@ export default function Page(): React.ReactElement {
                     <dd>
                         Reserved.
                         Always cleared.
-                        {/* TODO: http://www.righto.com/2013/02/looking-at-silicon-to-understanding.html */}
+                        <br />
+                        Historically, this <em>undocumented</em> flag would signal that the first value of a signed comparison is smaller than the second.
+                        <Ref.Link name="vkFlags" />
                     </dd>
                     <dt><code>ZF</code> - Zero Flag (bit 6)</dt>
                     <dd>
@@ -170,8 +177,8 @@ export default function Page(): React.ReactElement {
                     <dt><code>ID</code> - &quot;ID&quot; Flag (bit 21)</dt>
                     <dd>
                         Provides a method of checking for support of the <Instruction name="CPUID" /> instruction.
-                        On the 80486 and older processors, attempts to set this bit will fail as the processor will clear it upon load.
-                        However, Pentium (and newer) processors (which support <Instruction name="CPUID" noLink noTitle />) will allow setting and clearing this bit.
+                        On the 80486 and older processors, attempts to set this bit will be unsuccessful as the processor will clear it upon load into the register.
+                        However, Pentium (and newer) processors (which support <Instruction name="CPUID" noTitle />) will allow setting and clearing this bit.
                     </dd>
                     <dt>(bits 22 and up)</dt>
                     <dd>
@@ -179,6 +186,18 @@ export default function Page(): React.ReactElement {
                         Always cleared.
                     </dd>
                 </dl>
+
+                <Ref.Root>
+                    <Ref.Entry name="vkFlags">
+                        <Cite.Web
+                            title="Silicon reverse engineering: The 8085's undocumented flags"
+                            date="2013-02"
+                            author="Ken Shirriff"
+                            website="Ken Shirriff's Blog"
+                            url="http://www.righto.com/2013/02/looking-at-silicon-to-understanding.html"
+                            accessDate="2022-01-09" />
+                    </Ref.Entry>
+                </Ref.Root>
             </Layout.Content>
         </Layout.Root>
     );
