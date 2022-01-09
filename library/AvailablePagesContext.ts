@@ -2,7 +2,7 @@
  * File:   AvailablePagesContext.ts
  * Author: Cole Tobin
  * =============================================================================
- * Copyright (c) 2021 Cole Tobin
+ * Copyright (c) 2021-2022 Cole Tobin
  *
  * This file is part of Arch86.
  *

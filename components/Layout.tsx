@@ -131,7 +131,7 @@ function LayoutRoot(props: LayoutRootProps): React.ReactElement {
                 <footer className="bg-white shadow flex-initial">
                     <div className="text-sm max-w-7xl mx-auto pt-6 pb-10 px-4 sm:px-6 lg:px-8">
                         <p>
-                            Website copyright &copy; Cole Tobin 2020-2021.
+                            Website copyright &copy; Cole Tobin 2020-2022.
                         </p>
                     </div>
                 </footer>
