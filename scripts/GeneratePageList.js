@@ -41,7 +41,7 @@ const list = [];
 const pagesDir = path.join(process.cwd(), "pages");
 dir.files(pagesDir, { sync: true }).forEach((entry) => {
     // cleanup directory separator for Windows
-    entry = entry.replaceAll("\\", "/");
+    entry = entry.replace(/\\/g, "/");
 
     if (!entry.endsWith(".tsx"))
         return;
@@ -69,7 +69,7 @@ dir.files(pagesDir, { sync: true }).forEach((entry) => {
 const instructionsDir = path.join(process.cwd(), "data", "instructions")
 dir.files(instructionsDir, { sync: true }).forEach((entry) => {
     // cleanup directory separator for Windows
-    entry = entry.replaceAll("\\", "/");
+    entry = entry.replace(/\\/g, "/");
 
     if (!entry.endsWith(".yaml"))
         return;
