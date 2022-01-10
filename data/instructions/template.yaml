@@ -54,8 +54,8 @@ exceptions:
   other:
   otherAdditional:
 changes:
-  version: 75
-  date: 2021-06
+  version: 76
+  date: 2021-12
   list:
     -
 refs:
