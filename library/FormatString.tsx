@@ -84,8 +84,10 @@ const cannedArgs: Record<string, (arg: string) => React.ReactElement> = {
 
 // "canned" exception responses
 const exceptions: Record<string, React.ReactElement> = {
-    // #UD
+    // misc
     cpl0: <>If <code>CPL</code> is greater than <code>0</code>.</>,
+
+    // #UD
     cpuid: <>If any of the required CPUID feature flags are note set.</>,
     cpuidFeatureFlags: <>If any of the required CPUID feature flags need enabling, but are not.</>,
     "evex.vvvvv": <>If <code>EVEX.vvvvv</code> is not <code>11111b</code>.</>,
@@ -104,13 +106,13 @@ const exceptions: Record<string, React.ReactElement> = {
 
     // #SS(0)
     nonCanonSS: <>If a memory operand using the <code>SS</code> segment is in non-canonical form.</>, // TODO: link to a page on canonicalness
-    segLimitSS: <>If a memory operand using the <code>SS</code> segment has an effective address that is outside the <code>SS</code> segment limit.</>,
+    segLimitSS: <>If a memory operand using the <code>SS</code> segment has an effective address that is outside the <code>SS</code> segment&apos;s limit.</>,
 
     // #GP(0)
     nonCanon: <>If a memory operand (using a semgent other than <code>SS</code>) is in non-canonical form.</>,
     nullSelector: <>If a memory operand uses a segment containing a <code>NULL</code> selector.</>,
     nonWritableSegment: <>If the destination is located in a non-writable segment.</>,
-    segLimit: <>If a memory operand (using a segment other than <code>SS</code>) has an effective address that is outside the segment&apos; limit.</>,
+    segLimit: <>If a memory operand (using a segment other than <code>SS</code>) has an effective address that is outside the segment&apos;s limit.</>,
 
     // #PF(fc)
     pf: <>If a page fault occurs.</>,

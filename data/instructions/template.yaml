@@ -30,6 +30,7 @@ flags:
   # Set according to the result.
   # Set.
   # Cleared.
+  # Inverted.
   # Undefined.
   # Unmodified.
   # Set if ... Cleared otherwise.
@@ -45,9 +46,9 @@ intrinsics: |-
     $1 $2($3)
   After, ensure ALL parameters have a name
 exceptions:
-  protected:
   real:
   virtual:
+  protected:
   compatibility:
   long:
   floating:

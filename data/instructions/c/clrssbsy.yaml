@@ -1,0 +1,96 @@
+%YAML 1.2
+---
+title: Clear Busy Flag in a Supervisor Shadow Stack Token
+opcode:
+  - opcode: F3 0F AE !(11):110:bbb
+    mnemonic: CLRSSBSY \i{m64}
+    encoding: M
+    validity:
+      16: invalid
+      32: valid
+      64: valid
+    cpuid: CET_SS
+    description: >-
+      Clears the busy flag in a supervisor shadow stack token at \i{m64}
+opcodeNote: >-
+encoding:
+  operands: 1
+  encodings:
+    M:
+      - ModRM:r/m[rw]
+description: >-
+  The \c{CLRSSBSY} instructions clears the "busy" flag in a supervisor shadow stack token at the operand.
+  After doing so, the \reg{SSP} is loaded with the value \c{0}.
+operation: |-
+  public void CLRSSBSY(IntPtr ptr)
+  {
+    if (CR4.CET == false || IA32_S_CET.SH_STK_EN == false)
+      #UD;
+
+    if (CPL > 0 || !IsAligned(ptr, 8))
+      #GP(0);
+
+    ulong expectedToken = ptr.ToInt64() | 1 // busy bit is bit 0
+    ulong newToken = ptr.ToInt64()
+    CF = ShadowStackLockCmpxchg8b(ptr, newToken, expectedToken) != expectedToken;
+    SSP = 0;
+  }
+flags:
+  CF: Set if an invalid token was detected. Cleared otherwise.
+  PF: Cleared.
+  AF: Cleared.
+  ZF: Cleared.
+  SF: Cleared.
+  OF: Cleared.
+exceptions:
+  real:
+    "#UD": \exception{inReal}
+  virtual:
+    "#UD": \exception{inVirtual8086}
+  protected:
+    "#UD":
+      - \exception{lock}
+      - If \c{CR4.CET} is \c{0}.
+      - If \c{IA32_S_CET.SH_STK_EN} is \c{0}.
+    "#GP(0)":
+      - \exception{cpl0}
+      - \exception{nullSelector}
+      - \exception{nonWritableSegment}
+      - \exception{segLimit}
+      - If the memory operand is not aligned to 8 bytes.
+    "#SS": \exception{segLimitSS}
+    "#PF(fc)": \exception{pf}
+  compatibility:
+    "#UD":
+      - \exception{lock}
+      - If \c{CR4.CET} is \c{0}.
+      - If \c{IA32_S_CET.SH_STK_EN} is \c{0}.
+    "#GP(0)":
+      - \exception{cpl0}
+      - \exception{nullSelector}
+      - \exception{nonWritableSegment}
+      - \exception{segLimit}
+      - If the memory operand is not aligned to 8 bytes.
+    "#SS": \exception{segLimitSS}
+    "#PF(fc)": \exception{pf}
+  long:
+    "#UD":
+      - \exception{lock}
+      - If \c{CR4.CET} is \c{0}.
+      - If \c{IA32_S_CET.SH_STK_EN} is \c{0}.
+    "#GP(0)":
+      - \exception{cpl0}
+      - \exception{nullSelector}
+      - \exception{nonCanon}
+      - \exception{nonWritableSegment}
+      - \exception{segLimit}
+      - If the memory operand is not aligned to 8 bytes.
+    "#SS":
+      - \exception{nonCanonSS}
+      - \exception{segLimitSS}
+    "#PF(fc)": \exception{pf}
+changes:
+  version: 76
+  date: 2021-12
+  list:
+    - The encoding of the ModR/M byte has been changed from \c{/r} to show the restrictions on it.

@@ -58,3 +58,18 @@ c:
   - cldemote
   - clflush
   - clflushopt
+  - cli
+  - clrssbsy
+  - clts
+  - clwb
+  - cmc
+  - cmovcc
+  - cmp
+  - [cmpList, cmppd, cmpps, cmpsd, cmpss]
+  - cmps
+  - cmpxchg
+  - cmpxchg8b
+  - cmpxchg16b
+  - [comiList, comisd, comiss]
+  - cpuid
+  - crc32

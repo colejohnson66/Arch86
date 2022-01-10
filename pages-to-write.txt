@@ -42,5 +42,7 @@
   /aesenc256kl
   /aesencwide128kl
   /aesencwide256kl
+  /clts
+  /clwb
   /help#headingAlternateR8Encoding
   ...
