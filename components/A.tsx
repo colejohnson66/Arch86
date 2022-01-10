@@ -22,6 +22,7 @@
  */
 
 import Link from "next/link";
+import PageList from "@data/PageList";
 import React from "react";
 
 // TODO: next uses 'url.UrlObject | string' for 'href'; is that needed here?
@@ -32,12 +33,14 @@ type AProps = {
 };
 
 export default function A(props: AProps): JSX.Element {
-    const classes = props.className ?? "";
+    let classes = props.className ?? "";
 
     // is this an internal link? (internal links without slash are invalid)
     if (props.href[0] === "/") {
+        if (!PageList.includes(props.href))
+            classes += " text-red-500";
         return (
-            <Link href={props.href} >
+            <Link href={props.href}>
                 <a className={classes}>{props.children}</a>
             </Link>
         );

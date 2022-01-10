@@ -9,15 +9,16 @@
   /p6
   ...
 /register
+  /gpr
   /segment
   /control
-    /cr0
-    /cr3
-    /cr4
+    ...
+  /debug
+    ...
+  /test
   /fpu
   /mmx
   /vector
-  /mask
   /bound
   /tile
   /msr
@@ -40,3 +41,4 @@
   /aesenc256kl
   /aesencwide128kl
   /aesencwide256kl
+  ...
