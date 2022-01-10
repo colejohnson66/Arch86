@@ -37,7 +37,7 @@ export default function A(props: AProps): JSX.Element {
 
     // is this an internal link? (internal links without slash are invalid)
     if (props.href[0] === "/") {
-        if (!PageList.includes(props.href))
+        if (!PageList.includes(props.href.split("#")[0]))
             classes += " text-red-500";
         return (
             <Link href={props.href}>
