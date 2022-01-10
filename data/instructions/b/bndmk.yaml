@@ -43,26 +43,41 @@ operation: |-
 intrinsics: |-
   void *_bnd_set_ptr_bounds(const void *address, size_t size)
 exceptions:
+  real:
+    "#UD":
+      - \exception{lock}
+      - \exception{sib}
+      - If \cpuid{eax=07,ecx=00,,ebx=14=mpx} is \c{0}.
+      - If \c{ModRM.reg} does not encode \c{BND0} through \c{BND3} (i.e. contains a 4 or higher).
+  virtual:
+    "#UD":
+      - \exception{lock}
+      - \exception{sib}
+      - If \cpuid{eax=07,ecx=00,,ebx=14=mpx} is \c{0}.
+      - If \c{ModRM.reg} does not encode \c{BND0} through \c{BND3} (i.e. contains a 4 or higher).
   protected:
     "#UD":
       - \exception{lock}
+      - \exception{sib}
       - If \cpuid{eax=07,ecx=00,,ebx=14=mpx} is \c{0}.
       - If \c{ModRM.reg} does not encode \c{BND0} through \c{BND3} (i.e. contains a 4 or higher).
-      - If 16 bit addressing is used.
-  real: Same exceptions as protected mode.
-  virtual: Same exceptions as protected mode.
-  compatibility: Same exceptions as protected mode.
+  compatibility:
+    "#UD":
+      - \exception{lock}
+      - \exception{sib}
+      - If \cpuid{eax=07,ecx=00,,ebx=14=mpx} is \c{0}.
+      - If \c{ModRM.reg} does not encode \c{BND0} through \c{BND3} (i.e. contains a 4 or higher).
   long:
     "#UD":
       - \exception{lock}
+      - \exception{sib}
       - If \cpuid{eax=07,ecx=00,,ebx=14=mpx} is \c{0}.
       - If \c{ModRM.reg} does not encode \c{BND0} through \c{BND3} (i.e. contains a 4 or higher).
-      - If 16 bit addressing is used.
       - If RIP-relative addressing is used.
     "#SS(0)": \exception{nonCanonSS}
     "#GP(0)": \exception{nonCanon}
 changes:
-  version: 75
-  date: 2021-06
+  version: 76
+  date: 2021-12
   list:
     - The encoding of the ModR/M byte has been changed from \c{/r} to show the restrictions on it.

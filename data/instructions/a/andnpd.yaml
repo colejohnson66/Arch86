@@ -190,7 +190,7 @@ exceptions:
     - \exceptionVex{4}
     - \exceptionEvex{E4}
 changes:
-  version: 75
-  date: 2021-06
+  version: 76
+  date: 2021-12
   list:
     - The VEX form mnemonics (\c{VEX.###.66.0F.WIG 55 /r}) are not listed with \c{WIG}.

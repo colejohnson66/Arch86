@@ -84,9 +84,8 @@ exceptions:
   floating: None
   other: \exceptionVex{13}
 changes:
-  version: 73
-  date: 2020-11
+  version: 76
+  date: 2021-12
   list:
     - >-
       The \c{BZHI r64a, r/m64, r64b} form is incorrectly documented as being "not encodable" in 32 bit mode.
-      This is misleading as it \i{is} encodable, but is defined to be treated as the 32 bit form.

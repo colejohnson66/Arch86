@@ -98,6 +98,18 @@ flags:
   SF: Undefined.
   OF: Undefined.
 exceptions:
+  real:
+    "#UD": If the \instr{LOCK} prefix is used.
+    "#GP": \exception{segLimit}
+    "#SS": \exception{segLimitSS}
+  virtual:
+    "#UD": \exception{lock}
+    "#GP(0)":
+      - \exception{segLimit}
+      - \exception{nullSelector}
+    "#SS(0)": \exception{segLimitSS}
+    "#PF(fc)": \exception{pf}
+    "#AC(0)": \exception{ac}
   protected:
     "#UD": \exception{lock}
     "#GP(0)":
@@ -106,12 +118,14 @@ exceptions:
     "#SS(0)": \exception{segLimitSS}
     "#PF(fc)": \exception{pf}
     "#AC(0)": \exception{ac}
-  real:
-    "#UD": If the \instr{LOCK} prefix is used.
-    "#GP": \exception{segLimit}
-    "#SS": \exception{segLimitSS}
-  virtual: Same exceptions as protected mode.
-  compatibility: Same exceptions as protected mode.
+  compatibility:
+    "#UD": \exception{lock}
+    "#GP(0)":
+      - \exception{segLimit}
+      - \exception{nullSelector}
+    "#SS(0)": \exception{segLimitSS}
+    "#PF(fc)": \exception{pf}
+    "#AC(0)": \exception{ac}
   long:
     "#UD": \exception{lock}
     "#GP(0)": \exception{nonCanon}

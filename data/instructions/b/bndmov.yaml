@@ -64,12 +64,20 @@ operation: |-
 intrinsics: |-
   void *_bnd_copy_ptr_bounds(const void *q, const void *r)
 exceptions:
-  protected:
+  real:
     "#UD":
       - \exception{lock}
+      - \exception{sib}
       - If \cpuid{eax=07,ecx=00,,ebx=14=mpx} is \c{0}.
       - If \c{ModRM.reg} or \c{ModRM.r/m} does not encode \c{BND0} through \c{BND3} (i.e. contains a 4 or higher).
-      - If 16 bit addressing is used.
+    "#SS(0)": \exception{segLimitSS}
+    "#GP(0)": \exception{segLimit}
+  virtual:
+    "#UD":
+      - \exception{lock}
+      - \exception{sib}
+      - If \cpuid{eax=07,ecx=00,,ebx=14=mpx} is \c{0}.
+      - If \c{ModRM.reg} or \c{ModRM.r/m} does not encode \c{BND0} through \c{BND3} (i.e. contains a 4 or higher).
     "#SS(0)": \exception{segLimitSS}
     "#GP(0)":
       - \exception{segLimit}
@@ -77,22 +85,38 @@ exceptions:
       - \exception{nullSelector}
     "#AC(0)": \exception{ac}
     "#PF(fc)": \exception{pf}
-  real:
+  protected:
     "#UD":
       - \exception{lock}
+      - \exception{sib}
       - If \cpuid{eax=07,ecx=00,,ebx=14=mpx} is \c{0}.
       - If \c{ModRM.reg} or \c{ModRM.r/m} does not encode \c{BND0} through \c{BND3} (i.e. contains a 4 or higher).
-      - If 16 bit addressing is used.
     "#SS(0)": \exception{segLimitSS}
-    "#GP(0)": \exception{segLimit}
-  virtual: Same exceptions as protected mode.
-  compatibility: Same exceptions as protected mode.
+    "#GP(0)":
+      - \exception{segLimit}
+      - \exception{nonWritableSegment}
+      - \exception{nullSelector}
+    "#AC(0)": \exception{ac}
+    "#PF(fc)": \exception{pf}
+  compatibility:
+    "#UD":
+      - \exception{lock}
+      - \exception{sib}
+      - If \cpuid{eax=07,ecx=00,,ebx=14=mpx} is \c{0}.
+      - If \c{ModRM.reg} or \c{ModRM.r/m} does not encode \c{BND0} through \c{BND3} (i.e. contains a 4 or higher).
+    "#SS(0)": \exception{segLimitSS}
+    "#GP(0)":
+      - \exception{segLimit}
+      - \exception{nonWritableSegment}
+      - \exception{nullSelector}
+    "#AC(0)": \exception{ac}
+    "#PF(fc)": \exception{pf}
   long:
     "#UD":
       - \exception{lock}
+      - \exception{sib}
       - If \cpuid{eax=07,ecx=00,,ebx=14=mpx} is \c{0}.
       - If \c{ModRM.reg} or \c{ModRM.r/m} does not encode \c{BND0} through \c{BND3} (i.e. contains a 4 or higher).
-      - If 16 bit addressing is used.
       - If RIP-relative addressing is used.
     "#SS(0)": \exception{nonCanonSS}
     "#GP(0)": \exception{nonCanon}

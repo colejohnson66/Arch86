@@ -196,12 +196,12 @@ export default function Page(props: PageProps): React.ReactElement {
                     {props.intrinsics &&
                         <Toc.Entry href="#headingIntrinsics" text="Intrinsics" />}
                     <Toc.Entry href="#headingExceptions" text="Exceptions">
-                        {props.exceptions.protected &&
-                            <Toc.Entry href="#headingExceptionsProtected" text="Protected Mode" />}
                         {props.exceptions.real &&
                             <Toc.Entry href="#headingExceptionsReal" text="Real-Address Mode" />}
                         {props.exceptions.virtual &&
                             <Toc.Entry href="#headingExceptionsVirtual" text="Virtual-8086 Mode" />}
+                        {props.exceptions.protected &&
+                            <Toc.Entry href="#headingExceptionsProtected" text="Protected Mode" />}
                         {props.exceptions.compatibility &&
                             <Toc.Entry href="#headingExceptionsCompatibility" text="Compatibility Mode" />}
                         {props.exceptions.long &&
@@ -348,11 +348,6 @@ export default function Page(props: PageProps): React.ReactElement {
                     </>}
 
                 <h2 id="headingExceptions">Exceptions</h2>
-                {props.exceptions.protected &&
-                    <>
-                        <h3 id="headingExceptionsProtected">Protected Mode</h3>
-                        {RegularExceptionList(props.exceptions.protected)}
-                    </>}
                 {props.exceptions.real &&
                     <>
                         <h3 id="headingExceptionsReal">Real-Address Mode</h3>
@@ -362,6 +357,11 @@ export default function Page(props: PageProps): React.ReactElement {
                     <>
                         <h3 id="headingExceptionsVirtual">Virtual-8086 Mode</h3>
                         {RegularExceptionList(props.exceptions.virtual)}
+                    </>}
+                {props.exceptions.protected &&
+                    <>
+                        <h3 id="headingExceptionsProtected">Protected Mode</h3>
+                        {RegularExceptionList(props.exceptions.protected)}
                     </>}
                 {props.exceptions.compatibility &&
                     <>

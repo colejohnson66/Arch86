@@ -63,12 +63,11 @@ exceptions:
   floating: None
   other: \exceptionVex{13}
 changes:
-  version: 75
-  date: 2021-06
+  version: 76
+  date: 2021-12
   list:
     - >-
       Officially, this instruction is titled "Reset Lowest Set Bit".
       This is changed here for consistency (clearing a bit sets it to 0).
     - >-
       The \c{BLSR r64, r/m64} form is documented as being "not encodable" in 32 bit mode.
-      This is misleading as it \i{is} encodable, but is defined to be treated as the 32 bit form.

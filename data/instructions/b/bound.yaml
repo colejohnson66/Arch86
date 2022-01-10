@@ -48,6 +48,25 @@ operation: |-
       #BR;
   }
 exceptions:
+  real:
+    "#BR": If the bounds test fails.
+    "#UD":
+      - If the \instr{LOCK} prefix is used.
+      - If the second operand is not a memory location.
+    "#GP(0)":
+      - If the destination's effective address of the Bound Table entry is outside the \reg{DS} segment limit.
+      - If the \reg{DS} segment contains a \c{NULL} segment selector.
+    "#SS(0)": \exception{segLimitSS}
+  virtual:
+    "#BR": If the bounds test fails.
+    "#UD":
+      - \exception{lock}
+    "#GP(0)":
+      - If the destination's effective address of the Bound Table entry is outside the \reg{DS} segment limit.
+      - If the \reg{DS} segment contains a \c{NULL} segment selector.
+    "#SS(0)": \exception{segLimitSS}
+    "#PF(fc)": \exception{pf}
+    "#AC(0)": \exception{ac}
   protected:
     "#BR": If the bounds test fails.
     "#UD":
@@ -58,21 +77,19 @@ exceptions:
     "#SS(0)": \exception{segLimitSS}
     "#PF(fc)": \exception{pf}
     "#AC(0)": \exception{ac}
-  real:
+  compatibility:
     "#BR": If the bounds test fails.
     "#UD":
-      - If the \instr{LOCK} prefix is used.
-      - If the second operand is not a memory location.
+      - \exception{lock}
     "#GP(0)":
       - If the destination's effective address of the Bound Table entry is outside the \reg{DS} segment limit.
       - If the \reg{DS} segment contains a \c{NULL} segment selector.
     "#SS(0)": \exception{segLimitSS}
-  virtual: Same exceptions as protected mode.
-  compatibility: Same exceptions as protected mode.
-  long: Not encodable.
+    "#PF(fc)": \exception{pf}
+    "#AC(0)": \exception{ac}
 changes:
-  version: 75
-  date: 2021-06
+  version: 76
+  date: 2021-12
   list:
     - The overview table lists the encodings as "invalid" in 64 bit mode, but they are actually not encodable due to the EVEX prefix.
     - The encoding of the ModR/M byte has been changed from \c{/r} to show the restrictions on it.

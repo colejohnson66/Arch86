@@ -72,14 +72,12 @@ exceptions:
   floating: None
   other: \exceptionVex{13}
   otherAdditional:
-    "#UD": \exception{vex.l}
+    "#UD": \exception{vex.l0}
 changes:
-  version: 75
-  date: 2021-06
+  version: 76
+  date: 2021-12
   list:
     - >-
       The "Exceptions" section lists the \c{#UD} as occurring when \c{VEX.W = 1}.
-      The most likely typo seems to be that it should be when \c{VEX.L = 1}.
     - >-
       The \c{BEXTR r64a, r/m64, r64b} form is documented as being "not encodable" in 32 bit mode.
-      This is misleading as it \i{is} encodable, but is defined to be treated as the 32 bit form.

@@ -23,7 +23,7 @@ opcode:
     description: ANDs the inverted form of \i{r/m64} with \i{r64b}.
       Stores the result in \i{r64a}.
 encoding:
-  operands: 2
+  operands: 3
   encodings:
     VEX:
       - ModRM.reg[w]
@@ -57,13 +57,12 @@ exceptions:
   floating: None
   other: \exceptionVex{13}
   otherAdditional:
-    "#UD": \exception{vex.l}
+    "#UD": \exception{vex.l0}
 changes:
-  version: 75
-  date: 2021-06
+  version: 76
+  date: 2021-12
   list:
     - >-
       The \c{ANDN r64a, r64b, r/m64} form is documented as being "not encodable" in 32 bit mode.
-      This is misleading as it \i{is} encodable, but is defined to be treated as the 32 bit form.
     - >-
       The \c{#UD} exception is not present in their exceptions list.

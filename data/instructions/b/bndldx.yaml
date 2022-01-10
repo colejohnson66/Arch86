@@ -93,41 +93,61 @@ operationNotes:
     If \c{CPL} (protection ring) is less than 3, the supervisor \c{MAWA} (\c{MAWAS}) is used, which is 0.
     Otherwise, the user \c{MAWA} (\c{MAWAU}) is used; it's value is enumerated in \cpuid{eax=07,ecx=00,,ecx=17..23=mawau}.
 exceptions:
-  protected:
-    "#BR": If the bound directory entry is invalid.
-    "#UD":
-      - \exception{lock}
-      - If \cpuid{eax=07,ecx=00,,ebx=14=mpx} is \c{0}.
-      - If \c{ModRM.reg} does not encode \c{BND0} through \c{BND3} (i.e. contains a 4 or higher).
-      - If 16 bit addressing is used.
-    "#GP(0)":
-      - If the destination's effective address of the Bound Table entry is outside the \reg{DS} segment limit.
-      - If the \reg{DS} segment contains a \c{NULL} segment selector.
-    "#PF(fc)": \exception{pf}
   real:
     "#BR": If the bound directory entry is invalid.
     "#UD":
       - \exception{lock}
+      - \exception{sib}
       - If \cpuid{eax=07,ecx=00,,ebx=14=mpx} is \c{0}.
       - If \c{ModRM.reg} does not encode \c{BND0} through \c{BND3} (i.e. contains a 4 or higher).
-      - If 16 bit addressing is used.
     "#GP(0)":
       - If the destination's effective address of the Bound Table entry is outside the \reg{DS} segment limit.
       - If the \reg{DS} segment contains a \c{NULL} segment selector.
-  virtual: Same exceptions as protected mode.
-  compatibility: Same exceptions as protected mode.
+  virtual:
+    "#BR": If the bound directory entry is invalid.
+    "#UD":
+      - \exception{lock}
+      - \exception{sib}
+      - If \cpuid{eax=07,ecx=00,,ebx=14=mpx} is \c{0}.
+      - If \c{ModRM.reg} does not encode \c{BND0} through \c{BND3} (i.e. contains a 4 or higher).
+    "#GP(0)":
+      - If the destination's effective address of the Bound Table entry is outside the \reg{DS} segment limit.
+      - If the \reg{DS} segment contains a \c{NULL} segment selector.
+    "#PF(fc)": \exception{pf}
+  protected:
+    "#BR": If the bound directory entry is invalid.
+    "#UD":
+      - \exception{lock}
+      - \exception{sib}
+      - If \cpuid{eax=07,ecx=00,,ebx=14=mpx} is \c{0}.
+      - If \c{ModRM.reg} does not encode \c{BND0} through \c{BND3} (i.e. contains a 4 or higher).
+    "#GP(0)":
+      - If the destination's effective address of the Bound Table entry is outside the \reg{DS} segment limit.
+      - If the \reg{DS} segment contains a \c{NULL} segment selector.
+    "#PF(fc)": \exception{pf}
+  compatibility:
+    "#BR": If the bound directory entry is invalid.
+    "#UD":
+      - \exception{lock}
+      - \exception{sib}
+      - If \cpuid{eax=07,ecx=00,,ebx=14=mpx} is \c{0}.
+      - If \c{ModRM.reg} does not encode \c{BND0} through \c{BND3} (i.e. contains a 4 or higher).
+    "#GP(0)":
+      - If the destination's effective address of the Bound Table entry is outside the \reg{DS} segment limit.
+      - If the \reg{DS} segment contains a \c{NULL} segment selector.
+    "#PF(fc)": \exception{pf}
   long:
     "#BR": If the bound directory entry is invalid.
     "#UD":
       - \exception{lock}
+      - \exception{sib}
       - If \cpuid{eax=07,ecx=00,,ebx=14=mpx} is \c{0}.
       - If \c{ModRM.reg} does not encode \c{BND0} through \c{BND3} (i.e. contains a 4 or higher).
-      - If 16 bit addressing is used.
     "#GP(0)": If the memory address (\c{A_BDE} or \c{A_BTE}) is in non-canonical form.
     "#PF(fc)": \exception{pf}
 changes:
-  version: 75
-  date: 2021-06
+  version: 76
+  date: 2021-12
   list:
     - >-
       The overview table only mentions 32 and 64 bit mode support.

@@ -55,9 +55,13 @@ operation: |-
     arg.Bit[56..64] = temp.Bit[0..8];
   }
 exceptions:
+  real:
+    "#UD": \exception{lock}
+  virtual:
+    "#UD": \exception{lock}
   protected:
     "#UD": \exception{lock}
-  real: Same as protected mode.
-  virtual: Same as protected mode.
-  compatibility: Same as protected mode.
-  long: Same as protected mode.
+  compatibility:
+    "#UD": \exception{lock}
+  long:
+    "#UD": \exception{lock}

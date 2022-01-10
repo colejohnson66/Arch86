@@ -47,17 +47,24 @@ flags:
   OF: Unmodified.
 exceptions:
   real:
-    "#UD": If in 16 bit mode.
+    "#UD": \exception{inReal}
   virtual:
-    "#UD": If in 16 bit mode.
+    "#UD": \exception{inReal}
   protected:
     "#GP(0)":
-      - \exception{nonWriteableSegment}
+      - \exception{nonWritableSegment}
       - \exception{segLimit}
       - \exception{nullSelector}
     "#SS(0)": \exception{segLimitSS}
     "#PF(fc)": \exception{pf}
     "#AC(0)": \exception{ac}
     "#UD": \exception{lock}
-  compatibility: Same exceptions as in protected mode.
-  long: Not encodable.
+  compatibility:
+    "#GP(0)":
+      - \exception{nonWritableSegment}
+      - \exception{segLimit}
+      - \exception{nullSelector}
+    "#SS(0)": \exception{segLimitSS}
+    "#PF(fc)": \exception{pf}
+    "#AC(0)": \exception{ac}
+    "#UD": \exception{lock}

@@ -35,14 +35,18 @@ operation: |-
 intrinsics: |-
   void _cldemote(const void *ptr)
 exceptions:
+  real:
+    "#UD": \exception{lock}
+  virtual:
+    "#UD": \exception{lock}
   protected:
     "#UD": \exception{lock}
-  real: Same exceptions as protected mode.
-  virtual: Same exceptions as protected mode.
-  compatibility: Same exceptions as protected mode.
-  long: Same exceptions as protected mode.
+  compatibility:
+    "#UD": \exception{lock}
+  long:
+    "#UD": \exception{lock}
 changes:
-  version: 75
-  date: 2021-06
+  version: 76
+  date: 2021-12
   list:
     - The encoding of the ModR/M byte has been changed from \c{/r} to show the restrictions on it.

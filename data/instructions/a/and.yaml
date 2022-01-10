@@ -281,8 +281,8 @@ exceptions:
     "#AC(0)": \exception{ac}
     "#UD": \exception{lockNoMem}
 changes:
-  version: 75
-  date: 2021-06
+  version: 76
+  date: 2021-12
   list:
     - \c{REX 20 /r} is incorrectly described as "\i{r/m64} AND \i{r8} (\i{sign-extended})."
     - \c{REX 22 /r} is incorrectly described as "\i{r/m64} AND \i{r8} (\i{sign-extended})."

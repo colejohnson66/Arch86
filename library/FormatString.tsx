@@ -85,6 +85,7 @@ const cannedArgs: Record<string, (arg: string) => React.ReactElement> = {
 // "canned" exception responses
 const exceptions: Record<string, React.ReactElement> = {
     // #UD
+    cpl0: <>If <code>CPL</code> is greater than <code>0</code>.</>,
     cpuid: <>If any of the required CPUID feature flags are note set.</>,
     cpuidFeatureFlags: <>If any of the required CPUID feature flags need enabling, but are not.</>,
     "evex.vvvvv": <>If <code>EVEX.vvvvv</code> is not <code>11111b</code>.</>,
@@ -116,10 +117,6 @@ const exceptions: Record<string, React.ReactElement> = {
 
     // #AC(0)
     ac: <>If alignment checking is enabled while the current privilege level is 3 and an unaligned memory access is made.</>,
-
-    // old; remove
-    in64: <>If in 64 bit mode.</>,
-    "vex.l": <>If <code>VEX.L</code> is not 0.</>,
 };
 
 // `\bits` may change, so don't combine with `\c`

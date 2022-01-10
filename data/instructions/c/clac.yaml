@@ -30,17 +30,24 @@ operation: |-
     AC = 0;
   }
 exceptions:
-  protected:
+  real:
     "#UD":
       - \exception{lock}
       - If \cpuid{eax=07,ecx=00,,ebx=20=smap} is \c{0}.
-      - If \c{CPL} is greater than \c{0}.
-  real:
-    "#UD":
-      - If the \instr{LOCK} prefix is used.
-      - If \cpuid{eax=07,ecx=00,,ebx=20=smap} is \c{0}.
   virtual:
+    "#UD": \exception{inVirtual8086}
+  protected:
     "#UD":
-      - The \c{CLAC} instruction is not recognized in virtual 8086 mode.
-  compatibility: Same exceptions as protected mode.
-  long: Same exceptions as protected mode.
+      - \exception{lock}
+      - \exception{cpl0}
+      - If \cpuid{eax=07,ecx=00,,ebx=20=smap} is \c{0}.
+  compatibility:
+    "#UD":
+      - \exception{lock}
+      - \exception{cpl0}
+      - If \cpuid{eax=07,ecx=00,,ebx=20=smap} is \c{0}.
+  long:
+    "#UD":
+      - \exception{lock}
+      - \exception{cpl0}
+      - If \cpuid{eax=07,ecx=00,,ebx=20=smap} is \c{0}.

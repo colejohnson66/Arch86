@@ -66,4 +66,4 @@ exceptions:
     "#DE": If an immediate value of 0 is used.
     "#UD": \exception{lock}
   long:
-    "#UD": \exception{in64}
+    "#UD": \exception{inLong}

@@ -76,4 +76,4 @@ exceptions:
   compatibility:
     "#UD": \exception{lock}
   long:
-    "#UD": \exception{in64}
+    "#UD": \exception{inLong}

@@ -24,18 +24,11 @@ description: >-
 operation: |-
   public void CLFLUSHOPT(IntPtr ptr)
   {
-    CacheLineFlushOptimized(ptr);
+    CacheLineFlush(ptr, optimized: true);
   }
 intrinsics: |-
   void _mm_clflushopt(const void *ptr)
 exceptions:
-  protected:
-    "#UD":
-      - \exception{lock}
-      - If \cpuid{eax=07,ecx=00,,ebx=23=clflushopt} is \c{0}.
-    "#PF(fc)": \exception{pf}
-    "#SS(0)": \exception{segLimitSS}
-    "#GP(0)": \exception{segLimit}
   real:
     "#UD":
       - \exception{lock}
@@ -47,7 +40,20 @@ exceptions:
       - If \cpuid{eax=07,ecx=00,,ebx=23=clflushopt} is \c{0}.
     "#PF(fc)": \exception{pf}
     "#GP(0)": \exception{segLimit}
-  compatibility: Same exceptions as protected mode.
+  protected:
+    "#UD":
+      - \exception{lock}
+      - If \cpuid{eax=07,ecx=00,,ebx=23=clflushopt} is \c{0}.
+    "#PF(fc)": \exception{pf}
+    "#SS(0)": \exception{segLimitSS}
+    "#GP(0)": \exception{segLimit}
+  compatibility:
+    "#UD":
+      - \exception{lock}
+      - If \cpuid{eax=07,ecx=00,,ebx=23=clflushopt} is \c{0}.
+    "#PF(fc)": \exception{pf}
+    "#SS(0)": \exception{segLimitSS}
+    "#GP(0)": \exception{segLimit}
   long:
     "#UD":
       - \exception{lock}
@@ -56,7 +62,7 @@ exceptions:
     "#SS(0)": \exception{nonCanonSS}
     "#GP(0)": \exception{nonCanon}
 changes:
-  version: 75
-  date: 2021-06
+  version: 76
+  date: 2021-12
   list:
     - The encoding of the ModR/M byte has been changed from \c{/r} to show the restrictions on it.

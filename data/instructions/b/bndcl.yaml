@@ -52,20 +52,44 @@ operation: |-
 intrinsics: |-
   void _bnd_chk_ptr_lbounds(const void *address)
 exceptions:
+  real:
+    "#BR": If the lower bounds check fails.
+    "#UD":
+      - \exception{lock}
+      - \exception{sib}
+      - If \cpuid{eax=07,ecx=00,,ebx=14=mpx} is \c{0}.
+      - If \c{ModRM.reg} does not encode \c{BND0} through \c{BND3} (i.e. contains a 4 or higher).
+  virtual:
+    "#BR": If the lower bounds check fails.
+    "#UD":
+      - \exception{lock}
+      - \exception{sib}
+      - If \cpuid{eax=07,ecx=00,,ebx=14=mpx} is \c{0}.
+      - If \c{ModRM.reg} does not encode \c{BND0} through \c{BND3} (i.e. contains a 4 or higher).
   protected:
     "#BR": If the lower bounds check fails.
     "#UD":
       - \exception{lock}
+      - \exception{sib}
       - If \cpuid{eax=07,ecx=00,,ebx=14=mpx} is \c{0}.
       - If \c{ModRM.reg} does not encode \c{BND0} through \c{BND3} (i.e. contains a 4 or higher).
-      - If 16 bit addressing is used.
-  real: Same exceptions as protected mode.
-  virtual: Same exceptions as protected mode.
-  compatibility: Same exceptions as protected mode.
-  long: Same exceptions as protected mode.
+  compatibility:
+    "#BR": If the lower bounds check fails.
+    "#UD":
+      - \exception{lock}
+      - \exception{sib}
+      - If \cpuid{eax=07,ecx=00,,ebx=14=mpx} is \c{0}.
+      - If \c{ModRM.reg} does not encode \c{BND0} through \c{BND3} (i.e. contains a 4 or higher).
+  long:
+    "#BR": If the lower bounds check fails.
+    "#UD":
+      - \exception{lock}
+      - \exception{sib}
+      - If \cpuid{eax=07,ecx=00,,ebx=14=mpx} is \c{0}.
+      - If \c{ModRM.reg} does not encode \c{BND0} through \c{BND3} (i.e. contains a 4 or higher).
 changes:
-  version: 75
-  date: 2021-06
+  version: 76
+  date: 2021-12
   list:
     - >-
       The overview table only mentions 32 and 64 bit mode support.

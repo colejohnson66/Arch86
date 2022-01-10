@@ -34,6 +34,7 @@
 /extension
   ...
 /instruction
+  /aesdec128kl - exceptions cleanup
   /aesdec256kl
   /aesdecwide128kl
   /aesdecwide256kl
@@ -41,4 +42,5 @@
   /aesenc256kl
   /aesencwide128kl
   /aesencwide256kl
+  /help#headingAlternateR8Encoding
   ...
