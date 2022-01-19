@@ -78,7 +78,7 @@ export default function Page(): React.ReactElement {
                     <dd>
                         Indicates if the least significant byte of a result contains an even number of set (&quot;1&quot;) bits (indicating even parity), and cleared otherwise.
                         Due to the result only being based on the least significant byte, it is considered obsolete and does not have much usage today.
-                        However, in situations where it is used, there exists two &quot;jump&quot; instructions: <A href="/instruction/jcc"><code>JP/JPE</code> - Jump If Parity (Even)</A> and <A href="/instruction/jcc"><code>JNP/JPO</code> - Jump If No Parity (Odd)</A>.
+                        However, in situations where it is used, there exists two &quot;jump&quot; instructions: <A href="/instruction/j/jcc"><code>JP/JPE</code> - Jump If Parity (Even)</A> and <A href="/instruction/j/jcc"><code>JNP/JPO</code> - Jump If No Parity (Odd)</A>.
                         {/* TODO: use <Instruction /> */}
                         <br />
                         Some other (non-arithmetic) instructions overload this bit for various results.
@@ -91,7 +91,7 @@ export default function Page(): React.ReactElement {
                     <dt><code>AF</code> - Auxiliary Carry Flag (bit 4)</dt>
                     <dd>
                         Sometimes referred to as the &quot;Half Carry Flag&quot;, it is similar to the carry flag (bit 0), but always operating on overflow or underflow with bit 3 of the result.
-                        This obsolete flag is used for the obsolete BCD instructions such as <Instruction name="AAA" />.
+                        This obsolete flag is used for the obsolete BCD instructions such as <Instruction name="aaa" />.
                         <br />
                         Some other (non-arithmetic) instructions overload this bit for various results.
                     </dd>
@@ -176,9 +176,9 @@ export default function Page(): React.ReactElement {
                     <dd>TODO</dd>
                     <dt><code>ID</code> - &quot;ID&quot; Flag (bit 21)</dt>
                     <dd>
-                        Provides a method of checking for support of the <Instruction name="CPUID" /> instruction.
+                        Provides a method of checking for support of the <Instruction name="cpuid" /> instruction.
                         On the 80486 and older processors, attempts to set this bit will be unsuccessful as the processor will clear it upon load into the register.
-                        However, Pentium (and newer) processors (which support <Instruction name="CPUID" noTitle />) will allow setting and clearing this bit.
+                        However, Pentium (and newer) processors (which support <Instruction name="cpuid" noLink noTitle />) will allow setting and clearing this bit.
                     </dd>
                     <dt>(bits 22 and up)</dt>
                     <dd>

@@ -77,8 +77,8 @@ function LayoutRoot(props: LayoutRootProps): React.ReactElement {
                                                 {Navigation.map((navItem) => (
                                                     <A key={navItem.navGroup} href={navItem.href} aria-current={navItem.navGroup === props.navGroup && "page"} className={
                                                         navItem.navGroup === props.navGroup
-                                                            ? "activeNavItem"
-                                                            : "inactiveNavItem"}>
+                                                            ? ["activeNavItem"]
+                                                            : ["inactiveNavItem"]}>
                                                         {navItem.name}
                                                     </A>
                                                 ))}
@@ -102,8 +102,8 @@ function LayoutRoot(props: LayoutRootProps): React.ReactElement {
                                     <div key={navItem.navGroup} className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                                         <A href={navItem.href} aria-current={navItem.navGroup === props.navGroup && "page"} className=
                                             {navItem.navGroup === props.navGroup
-                                                ? "activeNavItem"
-                                                : "inactiveNavItem"}>
+                                                ? ["activeNavItem"]
+                                                : ["inactiveNavItem"]}>
                                             {navItem.name}
                                         </A>
                                     </div>

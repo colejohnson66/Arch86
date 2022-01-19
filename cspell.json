@@ -76,6 +76,7 @@
         "FIPS",
         "hexdigit",
         "intrinsics",
+        "LLIG",
         "lowercased",
         "microarchitecture",
         "microarchitectures",
@@ -91,6 +92,8 @@
         "Ryzen",
         "scrollable",
         "simd",
+        "ulong",
+        "ushort",
         "Vercel",
         "vex",
         "writemask"

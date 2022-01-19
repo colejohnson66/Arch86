@@ -104,9 +104,12 @@
     table.instruction-overview td {
         @apply border border-gray-400 p-2;
     }
-    table.instruction-encoding th,
-    table.instruction-encoding td {
+    table.instruction-table th,
+    table.instruction-table td {
         @apply border border-gray-400 p-1 text-center;
+    }
+    table.instruction-table code {
+        @apply whitespace-pre;
     }
 
 

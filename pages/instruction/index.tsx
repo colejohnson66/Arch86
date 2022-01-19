@@ -24,22 +24,20 @@
 import A from "@components/A";
 import Breadcrumb from "@components/Breadcrumb";
 import Clear from "@components/Clear";
-import { GetGroupedInstructionList } from "@library/Instruction";
-import { GetStaticProps } from "next";
 import Instruction from "@components/Instruction";
+import InstructionList from "@data/instructions/List";
 import InstructionTitles from "@data/instructions/Titles";
 import Layout from "@components/Layout";
 import MaybeArray from "@myTypes/MaybeArray";
 import React from "react";
 import Toc from "@components/Toc";
-import UppercaseMnemonic from "@library/UppercaseMnemonic";
 
 function CommaSeparatedLinks(list: string[]): React.ReactElement {
     // list[0] is the name in `InstructionTitles`
     // list[1..] is the instructions
     const fragments = list.slice(1).map((item, idx) => (
         <React.Fragment key={idx}>
-            <Instruction name={UppercaseMnemonic(item)} as={item} noTitle />
+            <Instruction name={item} noTitle />
             {idx !== list.length - 2 && ", " /* 2 because: 1 as always, and one for the slice offset */}
         </React.Fragment>
     ));
@@ -47,7 +45,7 @@ function CommaSeparatedLinks(list: string[]): React.ReactElement {
     return <>{fragments}{" - "}{InstructionTitles[list[0]]}</>;
 }
 
-function InstructionListWithHeading(list: MaybeArray<string>[], char: string): React.ReactElement {
+function InstructionListWithHeading(char: string, list: MaybeArray<string>[]): React.ReactElement {
     // each entry in `list` is either a mnemonic, or an array
     // if it's an array, the first element is a key into `InstructionTitles`, and the rest are mnemonics
     char = char.toUpperCase();
@@ -58,18 +56,14 @@ function InstructionListWithHeading(list: MaybeArray<string>[], char: string): R
                 {list.map((item) => (
                     Array.isArray(item)
                         ? <li key={item[0]}>{CommaSeparatedLinks(item)}</li>
-                        : <li key={item}><Instruction name={UppercaseMnemonic(item)} as={item} useHyphen /></li>
+                        : <li key={item}><Instruction name={item} useHyphen /></li>
                 ))}
             </ul>
         </React.Fragment>
     );
 }
 
-type PageProps = {
-    instructions: Record<string, MaybeArray<string>[]>;
-};
-
-export default function Page(props: PageProps): React.ReactElement {
+export default function Page(): React.ReactElement {
     return (
         <Layout.Root navGroup="instruction" pageTitle="Instructions">
             <Layout.Title title="Instructions" />
@@ -79,7 +73,7 @@ export default function Page(props: PageProps): React.ReactElement {
             <Layout.Content>
                 <Toc.Root>
                     <Toc.Entry href="#headingList" text="Mnemonic List">
-                        {Object.keys(props.instructions).map((char) => (
+                        {Object.keys(InstructionList).map((char) => (
                             char.toUpperCase()
                         )).map((char) => (
                             <Toc.Entry key={char} href={`#headingList${char}`} text={char} />
@@ -88,22 +82,16 @@ export default function Page(props: PageProps): React.ReactElement {
                 </Toc.Root>
                 <p>
                     x86 is home to a few hundred instructions with other 3,600 different encodings.
+                </p>
+                <p>
                     Up-to-date lists are available from <A href="https://software.intel.com/content/www/us/en/develop/articles/intel-sdm.html">Intel</A> and <A href="https://developer.amd.com/resources/developer-guides-manuals/">AMD</A>, however, they may be incomplete;
                     Undocumented and removed instructions may be missing from these manuals.
                 </p>
                 <Clear />
 
                 <h2 id="headingList">Mnemonic List</h2>
-                {Object.keys(props.instructions).map((char) => InstructionListWithHeading(props.instructions[char], char))}
+                {Object.entries(InstructionList).map((entry) => InstructionListWithHeading(entry[0], entry[1]))}
             </Layout.Content>
         </Layout.Root>
     );
 }
-
-export const getStaticProps: GetStaticProps = async () => {
-    return {
-        props: {
-            instructions: GetGroupedInstructionList(),
-        },
-    };
-};

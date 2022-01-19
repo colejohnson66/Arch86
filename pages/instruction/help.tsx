@@ -39,6 +39,7 @@ export default function Page(): React.ReactElement {
             <Layout.Content>
                 <Toc.Root>
                     <Toc.Entry href="#headingOverviewTable" text="Overview Table">
+                        <Toc.Entry href="#headingOverviewAlternateGpr8Encoding" text="Alternate GPR8 Encoding" />
                         <Toc.Entry href="#headingOverviewTableVector" text="Interpreting VEX, EVEX, and XOP Opcodes" />
                     </Toc.Entry>
                     <Toc.Entry href="#headingEncoding" text="Encoding">
@@ -49,6 +50,11 @@ export default function Page(): React.ReactElement {
                     <Toc.Entry href="#headingExamples" text="Example(s)" />
                     <Toc.Entry href="#headingFlags" text="Flags Affected" />
                     <Toc.Entry href="#headingIntrinsics" text="Intrinsics" />
+                    <Toc.Entry href="#headingExceptions" text="Exceptions">
+                        <Toc.Entry href="#headingExceptionsOperatingMode" text="By Operating Mode" />
+                        <Toc.Entry href="#headingExceptionsSimd" text="SIMD Floating-Point" />
+                        <Toc.Entry href="#headingExceptionsOther" text={"\"Other\""} />
+                    </Toc.Entry>
                 </Toc.Root>
                 <p>
                     This page details many of the sections of instruction pages.
@@ -68,9 +74,9 @@ export default function Page(): React.ReactElement {
                         Italics in the mnemonic (bottom) part signify operands.
                         {" "}<A href="#headingOverviewTableVector">See below</A> for an explanation on interpreting vector (VEX, EVEX, and XOP prefixed) opcodes.
                         <br className="mb-2" />
-                        Some vector opcodes (such as <Instruction name="ADDPD" />) require that certain &quot;legacy&quot; prefixes be present (or none at all in some cases, such as with <Instruction name="ADDPS" />).
+                        Some vector opcodes (such as <Instruction name="addpd" />) require that certain &quot;legacy&quot; prefixes be present (or none at all in some cases, such as with <Instruction name="addps" />).
                         In these cases, using the wrong prefixes will change how the instruction is decoded, and will result in a different opcode.
-                        For example, prefixing an <Instruction name="ADDPS" noLink noTitle /> instruction with <code>0x66</code> will change it into an <Instruction name="ADDPD" noLink noTitle /> instruction.
+                        For example, prefixing an <Instruction name="addps" noLink noTitle /> instruction with <code>0x66</code> will change it into an <Instruction name="addpd" noLink noTitle /> instruction.
                         <br className="mb-2" />
                         EVEX forms commonly feature other bits of information such as: an indication mask registers are allowed (with <code>{"{k1}"}</code>), error masking (with <code>{"{er}"}</code>), and more.
                     </dd>
@@ -107,6 +113,11 @@ export default function Page(): React.ReactElement {
                         For most instructions, the various cells will be almost carbon copies of each other, but with minor changes.
                     </dd>
                 </dl>
+
+                <h3 id="headingOverviewAlternateGpr8Encoding">Alternate <code>GPR8</code> Encoding</h3>
+                <p>
+                    TODO...
+                </p>
 
                 <h3 id="headingOverviewTableVector">Interpreting VEX, EVEX, and XOP Opcodes</h3>
                 <p>
@@ -225,7 +236,7 @@ export default function Page(): React.ReactElement {
                         An immediate value with <code>##</code> bits.
                         If multiple values of <code>##</code> are allowed, they will be separated by a slash.
                     </dd>
-                    <dt><code>imm8(7..4)</code></dt>
+                    <dt><code>imm8(4..7)</code></dt>
                     <dd>
                         The upper four bits (the high nibble) of an eight bit immediate encode the register.
                     </dd>
@@ -294,6 +305,15 @@ export default function Page(): React.ReactElement {
                 <p>
                     The &quot;Exceptions&quot; section contains a list of the possible exceptions that can be raised, along with the criteria for doing so.
                 </p>
+
+                <h3 id="headingExceptionsOperatingMode">By Operating Mode</h3>
+                <p>TODO</p>
+
+                <h3 id="headingExceptionsSimd">SIMD Floating-Point</h3>
+                <p>TODO</p>
+
+                <h3 id="headingExceptionsOther">&quot;Other&quot;</h3>
+                <p>TODO</p>
             </Layout.Content>
         </Layout.Root>
     );

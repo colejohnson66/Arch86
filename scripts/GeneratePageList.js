@@ -66,28 +66,6 @@ dir.files(pagesDir, { sync: true }).forEach((entry) => {
     list.push(entry);
 });
 
-const instructionsDir = path.join(process.cwd(), "data", "instructions")
-dir.files(instructionsDir, { sync: true }).forEach((entry) => {
-    // cleanup directory separator for Windows
-    entry = entry.replace(/\\/g, "/");
-
-    if (!entry.endsWith(".yaml"))
-        return;
-
-    // get just the URL part
-    entry = entry.substring(instructionsDir.length + 1);
-    entry = entry.substring(0, entry.length - ".yaml".length);
-
-    // filter out anything not in a subdirectory
-    if (!entry.includes("/"))
-        return;
-
-    // remove subdirectory
-    entry = entry.substring(1);
-
-    list.push(`/instruction${entry}`);
-});
-
 list.sort();
 lines.push(...list.map((entry) => `    "${entry}",`));
 lines.push(

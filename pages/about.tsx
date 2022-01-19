@@ -50,7 +50,7 @@ export default function Page(): React.ReactElement {
                     {" "}<A href="https://tailwindcss.com/">Tailwind</A> is used for themeing.
                 </p>
                 <p>
-                    Additionally, the npm packages <A href="https://www.npmjs.com/package/react-syntax-highlighter"><code>react-syntax-highlighter</code></A> and <A href="https://www.npmjs.com/package/yaml"><code>yaml</code></A> are used.
+                    Additionally, <A href="https://www.npmjs.com/package/react-syntax-highlighter"><code>react-syntax-highlighter</code></A> is used.
                 </p>
 
                 <h2 id="headingSource">Open Source</h2>

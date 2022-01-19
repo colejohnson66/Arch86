@@ -28,30 +28,33 @@ import React from "react";
 // TODO: next uses 'url.UrlObject | string' for 'href'; is that needed here?
 type AProps = {
     href: string;
-    className?: string;
+    className?: string[];
     children: React.ReactNode;
 };
 
-export default function A(props: AProps): JSX.Element {
-    let classes = props.className ?? "";
+export default function A(props: AProps): React.ReactElement {
+    const classes = props.className ?? [];
 
-    // is this an internal link? (internal links without slash are invalid)
-    if (props.href[0] === "/") {
-        if (!PageList.includes(props.href.split("#")[0]))
-            classes += " text-red-500";
+    // local link?
+    if (props.href[0] === "#") {
         return (
             <Link href={props.href}>
-                <a className={classes}>{props.children}</a>
+                <a className={classes.join(" ")}>{props.children}</a>
             </Link>
         );
     }
-    // TODO: An unknown issue is causing Next to write out links with only a hash as
-    //   `{url}#{hash}`. Normally, this wouldn't be an issue, but on "slug" pages, this
-    //   causes `#headingEncoding` to turn into `/instruction/[slug]#headingEncoding`,
-    //   which doesn't work.
-    if (props.href[0] === "#")
-        return <a href={props.href} className={classes}>{props.children}</a>;
+
+    // internal link? (internal links without slash are invalid)
+    if (props.href[0] === "/") {
+        if (!PageList.includes(props.href.split("#")[0]))
+            classes.push("text-red-500");
+        return (
+            <Link href={props.href}>
+                <a className={classes.join(" ")}>{props.children}</a>
+            </Link>
+        );
+    }
 
     // it's external
-    return <a href={props.href} className={classes} rel="external">{props.children}</a>;
+    return <a href={props.href} className={classes.join(" ")} rel="external">{props.children}</a>;
 }
