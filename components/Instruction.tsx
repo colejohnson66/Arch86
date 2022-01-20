@@ -22,7 +22,7 @@
  */
 
 import A from "./A";
-import InstructionTitles from "@data/instructions/Titles";
+import InstructionTitles from "@data/InstructionTitles";
 
 // convert a link to an instruction (key) to the correct URL
 const Aliases: Record<string, keyof typeof InstructionTitles> = {

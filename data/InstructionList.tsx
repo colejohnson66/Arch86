@@ -22,7 +22,7 @@
  */
 
 import MaybeArray from "@myTypes/MaybeArray";
-import Titles from "@data/instructions/Titles";
+import Titles from "@data/InstructionTitles";
 
 const InstructionList: Record<string, MaybeArray<keyof typeof Titles>[]> = {
     a: [
