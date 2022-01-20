@@ -14,7 +14,7 @@
     },
     "scripts": {
         "dev": "next",
-        "prebuild": "node ./scripts/GeneratePageList.js",
+        "prebuild": "node ./scripts/Prebuild.js",
         "build": "next build",
         "start": "next start",
         "lint": "next lint",
