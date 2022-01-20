@@ -56,7 +56,7 @@ const Exceptions = {
     NonAlignedMemory: (bytes: number) => (
         <>If a memory operand is not aligned to a <Unit value={bytes} unit="byte" /> boundary.</>
     ),
-    NonCanon: <>If a memory operand (using a semgent other than <code>SS</code>) is in non-canonical form.</>,
+    NonCanon: <>If a memory operand (using a segment other than <code>SS</code>) is in non-canonical form.</>,
     NullSelector: <>If a memory operand uses a segment containing a <code>NULL</code> selector.</>,
     NonWritableSegment: <>If the destination is located in a non-writable segment.</>,
     SegLimit: <>If a memory operand (using a segment other than <code>SS</code>) has an effective address that is outside the segment&apos;s limit.</>,
