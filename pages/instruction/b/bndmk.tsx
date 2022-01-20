@@ -1,5 +1,5 @@
 /* =============================================================================
- * File:   bndcu-bndcn.tsx
+ * File:   bndmk.tsx
  * Author: Cole Tobin
  * =============================================================================
  * Copyright (c) 2022 Cole Tobin
@@ -23,20 +23,19 @@
 
 import InstructionPageLayout, { InstructionPageLayoutProps } from "@components/InstructionPageLayout";
 
-import Exception from "@components/Exception";
 import Exceptions from "@library/Exceptions";
-import Instruction from "@components/Instruction";
 import Register from "@components/Register";
 import Unit from "@components/Unit";
 
 const PageData: InstructionPageLayoutProps = {
-    id: "bndcu-bndcn",
-    title: <>Check Upper Bound</>,
-    titlePlain: "Check Upper Bound",
+    id: "bndmk",
+    title: <>Make Bounds</>,
+    titlePlain: "Make Bounds",
     opcodes: [
         {
-            opcode: <>F2 0F 1A /r</>,
-            mnemonic: <>BNDCU <i>bnd</i>, <i>r/m32</i></>,
+            // TODO: is an SIB byte required?
+            opcode: <>F3 0F 1B !11:rrr:bbb</>,
+            mnemonic: <>BNDMK <i>bnd</i>, <i>m32</i></>,
             encoding: "RM",
             validity: {
                 16: "valid",
@@ -44,12 +43,11 @@ const PageData: InstructionPageLayoutProps = {
                 64: "n/e",
             },
             cpuid: "mpx",
-            description:
-                <>Raise a <Exception name="BR" /> exception if the address in <i>r/m32</i> is greater than the upper bound of <i>bnd</i>.</>,
+            description: <>Make lower and upper bounds from <i>m32</i> and store them into <i>bnd</i>.</>,
         },
         {
-            opcode: <>F2 0F 1A /r</>,
-            mnemonic: <>BNDCU <i>bnd</i>, <i>r/m64</i></>,
+            opcode: <>F3 0F 1B !11:rrr:bbb</>,
+            mnemonic: <>BNDMK <i>bnd</i>, <i>m64</i></>,
             encoding: "RM",
             validity: {
                 16: "n/e",
@@ -57,56 +55,20 @@ const PageData: InstructionPageLayoutProps = {
                 64: "valid",
             },
             cpuid: "mpx",
-            description:
-                <>Raise a <Exception name="BR" /> exception if the address in <i>r/m64</i> is greater than the upper bound of <i>bnd</i>.</>,
-        },
-        {
-            opcode: <>F2 0F 1B /r</>,
-            mnemonic: <>BNDCN <i>bnd</i>, <i>r/m32</i></>,
-            encoding: "RM",
-            validity: {
-                16: "valid",
-                32: "valid",
-                64: "n/e",
-            },
-            cpuid: "mpx",
-            description:
-                <>Raise a <Exception name="BR" /> exception if the address in <i>r/m32</i> is greater than the (inverted) upper bound of <i>bnd</i>.</>,
-        },
-        {
-            opcode: <>F2 0F 1B /r</>,
-            mnemonic: <>BNDCN <i>bnd</i>, <i>r/m64</i></>,
-            encoding: "RM",
-            validity: {
-                16: "n/e",
-                32: "n/e",
-                64: "valid",
-            },
-            cpuid: "mpx",
-            description:
-                <>Raise a <Exception name="BR" /> exception if the address in <i>r/m64</i> is greater than the (inverted) upper bound of <i>bnd</i>.</>,
+            description: <>Make lower and upper bounds from <i>m64</i> and store them into <i>bnd</i>.</>,
         },
     ],
     encodings: {
         operands: 2,
         encodings: {
-            "RM": ["ModRM.reg[r]", "ModRM.r/m[r]"],
+            "RM": ["ModRM.reg[w]", "ModRM.r/m"],
         },
     },
     description: (
         <>
             <p>
-                The <code>BNDCU/BNDCN</code> instructions compare the address in the second source operand against the upper bound in the first source operand.
-                If the second source is greater (outside the bounds), a <Exception name="BR" /> exception is raised and <Register name="BNDSTATUS" /> is set to <code>1</code>.
-            </p>
-            <p>
-                By default, the value stored in the upper bound is stored in its inverted (one&apos;s complement) form.
-                The <code>BNDCU</code> instruction should be used when that assumption is true, and will invert it before comparison.
-                Otherwise, use the <code>BNDCN</code> instruction.
-            </p>
-            <p>
-                If the second source operand is a general purpose register, the value contained in it is treated as the address to compare against.
-                If, however, it is a memory location, the effective address is calculated (see <Instruction name="lea" useHyphen />) and used in the comparison.
+                The <code>BNDMK</code> instruction makes lower and upper bounds from the source operand&apos;s effective address.
+                The result is stored in the destination register.
                 At no time is memory accessed.
             </p>
             <p>
@@ -117,25 +79,10 @@ const PageData: InstructionPageLayoutProps = {
         </>
     ),
     operation:
-        `public void BNDCU(Bound bnd, IntPtr addr)
+        `public void BNDMK_Sib(Bound dest, Sib addr)
 {
-    // uninvert the stored version (that itself is inverted)
-    if (addr > ~bnd.Upper)
-    {
-        BNDSTATUS.Abd = 0;
-        BNDSTATUS.EC = 1; // bounds violation
-        #BR;
-    }
-}
-
-public void BNDCN(Bound bnd, IntPtr addr)
-{
-    if (addr > bnd.Upper)
-    {
-        BNDSTATUS.Abd = 0;
-        BNDSTATUS.EC = 1; // bounds violation
-        #BR;
-    }
+    dest.Lower = addr.Base;
+    dest.Upper = ~lea(addr);
 }`,
     flags: {
         CF: <>Unmodified.</>,
@@ -146,11 +93,10 @@ public void BNDCN(Bound bnd, IntPtr addr)
         OF: <>Unmodified.</>,
     },
     intrinsics: [
-        "void _bnd_chk_ptr_ubounds(const void *address)",
+        "void *_bnd_set_ptr_bounds(const void *address, size_t size)",
     ],
     exceptions: {
         real: {
-            BR: "If the bounds test fails.",
             UD: [
                 Exceptions.Lock,
                 Exceptions.SibRequired,
@@ -158,7 +104,6 @@ public void BNDCN(Bound bnd, IntPtr addr)
             ],
         },
         virtual: {
-            BR: "If the bounds test fails.",
             UD: [
                 Exceptions.Lock,
                 Exceptions.SibRequired,
@@ -166,7 +111,6 @@ public void BNDCN(Bound bnd, IntPtr addr)
             ],
         },
         protected: {
-            BR: "If the bounds test fails.",
             UD: [
                 Exceptions.Lock,
                 Exceptions.SibRequired,
@@ -174,7 +118,6 @@ public void BNDCN(Bound bnd, IntPtr addr)
             ],
         },
         compatibility: {
-            BR: "If the bounds test fails.",
             UD: [
                 Exceptions.Lock,
                 Exceptions.SibRequired,
@@ -182,7 +125,6 @@ public void BNDCN(Bound bnd, IntPtr addr)
             ],
         },
         long: {
-            BR: "If the bounds test fails.",
             UD: [
                 Exceptions.Lock,
                 Exceptions.SibRequired,

@@ -81,13 +81,13 @@ const PageData: InstructionPageLayoutProps = {
         // TODO: if #BR and "equation for PL enabled" is true, BNDSTATUS becomes 0
         `public void BOUND_16(ushort index, IntPtr bounds)
 {
-    if (index < mem16[bounds] || index > mem16[bounds + 2])
+    if (index < Mem16[bounds] || index > Mem16[bounds + 2])
         #BR;
 }
 
 public void BOUND_32(uint index, IntPtr bounds)
 {
-    if (index < mem16[bounds] || index > mem16[bounds + 4])
+    if (index < Mem16[bounds] || index > Mem16[bounds + 4])
         #BR;
 }`,
     flags: {

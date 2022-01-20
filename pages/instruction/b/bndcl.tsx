@@ -88,10 +88,10 @@ const PageData: InstructionPageLayoutProps = {
     operation:
         `public void BNDCL(Bound bnd, IntPtr addr)
 {
-    if (addr < bnd.lower)
+    if (addr < bnd.Lower)
     {
-        BNDSTATUS.abd = 0;
-        BNDSTATUS.ec = 1; // bounds violation
+        BNDSTATUS.Abd = 0;
+        BNDSTATUS.EC = 1; // bounds violation
         #BR;
     }
 }`,
