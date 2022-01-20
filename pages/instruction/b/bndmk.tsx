@@ -34,7 +34,7 @@ const PageData: InstructionPageLayoutProps = {
     opcodes: [
         {
             // TODO: is an SIB byte required?
-            opcode: <>F3 0F 1B !11:rrr:bbb</>,
+            opcode: <>F3 0F 1B mem/r</>,
             mnemonic: <>BNDMK <i>bnd</i>, <i>m32</i></>,
             encoding: "RM",
             validity: {
@@ -46,7 +46,7 @@ const PageData: InstructionPageLayoutProps = {
             description: <>Make lower and upper bounds from <i>m32</i> and store them into <i>bnd</i>.</>,
         },
         {
-            opcode: <>F3 0F 1B !11:rrr:bbb</>,
+            opcode: <>F3 0F 1B mem/r</>,
             mnemonic: <>BNDMK <i>bnd</i>, <i>m64</i></>,
             encoding: "RM",
             validity: {

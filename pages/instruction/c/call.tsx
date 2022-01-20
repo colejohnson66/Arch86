@@ -112,7 +112,7 @@ const PageData: InstructionPageLayoutProps = {
             description: <>Call a far procedure with an absolute offset <i>ptr16:32</i>.</>,
         },
         {
-            opcode: <>FF !11:011:bbb</>,
+            opcode: <>FF mem/3</>,
             mnemonic: <>CALLF <i>m16:16</i></>,
             encoding: "M",
             validity: {
@@ -123,7 +123,7 @@ const PageData: InstructionPageLayoutProps = {
             description: <>Call a far procedure with an absolute (indirect) offset <i>m16:16</i>.</>,
         },
         {
-            opcode: <>FF !11:011:bbb</>,
+            opcode: <>FF mem/3</>,
             mnemonic: <>CALLF <i>m16:32</i></>,
             encoding: "M",
             validity: {
@@ -134,7 +134,7 @@ const PageData: InstructionPageLayoutProps = {
             description: <>Call a far procedure with an absolute (indirect) offset <i>m16:32</i>.</>,
         },
         {
-            opcode: <>FF !11:011:bbb</>,
+            opcode: <>FF mem/3</>,
             mnemonic: <>CALLF <i>m16:64</i></>,
             encoding: "M",
             validity: {

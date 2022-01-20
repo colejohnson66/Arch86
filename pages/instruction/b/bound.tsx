@@ -33,7 +33,7 @@ const PageData: InstructionPageLayoutProps = {
     titlePlain: "Check Array Index Against Bounds",
     opcodes: [
         {
-            opcode: <>62 !11:rrr:bbb</>,
+            opcode: <>62 mem/r</>,
             mnemonic: <>BOUND <i>r16</i>, <i>m16&amp;16</i></>,
             encoding: "RM",
             validity: {
@@ -44,7 +44,7 @@ const PageData: InstructionPageLayoutProps = {
             description: <>Check if <i>r16</i> (an array index) is within the bounds specified by <i>m16&amp;16</i>.</>,
         },
         {
-            opcode: <>62 !11:rrr:bbb</>,
+            opcode: <>62 mem/r</>,
             mnemonic: <>BOUND <i>r32</i>, <i>m32&amp;32</i></>,
             encoding: "RM",
             validity: {
