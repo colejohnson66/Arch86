@@ -1,5 +1,5 @@
 /* =============================================================================
- * File:   addsd.tsx
+ * File:   addss.tsx
  * Author: Cole Tobin
  * =============================================================================
  * Copyright (c) 2022 Cole Tobin
@@ -29,7 +29,7 @@ const k1z = "{k1}{z}";
 const er = "{er}";
 
 const PageData: InstructionPageLayoutProps = {
-    id: "addsd",
+    id: "addss",
     title: <>Add Scalar Single-Precision Floating-Point Value</>,
     titlePlain: "Add Scalar Single-Precision Floating-Point Value",
     opcodes: [
@@ -104,13 +104,13 @@ const PageData: InstructionPageLayoutProps = {
         </>
     ),
     operation:
-        `public void ADDSD(SimdF32 dest, SimdF32 src)
+        `public void ADDSS(SimdF32 dest, SimdF32 src)
 {
     dest[0] += src[0];
     // dest[1..] is unmodified
 }
 
-public void VADDSD_Vex(SimdF32 dest, SimdF32 src1, SimdF32 src2)
+public void VADDSS_Vex(SimdF32 dest, SimdF32 src1, SimdF32 src2)
 {
     dest[0] = src1[0] + src[2];
     dest[1] = src1[1];
@@ -119,7 +119,7 @@ public void VADDSD_Vex(SimdF32 dest, SimdF32 src1, SimdF32 src2)
     dest[2..] = 0;
 }
 
-public void VADDSD_EvexMemory(SimdF32 dest, SimdF32 src1, SimdF32 src2, KMask k)
+public void VADDSS_EvexMemory(SimdF32 dest, SimdF32 src1, SimdF32 src2, KMask k)
 {
     if (k[0])
         dest[0] = src1[0] + src2[0];
@@ -132,7 +132,7 @@ public void VADDSD_EvexMemory(SimdF32 dest, SimdF32 src1, SimdF32 src2, KMask k)
     dest[2..] = 0;
 }
 
-public void VADDSD_EvexRegister(SimdF32 dest, SimdF32 src1, SimdF32 src2, KMask k)
+public void VADDSS_EvexRegister(SimdF32 dest, SimdF32 src1, SimdF32 src2, KMask k)
 {
     if (EVEX.b)
         OverrideRoundingModeForThisInstruction(EVEX.rc);

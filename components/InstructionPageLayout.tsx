@@ -239,9 +239,9 @@ function FormatOtherExceptionsList(list: OtherExceptionList): React.ReactNode {
 }
 
 export default function InstructionPageLayout(props: InstructionPageLayoutProps): React.ReactElement {
-    // TODO: include the mnemonic in `titlePlain`
     return (
-        <Layout.Root navGroup="instruction" pageTitle={props.title}>
+        <Layout.Root navGroup="instruction" pageTitle={props.title} canonical={`/instruction/${props.id[0]}/${props.id}`}>
+            {/* TODO: include mnemonic here */}
             <Layout.Title title={props.titlePlain} />
             <Breadcrumb.Root>
                 <Breadcrumb.Item href="/instruction">Instructions</Breadcrumb.Item>

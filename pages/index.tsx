@@ -26,7 +26,7 @@ import Layout from "@components/Layout";
 
 export default function Page(): React.ReactElement {
     return (
-        <Layout.Root navGroup="home" pageTitle="Arch86">
+        <Layout.Root navGroup="home" pageTitle="Arch86" canonical="/">
             <Layout.Content>
                 <p>
                     This is the Arch86 website;

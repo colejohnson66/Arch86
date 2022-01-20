@@ -2,7 +2,7 @@
  * File:   Layout.tsx
  * Author: Cole Tobin
  * =============================================================================
- * Copyright (c) 2020-2021 Cole Tobin
+ * Copyright (c) 2020-2022 Cole Tobin
  *
  * This file is part of Arch86.
  *
@@ -29,11 +29,17 @@ import Head from "next/head";
 
 type NavGroup = "home" | "history" | "architecture" | "register" | "mode" | "extension" | "instruction" | "instruction" | "about";
 
+type LayoutRoot404Props = {
+    navGroup?: NavGroup; // missing
+    pageTitle: "404";
+    canonical?: string; // missing
+    children: React.ReactNode;
+}
 type LayoutRootProps = {
-    navGroup?: NavGroup;
+    navGroup: NavGroup;
     pageTitle: string | React.ReactNode;
-    canonical?: string;
-    children?: React.ReactNode;
+    canonical: string;
+    children: React.ReactNode;
 };
 
 /* eslint-disable object-property-newline */
@@ -49,7 +55,7 @@ const Navigation = [
 ];
 /* eslint-enable object-property-newline */
 
-function LayoutRoot(props: LayoutRootProps): React.ReactElement {
+function LayoutRoot(props: LayoutRootProps | LayoutRoot404Props): React.ReactElement {
     return (
         <>
             <Head>

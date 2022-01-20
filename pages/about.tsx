@@ -29,7 +29,7 @@ import Toc from "@components/Toc";
 
 export default function Page(): React.ReactElement {
     return (
-        <Layout.Root navGroup="about" pageTitle="About">
+        <Layout.Root navGroup="about" pageTitle="About" canonical="/about">
             <Layout.Title title="About" />
             <Breadcrumb.Root>
                 <Breadcrumb.Item>About</Breadcrumb.Item>

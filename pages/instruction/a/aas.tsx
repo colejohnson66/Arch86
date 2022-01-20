@@ -1,5 +1,5 @@
 /* =============================================================================
- * File:   aad.tsx
+ * File:   aas.tsx
  * Author: Cole Tobin
  * =============================================================================
  * Copyright (c) 2022 Cole Tobin
@@ -28,7 +28,7 @@ import Exceptions from "@library/Exceptions";
 import Register from "@components/Register";
 
 const PageData: InstructionPageLayoutProps = {
-    id: "aam",
+    id: "aas",
     title: <>ASCII Adjust <Register name="AX" /> After Subtraction</>,
     titlePlain: "ASCII Adjust AX After Subtraction",
     opcodes: [

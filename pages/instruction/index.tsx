@@ -65,7 +65,7 @@ function InstructionListWithHeading(char: string, list: MaybeArray<string>[]): R
 
 export default function Page(): React.ReactElement {
     return (
-        <Layout.Root navGroup="instruction" pageTitle="Instructions">
+        <Layout.Root navGroup="instruction" pageTitle="Instructions" canonical="/instruction">
             <Layout.Title title="Instructions" />
             <Breadcrumb.Root>
                 <Breadcrumb.Item>Instructions</Breadcrumb.Item>

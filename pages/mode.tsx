@@ -30,7 +30,7 @@ import Unit from "@components/Unit";
 
 export default function Page(): React.ReactElement {
     return (
-        <Layout.Root navGroup="mode" pageTitle="Operating Modes">
+        <Layout.Root navGroup="mode" pageTitle="Operating Modes" canonical="/mode">
             <Layout.Title title="Operating Modes" />
             <Breadcrumb.Root>
                 <Breadcrumb.Item>Operating Modes</Breadcrumb.Item>

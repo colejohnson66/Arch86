@@ -32,7 +32,7 @@ import Toc from "@components/Toc";
 
 export default function Page(): React.ReactElement {
     return (
-        <Layout.Root navGroup="register" pageTitle="Flags Register">
+        <Layout.Root navGroup="register" pageTitle="Flags Register" canonical="/register/flags">
             <Layout.Title title="Flags Register" />
             <Breadcrumb.Root>
                 <Breadcrumb.Item href="/register">Registers</Breadcrumb.Item>

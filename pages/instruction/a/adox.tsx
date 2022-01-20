@@ -28,7 +28,7 @@ import Instruction from "@components/Instruction";
 import Register from "@components/Register";
 
 const PageData: InstructionPageLayoutProps = {
-    id: "adcx",
+    id: "adox",
     title: <>Unsigned Integer Addition With Overflow Flag</>,
     titlePlain: "Unsigned Integer Addition With Overflow Flag",
     opcodes: [

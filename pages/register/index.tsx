@@ -30,7 +30,7 @@ import Unit from "@components/Unit";
 
 export default function Page(): React.ReactElement {
     return (
-        <Layout.Root navGroup="register" pageTitle="Registers">
+        <Layout.Root navGroup="register" pageTitle="Registers" canonical="/register">
             <Layout.Title title="Registers" />
             <Breadcrumb.Root>
                 <Breadcrumb.Item>Registers</Breadcrumb.Item>
