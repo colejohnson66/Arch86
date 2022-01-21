@@ -150,11 +150,11 @@ public void VADDSS_EvexRegister(SimdF32 dest, SimdF32 src1, SimdF32 src2, KMask 
 }`,
     intrinsics: [
         "__m128d _mm_add_ss(__m128d a, __m128d b)",
-        "__m128d _mm_add_round_ss(__m128d a, __m128d b, int32_t rounding)",
+        "__m128d _mm_add_round_ss(__m128d a, __m128d b, int rounding)",
         "__m128d _mm_mask_add_ss(__m128d s, __mmask8 k, __m128d a, __m128d b)",
-        "__m128d _mm_mask_add_round_ss(__m128d s, __mmask8 k, __m128d a, __m128d b, int32_t rounding)",
+        "__m128d _mm_mask_add_round_ss(__m128d s, __mmask8 k, __m128d a, __m128d b, int rounding)",
         "__m128d _mm_maskz_add_ss(__mmask8 k, __m128d a, __m128d b)",
-        "__m128d _mm_maskz_add_round_ss(__mmask8 k, __m128d a, __m128d b, int32_t rounding)",
+        "__m128d _mm_maskz_add_round_ss(__mmask8 k, __m128d a, __m128d b, int rounding)",
     ],
     exceptions: {
         simd: {

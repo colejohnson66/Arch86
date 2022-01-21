@@ -222,11 +222,11 @@ public void VADDPS_Evex512Register(SimdF32 dest, SimdF32 src1, SimdF32 src2, KMa
         "__m256d _mm256_maskz_add_ps(__mmask8 k, __m256d a, __m256d b)",
         "",
         "__m512d _mm512_add_ps(__m512d a, __m512d b)",
-        "__m512d _mm512_add_round_ps(__m512d a, __m512d b, int32_t rounding)",
+        "__m512d _mm512_add_round_ps(__m512d a, __m512d b, int rounding)",
         "__m512d _mm512_mask_add_ps(__m512d s, __mmask8 k, __m512d a, __m512d b)",
-        "__m512d _mm512_mask_add_round_ps(__m512d s, __mmask8 k, __m512d a, __m512d b, int32_t rounding)",
+        "__m512d _mm512_mask_add_round_ps(__m512d s, __mmask8 k, __m512d a, __m512d b, int rounding)",
         "__m512d _mm512_maskz_add_ps(__mmask8 k, __m512d a, __m512d b)",
-        "__m512d _mm512_maskz_add_round_ps(__mmask8 k, __m512d a, __m512d b, int32_t rounding)",
+        "__m512d _mm512_maskz_add_round_ps(__mmask8 k, __m512d a, __m512d b, int rounding)",
     ],
     exceptions: {
         simd: {

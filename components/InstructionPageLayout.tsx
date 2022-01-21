@@ -270,9 +270,9 @@ export default function InstructionPageLayout(props: InstructionPageLayoutProps)
                             {props.opcodes.map((row, idx) => (
                                 <tr key={idx}>
                                     <td className="text-sm">
-                                        <code className="px-1 whitespace-nowrap">{row.opcode}</code>
+                                        <code className="px-1">{row.opcode}</code>
                                         <hr />
-                                        <code className="px-1">{row.mnemonic}</code>
+                                        <code className="px-1 whitespace-normal">{row.mnemonic}</code>
                                     </td>
                                     <td className="text-center"><code>{row.encoding}</code></td>
                                     {OpcodeValidityMap[row.validity[16]]}
