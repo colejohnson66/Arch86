@@ -24,6 +24,7 @@
 import InstructionPageLayout, { InstructionPageLayoutProps } from "@components/InstructionPageLayout";
 
 import Canned from "@library/Canned";
+import Exceptions from "@library/Exceptions";
 
 const k1z = "{k1}{z}";
 const er = "{er}";
@@ -228,7 +229,15 @@ public void VADDPS_Evex512Register(SimdF32 dest, SimdF32 src1, SimdF32 src2, KMa
         "__m512d _mm512_maskz_add_round_ps(__mmask8 k, __m512d a, __m512d b, int32_t rounding)",
     ],
     exceptions: {
-        simd: ["invalid", "denormal", "overflow", "underflow", "precision"],
+        simd: {
+            XM: [
+                Exceptions.SimdDenormal,
+                Exceptions.SimdInvalid,
+                Exceptions.SimdOverflow,
+                Exceptions.SimdPrecision,
+                Exceptions.SimdUnderflow,
+            ],
+        },
         other: {
             vex: "2",
             evex: "e2",

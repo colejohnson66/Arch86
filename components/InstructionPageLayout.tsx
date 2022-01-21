@@ -99,8 +99,6 @@ type ExceptionAbbr = "DE" | "DB" | "BP" | "OF" | "BR" | "UD" | "NM" | "DF0"
     | "TSSel" | "NPSel" | "SS0" | "SSSel" | "GP0" | "GPSel" | "PF" | "MF"
     | "AC0" | "MC" | "XM" | "VE" | "CP" | "HV" | "VC" | "SX";
 type ExceptionList = Partial<Record<ExceptionAbbr, MaybeArray<React.ReactNode>>>;
-type SimdExceptions = "invalid" | "divide-by-0" | "denormal" | "overflow"
-    | "underflow" | "precision" | "none"
 type VexExceptions = "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "11" | "12" | "13";
 type EvexExceptions = "e1" | "e1nf" | "e2" | "e3" | "e3nf" | "e4" | "e4nf"
     | "e5" | "e5nf" | "e6" | "e6nf" | "e7nm" | "e9" | "e9nf" | "e10" | "e10nf"
@@ -110,13 +108,13 @@ type OtherExceptionList = {
     evex?: EvexExceptions;
 } & ExceptionList;
 type ExceptionsList = {
-    real?: ExceptionList;
-    virtual?: ExceptionList;
-    protected?: ExceptionList;
-    compatibility?: ExceptionList;
-    long?: ExceptionList;
+    real?: ExceptionList | "none";
+    virtual?: ExceptionList | "none";
+    protected?: ExceptionList | "none";
+    compatibility?: ExceptionList | "none";
+    long?: ExceptionList | "none";
     //
-    simd?: MaybeArray<SimdExceptions>;
+    simd?: ExceptionList | "none";
     other?: OtherExceptionList;
 }
 
@@ -132,7 +130,7 @@ export type InstructionPageLayoutProps = {
     operation: string;
     operationNotes?: MaybeArray<React.ReactNode>;
     examples?: MaybeArray<string>;
-    flags?: Flags;
+    flags?: Flags | "none";
     intrinsics?: string[] | "autogen";
     exceptions: ExceptionsList;
 };
@@ -199,7 +197,10 @@ function FormatFlagEntry(name: string, description: string, line?: React.ReactNo
     );
 }
 
-function FormatNormalExceptionsList(list: ExceptionList): React.ReactNode {
+function FormatNormalExceptionsList(list: ExceptionList | "none"): React.ReactNode {
+    if (typeof list === "string" && list === "none")
+        return <>None.</>;
+
     const ret: React.ReactNode[] = [];
 
     // each key is the exception code
@@ -365,25 +366,27 @@ export default function InstructionPageLayout(props: InstructionPageLayoutProps)
                 {props.flags &&
                     <>
                         <h2 id="headingFlags">Flags Affected</h2>
-                        <dl>
-                            {FormatFlagEntry("CF", "carry flag", props.flags.CF)}
-                            {FormatFlagEntry("PF", "parity flag", props.flags.PF)}
-                            {FormatFlagEntry("AF", "auxiliary flag", props.flags.AF)}
-                            {FormatFlagEntry("ZF", "zero flag", props.flags.ZF)}
-                            {FormatFlagEntry("SF", "sign flag", props.flags.SF)}
-                            {FormatFlagEntry("TF", "trap flag", props.flags.TF)}
-                            {FormatFlagEntry("IF", "interrupt enable flag", props.flags.IF)}
-                            {FormatFlagEntry("DF", "direction flag", props.flags.DF)}
-                            {FormatFlagEntry("OF", "overflow flag", props.flags.OF)}
-                            {/* {FormatFlagEntry("IOPL", "IO privilege level", props.flags.IOPL)} */}
-                            {FormatFlagEntry("NT", "nested task flag", props.flags.NT)}
-                            {FormatFlagEntry("RF", "resume flag", props.flags.RF)}
-                            {FormatFlagEntry("VM", "virtual-8086 mode", props.flags.VM)}
-                            {FormatFlagEntry("AC", "alignment check flag", props.flags.AC)}
-                            {FormatFlagEntry("VIF", "virtual interrupt flag", props.flags.VIF)}
-                            {FormatFlagEntry("VIP", "virtual interrupt pending", props.flags.VIP)}
-                            {FormatFlagEntry("ID", "identification flag", props.flags.ID)}
-                        </dl>
+                        {typeof props.flags === "string" && props.flags === "none"
+                            ? <>None.</>
+                            : <dl>
+                                {FormatFlagEntry("CF", "carry flag", props.flags.CF)}
+                                {FormatFlagEntry("PF", "parity flag", props.flags.PF)}
+                                {FormatFlagEntry("AF", "auxiliary flag", props.flags.AF)}
+                                {FormatFlagEntry("ZF", "zero flag", props.flags.ZF)}
+                                {FormatFlagEntry("SF", "sign flag", props.flags.SF)}
+                                {FormatFlagEntry("TF", "trap flag", props.flags.TF)}
+                                {FormatFlagEntry("IF", "interrupt enable flag", props.flags.IF)}
+                                {FormatFlagEntry("DF", "direction flag", props.flags.DF)}
+                                {FormatFlagEntry("OF", "overflow flag", props.flags.OF)}
+                                {/* {FormatFlagEntry("IOPL", "IO privilege level", props.flags.IOPL)} */}
+                                {FormatFlagEntry("NT", "nested task flag", props.flags.NT)}
+                                {FormatFlagEntry("RF", "resume flag", props.flags.RF)}
+                                {FormatFlagEntry("VM", "virtual-8086 mode", props.flags.VM)}
+                                {FormatFlagEntry("AC", "alignment check flag", props.flags.AC)}
+                                {FormatFlagEntry("VIF", "virtual interrupt flag", props.flags.VIF)}
+                                {FormatFlagEntry("VIP", "virtual interrupt pending", props.flags.VIP)}
+                                {FormatFlagEntry("ID", "identification flag", props.flags.ID)}
+                            </dl>}
                     </>}
 
                 {props.intrinsics &&
@@ -429,7 +432,7 @@ export default function InstructionPageLayout(props: InstructionPageLayoutProps)
                 {props.exceptions.simd &&
                     <>
                         <h3 id="headingExceptionsSimd">SIMD Floating-Point</h3>
-                        <p>TODO</p>
+                        {FormatNormalExceptionsList(props.exceptions.simd)}
                     </>}
                 {props.exceptions.other &&
                     <>

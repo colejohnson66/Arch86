@@ -66,6 +66,14 @@ const Exceptions = {
 
     // #AC(0)
     AC: <>If alignment checking is enabled while the current privilege level is 3 and an unaligned memory access is made.</>,
+
+    // #XM
+    SimdDenormal: <><code>#D</code> - Denormal operand.</>,
+    SimdInvalid: <><code>#I</code> - Invalid operation.</>,
+    SimdOverflow: <><code>#O</code> - Numeric overflow.</>,
+    SimdPrecision: <><code>#P</code> - Inexact result.</>,
+    SimdUnderflow: <><code>#U</code> - Numeric underflow.</>,
+    SimdDivideBy0: <><code>#Z</code> - Divide-by-zero.</>,
 };
 
 export default Exceptions;

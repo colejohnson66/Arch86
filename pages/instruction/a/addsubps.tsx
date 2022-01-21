@@ -138,7 +138,15 @@ public void VADDSUBPS_Vex256(SimdF32 dest, SimdF32 src1, SimdF32 src2)
         "__m256d _mm256_addsub_pd(__m256d a, __m256d b)",
     ],
     exceptions: {
-        simd: ["invalid", "divide-by-0", "denormal", "overflow", "underflow", "precision"],
+        simd: {
+            XM: [
+                Exceptions.SimdDenormal,
+                Exceptions.SimdInvalid,
+                Exceptions.SimdOverflow,
+                Exceptions.SimdPrecision,
+                Exceptions.SimdUnderflow,
+            ],
+        },
         other: {
             vex: "2",
             GP0: Exceptions.NonAlignedMemory(16),
