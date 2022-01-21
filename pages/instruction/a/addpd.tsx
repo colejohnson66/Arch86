@@ -51,7 +51,7 @@ const PageData: InstructionPageLayoutProps = {
         },
         {
             opcode: <>VEX.128.66.0F.WIG 58 /r</>,
-            mnemonic: <>ADDPD <i>xmm1</i>, <i>xmm2</i>, <i>xmm3/m128</i></>,
+            mnemonic: <>VADDPD <i>xmm1</i>, <i>xmm2</i>, <i>xmm3/m128</i></>,
             encoding: "VEX",
             validity: {
                 16: "invalid",
@@ -67,7 +67,7 @@ const PageData: InstructionPageLayoutProps = {
         },
         {
             opcode: <>VEX.256.66.0F.WIG 58 /r</>,
-            mnemonic: <>ADDPD <i>ymm1</i>, <i>ymm2</i>, <i>ymm3/m256</i></>,
+            mnemonic: <>VADDPD <i>ymm1</i>, <i>ymm2</i>, <i>ymm3/m256</i></>,
             encoding: "VEX",
             validity: {
                 16: "invalid",
@@ -83,7 +83,7 @@ const PageData: InstructionPageLayoutProps = {
         },
         {
             opcode: <>EVEX.128.66.0F.W1 58 /r</>,
-            mnemonic: <>ADDPD {k1z} <i>xmm1</i>, <i>xmm2</i>, <i>xmm3/m128/bcst64</i></>,
+            mnemonic: <>VADDPD {k1z} <i>xmm1</i>, <i>xmm2</i>, <i>xmm3/m128/bcst64</i></>,
             encoding: "EVEX",
             validity: {
                 16: "invalid",
@@ -99,7 +99,7 @@ const PageData: InstructionPageLayoutProps = {
         },
         {
             opcode: <>EVEX.256.66.0F.W1 58 /r</>,
-            mnemonic: <>ADDPD {k1z} <i>ymm1</i>, <i>ymm2</i>, <i>ymm3/m256/bcst64</i></>,
+            mnemonic: <>VADDPD {k1z} <i>ymm1</i>, <i>ymm2</i>, <i>ymm3/m256/bcst64</i></>,
             encoding: "EVEX",
             validity: {
                 16: "invalid",
@@ -115,7 +115,7 @@ const PageData: InstructionPageLayoutProps = {
         },
         {
             opcode: <>EVEX.512.66.0F.W1 58 /r</>,
-            mnemonic: <>ADDPD {k1z} <i>zmm1</i>, <i>zmm2</i>, <i>zmm3/m512/bcst64{er}</i></>,
+            mnemonic: <>VADDPD {k1z} <i>zmm1</i>, <i>zmm2</i>, <i>zmm3/m512/bcst64{er}</i></>,
             encoding: "EVEX",
             validity: {
                 16: "invalid",
