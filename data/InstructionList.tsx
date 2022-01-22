@@ -90,7 +90,7 @@ const InstructionList: Record<string, MaybeArray<keyof typeof Titles>[]> = {
         "cmovcc",
         "cmp",
         ["cmpList", "cmpps", "cmppd", "cmpss", "cmpsd"],
-        // "cmps",
+        "cmps",
         // "cmpxchg",
         // "cmpxchg8b",
         // "cmpxchg16b",

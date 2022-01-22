@@ -400,7 +400,7 @@ const PageData: InstructionPageLayoutProps = {
             </p>
             <p>
                 This instruction internally operates the same as <Instruction name="sub" />, but without writing the result back.
-                As such, the <code>CMP</code> instruction is the only one of the original eight ALU instructions that <em>cannot</em> be used with the <Instruction name="lock" noTitle /> prefix.
+                As such, the <code>CMP</code> instruction is the only one of the eight original ALU instructions that <em>cannot</em> be used with the <Instruction name="lock" noTitle /> prefix.
             </p>
         </>
     ),
