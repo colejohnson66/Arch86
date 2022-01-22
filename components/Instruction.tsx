@@ -35,10 +35,9 @@ const Aliases: Record<string, keyof typeof InstructionTitles> = {
 
 // when simple capitalization isn't enough
 const TitleCaseMapping: Partial<Record<keyof typeof InstructionTitles, string>> = {
-    // TODO: commented out ones should only be used with some kind of "alternate mapping" prop
-    // "bndcu-bndcn": "BNDCN/BNDCU",
-    // "cbw-cwde-cdqe": "CBW/CWDE/CDQE",
-    // "cmpxchg8b-cmpxchg16b": "CMPXCHG8B/CMPXCHG16B",
+    "bndcu-bndcn": "BNDCN/BNDCU",
+    "cbw-cwde-cdqe": "CBW/CWDE/CDQE",
+    "cmpxchg8b-cmpxchg16b": "CMPXCHG8B/CMPXCHG16B",
     "cmovcc": "CMOVcc",
     // ...
 };
@@ -48,7 +47,6 @@ type InstructionProps = {
      * The (lowercased) mnemonic name to display.
      *
      * For example, to link to `Jcc`, `"jcc"` would be put here.
-     * When the link is generated, `/instruction/j/jcc` will be linked to.
      */
     name: string;
     /**
@@ -73,9 +71,14 @@ type InstructionProps = {
      */
     useHyphen?: boolean;
     /**
+     * Use the aliased version for title case mapping.
      *
+     * By default, the unaliased version is used for title case mapping.
+     * This overrides that.
+     *
+     * This is designed for use on `/instruction`.
      */
-    titleMapping?: boolean;
+    useAliasForTitleCaseMapping?: boolean;
 }
 
 /**
@@ -89,35 +92,32 @@ type InstructionProps = {
  *
  * If the title and name should be separated with a hyphen (instead of appearing
  *   appearing in parenthesis), the `useHyphen` prop should be set to `true`.
- *
- * @example
- * //                                          URL                          Text       Title Shown
- * <Instruction name="addpd" />         // ("/instruction/a/addpd",       "ADDPD",       true)
- * <Instruction name="and" noLink />    // (undefined,                    "AND",         false)
- * <Instruction name="bound" noTitle /> // ("/instruction/b/bound",       "BOUND",       false)
- * <Instruction name="jcc" />           // ("/instruction/j/jcc",         "Jcc",         true)
- * <Instruction name="vfmadd213pd" />   // ("/instruction/f/vfmaddnnnpd", "VFMADD132PD", true)
  */
 export default function Instruction(props: InstructionProps): React.ReactElement {
-    const name = Object.keys(Aliases).includes(props.name) ? Aliases[props.name] : props.name;
-    const uppercased = Object.keys(TitleCaseMapping).includes(name) ? TitleCaseMapping[name] : name.toUpperCase();
+    const name = props.name;
+    const aliasedName = Object.keys(Aliases).includes(name) ? Aliases[name] : name;
 
-    let titleJsx: React.ReactElement = undefined;
-    if (Object.keys(InstructionTitles).includes(name)) {
-        const title = InstructionTitles[name];
-        titleJsx = props.useHyphen
-            ? <> - {title}</>
-            : <> ({title})</>;
+    let uppercased: string;
+    if (props.useAliasForTitleCaseMapping)
+        uppercased = Object.keys(TitleCaseMapping).includes(aliasedName) ? TitleCaseMapping[aliasedName] : aliasedName.toUpperCase();
+    else
+        uppercased = Object.keys(TitleCaseMapping).includes(name) ? TitleCaseMapping[name] : name.toUpperCase();
+
+    let title: React.ReactElement = undefined;
+    if (Object.keys(InstructionTitles).includes(aliasedName)) {
+        title = props.useHyphen
+            ? <> - {InstructionTitles[aliasedName]}</>
+            : <> ({InstructionTitles[aliasedName]})</>;
     }
 
     if (props.noLink) {
         if (props.noTitle)
             return <code>{uppercased}</code>;
-        return <><code>{uppercased}</code>{titleJsx}</>;
+        return <><code>{uppercased}</code>{title}</>;
     }
 
-    const href = `/instruction/${name[0]}/${name}`;
+    const href = `/instruction/${aliasedName[0]}/${aliasedName}`;
     if (props.noTitle)
         return <A href={href}><code>{uppercased}</code></A>;
-    return <A href={href}><code>{uppercased}</code>{titleJsx}</A>;
+    return <A href={href}><code>{uppercased}</code>{title}</A>;
 }

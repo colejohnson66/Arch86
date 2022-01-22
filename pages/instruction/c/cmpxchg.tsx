@@ -26,7 +26,9 @@ import InstructionPageLayout, { InstructionPageLayoutProps } from "@components/I
 import A from "@components/A";
 import Canned from "@library/Canned";
 import Exceptions from "@library/Exceptions";
+import Instruction from "@components/Instruction";
 import Register from "@components/Register";
+import Unit from "@components/Unit";
 
 const PageData: InstructionPageLayoutProps = {
     id: "cmpxchg",
@@ -128,6 +130,9 @@ const PageData: InstructionPageLayoutProps = {
                 The <code>CMPXCHG</code> instruction compares the value in the accumulator with the first (&quot;destination&quot;) operand.
                 If the two values are equal, the second (&quot;source&quot;) operand is written into the first, and <Register name="EFLAGS.ZF" /> set.
                 Otherwise, the second operand is loaded into the accumulator and <Register name="EFLAGS.ZF" /> cleared.
+            </p>
+            <p>
+                For <Unit value={64} unit="bit" /> operation in legacy modes, the <Instruction name="cmpxchg8b" noTitle /> instruction can be used.
             </p>
             <p>
                 {Canned.Lockable}

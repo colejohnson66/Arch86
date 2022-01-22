@@ -56,7 +56,7 @@ function InstructionListWithHeading(char: string, list: MaybeArray<string>[]): R
                 {list.map((item) => (
                     Array.isArray(item)
                         ? <li key={item[0]}>{CommaSeparatedLinks(item)}</li>
-                        : <li key={item}><Instruction name={item} useHyphen /></li>
+                        : <li key={item}><Instruction name={item} useHyphen useAliasForTitleCaseMapping /></li>
                 ))}
             </ul>
         </React.Fragment>

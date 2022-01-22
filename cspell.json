@@ -93,6 +93,7 @@
         "scrollable",
         "simd",
         "ulong",
+        "unaliased",
         "ushort",
         "Vercel",
         "vex",
