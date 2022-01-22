@@ -38,8 +38,8 @@ const PageData: InstructionPageLayoutProps = {
             mnemonic: <>BSWAP <i>r32</i></>,
             encoding: "O",
             validity: {
-                16: "valid*",
-                32: "valid*",
+                16: "valid1",
+                32: "valid1",
                 64: "valid",
             },
             description: <>Reverse the byte order (endianness) of <i>r32</i>.</>,

@@ -33,10 +33,11 @@ import SyntaxHighlighter from "react-syntax-highlighter";
 import SyntaxHighlighterTheme from "react-syntax-highlighter/dist/cjs/styles/hljs/atom-one-light";
 import Unit from "@components/Unit";
 
-type OpcodeValidityValues = "valid" | "valid*" | "invalid" | "n/e" | "n/p" | "n/s";
+type OpcodeValiditySuperscripts = "1";
+type OpcodeValidityValues = "valid" | `valid${OpcodeValiditySuperscripts}` | "invalid" | "n/e" | "n/p" | "n/s";
 const OpcodeValidityMap: Record<OpcodeValidityValues, React.ReactNode> = {
     "valid": <td className="text-center bg-green-300">Valid</td>,
-    "valid*": <td className="text-center bg-green-300">Valid*</td>,
+    "valid1": <td className="text-center bg-green-300">Valid<sup>1</sup></td>,
     "invalid": <td className="text-center bg-red-300">Invalid</td>,
     "n/e": <td className="text-center bg-red-300"><abbr title="Not Encodable">N/E</abbr></td>,
     "n/p": <td className="text-center bg-yellow-300"><abbr title="Not Prefixable">N/P</abbr></td>,
@@ -287,14 +288,11 @@ export default function InstructionPageLayout(props: InstructionPageLayoutProps)
                     </table>
                 </Scrollable>
                 {props.opcodeNotes &&
-                    <>
-                        <h5>Notes:</h5>
-                        <ul>
-                            {CoerceToArray(props.opcodeNotes).map((note, idx) => (
-                                <li key={idx}>{note}</li>
-                            ))}
-                        </ul>
-                    </>}
+                    <ol className="ml-4">
+                        {CoerceToArray(props.opcodeNotes).map((note, idx) => (
+                            <li key={idx}>{note}</li>
+                        ))}
+                    </ol>}
 
                 <h2 id="headingEncoding">Encoding</h2>
                 <table className="instruction-table">
