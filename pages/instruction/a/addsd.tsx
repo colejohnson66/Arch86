@@ -105,20 +105,20 @@ const PageData: InstructionPageLayoutProps = {
         </>
     ),
     operation:
-        `public void ADDSS(SimdF64 dest, SimdF64 src)
+        `public void ADDSD(SimdF64 dest, SimdF64 src)
 {
     dest[0] += src[0];
     // dest[1..] is unmodified
 }
 
-public void VADDSS_Vex(SimdF64 dest, SimdF64 src1, SimdF64 src2)
+public void VADDSD_Vex(SimdF64 dest, SimdF64 src1, SimdF64 src2)
 {
     dest[0] = src1[0] + src[2];
     dest[1] = src1[1];
     dest[2..] = 0;
 }
 
-public void VADDSS_EvexMemory(SimdF64 dest, SimdF64 src1, SimdF64 src2, KMask k)
+public void VADDSD_EvexMemory(SimdF64 dest, SimdF64 src1, SimdF64 src2, KMask k)
 {
     if (k[0])
         dest[0] = src1[0] + src2[0];
@@ -129,7 +129,7 @@ public void VADDSS_EvexMemory(SimdF64 dest, SimdF64 src1, SimdF64 src2, KMask k)
     dest[2..] = 0;
 }
 
-public void VADDSS_EvexRegister(SimdF64 dest, SimdF64 src1, SimdF64 src2, KMask k)
+public void VADDSD_EvexRegister(SimdF64 dest, SimdF64 src1, SimdF64 src2, KMask k)
 {
     if (EVEX.b)
         OverrideRoundingModeForThisInstruction(EVEX.rc);
@@ -144,11 +144,11 @@ public void VADDSS_EvexRegister(SimdF64 dest, SimdF64 src1, SimdF64 src2, KMask 
 }`,
     intrinsics: [
         "__m128d _mm_add_sd(__m128d a, __m128d b)",
-        "__m128d _mm_add_round_sd(__m128d a, __m128d b, int rounding)",
+        "__m128d _mm_add_round_sd(__m128d a, __m128d b, const int rounding)",
         "__m128d _mm_mask_add_sd(__m128d s, __mmask8 k, __m128d a, __m128d b)",
-        "__m128d _mm_mask_add_round_sd(__m128d s, __mmask8 k, __m128d a, __m128d b, int rounding)",
+        "__m128d _mm_mask_add_round_sd(__m128d s, __mmask8 k, __m128d a, __m128d b, const int rounding)",
         "__m128d _mm_maskz_add_sd(__mmask8 k, __m128d a, __m128d b)",
-        "__m128d _mm_maskz_add_round_sd(__mmask8 k, __m128d a, __m128d b, int rounding)",
+        "__m128d _mm_maskz_add_round_sd(__mmask8 k, __m128d a, __m128d b, const int rounding)",
     ],
     exceptions: {
         simd: {
