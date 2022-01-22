@@ -29,6 +29,8 @@ const Aliases: Record<string, keyof typeof InstructionTitles> = {
     cbw: "cbw-cwde-cdqe",
     cwde: "cbw-cwde-cdqe",
     cdqe: "cbw-cwde-cdqe",
+    cmpxchg8b: "cmpxchg8b-cmpxchg16b",
+    cmpxchg16b: "cmpxchg8b-cmpxchg16b",
 };
 
 // when simple capitalization isn't enough
@@ -36,6 +38,7 @@ const TitleCaseMapping: Partial<Record<keyof typeof InstructionTitles, string>> 
     // TODO: commented out ones should only be used with some kind of "alternate mapping" prop
     // "bndcu-bndcn": "BNDCN/BNDCU",
     // "cbw-cwde-cdqe": "CBW/CWDE/CDQE",
+    // "cmpxchg8b-cmpxchg16b": "CMPXCHG8B/CMPXCHG16B",
     "cmovcc": "CMOVcc",
     // ...
 };
