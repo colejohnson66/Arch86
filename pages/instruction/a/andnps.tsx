@@ -168,7 +168,7 @@ void VANDNPS_Vex(SimdU32 dest, SimdU32 src1, SimdU32 src2, int kl)
 }
 public void VANDNPS_Vex128(SimdU32 dest, SimdU32 src1, SimdU32 src2) =>
     VANDNPS_Vex(dest, src1, src2, 4);
-public void VANDNPS_Vex256(SimdU32 dest, SimdU32 src1, SimdU32 src2) =?
+public void VANDNPS_Vex256(SimdU32 dest, SimdU32 src1, SimdU32 src2) =>
     VANDNPS_Vex(dest, src1, src2, 8);
 
 void VANDNPS_EvexMemory(SimdU32 dest, SimdU32 src1, SimdU32 src2, KMask k, int kl)

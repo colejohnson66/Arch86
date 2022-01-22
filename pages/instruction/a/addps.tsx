@@ -169,7 +169,7 @@ void VADDPS_Vex(SimdF32 dest, SimdF32 src1, SimdF32 src2, int kl)
 }
 public void VADDPS_Vex128(SimdF32 dest, SimdF32 src1, SimdF32 src2) =>
     VADDPS_Vex(dest, src1, src2, 4);
-public void VADDPS_Vex256(SimdF32 dest, SimdF32 src1, SimdF32 src2) =?
+public void VADDPS_Vex256(SimdF32 dest, SimdF32 src1, SimdF32 src2) =>
     VADDPS_Vex(dest, src1, src2, 8);
 
 void VADDPS_EvexMemory(SimdF32 dest, SimdF32 src1, SimdF32 src2, KMask k, int kl)
