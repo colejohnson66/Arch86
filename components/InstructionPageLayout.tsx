@@ -126,7 +126,7 @@ export type InstructionPageLayoutProps = {
     id: string;
     title: React.ReactNode;
     titlePlain: string;
-    opcodes: OpcodeEntry[];
+    opcodes: (OpcodeEntry | "")[];
     opcodeNotes?: MaybeArray<React.ReactNode>;
     encodings: EncodingEntries | EncodingEntriesTuple;
     description: React.ReactNode;
@@ -264,27 +264,29 @@ export default function InstructionPageLayout(props: InstructionPageLayoutProps)
                                 <th><Unit value={16} unit="bit" /></th>
                                 <th><Unit value={32} unit="bit" /></th>
                                 <th><Unit value={64} unit="bit" /></th>
-                                {props.opcodes[0]?.cpuid &&
+                                {typeof props.opcodes[0] !== "string" && props.opcodes[0]?.cpuid &&
                                     <th><Instruction name="cpuid" noTitle /> Feature Flag(s)</th>}
                                 <th>Description</th>
                             </tr>
                         </thead>
                         <tbody>
                             {props.opcodes.map((row, idx) => (
-                                <tr key={idx}>
-                                    <td className="text-sm">
-                                        <code className="px-1">{row.opcode}</code>
-                                        <hr />
-                                        <code className="px-1 whitespace-normal">{row.mnemonic}</code>
-                                    </td>
-                                    <td className="text-center"><code>{row.encoding}</code></td>
-                                    {OpcodeValidityMap[row.validity[16]]}
-                                    {OpcodeValidityMap[row.validity[32]]}
-                                    {OpcodeValidityMap[row.validity[64]]}
-                                    {row.cpuid &&
-                                        <td className="text-center">{FormatCpuidList(CoerceToArray(row.cpuid))}</td>}
-                                    <td>{row.description}</td>
-                                </tr>
+                                typeof row === "string" && row === ""
+                                    ? <tr key={idx}><td colSpan={6} /></tr>
+                                    : <tr key={idx}>
+                                        <td className="text-sm">
+                                            <code className="px-1">{row.opcode}</code>
+                                            <hr />
+                                            <code className="px-1 whitespace-normal">{row.mnemonic}</code>
+                                        </td>
+                                        <td className="text-center"><code>{row.encoding}</code></td>
+                                        {OpcodeValidityMap[row.validity[16]]}
+                                        {OpcodeValidityMap[row.validity[32]]}
+                                        {OpcodeValidityMap[row.validity[64]]}
+                                        {row.cpuid &&
+                                            <td className="text-center">{FormatCpuidList(CoerceToArray(row.cpuid))}</td>}
+                                        <td>{row.description}</td>
+                                    </tr>
                             ))}
                         </tbody>
                     </table>
