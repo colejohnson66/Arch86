@@ -21,12 +21,13 @@
  * =============================================================================
  */
 
+import MaybeArray, { CoerceToArray } from "@myTypes/MaybeArray";
+
 import A from "@components/A";
 import Breadcrumb from "@components/Breadcrumb";
 import Clear from "@components/Clear";
 import Instruction from "@components/Instruction";
 import Layout from "@components/Layout";
-import MaybeArray from "@myTypes/MaybeArray";
 import React from "react";
 import Scrollable from "./Scrollable";
 import SyntaxHighlighter from "react-syntax-highlighter";
@@ -169,12 +170,6 @@ function Plural<T>(value: number, singular: T, plural: T): T {
     if (value === 1)
         return singular;
     return plural;
-}
-
-function CoerceToArray<T>(arr: MaybeArray<T>): T[] {
-    if (Array.isArray(arr))
-        return arr;
-    return [arr];
 }
 
 function FormatCpuidList(list: string[]): React.ReactNode {

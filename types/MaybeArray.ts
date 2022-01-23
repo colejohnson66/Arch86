@@ -24,3 +24,9 @@
 type MaybeArray<T> = T | T[];
 
 export default MaybeArray;
+
+export function CoerceToArray<T>(arr: MaybeArray<T>): T[] {
+    if (Array.isArray(arr))
+        return arr;
+    return [arr];
+}
