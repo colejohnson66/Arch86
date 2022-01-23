@@ -24,7 +24,6 @@
 import InstructionPageLayout, { InstructionPageLayoutProps } from "@components/InstructionPageLayout";
 
 import Exceptions from "@library/Exceptions";
-import MaybeArray from "@myTypes/MaybeArray";
 import Register from "@components/Register";
 
 // Needed to work around incompatible types error:
@@ -40,42 +39,41 @@ type OpcodeGroupReturnType = {
     };
     description: React.ReactNode;
 };
-function OpcodeGroup(opcodeByte: string, suffix: string, condition: MaybeArray<React.ReactNode>): OpcodeGroupReturnType[] {
-    return [
-        {
-            opcode: <>0F {opcodeByte} /r</>,
-            mnemonic: <>CMOV{suffix} <i>r16</i>, <i>r/m16</i></>,
-            encoding: "rm",
-            validity: {
-                16: "valid",
-                32: "valid",
-                64: "valid",
-            },
-            description: <>Move <i>r/m16</i> into <i>r16</i> if {condition}.</>,
+function OpcodeGroup(opcodeByte: string, conditions: [string, React.ReactNode][]): OpcodeGroupReturnType[] {
+    const r16 = conditions.map((condition) => ({
+        opcode: <>0F {opcodeByte} /r</>,
+        mnemonic: <>CMOV{condition[0]} <i>r16</i>, <i>r/m16</i></>,
+        encoding: "rm",
+        validity: {
+            16: "valid",
+            32: "valid",
+            64: "valid",
         },
-        {
-            opcode: <>0F {opcodeByte} /r</>,
-            mnemonic: <>CMOV{suffix} <i>r32</i>, <i>r/m32</i></>,
-            encoding: "rm",
-            validity: {
-                16: "valid",
-                32: "valid",
-                64: "valid",
-            },
-            description: <>Move <i>r/m32</i> into <i>r32</i> if {condition}.</>,
+        description: <>Move <i>r/m16</i> into <i>r16</i> if {condition[1]}.</>,
+    } as OpcodeGroupReturnType));
+    const r32 = conditions.map((condition) => ({
+        opcode: <>0F {opcodeByte} /r</>,
+        mnemonic: <>CMOV{condition[0]} <i>r32</i>, <i>r/m32</i></>,
+        encoding: "rm",
+        validity: {
+            16: "valid",
+            32: "valid",
+            64: "valid",
         },
-        {
-            opcode: <>REX.W 0F {opcodeByte} /r</>,
-            mnemonic: <>CMOV{suffix} <i>r64</i>, <i>r/m64</i></>,
-            encoding: "rm",
-            validity: {
-                16: "n/e",
-                32: "n/e",
-                64: "valid",
-            },
-            description: <>Move <i>r/m64</i> into <i>r64</i> if {condition}.</>,
+        description: <>Move <i>r/m32</i> into <i>r32</i> if {condition[1]}.</>,
+    } as OpcodeGroupReturnType));
+    const r64 = conditions.map((condition) => ({
+        opcode: <>REX.W 0F {opcodeByte} /r</>,
+        mnemonic: <>CMOV{condition[0]} <i>r64</i>, <i>r/m64</i></>,
+        encoding: "rm",
+        validity: {
+            16: "n/e",
+            32: "n/e",
+            64: "valid",
         },
-    ];
+        description: <>Move <i>r/m64</i> into <i>r64</i> if {condition[1]}.</>,
+    } as OpcodeGroupReturnType));
+    return [...r16, ...r32, ...r64];
 }
 
 const PageData: InstructionPageLayoutProps = {
@@ -83,51 +81,83 @@ const PageData: InstructionPageLayoutProps = {
     title: <>Conditional Move</>,
     titlePlain: "Conditional Move",
     opcodes: [
-        ...OpcodeGroup("40", "O", <>&quot;overflow&quot; (<Register name="EFLAGS.OF" /> = <code>1</code>)</>),
+        ...OpcodeGroup("40", [
+            ["O", <>&quot;overflow&quot; (<Register name="EFLAGS.OF" /> = <code>1</code>)</>],
+        ]),
         "",
-        ...OpcodeGroup("41", "NO", <>&quot;not overflow&quot; (<Register name="EFLAGS.OF" /> = <code>0</code>)</>),
+        ...OpcodeGroup("41", [
+            ["NO", <>&quot;not overflow&quot; (<Register name="EFLAGS.OF" /> = <code>0</code>)</>],
+        ]),
         "",
-        ...OpcodeGroup("42", "B", <>&quot;below&quot; (<Register name="EFLAGS.CF" /> = <code>1</code>)</>),
-        ...OpcodeGroup("42", "C", <>&quot;carry&quot; (<Register name="EFLAGS.CF" /> = <code>1</code>)</>),
-        ...OpcodeGroup("42", "NAE", <>&quot;not above or equal&quot; (<Register name="EFLAGS.CF" /> = <code>1</code>)</>),
+        ...OpcodeGroup("42", [
+            ["B", <>&quot;below&quot; (<Register name="EFLAGS.CF" /> = <code>1</code>)</>],
+            ["C", <>&quot;carry&quot; (<Register name="EFLAGS.CF" /> = <code>1</code>)</>],
+            ["NAE", <>&quot;not above or equal&quot; (<Register name="EFLAGS.CF" /> = <code>1</code>)</>],
+        ]),
         "",
-        ...OpcodeGroup("43", "AE", <>&quot;above or equal&quot; (<Register name="EFLAGS.CF" /> = <code>0</code>)</>),
-        ...OpcodeGroup("43", "NB", <>&quot;not below&quot; (<Register name="EFLAGS.CF" /> = <code>0</code>)</>),
-        ...OpcodeGroup("43", "NC", <>&quot;not carry&quot; (<Register name="EFLAGS.CF" /> = <code>0</code>)</>),
+        ...OpcodeGroup("43", [
+            ["AE", <>&quot;above or equal&quot; (<Register name="EFLAGS.CF" /> = <code>0</code>)</>],
+            ["NB", <>&quot;not below&quot; (<Register name="EFLAGS.CF" /> = <code>0</code>)</>],
+            ["NC", <>&quot;not carry&quot; (<Register name="EFLAGS.CF" /> = <code>0</code>)</>],
+        ]),
         "",
-        ...OpcodeGroup("44", "E", <>&quot;equal&quot; (<Register name="EFLAGS.ZF" /> = <code>1</code>)</>),
-        ...OpcodeGroup("44", "Z", <>&quot;zero&quot; (<Register name="EFLAGS.ZF" /> = <code>1</code>)</>),
+        ...OpcodeGroup("44", [
+            ["E", <>&quot;equal&quot; (<Register name="EFLAGS.ZF" /> = <code>1</code>)</>],
+            ["Z", <>&quot;zero&quot; (<Register name="EFLAGS.ZF" /> = <code>1</code>)</>],
+        ]),
         "",
-        ...OpcodeGroup("45", "NE", <>&quot;not equal&quot; (<Register name="EFLAGS.ZF" /> = <code>0</code>)</>),
-        ...OpcodeGroup("45", "NZ", <>&quot;not zero&quot; (<Register name="EFLAGS.ZF" /> = <code>0</code>)</>),
+        ...OpcodeGroup("45", [
+            ["NE", <>&quot;not equal&quot; (<Register name="EFLAGS.ZF" /> = <code>0</code>)</>],
+            ["NZ", <>&quot;not zero&quot; (<Register name="EFLAGS.ZF" /> = <code>0</code>)</>],
+        ]),
         "",
-        ...OpcodeGroup("46", "BE", <>&quot;below or equal&quot; (<Register name="EFLAGS.CF" /> = <code>1</code> and <Register name="EFLAGS.ZF" /> = <code>1</code>)</>),
-        ...OpcodeGroup("46", "NA", <>&quot;not above&quot; (<Register name="EFLAGS.CF" /> = <code>1</code> and <Register name="EFLAGS.ZF" /> = <code>1</code>)</>),
+        ...OpcodeGroup("46", [
+            ["BE", <>&quot;below or equal&quot; (<Register name="EFLAGS.CF" /> = <code>1</code> and <Register name="EFLAGS.ZF" /> = <code>1</code>)</>],
+            ["NA", <>&quot;not above&quot; (<Register name="EFLAGS.CF" /> = <code>1</code> and <Register name="EFLAGS.ZF" /> = <code>1</code>)</>],
+        ]),
         "",
-        ...OpcodeGroup("47", "A", <>&quot;above&quot; (<Register name="EFLAGS.CF" /> = <code>0</code> and <Register name="EFLAGS.ZF" /> = <code>0</code>)</>),
-        ...OpcodeGroup("47", "NBE", <>&quot;not below or equal&quot; (<Register name="EFLAGS.CF" /> = <code>0</code> and <Register name="EFLAGS.ZF" /> = <code>0</code>)</>),
+        ...OpcodeGroup("47", [
+            ["A", <>&quot;above&quot; (<Register name="EFLAGS.CF" /> = <code>0</code> and <Register name="EFLAGS.ZF" /> = <code>0</code>)</>],
+            ["NBE", <>&quot;not below or equal&quot; (<Register name="EFLAGS.CF" /> = <code>0</code> and <Register name="EFLAGS.ZF" /> = <code>0</code>)</>],
+        ]),
         "",
-        ...OpcodeGroup("48", "S", <>&quot;sign&quot; (<Register name="EFLAGS.SF" /> = <code>1</code>)</>),
+        ...OpcodeGroup("48", [
+            ["S", <>&quot;sign&quot; (<Register name="EFLAGS.SF" /> = <code>1</code>)</>],
+        ]),
         "",
-        ...OpcodeGroup("49", "NS", <>&quot;not sign&quot; (<Register name="EFLAGS.SF" /> = <code>0</code>)</>),
+        ...OpcodeGroup("49", [
+            ["NS", <>&quot;not sign&quot; (<Register name="EFLAGS.SF" /> = <code>0</code>)</>],
+        ]),
         "",
-        ...OpcodeGroup("4A", "P", <>&quot;parity&quot; (<Register name="EFLAGS.PF" /> = <code>1</code>)</>),
-        ...OpcodeGroup("4A", "PE", <>&quot;parity even&quot; (<Register name="EFLAGS.PF" /> = <code>1</code>)</>),
+        ...OpcodeGroup("4A", [
+            ["P", <>&quot;parity&quot; (<Register name="EFLAGS.PF" /> = <code>1</code>)</>],
+            ["PE", <>&quot;parity even&quot; (<Register name="EFLAGS.PF" /> = <code>1</code>)</>],
+        ]),
         "",
-        ...OpcodeGroup("4B", "NP", <>&quot;not parity&quot; (<Register name="EFLAGS.PF" /> = <code>0</code>)</>),
-        ...OpcodeGroup("4B", "PO", <>&quot;parity odd&quot; (<Register name="EFLAGS.PF" /> = <code>0</code>)</>),
+        ...OpcodeGroup("4B", [
+            ["NP", <>&quot;not parity&quot; (<Register name="EFLAGS.PF" /> = <code>0</code>)</>],
+            ["PO", <>&quot;parity odd&quot; (<Register name="EFLAGS.PF" /> = <code>0</code>)</>],
+        ]),
         "",
-        ...OpcodeGroup("4C", "L", <>&quot;less than&quot; (<Register name="EFLAGS.SF" /> &ne; <Register name="EFLAGS.OF" />)</>),
-        ...OpcodeGroup("4C", "NGE", <>&quot;not greater than or equal&quot; (<Register name="EFLAGS.SF" /> &ne; <Register name="EFLAGS.OF" />)</>),
+        ...OpcodeGroup("4C", [
+            ["L", <>&quot;less than&quot; (<Register name="EFLAGS.SF" /> &ne; <Register name="EFLAGS.OF" />)</>],
+            ["NGE", <>&quot;not greater than or equal&quot; (<Register name="EFLAGS.SF" /> &ne; <Register name="EFLAGS.OF" />)</>],
+        ]),
         "",
-        ...OpcodeGroup("4D", "GE", <>&quot;greater than or equal&quot; (<Register name="EFLAGS.SF" /> = <Register name="EFLAGS.OF" />)</>),
-        ...OpcodeGroup("4D", "NL", <>&quot;not less than&quot; (<Register name="EFLAGS.SF" /> = <Register name="EFLAGS.OF" />)</>),
+        ...OpcodeGroup("4D", [
+            ["GE", <>&quot;greater than or equal&quot; (<Register name="EFLAGS.SF" /> = <Register name="EFLAGS.OF" />)</>],
+            ["NL", <>&quot;not less than&quot; (<Register name="EFLAGS.SF" /> = <Register name="EFLAGS.OF" />)</>],
+        ]),
         "",
-        ...OpcodeGroup("4E", "LE", <>&quot;less than or equal&quot; (<Register name="EFLAGS.ZF" /> = <code>0</code> and <Register name="EFLAGS.SF" /> &ne; <Register name="EFLAGS.OF" /> )</>),
-        ...OpcodeGroup("4E", "NG", <>&quot;not greater than or equal&quot; (<Register name="EFLAGS.ZF" /> = <code>0</code> and <Register name="EFLAGS.SF" /> &ne; <Register name="EFLAGS.OF" /> )</>),
+        ...OpcodeGroup("4E", [
+            ["LE", <>&quot;less than or equal&quot; (<Register name="EFLAGS.ZF" /> = <code>0</code> and <Register name="EFLAGS.SF" /> &ne; <Register name="EFLAGS.OF" /> )</>],
+            ["NG", <>&quot;not greater than or equal&quot; (<Register name="EFLAGS.ZF" /> = <code>0</code> and <Register name="EFLAGS.SF" /> &ne; <Register name="EFLAGS.OF" /> )</>],
+        ]),
         "",
-        ...OpcodeGroup("4F", "G", <>&quot;greater than&quot; (<Register name="EFLAGS.ZF" /> = <code>1</code> and <Register name="EFLAGS.SF" /> = <Register name="EFLAGS.OF" /> )</>),
-        ...OpcodeGroup("4F", "NLE", <>&quot;not less than or equal&quot; (<Register name="EFLAGS.ZF" /> = <code>1</code> and <Register name="EFLAGS.SF" /> = <Register name="EFLAGS.OF" /> )</>),
+        ...OpcodeGroup("4F", [
+            ["G", <>&quot;greater than&quot; (<Register name="EFLAGS.ZF" /> = <code>1</code> and <Register name="EFLAGS.SF" /> = <Register name="EFLAGS.OF" /> )</>],
+            ["NLE", <>&quot;not less than or equal&quot; (<Register name="EFLAGS.ZF" /> = <code>1</code> and <Register name="EFLAGS.SF" /> = <Register name="EFLAGS.OF" /> )</>],
+        ]),
 
     ],
     encodings: {
