@@ -42,8 +42,6 @@
   /aesenc256kl
   /aesencwide128kl
   /aesencwide256kl
-  /clts
-  /clwb
   /cpuid
   /help#headingAlternateR8Encoding
   /help#headingExceptionOther
