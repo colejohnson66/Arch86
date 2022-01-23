@@ -46,6 +46,7 @@
   /bndstx
   /clts
   /clwb
+  /cpuid
   /help#headingAlternateR8Encoding
   /help#headingExceptionOther
   ...
