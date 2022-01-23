@@ -135,7 +135,7 @@ const PageData: InstructionPageLayoutProps = {
 
     if (IOPL > CPL)
     {
-        // CPL is 3 in virtual-8086 mode
+        // NOTE: CPL is 3 in virtual-8086 mode
         EFLAGS.IF = 0;
         return;
     }

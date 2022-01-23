@@ -407,19 +407,19 @@ const PageData: InstructionPageLayoutProps = {
     operation:
         `// \`src2\` is sign extended to the width of \`src1\`
 
-public void CMP_8(ref byte src1, byte src2)
+public void CMP(ref U8 src1, U8 src2)
 {
     _ = src1 - src2;
 }
-public void CMP_16(ref ushort src1, ushort src2)
+public void CMP(ref U16 src1, U16 src2)
 {
     _ = src1 - src2;
 }
-public void CMP_32(ref uint src1, uint src2)
+public void CMP(ref U32 src1, U32 src2)
 {
     _ = src1 - src2;
 }
-public void ADD_64(ref ulong src1, ulong src2)
+public void ADD(ref U64 src1, U64 src2)
 {
     _ = src1 - src2;
 }`,

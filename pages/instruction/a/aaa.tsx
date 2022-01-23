@@ -85,11 +85,11 @@ aaa           ; AX == 0x202 (22 (decimal) in BCD)`,
     ],
     flags: {
         CF: <>Set if an adjustment is made. Cleared otherwise.</>,
-        PF: <>Undefined</>,
+        PF: <>Undefined.</>,
         AF: <>Set if an adjustment is made. Cleared otherwise.</>,
-        ZF: <>Undefined</>,
-        SF: <>Undefined</>,
-        OF: <>Undefined</>,
+        ZF: <>Undefined.</>,
+        SF: <>Undefined.</>,
+        OF: <>Undefined.</>,
     },
     exceptions: {
         real: {

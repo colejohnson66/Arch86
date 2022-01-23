@@ -322,19 +322,19 @@ const PageData: InstructionPageLayoutProps = {
     operation:
         `// \`src\` is sign extended to the width of \`dest\`
 
-public void ADD_8(ref byte dest, byte src)
+public void ADD(ref U8 dest, U8 src)
 {
     dest += SRC;
 }
-public void ADD_16(ref ushort dest, ushort src)
+public void ADD(ref U16 dest, U16 src)
 {
     dest += SRC;
 }
-public void ADD_32(ref uint dest, uint src)
+public void ADD(ref U32 dest, U32 src)
 {
     dest += SRC;
 }
-public void ADD_64(ref ulong dest, ulong src)
+public void ADD(ref U64 dest, U64 src)
 {
     dest += SRC;
 }`,

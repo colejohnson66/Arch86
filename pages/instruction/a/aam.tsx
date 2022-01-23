@@ -83,7 +83,7 @@ const PageData: InstructionPageLayoutProps = {
         </>
     ),
     operation:
-        `public void AAM(byte imm8)
+        `public void AAM(U8 imm8)
 {
     AH = AL / imm8;
     AL = AL % imm8;

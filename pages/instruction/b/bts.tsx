@@ -146,19 +146,19 @@ const PageData: InstructionPageLayoutProps = {
         </>
     ),
     operation:
-        `public void BTS_16(ushort src, ushort idx)
+        `public void BTS(U16 src, U16 idx)
 {
     EFLAGS.CF = src.Bit[idx % 16];
     src.Bit[idx % 16] = 1;
 }
 
-public void BTS_32(uint src, uint idx)
+public void BTS(U32 src, U32 idx)
 {
     EFLAGS.CF = src.Bit[idx % 32];
     src.Bit[idx % 32] = 1;
 }
 
-public void BTS_64(ulong src, ulong idx)
+public void BTS(U64 src, U64 idx)
 {
     EFLAGS.CF = src.Bit[idx % 64];
     src.Bit[idx % 64] = 1;

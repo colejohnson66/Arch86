@@ -95,14 +95,7 @@ const PageData: InstructionPageLayoutProps = {
         #BR;
     }
 }`,
-    flags: {
-        CF: <>Unmodified.</>,
-        PF: <>Unmodified.</>,
-        AF: <>Unmodified.</>,
-        ZF: <>Unmodified.</>,
-        SF: <>Unmodified.</>,
-        OF: <>Unmodified.</>,
-    },
+    flags: "none",
     intrinsics: [
         "void _bnd_chk_ptr_lbounds(const void *address)",
     ],

@@ -135,58 +135,51 @@ const PageData: InstructionPageLayoutProps = {
 
 const U40 POLYNOMIAL = 0x11EDC6F41;
 
-public void CRC32(ref uint dest, byte src)
+public void CRC32(ref U32 dest, U8 src)
 {
     U40 temp1 = BitReflect(src) << 32;
     U40 temp2 = BitReflect(dest) << 8;
     U40 temp3 = temp1 ^ temp2;
-    uint temp4 = PolynomialDivisionMod2(temp3, POLYNOMIAL);
+    U32 temp4 = PolynomialDivisionMod2(temp3, POLYNOMIAL);
     dest = BitReflect(temp4);
 }
 
-public void CRC32(ref uint dest, ushort src)
+public void CRC32(ref U32 dest, U16 src)
 {
     U48 temp1 = BitReflect(src) << 32;
     U48 temp2 = BitReflect(dest) << 16;
     U48 temp3 = temp1 ^ temp2;
-    uint temp4 = PolynomialDivisionMod2(temp3, POLYNOMIAL);
+    U32 temp4 = PolynomialDivisionMod2(temp3, POLYNOMIAL);
     dest = BitReflect(temp4);
 }
 
-public void CRC32(ref uint dest, uint src)
+public void CRC32(ref U32 dest, U32 src)
 {
-    ulong temp1 = BitReflect(src) << 32;
-    ulong temp2 = BitReflect(dest) << 32;
-    ulong temp3 = temp1 ^ temp2;
-    uint temp4 = PolynomialDivisionMod2(temp3, POLYNOMIAL);
+    U64 temp1 = BitReflect(src) << 32;
+    U64 temp2 = BitReflect(dest) << 32;
+    U64 temp3 = temp1 ^ temp2;
+    U32 temp4 = PolynomialDivisionMod2(temp3, POLYNOMIAL);
     dest = BitReflect(temp4);
 }
 
-public void CRC32(ref ulong dest, byte src)
+public void CRC32(ref U64 dest, U8 src)
 {
     U40 temp1 = BitReflect(src) << 32;
-    U40 temp2 = BitReflect((uint)(dest & 0xFFFFFFFFul)) << 8;
+    U40 temp2 = BitReflect((U32)(dest & 0xFFFFFFFFul)) << 8;
     U40 temp3 = temp1 ^ temp2;
-    uint temp4 = PolynomialDivisionMod2(temp3, POLYNOMIAL);
+    U32 temp4 = PolynomialDivisionMod2(temp3, POLYNOMIAL);
     dest = SignExtend(BitReflect(temp4));
 }
 
-public void CRC32(ref ulong dest, ulong src)
+public void CRC32(ref U64 dest, U64 src)
 {
     U96 temp1 = BitReflect(src) << 32;
-    U96 temp2 = BitReflect((uint)(dest & 0xFFFFFFFFul)) << 64;
+    U96 temp2 = BitReflect((U32)(dest & 0xFFFFFFFFul)) << 64;
     U96 temp3 = temp1 ^ temp2;
-    uint temp4 = PolynomialDivisionMod2(temp3, POLYNOMIAL);
+    U32 temp4 = PolynomialDivisionMod2(temp3, POLYNOMIAL);
     dest = SignExtend(BitReflect(temp4));
 }`,
-    flags: {
-        CF: <>Unmodified.</>,
-        PF: <>Unmodified.</>,
-        AF: <>Unmodified.</>,
-        ZF: <>Unmodified.</>,
-        SF: <>Unmodified.</>,
-        OF: <>Unmodified.</>,
-    },
+    flags: "none",
     intrinsics: [
         "uint32_t _mm_crc32_u8(uint32_t crc, uint8_t data)",
         "uint32_t _mm_crc32_u16(uint32_t crc, uint16_t data)",

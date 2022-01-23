@@ -109,14 +109,7 @@ const PageData: InstructionPageLayoutProps = {
 {
     dest = src;
 }`,
-    flags: {
-        CF: <>Unmodified.</>,
-        PF: <>Unmodified.</>,
-        AF: <>Unmodified.</>,
-        ZF: <>Unmodified.</>,
-        SF: <>Unmodified.</>,
-        OF: <>Unmodified.</>,
-    },
+    flags: "none",
     intrinsics: [
         "void *_bnd_copy_ptr_bounds(const void *dest, const void *src)",
     ],

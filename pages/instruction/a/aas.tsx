@@ -66,24 +66,19 @@ const PageData: InstructionPageLayoutProps = {
         </>
     ),
     operation:
-        // TODO: should this be the same as AAA (where 0x106 is used)?
-        // Intel's manual also uses AX, not AL???
-        `public void AAS(byte imm8)
+        `public void AAS(U8 imm8)
 {
     if ((AL & 0xF) > 9 || EFLAGS.AF)
-    {
-        AX -= 6;
-        AH -= 1;
-    }
+        AX -= 0x106;
     AL &= 0xF;
 }`,
     flags: {
         CF: <>Set if an adjustment is made. Cleared otherwise.</>,
-        PF: <>Undefined</>,
+        PF: <>Undefined.</>,
         AF: <>Set if an adjustment is made. Cleared otherwise.</>,
-        ZF: <>Undefined</>,
-        SF: <>Undefined</>,
-        OF: <>Undefined</>,
+        ZF: <>Undefined.</>,
+        SF: <>Undefined.</>,
+        OF: <>Undefined.</>,
     },
     exceptions: {
         real: {

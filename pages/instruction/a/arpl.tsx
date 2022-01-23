@@ -63,7 +63,7 @@ const PageData: InstructionPageLayoutProps = {
         </>
     ),
     operation:
-        `public void ARPL()
+        `public void ARPL(U16 dest, U16 src)
 {
     if (dest.Bit[0..1] < src.Bit[0..1])
         dest.Bit[0..1] = src.Bit[0..1];

@@ -103,7 +103,7 @@ const PageData: InstructionPageLayoutProps = {
         </>
     ),
     operation:
-        `public void BLENDPD(SimdF64 dest, SimdF64 src, byte mask)
+        `public void BLENDPD(SimdF64 dest, SimdF64 src, U8 mask)
 {
     // if \`mask.Bit[n]\` is 0, \`dest\` will be copied into itself (i.e. nothing happens)
     if (mask.Bit[0])
@@ -113,15 +113,15 @@ const PageData: InstructionPageLayoutProps = {
     // dest[2..] is unmodified
 }
 
-void VBLENDPD_Vex(SimdF64 dest, SimdF64 src1, SimdF64 src2, byte mask, int kl)
+void VBLENDPD_Vex(SimdF64 dest, SimdF64 src1, SimdF64 src2, U8 mask, int kl)
 {
     for (int n = 0; n < kl; n++)
         dest[n] = mask.Bit[n] ? src2[n] : src1[n];
     dest[kl..] = 0;
 }
-public void VBLENDPD_Vex128(SimdF64 dest, SimdF64 src1, SimdF64 src2, byte mask) =>
+public void VBLENDPD_Vex128(SimdF64 dest, SimdF64 src1, SimdF64 src2, U8 mask) =>
     VBLENDPD_Vex(dest, src1, src2, mask, 2);
-public void VBLENDPD_Vex256(SimdF64 dest, SimdF64 src1, SimdF64 src2, byte mask) =>
+public void VBLENDPD_Vex256(SimdF64 dest, SimdF64 src1, SimdF64 src2, U8 mask) =>
     VBLENDPD_Vex(dest, src1, src2, mask, 4);`,
     intrinsics: [
         "__m128d _mm_blend_pd(__m128d v1, __m128d v2, const uint32_t mask)",

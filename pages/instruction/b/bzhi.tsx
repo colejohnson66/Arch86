@@ -86,35 +86,24 @@ const PageData: InstructionPageLayoutProps = {
         </>
     ),
     operation:
-        `public void BZHI_32(ref uint dest, uint src, uint idx)
+        `public void BZHI((ref U32 dest, U32 src, U32 idx)
 {
-    uint n = idx & 0xFF;
+    U32 n = idx & 0xFF;
     if (n < 32)
         dest.Bit[n..31] = 0;
     else
         dest = 0.
 }
 
-public void BZHI_64(ref ulong dest, ulong src, uint idx)
+public void BZHI((ref U64 dest, U64 src, U64 idx)
 {
-    ulong n = idx & 0xFF;
+    U64 n = idx & 0xFF;
     if (n < 64)
         dest.Bit[n..63] = 0;
     else
         dest = 0.
 }`,
     flags: {
-        // Common values:
-        // Set according to the result.
-        // Set.
-        // Cleared.
-        // Inverted.
-        // Undefined.
-        // Unmodified.
-        // Cleared if ...
-        // Set if ...
-        // Cleared if ... Set otherwise.
-        // Set if ... Cleared otherwise.
         CF: <>Set if the beginning index is out of range. Cleared otherwise.</>,
         PF: <>Undefined.</>,
         AF: <>Undefined.</>,

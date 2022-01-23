@@ -329,14 +329,14 @@ ComparisonFunc[] PredicateMapping32 = new[]
     TRUE_US, //  31 - true                      (unordered, signaling)
 };
 
-public void CMPSD(SimdU64 dest, SimdF64 src, byte predicate)
+public void CMPSD(SimdU64 dest, SimdF64 src, U8 predicate)
 {
     ComparisonFunc func = PredicateMapping8[predicate];
     dest[0] = func(dest[0], src[0]) ? 0xFFFF_FFFF_FFFF_FFFFul : 0;
     // dest[1..] is unmodified
 }
 
-public void VCMPSD_Vex(SimdU64 dest, SimdF64 src1, SimdF64 src2, byte predicate, int kl)
+public void VCMPSD_Vex(SimdU64 dest, SimdF64 src1, SimdF64 src2, U8 predicate, int kl)
 {
     ComparisonFunc func = PredicateMapping32[predicate];
     dest[0] = func(dest[0], src[0]) ? 0xFFFF_FFFF_FFFF_FFFFul : 0;
@@ -344,7 +344,7 @@ public void VCMPSD_Vex(SimdU64 dest, SimdF64 src1, SimdF64 src2, byte predicate,
     dest[2..] = 0;
 }
 
-void VCMPSD_Evex(KMask dest, SimdF64 src1, SimdF64 src2, byte predicate, KMask k, int kl)
+void VCMPSD_Evex(KMask dest, SimdF64 src1, SimdF64 src2, U8 predicate, KMask k, int kl)
 {
     ComparisonFunc func = PredicateMapping32[predicate];
     if (k[0])

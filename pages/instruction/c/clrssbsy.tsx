@@ -67,8 +67,8 @@ const PageData: InstructionPageLayoutProps = {
     if (CPL > 0 || !IsAligned(addr, 8))
         #GP(0);
 
-    ulong newToken = addr.ToInt64();
-    ulong expectedToken = newToken | 1; // busy bit is bit 0
+    U64 newToken = addr.ToInt64();
+    U64 expectedToken = newToken | 1; // busy bit is bit 0
     CF = ShadowStackLockCmpxchg8b(addr, newToken, expectedToken) != expectedToken;
     SSP = 0;
 }`,

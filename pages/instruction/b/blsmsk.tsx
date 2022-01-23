@@ -73,12 +73,12 @@ const PageData: InstructionPageLayoutProps = {
         </>
     ),
     operation:
-        `public void BLSMSK_32(ref uint dest, uint src)
+        `public void BLSMSK((ref U32 dest, U32 src)
 {
     dest = (-src) ^ src;
 }
 
-public void BLSMSK_64(ref ulong dest, ulong src)
+public void BLSMSK((ref U64 dest, U64 src)
 {
     dest = (-src) ^ src;
 }`,

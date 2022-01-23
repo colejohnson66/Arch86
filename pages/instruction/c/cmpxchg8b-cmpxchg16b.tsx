@@ -29,7 +29,6 @@ import Exceptions from "@library/Exceptions";
 import Register from "@components/Register";
 
 const PageData: InstructionPageLayoutProps = {
-    wip: true,
     id: "cmpxchg8b-cmpxchg16b",
     title: <>Compare and Exchange 8/16 Bytes</>,
     titlePlain: "Compare and Exchange 8/16 Bytes",

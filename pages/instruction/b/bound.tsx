@@ -79,25 +79,18 @@ const PageData: InstructionPageLayoutProps = {
     ),
     operation:
         // TODO: if #BR and "equation for PL enabled" is true, BNDSTATUS becomes 0
-        `public void BOUND_16(ushort index, IntPtr bounds)
+        `public void BOUND(U16 index, IntPtr bounds)
 {
     if (index < Mem16[bounds] || index > Mem16[bounds + 2])
         #BR;
 }
 
-public void BOUND_32(uint index, IntPtr bounds)
+public void BOUND(U32 index, IntPtr bounds)
 {
-    if (index < Mem16[bounds] || index > Mem16[bounds + 4])
+    if (index < Mem32[bounds] || index > Mem32[bounds + 4])
         #BR;
 }`,
-    flags: {
-        CF: <>Unmodified.</>,
-        PF: <>Unmodified.</>,
-        AF: <>Unmodified.</>,
-        ZF: <>Unmodified.</>,
-        SF: <>Unmodified.</>,
-        OF: <>Unmodified.</>,
-    },
+    flags: "none",
     intrinsics: "autogen",
     exceptions: {
         real: {

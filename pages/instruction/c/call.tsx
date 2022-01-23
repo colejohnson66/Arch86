@@ -23,11 +23,6 @@
 
 import InstructionPageLayout, { InstructionPageLayoutProps } from "@components/InstructionPageLayout";
 
-import Canned from "@library/Canned";
-import Exceptions from "@library/Exceptions";
-import Instruction from "@components/Instruction";
-import Register from "@components/Register";
-
 const PageData: InstructionPageLayoutProps = {
     wip: true,
     id: "call",
@@ -165,17 +160,6 @@ const PageData: InstructionPageLayoutProps = {
     // TODO
 }`,
     flags: {
-        // Common values:
-        // Set according to the result.
-        // Set.
-        // Cleared.
-        // Inverted.
-        // Undefined.
-        // Unmodified.
-        // Cleared if ...
-        // Set if ...
-        // Cleared if ... Set otherwise.
-        // Set if ... Cleared otherwise.
         CF: <>Affected if a task switch occurs. Unmodified otherwise.</>,
         PF: <>Affected if a task switch occurs. Unmodified otherwise.</>,
         AF: <>Affected if a task switch occurs. Unmodified otherwise.</>,

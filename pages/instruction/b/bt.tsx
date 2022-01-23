@@ -121,17 +121,17 @@ const PageData: InstructionPageLayoutProps = {
         </>
     ),
     operation:
-        `public void BT_16(ushort src, ushort idx)
+        `public void BT(U16 src, U16 idx)
 {
     EFLAGS.CF = src.Bit[idx % 16];
 }
 
-public void BT_32(uint src, uint idx)
+public void BT(U32 src, U32 idx)
 {
     EFLAGS.CF = src.Bit[idx % 32];
 }
 
-public void BT_64(ulong src, ulong idx)
+public void BT(U64 src, U64 idx)
 {
     EFLAGS.CF = src.Bit[idx % 64];
 }`,

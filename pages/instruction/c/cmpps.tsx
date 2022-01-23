@@ -379,7 +379,7 @@ ComparisonFunc[] PredicateMapping32 = new[]
     TRUE_US, //  31 - true                      (unordered, signaling)
 };
 
-public void CMPPS(SimdU32 dest, SimdF32 src, byte predicate)
+public void CMPPS(SimdU32 dest, SimdF32 src, U8 predicate)
 {
     ComparisonFunc func = PredicateMapping8[predicate];
     dest[0] = func(dest[0], src[0]) ? 0xFFFF_FFFF_FFFF_FFFFul : 0;
@@ -389,19 +389,19 @@ public void CMPPS(SimdU32 dest, SimdF32 src, byte predicate)
     // dest[4..] is unmodified
 }
 
-void VCMPPS_Vex(SimdU32 dest, SimdF32 src1, SimdF32 src2, byte predicate, int kl)
+void VCMPPS_Vex(SimdU32 dest, SimdF32 src1, SimdF32 src2, U8 predicate, int kl)
 {
     ComparisonFunc func = PredicateMapping32[predicate];
     for (int n = 0; n < kl; n++)
         dest[n] = func(src1[n], src2[n]) ? 0xFFFF_FFFF_FFFF_FFFFul : 0;
     dest[kl..] = 0;
 }
-public void VCMPPS_Vex128(SimdU32 dest, SimdF32 src1, SimdF32 src2, byte predicate) =>
+public void VCMPPS_Vex128(SimdU32 dest, SimdF32 src1, SimdF32 src2, U8 predicate) =>
     VCMPPS_Vex(dest, src1, src2, predicate, 4);
-public void VCMPPS_Vex256(SimdU32 dest, SimdF32 src1, SimdF32 src2, byte predicate) =>
+public void VCMPPS_Vex256(SimdU32 dest, SimdF32 src1, SimdF32 src2, U8 predicate) =>
     VCMPPS_Vex(dest, src1, src2, predicate, 8);
 
-void VCMPPS_EvexMemory(KMask dest, SimdF32 src1, SimdF32 src2, byte predicate, KMask k, int kl)
+void VCMPPS_EvexMemory(KMask dest, SimdF32 src1, SimdF32 src2, U8 predicate, KMask k, int kl)
 {
     ComparisonFunc func = PredicateMapping32[predicate];
     for (int n = 0; n < kl; n++)
@@ -414,14 +414,14 @@ void VCMPPS_EvexMemory(KMask dest, SimdF32 src1, SimdF32 src2, byte predicate, K
     }
     dest[kl..] = 0;
 }
-public void VCMPPS_Evex128Memory(KMask dest, SimdF32 src1, SimdF32 src2, byte predicate, KMask k) =>
+public void VCMPPS_Evex128Memory(KMask dest, SimdF32 src1, SimdF32 src2, U8 predicate, KMask k) =>
     VCMPPS_EvexMemory(dest, src1, src2, predicate, 4);
-public void VCMPPS_Evex256Memory(KMask dest, SimdF32 src1, SimdF32 src2, byte predicate, KMask k) =>
+public void VCMPPS_Evex256Memory(KMask dest, SimdF32 src1, SimdF32 src2, U8 predicate, KMask k) =>
     VCMPPS_EvexMemory(dest, src1, src2, predicate, 8);
-public void VCMPPS_Evex512Memory(KMask dest, SimdF32 src1, SimdF32 src2, byte predicate, KMask k) =>
+public void VCMPPS_Evex512Memory(KMask dest, SimdF32 src1, SimdF32 src2, U8 predicate, KMask k) =>
     VCMPPS_EvexMemory(dest, src1, src2, predicate, 16);
 
-void VCMPPS_EvexRegister(KMask dest, SimdF32 src1, SimdF32 src2, byte predicate, KMask k, int kl)
+void VCMPPS_EvexRegister(KMask dest, SimdF32 src1, SimdF32 src2, U8 predicate, KMask k, int kl)
 {
     ComparisonFunc func = PredicateMapping32[predicate];
     for (int n = 0; n < kl; n++)
@@ -434,11 +434,11 @@ void VCMPPS_EvexRegister(KMask dest, SimdF32 src1, SimdF32 src2, byte predicate,
     }
     dest[kl..] = 0;
 }
-public void VCMPPS_Evex128Register(KMask dest, SimdF32 src1, SimdF32 src2, byte predicate, KMask k) =>
+public void VCMPPS_Evex128Register(KMask dest, SimdF32 src1, SimdF32 src2, U8 predicate, KMask k) =>
     VCMPPS_EvexRegister(dest, src1, src2, predicate, 4);
-public void VCMPPS_Evex256Register(KMask dest, SimdF32 src1, SimdF32 src2, byte predicate, KMask k) =>
+public void VCMPPS_Evex256Register(KMask dest, SimdF32 src1, SimdF32 src2, U8 predicate, KMask k) =>
     VCMPPS_EvexRegister(dest, src1, src2, predicate, 8);
-public void VCMPPS_Evex512Register(KMask dest, SimdF32 src1, SimdF32 src2, byte predicate, KMask k) =>
+public void VCMPPS_Evex512Register(KMask dest, SimdF32 src1, SimdF32 src2, U8 predicate, KMask k) =>
     VCMPPS_EvexRegister(dest, src1, src2, predicate, 16);`,
     intrinsics: [
         "__m128 _mm_cmp_ps(__m128d a, __m128d b, const int predicate)",

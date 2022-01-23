@@ -137,14 +137,7 @@ public void BNDCN(Bound bnd, IntPtr addr)
         #BR;
     }
 }`,
-    flags: {
-        CF: <>Unmodified.</>,
-        PF: <>Unmodified.</>,
-        AF: <>Unmodified.</>,
-        ZF: <>Unmodified.</>,
-        SF: <>Unmodified.</>,
-        OF: <>Unmodified.</>,
-    },
+    flags: "none",
     intrinsics: [
         "void _bnd_chk_ptr_ubounds(const void *address)",
     ],

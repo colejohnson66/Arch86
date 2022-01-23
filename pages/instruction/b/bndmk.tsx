@@ -84,14 +84,7 @@ const PageData: InstructionPageLayoutProps = {
     dest.Lower = addr.Base;
     dest.Upper = ~lea(addr);
 }`,
-    flags: {
-        CF: <>Unmodified.</>,
-        PF: <>Unmodified.</>,
-        AF: <>Unmodified.</>,
-        ZF: <>Unmodified.</>,
-        SF: <>Unmodified.</>,
-        OF: <>Unmodified.</>,
-    },
+    flags: "none",
     intrinsics: [
         "void *_bnd_set_ptr_bounds(const void *address, size_t size)",
     ],

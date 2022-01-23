@@ -69,7 +69,7 @@ const PageData: InstructionPageLayoutProps = {
     operation:
         `public void CLFLUSHOPT(IntPtr addr)
 {
-    CacheLineFlushOptimized(addr);
+    CacheLineFlush(addr, optimized: true);
 }`,
     intrinsics: [
         "void _mm_clflushopt(const void *ptr)",

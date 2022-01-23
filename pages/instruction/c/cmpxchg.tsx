@@ -143,7 +143,7 @@ const PageData: InstructionPageLayoutProps = {
     operation:
         `// if the instruction is LOCKed and \`dest\` and the accumulator are different, \`dest\` is reloaded with itself
 
-public void CMPXCHG_8(ref byte dest, byte src)
+public void CMPXCHG(ref U8 dest, U8 src)
 {
     if (dest == AL)
         dest = src;
@@ -151,7 +151,7 @@ public void CMPXCHG_8(ref byte dest, byte src)
         AL = dest;
 }
 
-public void CMPXCHG_16(ref ushort dest, ushort src)
+public void CMPXCHG(ref U16 dest, U16 src)
 {
     if (dest == AX)
         dest = src;
@@ -159,7 +159,7 @@ public void CMPXCHG_16(ref ushort dest, ushort src)
         AX = dest;
 }
 
-public void CMPXCHG_32(ref uint dest, uint src)
+public void CMPXCHG(ref U32 dest, U32 src)
 {
     if (dest == EAX)
         dest = src;
@@ -167,7 +167,7 @@ public void CMPXCHG_32(ref uint dest, uint src)
         EAX = dest;
 }
 
-public void CMPXCHG_64(ref ulong dest, ulong src)
+public void CMPXCHG(ref U64 dest, U64 src)
 {
     if (dest == RAX)
         dest = src;

@@ -85,11 +85,11 @@ const PageData: InstructionPageLayoutProps = {
     operation:
         `public void AESKEYGENASSIST(SimdU32 dest, SimdU32 src, byte roundConstant)
 {
-    uint x0 = src[0];
-    uint x1 = src[1];
-    uint x2 = src[2];
-    uint x3 = src[3];
-    uint rcon = roundConstant;
+    U32 x0 = src[0];
+    U32 x1 = src[1];
+    U32 x2 = src[2];
+    U32 x3 = src[3];
+    U32 rcon = roundConstant;
 
     dest[0] = SubWord(x1);
     dest[1] = RotWord(SubWord(x1)) ^ rcon;
@@ -100,11 +100,11 @@ const PageData: InstructionPageLayoutProps = {
 
 public void VAESKEYGENASSIST_Vex128(SimdU32 dest, SimdU32 src, byte roundConstant)
 {
-    uint x0 = src[0];
-    uint x1 = src[1];
-    uint x2 = src[2];
-    uint x3 = src[3];
-    uint rcon = roundConstant;
+    U32 x0 = src[0];
+    U32 x1 = src[1];
+    U32 x2 = src[2];
+    U32 x3 = src[3];
+    U32 rcon = roundConstant;
 
     dest[0] = SubWord(x1);
     dest[1] = RotWord(SubWord(x1)) ^ rcon;

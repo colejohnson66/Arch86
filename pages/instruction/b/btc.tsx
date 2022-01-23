@@ -146,22 +146,22 @@ const PageData: InstructionPageLayoutProps = {
         </>
     ),
     operation:
-        `public void BTC_16(ushort src, ushort idx)
+        `public void BTC(U16 src, U16 idx)
 {
     EFLAGS.CF = src.Bit[idx % 16];
-    src.Bit[idx % 16] = !src.Bit[idx % 16];
+    src.Bit[idx % 16] = !EFLAGS.CF;
 }
 
-public void BTC_32(uint src, uint idx)
+public void BTC(U32 src, U32 idx)
 {
     EFLAGS.CF = src.Bit[idx % 32];
-    src.Bit[idx % 32] = !src.Bit[idx % 32];
+    src.Bit[idx % 32] = !EFLAGS.CF;
 }
 
-public void BTC_64(ulong src, ulong idx)
+public void BTC(U64 src, U64 idx)
 {
     EFLAGS.CF = src.Bit[idx % 64];
-    src.Bit[idx % 64] = !src.Bit[idx % 64];
+    src.Bit[idx % 64] = !EFLAGS.CF;
 }`,
     flags: {
         CF: <>Set if the specified bit is set prior to being complemented. Cleared otherwise.</>,

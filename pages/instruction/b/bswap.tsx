@@ -77,18 +77,18 @@ const PageData: InstructionPageLayoutProps = {
         </>
     ),
     operation:
-        `public void BSWAP_32(ref uint arg)
+        `public void BSWAP((ref U32 arg)
 {
-    uint temp = arg;
+    U32 temp = arg;
     arg.Bit[0..7] = temp.Bit[24..31];
     arg.Bit[8..15] = temp.Bit[16..23];
     arg.Bit[16..23] = temp.Bit[8..15];
     arg.Bit[24..31] = temp.Bit[0..7];
 }
 
-public void BSWAP_64(ref ulong arg)
+public void BSWAP((ref U64 arg)
 {
-    ulong temp = arg;
+    U64 temp = arg;
     arg.Bit[0..7] = temp.Bit[56..63];
     arg.Bit[8..15] = temp.Bit[48..55];
     arg.Bit[16..23] = temp.Bit[40..47];
@@ -98,14 +98,7 @@ public void BSWAP_64(ref ulong arg)
     arg.Bit[48..55] = temp.Bit[8..15];
     arg.Bit[56..63] = temp.Bit[0..7];
 }`,
-    flags: {
-        CF: <>Unmodified.</>,
-        PF: <>Unmodified.</>,
-        AF: <>Unmodified.</>,
-        ZF: <>Unmodified.</>,
-        SF: <>Unmodified.</>,
-        OF: <>Unmodified.</>,
-    },
+    flags: "none",
     exceptions: {
         real: {
             UD: Exceptions.Lock,

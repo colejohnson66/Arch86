@@ -83,34 +83,34 @@ const PageData: InstructionPageLayoutProps = {
         </>
     ),
     operation:
-        `public void BSR_16(ref ushort dest, ushort src)
+        `public void BSR(ref U16 dest, U16 src)
 {
     if (src == 0)
         return; // \`dest\` is undefined
 
-    ushort idx = 15;
+    U16 idx = 15;
     while (src.Bit[idx] == 0)
         idx--;
     dest = idx;
 }
 
-public void BSR_32(ref uint dest, uint src)
+public void BSR(ref U32 dest, U32 src)
 {
     if (src == 0)
         return; // \`dest\` is undefined
 
-    uint idx = 31;
+    U32 idx = 31;
     while (src.Bit[idx] == 0)
         idx--;
     dest = idx;
 }
 
-public void BSR_64(ref ulong dest, ulong src)
+public void BSR(ref U64 dest, U64 src)
 {
     if (src == 0)
         return; // \`dest\` is undefined
 
-    ulong idx = 63;
+    U64 idx = 63;
     while (src.Bit[idx] == 0)
         idx--;
     dest = idx;

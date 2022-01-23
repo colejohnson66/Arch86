@@ -82,12 +82,12 @@ const PageData: InstructionPageLayoutProps = {
         </>
     ),
     operation:
-        `public void ANDN_32(ref uint dest, uint src1, uint src2)
+        `public void ANDN((ref U32 dest, U32 src1, U32 src2)
 {
     dest = ~src1 & src2;
 }
 
-public void ANDN_64(ref ulong dest, ulong src1, ulong src2)
+public void ANDN((ref U64 dest, U64 src1, U64 src2)
 {
     dest = ~src1 & src2;
 }`,

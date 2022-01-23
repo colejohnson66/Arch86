@@ -93,14 +93,7 @@ public void CDQE()
 {
     RAX = SignExtend(EAX);
 }`,
-    flags: {
-        CF: <>Unmodified.</>,
-        PF: <>Unmodified.</>,
-        AF: <>Unmodified.</>,
-        ZF: <>Unmodified.</>,
-        SF: <>Unmodified.</>,
-        OF: <>Unmodified.</>,
-    },
+    flags: "none",
     exceptions: {
         real: {
             UD: Exceptions.Lock,

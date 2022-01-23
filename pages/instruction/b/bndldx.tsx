@@ -71,10 +71,10 @@ const PageData: InstructionPageLayoutProps = {
         `public void BNDLDX_1632(Bound dest, Sib addr)
 {
     IntPtr @base = addr.Base + addr.Displacement;
-    uint ptr = GPR(addr.Index);
+    U32 ptr = GPR(addr.Index);
 
-    uint a_bde = (@base[12..31] << 2) + (BNDCFG[12..31] << 12);
-    uint a_bt = mem[a_bde];
+    U32 a_bde = (@base[12..31] << 2) + (BNDCFG[12..31] << 12);
+    U32 a_bt = Mem32[a_bde];
     if (a_bt.Bit[0] == 0)
     {
         BNDSTATUS.Bde = a_bde;
@@ -82,10 +82,10 @@ const PageData: InstructionPageLayoutProps = {
         #BR;
     }
 
-    uint a_bte = (@base[2..11] << 4) + (a_bt[2..31] << 2);
-    uint tmpLower = Mem32[a_bte];
-    uint tmpUpper = Mem32[a_bte + 4];
-    uint tmpPtr = Mem32[a_bte + 8];
+    U32 a_bte = (@base[2..11] << 4) + (a_bt[2..31] << 2);
+    U32 tmpLower = Mem32[a_bte];
+    U32 tmpUpper = Mem32[a_bte + 4];
+    U32 tmpPtr = Mem32[a_bte + 8];
     if (tmpPtr == ptr)
     {
         dest.Lower = tmpLower;
@@ -98,13 +98,13 @@ const PageData: InstructionPageLayoutProps = {
     }
 }
 
-public void BNDLDX_64(Bound dest, Sib addr)
+public void BNDLDX((Bound dest, Sib addr)
 {
     IntPtr @base = addr.Base + addr.Displacement;
-    uint ptr = GPR(addr.Index);
+    U64 ptr = GPR(addr.Index);
 
-    ulong a_bde = (@base[20..(48+MAWA-1)] << 3) + (BNDCFG[12..63] << 12); // see note 1
-    ulong a_bt = mem[a_bde];
+    U64 a_bde = (@base[20..(48+MAWA-1)] << 3) + (BNDCFG[12..63] << 12); // see note 1
+    U64 a_bt = Mem64[a_bde];
     if (a_bt.Bit[0] == 0)
     {
         BNDSTATUS.Bde = a_bde;
@@ -112,10 +112,10 @@ public void BNDLDX_64(Bound dest, Sib addr)
         #BR;
     }
 
-    ulong a_bte = (@base[3..19] << 5) + (a_bt[3..63] << 3);
-    ulong tmpLower = Mem64[a_bte];
-    ulong tmpUpper = Mem64[a_bte + 8];
-    ulong tmpPtr = Mem64[a_bte + 16];
+    U64 a_bte = (@base[3..19] << 5) + (a_bt[3..63] << 3);
+    U64 tmpLower = Mem64[a_bte];
+    U64 tmpUpper = Mem64[a_bte + 8];
+    U64 tmpPtr = Mem64[a_bte + 16];
     if (tmpPtr == ptr)
     {
         dest.Lower = tmpLower;
@@ -133,14 +133,7 @@ public void BNDLDX_64(Bound dest, Sib addr)
             It&apos;s value is enumerated in <Cpuid featureID="mawau" eax={7} ecx={0} output="ecx" bit={17} bitEnd={23} />.
             Otherwise, the supervisor <code>MAWA</code> (<code>MAWAS</code>) is used, which is 0.
         </>,
-    flags: {
-        CF: <>Unmodified.</>,
-        PF: <>Unmodified.</>,
-        AF: <>Unmodified.</>,
-        ZF: <>Unmodified.</>,
-        SF: <>Unmodified.</>,
-        OF: <>Unmodified.</>,
-    },
+    flags: "none",
     intrinsics: "autogen",
     exceptions: {
         real: {
