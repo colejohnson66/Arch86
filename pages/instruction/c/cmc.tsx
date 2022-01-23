@@ -34,7 +34,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>F5</>,
             mnemonic: <>CMC</>,
-            encoding: "ZO",
+            encoding: "zo",
             validity: {
                 16: "valid",
                 32: "valid",
@@ -46,7 +46,7 @@ const PageData: InstructionPageLayoutProps = {
     encodings: {
         operands: 1,
         encodings: {
-            "ZO": ["None"],
+            zo: ["None"],
         },
     },
     description: (

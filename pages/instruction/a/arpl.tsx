@@ -35,7 +35,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>63 /r</>,
             mnemonic: <>ARPL <i>r/m16</i>, <i>r16</i></>,
-            encoding: "MR",
+            encoding: "mr",
             validity: {
                 16: "invalid",
                 32: "valid",
@@ -47,7 +47,7 @@ const PageData: InstructionPageLayoutProps = {
     encodings: {
         operands: 2,
         encodings: {
-            "MR": ["ModRM.r/m[rw]", "ModRM.reg[r]"],
+            mr: ["ModRM.r/m[rw]", "ModRM.reg[r]"],
         },
     },
     description: (

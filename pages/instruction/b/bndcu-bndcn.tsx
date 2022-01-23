@@ -37,7 +37,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>F2 0F 1A /r</>,
             mnemonic: <>BNDCU <i>bnd</i>, <i>r/m32</i></>,
-            encoding: "RM",
+            encoding: "rm",
             validity: {
                 16: "valid",
                 32: "valid",
@@ -50,7 +50,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>F2 0F 1A /r</>,
             mnemonic: <>BNDCU <i>bnd</i>, <i>r/m64</i></>,
-            encoding: "RM",
+            encoding: "rm",
             validity: {
                 16: "n/e",
                 32: "n/e",
@@ -63,7 +63,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>F2 0F 1B /r</>,
             mnemonic: <>BNDCN <i>bnd</i>, <i>r/m32</i></>,
-            encoding: "RM",
+            encoding: "rm",
             validity: {
                 16: "valid",
                 32: "valid",
@@ -76,7 +76,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>F2 0F 1B /r</>,
             mnemonic: <>BNDCN <i>bnd</i>, <i>r/m64</i></>,
-            encoding: "RM",
+            encoding: "rm",
             validity: {
                 16: "n/e",
                 32: "n/e",
@@ -90,7 +90,7 @@ const PageData: InstructionPageLayoutProps = {
     encodings: {
         operands: 2,
         encodings: {
-            "RM": ["ModRM.reg[r]", "ModRM.r/m[r]"],
+            rm: ["ModRM.reg[r]", "ModRM.r/m[r]"],
         },
     },
     description: (

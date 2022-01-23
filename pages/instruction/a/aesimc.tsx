@@ -34,7 +34,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>66 0F 38 DB /r</>,
             mnemonic: <>AESIMC <i>xmm1</i>, <i>xmm2/m128</i></>,
-            encoding: "RM",
+            encoding: "rm",
             validity: {
                 16: "invalid",
                 32: "valid",
@@ -50,7 +50,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>VEX.128.66.0F38.WIG DB /r</>,
             mnemonic: <>VAESIMC <i>xmm1</i>, <i>xmm2/m128</i></>,
-            encoding: "RM",
+            encoding: "rm",
             validity: {
                 16: "invalid",
                 32: "valid",
@@ -67,7 +67,7 @@ const PageData: InstructionPageLayoutProps = {
     encodings: {
         operands: 2,
         encodings: {
-            "RM": ["ModRM.reg[w]", "ModRM.r/m[r]"],
+            rm: ["ModRM.reg[w]", "ModRM.r/m[r]"],
         },
     },
     description: (

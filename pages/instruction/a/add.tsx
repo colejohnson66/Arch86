@@ -35,7 +35,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>00 /r</>,
             mnemonic: <>ADD <i>r/m8</i>, <i>r8</i></>,
-            encoding: "MR",
+            encoding: "mr",
             validity: {
                 16: "valid",
                 32: "valid",
@@ -46,7 +46,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>REX 00 /r</>,
             mnemonic: <>ADD <i>r/m8<sup>*</sup></i>, <i>r8<sup>*</sup></i></>,
-            encoding: "MR",
+            encoding: "mr",
             validity: {
                 16: "n/e",
                 32: "n/e",
@@ -60,7 +60,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>01 /r</>,
             mnemonic: <>ADD <i>r/m16</i>, <i>r16</i></>,
-            encoding: "MR",
+            encoding: "mr",
             validity: {
                 16: "valid",
                 32: "valid",
@@ -71,7 +71,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>01 /r</>,
             mnemonic: <>ADD <i>r/m32</i>, <i>r32</i></>,
-            encoding: "MR",
+            encoding: "mr",
             validity: {
                 16: "valid",
                 32: "valid",
@@ -82,7 +82,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>REX.W 01 /r</>,
             mnemonic: <>ADD <i>r/m64</i>, <i>r64</i></>,
-            encoding: "MR",
+            encoding: "mr",
             validity: {
                 16: "n/e",
                 32: "n/e",
@@ -93,7 +93,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>02 /r</>,
             mnemonic: <>ADD <i>r8</i>, <i>r/m8</i></>,
-            encoding: "RM",
+            encoding: "rm",
             validity: {
                 16: "valid",
                 32: "valid",
@@ -104,7 +104,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>REX 02 /r</>,
             mnemonic: <>ADD <i>r8<sup>*</sup></i>, <i>r/m8<sup>*</sup></i></>,
-            encoding: "RM",
+            encoding: "rm",
             validity: {
                 16: "n/e",
                 32: "n/e",
@@ -118,7 +118,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>03 /r</>,
             mnemonic: <>ADD <i>r16</i>, <i>r/m16</i></>,
-            encoding: "RM",
+            encoding: "rm",
             validity: {
                 16: "valid",
                 32: "valid",
@@ -129,7 +129,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>03 /r</>,
             mnemonic: <>ADD <i>r32</i>, <i>r/m32</i></>,
-            encoding: "RM",
+            encoding: "rm",
             validity: {
                 16: "valid",
                 32: "valid",
@@ -140,7 +140,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>REX.W 03 /r</>,
             mnemonic: <>ADD <i>r64</i>, <i>r/m64</i></>,
-            encoding: "RM",
+            encoding: "rm",
             validity: {
                 16: "n/e",
                 32: "n/e",
@@ -151,7 +151,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>04 <i>ib</i></>,
             mnemonic: <>ADD AL, <i>imm8</i></>,
-            encoding: "AI",
+            encoding: "ai",
             validity: {
                 16: "valid",
                 32: "valid",
@@ -162,7 +162,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>05 <i>iw</i></>,
             mnemonic: <>ADD AX, <i>imm16</i></>,
-            encoding: "AI",
+            encoding: "ai",
             validity: {
                 16: "valid",
                 32: "valid",
@@ -173,7 +173,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>05 <i>id</i></>,
             mnemonic: <>ADD EAX, <i>imm32</i></>,
-            encoding: "AI",
+            encoding: "ai",
             validity: {
                 16: "valid",
                 32: "valid",
@@ -184,7 +184,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>REX.W 05 <i>id</i></>,
             mnemonic: <>ADD RAX, <i>imm32</i></>,
-            encoding: "AI",
+            encoding: "ai",
             validity: {
                 16: "n/e",
                 32: "n/e",
@@ -195,7 +195,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>80 /0 <i>ib</i></>,
             mnemonic: <>ADD <i>r/m8</i>, <i>imm8</i></>,
-            encoding: "MI",
+            encoding: "mi",
             validity: {
                 16: "valid",
                 32: "valid",
@@ -206,7 +206,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>REX 80 /0 <i>ib</i></>,
             mnemonic: <>ADD <i>r/m8<sup>*</sup></i>, <i>imm8<sup>*</sup></i></>,
-            encoding: "MI",
+            encoding: "mi",
             validity: {
                 16: "valid",
                 32: "valid",
@@ -220,7 +220,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>81 /0 <i>iw</i></>,
             mnemonic: <>ADD <i>r/m16</i>, <i>imm16</i></>,
-            encoding: "MI",
+            encoding: "mi",
             validity: {
                 16: "valid",
                 32: "valid",
@@ -231,7 +231,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>81 /0 <i>id</i></>,
             mnemonic: <>ADD <i>r/m32</i>, <i>imm32</i></>,
-            encoding: "MI",
+            encoding: "mi",
             validity: {
                 16: "valid",
                 32: "valid",
@@ -242,7 +242,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>REX.W 81 /0 <i>id</i></>,
             mnemonic: <>ADD <i>r/m64</i>, <i>imm32</i></>,
-            encoding: "MI",
+            encoding: "mi",
             validity: {
                 16: "n/e",
                 32: "n/e",
@@ -253,7 +253,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>82 /0 <i>ib</i></>,
             mnemonic: <>ADD <i>r/m8</i>, <i>imm8</i></>,
-            encoding: "MI",
+            encoding: "mi",
             validity: {
                 16: "valid",
                 32: "valid",
@@ -268,7 +268,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>83 /0 <i>ib</i></>,
             mnemonic: <>ADD <i>r/m16</i>, <i>imm8</i></>,
-            encoding: "MI",
+            encoding: "mi",
             validity: {
                 16: "valid",
                 32: "valid",
@@ -279,7 +279,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>83 /0 <i>ib</i></>,
             mnemonic: <>ADD <i>r/m32</i>, <i>imm8</i></>,
-            encoding: "MI",
+            encoding: "mi",
             validity: {
                 16: "valid",
                 32: "valid",
@@ -290,7 +290,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>REX.W 83 /0 <i>ib</i></>,
             mnemonic: <>ADD <i>r/m64</i>, <i>imm8</i></>,
-            encoding: "MI",
+            encoding: "mi",
             validity: {
                 16: "n/e",
                 32: "n/e",
@@ -302,10 +302,10 @@ const PageData: InstructionPageLayoutProps = {
     encodings: {
         operands: 2,
         encodings: {
-            "MR": ["ModRM.r/m[rw]", "ModRM.reg[r]"],
-            "RM": ["ModRM.reg[rw]", "ModRM.r/m[r]"],
-            "AI": ["AL/AX/EAX/RAX", "imm8/16/32"],
-            "MI": ["ModRM.r/m[rw]", "imm8/16/32"],
+            mr: ["ModRM.r/m[rw]", "ModRM.reg[r]"],
+            rm: ["ModRM.reg[rw]", "ModRM.r/m[r]"],
+            ai: ["AL/AX/EAX/RAX", "imm8/16/32"],
+            mi: ["ModRM.r/m[rw]", "imm8/16/32"],
         },
     },
     description: (

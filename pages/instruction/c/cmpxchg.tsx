@@ -38,7 +38,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>0F B0 /r</>,
             mnemonic: <>CMPXCHG <i>r/m8</i>, <i>r8</i></>,
-            encoding: "MR",
+            encoding: "mr",
             validity: {
                 16: "valid1",
                 32: "valid1",
@@ -54,7 +54,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>0F B0 /r</>,
             mnemonic: <>CMPXCHG <i>r/m8<sup>*</sup></i>, <i>r8<sup>*</sup></i></>,
-            encoding: "MR",
+            encoding: "mr",
             validity: {
                 16: "n/e",
                 32: "n/e",
@@ -71,7 +71,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>0F B1 /r</>,
             mnemonic: <>CMPXCHG <i>r/m16</i>, <i>r16</i></>,
-            encoding: "MR",
+            encoding: "mr",
             validity: {
                 16: "valid1",
                 32: "valid1",
@@ -87,7 +87,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>0F B1 /r</>,
             mnemonic: <>CMPXCHG <i>r/m16</i>, <i>r16</i></>,
-            encoding: "MR",
+            encoding: "mr",
             validity: {
                 16: "valid1",
                 32: "valid1",
@@ -103,7 +103,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>REX.W 0F B1 /r</>,
             mnemonic: <>CMPXCHG <i>r/m64</i>, <i>r64</i></>,
-            encoding: "MR",
+            encoding: "mr",
             validity: {
                 16: "n/e",
                 32: "n/e",
@@ -121,7 +121,7 @@ const PageData: InstructionPageLayoutProps = {
     encodings: {
         operands: 2,
         encodings: {
-            "MR": ["ModRM.r/m[rw]", "ModRM.reg[r]"],
+            mr: ["ModRM.r/m[rw]", "ModRM.reg[r]"],
         },
     },
     description: (

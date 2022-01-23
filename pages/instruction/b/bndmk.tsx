@@ -36,7 +36,7 @@ const PageData: InstructionPageLayoutProps = {
             // TODO: is an SIB byte required?
             opcode: <>F3 0F 1B mem/r</>,
             mnemonic: <>BNDMK <i>bnd</i>, <i>m32</i></>,
-            encoding: "RM",
+            encoding: "rm",
             validity: {
                 16: "valid",
                 32: "valid",
@@ -48,7 +48,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>F3 0F 1B mem/r</>,
             mnemonic: <>BNDMK <i>bnd</i>, <i>m64</i></>,
-            encoding: "RM",
+            encoding: "rm",
             validity: {
                 16: "n/e",
                 32: "n/e",
@@ -61,7 +61,7 @@ const PageData: InstructionPageLayoutProps = {
     encodings: {
         operands: 2,
         encodings: {
-            "RM": ["ModRM.reg[w]", "ModRM.r/m"],
+            rm: ["ModRM.reg[w]", "ModRM.r/m"],
         },
     },
     description: (

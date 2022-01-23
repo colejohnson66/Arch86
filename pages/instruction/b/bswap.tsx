@@ -36,7 +36,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>0F C8+rd</>,
             mnemonic: <>BSWAP <i>r32</i></>,
-            encoding: "O",
+            encoding: "o",
             validity: {
                 16: "valid1",
                 32: "valid1",
@@ -47,7 +47,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>REX.W 0F C8+rq</>,
             mnemonic: <>BSWAP <i>r64</i></>,
-            encoding: "O",
+            encoding: "o",
             validity: {
                 16: "invalid",
                 32: "invalid",
@@ -60,7 +60,7 @@ const PageData: InstructionPageLayoutProps = {
     encodings: {
         operands: 1,
         encodings: {
-            "O": ["opcode(0..2)"],
+            o: ["opcode(0..2)"],
         },
     },
     description: (

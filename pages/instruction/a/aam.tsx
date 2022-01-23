@@ -35,7 +35,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>D4 0A</>,
             mnemonic: <>AAM</>,
-            encoding: "ZO",
+            encoding: "zo",
             validity: {
                 16: "valid",
                 32: "valid",
@@ -46,7 +46,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>D4 <i>ib</i></>,
             mnemonic: <>AAM <i>imm8</i></>,
-            encoding: "I",
+            encoding: "i",
             validity: {
                 16: "valid",
                 32: "valid",
@@ -58,8 +58,8 @@ const PageData: InstructionPageLayoutProps = {
     encodings: {
         operands: 1,
         encodings: {
-            "ZO": ["None (implicitly 10)"],
-            "I": ["imm8"],
+            zo: ["None (implicitly 10)"],
+            i: ["imm8"],
         },
     },
     description: (

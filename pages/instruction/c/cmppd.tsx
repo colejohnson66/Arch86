@@ -82,7 +82,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>66 0F C2 /r <i>ib</i></>,
             mnemonic: <>CMPPD <i>xmm1</i>, <i>xmm2/m128</i>, <i>imm8</i></>,
-            encoding: "LEGACY",
+            encoding: "legacy",
             validity: {
                 16: "invalid",
                 32: "valid",
@@ -99,7 +99,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>VEX.128.66.0F.WIG C2 /r <i>ib</i></>,
             mnemonic: <>VCMPPD <i>xmm1</i>, <i>xmm2</i>, <i>xmm3/m128</i>, <i>imm8</i></>,
-            encoding: "VEX",
+            encoding: "vex",
             validity: {
                 16: "invalid",
                 32: "valid",
@@ -116,7 +116,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>VEX.256.66.0F.WIG C2 /r <i>ib</i></>,
             mnemonic: <>VCMPPD <i>ymm1</i>, <i>ymm2</i>, <i>ymm3/m256</i>, <i>imm8</i></>,
-            encoding: "VEX",
+            encoding: "vex",
             validity: {
                 16: "invalid",
                 32: "valid",
@@ -133,7 +133,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>EVEX.128.66.0F.W1 C2 /r <i>ib</i></>,
             mnemonic: <>VCMPPD <i>k1</i> {k2z}, <i>xmm1</i>, <i>xmm2/m128/m64bcst</i>, <i>imm8</i></>,
-            encoding: "EVEX",
+            encoding: "evex",
             validity: {
                 16: "invalid",
                 32: "valid",
@@ -150,7 +150,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>EVEX.256.66.0F.W1 C2 /r <i>ib</i></>,
             mnemonic: <>VCMPPD <i>k1</i> {k2z}, <i>ymm1</i>, <i>ymm2/m256/m64bcst</i>, <i>imm8</i></>,
-            encoding: "EVEX",
+            encoding: "evex",
             validity: {
                 16: "invalid",
                 32: "valid",
@@ -167,7 +167,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>EVEX.512.66.0F.W1 C2 /r <i>ib</i></>,
             mnemonic: <>VCMPPD <i>k1</i> {k2z}, <i>zmm1</i>, <i>zmm2/m512/m64bcst{sae}</i>, <i>imm8</i></>,
-            encoding: "EVEX",
+            encoding: "evex",
             validity: {
                 16: "invalid",
                 32: "valid",
@@ -186,9 +186,9 @@ const PageData: InstructionPageLayoutProps = {
         operands: 4,
         hasTuple: true,
         encodings: {
-            "LEGACY": ["n/a", "ModRM.reg[rw]", "ModRM.r/m[r]", "imm8", ""],
-            "VEX": ["n/a", "ModRM.reg[rw]", "VEX.vvvv[r]", "ModRM.r/m[r]", "imm8"],
-            "EVEX": ["full", "ModRM.reg[rw]", "EVEX.vvvvv[r]", "ModRM.r/m[r]", "imm8"],
+            legacy: ["n/a", "ModRM.reg[rw]", "ModRM.r/m[r]", "imm8", ""],
+            vex: ["n/a", "ModRM.reg[rw]", "VEX.vvvv[r]", "ModRM.r/m[r]", "imm8"],
+            evex: ["full", "ModRM.reg[rw]", "EVEX.vvvvv[r]", "ModRM.r/m[r]", "imm8"],
         },
     },
     description: (

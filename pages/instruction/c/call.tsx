@@ -37,7 +37,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>E8 <i>cw</i></>,
             mnemonic: <>CALL <i>rel16</i></>,
-            encoding: "D",
+            encoding: "d",
             validity: {
                 16: "valid",
                 32: "valid",
@@ -48,7 +48,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>E8 <i>cd</i></>,
             mnemonic: <>CALL <i>rel32</i></>,
-            encoding: "D",
+            encoding: "d",
             validity: {
                 16: "valid",
                 32: "valid",
@@ -59,7 +59,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>FF /2</>,
             mnemonic: <>CALL <i>r/m16</i></>,
-            encoding: "M",
+            encoding: "m",
             validity: {
                 16: "valid",
                 32: "valid",
@@ -70,7 +70,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>FF /2</>,
             mnemonic: <>CALL <i>r/m32</i></>,
-            encoding: "M",
+            encoding: "m",
             validity: {
                 16: "valid",
                 32: "valid",
@@ -81,7 +81,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>FF /2</>,
             mnemonic: <>CALL <i>r/m64</i></>,
-            encoding: "M",
+            encoding: "m",
             validity: {
                 16: "n/e",
                 32: "n/e",
@@ -92,7 +92,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>9A <i>seg16</i> <i>cw</i></>,
             mnemonic: <>CALLF <i>ptr16:16</i></>,
-            encoding: "D",
+            encoding: "d",
             validity: {
                 16: "valid",
                 32: "valid",
@@ -103,7 +103,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>9A <i>seg16</i> <i>cd</i></>,
             mnemonic: <>CALLF <i>ptr16:32</i></>,
-            encoding: "D",
+            encoding: "d",
             validity: {
                 16: "valid",
                 32: "valid",
@@ -114,7 +114,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>FF mem/3</>,
             mnemonic: <>CALLF <i>m16:16</i></>,
-            encoding: "M",
+            encoding: "m",
             validity: {
                 16: "valid",
                 32: "valid",
@@ -125,7 +125,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>FF mem/3</>,
             mnemonic: <>CALLF <i>m16:32</i></>,
-            encoding: "M",
+            encoding: "m",
             validity: {
                 16: "valid",
                 32: "valid",
@@ -136,7 +136,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>FF mem/3</>,
             mnemonic: <>CALLF <i>m16:64</i></>,
-            encoding: "M",
+            encoding: "m",
             validity: {
                 16: "invalid",
                 32: "invalid",
@@ -148,8 +148,8 @@ const PageData: InstructionPageLayoutProps = {
     encodings: {
         operands: 1,
         encodings: {
-            "D": ["offset"],
-            "M": ["ModRM.r/m[rw]"],
+            d: ["offset"],
+            m: ["ModRM.r/m[rw]"],
         },
     },
     description: (

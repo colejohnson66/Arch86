@@ -35,7 +35,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>62 mem/r</>,
             mnemonic: <>BOUND <i>r16</i>, <i>m16&amp;16</i></>,
-            encoding: "RM",
+            encoding: "rm",
             validity: {
                 16: "valid",
                 32: "valid",
@@ -46,7 +46,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>62 mem/r</>,
             mnemonic: <>BOUND <i>r32</i>, <i>m32&amp;32</i></>,
-            encoding: "RM",
+            encoding: "rm",
             validity: {
                 16: "valid",
                 32: "valid",
@@ -58,7 +58,7 @@ const PageData: InstructionPageLayoutProps = {
     encodings: {
         operands: 2,
         encodings: {
-            "MI": ["ModRM.reg[r]", "ModRM.r/m[r]"],
+            mi: ["ModRM.reg[r]", "ModRM.r/m[r]"],
         },
     },
     description: (

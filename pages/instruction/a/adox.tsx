@@ -35,7 +35,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>F3 0F 38 F6 /r</>,
             mnemonic: <>ADOX <i>r32</i>, <i>r/m32</i></>,
-            encoding: "RM",
+            encoding: "rm",
             validity: {
                 16: "valid",
                 32: "valid",
@@ -51,7 +51,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>F3 REX.W 0F 38 F6 /r</>,
             mnemonic: <>ADOX <i>r64</i>, <i>r/m64</i></>,
-            encoding: "RM",
+            encoding: "rm",
             validity: {
                 16: "n/e",
                 32: "n/e",
@@ -68,7 +68,7 @@ const PageData: InstructionPageLayoutProps = {
     encodings: {
         operands: 2,
         encodings: {
-            "RM": ["ModRM.reg[rw]", "ModRM.r/m[rw]"],
+            rm: ["ModRM.reg[rw]", "ModRM.r/m[rw]"],
         },
     },
     description: (

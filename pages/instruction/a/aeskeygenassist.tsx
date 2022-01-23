@@ -34,7 +34,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>66 0F 3A DF /r <i>ib</i></>,
             mnemonic: <>AESKEYGENASSIST <i>xmm1</i>, <i>xmm2/m128</i>, <i>imm8</i></>,
-            encoding: "RMI",
+            encoding: "rmi",
             validity: {
                 16: "invalid",
                 32: "valid",
@@ -50,7 +50,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>VEX.128.66.0F3A.WIG DF /r <i>ib</i></>,
             mnemonic: <>VAESKEYGENASSIST <i>xmm1</i>, <i>xmm2/m128</i>, <i>imm8</i></>,
-            encoding: "RMI",
+            encoding: "rmi",
             validity: {
                 16: "invalid",
                 32: "valid",
@@ -67,7 +67,7 @@ const PageData: InstructionPageLayoutProps = {
     encodings: {
         operands: 3,
         encodings: {
-            "RMI": ["ModRM.reg[w]", "ModRM.r/m[r]", "imm8"],
+            rmi: ["ModRM.reg[w]", "ModRM.r/m[r]", "imm8"],
         },
     },
     description: (

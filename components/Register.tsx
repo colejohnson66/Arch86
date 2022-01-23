@@ -21,13 +21,12 @@
  * =============================================================================
  */
 
-type RegisterValuesGprLow8 = "AL" | "CL" | "DL" | "BL" | "SPL" | "BPL" | "SIL" | "DIL";
-type RegisterValuesGprHigh8 = "AH" | "CH" | "DH" | "BH";
-type RegisterValuesGpr16 = "AX" | "CX" | "DX" | "BX" | "SP" | "BP" | "SI" | "DI" | "R8W" | "R9W" | "R10W" | "R11W" | "R12W" | "R13W" | "R14W" | "R15W";
-type RegisterValuesGpr32 = "EAX" | "ECX" | "EDX" | "EBX" | "ESP" | "EBP" | "ESI" | "EDI" | "R8" | "R9" | "R10" | "R11" | "R12" | "R13" | "R14" | "R15";
-type RegisterValuesGpr64 = "RAX" | "RCX" | "RDX" | "RBX" | "RSP" | "RBP" | "RSI" | "RDI" | "R8" | "R9" | "R10" | "R11" | "R12" | "R13" | "R14" | "R15";
-
-type RegisterValuesGpr = RegisterValuesGprLow8 | RegisterValuesGprHigh8 | RegisterValuesGpr16 | RegisterValuesGpr32 | RegisterValuesGpr64
+// type RegisterValuesGprLow8 = "AL" | "CL" | "DL" | "BL" | "SPL" | "BPL" | "SIL" | "DIL";
+// type RegisterValuesGprHigh8 = "AH" | "CH" | "DH" | "BH";
+// type RegisterValuesGpr16 = "AX" | "CX" | "DX" | "BX" | "SP" | "BP" | "SI" | "DI" | "R8W" | "R9W" | "R10W" | "R11W" | "R12W" | "R13W" | "R14W" | "R15W";
+// type RegisterValuesGpr32 = "EAX" | "ECX" | "EDX" | "EBX" | "ESP" | "EBP" | "ESI" | "EDI" | "R8" | "R9" | "R10" | "R11" | "R12" | "R13" | "R14" | "R15";
+// type RegisterValuesGpr64 = "RAX" | "RCX" | "RDX" | "RBX" | "RSP" | "RBP" | "RSI" | "RDI" | "R8" | "R9" | "R10" | "R11" | "R12" | "R13" | "R14" | "R15";
+// type RegisterValuesGpr = RegisterValuesGprLow8 | RegisterValuesGprHigh8 | RegisterValuesGpr16 | RegisterValuesGpr32 | RegisterValuesGpr64
 
 type RegisterProps = {
     name: string;

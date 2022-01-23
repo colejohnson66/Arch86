@@ -35,7 +35,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>NP 0F 1B mem/r+sib</>,
             mnemonic: <>BNDSTX <i>mib</i>, <i>bnd</i></>,
-            encoding: "MR",
+            encoding: "mr",
             validity: {
                 16: "valid",
                 32: "valid",
@@ -48,7 +48,7 @@ const PageData: InstructionPageLayoutProps = {
     encodings: {
         operands: 2,
         encodings: {
-            "MR": ["SIB.base + SIB.index", "ModRM.reg[w]"],
+            mr: ["SIB.base + SIB.index", "ModRM.reg[w]"],
         },
     },
     description: (

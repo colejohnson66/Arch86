@@ -35,7 +35,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>A6</>,
             mnemonic: <>CMPSB</>,
-            encoding: "ZO",
+            encoding: "zo",
             validity: {
                 16: "valid",
                 32: "valid",
@@ -52,7 +52,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>A7</>,
             mnemonic: <>CMPSW</>,
-            encoding: "ZO",
+            encoding: "zo",
             validity: {
                 16: "valid",
                 32: "valid",
@@ -69,7 +69,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>A7</>,
             mnemonic: <>CMPSD</>,
-            encoding: "ZO",
+            encoding: "zo",
             validity: {
                 16: "valid",
                 32: "valid",
@@ -86,7 +86,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>REX.W A7</>,
             mnemonic: <>CMPSQ</>,
-            encoding: "ZO",
+            encoding: "zo",
             validity: {
                 16: "invalid",
                 32: "invalid",
@@ -104,7 +104,7 @@ const PageData: InstructionPageLayoutProps = {
     encodings: {
         operands: 1,
         encodings: {
-            "ZO": ["None"],
+            zo: ["None"],
         },
     },
     description: (

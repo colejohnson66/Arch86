@@ -34,7 +34,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>98</>,
             mnemonic: <>CBW</>,
-            encoding: "ZO",
+            encoding: "zo",
             validity: {
                 16: "valid",
                 32: "valid",
@@ -45,7 +45,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>98</>,
             mnemonic: <>CWDE</>,
-            encoding: "ZO",
+            encoding: "zo",
             validity: {
                 16: "valid",
                 32: "valid",
@@ -56,7 +56,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>REX.W 98</>,
             mnemonic: <>CDQE</>,
-            encoding: "ZO",
+            encoding: "zo",
             validity: {
                 16: "n/e",
                 32: "n/e",
@@ -68,7 +68,7 @@ const PageData: InstructionPageLayoutProps = {
     encodings: {
         operands: 1,
         encodings: {
-            "ZO": ["None"],
+            zo: ["None"],
         },
     },
     description: (

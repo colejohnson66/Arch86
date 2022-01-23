@@ -34,7 +34,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>0F BD /r</>,
             mnemonic: <>BSR <i>r16</i>, <i>r/m16</i></>,
-            encoding: "RM",
+            encoding: "rm",
             validity: {
                 16: "valid",
                 32: "valid",
@@ -45,7 +45,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>0F BD /r</>,
             mnemonic: <>BSR <i>r32</i>, <i>r/m32</i></>,
-            encoding: "RM",
+            encoding: "rm",
             validity: {
                 16: "valid",
                 32: "valid",
@@ -56,7 +56,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>REX.W 0F BD /r</>,
             mnemonic: <>BSR <i>r64</i>, <i>r/m64</i></>,
-            encoding: "RM",
+            encoding: "rm",
             validity: {
                 16: "n/e",
                 32: "n/e",
@@ -68,7 +68,7 @@ const PageData: InstructionPageLayoutProps = {
     encodings: {
         operands: 2,
         encodings: {
-            "RM": ["ModRM.reg[w]", "ModRM.r/m[r]"],
+            rm: ["ModRM.reg[w]", "ModRM.r/m[r]"],
         },
     },
     description: (

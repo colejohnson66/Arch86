@@ -34,7 +34,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>F2 0F 38 F0 /r</>,
             mnemonic: <>CRC32 <i>r32</i>, <i>r/m8</i></>,
-            encoding: "RM",
+            encoding: "rm",
             validity: {
                 16: "valid",
                 32: "valid",
@@ -46,7 +46,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>F2 REX 0F 38 F0 /r</>,
             mnemonic: <>CRC32 <i>r32</i>, <i>r/m8<sup>*</sup></i></>,
-            encoding: "RM",
+            encoding: "rm",
             validity: {
                 16: "n/e",
                 32: "n/e",
@@ -62,7 +62,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>F2 REX.W 0F 38 F0 /r</>,
             mnemonic: <>CRC32 <i>r64</i>, <i>r/m8<sup>*</sup></i></>,
-            encoding: "RM",
+            encoding: "rm",
             validity: {
                 16: "n/e",
                 32: "n/e",
@@ -78,7 +78,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>F2 0F 38 F1 /r</>,
             mnemonic: <>CRC32 <i>r32</i>, <i>r/m16</i></>,
-            encoding: "RM",
+            encoding: "rm",
             validity: {
                 16: "valid",
                 32: "valid",
@@ -90,7 +90,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>F2 0F 38 F1 /r</>,
             mnemonic: <>CRC32 <i>r32</i>, <i>r/m32</i></>,
-            encoding: "RM",
+            encoding: "rm",
             validity: {
                 16: "valid",
                 32: "valid",
@@ -102,7 +102,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>F2 REX.W 0F 38 F1 /r</>,
             mnemonic: <>CRC32 <i>r64</i>, <i>r/m64</i></>,
-            encoding: "RM",
+            encoding: "rm",
             validity: {
                 16: "n/e",
                 32: "n/e",
@@ -115,7 +115,7 @@ const PageData: InstructionPageLayoutProps = {
     encodings: {
         operands: 2,
         encodings: {
-            "MR": ["ModRM.r/m[rw]", "ModRM.reg[r]"],
+            mr: ["ModRM.r/m[rw]", "ModRM.reg[r]"],
         },
     },
     description: (

@@ -34,7 +34,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>NFx 66 0F AE mem/7</>,
             mnemonic: <>CLFLUSHOPT <i>m8</i></>,
-            encoding: "M",
+            encoding: "m",
             validity: {
                 16: "valid",
                 32: "valid",
@@ -47,7 +47,7 @@ const PageData: InstructionPageLayoutProps = {
     encodings: {
         operands: 1,
         encodings: {
-            "M": ["ModRM.r/m[w]"],
+            m: ["ModRM.r/m[w]"],
         },
     },
     description: (

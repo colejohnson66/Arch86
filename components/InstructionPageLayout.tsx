@@ -51,16 +51,18 @@ type OpcodeEntryValidity = {
 type OpcodeEntry = {
     opcode: React.ReactNode;
     mnemonic: React.ReactNode;
-    encoding: string;
+    encoding: EncodingKey;
     validity: OpcodeEntryValidity;
     cpuid?: MaybeArray<string>;
     description: React.ReactNode;
 };
 
+type EncodingKey = "ai" | "d" | "evex" | "i" | "legacy" | "m" | "mi" | "mr"
+    | "o" | "rm" | "rmi" | "rmv" | "rvm" | "vex" | "vm" | "zo";
 type EncodingEntries = {
     operands: number;
     hasTuple?: false;
-    encodings: Record<string, string[]>;
+    encodings: Partial<Record<EncodingKey, string[]>>;
 };
 type EncodingTupleType = "n/a" | "full" | "half" | "full-mem" | "tuple1-scalar"
     | "tuple1-fixed" | "tuple2" | "tuple4" | "tuple8" | "half-mem"
@@ -72,7 +74,7 @@ type EncodingTupleArrayType = [EncodingTupleType, string]
 type EncodingEntriesTuple = {
     operands: number;
     hasTuple: true;
-    encodings: Record<string, EncodingTupleArrayType>;
+    encodings: Partial<Record<EncodingKey, EncodingTupleArrayType>>;
 };
 
 type Flags = {
@@ -310,10 +312,10 @@ export default function InstructionPageLayout(props: InstructionPageLayoutProps)
                     </thead>
                     <tbody>
                         {/* TODO: this JSX is messy; use functions */}
-                        {Object.entries(props.encodings.encodings).map((keyVal) => (
-                            <tr key={keyVal[0]}>
-                                <td><code>{keyVal[0]}</code></td>
-                                {keyVal[1].map((operand, idx) => (
+                        {Object.entries(props.encodings.encodings).map((entry) => (
+                            <tr key={entry[0]}>
+                                <td><code id={`#encoding${entry[0].toUpperCase()}`}>{entry[0]}</code></td>
+                                {entry[1].map((operand, idx) => (
                                     <td key={operand}>
                                         {/* is this an empty or a "tuple type" cell? */}
                                         {/* TODO: don't just wrap the cell in <code>, but selectively monospace and use <abbr> */}

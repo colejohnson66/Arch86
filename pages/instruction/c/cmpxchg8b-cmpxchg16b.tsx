@@ -37,7 +37,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>0F C7 mem/1</>,
             mnemonic: <>CMPXCHG8B <i>m64</i></>,
-            encoding: "M",
+            encoding: "m",
             validity: {
                 16: "valid1",
                 32: "valid1",
@@ -53,7 +53,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>REX.W 0F C7 mem/1</>,
             mnemonic: <>CMPXCHG8B <i>m128</i></>,
-            encoding: "M",
+            encoding: "m",
             validity: {
                 16: "n/e",
                 32: "n/e",
@@ -71,7 +71,7 @@ const PageData: InstructionPageLayoutProps = {
     encodings: {
         operands: 1,
         encodings: {
-            "M": ["ModRM.r/m[rw]"],
+            m: ["ModRM.r/m[rw]"],
         },
     },
     description: (

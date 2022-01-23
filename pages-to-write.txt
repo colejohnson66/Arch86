@@ -42,8 +42,6 @@
   /aesenc256kl
   /aesencwide128kl
   /aesencwide256kl
-  /bndldx
-  /bndstx
   /clts
   /clwb
   /cpuid

@@ -143,7 +143,7 @@
             "    encodings: {",
             "        operands: 2,",
             "        encodings: {",
-            "            \"MI\": [\"ModRM.r/m[rw]\", \"imm8\"],",
+            "            \"mi\": [\"ModRM.r/m[rw]\", \"imm8\"],",
             "        },",
             "    },",
             "    description: (",

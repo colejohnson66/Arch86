@@ -35,7 +35,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>0F BB /r</>,
             mnemonic: <>BTC <i>r/m16</i>, <i>r16</i></>,
-            encoding: "MR",
+            encoding: "mr",
             validity: {
                 16: "valid",
                 32: "valid",
@@ -50,7 +50,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>0F BB /r</>,
             mnemonic: <>BTC <i>r/m32</i>, <i>r32</i></>,
-            encoding: "MR",
+            encoding: "mr",
             validity: {
                 16: "valid",
                 32: "valid",
@@ -65,7 +65,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>REX.W 0F BB /r</>,
             mnemonic: <>BTC <i>r/m64</i>, <i>r64</i></>,
-            encoding: "MR",
+            encoding: "mr",
             validity: {
                 16: "n/e",
                 32: "n/e",
@@ -80,7 +80,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>0F BA /7 <i>ib</i></>,
             mnemonic: <>BTC <i>r/m16</i>, <i>imm8</i></>,
-            encoding: "MI",
+            encoding: "mi",
             validity: {
                 16: "valid",
                 32: "valid",
@@ -95,7 +95,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>0F BA /7 <i>ib</i></>,
             mnemonic: <>BTC <i>r/m32</i>, <i>imm8</i></>,
-            encoding: "MI",
+            encoding: "mi",
             validity: {
                 16: "valid",
                 32: "valid",
@@ -110,7 +110,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>REX.W 0F BA /7 <i>ib</i></>,
             mnemonic: <>BTC <i>r/m64</i>, <i>imm8</i></>,
-            encoding: "MI",
+            encoding: "mi",
             validity: {
                 16: "n/e",
                 32: "n/e",
@@ -126,8 +126,8 @@ const PageData: InstructionPageLayoutProps = {
     encodings: {
         operands: 2,
         encodings: {
-            "MR": ["ModRM.reg[rw]", "ModRM.r/m[r]"],
-            "MI": ["ModRM.r/m[rw]", "imm8"],
+            mr: ["ModRM.reg[rw]", "ModRM.r/m[r]"],
+            mi: ["ModRM.r/m[rw]", "imm8"],
         },
     },
     description: (
