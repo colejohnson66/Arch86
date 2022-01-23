@@ -238,6 +238,7 @@ function FormatOtherExceptionsList(list: OtherExceptionList): React.ReactNode {
 }
 
 export default function InstructionPageLayout(props: InstructionPageLayoutProps): React.ReactElement {
+    const hasCpuid = typeof props.opcodes[0] !== "string" && props.opcodes[0]?.cpuid !== undefined;
     return (
         <Layout.Root navGroup="instruction" pageTitle={props.title} canonical={`/instruction/${props.id[0]}/${props.id}`}>
             {/* TODO: include mnemonic here */}
@@ -259,15 +260,14 @@ export default function InstructionPageLayout(props: InstructionPageLayoutProps)
                                 <th><Unit value={16} unit="bit" /></th>
                                 <th><Unit value={32} unit="bit" /></th>
                                 <th><Unit value={64} unit="bit" /></th>
-                                {typeof props.opcodes[0] !== "string" && props.opcodes[0]?.cpuid &&
-                                    <th><Instruction name="cpuid" noTitle /> Feature Flag(s)</th>}
+                                {hasCpuid && <th><Instruction name="cpuid" noTitle /> Feature Flag(s)</th>}
                                 <th>Description</th>
                             </tr>
                         </thead>
                         <tbody>
                             {props.opcodes.map((row, idx) => (
                                 typeof row === "string" && row === ""
-                                    ? <tr key={idx}><td colSpan={6} /></tr>
+                                    ? <tr key={idx}><td colSpan={hasCpuid ? 7 : 6} /></tr>
                                     : <tr key={idx}>
                                         <td className="text-sm">
                                             <code className="px-1">{row.opcode}</code>
