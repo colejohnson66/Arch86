@@ -28,39 +28,18 @@ import Instruction from "@components/Instruction";
 import InstructionList from "@data/InstructionList";
 import InstructionTitles from "@data/InstructionTitles";
 import Layout from "@components/Layout";
-import MaybeArray from "@myTypes/MaybeArray";
 import React from "react";
 import Toc from "@components/Toc";
 
-function CommaSeparatedLinks(list: string[]): React.ReactElement {
-    // list[0] is the name in `InstructionTitles`
-    // list[1..] is the instructions
-    const fragments = list.slice(1).map((item, idx) => (
+function InstructionArrayEntry(title: string, list: string[]): React.ReactElement {
+    const fragments = list.map((item, idx) => (
         <React.Fragment key={idx}>
             <Instruction name={item} noTitle />
-            {idx !== list.length - 2 && ", " /* 2 because: 1 as always, and one for the slice offset */}
+            {idx !== list.length - 1 && ", "}
         </React.Fragment>
     ));
 
-    return <>{fragments}{" - "}{InstructionTitles[list[0]]}</>;
-}
-
-function InstructionListWithHeading(char: string, list: MaybeArray<string>[]): React.ReactElement {
-    // each entry in `list` is either a mnemonic, or an array
-    // if it's an array, the first element is a key into `InstructionTitles`, and the rest are mnemonics
-    char = char.toUpperCase();
-    return (
-        <React.Fragment key={char}>
-            <h3 id={`headingList${char}`}>{char}</h3>
-            <ul>
-                {list.map((item) => (
-                    Array.isArray(item)
-                        ? <li key={item[0]}>{CommaSeparatedLinks(item)}</li>
-                        : <li key={item}><Instruction name={item} useHyphen useAliasForTitleCaseMapping /></li>
-                ))}
-            </ul>
-        </React.Fragment>
-    );
+    return <>{fragments}{" - "}{InstructionTitles[title]}</>;
 }
 
 export default function Page(): React.ReactElement {
@@ -74,14 +53,13 @@ export default function Page(): React.ReactElement {
                 <Toc.Root>
                     <Toc.Entry href="#headingList" text="Mnemonic List">
                         {Object.keys(InstructionList).map((char) => (
-                            char.toUpperCase()
-                        )).map((char) => (
-                            <Toc.Entry key={char} href={`#headingList${char}`} text={char} />
+                            <Toc.Entry key={char} href={`#headingList${char.toUpperCase()}`} text={char.toUpperCase()} />
                         ))}
                     </Toc.Entry>
                 </Toc.Root>
                 <p>
                     x86 is home to a few hundred instructions with other 3,600 different encodings.
+                    This page lists all of them.
                 </p>
                 <p>
                     Up-to-date lists are available from <A href="https://software.intel.com/content/www/us/en/develop/articles/intel-sdm.html">Intel</A> and <A href="https://developer.amd.com/resources/developer-guides-manuals/">AMD</A>, however, they may be incomplete;
@@ -90,7 +68,17 @@ export default function Page(): React.ReactElement {
                 <Clear />
 
                 <h2 id="headingList">Mnemonic List</h2>
-                {Object.entries(InstructionList).map((entry) => InstructionListWithHeading(entry[0], entry[1]))}
+                {Object.entries(InstructionList).map((outer) => (
+                    <React.Fragment key={outer[0]}>
+                        <h3 id={`headingList${outer[0].toUpperCase()}`}>{outer[0].toUpperCase()}</h3>
+                        <ul>
+                            {outer[1].map((inner) => (
+                                Array.isArray(inner)
+                                    ? <li key={inner[0]}>{InstructionArrayEntry(inner[0], inner.slice(1))}</li>
+                                    : <li key={inner}><Instruction name={inner} useHyphen useAliasForTitleCaseMapping /></li>
+                            ))}
+                        </ul>
+                    </React.Fragment>))}
             </Layout.Content>
         </Layout.Root>
     );

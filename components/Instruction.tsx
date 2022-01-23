@@ -25,7 +25,7 @@ import A from "./A";
 import InstructionTitles from "@data/InstructionTitles";
 
 // convert a link to an instruction (key) to the correct URL
-const Aliases: Record<string, keyof typeof InstructionTitles> = {
+export const Aliases: Record<string, keyof typeof InstructionTitles> = {
     cbw: "cbw-cwde-cdqe",
     cwde: "cbw-cwde-cdqe",
     cdqe: "cbw-cwde-cdqe",
@@ -34,7 +34,7 @@ const Aliases: Record<string, keyof typeof InstructionTitles> = {
 };
 
 // when simple capitalization isn't enough
-const TitleCaseMapping: Partial<Record<keyof typeof InstructionTitles, string>> = {
+export const TitleCaseMapping: Partial<Record<keyof typeof InstructionTitles, string>> = {
     "bndcu-bndcn": "BNDCN/BNDCU",
     "cbw-cwde-cdqe": "CBW/CWDE/CDQE",
     "cmpxchg8b-cmpxchg16b": "CMPXCHG8B/CMPXCHG16B",
