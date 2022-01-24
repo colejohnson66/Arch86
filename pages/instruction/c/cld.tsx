@@ -44,10 +44,7 @@ const PageData: InstructionPageLayoutProps = {
         },
     ],
     encodings: {
-        operands: 1,
-        encodings: {
-            zo: ["None"],
-        },
+        zo: ["None"],
     },
     description: (
         <>

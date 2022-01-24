@@ -119,10 +119,7 @@ const PageData: InstructionPageLayoutProps = {
     ],
     opcodeNotes: <>This instruction is not supported on processors earlier than the <A href="/architecture/80486">80486</A>.</>,
     encodings: {
-        operands: 2,
-        encodings: {
-            mr: ["ModRM.r/m[rw]", "ModRM.reg[r]"],
-        },
+        mr: ["ModRM.r/m[rw]", "ModRM.reg[r]"],
     },
     description: (
         <>

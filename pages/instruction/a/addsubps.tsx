@@ -81,11 +81,8 @@ const PageData: InstructionPageLayoutProps = {
         },
     ],
     encodings: {
-        operands: 3,
-        encodings: {
-            legacy: ["ModRM.reg[rw]", "ModRM.r/m[r]", ""],
-            vex: ["ModRM.reg[rw]", "VEX.vvvv[r]", "ModRM.r/m[r]"],
-        },
+        legacy: ["ModRM.reg[rw]", "ModRM.r/m[r]", ""],
+        vex: ["ModRM.reg[rw]", "VEX.vvvv[r]", "ModRM.r/m[r]"],
     },
     description: (
         <>

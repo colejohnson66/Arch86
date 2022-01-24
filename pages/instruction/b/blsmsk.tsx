@@ -56,10 +56,7 @@ const PageData: InstructionPageLayoutProps = {
         },
     ],
     encodings: {
-        operands: 2,
-        encodings: {
-            vm: ["VEX.vvvv[w]", "ModRM.r/m[r]"],
-        },
+        vm: ["VEX.vvvv[w]", "ModRM.r/m[r]"],
     },
     description: (
         <>

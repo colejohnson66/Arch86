@@ -83,11 +83,8 @@ const PageData: InstructionPageLayoutProps = {
         },
     ],
     encodings: {
-        operands: 2,
-        encodings: {
-            rm: ["ModRM.reg[w]", "ModRM.r/m[r]"],
-            mr: ["ModRM.r/m[w]", "ModRM.reg[r]"],
-        },
+        rm: ["ModRM.reg[w]", "ModRM.r/m[r]"],
+        mr: ["ModRM.r/m[w]", "ModRM.reg[r]"],
     },
     description: (
         <>

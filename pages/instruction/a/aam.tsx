@@ -56,11 +56,8 @@ const PageData: InstructionPageLayoutProps = {
         },
     ],
     encodings: {
-        operands: 1,
-        encodings: {
-            zo: ["None (implicitly 10)"],
-            i: ["imm8"],
-        },
+        zo: ["None (implicitly 10)"],
+        i: ["imm8"],
     },
     description: (
         <>

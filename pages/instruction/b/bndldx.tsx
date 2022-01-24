@@ -46,10 +46,7 @@ const PageData: InstructionPageLayoutProps = {
         },
     ],
     encodings: {
-        operands: 2,
-        encodings: {
-            rm: ["ModRM.reg[w]", "SIB.base + SIB.index"],
-        },
+        rm: ["ModRM.reg[w]", "SIB.base + SIB.index"],
     },
     description: (
         <>

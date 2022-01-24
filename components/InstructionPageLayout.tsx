@@ -52,30 +52,29 @@ type OpcodeEntryValidity = {
 type OpcodeEntry = {
     opcode: React.ReactNode;
     mnemonic: React.ReactNode;
-    encoding: EncodingKey;
+    encoding: EncodingKey | "evex";
     validity: OpcodeEntryValidity;
     cpuid?: MaybeArray<string>;
     description: React.ReactNode;
 };
 
-type EncodingKey = "ai" | "d" | "evex" | "i" | "legacy" | "m" | "mi" | "mr"
-    | "o" | "rm" | "rmi" | "rmv" | "rvm" | "vex" | "vm" | "zo";
-type EncodingEntries = {
-    operands: number;
-    hasTuple?: false;
-    encodings: Partial<Record<EncodingKey, string[]>>;
-};
-type EncodingTupleType = "n/a" | "full" | "half" | "full-mem" | "tuple1-scalar"
+type EncodingKeyNoEvex = "ai" | "d" | "i" | "legacy" | "m" | "mi" | "mr" | "o" | "rm"
+    | "rmi" | "rmv" | "rvm" | "vex" | "vm" | "zo";
+type EncodingKey = EncodingKeyNoEvex | "evex";
+type EncodingTupleType = "full" | "half" | "full-mem" | "tuple1-scalar"
     | "tuple1-fixed" | "tuple2" | "tuple4" | "tuple8" | "half-mem"
     | "quarter-mem" | "eighth-mem" | "mem128" | "movddup";
+type EncodingTupleNonEvexArrayType = ["n/a", string]
+    | ["n/a", string, string]
+    | ["n/a", string, string, string]
+    | ["n/a", string, string, string, string];
 type EncodingTupleArrayType = [EncodingTupleType, string]
     | [EncodingTupleType, string, string]
     | [EncodingTupleType, string, string, string]
-    | [EncodingTupleType, string, string, string, string]
-type EncodingEntriesTuple = {
-    operands: number;
-    hasTuple: true;
-    encodings: Partial<Record<EncodingKey, EncodingTupleArrayType>>;
+    | [EncodingTupleType, string, string, string, string];
+type EncodingEntryNoEvex = Partial<Record<EncodingKeyNoEvex, string[]>>;
+type EncodingEntryEvex = Partial<Record<EncodingKeyNoEvex, EncodingTupleNonEvexArrayType>> & {
+    evex: EncodingTupleArrayType;
 };
 
 type Flags = {
@@ -129,7 +128,7 @@ export type InstructionPageLayoutProps = {
     titlePlain: string;
     opcodes: (OpcodeEntry | "")[];
     opcodeNotes?: MaybeArray<React.ReactNode>;
-    encodings: EncodingEntries | EncodingEntriesTuple;
+    encodings: EncodingEntryNoEvex | EncodingEntryEvex;
     description: React.ReactNode;
     operation: string;
     operationNotes?: MaybeArray<React.ReactNode>;
@@ -239,6 +238,8 @@ function FormatOtherExceptionsList(list: OtherExceptionList): React.ReactNode {
 
 export default function InstructionPageLayout(props: InstructionPageLayoutProps): React.ReactElement {
     const hasCpuid = typeof props.opcodes[0] !== "string" && props.opcodes[0]?.cpuid !== undefined;
+    const encodingHasTuple = Object.keys(props.encodings).includes("evex");
+    const operandCount = Object.values(props.encodings)[0].length - (encodingHasTuple ? 1 : 0);
     return (
         <Layout.Root navGroup="instruction" pageTitle={props.title} canonical={`/instruction/${props.id[0]}/${props.id}`}>
             {/* TODO: include mnemonic here */}
@@ -298,25 +299,24 @@ export default function InstructionPageLayout(props: InstructionPageLayoutProps)
                     <thead>
                         <tr>
                             <th>Encoding</th>
-                            {props.encodings.hasTuple &&
-                                <th>Tuple Type</th>}
-                            {props.encodings.operands === 1
+                            {encodingHasTuple && <th>Tuple Type</th>}
+                            {operandCount === 1
                                 ? <th>Operand</th>
-                                : [...Array(props.encodings.operands)].map((_, idx) => (
+                                : [...Array(operandCount)].map((_, idx) => (
                                     <th key={idx}>Operand {idx + 1}</th>
                                 ))}
                         </tr>
                     </thead>
                     <tbody>
                         {/* TODO: this JSX is messy; use functions */}
-                        {Object.entries(props.encodings.encodings).map((entry) => (
+                        {Object.entries(props.encodings).map((entry) => (
                             <tr key={entry[0]}>
                                 <td><code id={`#encoding${entry[0].toUpperCase()}`}>{entry[0]}</code></td>
                                 {entry[1].map((operand, idx) => (
                                     <td key={operand}>
                                         {/* is this an empty or a "tuple type" cell? */}
                                         {/* TODO: don't just wrap the cell in <code>, but selectively monospace and use <abbr> */}
-                                        {operand === "" || operand.startsWith("None") || (props.encodings.hasTuple && idx === 0)
+                                        {operand === "" || operand.startsWith("None") || (encodingHasTuple && idx === 0)
                                             ? operand
                                             : <code>{operand}</code>}
                                     </td>

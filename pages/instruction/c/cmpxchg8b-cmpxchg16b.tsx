@@ -68,10 +68,7 @@ const PageData: InstructionPageLayoutProps = {
     ],
     opcodeNotes: <>This instruction is not supported on processors earlier than the <A href="/architecture/p5">Pentium</A>.</>,
     encodings: {
-        operands: 1,
-        encodings: {
-            m: ["ModRM.r/m[rw]"],
-        },
+        m: ["ModRM.r/m[rw]"],
     },
     description: (
         <>

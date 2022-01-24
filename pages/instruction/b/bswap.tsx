@@ -58,10 +58,7 @@ const PageData: InstructionPageLayoutProps = {
     ],
     opcodeNotes: <>This instruction is not supported on processors earlier than the <A href="/architecture/80486">80486</A>.</>,
     encodings: {
-        operands: 1,
-        encodings: {
-            o: ["opcode(0..2)"],
-        },
+        o: ["opcode(0..2)"],
     },
     description: (
         <>

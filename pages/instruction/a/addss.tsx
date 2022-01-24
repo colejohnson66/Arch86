@@ -84,13 +84,9 @@ const PageData: InstructionPageLayoutProps = {
         },
     ],
     encodings: {
-        operands: 3,
-        hasTuple: true,
-        encodings: {
-            legacy: ["n/a", "ModRM.reg[rw]", "ModRM.r/m[r]", ""],
-            vex: ["n/a", "ModRM.reg[rw]", "VEX.vvvv[r]", "ModRM.r/m[r]"],
-            evex: ["tuple1-scalar", "ModRM.reg[rw]", "EVEX.vvvvv[r]", "ModRM.r/m[r]"],
-        },
+        legacy: ["n/a", "ModRM.reg[rw]", "ModRM.r/m[r]", ""],
+        vex: ["n/a", "ModRM.reg[rw]", "VEX.vvvv[r]", "ModRM.r/m[r]"],
+        evex: ["tuple1-scalar", "ModRM.reg[rw]", "EVEX.vvvvv[r]", "ModRM.r/m[r]"],
     },
     description: (
         <>
