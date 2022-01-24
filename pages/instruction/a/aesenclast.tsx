@@ -160,7 +160,7 @@ const PageData: InstructionPageLayoutProps = {
 
 void VAESENCLAST(SimdU128 dest, SimdU128 src1, SimdU128 src2, int kl)
 {
-    for (int n = 0; n < kl, n++)
+    for (int n = 0; n < kl; n++)
     {
         U128 state = src1[n];
         state = AesShiftRows(state);

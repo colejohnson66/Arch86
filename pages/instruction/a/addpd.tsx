@@ -157,7 +157,7 @@ const PageData: InstructionPageLayoutProps = {
 
 void VADDPD_Vex(SimdF64 dest, SimdF64 src1, SimdF64 src2, int kl)
 {
-    for (int n = 0; n < kl, n++)
+    for (int n = 0; n < kl; n++)
         dest[n] = src1[n] + src2[n];
     dest[kl..] = 0;
 }
@@ -168,7 +168,7 @@ public void VADDPD_Vex256(SimdF64 dest, SimdF64 src1, SimdF64 src2) =>
 
 void VADDPD_EvexMemory(SimdF64 dest, SimdF64 src1, SimdF64 src2, KMask k, int kl)
 {
-    for (int n = 0; n < kl, n++)
+    for (int n = 0; n < kl; n++)
     {
         if (k[n])
             dest[n] = src1[n] + (EVEX.b ? src2[0] : src2[n]);
@@ -190,7 +190,7 @@ void VADDPD_EvexRegister(SimdF64 dest, SimdF64 src1, SimdF64 src2, KMask k, int 
     if (kl == 8 && EVEX.b)
         OverrideRoundingModeForThisInstruction(EVEX.rc);
 
-    for (int n = 0; n < kl, n++)
+    for (int n = 0; n < kl; n++)
     {
         if (k[n])
             dest[n] = src1[n] + src2[n];
