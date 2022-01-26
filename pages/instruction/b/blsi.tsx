@@ -27,8 +27,8 @@ import Canned from "@library/Canned";
 
 const PageData: InstructionPageLayoutProps = {
     id: "blsi",
-    title: <>Extract Lowest Set Bit</>,
-    titlePlain: "Extract Lowest Set Bit",
+    title: <>Isolate Lowest Set Bit</>,
+    titlePlain: "Isolate Lowest Set Bit",
     opcodes: [
         {
             opcode: <>VEX.L0.NP.0F38.W0 F3 /3</>,
@@ -40,7 +40,7 @@ const PageData: InstructionPageLayoutProps = {
                 64: "valid",
             },
             cpuid: "bmi1",
-            description: <>Extract the lowest set bit from <i>r/m32</i> and set that same bit in <i>r32</i>.</>,
+            description: <>Isolate the lowest set bit from <i>r/m32</i> and set that same bit in <i>r32</i>.</>,
         },
         {
             opcode: <>VEX.L0.NP.0F38.W1 F3 /3</>,
@@ -52,7 +52,7 @@ const PageData: InstructionPageLayoutProps = {
                 64: "valid",
             },
             cpuid: "bmi1",
-            description: <>Extract the lowest set bit from <i>r/m64</i> and set that same bit in <i>r64</i>.</>,
+            description: <>Isolate the lowest set bit from <i>r/m64</i> and set that same bit in <i>r64</i>.</>,
         },
     ],
     encodings: {
@@ -61,7 +61,7 @@ const PageData: InstructionPageLayoutProps = {
     description: (
         <>
             <p>
-                The <code>BLSI</code> instruction extracts the lowest set bit in the source operand and sets the same bit in the destination operand.
+                The <code>BLSI</code> instruction extracts (isolates) the lowest set bit in the source operand and sets the same bit in the destination operand.
                 All other bits in the destination operand are cleared.
             </p>
             <p>

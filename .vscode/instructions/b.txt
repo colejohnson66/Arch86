@@ -1,4 +1,9 @@
 bextr
+blcfill
+blci
+blcic
+blcmsk
+blcs
 blendpd
 vblendpd
 blendps
@@ -7,7 +12,9 @@ blendvpd
 vblendvpd
 blendvps
 vblendvps
+blsfill
 blsi
+blsic
 blsmsk
 blsr
 bndcl

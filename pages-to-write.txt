@@ -42,6 +42,15 @@
   /aesenc256kl
   /aesencwide128kl
   /aesencwide256kl
+  /bextr (XOP (immediate) form)
+  /blcfill
+  /blci
+  /blcic
+  /blcmsk
+  /blcs
+  /blsfill
+  /blsic
+  /blsmsk (rename)
   /cpuid
   /help#headingAlternateR8Encoding
   /help#headingExceptionOther
