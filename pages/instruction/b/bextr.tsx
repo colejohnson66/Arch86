@@ -83,14 +83,14 @@ const PageData: InstructionPageLayoutProps = {
         </>
     ),
     operation:
-        `public void BEXTR((ref U32 dest, U32 src1, U32 src2)
+        `public void BEXTR(ref U32 dest, U32 src1, U32 src2)
 {
     U8 start = src2[0..7];
     U8 end = start + src2[8..15];
     dest = src1[start..end];
 }
 
-public void BEXTR((ref U64 dest, U64 src1, U64 src2)
+public void BEXTR(ref U64 dest, U64 src1, U64 src2)
 {
     U8 start = src2[0..7];
     U8 end = start + src2[8..15];

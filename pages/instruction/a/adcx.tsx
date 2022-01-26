@@ -82,12 +82,12 @@ const PageData: InstructionPageLayoutProps = {
         </>
     ),
     operation:
-        `public void ADCX((ref U32 dest, U32 src)
+        `public void ADCX(ref U32 dest, U32 src)
 {
     dest += src + EFLAGS.CF;
 }
 
-public void ADCX((ref U64 dest, U64 src)
+public void ADCX(ref U64 dest, U64 src)
 {
     dest += src + EFLAGS.CF;
 }`,

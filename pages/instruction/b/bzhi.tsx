@@ -83,7 +83,7 @@ const PageData: InstructionPageLayoutProps = {
         </>
     ),
     operation:
-        `public void BZHI((ref U32 dest, U32 src, U32 idx)
+        `public void BZHI(ref U32 dest, U32 src, U32 idx)
 {
     U32 n = idx & 0xFF;
     if (n < 32)
@@ -92,7 +92,7 @@ const PageData: InstructionPageLayoutProps = {
         dest = 0.
 }
 
-public void BZHI((ref U64 dest, U64 src, U64 idx)
+public void BZHI(ref U64 dest, U64 src, U64 idx)
 {
     U64 n = idx & 0xFF;
     if (n < 64)

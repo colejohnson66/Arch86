@@ -70,12 +70,12 @@ const PageData: InstructionPageLayoutProps = {
         </>
     ),
     operation:
-        `public void BLSI((ref U32 dest, U32 src)
+        `public void BLSI(ref U32 dest, U32 src)
 {
     dest = (-src) & src;
 }
 
-public void BLSI((ref U64 dest, U64 src)
+public void BLSI(ref U64 dest, U64 src)
 {
     dest = (-src) & src;
 }`,

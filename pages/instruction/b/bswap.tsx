@@ -74,7 +74,7 @@ const PageData: InstructionPageLayoutProps = {
         </>
     ),
     operation:
-        `public void BSWAP((ref U32 arg)
+        `public void BSWAP(ref U32 arg)
 {
     U32 temp = arg;
     arg.Bit[0..7] = temp.Bit[24..31];
@@ -83,7 +83,7 @@ const PageData: InstructionPageLayoutProps = {
     arg.Bit[24..31] = temp.Bit[0..7];
 }
 
-public void BSWAP((ref U64 arg)
+public void BSWAP(ref U64 arg)
 {
     U64 temp = arg;
     arg.Bit[0..7] = temp.Bit[56..63];
