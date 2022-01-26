@@ -103,6 +103,7 @@ public void BLCI(ref U64 dest, U64 src)
     exceptions: {
         simd: "none",
         other: {
+            // xop: ???,
         },
     },
 };
