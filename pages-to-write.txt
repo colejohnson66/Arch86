@@ -45,7 +45,7 @@
   /bextr      (need XOP intrinsics?)
   /blcfill    (need exceptions and intrinsics)
   /blci       (need exceptions and intrinsics)
-  /blcic
+  /blcic      (need exceptions and intrinsics)
   /blcmsk
   /blcs
   /blsfill    (need exceptions and intrinsics)
