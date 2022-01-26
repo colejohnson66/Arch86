@@ -62,6 +62,12 @@ const Canned = {
             In other words, <code>VEX.W1</code> is treated as <code>VEX.W0</code> outside 64 bit mode.
         </>
     ),
+    XopWIgnoredIn32: (
+        <>
+            The operand size is always <Unit value={32} unit="bits" /> if not in 64 bit mode.
+            In other words, <code>XOP.W1</code> is treated as <code>XOP.W0</code> outside 64 bit mode.
+        </>
+    ),
 };
 
 export default Canned;
