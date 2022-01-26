@@ -62,9 +62,42 @@ const PageData: InstructionPageLayoutProps = {
                     Store the result in <i>r64a</i>.
                 </>,
         },
+        {
+            opcode: <>XOP.L0.NP.0A.W0 10 /r <i>id</i></>,
+            mnemonic: <>BEXTR <i>r32</i>, <i>r/m32</i>, <i>imm32</i></>,
+            encoding: "xop",
+            validity: {
+                16: "invalid",
+                32: "valid",
+                64: "valid",
+            },
+            cpuid: "tbm",
+            description:
+                <>
+                    Contiguous bitwise extract from <i>r/m32</i> using <i>imm32</i> as a control.
+                    Store the result in <i>r32</i>.
+                </>,
+        },
+        {
+            opcode: <>XOP.L0.NP.0A.W1 10 /r <i>id</i></>,
+            mnemonic: <>BEXTR <i>r64</i>, <i>r/m64</i>, <i>imm32</i></>,
+            encoding: "xop",
+            validity: {
+                16: "invalid",
+                32: "invalid",
+                64: "valid",
+            },
+            cpuid: "tbm",
+            description:
+                <>
+                    Contiguous bitwise extract from <i>r/m64</i> using <i>imm32</i> as a control.
+                    Store the result in <i>r64</i>.
+                </>,
+        },
     ],
     encodings: {
         vex: ["ModRM.reg[w]", "ModRM.r/m[r]", "VEX.vvvv[r]"],
+        xop: ["ModRM.reg[w]", "ModRM.r/m[r]", "imm32"],
     },
     description: (
         <>
@@ -76,22 +109,31 @@ const PageData: InstructionPageLayoutProps = {
                 The control register contains 16 bits: the lower eight are the starting index into the slice, and the upper eight is the amount of bits to extract.
                 In other words, the destination register will be filled least significant to most significant by copying from the source, beginning at the starting position (where 0 indicates the least significant bit).
                 The length field determines how many bits are extracted.
+                Bits <code>16..</code> of the control operand are ignored.
             </p>
             <p>
-                {Canned.WIgnoredIn32("vex")}
+                {Canned.WIgnoredIn32("vex+xop")}
             </p>
         </>
     ),
     operation:
         `public void BEXTR(ref U32 dest, U32 src1, U32 src2)
 {
+    // both VEX and XOP forms
     U8 start = src2[0..7];
     U8 end = start + src2[8..15];
     dest = src1[start..end];
 }
 
+public void BEXTR(ref U64 dest, U64 src1, U32 src2)
+{
+    // XOP form
+    BEXTR(ref dest, src1, (U64)src2);
+}
+
 public void BEXTR(ref U64 dest, U64 src1, U64 src2)
 {
+    // VEX form
     U8 start = src2[0..7];
     U8 end = start + src2[8..15];
     dest = src1[start..end]
