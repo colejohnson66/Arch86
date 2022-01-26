@@ -132,7 +132,7 @@ export default function Page(): React.ReactElement {
                     <dd>
                         The actual vector prefix that this opcode uses.
                         This can be one of: VEX, EVEX, or XOP.
-                        In the case of VEX prefixes, the choice of the <code>0xC4</code> or <code>0xC5</code> form is not specified.
+                        In the case of VEX prefixes, the choice of the <code>0xC4</code> or <code>0xC5</code> form is not specified and must be determined from the required (and prefix implied) bits.
                     </dd>
                     <dt>length</dt>
                     <dd>
@@ -148,7 +148,7 @@ export default function Page(): React.ReactElement {
                         The implied (&quot;compressed&quot;) opcode map that is stored in the <code>mm</code> bits of the vector prefix.
                         For example, for VEX and EVEX prefixes, a value of <code>0F38</code> implies a two byte <code>0F 38</code> opmap prefix being encoded as <code>10b</code> in the <code>mm</code> bits.
                         In the case of XOP prefixes, this value is simply the hex encoding of the <code>mmmmm</code> bits;
-                        They do not correspond to an implied opmap bytes.
+                        They do not correspond to any implied opmap bytes.
                     </dd>
                     <dt>legacy</dt>
                     <dd>
