@@ -154,6 +154,7 @@ public void BEXTR(ref U64 dest, U64 src1, U64 src2)
         simd: "none",
         other: {
             vex: "13",
+            // xop: ???,
         },
     },
 };

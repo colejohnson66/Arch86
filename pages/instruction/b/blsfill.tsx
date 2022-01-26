@@ -101,6 +101,7 @@ public void BLSFILL(ref U64 dest, U64 src)
         // "<1> <2>(<3>)",
     ],
     exceptions: {
+        simd: "none",
         other: {
         },
     },

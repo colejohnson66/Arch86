@@ -40,7 +40,11 @@ const PageData: InstructionPageLayoutProps = {
                 64: "valid",
             },
             cpuid: "bmi1",
-            description: <>Isolate the lowest set bit from <i>r/m32</i> and set that same bit in <i>r32</i>.</>,
+            description:
+                <>
+                    Isolate the lowest set bit from <i>r/m32</i> and set that same bit in <i>r32</i>.
+                    Clear all other bits in <i>r32</i>.
+                </>,
         },
         {
             opcode: <>VEX.L0.NP.0F38.W1 F3 /3</>,
@@ -52,7 +56,11 @@ const PageData: InstructionPageLayoutProps = {
                 64: "valid",
             },
             cpuid: "bmi1",
-            description: <>Isolate the lowest set bit from <i>r/m64</i> and set that same bit in <i>r64</i>.</>,
+            description:
+                <>
+                    Isolate the lowest set bit from <i>r/m64</i> and set that same bit in <i>r64</i>.
+                    Clear all other bits in <i>r64</i>.
+                </>,
         },
     ],
     encodings: {
@@ -72,12 +80,12 @@ const PageData: InstructionPageLayoutProps = {
     operation:
         `public void BLSI(ref U32 dest, U32 src)
 {
-    dest = (-src) & src;
+    dest = src & -src;
 }
 
 public void BLSI(ref U64 dest, U64 src)
 {
-    dest = (-src) & src;
+    dest = src & -src;
 }`,
     flags: {
         CF: <>Set if the source is not zero. Cleared otherwise.</>,
