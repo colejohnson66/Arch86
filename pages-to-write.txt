@@ -44,7 +44,7 @@
   /aesencwide256kl
   /bextr      (need XOP intrinsics?)
   /blcfill    (need exceptions and intrinsics)
-  /blci
+  /blci       (need exceptions and intrinsics)
   /blcic
   /blcmsk
   /blcs
