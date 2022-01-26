@@ -78,7 +78,7 @@ const PageData: InstructionPageLayoutProps = {
                 If those eight bits contain a value greater than the operand size, the destination operand will be set to <code>0</code> and <Register name="EFLAGS.CF" /> set.
             </p>
             <p>
-                {Canned.VexWIgnoredIn32}
+                {Canned.WIgnoredIn32("vex")}
             </p>
         </>
     ),

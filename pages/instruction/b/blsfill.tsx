@@ -73,7 +73,7 @@ const PageData: InstructionPageLayoutProps = {
                 The result is stored in the destination operand.
             </p>
             <p>
-                {Canned.XopWIgnoredIn32}
+                {Canned.WIgnoredIn32("xop")}
             </p>
         </>
     ),

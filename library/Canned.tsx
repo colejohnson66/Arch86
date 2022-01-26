@@ -26,6 +26,7 @@ import Exception from "@components/Exception";
 import Instruction from "@components/Instruction";
 import Register from "@components/Register";
 import Unit from "@components/Unit";
+import assert from "assert";
 
 const Canned = {
     Cpl0Required:
@@ -48,32 +49,39 @@ const Canned = {
     },
     RexR8Encoding: <>This uses the <A href="/instruction/help#headingOverviewAlternateGpr8Encoding">alterate <code>gpr8</code> encoding</A>.</>,
     UndocumentedOpcode: <>Undocumented.</>, // TODO: link to a page about undocumented opcodes
-    VexWIgnoredIn32: (
-        <>
-            The operand size is always <Unit value={32} unit="bits" /> if not in 64 bit mode.
-            In other words, <code>VEX.W1</code> is treated as <code>VEX.W0</code> outside 64 bit mode.
-        </>
-    ),
-    VvvvReserved: (arg: "both" | "vex" | "evex") => {
-        if (arg === "both")
-            return <><code>VEX.vvvv</code> and <code>EVEX.vvvvv</code> are reserved and must be <code>b1111</code> and <code>b11111</code> (respectively). Any other values will raise a <code>#UD</code> exception.</>;
+    VvvvReserved: (arg: "vex" | "xop" | "evex" | "vex+xop" | "vex+evex" | "all") => {
+        let jsx: React.ReactNode;
         if (arg === "vex")
-            return <><code>VEX.vvvv</code> is reserved and must be <code>b1111</code>. Any other values will raise a <code>#UD</code> exception.</>;
-        if (arg === "evex")
-            return <><code>EVEX.vvvvv</code> is reserved and must be <code>b11111</code>. Any other values will raise a <code>#UD</code> exception.</>;
+            jsx = <><code>VEX.vvvv</code> is reserved and must be <code>b1111</code> (<code>0</code> inverted).</>;
+        // else if (arg === "xop")
+        //     jsx = <><code>XOP.vvvv</code> is reserved and must be <code>b1111</code> (<code>0</code> inverted).</>;
+        // else if (arg === "evex")
+        //     jsx = <><code>EVEX.vvvv</code> is reserved and must be <code>b11111</code> (<code>0</code> inverted).</>;
+        // else if (arg === "vex+xop")
+        //     jsx = <><code>VEX.vvvv</code> and <code>XOP.vvvv</code> are reserved and must both be <code>b1111</code> (<code>0</code> inverted).</>;
+        // else if (arg === "vex+evex")
+        //     jsx = <><code>VEX.vvvv</code> and <code>EVEX.vvvvv</code> are reserved and must be <code>b1111</code> and <code>b11111</code>, respectively (<code>0</code> inverted).</>;
+        // else if (arg === "all")
+        //     jsx = <><code>VEX.vvvv</code>, <code>XOP.vvvv</code>, and <code>EVEX.vvvvv</code> are reserved and must all be <code>b1111</code> (VEX and XOP) or <code>b11111</code> (EVEX) (<code>0</code> inverted).</>;
+        else
+            assert(false);
+        return <>{jsx} Any other values will raise a <Exception name="UD" /> exception.</>;
     },
-    VexXopWIgnoredIn32: (
-        <>
-            The operand size is always <Unit value={32} unit="bits" /> if not in 64 bit mode.
-            In other words, <code>VEX.W1</code> and <code>XOP.W1</code> are treated as <code>VEX.W0</code> and <code>XOP.W0</code> (respectively) outside 64 bit mode.
-        </>
-    ),
-    XopWIgnoredIn32: (
-        <>
-            The operand size is always <Unit value={32} unit="bits" /> if not in 64 bit mode.
-            In other words, <code>XOP.W1</code> is treated as <code>XOP.W0</code> outside 64 bit mode.
-        </>
-    ),
+    WIgnoredIn32: (arg: "vex" | "xop" | "vex+xop") => {
+        let jsx: React.ReactNode;
+        if (arg === "vex")
+            jsx = <><code>VEX.W1</code> is treated as <code>VEX.W0</code></>;
+        else if (arg === "xop")
+            jsx = <><code>XOP.W1</code> is treated as <code>XOP.W0</code></>;
+        else if (arg === "vex+xop")
+            jsx = <><code>VEX.W1</code> and <code>XOP.W1</code> are treated as <code>VEX.W0</code> and <code>XOP.W0</code> (respectively)</>;
+        return (
+            <>
+                The operand size is always <Unit value={32} unit="bits" /> if not in Long Mode.
+                In other words, {jsx} outside Long Mode.
+            </>
+        );
+    },
 };
 
 export default Canned;

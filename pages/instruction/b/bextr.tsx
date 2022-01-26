@@ -78,7 +78,7 @@ const PageData: InstructionPageLayoutProps = {
                 The length field determines how many bits are extracted.
             </p>
             <p>
-                {Canned.VexWIgnoredIn32}
+                {Canned.WIgnoredIn32("vex")}
             </p>
         </>
     ),
