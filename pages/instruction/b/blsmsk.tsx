@@ -65,7 +65,7 @@ const PageData: InstructionPageLayoutProps = {
                 All other bits in the destination operand are cleared.
             </p>
             <p>
-                {Canned.WIgnoredIn32}
+                {Canned.VexWIgnoredIn32}
             </p>
         </>
     ),

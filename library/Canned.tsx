@@ -48,6 +48,12 @@ const Canned = {
     },
     RexR8Encoding: <>This uses the <A href="/instruction/help#headingOverviewAlternateGpr8Encoding">alterate <code>gpr8</code> encoding</A>.</>,
     UndocumentedOpcode: <>Undocumented.</>, // TODO: link to a page about undocumented opcodes
+    VexWIgnoredIn32: (
+        <>
+            The operand size is always <Unit value={32} unit="bits" /> if not in 64 bit mode.
+            In other words, <code>VEX.W1</code> is treated as <code>VEX.W0</code> outside 64 bit mode.
+        </>
+    ),
     VvvvReserved: (arg: "both" | "vex" | "evex") => {
         if (arg === "both")
             return <><code>VEX.vvvv</code> and <code>EVEX.vvvvv</code> are reserved and must be <code>b1111</code> and <code>b11111</code> (respectively). Any other values will raise a <code>#UD</code> exception.</>;
@@ -56,10 +62,10 @@ const Canned = {
         if (arg === "evex")
             return <><code>EVEX.vvvvv</code> is reserved and must be <code>b11111</code>. Any other values will raise a <code>#UD</code> exception.</>;
     },
-    WIgnoredIn32: (
+    VexXopWIgnoredIn32: (
         <>
             The operand size is always <Unit value={32} unit="bits" /> if not in 64 bit mode.
-            In other words, <code>VEX.W1</code> is treated as <code>VEX.W0</code> outside 64 bit mode.
+            In other words, <code>VEX.W1</code> and <code>XOP.W1</code> are treated as <code>VEX.W0</code> and <code>XOP.W0</code> (respectively) outside 64 bit mode.
         </>
     ),
     XopWIgnoredIn32: (

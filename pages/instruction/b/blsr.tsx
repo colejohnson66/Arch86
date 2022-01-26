@@ -64,7 +64,7 @@ const PageData: InstructionPageLayoutProps = {
                 The <code>BLSR</code> instruction copies from the source operand into the destination operand while, at the same time, clearing (resetting) the lowest set bit.
             </p>
             <p>
-                {Canned.WIgnoredIn32}
+                {Canned.VexWIgnoredIn32}
             </p>
         </>
     ),
