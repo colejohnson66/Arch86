@@ -29,7 +29,7 @@ import Clear from "@components/Clear";
 import Instruction from "@components/Instruction";
 import Layout from "@components/Layout";
 import React from "react";
-import Scrollable from "./Scrollable";
+import Scrollable from "@components/Scrollable";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import SyntaxHighlighterTheme from "react-syntax-highlighter/dist/cjs/styles/hljs/atom-one-light";
 import Unit from "@components/Unit";
@@ -295,36 +295,38 @@ export default function InstructionPageLayout(props: InstructionPageLayoutProps)
                     </ol>}
 
                 <h2 id="headingEncoding">Encoding</h2>
-                <table className="instruction-table">
-                    <thead>
-                        <tr>
-                            <th>Encoding</th>
-                            {encodingHasTuple && <th>Tuple Type</th>}
-                            {operandCount === 1
-                                ? <th>Operand</th>
-                                : [...Array(operandCount)].map((_, idx) => (
-                                    <th key={idx}>Operand {idx + 1}</th>
-                                ))}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {/* TODO: this JSX is messy; use functions */}
-                        {Object.entries(props.encodings).map((entry) => (
-                            <tr key={entry[0]}>
-                                <td><code id={`#encoding${entry[0].toUpperCase()}`}>{entry[0]}</code></td>
-                                {entry[1].map((operand, idx) => (
-                                    <td key={operand}>
-                                        {/* is this an empty or a "tuple type" cell? */}
-                                        {/* TODO: don't just wrap the cell in <code>, but selectively monospace and use <abbr> */}
-                                        {operand === "" || operand.startsWith("None") || (encodingHasTuple && idx === 0)
-                                            ? operand
-                                            : <code>{operand}</code>}
-                                    </td>
-                                ))}
+                <Scrollable>
+                    <table className="instruction-table">
+                        <thead>
+                            <tr>
+                                <th>Encoding</th>
+                                {encodingHasTuple && <th>Tuple Type</th>}
+                                {operandCount === 1
+                                    ? <th>Operand</th>
+                                    : [...Array(operandCount)].map((_, idx) => (
+                                        <th key={idx}>Operand {idx + 1}</th>
+                                    ))}
                             </tr>
-                        ))}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            {/* TODO: this JSX is messy; use functions */}
+                            {Object.entries(props.encodings).map((entry) => (
+                                <tr key={entry[0]}>
+                                    <td><code id={`#encoding${entry[0].toUpperCase()}`}>{entry[0]}</code></td>
+                                    {entry[1].map((operand, idx) => (
+                                        <td key={operand}>
+                                            {/* is this an empty or a "tuple type" cell? */}
+                                            {/* TODO: don't just wrap the cell in <code>, but selectively monospace and use <abbr> */}
+                                            {operand === "" || operand.startsWith("None") || (encodingHasTuple && idx === 0)
+                                                ? operand
+                                                : <code>{operand}</code>}
+                                        </td>
+                                    ))}
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </Scrollable>
                 <Clear />
 
                 <h2 id="headingDescription">Description</h2>

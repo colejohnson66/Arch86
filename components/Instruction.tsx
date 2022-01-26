@@ -21,7 +21,7 @@
  * =============================================================================
  */
 
-import A from "./A";
+import A from "@components/A";
 import InstructionTitles from "@data/InstructionTitles";
 
 // convert a link to an instruction (key) to the correct URL
