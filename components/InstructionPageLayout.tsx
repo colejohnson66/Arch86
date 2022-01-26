@@ -52,14 +52,14 @@ type OpcodeEntryValidity = {
 type OpcodeEntry = {
     opcode: React.ReactNode;
     mnemonic: React.ReactNode;
-    encoding: EncodingKey | "evex";
+    encoding: EncodingKey;
     validity: OpcodeEntryValidity;
     cpuid?: MaybeArray<string>;
     description: React.ReactNode;
 };
 
-type EncodingKeyNoEvex = "ai" | "d" | "i" | "legacy" | "m" | "mi" | "mr" | "o" | "rm"
-    | "rmi" | "rmv" | "rvm" | "vex" | "vm" | "zo";
+type EncodingKeyNoEvex = "ai" | "d" | "i" | "legacy" | "m" | "mi" | "mr" | "o"
+    | "rm" | "rmi" | "vex" | "xop" | "zo";
 type EncodingKey = EncodingKeyNoEvex | "evex";
 type EncodingTupleType = "full" | "half" | "full-mem" | "tuple1-scalar"
     | "tuple1-fixed" | "tuple2" | "tuple4" | "tuple8" | "half-mem"

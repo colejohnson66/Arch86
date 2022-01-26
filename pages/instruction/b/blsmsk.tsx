@@ -33,7 +33,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>VEX.L0.NP.0F38.W0 F3 /3</>,
             mnemonic: <>BLSMSK <i>r32</i>, <i>r/m32</i></>,
-            encoding: "vm",
+            encoding: "vex",
             validity: {
                 16: "invalid",
                 32: "valid",
@@ -45,7 +45,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>VEX.L0.NP.0F38.W1 F3 /3</>,
             mnemonic: <>BLSMSK <i>r64</i>, <i>r/m64</i></>,
-            encoding: "vm",
+            encoding: "vex",
             validity: {
                 16: "invalid",
                 32: "invalid",
@@ -56,7 +56,7 @@ const PageData: InstructionPageLayoutProps = {
         },
     ],
     encodings: {
-        vm: ["VEX.vvvv[w]", "ModRM.r/m[r]"],
+        vex: ["VEX.vvvv[w]", "ModRM.r/m[r]"],
     },
     description: (
         <>
