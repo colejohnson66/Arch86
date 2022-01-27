@@ -105,7 +105,7 @@ const InstructionList: Record<string, MaybeArray<keyof typeof Titles>[]> = {
         "crc32",
         ["cvtdqList", "cvtdq2ps", "cvtdq2pd"],
         ["cvtpdList", "cvtpd2dq", "cvtpd2pi", "cvtpd2ps"],
-        // ["cvtpiList", "cvtpi2ps", "cvtpi2pd"],
+        ["cvtpiList", "cvtpi2ps", "cvtpi2pd"],
         // ["cvtpsList", "cvtps2dq", "cvtps2pd", "cvtps2pi"],
         // ["cvtsdList", "cvtsd2si", "cvtsd2ss"],
         // ["cvtsiList", "cvtsi2ss", "cvtsi2sd"],
