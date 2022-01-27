@@ -84,7 +84,7 @@ const PageData: InstructionPageLayoutProps = {
         },
         {
             opcode: <>EVEX.128.F3.0F.W0 E6 /r</>,
-            mnemonic: <>VCVTDQ2PD <i>xmm1{k1z}</i>, <i>xmm2/m128/m64bcst</i></>,
+            mnemonic: <>VCVTDQ2PD {k1z} <i>xmm1</i>, <i>xmm2/m128/m64bcst</i></>,
             encoding: "evex",
             validity: {
                 16: "invalid",
@@ -100,7 +100,7 @@ const PageData: InstructionPageLayoutProps = {
         },
         {
             opcode: <>EVEX.256.F3.0F.W0 E6 /r</>,
-            mnemonic: <>VCVTDQ2PD <i>ymm1{k1z}</i>, <i>ymm2/m256/m64bcst</i></>,
+            mnemonic: <>VCVTDQ2PD {k1z} <i>ymm1</i>, <i>ymm2/m256/m64bcst</i></>,
             encoding: "evex",
             validity: {
                 16: "invalid",
@@ -116,7 +116,7 @@ const PageData: InstructionPageLayoutProps = {
         },
         {
             opcode: <>EVEX.512.F3.0F.W0 E6 /r</>,
-            mnemonic: <>VCVTDQ2PD <i>zmm1{k1z}</i>, <i>zmm2/m512/m64bcst{er}</i></>,
+            mnemonic: <>VCVTDQ2PD {k1z} <i>zmm1</i>, <i>zmm2/m512/m64bcst{er}</i></>,
             encoding: "evex",
             validity: {
                 16: "invalid",
@@ -187,7 +187,7 @@ public void VCVTDQ2PD_Evex512Memory(SimdF64 dest, SimdU32 src, KMask k) =>
 
 void VCVTDQ2PD_EvexRegister(SimdF64 dest, SimdU32 src, KMask k, int kl)
 {
-    if (kl == 16 && EVEX.b)
+    if (kl == 8 && EVEX.b)
         OverrideRoundingModeForThisInstruction(EVEX.rc);
 
     for (int n = 0; n < kl; n++)
@@ -231,6 +231,10 @@ public void VCVTDQ2PD_Evex512Register(SimdF64 dest, SimdU32 src, KMask k) =>
         other: {
             vex: "2",
             evex: "e2",
+            UD: [
+                Exceptions.VexVvvv,
+                Exceptions.EvexVvvvv,
+            ],
         },
     },
 };

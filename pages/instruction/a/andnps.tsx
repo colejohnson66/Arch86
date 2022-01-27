@@ -188,7 +188,7 @@ public void VANDNPS_Evex512Memory(SimdU32 dest, SimdU32 src1, SimdU32 src2, KMas
 
 void VANDNPS_EvexRegister(SimdU32 dest, SimdU32 src1, SimdU32 src2, KMask k, int kl)
 {
-    if (kl == 8 && EVEX.b)
+    if (kl == 16 && EVEX.b)
         OverrideRoundingModeForThisInstruction(EVEX.rc);
 
     for (int n = 0; n < kl; n++)

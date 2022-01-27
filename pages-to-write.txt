@@ -51,6 +51,7 @@
   /blsfill    (need exceptions and intrinsics)
   /blsic
   /blsmsk     (rename)
+  /clgi       (AMD SVM)
   /cpuid
   /help#headingAlternateR8Encoding
   /help#headingExceptionOther

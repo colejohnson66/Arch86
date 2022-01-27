@@ -84,7 +84,7 @@ const PageData: InstructionPageLayoutProps = {
         },
         {
             opcode: <>EVEX.128.NP.0F.W0 5B /r</>,
-            mnemonic: <>VCVTDQ2PS <i>xmm1{k1z}</i>, <i>xmm2/m128/m32bcst</i></>,
+            mnemonic: <>VCVTDQ2PS {k1z} <i>xmm1</i>, <i>xmm2/m128/m32bcst</i></>,
             encoding: "evex",
             validity: {
                 16: "invalid",
@@ -100,7 +100,7 @@ const PageData: InstructionPageLayoutProps = {
         },
         {
             opcode: <>EVEX.256.NP.0F.W0 5B /r</>,
-            mnemonic: <>VCVTDQ2PS <i>ymm1{k1z}</i>, <i>ymm2/m256/m32bcst</i></>,
+            mnemonic: <>VCVTDQ2PS {k1z} <i>ymm1</i>, <i>ymm2/m256/m32bcst</i></>,
             encoding: "evex",
             validity: {
                 16: "invalid",
@@ -116,7 +116,7 @@ const PageData: InstructionPageLayoutProps = {
         },
         {
             opcode: <>EVEX.512.NP.0F.W0 5B /r</>,
-            mnemonic: <>VCVTDQ2PS <i>zmm1{k1z}</i>, <i>zmm2/m512/m32bcst{er}</i></>,
+            mnemonic: <>VCVTDQ2PS {k1z} <i>zmm1</i>, <i>zmm2/m512/m32bcst{er}</i></>,
             encoding: "evex",
             validity: {
                 16: "invalid",
@@ -233,6 +233,10 @@ public void VCVTDQ2PS_Evex512Register(SimdF32 dest, SimdU32 src, KMask k) =>
         other: {
             vex: "2",
             evex: "e2",
+            UD: [
+                Exceptions.VexVvvv,
+                Exceptions.EvexVvvvv,
+            ],
         },
     },
 };
