@@ -197,6 +197,8 @@ const InstructionTitles = {
     endbr64: <>Terminate an Indirect Branch in 64 bit Mode</>,
     enter: <>Make Stack Frame for Procedure Parameters</>,
     extractps: <>Extract {pspfp}</>,
+
+    lock: <>Assert <code>LOCK#</code> Pin</>
 };
 
 export default InstructionTitles;

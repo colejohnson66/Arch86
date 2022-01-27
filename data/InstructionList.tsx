@@ -114,6 +114,9 @@ const InstructionList: Record<string, MaybeArray<keyof typeof Titles>[]> = {
         // ["cvttpsList", "cvttps2dq", "cvttps2pi"],
         // "cvttsd2si",
         // "cvttss2si",
+    ],
+    l: [
+        "lock",
     ]
 };
 
