@@ -148,44 +148,44 @@ const PageData: InstructionPageLayoutProps = {
         </>
     ),
     operation:
-        `public void CVTPD2DQ(SimdU32 dest, SimdF64 src)
+        `public void CVTPD2DQ(SimdI32 dest, SimdF64 src)
 {
-    dest[0] = ConvertToU32(src[0]);
-    dest[1] = ConvertToU32(src[1]);
+    dest[0] = ConvertToI32(src[0]);
+    dest[1] = ConvertToI32(src[1]);
     // dest[2..] is unmodified
 }
 
-void VCVTPD2DQ_Vex(SimdU32 dest, SimdF64 src, int kl)
+void VCVTPD2DQ_Vex(SimdI32 dest, SimdF64 src, int kl)
 {
     for (int n = 0; n < kl; n++)
-        dest[n] = ConvertToU32(src[n]);
+        dest[n] = ConvertToI32(src[n]);
     dest[kl..] = 0;
 }
-public void VCVTPD2DQ_Vex128(SimdU32 dest, SimdF64 src) =>
+public void VCVTPD2DQ_Vex128(SimdI32 dest, SimdF64 src) =>
     VCVTPD2DQ_Vex(dest, src, 2);
-public void VCVTPD2DQ_Vex256(SimdU32 dest, SimdF64 src) =>
+public void VCVTPD2DQ_Vex256(SimdI32 dest, SimdF64 src) =>
     VCVTPD2DQ_Vex(dest, src, 4);
 
-void VCVTPD2DQ_EvexMemory(SimdU32 dest, SimdF64 src, KMask k, int kl)
+void VCVTPD2DQ_EvexMemory(SimdI32 dest, SimdF64 src, KMask k, int kl)
 {
     for (int n = 0; n < kl; n++)
     {
         if (k[n])
-            dest[n] = ConvertToU32(EVEX.b ? src[0] : src[n]);
+            dest[n] = ConvertToI32(EVEX.b ? src[0] : src[n]);
         else if (EVEX.z)
             dest[n] = 0;
         // otherwise unchanged
     }
     dest[kl..] = 0;
 }
-public void VCVTPD2DQ_Evex128(SimdU32 dest, SimdF64 src, KMask k) =>
+public void VCVTPD2DQ_Evex128(SimdI32 dest, SimdF64 src, KMask k) =>
     VCVTPD2DQ_EvexMemory(dest, src, k, 2);
-public void VCVTPD2DQ_Evex256(SimdU32 dest, SimdF64 src, KMask k) =>
+public void VCVTPD2DQ_Evex256(SimdI32 dest, SimdF64 src, KMask k) =>
     VCVTPD2DQ_EvexMemory(dest, src, k, 4);
-public void VCVTPD2DQ_Evex512(SimdU32 dest, SimdF64 src, KMask k) =>
+public void VCVTPD2DQ_Evex512(SimdI32 dest, SimdF64 src, KMask k) =>
     VCVTPD2DQ_EvexMemory(dest, src, k, 8);
 
-void VCVTPD2DQ_EvexRegister(SimdU32 dest, SimdF64 src, KMask k, int kl)
+void VCVTPD2DQ_EvexRegister(SimdI32 dest, SimdF64 src, KMask k, int kl)
 {
     if (kl == 8 && EVEX.b)
         OverrideRoundingModeForThisInstruction(EVEX.rc);
@@ -193,7 +193,7 @@ void VCVTPD2DQ_EvexRegister(SimdU32 dest, SimdF64 src, KMask k, int kl)
     for (int n = 0; n < kl; n++)
     {
         if (k[n])
-            dest[n] = ConvertToU32(src[n]);
+            dest[n] = ConvertToI32(src[n]);
         else if (EVEX.z)
             dest[n] = 0;
         // otherwise unchanged

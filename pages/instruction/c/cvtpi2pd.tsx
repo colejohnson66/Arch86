@@ -57,7 +57,7 @@ const PageData: InstructionPageLayoutProps = {
         </>
     ),
     operation:
-        `public void CVTPI2PD(SimdF64 dest, MmxU32 src)
+        `public void CVTPI2PD(SimdF64 dest, MmxI32 src)
 {
     dest[0] = ConvertToF64(src[0]);
     dest[1] = ConvertToF64(src[1]);

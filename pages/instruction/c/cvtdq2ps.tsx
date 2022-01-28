@@ -148,7 +148,7 @@ const PageData: InstructionPageLayoutProps = {
         </>
     ),
     operation:
-        `public void CVTDQ2PS(SimdF32 dest, SimdU32 src)
+        `public void CVTDQ2PS(SimdF32 dest, SimdI32 src)
 {
     dest[0] = ConvertToF32(src[0]);
     dest[1] = ConvertToF32(src[1]);
@@ -157,18 +157,18 @@ const PageData: InstructionPageLayoutProps = {
     // dest[4..] is unmodified
 }
 
-void VCVTDQ2PS_Vex(SimdF32 dest, SimdU32 src, int kl)
+void VCVTDQ2PS_Vex(SimdF32 dest, SimdI32 src, int kl)
 {
     for (int n = 0; n < kl; n++)
         dest[n] = ConvertToF32(src[n]);
     dest[kl..] = 0;
 }
-public void VCVTDQ2PS_Vex128(SimdF32 dest, SimdU32 src) =>
+public void VCVTDQ2PS_Vex128(SimdF32 dest, SimdI32 src) =>
     VCVTDQ2PS_Vex(dest, src, 4);
-public void VCVTDQ2PS_Vex128(SimdF32 dest, SimdU32 src) =>
+public void VCVTDQ2PS_Vex128(SimdF32 dest, SimdI32 src) =>
     VCVTDQ2PS_Vex(dest, src, 8);
 
-void VCVTDQ2PS_EvexMemory(SimdF32 dest, SimdU32 src, KMask k, int kl)
+void VCVTDQ2PS_EvexMemory(SimdF32 dest, SimdI32 src, KMask k, int kl)
 {
     for (int n = 0; n < kl; n++)
     {
@@ -180,14 +180,14 @@ void VCVTDQ2PS_EvexMemory(SimdF32 dest, SimdU32 src, KMask k, int kl)
     }
     dest[kl..] = 0;
 }
-public void VCVTDQ2PS_Evex128Memory(SimdF32 dest, SimdU32 src, KMask k) =>
+public void VCVTDQ2PS_Evex128Memory(SimdF32 dest, SimdI32 src, KMask k) =>
     VCVTDQ2PS_EvexMemory(dest, src, k, 4);
-public void VCVTDQ2PS_Evex256Memory(SimdF32 dest, SimdU32 src, KMask k) =>
+public void VCVTDQ2PS_Evex256Memory(SimdF32 dest, SimdI32 src, KMask k) =>
     VCVTDQ2PS_EvexMemory(dest, src, k, 8);
-public void VCVTDQ2PS_Evex512Memory(SimdF32 dest, SimdU32 src, KMask k) =>
+public void VCVTDQ2PS_Evex512Memory(SimdF32 dest, SimdI32 src, KMask k) =>
     VCVTDQ2PS_EvexMemory(dest, src, k, 16);
 
-void VCVTDQ2PS_EvexRegister(SimdF32 dest, SimdU32 src, KMask k, int kl)
+void VCVTDQ2PS_EvexRegister(SimdF32 dest, SimdI32 src, KMask k, int kl)
 {
     if (kl == 16 && EVEX.b)
         OverrideRoundingModeForThisInstruction(EVEX.rc);
@@ -202,11 +202,11 @@ void VCVTDQ2PS_EvexRegister(SimdF32 dest, SimdU32 src, KMask k, int kl)
     }
     dest[kl..] = 0;
 }
-public void VCVTDQ2PS_Evex128Register(SimdF32 dest, SimdU32 src, KMask k) =>
+public void VCVTDQ2PS_Evex128Register(SimdF32 dest, SimdI32 src, KMask k) =>
     VCVTDQ2PS_EvexRegister(dest, src, k, 4);
-public void VCVTDQ2PS_Evex256Register(SimdF32 dest, SimdU32 src, KMask k) =>
+public void VCVTDQ2PS_Evex256Register(SimdF32 dest, SimdI32 src, KMask k) =>
     VCVTDQ2PS_EvexRegister(dest, src, k, 8);
-public void VCVTDQ2PS_Evex512Register(SimdF32 dest, SimdU32 src, KMask k) =>
+public void VCVTDQ2PS_Evex512Register(SimdF32 dest, SimdI32 src, KMask k) =>
     VCVTDQ2PS_EvexRegister(dest, src, k, 16);`,
     intrinsics: [
         "__m128 _mm_cvtepi32_ps(__m128i src)",
