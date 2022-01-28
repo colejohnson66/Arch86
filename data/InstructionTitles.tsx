@@ -153,7 +153,7 @@ const InstructionTitles = {
     cvtpsList: <>Convert {pspfp} (Vector)</>,
     cvtps2dq: <>Convert {pspfp} to {pdwi}</>,
     cvtps2pd: <>Convert {pspfp} to {pdpfp}</>,
-    cvtps2pi: <>Convert {pspfp} {pdwi} (MMX)</>,
+    cvtps2pi: <>Convert {pspfp} to {pdwi} (MMX)</>,
     cvtsdList: <>Convert {sdpfp} (Vector)</>,
     cvtsd2si: <>Convert {sdpfp} to {dwi}</>,
     cvtsd2ss: <>Convert {sdpfp} to {sspfp}</>,
