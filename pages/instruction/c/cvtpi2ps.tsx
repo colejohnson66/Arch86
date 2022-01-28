@@ -53,7 +53,7 @@ const PageData: InstructionPageLayoutProps = {
     description: (
         <>
             <p>
-                The <code>CVTPI2PS</code> instruction converts two packed doubleword integers from the source operand into packed single-precision floating-point values.
+                The <code>CVTPI2PS</code> instruction converts two packed doubleword integers from the source operand into single-precision floating-point values.
                 The result is stored in the destination operand.
             </p>
         </>
