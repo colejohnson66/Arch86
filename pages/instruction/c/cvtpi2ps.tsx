@@ -32,7 +32,7 @@ const PageData: InstructionPageLayoutProps = {
     opcodes: [
         {
             opcode: <>NP 0F 2A /r</>,
-            mnemonic: <>CVTPI2PS <i>xmm</i>, <i>mm/m64</i></>,
+            mnemonic: <>CVTPI2PS <i>xmm1</i>, <i>mm1/m64</i></>,
             encoding: "rm",
             validity: {
                 16: "invalid",
@@ -42,8 +42,8 @@ const PageData: InstructionPageLayoutProps = {
             cpuid: ["sse2", "mmx"], // TODO: SSE or SSE2?
             description:
                 <>
-                    Convert packed doubleword integers from <i>mm/m64</i> into packed single-precision floating-point values.
-                    Store the result in <i>xmm</i>.
+                    Convert packed doubleword integers from <i>mm1/m64</i> into packed single-precision floating-point values.
+                    Store the result in <i>xmm1</i>.
                 </>,
         },
     ],

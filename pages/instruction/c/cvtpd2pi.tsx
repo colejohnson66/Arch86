@@ -32,7 +32,7 @@ const PageData: InstructionPageLayoutProps = {
     opcodes: [
         {
             opcode: <>66 0F 2D /r</>,
-            mnemonic: <>CVTPD2PI <i>mm</i>, <i>xmm/m128</i></>,
+            mnemonic: <>CVTPD2PI <i>mm1</i>, <i>xmm1/m128</i></>,
             encoding: "rm",
             validity: {
                 16: "invalid",
@@ -42,8 +42,8 @@ const PageData: InstructionPageLayoutProps = {
             cpuid: ["sse2", "mmx"],
             description:
                 <>
-                    Convert packed double-precision floating-point values from <i>xmm/m128</i> into packed doubleword integers.
-                    Store the result in <i>mm</i>.
+                    Convert packed double-precision floating-point values from <i>xmm1/m128</i> into packed doubleword integers.
+                    Store the result in <i>mm1</i>.
                 </>,
         },
     ],
