@@ -1,5 +1,5 @@
 /* =============================================================================
- * File:   cvttsd2si.tsx
+ * File:   cvttss2si.tsx
  * Author: Cole Tobin
  * =============================================================================
  * Copyright (c) 2022 Cole Tobin
@@ -29,13 +29,13 @@ import Exceptions from "@library/Exceptions";
 const er = "{er}";
 
 const PageData: InstructionPageLayoutProps = {
-    id: "cvttsd2si",
-    title: <>Convert with Truncation Scalar Double-Precision Floating Point Values to Doubleword and Quadword Integers</>,
-    titlePlain: "Convert with Truncation Scalar Double-Precision Floating Point Values to Doubleword and Quadword Integers",
+    id: "cvttss2si",
+    title: <>Convert with Truncation Scalar Single-Precision Floating Point Values to Doubleword and Quadword Integers</>,
+    titlePlain: "Convert with Truncation Scalar Single-Precision Floating Point Values to Doubleword and Quadword Integers",
     opcodes: [
         {
-            opcode: <>F2 0F 2C /r</>,
-            mnemonic: <>CVTTSD2SI <i>r32</i>, <i>xmm1/m64</i></>,
+            opcode: <>F3 0F 2C /r</>,
+            mnemonic: <>CVTTSS2SI <i>r32</i>, <i>xmm1/m32</i></>,
             encoding: "legacy",
             validity: {
                 16: "invalid",
@@ -45,13 +45,13 @@ const PageData: InstructionPageLayoutProps = {
             cpuid: "sse2",
             description:
                 <>
-                    Convert with truncation a scalar double-precision floating-point value from <i>xmm1/m64</i> into a doubleword integer.
+                    Convert with truncation a scalar single-precision floating-point value from <i>xmm1/m32</i> into a doubleword integer.
                     Store the result in <i>r32</i>.
                 </>,
         },
         {
-            opcode: <>F2 REX.W 0F 2C /r</>,
-            mnemonic: <>CVTTSD2SI <i>r64</i>, <i>xmm1/m64</i></>,
+            opcode: <>F3 REX.W 0F 2C /r</>,
+            mnemonic: <>CVTTSS2SI <i>r64</i>, <i>xmm1/m32</i></>,
             encoding: "legacy",
             validity: {
                 16: "invalid",
@@ -61,13 +61,13 @@ const PageData: InstructionPageLayoutProps = {
             cpuid: "sse2",
             description:
                 <>
-                    Convert with truncation a scalar double-precision floating-point value from <i>xmm1/m64</i> into a quadword integer.
+                    Convert with truncation a scalar single-precision floating-point value from <i>xmm1/m32</i> into a quadword integer.
                     Store the result in <i>r64</i>.
                 </>,
         },
         {
-            opcode: <>VEX.LIG.F2.0F.W0 2C /r</>,
-            mnemonic: <>VCVTTSD2SI <i>r32</i>, <i>xmm1/m64</i></>,
+            opcode: <>VEX.LIG.F3.0F.W0 2C /r</>,
+            mnemonic: <>VCVTTSS2SI <i>r32</i>, <i>xmm1/m32</i></>,
             encoding: "vex",
             validity: {
                 16: "invalid",
@@ -77,13 +77,13 @@ const PageData: InstructionPageLayoutProps = {
             cpuid: "avx",
             description:
                 <>
-                    Convert with truncation a scalar double-precision floating-point value from <i>xmm1/m64</i> into a doubleword integer.
+                    Convert with truncation a scalar single-precision floating-point value from <i>xmm1/m32</i> into a doubleword integer.
                     Store the result in <i>r32</i>.
                 </>,
         },
         {
-            opcode: <>VEX.LIG.F2.0F.W1 2C /r</>,
-            mnemonic: <>VCVTTSD2SI <i>r64</i>, <i>xmm1/m64</i></>,
+            opcode: <>VEX.LIG.F3.0F.W1 2C /r</>,
+            mnemonic: <>VCVTTSS2SI <i>r64</i>, <i>xmm1/m32</i></>,
             encoding: "vex",
             validity: {
                 16: "invalid",
@@ -93,13 +93,13 @@ const PageData: InstructionPageLayoutProps = {
             cpuid: "avx",
             description:
                 <>
-                    Convert with truncation a scalar double-precision floating-point value from <i>xmm1/m64</i> into a quadword integer.
+                    Convert with truncation a scalar single-precision floating-point value from <i>xmm1/m32</i> into a quadword integer.
                     Store the result in <i>r64</i>.
                 </>,
         },
         {
-            opcode: <>EVEX.LLIG.F2.0F.W0 2C /r</>,
-            mnemonic: <>VCVTTSD2SI <i>r32</i>, <i>xmm1/m64{er}</i></>,
+            opcode: <>EVEX.LLIG.F3.0F.W0 2C /r</>,
+            mnemonic: <>VCVTTSS2SI <i>r32</i>, <i>xmm1/m32{er}</i></>,
             encoding: "evex",
             validity: {
                 16: "invalid",
@@ -109,13 +109,13 @@ const PageData: InstructionPageLayoutProps = {
             cpuid: "avx512-f",
             description:
                 <>
-                    Convert with truncation a scalar double-precision floating-point value from <i>xmm1/m64</i> into a doubleword integer.
+                    Convert with truncation a scalar single-precision floating-point value from <i>xmm1/m32</i> into a doubleword integer.
                     Store the result in <i>r32</i>.
                 </>,
         },
         {
-            opcode: <>EVEX.LLIG.F2.0F.W1 2C /r</>,
-            mnemonic: <>VCVTTSD2SI <i>r64</i>, <i>xmm1/m64{er}</i></>,
+            opcode: <>EVEX.LLIG.F3.0F.W1 2C /r</>,
+            mnemonic: <>VCVTTSS2SI <i>r64</i>, <i>xmm1/m32{er}</i></>,
             encoding: "evex",
             validity: {
                 16: "invalid",
@@ -125,7 +125,7 @@ const PageData: InstructionPageLayoutProps = {
             cpuid: "avx512-f",
             description:
                 <>
-                    Convert with truncation a scalar double-precision floating-point value from <i>xmm1/m64</i> into a quadword integer.
+                    Convert with truncation a scalar single-precision floating-point value from <i>xmm1/m32</i> into a quadword integer.
                     Store the result in <i>r64</i>.
                 </>,
         },
@@ -138,7 +138,7 @@ const PageData: InstructionPageLayoutProps = {
     description: (
         <>
             <p>
-                The <code>(V)CVTTSD2SI</code> instruction converts with truncation a scalar double-precision floating-point value from the source operand into either a doubleword or quadword integer.
+                The <code>(V)CVTTSS2SI</code> instruction converts with truncation a scalar single-precision floating-point value from the source operand into either a doubleword or quadword integer.
                 The result is stored in the destination operand.
             </p>
             <p>
@@ -149,32 +149,32 @@ const PageData: InstructionPageLayoutProps = {
         </>
     ),
     operation:
-        `public void CVTTSD2SI(ref I32 dest, SimdF64 src)
+        `public void CVTTSS2SI(ref I32 dest, SimdF64 src)
 {
     dest = ConvertToI32(src[0], truncate: true);
 }
-public void CVTTSD2SI(ref I64 dest, SimdF64 src)
+public void CVTTSS2SI(ref I64 dest, SimdF64 src)
 {
     dest = ConvertToI64(src[0], truncate: true);
 }
 
-public void VCVTTSD2SI_Vex(ref I32 dest, SimdF64 src) =>
-    CVTTSD2SI(ref dest, src);
-public void VCVTTSD2SI_Vex(ref I64 dest, SimdF64 src) =>
-    CVTTSD2SI(ref dest, src);
+public void VCVTTSS2SI_Vex(ref I32 dest, SimdF64 src) =>
+    CVTTSS2SI(ref dest, src);
+public void VCVTTSS2SI_Vex(ref I64 dest, SimdF64 src) =>
+    CVTTSS2SI(ref dest, src);
 
-public void VCVTTSD2SI_Evex(ref I32 dest, SimdF64 src) =>
-    CVTTSD2SI(ref dest, src);
-public void VCVTTSD2SI_Evex(ref I64 dest, SimdF64 src) =>
-    CVTTSD2SI(ref dest, src);`,
+public void VCVTTSS2SI_Evex(ref I32 dest, SimdF64 src) =>
+    CVTTSS2SI(ref dest, src);
+public void VCVTTSS2SI_Evex(ref I64 dest, SimdF64 src) =>
+    CVTTSS2SI(ref dest, src);`,
     intrinsics: [
-        "int32_t _mm_cvttsd_i32(__m128d a)",
-        "int32_t _mm_cvttsd_si32(__m128d a)",
-        "int32_t _mm_cvtt_roundsd_i32(__m128d a, const int sae)",
+        "int32_t _mm_cvttss_i32(__m128d a)",
+        "int32_t _mm_cvttss_si32(__m128d a)",
+        "int32_t _mm_cvtt_roundss_i32(__m128d a, const int sae)",
         "",
-        "int64_t _mm_cvttsd_i64(__m128d a)",
-        "int64_t _mm_cvttsd_si64(__m128d a)",
-        "int64_t _mm_cvtt_roundsd_i64(__m128d a, const int sae)",
+        "int64_t _mm_cvttss_i64(__m128d a)",
+        "int64_t _mm_cvttss_si64(__m128d a)",
+        "int64_t _mm_cvtt_roundss_i64(__m128d a, const int sae)",
     ],
     exceptions: {
         simd: {
