@@ -89,8 +89,11 @@
     }
 
 
-    #breadcrumbs li + li::before {
-        @apply float-left px-4;
+    #breadcrumbs li {
+        @apply inline align-baseline;
+    }
+    #breadcrumbs li+li::before {
+        @apply px-2 text-black;
         content: "/";
     }
 

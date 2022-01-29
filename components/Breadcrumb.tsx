@@ -31,11 +31,10 @@ type BreadcrumbRootProps = {
 function BreadcrumbRoot(props: BreadcrumbRootProps): React.ReactElement {
     return (
         <nav aria-label="breadcrumb" id="breadcrumbs" className="shadow bg-white p-4 rounded-md mx-4 sm:mx-0">
-            <ul className="flex list-none ml-0 pl-2">
-                <li className="align-middle">
-                    {/* the slash character is inserted through CSS in `global.css` */}
+            <ul className="list-none ml-0 pl-2">
+                <li >
                     <A href="/">
-                        <HomeIcon className="block h-6 w-6" />
+                        <HomeIcon className="inline h-6 w-6" aria-label="home" />
                     </A>
                 </li>
                 {props.children}
@@ -53,6 +52,7 @@ function BreadcrumbItem(props: BreadcrumbItemProps): React.ReactElement {
     if (props.href) {
         return (
             <li>
+                {/* the slash character is inserted through CSS in `global.css` */}
                 <A href={props.href}>
                     {props.children}
                 </A>
