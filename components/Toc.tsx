@@ -31,7 +31,7 @@ type TocRootProps = {
 function TocRoot(props: TocRootProps): React.ReactElement {
     // Set `tocIndex`, but only on valid TOC entries (filter out nulls)
     let count = 0;
-    const newChildren = React.Children.map(props.children, (child) => {
+    const newChildren: React.ReactNode[] = React.Children.map(props.children, (child) => {
         if (React.isValidElement(child)) {
             count++;
             return React.cloneElement(child, { tocIndex: count.toString() });
@@ -59,7 +59,7 @@ type TocEntryProps = {
 function TocEntry(props: TocEntryProps): React.ReactElement {
     // Set `tocIndex`, but only on valid TOC entries (filter out nulls)
     let count = 0;
-    const newChildren = React.Children.map(props.children, (child) => {
+    const newChildren: React.ReactNode[] = React.Children.map(props.children, (child) => {
         if (React.isValidElement(child)) {
             count++;
             return React.cloneElement(child, { tocIndex: count.toString() });
@@ -70,7 +70,8 @@ function TocEntry(props: TocEntryProps): React.ReactElement {
     return (
         <li>
             {props.tocIndex}. <A href={props.href}>{props.text}</A>
-            {newChildren?.length !== 0 && <ul className="list-none ml-0 pl-4">{newChildren}</ul>}
+            {newChildren?.length !== 0 &&
+                <ul className="list-none ml-0 pl-4">{newChildren}</ul>}
         </li>
     );
 }
