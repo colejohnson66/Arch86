@@ -67,7 +67,7 @@ const Canned = {
             assert(false);
         return <>{jsx} Any other values will raise a <Exception name="UD" /> exception.</>;
     },
-    WIgnoredIn32: (arg: "vex" | "xop" | "vex+xop") => {
+    WIgnoredIn32: (arg: "vex" | "xop" | "vex+xop" | "vex+evex") => {
         let jsx: React.ReactNode;
         if (arg === "vex")
             jsx = <><code>VEX.W1</code> is treated as <code>VEX.W0</code></>;
@@ -75,6 +75,8 @@ const Canned = {
             jsx = <><code>XOP.W1</code> is treated as <code>XOP.W0</code></>;
         else if (arg === "vex+xop")
             jsx = <><code>VEX.W1</code> and <code>XOP.W1</code> are treated as <code>VEX.W0</code> and <code>XOP.W0</code> (respectively)</>;
+        else if (arg === "vex+evex")
+            jsx = <><code>VEX.W1</code> and <code>EVEX.W1</code> are treated as <code>VEX.W0</code> and <code>EVEX.W0</code> (respectively)</>;
         return (
             <>
                 The operand size is always <Unit value={32} unit="bits" /> if not in Long Mode.
