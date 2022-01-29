@@ -25,6 +25,7 @@ import InstructionPageLayout, { InstructionPageLayoutProps } from "@components/I
 
 import Canned from "@library/Canned";
 import Exceptions from "@library/Exceptions";
+import Instruction from "@components/Instruction";
 import Register from "@components/Register";
 
 const PageData: InstructionPageLayoutProps = {
@@ -51,6 +52,11 @@ const PageData: InstructionPageLayoutProps = {
         <>
             <p>
                 The <code>AAS</code> instruction converts the result of a subtraction of two BCD digits to a valid 2-digit BCD number.
+            </p>
+            <p>
+                An &quot;unpacked&quot; BCD number is one where each byte contains a single digit.
+                In contrast, a packed BCD number is one where each byte contains two digits &ndash; one in each nibble.
+                The <Instruction name="das" /> instruction handles that case.
             </p>
             <p>
                 Traditionally, this instruction is &apos;ASCII Adjust After Subtraction&apos;.

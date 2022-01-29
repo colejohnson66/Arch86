@@ -1,5 +1,5 @@
 /* =============================================================================
- * File:   aaa.tsx
+ * File:   daa.tsx
  * Author: Cole Tobin
  * =============================================================================
  * Copyright (c) 2022 Cole Tobin
@@ -29,20 +29,20 @@ import Instruction from "@components/Instruction";
 import Register from "@components/Register";
 
 const PageData: InstructionPageLayoutProps = {
-    id: "aaa",
-    title: <>ASCII Adjust <code>AL</code> After Addition</>,
-    titlePlain: "ASCII Adjust AL After Addition",
+    id: "daa",
+    title: <>Decimal Adjust <Register name="AL" /> After Addition</>,
+    titlePlain: "Decimal Adjust AL After Addition",
     opcodes: [
         {
-            opcode: <>37</>,
-            mnemonic: <>AAA</>,
+            opcode: <>27</>,
+            mnemonic: <>DAA</>,
             encoding: "zo",
             validity: {
                 16: "valid",
                 32: "valid",
                 64: "invalid",
             },
-            description: <>ASCII adjust <Register name="AL" /> after addition.</>,
+            description: <>Decimal adjust <Register name="AL" /> after addition.</>,
         },
     ],
     encodings: {
@@ -51,17 +51,12 @@ const PageData: InstructionPageLayoutProps = {
     description: (
         <>
             <p>
-                The <code>AAA</code> instruction converts the result of an addition of two (unpacked) BCD digits to a valid 2-digit BCD number.
+                The <code>DAA</code> instruction converts the result of an addition of two (packed) BCD digits to a valid 2-digit BCD number.
             </p>
             <p>
-                An &quot;unpacked&quot; BCD number is one where each byte contains a single digit.
-                In contrast, a packed BCD number is one where each byte contains two digits &ndash; one in each nibble.
-                The <Instruction name="daa" /> instruction handles that case.
-            </p>
-            <p>
-                Traditionally, this instruction is &apos;ASCII Adjust After Addition&apos;.
-                This would lead one to believe that it works on ASCII digits (<code>30h</code> (<code>&quot;0&quot;</code>) through <code>39h</code> (<code>&apos;9&apos;</code>)), however, this is incorrect.
-                This instruction <em>actually</em> operates on binary coded decimal (BCD) digits (<code>00h</code> through <code>09h</code>).
+                An &quot;packed&quot; BCD number is one where each byte contains two digits &ndash; one in each nibble.
+                In contrast, an unpacked BCD number is one where each byte contains a single digit.
+                The <Instruction name="aaa" /> instruction handles that case.
             </p>
             <p>
                 {Canned.InvalidLong}
@@ -69,29 +64,30 @@ const PageData: InstructionPageLayoutProps = {
         </>
     ),
     operation:
-        `public void AAA()
+        `public void DAA()
 {
+    byte oldAL = AL;
+    bool oldCF = EFLAGS.CF; // CF could be set in the ones place adjustment
+
+    // adjust ones place
     if ((AL & 0xF) > 9 || EFLAGS.AF)
-        AX += 0x106;
+        AL += 6;
+
+    // adjust tens place
+    if (oldAL > 0x99 || oldCF)
+        AL += 0x60;
 }`,
-    operationNotes: [
-        <>
-            According to Bochs&apos; source code (<code>/cpu/bcd.cc</code>), this instruction is implemented differently on the 8086, 8088, and 80186 architectures.
-            On them, the addition to <Register name="AX" /> is performed as two separate operations: adding <code>1</code> to <Register name="AH" /> and adding <code>6</code> to <Register name="AL" />.
-            In practice, this makes no difference when true BCD digits are used (i.e. nothing outside <code>00h</code> through <code>09h</code>)
-        </>,
-    ],
     examples: [
-        `mov ax, 0x106 ; 16 (decimal) in BCD
-add al, 5     ; AX == 0x10B
-aaa           ; AX == 0x202 (22 (decimal) in BCD)`,
+        `mov al, 0x79 ; 79 (decimal) in packed BCD
+add al, 0x35 ; AL == 0xAE
+daa          ; AL == 0x14 with carry set (giving 0x114)`,
     ],
     flags: {
-        CF: <>Set if an adjustment is made. Cleared otherwise.</>,
-        PF: <>Undefined.</>,
-        AF: <>Set if an adjustment is made. Cleared otherwise.</>,
-        ZF: <>Undefined.</>,
-        SF: <>Undefined.</>,
+        CF: <>Set if an adjustment results in a decimal carry in either digit. Cleared otherwise.</>,
+        PF: <>Set according to the result.</>,
+        AF: <>Set if an adjustment results in a decimal carry in either digit. Cleared otherwise.</>,
+        ZF: <>Set according to the result.</>,
+        SF: <>Set according to the result.</>,
         OF: <>Undefined.</>,
     },
     exceptions: {

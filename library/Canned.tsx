@@ -35,7 +35,7 @@ const Canned = {
             Attempts to execute this instruction in less privileged rings will cause a <Exception name="UD" /> exception to be raised.
         </>,
     EvexNoFaultSuppression: <>The EVEX form of this instruction does not support memory-fault suppression.</>,
-    InvalidLong: <>This instruction is not valid in long mode.</>,
+    InvalidLong: <>This instruction is not valid in Long Mode.</>,
     LegacySimd: <>All forms except the legacy SSE one will zero the upper (untouched) bits.</>,
     LegacySimdMultiple: <>All forms except the legacy SSE ones will zero the upper (untouched) bits.</>,
     Lockable: <>This instruction can be used with the <Instruction name="lock" noTitle /> prefix to allow atomic exectution.</>,
