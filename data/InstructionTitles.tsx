@@ -171,9 +171,9 @@ const InstructionTitles = {
     cvttps2dq: <>Convert with Truncation {pspfp} to {pdwi}</>,
     cvttps2pi: <>Convert with Truncation {pspfp} to {pdwi} (MMX)</>,
     // cvttsdList: <> Convert with Truncation {sdpfp} (Vector)</>,
-    cvttsd2si: <>Convert with Truncation {sdpfp} to {dwi}</>,
+    cvttsd2si: <>Convert with Truncation {sdpfp} to {dwqwi}</>,
     // cvttssList: <> Convert with Truncation {sspfp} (Vector)</>,
-    cvttss2si: <>Convert with Truncation {sspfp} to {dwi}</>,
+    cvttss2si: <>Convert with Truncation {sspfp} to {dwqwi}</>,
     "cwd-cdq-cqo": <>Sign Extend Accumulator Into <Register name="rDX" /></>,
 
     daa: <>Decimal Adjust <Register name="AL" /> After Addition</>,
