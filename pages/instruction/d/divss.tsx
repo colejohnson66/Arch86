@@ -43,7 +43,7 @@ const PageData: InstructionPageLayoutProps = {
                 32: "valid",
                 64: "valid",
             },
-            cpuid: "sse2",
+            cpuid: "sse",
             description:
                 <>
                     Divide the lowest single-precision floating-point value in <i>xmm1</i> by the same in <i>xmm2/m32</i>.
