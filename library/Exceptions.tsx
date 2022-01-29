@@ -40,6 +40,7 @@ const Exceptions = {
     InVirtual8086: <>If in Virtual-8086 Mode.</>,
     Lock: <>If the <Instruction name="lock" noTitle /> prefix is used.</>,
     LockNoMem: <>If the <Instruction name="lock" noTitle /> prefix is used, but the destination is not a memory operand.</>,
+    NoFpu: <>If <Register name="CR0.EM" /> is set (no internal or external FPU)</>,
     SibRequired: <>If 16 bit addressing is used, or 32 or 64 bit addressing is used, but without an SIB byte (<code>rm</code> is not <code>100b</code>).</>,
     VexNotL0: <>If <code>VEX.L</code> is not 0.</>,
     VexNotL1: <>If <code>VEX.L</code> is not 1.</>,
@@ -47,6 +48,9 @@ const Exceptions = {
     VexNotW1: <>If <code>VEX.W</code> is not 1.</>,
     VexVvvv: <>If <code>VEX.vvvv</code> is not <code>1111b</code>.</>,
     XopVvvv: <>If <code>XOP.vvvv</code> is not <code>1111b</code>.</>, // TODO: is this a thing?
+
+    // #NM
+    TaskSwitchOccured: <>If <Register name="CR0.TS" /> is set (a task switch occurred).</>,
 
     // #SS(0)
     NonCanonSS: <>If a memory operand using the <code>SS</code> segment is in non-canonical form.</>, // TODO: link to a page on canonicalness
@@ -63,6 +67,9 @@ const Exceptions = {
 
     // #PF(fc)
     PF: <>If a page fault occurs.</>,
+
+    // #MF
+    PendingFpuException: <>If an FPU exception is pending.</>,
 
     // #AC(0)
     AC: <>If alignment checking is enabled while the current privilege level is 3 and an unaligned memory access is made.</>,

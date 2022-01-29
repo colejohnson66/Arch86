@@ -6,3 +6,4 @@ endbr64
 enter
 extractps
 vextractps
+extrq

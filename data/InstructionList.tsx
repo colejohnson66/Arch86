@@ -125,6 +125,16 @@ const InstructionList: Record<string, MaybeArray<keyof typeof Titles>[]> = {
         ["divList", "divps", "divpd", "divss", "divsd"],
         ["dpList", "dppd", "dpps"],
     ],
+    e: [
+        "emms",
+        "encodekey128",
+        "encodekey256",
+        "endbr32",
+        "endbr64",
+        "enter",
+        "extractps",
+        "extrq",
+    ],
     l: [
         "lock",
     ]
