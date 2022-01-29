@@ -1,5 +1,5 @@
 /* =============================================================================
- * File:   cvtsd2ss.tsx
+ * File:   cvtss2sd.tsx
  * Author: Cole Tobin
  * =============================================================================
  * Copyright (c) 2022 Cole Tobin
@@ -27,16 +27,16 @@ import Canned from "@library/Canned";
 import Exceptions from "@library/Exceptions";
 
 const k1z = "{k1}{z}";
-const er = "{er}";
+const sae = "{sae}";
 
 const PageData: InstructionPageLayoutProps = {
-    id: "cvtsd2ss",
-    title: <>Convert Scalar Double-Precision Floating-Point Values to Scalar Single-Precision Floating-Point Values</>,
-    titlePlain: "Convert Scalar Double-Precision Floating-Point Values to Scalar Single-Precision Floating-Point Values",
+    id: "cvtss2sd",
+    title: <>Convert Scalar Single-Precision Floating-Point Values to Scalar Double-Precision Floating-Point Values</>,
+    titlePlain: "Convert Scalar Single-Precision Floating-Point Values to Scalar Double-Precision Floating-Point Values",
     opcodes: [
         {
-            opcode: <>F2 0F 5A /r</>,
-            mnemonic: <>CVTSD2SS <i>xmm1</i>, <i>xmm2/m64</i></>,
+            opcode: <>F3 0F 5A /r</>,
+            mnemonic: <>CVTSS2SD <i>xmm1</i>, <i>xmm2/m32</i></>,
             encoding: "legacy",
             validity: {
                 16: "invalid",
@@ -46,13 +46,13 @@ const PageData: InstructionPageLayoutProps = {
             cpuid: "sse2",
             description:
                 <>
-                    Convert a scalar double-precision floating-point value from <i>xmm2/m64</i> into a scalar single-precision floating-point value.
+                    Convert a scalar double-precision floating-point value from <i>xmm2/m32</i> into a scalar single-precision floating-point value.
                     Store the result in <i>xmm1</i>.
                 </>,
         },
         {
-            opcode: <>VEX.LIG.F2.0F.WIG 5A /r</>,
-            mnemonic: <>VCVTSD2SS <i>xmm1</i>, <i>xmm2</i>, <i>xmm3/m64</i></>,
+            opcode: <>VEX.LIG.F3.0F.WIG 5A /r</>,
+            mnemonic: <>VCVTSS2SD <i>xmm1</i>, <i>xmm2</i>, <i>xmm3/m32</i></>,
             encoding: "vex",
             validity: {
                 16: "invalid",
@@ -62,14 +62,14 @@ const PageData: InstructionPageLayoutProps = {
             cpuid: "avx",
             description:
                 <>
-                    Convert a scalar double-precision floating-point value from <i>xmm3/m64</i> into a scalar single-precision floating-point value.
+                    Convert a scalar double-precision floating-point value from <i>xmm3/m32</i> into a scalar single-precision floating-point value.
                     Merge the upper bits of the result with those in <i>xmm2</i>.
                     Store the result in <i>xmm1</i>.
                 </>,
         },
         {
-            opcode: <>EVEX.LLIG.F2.0F.W1 5A /r</>,
-            mnemonic: <>VCVTSD2SS {k1z} <i>xmm1</i>, <i>xmm2</i>, <i>xmm3/m64{er}</i></>,
+            opcode: <>EVEX.LLIG.F3.0F.W1 5A /r</>,
+            mnemonic: <>VCVTSS2SD {k1z} <i>xmm1</i>, <i>xmm2</i>, <i>xmm3/m32{sae}</i></>,
             encoding: "evex",
             validity: {
                 16: "invalid",
@@ -79,7 +79,7 @@ const PageData: InstructionPageLayoutProps = {
             cpuid: "avx",
             description:
                 <>
-                    Convert a scalar double-precision floating-point value from <i>xmm3/m64</i> into a scalar single-precision floating-point value.
+                    Convert a scalar double-precision floating-point value from <i>xmm3/m32</i> into a scalar single-precision floating-point value.
                     Merge the upper bits of the result with those in <i>xmm2</i>.
                     Store the result in <i>xmm1</i>.
                 </>,
@@ -93,32 +93,30 @@ const PageData: InstructionPageLayoutProps = {
     description: (
         <>
             <p>
-                The <code>(V)CVTSD2SS</code> instruction converts a scalar double-precision floating-point value from the source operand to a scalar single-precision floating-point value.
+                The <code>(V)CVTSS2SD</code> instruction converts a scalar single-precision floating-point value from the source operand to a scalar double-precision floating-point value.
                 The result is stored in the destination operand.
             </p>
             <p>
-                The VEX and EVEX forms will copy bits <code>32..127</code> from the first source operand into the destination.
+                The VEX and EVEX forms will copy bits <code>64..127</code> from the first source operand into the destination.
                 {" "}{Canned.LegacySimd}
             </p>
         </>
     ),
     operation:
-        `public void CVTSD2SS(SimdF32 dest, SimdF64 src)
+        `public void CVTSS2SD(SimdF64 dest, SimdF32 src)
 {
     dest[0] = ConvertToF32(src[0]);
     // dest[1..] is unmodified
 }
 
-public void VCVTSD2SS_Vex(SimdF32 dest, SimdF32 src1, SimdF64 src2)
+public void VCVTSS2SD_Vex(SimdF64 dest, SimdF64 src1, SimdF32 src2)
 {
     dest[0] = ConvertToF32(src2[0]);
     dest[1] = src1[1];
-    dest[2] = src1[2];
-    dest[3] = src1[3];
-    dest[4..] = 0;
+    dest[2..] = 0;
 }
 
-public void VCVTSD2SS_EvexMemory(SimdF32 dest, SimdF32 src1, SimdF64 src2, KMask k)
+public void VCVTSS2SD_EvexMemory(SimdF64 dest, SimdF64 src1, SimdF32 src2, KMask k)
 {
     if (k[0])
         dest[0] = ConvertToF32(src2[0]);
@@ -126,12 +124,10 @@ public void VCVTSD2SS_EvexMemory(SimdF32 dest, SimdF32 src1, SimdF64 src2, KMask
         dest[0] = 0;
     // otherwise unchanged
     dest[1] = src1[1];
-    dest[2] = src1[2];
-    dest[3] = src1[3];
-    dest[4..] = 0;
+    dest[2..] = 0;
 }
 
-public void VCVTSD2SS_EvexRegister(SimdF32 dest, SimdF32 src1, SimdF64 src2, KMask k)
+public void VCVTSS2SD_EvexRegister(SimdF64 dest, SimdF64 src1, SimdF32 src2, KMask k)
 {
     if (EVEX.b)
         OverrideRoundingModeForThisInstruction(EVEX.rc);
@@ -142,26 +138,21 @@ public void VCVTSD2SS_EvexRegister(SimdF32 dest, SimdF32 src1, SimdF64 src2, KMa
         dest[0] = 0;
     // otherwise unchanged
     dest[1] = src1[1];
-    dest[2] = src1[2];
-    dest[3] = src1[3];
-    dest[4..] = 0;
+    dest[2..] = 0;
 }`,
     intrinsics: [
-        "__m128 _mm_cvtsd_ss(__m128 a, __m128d b)",
-        "__m128 _mm_cvt_roundsd_ss(__m128 a, __m128d b, const int rounding)",
-        "__m128 _mm_mask_cvtsd_ss(__m128 s, __mmask8 k, __m128 a, __m128d b)",
-        "__m128 _mm_mask_cvt_roundsd_ss(__m128 s, __mmask8 k, __m128 a, __m128d b, const int rounding)",
-        "__m128 _mm_maskz_cvtsd_ss(__mmask8 k, __m128 a,__m128d b)",
-        "__m128 _mm_maskz_cvt_roundsd_ss(__mmask8 k, __m128 a,__m128d b, const int rounding)",
+        "__m128 _mm_cvtss_sd(__m128 a, __m128d b)",
+        "__m128 _mm_cvt_roundss_sd(__m128 a, __m128d b, const int rounding)",
+        "__m128 _mm_mask_cvtss_sd(__m128 s, __mmask8 k, __m128 a, __m128d b)",
+        "__m128 _mm_mask_cvt_roundss_sd(__m128 s, __mmask8 k, __m128 a, __m128d b, const int rounding)",
+        "__m128 _mm_maskz_cvtss_sd(__mmask8 k, __m128 a,__m128d b)",
+        "__m128 _mm_maskz_cvt_roundss_sd(__mmask8 k, __m128 a,__m128d b, const int rounding)",
     ],
     exceptions: {
         simd: {
             XM: [
                 Exceptions.SimdDenormal,
                 Exceptions.SimdInvalid,
-                Exceptions.SimdOverflow,
-                Exceptions.SimdPrecision,
-                Exceptions.SimdUnderflow,
             ],
         },
         other: {
