@@ -1,5 +1,5 @@
 /* =============================================================================
- * File:   cbw-cwde-cdqe.tsx
+ * File:   cwd-cdq-cqo.tsx
  * Author: Cole Tobin
  * =============================================================================
  * Copyright (c) 2022 Cole Tobin
@@ -28,42 +28,42 @@ import Instruction from "@components/Instruction";
 import Register from "@components/Register";
 
 const PageData: InstructionPageLayoutProps = {
-    id: "cbw-cwde-cdqe",
-    title: <>Sign Extend Accumulator</>,
-    titlePlain: "Sign Extend Accumulator",
+    id: "cwd-cdq-cqo",
+    title: <>Sign Extend Accumulator Into <Register name="rDX" /></>,
+    titlePlain: "Sign Extend Accumulator Into rDX",
     opcodes: [
         {
-            opcode: <>98</>,
-            mnemonic: <>CBW</>,
+            opcode: <>99</>,
+            mnemonic: <>CWD</>,
             encoding: "zo",
             validity: {
                 16: "valid",
                 32: "valid",
                 64: "valid",
             },
-            description: <>Sign extend <Register name="AL" /> into <Register name="AX" />.</>,
+            description: <>Sign extend <Register name="AX" /> into <Register name="DX" />.</>,
         },
         {
-            opcode: <>98</>,
-            mnemonic: <>CWDE</>,
+            opcode: <>99</>,
+            mnemonic: <>CDQ</>,
             encoding: "zo",
             validity: {
                 16: "valid",
                 32: "valid",
                 64: "valid",
             },
-            description: <>Sign extend <Register name="AX" /> into <Register name="EAX" />.</>,
+            description: <>Sign extend <Register name="EAX" /> into <Register name="EDX" />.</>,
         },
         {
-            opcode: <>REX.W 98</>,
-            mnemonic: <>CDQE</>,
+            opcode: <>REX.W 99</>,
+            mnemonic: <>CQO</>,
             encoding: "zo",
             validity: {
                 16: "n/e",
                 32: "n/e",
                 64: "valid",
             },
-            description: <>Sign extend <Register name="EAX" /> into <Register name="RAX" />.</>,
+            description: <>Sign extend <Register name="RAX" /> into <Register name="RDX" />.</>,
         },
     ],
     encodings: {
@@ -72,27 +72,31 @@ const PageData: InstructionPageLayoutProps = {
     description: (
         <>
             <p>
-                The <code>CBW/CWDE/CDQE</code> instructions sign extend the accumulator to the next larger size.
+                The <code>CWD/CDQ/CQO</code> instructions sign extend the accumulator into the data register (<Register name="rDX" />).
+                This essentially sets every bit of the data register to that of the accumulator.
             </p>
             <p>
-                This instruction is similar to <Instruction name="cwd-cdq-cqo" />, but working only with the accumulator.
+                This instruction is similar to <Instruction name="cbw-cwde-cdqe" />, but working into the data register.
             </p>
         </>
     ),
     operation:
-        `public void CBW()
+        `public void CWD()
 {
-    AX = SignExtend(AL);
+    // DX:AX = SignExtend(AX)
+    DX = AX.Bit[15] ? 0xFFFF : 0;
 }
 
-public void CWDE()
+public void CDQ()
 {
-    EAX = SignExtend(AX);
+    // EDX:EAX = SignExtend(EAX)
+    EDX = EAX.Bit[31] ? 0xFFFFFFFF : 0;
 }
 
-public void CDQE()
+public void CQO()
 {
-    RAX = SignExtend(EAX);
+    // RDX:RAX = SignExtend(RAX)
+    RDX = RAX.Bit[63] ? 0xFFFFFFFFFFFFFFFF : 0;
 }`,
     flags: "none",
     exceptions: {

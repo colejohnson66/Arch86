@@ -174,9 +174,7 @@ const InstructionTitles = {
     cvttsd2si: <>Convert with Truncation {sdpfp} to {dwi}</>,
     // cvttssList: <> Convert with Truncation {sspfp} (Vector)</>,
     cvttss2si: <>Convert with Truncation {sspfp} to {dwi}</>,
-    cwd: <>Convert Word to Doubleword Through DX</>,
-    cdq: <>Convert Doubleword to Quadword Through EDX</>,
-    cqo: <>Convert Quadword to Octoword Through RDX</>,
+    "cwd-cdq-cqo": <>Sign Extend Accumulator Into <Register name="rDX" /></>,
 
     daa: <>Decimal Adjust <Register name="AL" /> After Addition</>,
     das: <>Decimal Adjust <Register name="AL" /> After Subtraction</>,
