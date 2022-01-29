@@ -25,11 +25,12 @@ import Register from "@components/Register";
 
 const pspfp = "Packed Single-Precision Floating-Point Values";
 const pdpfp = "Packed Double-Precision Floating-Point Values";
-const sspfp = "Scalar Single-Precision Floating-Point Value";
-const sdpfp = "Scalar Double-Precision Floating-Point Value";
+const sspfp = "Scalar Single-Precision Floating-Point Values";
+const sdpfp = "Scalar Double-Precision Floating-Point Values";
 
 const pdwi = "Packed Doubleword Integers";
-const dwi = /* Scalar */ "Doubleword Integer";
+const dwi = /* Scalar */ "Doubleword Integers";
+const dwqwi = /* Scalar */ "Doubleword and Quadword Integers";
 
 // These are duplicated from the actual pages
 const InstructionTitles = {
@@ -155,7 +156,7 @@ const InstructionTitles = {
     cvtps2pd: <>Convert {pspfp} to {pdpfp}</>,
     cvtps2pi: <>Convert {pspfp} to {pdwi} (MMX)</>,
     cvtsdList: <>Convert {sdpfp} (Vector)</>,
-    cvtsd2si: <>Convert {sdpfp} to {dwi}</>,
+    cvtsd2si: <>Convert {sdpfp} to {dwqwi}</>,
     cvtsd2ss: <>Convert {sdpfp} to {sspfp}</>,
     cvtsiList: <>Convert {dwi} (Vector)</>,
     cvtsi2ss: <>Convert {dwi} to {sspfp}</>,

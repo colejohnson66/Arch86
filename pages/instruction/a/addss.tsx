@@ -31,8 +31,8 @@ const er = "{er}";
 
 const PageData: InstructionPageLayoutProps = {
     id: "addss",
-    title: <>Add Scalar Single-Precision Floating-Point Value</>,
-    titlePlain: "Add Scalar Single-Precision Floating-Point Value",
+    title: <>Add Scalar Single-Precision Floating-Point Values</>,
+    titlePlain: "Add Scalar Single-Precision Floating-Point Values",
     opcodes: [
         {
             opcode: <>F3 0F 58 /r</>,

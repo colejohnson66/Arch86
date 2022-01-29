@@ -76,8 +76,8 @@ function PseudoMnemonicVectorTableEntry(suffix: string, imm8: number): React.Rea
 
 const PageData: InstructionPageLayoutProps = {
     id: "cmpsd",
-    title: <>Compare Scalar Double-Precision Floating-Point Value</>,
-    titlePlain: "Compare Scalar Double-Precision Floating-Point Value",
+    title: <>Compare Scalar Double-Precision Floating-Point Values</>,
+    titlePlain: "Compare Scalar Double-Precision Floating-Point Values",
     opcodes: [
         {
             opcode: <>F2 0F C2 /r <i>ib</i></>,

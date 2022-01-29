@@ -27,8 +27,8 @@ import Exceptions from "@library/Exceptions";
 
 const PageData: InstructionPageLayoutProps = {
     id: "cvtps2pi",
-    title: <>Convert Packed Single-Precision Floating-Point Values into Packed Doubleword Integers</>,
-    titlePlain: "Convert Packed Single-Precision Floating-Point Values into Packed Doubleword Integers",
+    title: <>Convert Packed Single-Precision Floating-Point Values into Packed Doubleword Integers (MMX)</>,
+    titlePlain: "Convert Packed Single-Precision Floating-Point Values into Packed Doubleword Integers (MMX)",
     opcodes: [
         {
             opcode: <>NP 0F 2D /r</>,
