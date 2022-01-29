@@ -8,6 +8,7 @@ cld
 cldemote
 clflush
 clflushopt
+clgi
 cli
 clrssbsy
 clts

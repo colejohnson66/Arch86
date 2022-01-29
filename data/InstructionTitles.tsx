@@ -121,6 +121,7 @@ const InstructionTitles = {
     cldemote: <>Demote Cache Line</>,
     clflush: <>Flush Cache Line</>,
     clflushopt: <>Flush Cache Line (Optimized)</>,
+    clgi: <>Clear Global Interrupt Flag</>,
     cli: <>Clear Interrupt Enable Flag</>,
     clrssbsy: <>Clear Busy Flag in a Supervisor Shadow Stack Token</>,
     clts: <>Clear Task-Switched Flag in <Register name="CR0" /></>,
