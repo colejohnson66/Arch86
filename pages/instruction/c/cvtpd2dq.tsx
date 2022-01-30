@@ -37,7 +37,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>F2 0F E6 /r</>,
             mnemonic: <>CVTPD2DQ <i>xmm1</i>, <i>xmm2/m128</i></>,
-            encoding: "legacy",
+            encoding: "rm",
             validity: {
                 16: "invalid",
                 32: "valid",
@@ -53,7 +53,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>VEX.128.F2.0F.WIG E6 /r</>,
             mnemonic: <>VCVTPD2DQ <i>xmm1</i>, <i>xmm2/m128</i></>,
-            encoding: "vex",
+            encoding: "rm",
             validity: {
                 16: "invalid",
                 32: "valid",
@@ -69,7 +69,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>VEX.256.F2.0F.WIG E6 /r</>,
             mnemonic: <>VCVTPD2DQ <i>ymm1</i>, <i>ymm2/m256</i></>,
-            encoding: "vex",
+            encoding: "rm",
             validity: {
                 16: "invalid",
                 32: "valid",
@@ -84,8 +84,8 @@ const PageData: InstructionPageLayoutProps = {
         },
         {
             opcode: <>EVEX.128.F2.0F.W1 E6 /r</>,
-            mnemonic: <>VCVTPD2DQ {k1z} <i>xmm1</i>, <i>xmm2/m128/m64bcst</i></>,
-            encoding: "evex",
+            mnemonic: <>VCVTPD2DQ <i>xmm1</i> {k1z}, <i>xmm2/m128/m64bcst</i></>,
+            encoding: "erm",
             validity: {
                 16: "invalid",
                 32: "valid",
@@ -100,8 +100,8 @@ const PageData: InstructionPageLayoutProps = {
         },
         {
             opcode: <>EVEX.256.F2.0F.W1 E6 /r</>,
-            mnemonic: <>VCVTPD2DQ {k1z} <i>ymm1</i>, <i>ymm2/m256/m64bcst</i></>,
-            encoding: "evex",
+            mnemonic: <>VCVTPD2DQ <i>ymm1</i> {k1z}, <i>ymm2/m256/m64bcst</i></>,
+            encoding: "erm",
             validity: {
                 16: "invalid",
                 32: "valid",
@@ -116,8 +116,8 @@ const PageData: InstructionPageLayoutProps = {
         },
         {
             opcode: <>EVEX.512.F2.0F.W1 E6 /r</>,
-            mnemonic: <>VCVTPD2DQ {k1z} <i>zmm1</i>, <i>zmm2/m512/m64bcst{er}</i></>,
-            encoding: "evex",
+            mnemonic: <>VCVTPD2DQ <i>zmm1</i> {k1z}, <i>zmm2/m512/m64bcst{er}</i></>,
+            encoding: "erm",
             validity: {
                 16: "invalid",
                 32: "valid",
@@ -132,16 +132,15 @@ const PageData: InstructionPageLayoutProps = {
         },
     ],
     encodings: {
-        legacy: ["n/a", "ModRM.reg[w]", "ModRM.r/m[r]"],
-        vex: ["n/a", "ModRM.reg[w]", "ModRM.r/m[r]"],
-        evex: ["full", "ModRM.reg[w]", "ModRM.r/m[r]"],
+        rm: ["n/a", "ModRM.reg[w]", "ModRM.r/m[r]"],
+        erm: ["full", "ModRM.reg[w]", "ModRM.r/m[r]"],
     },
     description: (
         <>
             <p>
-                The <code>(V)CVTPD2DQ</code> instruction converts two, four, or eight double-precision floating-point values from the source operand into doubleword integers.
+                The<code>(V)CVTPD2DQ</code > instruction converts two, four, or eight double - precision floating - point values from the source operand into doubleword integers.
                 The result is stored in the destination operand.
-            </p>
+            </p >
             <p>
                 {Canned.LegacySimd}
             </p>

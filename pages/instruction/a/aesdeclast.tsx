@@ -34,7 +34,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>66 0F 38 DF /r</>,
             mnemonic: <>AESDECLAST <i>xmm1</i>, <i>xmm2/m128</i></>,
-            encoding: "legacy",
+            encoding: "rm",
             validity: {
                 16: "invalid",
                 32: "valid",
@@ -50,7 +50,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>VEX.128.66.0F38.WIG DF /r</>,
             mnemonic: <>VAESDECLAST <i>xmm1</i>, <i>xmm2</i>, <i>xmm3/m128</i></>,
-            encoding: "vex",
+            encoding: "rvm",
             validity: {
                 16: "invalid",
                 32: "valid",
@@ -66,7 +66,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>VEX.256.66.0F38.WIG DF /r</>,
             mnemonic: <>VAESDECLAST <i>ymm1</i>, <i>ymm2</i>, <i>ymm3/m256</i></>,
-            encoding: "vex",
+            encoding: "rvm",
             validity: {
                 16: "invalid",
                 32: "valid",
@@ -82,7 +82,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>EVEX.128.66.0F38.WIG DF /r</>,
             mnemonic: <>VAESDECLAST <i>xmm1</i>, <i>xmm2</i>, <i>xmm3/m128</i></>,
-            encoding: "evex",
+            encoding: "ervm",
             validity: {
                 16: "invalid",
                 32: "valid",
@@ -98,7 +98,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>EVEX.256.66.0F38.WIG DF /r</>,
             mnemonic: <>VAESDECLAST <i>ymm1</i>, <i>ymm2</i>, <i>ymm3/m256</i></>,
-            encoding: "evex",
+            encoding: "ervm",
             validity: {
                 16: "invalid",
                 32: "valid",
@@ -114,7 +114,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>EVEX.128.66.0F38.WIG DF /r</>,
             mnemonic: <>VAESDECLAST <i>zmm1</i>, <i>zmm2</i>, <i>zmm3/m512</i></>,
-            encoding: "evex",
+            encoding: "ervm",
             validity: {
                 16: "invalid",
                 32: "valid",
@@ -129,9 +129,9 @@ const PageData: InstructionPageLayoutProps = {
         },
     ],
     encodings: {
-        legacy: ["n/a", "ModRM.reg[rw]", "ModRM.r/m[r]", ""],
-        vex: ["n/a", "ModRM.reg[rw]", "VEX.vvvv[r]", "ModRM.r/m[r]"],
-        evex: ["full-mem", "ModRM.reg[rw]", "EVEX.vvvvv[r]", "ModRM.r/m[r]"],
+        rm: ["n/a", "ModRM.reg[rw]", "ModRM.r/m[r]", ""],
+        rvm: ["n/a", "ModRM.reg[rw]", "VEX.vvvv[r]", "ModRM.r/m[r]"],
+        ervm: ["full-mem", "ModRM.reg[rw]", "EVEX.vvvvv[r]", "ModRM.r/m[r]"],
     },
     description: (
         <>

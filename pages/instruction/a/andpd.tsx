@@ -35,7 +35,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>66 0F 54 /r</>,
             mnemonic: <>ANDPD <i>xmm1</i>, <i>xmm2/m128</i></>,
-            encoding: "legacy",
+            encoding: "rm",
             validity: {
                 16: "invalid",
                 32: "valid",
@@ -51,7 +51,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>VEX.128.66.0F.WIG 54 /r</>,
             mnemonic: <>VANDPD <i>xmm1</i>, <i>xmm2</i>, <i>xmm3/m128</i></>,
-            encoding: "vex",
+            encoding: "rvm",
             validity: {
                 16: "invalid",
                 32: "valid",
@@ -67,7 +67,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>VEX.256.66.0F.WIG 54 /r</>,
             mnemonic: <>VANDPD <i>ymm1</i>, <i>ymm2</i>, <i>ymm3/m256</i></>,
-            encoding: "vex",
+            encoding: "rvm",
             validity: {
                 16: "invalid",
                 32: "valid",
@@ -82,8 +82,8 @@ const PageData: InstructionPageLayoutProps = {
         },
         {
             opcode: <>EVEX.128.66.0F.W1 54 /r</>,
-            mnemonic: <>VANDPD {k1z} <i>xmm1</i>, <i>xmm2</i>, <i>xmm3/m128/m64bcst</i></>,
-            encoding: "evex",
+            mnemonic: <>VANDPD <i>xmm1</i> {k1z}, <i>xmm2</i>, <i>xmm3/m128/m64bcst</i></>,
+            encoding: "ervm",
             validity: {
                 16: "invalid",
                 32: "valid",
@@ -98,8 +98,8 @@ const PageData: InstructionPageLayoutProps = {
         },
         {
             opcode: <>EVEX.256.66.0F.W1 54 /r</>,
-            mnemonic: <>VANDPD {k1z} <i>ymm1</i>, <i>ymm2</i>, <i>ymm3/m256/m64bcst</i></>,
-            encoding: "evex",
+            mnemonic: <>VANDPD <i>ymm1</i> {k1z}, <i>ymm2</i>, <i>ymm3/m256/m64bcst</i></>,
+            encoding: "ervm",
             validity: {
                 16: "invalid",
                 32: "valid",
@@ -114,8 +114,8 @@ const PageData: InstructionPageLayoutProps = {
         },
         {
             opcode: <>EVEX.512.66.0F.W1 54 /r</>,
-            mnemonic: <>VANDPD {k1z} <i>zmm1</i>, <i>zmm2</i>, <i>zmm3/m512/m64bcst</i></>,
-            encoding: "evex",
+            mnemonic: <>VANDPD <i>zmm1</i> {k1z}, <i>zmm2</i>, <i>zmm3/m512/m64bcst</i></>,
+            encoding: "ervm",
             validity: {
                 16: "invalid",
                 32: "valid",
@@ -130,9 +130,9 @@ const PageData: InstructionPageLayoutProps = {
         },
     ],
     encodings: {
-        legacy: ["n/a", "ModRM.reg[rw]", "ModRM.r/m[r]", ""],
-        vex: ["n/a", "ModRM.reg[rw]", "VEX.vvvv[r]", "ModRM.r/m[r]"],
-        evex: ["full", "ModRM.reg[rw]", "EVEX.vvvvv[r]", "ModRM.r/m[r]"],
+        rm: ["n/a", "ModRM.reg[rw]", "ModRM.r/m[r]", ""],
+        rvm: ["n/a", "ModRM.reg[rw]", "VEX.vvvv[r]", "ModRM.r/m[r]"],
+        ervm: ["full", "ModRM.reg[rw]", "EVEX.vvvvv[r]", "ModRM.r/m[r]"],
     },
     description: (
         <>

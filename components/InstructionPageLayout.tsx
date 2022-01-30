@@ -58,9 +58,21 @@ type OpcodeEntry = {
     description: React.ReactNode;
 };
 
-type EncodingKeyNoEvex = "ai" | "d" | "i" | "legacy" | "m" | "mi" | "mr" | "o"
-    | "rm" | "rmi" | "vex" | "xop" | "zo";
-type EncodingKey = EncodingKeyNoEvex | "evex";
+// A: accumulator
+// B: imm8(4..7)
+// I: immediate
+// M: ModRM.r/m
+// O: opcode(0..2)
+// P: pointer (imm16+imm)
+// R: ModRM.reg
+// V: VEX.vvvv / XOP.vvvv / EVEX.vvvvv
+// ZO: none
+type EncodingKeyNoEvex = "ai" | "i" | "m" | "mi" | "mr" | "mri" | "o" | "p"
+    | "rm" | "rmb" | "rmi" | "rmv" | "rvm" | "rvmb" | "rvmi" | "vm" | "zo";
+type EncodingEntryNoEvex = Partial<Record<EncodingKeyNoEvex, string[]>>;
+//
+type EncodingKey = EncodingKeyNoEvex | `e${EncodingKeyNoEvex}`;
+//
 type EncodingTupleType = "full" | "half" | "full-mem" | "tuple1-scalar"
     | "tuple1-fixed" | "tuple2" | "tuple4" | "tuple8" | "half-mem"
     | "quarter-mem" | "eighth-mem" | "mem128" | "movddup";
@@ -72,10 +84,8 @@ type EncodingTupleArrayType = [EncodingTupleType, string]
     | [EncodingTupleType, string, string]
     | [EncodingTupleType, string, string, string]
     | [EncodingTupleType, string, string, string, string];
-type EncodingEntryNoEvex = Partial<Record<EncodingKeyNoEvex, string[]>>;
-type EncodingEntryEvex = Partial<Record<EncodingKeyNoEvex, EncodingTupleNonEvexArrayType>> & {
-    evex: EncodingTupleArrayType;
-};
+type EncodingEntryEvex = Partial<Record<EncodingKeyNoEvex, EncodingTupleNonEvexArrayType>> &
+    Partial<Record<`e${EncodingKeyNoEvex}`, EncodingTupleArrayType>>;
 
 type Flags = {
     CF: React.ReactNode;

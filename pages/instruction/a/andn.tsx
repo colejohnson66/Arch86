@@ -33,7 +33,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>VEX.L0.NP.0F38.W0 F2 /r</>,
             mnemonic: <>ANDN <i>r32a</i>, <i>r32b</i>, <i>r/m32</i></>,
-            encoding: "vex",
+            encoding: "rvm",
             validity: {
                 16: "invalid",
                 32: "valid",
@@ -49,7 +49,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>VEX.L0.NP.0F38.W1 F2 /r</>,
             mnemonic: <>ANDN <i>r64a</i>, <i>r64b</i>, <i>r/m64</i></>,
-            encoding: "vex",
+            encoding: "rvm",
             validity: {
                 16: "invalid",
                 32: "invalid",
@@ -64,7 +64,7 @@ const PageData: InstructionPageLayoutProps = {
         },
     ],
     encodings: {
-        vex: ["ModRM.reg[w]", "VEX.vvvv[r]", "ModRM.r/m[r]"],
+        rvm: ["ModRM.reg[w]", "VEX.vvvv[r]", "ModRM.r/m[r]"],
     },
     description: (
         <>

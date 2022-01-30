@@ -37,7 +37,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>F3 0F 58 /r</>,
             mnemonic: <>ADDSS <i>xmm1</i>, <i>xmm2/m64</i></>,
-            encoding: "legacy",
+            encoding: "rm",
             validity: {
                 16: "invalid",
                 32: "valid",
@@ -53,7 +53,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>VEX.LIG.F3.0F.WIG 58 /r</>,
             mnemonic: <>VADDSS <i>xmm1</i>, <i>xmm2</i>, <i>xmm3/m64</i></>,
-            encoding: "vex",
+            encoding: "rvm",
             validity: {
                 16: "invalid",
                 32: "valid",
@@ -68,8 +68,8 @@ const PageData: InstructionPageLayoutProps = {
         },
         {
             opcode: <>EVEX.LLIG.F3.0F.W0 58 /r</>,
-            mnemonic: <>VADDSS {k1z} <i>xmm1</i>, <i>xmm2</i>, <i>xmm3/m64{er}</i></>,
-            encoding: "evex",
+            mnemonic: <>VADDSS <i>xmm1</i> {k1z}, <i>xmm2</i>, <i>xmm3/m64{er}</i></>,
+            encoding: "ervm",
             validity: {
                 16: "invalid",
                 32: "valid",
@@ -84,9 +84,9 @@ const PageData: InstructionPageLayoutProps = {
         },
     ],
     encodings: {
-        legacy: ["n/a", "ModRM.reg[rw]", "ModRM.r/m[r]", ""],
-        vex: ["n/a", "ModRM.reg[rw]", "VEX.vvvv[r]", "ModRM.r/m[r]"],
-        evex: ["tuple1-scalar", "ModRM.reg[rw]", "EVEX.vvvvv[r]", "ModRM.r/m[r]"],
+        rm: ["n/a", "ModRM.reg[rw]", "ModRM.r/m[r]", ""],
+        rvm: ["n/a", "ModRM.reg[rw]", "VEX.vvvv[r]", "ModRM.r/m[r]"],
+        ervm: ["tuple1-scalar", "ModRM.reg[rw]", "EVEX.vvvvv[r]", "ModRM.r/m[r]"],
     },
     description: (
         <>

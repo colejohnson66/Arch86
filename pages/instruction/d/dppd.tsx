@@ -34,7 +34,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>66 0F 3A 41 /r <i>ib</i></>,
             mnemonic: <>DPPD <i>xmm1</i>, <i>xmm2/m128</i>, <i>imm8</i></>,
-            encoding: "legacy",
+            encoding: "rmi",
             validity: {
                 16: "invalid",
                 32: "valid",
@@ -51,7 +51,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>VEX.128.66.0F3A.WIG 41 /r <i>ib</i></>,
             mnemonic: <>VDPPD <i>xmm1</i>, <i>xmm2</i>, <i>xmm3/m128</i>, <i>imm8</i></>,
-            encoding: "vex",
+            encoding: "rvmi",
             validity: {
                 16: "invalid",
                 32: "valid",
@@ -67,8 +67,8 @@ const PageData: InstructionPageLayoutProps = {
         },
     ],
     encodings: {
-        legacy: ["ModRM.reg[rw]", "ModRM.r/m[r]", "imm8", ""],
-        vex: ["ModRM.reg[w]", "VEX.vvvv[r]", "ModRM.r/m[r]", "imm8"],
+        rmi: ["ModRM.reg[rw]", "ModRM.r/m[r]", "imm8", ""],
+        rvmi: ["ModRM.reg[w]", "VEX.vvvv[r]", "ModRM.r/m[r]", "imm8"],
     },
     description: (
         <>

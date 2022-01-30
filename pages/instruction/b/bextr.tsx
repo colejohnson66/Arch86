@@ -33,7 +33,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>VEX.L0.NP.0F38.W0 F7 /r</>,
             mnemonic: <>BEXTR <i>r32a</i>, <i>r/m32</i>, <i>r32b</i></>,
-            encoding: "vex",
+            encoding: "rmv",
             validity: {
                 16: "invalid",
                 32: "valid",
@@ -49,7 +49,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>VEX.L0.NP.0F38.W1 F7 /r</>,
             mnemonic: <>BEXTR <i>r64a</i>, <i>r/m64</i>, <i>r64b</i></>,
-            encoding: "vex",
+            encoding: "rmv",
             validity: {
                 16: "invalid",
                 32: "invalid",
@@ -65,7 +65,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>XOP.L0.NP.0A.W0 10 /r <i>id</i></>,
             mnemonic: <>BEXTR <i>r32</i>, <i>r/m32</i>, <i>imm32</i></>,
-            encoding: "xop",
+            encoding: "rmi",
             validity: {
                 16: "invalid",
                 32: "valid",
@@ -81,7 +81,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>XOP.L0.NP.0A.W1 10 /r <i>id</i></>,
             mnemonic: <>BEXTR <i>r64</i>, <i>r/m64</i>, <i>imm32</i></>,
-            encoding: "xop",
+            encoding: "rmi",
             validity: {
                 16: "invalid",
                 32: "invalid",
@@ -96,8 +96,8 @@ const PageData: InstructionPageLayoutProps = {
         },
     ],
     encodings: {
-        vex: ["ModRM.reg[w]", "ModRM.r/m[r]", "VEX.vvvv[r]"],
-        xop: ["ModRM.reg[w]", "ModRM.r/m[r]", "imm32"],
+        rmv: ["ModRM.reg[w]", "ModRM.r/m[r]", "VEX.vvvv[r]"],
+        rmi: ["ModRM.reg[w]", "ModRM.r/m[r]", "imm32"],
     },
     description: (
         <>

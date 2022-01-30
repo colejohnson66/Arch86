@@ -33,7 +33,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>XOP.L0.NP.09.W0 01 /1</>,
             mnemonic: <>BLCFILL <i>r32</i>, <i>r/m32</i></>,
-            encoding: "xop",
+            encoding: "rm",
             validity: {
                 16: "invalid",
                 32: "valid",
@@ -49,7 +49,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>XOP.L0.NP.09.W1 01 /1</>,
             mnemonic: <>BLCFILL <i>r64</i>, <i>r/m64</i></>,
-            encoding: "xop",
+            encoding: "rm",
             validity: {
                 16: "invalid",
                 32: "invalid",
@@ -64,7 +64,7 @@ const PageData: InstructionPageLayoutProps = {
         },
     ],
     encodings: {
-        xop: ["ModRM.reg[w]", "ModRM.r/m[r]"],
+        rm: ["ModRM.reg[w]", "ModRM.r/m[r]"],
     },
     description: (
         <>

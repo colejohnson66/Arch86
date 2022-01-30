@@ -37,7 +37,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>66 0F 5B /r</>,
             mnemonic: <>CVTPS2DQ <i>xmm1</i>, <i>xmm2/m128</i></>,
-            encoding: "legacy",
+            encoding: "rm",
             validity: {
                 16: "invalid",
                 32: "valid",
@@ -53,7 +53,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>VEX.128.66.0F.WIG 5B /r</>,
             mnemonic: <>VCVTPS2DQ <i>xmm1</i>, <i>xmm2/m128</i></>,
-            encoding: "vex",
+            encoding: "rm",
             validity: {
                 16: "invalid",
                 32: "valid",
@@ -69,7 +69,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>VEX.256.66.0F.WIG 5B /r</>,
             mnemonic: <>VCVTPS2DQ <i>ymm1</i>, <i>ymm2/m256</i></>,
-            encoding: "vex",
+            encoding: "rm",
             validity: {
                 16: "invalid",
                 32: "valid",
@@ -84,8 +84,8 @@ const PageData: InstructionPageLayoutProps = {
         },
         {
             opcode: <>EVEX.128.66.0F.W0 5B /r</>,
-            mnemonic: <>VCVTPS2DQ {k1z} <i>xmm1</i>, <i>xmm2/m128/m32bcst</i></>,
-            encoding: "evex",
+            mnemonic: <>VCVTPS2DQ <i>xmm1</i> {k1z}, <i>xmm2/m128/m32bcst</i></>,
+            encoding: "erm",
             validity: {
                 16: "invalid",
                 32: "valid",
@@ -100,8 +100,8 @@ const PageData: InstructionPageLayoutProps = {
         },
         {
             opcode: <>EVEX.256.66.0F.W0 5B /r</>,
-            mnemonic: <>VCVTPS2DQ {k1z} <i>ymm1</i>, <i>ymm2/m256/m32bcst</i></>,
-            encoding: "evex",
+            mnemonic: <>VCVTPS2DQ <i>ymm1</i> {k1z}, <i>ymm2/m256/m32bcst</i></>,
+            encoding: "erm",
             validity: {
                 16: "invalid",
                 32: "valid",
@@ -116,8 +116,8 @@ const PageData: InstructionPageLayoutProps = {
         },
         {
             opcode: <>EVEX.512.66.0F.W0 5B /r</>,
-            mnemonic: <>VCVTPS2DQ {k1z} <i>zmm1</i>, <i>zmm2/m512/m32bcst{er}</i></>,
-            encoding: "evex",
+            mnemonic: <>VCVTPS2DQ <i>zmm1</i> {k1z}, <i>zmm2/m512/m32bcst{er}</i></>,
+            encoding: "erm",
             validity: {
                 16: "invalid",
                 32: "valid",
@@ -132,9 +132,8 @@ const PageData: InstructionPageLayoutProps = {
         },
     ],
     encodings: {
-        legacy: ["n/a", "ModRM.reg[w]", "ModRM.r/m[r]"],
-        vex: ["n/a", "ModRM.reg[w]", "ModRM.r/m[r]"],
-        evex: ["full", "ModRM.reg[w]", "ModRM.r/m[r]"],
+        rm: ["n/a", "ModRM.reg[w]", "ModRM.r/m[r]"],
+        erm: ["full", "ModRM.reg[w]", "ModRM.r/m[r]"],
     },
     description: (
         <>

@@ -36,7 +36,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>F2 0F 2D /r</>,
             mnemonic: <>CVTSD2SI <i>r32</i>, <i>xmm1/m64</i></>,
-            encoding: "legacy",
+            encoding: "rm",
             validity: {
                 16: "invalid",
                 32: "valid",
@@ -52,7 +52,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>F2 REX.W 0F 2D /r</>,
             mnemonic: <>CVTSD2SI <i>r64</i>, <i>xmm1/m64</i></>,
-            encoding: "legacy",
+            encoding: "rm",
             validity: {
                 16: "invalid",
                 32: "n/e",
@@ -68,7 +68,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>VEX.LIG.F2.0F.W0 2D /r</>,
             mnemonic: <>VCVTSD2SI <i>r32</i>, <i>xmm1/m64</i></>,
-            encoding: "vex",
+            encoding: "rm",
             validity: {
                 16: "invalid",
                 32: "valid",
@@ -84,7 +84,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>VEX.LIG.F2.0F.W1 2D /r</>,
             mnemonic: <>VCVTSD2SI <i>r64</i>, <i>xmm1/m64</i></>,
-            encoding: "vex",
+            encoding: "rm",
             validity: {
                 16: "invalid",
                 32: "invalid",
@@ -100,7 +100,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>EVEX.LLIG.F2.0F.W0 2D /r</>,
             mnemonic: <>VCVTSD2SI <i>r32</i>, <i>xmm1/m64{er}</i></>,
-            encoding: "evex",
+            encoding: "erm",
             validity: {
                 16: "invalid",
                 32: "valid",
@@ -116,7 +116,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>EVEX.LLIG.F2.0F.W1 2D /r</>,
             mnemonic: <>VCVTSD2SI <i>r64</i>, <i>xmm1/m64{er}</i></>,
-            encoding: "evex",
+            encoding: "erm",
             validity: {
                 16: "invalid",
                 32: "invalid",
@@ -131,9 +131,8 @@ const PageData: InstructionPageLayoutProps = {
         },
     ],
     encodings: {
-        legacy: ["n/a", "ModRM.reg[w]", "ModRM.r/m[r]"],
-        vex: ["n/a", "ModRM.reg[w]", "ModRM.r/m[r]"],
-        evex: ["tuple1-fixed", "ModRM.reg[w]", "ModRM.r/m[r]"],
+        rm: ["n/a", "ModRM.reg[w]", "ModRM.r/m[r]"],
+        erm: ["tuple1-fixed", "ModRM.reg[w]", "ModRM.r/m[r]"],
     },
     description: (
         <>

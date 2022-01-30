@@ -34,7 +34,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>F2 0F D0 /r</>,
             mnemonic: <>ADDSUBPS <i>xmm1</i>, <i>xmm2/m128</i></>,
-            encoding: "legacy",
+            encoding: "rm",
             validity: {
                 16: "invalid",
                 32: "valid",
@@ -50,7 +50,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>VEX.128.F2.0F.WIG D0 /r</>,
             mnemonic: <>VADDSUBPS <i>xmm1</i>, <i>xmm2</i>, <i>xmm3/m128</i></>,
-            encoding: "vex",
+            encoding: "rvm",
             validity: {
                 16: "invalid",
                 32: "valid",
@@ -66,7 +66,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>VEX.256.F2.0F.WIG D0 /r</>,
             mnemonic: <>VADDSUBPS <i>ymm1</i>, <i>ymm2</i>, <i>ymm3/m256</i></>,
-            encoding: "vex",
+            encoding: "rvm",
             validity: {
                 16: "invalid",
                 32: "valid",
@@ -81,8 +81,8 @@ const PageData: InstructionPageLayoutProps = {
         },
     ],
     encodings: {
-        legacy: ["ModRM.reg[rw]", "ModRM.r/m[r]", ""],
-        vex: ["ModRM.reg[rw]", "VEX.vvvv[r]", "ModRM.r/m[r]"],
+        rm: ["ModRM.reg[rw]", "ModRM.r/m[r]", ""],
+        rvm: ["ModRM.reg[rw]", "VEX.vvvv[r]", "ModRM.r/m[r]"],
     },
     description: (
         <>

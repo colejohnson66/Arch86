@@ -7,7 +7,7 @@
  * This file is part of Arch86.
  *
  * Arch86 is free software: you can redistribute it and/or modify it under the
- *   terms of the GNU Affero General Public License as published by the Free
+ *   tes of the GNU Affero General Public License as published by the Free
  *   Software Foundation, either version 3 of the License, or (at your option)
  *   any later version.
  *
@@ -34,7 +34,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>66 0F D0 /r</>,
             mnemonic: <>ADDSUBPD <i>xmm1</i>, <i>xmm2/m128</i></>,
-            encoding: "legacy",
+            encoding: "rm",
             validity: {
                 16: "invalid",
                 32: "valid",
@@ -50,7 +50,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>VEX.128.66.0F.WIG D0 /r</>,
             mnemonic: <>VADDSUBPD <i>xmm1</i>, <i>xmm2</i>, <i>xmm3/m128</i></>,
-            encoding: "vex",
+            encoding: "rvm",
             validity: {
                 16: "invalid",
                 32: "valid",
@@ -66,7 +66,7 @@ const PageData: InstructionPageLayoutProps = {
         {
             opcode: <>VEX.256.66.0F.WIG D0 /r</>,
             mnemonic: <>VADDSUBPD <i>ymm1</i>, <i>ymm2</i>, <i>ymm3/m256</i></>,
-            encoding: "vex",
+            encoding: "rvm",
             validity: {
                 16: "invalid",
                 32: "valid",
@@ -81,8 +81,8 @@ const PageData: InstructionPageLayoutProps = {
         },
     ],
     encodings: {
-        legacy: ["ModRM.reg[rw]", "ModRM.r/m[r]", ""],
-        vex: ["ModRM.reg[rw]", "VEX.vvvv[r]", "ModRM.r/m[r]"],
+        rm: ["ModRM.reg[rw]", "ModRM.r/m[r]", ""],
+        rvm: ["ModRM.reg[rw]", "VEX.vvvv[r]", "ModRM.r/m[r]"],
     },
     description: (
         <>
