@@ -39,6 +39,12 @@ const Canned = {
     LegacySimd: <>All forms except the legacy SSE one will zero the upper (untouched) bits.</>,
     LegacySimdMultiple: <>All forms except the legacy SSE ones will zero the upper (untouched) bits.</>,
     Lockable: <>This instruction can be used with the <Instruction name="lock" noTitle /> prefix to allow atomic exectution.</>,
+    LongModeDefaultsTo64Bit:
+        <>
+            In Long Mode, the default operand size is <Unit value={64} unit="bits" />;
+            {" "}<Unit value={32} unit="bit" /> operation size cannot be encoded.
+            Use of the <Instruction name="osize" /> prefix changes the operand size to <Unit value={16} unit="bits" />.
+        </>,
     NoLongNE: (otherInstr: string) => {
         const prefix = "This instruction is not encodable in Long Mode, and, if encountered, will be interpreted as";
         if (otherInstr === "evex")

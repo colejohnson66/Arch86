@@ -67,8 +67,9 @@ type OpcodeEntry = {
 // R: ModRM.reg
 // V: VEX.vvvv / XOP.vvvv / EVEX.vvvvv
 // ZO: none
-type EncodingKeyNoEvex = "ai" | "i" | "m" | "mi" | "mr" | "mri" | "o" | "p"
-    | "rm" | "rmb" | "rmi" | "rmv" | "rvm" | "rvmb" | "rvmi" | "vm" | "zo";
+type EncodingKeyNoEvex = "ai" | "i" | "ii" | "m" | "mi" | "mr" | "mri" | "o"
+    | "p" | "rm" | "rmb" | "rmi" | "rmv" | "rvm" | "rvmb" | "rvmi" | "vm"
+    | "zo";
 type EncodingEntryNoEvex = Partial<Record<EncodingKeyNoEvex, string[]>>;
 //
 type EncodingKey = EncodingKeyNoEvex | `e${EncodingKeyNoEvex}`;
