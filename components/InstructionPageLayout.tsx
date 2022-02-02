@@ -352,14 +352,11 @@ export default function InstructionPageLayout(props: InstructionPageLayoutProps)
                     </Scrollable>
                 </div>
                 {props.operationNotes &&
-                    <>
-                        <h3 id="headingOperationNotes">Notes</h3>
-                        <ol>
-                            {CoerceToArray(props.operationNotes).map((note, idx) => (
-                                <li key={idx}>{note}</li>
-                            ))}
-                        </ol>
-                    </>}
+                    <ol className="ml-4">
+                        {CoerceToArray(props.operationNotes).map((note, idx) => (
+                            <li key={idx}>{note}</li>
+                        ))}
+                    </ol>}
 
                 {props.examples &&
                     <>
