@@ -32,6 +32,7 @@ const Exceptions = {
     // #UD
     Cpuid: <>If any of the required CPUID feature flags are not set.</>,
     CpuidFeatureFlags: <>If any of the required CPUID feature flags need enabling, but are not.</>,
+    EvexNotL0: <>If <code>EVEX.LL</code> is not <code>00b</code>.</>,
     EvexVvvvv: <>If <code>EVEX.vvvvv</code> is not <code>11111b</code>.</>,
     InCompatibility: <>If in Compatibility Mode.</>,
     InReal: <>If in Real Mode.</>,
@@ -42,10 +43,10 @@ const Exceptions = {
     LockNoMem: <>If the <Instruction name="lock" noTitle /> prefix is used, but the destination is not a memory operand.</>,
     NoFpu: <>If <Register name="CR0.EM" /> is set (no internal or external FPU)</>,
     SibRequired: <>If 16 bit addressing is used, or 32 or 64 bit addressing is used, but without an SIB byte (<code>rm</code> is not <code>100b</code>).</>,
-    VexNotL0: <>If <code>VEX.L</code> is not 0.</>,
-    VexNotL1: <>If <code>VEX.L</code> is not 1.</>,
-    VexNotW0: <>If <code>VEX.W</code> is not 0.</>,
-    VexNotW1: <>If <code>VEX.W</code> is not 1.</>,
+    VexNotL0: <>If <code>VEX.L</code> is not <code>0</code>.</>,
+    VexNotL1: <>If <code>VEX.L</code> is not <code>1</code>.</>,
+    VexNotW0: <>If <code>VEX.W</code> is not <code>0</code>.</>,
+    VexNotW1: <>If <code>VEX.W</code> is not <code>1</code>.</>,
     VexVvvv: <>If <code>VEX.vvvv</code> is not <code>1111b</code>.</>,
     XopVvvv: <>If <code>XOP.vvvv</code> is not <code>1111b</code>.</>, // TODO: is this a thing?
 
