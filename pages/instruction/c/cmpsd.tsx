@@ -340,7 +340,7 @@ public void VCMPSD_Vex(SimdU64 dest, SimdF64 src1, SimdF64 src2, U8 predicate, i
     dest[2..] = 0;
 }
 
-void VCMPSD_Evex(KMask dest, SimdF64 src1, SimdF64 src2, U8 predicate, KMask k, int kl)
+public void VCMPSD_Evex(KMask dest, SimdF64 src1, SimdF64 src2, U8 predicate, KMask k, int kl)
 {
     ComparisonFunc func = PredicateMapping32[predicate];
     if (k[0])
