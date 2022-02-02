@@ -135,7 +135,7 @@ const InstructionList: Record<string, MaybeArray<keyof typeof Titles>[]> = {
         "extractps",
         "extrq",
     ],
-    l: [
+    prefixes: [
         "lock",
     ]
 };

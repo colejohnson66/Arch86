@@ -43,6 +43,8 @@ function InstructionArrayEntry(title: string, list: string[]): React.ReactElemen
 }
 
 export default function Page(): React.ReactElement {
+    const mnemonicLetters = Object.fromEntries(Object.entries(InstructionList).filter((entry) => entry[0] !== "prefixes"));
+
     return (
         <Layout.Root navGroup="instruction" pageTitle="Instructions" canonical="/instruction">
             <Layout.Title title="Instructions" />
@@ -52,7 +54,8 @@ export default function Page(): React.ReactElement {
             <Layout.Content>
                 <Toc.Root>
                     <Toc.Entry href="#headingList" text="Mnemonic List">
-                        {Object.keys(InstructionList).map((char) => (
+                        <Toc.Entry href="#headingListPrefixes" text="Prefixes" />
+                        {Object.keys(mnemonicLetters).map((char) => (
                             <Toc.Entry key={char} href={`#headingList${char.toUpperCase()}`} text={char.toUpperCase()} />
                         ))}
                     </Toc.Entry>
@@ -68,7 +71,15 @@ export default function Page(): React.ReactElement {
                 <Clear />
 
                 <h2 id="headingList">Mnemonic List</h2>
-                {Object.entries(InstructionList).map((outer) => (
+                <h3 id="headingListPrefixes">Prefixes</h3>
+                <ul>
+                    {InstructionList.prefixes.map((entry) => (
+                        Array.isArray(entry)
+                            ? <li key={entry[0]}>{InstructionArrayEntry(entry[0], entry.slice(1))}</li>
+                            : <li key={entry}><Instruction name={entry} useHyphen useAliasForTitleCaseMapping /></li>
+                    ))}
+                </ul>
+                {Object.entries(mnemonicLetters).map((outer) => (
                     <React.Fragment key={outer[0]}>
                         <h3 id={`headingList${outer[0].toUpperCase()}`}>{outer[0].toUpperCase()}</h3>
                         <ul>
