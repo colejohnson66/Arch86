@@ -29,6 +29,14 @@
         {
             "name": "instructions-e",
             "path": "./.vscode/instructions/e.txt"
+        },
+        {
+            "name": "instructions-f",
+            "path": "./.vscode/instructions/f.txt"
+        },
+        {
+            "name": "instructions-g",
+            "path": "./.vscode/instructions/g.txt"
         }
     ],
     "dictionaries": [
@@ -38,7 +46,9 @@
         "instructions-b",
         "instructions-c",
         "instructions-d",
-        "instructions-e"
+        "instructions-e",
+        "instructions-f",
+        "instructions-g"
     ],
     "ignorePaths": [
         "**/node_modules/**",
@@ -91,6 +101,7 @@
         "quadword",
         "Ryzen",
         "scrollable",
+        "significand",
         "simd",
         "ulong",
         "unaliased",
