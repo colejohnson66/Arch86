@@ -44,6 +44,14 @@ const OpcodeValidityMap: Record<OpcodeValidityValues, React.ReactNode> = {
     "n/p": <td className="text-center bg-yellow-300"><abbr title="Not Prefixable">N/P</abbr></td>,
     "n/s": <td className="text-center bg-yellow-300"><abbr title="Not Supported">N/S</abbr></td>,
 };
+const OpcodeValidityMapString: Record<OpcodeValidityValues, React.ReactNode> = {
+    "valid": "valid",
+    "valid1": "valid<sup>1</sup>",
+    "invalid": "invalid",
+    "n/e": <abbr title="Not Encodable">N/E</abbr>,
+    "n/p": <abbr title="Not Prefixable">N/P</abbr>,
+    "n/s": <abbr title="Not Supported">N/S</abbr>,
+};
 type OpcodeEntryValidity = {
     16: OpcodeValidityValues;
     32: OpcodeValidityValues;
@@ -182,14 +190,26 @@ function Plural<T>(value: number, singular: T, plural: T): T {
     return plural;
 }
 
-function FormatCpuidList(list: string[]): React.ReactNode {
+function FormatCpuidListBreaks(list: string[]): React.ReactNode {
     if (list.length === 1)
         return <code>{list[0]}</code>;
 
     const ret: React.ReactNode[] = list.map((feature, idx) => {
-        if (idx === list.length)
+        if (idx === list.length - 1)
             return <code key={idx}>{feature}</code>;
         return <React.Fragment key={idx}><code>{feature}</code><br /></React.Fragment>;
+    });
+    return <>{ret}</>;
+}
+
+function FormatCpuidListComma(list: string[]): React.ReactNode {
+    if (list.length === 1)
+        return <code>{list[0]}</code>;
+
+    const ret: React.ReactNode[] = list.map((feature, idx) => {
+        if (idx === list.length - 1)
+            return <code key={idx}>{feature}</code>;
+        return <React.Fragment key={idx}><code>{feature}</code>, </React.Fragment>;
     });
     return <>{ret}</>;
 }
@@ -266,7 +286,7 @@ export default function InstructionPageLayout(props: InstructionPageLayoutProps)
                 <Scrollable>
                     <table className="instruction-overview">
                         <thead>
-                            <tr>
+                            <tr className="hidden lg:table-row">
                                 <th>Opcode</th>
                                 <th><A href="#headingEncoding">Encoding</A></th>
                                 <th><Unit value={16} unit="bit" /></th>
@@ -277,24 +297,71 @@ export default function InstructionPageLayout(props: InstructionPageLayoutProps)
                             </tr>
                         </thead>
                         <tbody>
-                            {props.opcodes.map((row, idx) => (
-                                typeof row === "string" && row === ""
-                                    ? <tr key={idx}><td colSpan={hasCpuid ? 7 : 6} /></tr>
-                                    : <tr key={idx}>
-                                        <td className="text-sm">
-                                            <code className="px-1">{row.opcode}</code>
-                                            <hr />
-                                            <code className="px-1 whitespace-normal">{row.mnemonic}</code>
-                                        </td>
-                                        <td className="text-center"><code>{row.encoding}</code></td>
-                                        {OpcodeValidityMap[row.validity[16]]}
-                                        {OpcodeValidityMap[row.validity[32]]}
-                                        {OpcodeValidityMap[row.validity[64]]}
-                                        {row.cpuid &&
-                                            <td className="text-center">{FormatCpuidList(CoerceToArray(row.cpuid))}</td>}
-                                        <td>{row.description}</td>
-                                    </tr>
-                            ))}
+                            {props.opcodes.map((row, idx) => {
+                                if (typeof row === "string" && row === "") {
+                                    return (
+                                        <React.Fragment key={idx}>
+                                            <tr className="hidden lg:table-row">
+                                                <td colSpan={hasCpuid ? 7 : 6} />
+                                            </tr>
+                                            <tr className="lg:invisible" aria-hidden="true">
+                                                <td />
+                                            </tr>
+                                        </React.Fragment>
+                                    );
+                                }
+
+                                return (
+                                    <React.Fragment key={idx}>
+                                        <tr className="hidden lg:table-row">
+                                            <td className="text-sm">
+                                                <code className="px-1">{row.opcode}</code>
+                                                <hr />
+                                                <code className="px-1 whitespace-normal">{row.mnemonic}</code>
+                                            </td>
+                                            <td className="text-center"><code>{row.encoding}</code></td>
+                                            {OpcodeValidityMap[row.validity[16]]}
+                                            {OpcodeValidityMap[row.validity[32]]}
+                                            {OpcodeValidityMap[row.validity[64]]}
+                                            {row.cpuid &&
+                                                <td className="text-center">{FormatCpuidListBreaks(CoerceToArray(row.cpuid))}</td>}
+                                            <td>{row.description}</td>
+                                        </tr>
+                                        <tr className="lg:hidden" aria-hidden="true">
+                                            <td>
+                                                <span className="whitespace-nowrap">
+                                                    <b>Opcode:</b>
+                                                    {" "}<code className="text-sm">{row.opcode}</code>
+                                                </span>
+                                                <br />
+                                                <span>
+                                                    <b>Mnemonic:</b>
+                                                    {" "}<code className="text-sm whitespace-normal">{row.mnemonic}</code>
+                                                </span>
+                                                <hr />
+                                                <span className="whitespace-nowrap">
+                                                    <b>Encoding:</b>
+                                                    {" "}<code>{row.encoding}</code></span>
+                                                <br />
+                                                <span>
+                                                    <b>Validity (16/32/64 bit):</b>
+                                                    {" "}{OpcodeValidityMapString[row.validity[16]]},
+                                                    {" "}{OpcodeValidityMapString[row.validity[32]]},
+                                                    {" "}{OpcodeValidityMapString[row.validity[64]]}
+                                                </span>
+                                                <br />
+                                                {hasCpuid &&
+                                                    <>
+                                                        <b><Instruction name="cpuid" noTitle /> Feature Flag(s):</b>
+                                                        {" "}{FormatCpuidListComma(CoerceToArray(row.cpuid))}
+                                                    </>}
+                                                <hr />
+                                                {row.description}
+                                            </td>
+                                        </tr>
+                                    </React.Fragment>
+                                );
+                            })}
                         </tbody>
                     </table>
                 </Scrollable>
