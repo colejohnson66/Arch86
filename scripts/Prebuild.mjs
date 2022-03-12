@@ -23,9 +23,9 @@
 
 // TODO: Convert to TypeScript
 
-const dir = require("node-dir");
-const fs = require("fs");
-const path = require("path");
+import dir from "node-dir"; // CommonJS module - must import this way
+import fs from "fs";
+import path from "path";
 
 console.log("[SCRIPTS] Generating PageList.ts...");
 console.log("[SCRIPTS] Generating sitemap.xml...")
@@ -45,8 +45,6 @@ dir.files(pagesDir, { sync: true }).forEach((entry) => {
 
     // filter out
     if (entry === "/_app" || entry === "/404")
-        return;
-    if (entry === "/instruction/[slug]")
         return;
 
     // cleanup indexes

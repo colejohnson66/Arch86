@@ -14,7 +14,7 @@
     },
     "scripts": {
         "dev": "next",
-        "prebuild": "node ./scripts/Prebuild.js",
+        "prebuild": "node ./scripts/Prebuild.mjs",
         "build": "next build",
         "start": "next start",
         "lint": "next lint",
