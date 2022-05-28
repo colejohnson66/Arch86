@@ -46,7 +46,7 @@ const PageData: InstructionPageLayoutProps = {
             description:
                 <>
                     Perform an unsigned divide of <Register name="AX" /> by <i>r/m8</i>.
-                    Store the quotient (result) in <Register name="AL" /> and the remainder in <Register name="AH" />.
+                    Store the quotient in <Register name="AL" /> and the remainder in <Register name="AH" />.
                 </>,
         },
         {
@@ -61,7 +61,7 @@ const PageData: InstructionPageLayoutProps = {
             description:
                 <>
                     Perform an unsigned divide of <Register name="AX" /> by <i>r/m8</i>.
-                    Store the quotient (result) in <Register name="AL" /> and the remainder in <Register name="AH" />.
+                    Store the quotient in <Register name="AL" /> and the remainder in <Register name="AH" />.
                     {" "}{Canned.RexR8Encoding}
                 </>,
         },
@@ -77,7 +77,7 @@ const PageData: InstructionPageLayoutProps = {
             description:
                 <>
                     Perform an unsigned divide of <Register name="DX:AX" /> by <i>r/m16</i>.
-                    Store the quotient (result) in <Register name="AX" /> and the remainder in <Register name="DX" />.
+                    Store the quotient in <Register name="AX" /> and the remainder in <Register name="DX" />.
                 </>,
         },
         {
@@ -92,7 +92,7 @@ const PageData: InstructionPageLayoutProps = {
             description:
                 <>
                     Perform an unsigned divide of <Register name="EDX:EAX" /> by <i>r/m32</i>.
-                    Store the quotient (result) in <Register name="EAX" /> and the remainder in <Register name="EDX" />.
+                    Store the quotient in <Register name="EAX" /> and the remainder in <Register name="EDX" />.
                 </>,
         },
         {
@@ -107,7 +107,7 @@ const PageData: InstructionPageLayoutProps = {
             description:
                 <>
                     Perform an unsigned divide of <Register name="RDX:RAX" /> by <i>r/m64</i>.
-                    Store the quotient (result) in <Register name="RAX" /> and the remainder in <Register name="RDX" />.
+                    Store the quotient in <Register name="RAX" /> and the remainder in <Register name="RDX" />.
                 </>,
         },
     ],
@@ -133,44 +133,48 @@ const PageData: InstructionPageLayoutProps = {
     if (divisor is 0)
         #DE;
 
-    U16 temp = AX / divisor;
-    if (temp > 0xFF)
+    U16 al = AX / divisor;
+    U16 ah = AX % divisor;
+    if (ah > 0xFF)
         #DE;
-    AL = (U8)temp;
-    AH = (U8)(AX % divisor);
+    AL = (U8)al;
+    AH = (U8)ah;
 }
 public void DIV(U16 divisor)
 {
     if (divisor is 0)
         #DE;
 
-    U32 temp = DX:AX / divisor;
-    if (temp > 0xFFFF)
+    U32 ax = DX:AX / divisor;
+    U32 dx = DX:AX % divisor;
+    if (ax > 0xFFFF)
         #DE;
-    AX = (U16)temp;
-    DX = (U16)(DX:AX % divisor);
+    AX = (U16)ax;
+    DX = (U16)dx;
 }
 public void DIV(U32 divisor)
 {
     if (divisor is 0)
         #DE;
 
-    U64 temp = EDX:EAX / divisor;
-    if (temp > 0xFFFFFFFF)
+    U64 eax = EDX:EAX / divisor;
+    U64 edx = EDX:EAX % divisor;
+    if (eax > 0xFFFF_FFFF)
         #DE;
-    EAX = (U16)temp;
-    EDX = (U16)(EDX:EAX % divisor);
+    EAX = (U32)eax;
+    EDX = (U32)edx;
 }
 public void DIV(U64 divisor)
 {
     if (divisor is 0)
         #DE;
 
-    U128 temp = RDX:RAX / divisor;
-    if (temp > 0xFFFFFFFFFFFFFFFF)
+    U128 rax = RDX:RAX / divisor;
+    U128 rdx = RDX:RAX % divisor;
+    if (temp > 0xFFFF_FFFF_FFFF_FFFF)
         #DE;
-    RAX = (U16)temp;
-    RDX = (U16)(RDX:RAX % divisor);
+    RAX = (U64)rax;
+    RDX = (U64)rdx;
 }`,
     flags: {
         CF: <>Undefined.</>,
