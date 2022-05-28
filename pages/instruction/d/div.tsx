@@ -171,7 +171,7 @@ public void DIV(U64 divisor)
 
     U128 rax = RDX:RAX / divisor;
     U128 rdx = RDX:RAX % divisor;
-    if (temp > 0xFFFF_FFFF_FFFF_FFFF)
+    if (rax > 0xFFFF_FFFF_FFFF_FFFF)
         #DE;
     RAX = (U64)rax;
     RDX = (U64)rdx;
