@@ -51,6 +51,7 @@ const Exceptions = {
     XopVvvv: <>If <code>XOP.vvvv</code> is not <code>1111b</code>.</>, // TODO: is this a thing?
 
     // #NM
+    EMOrTSSet: <>If <Register name="CR0.EM" /> or <Register name="CR0.TS" /> are <code>1</code>.</>,
     TaskSwitchOccured: <>If <Register name="CR0.TS" /> is set (a task switch occurred).</>,
 
     // #SS(0)
@@ -70,6 +71,13 @@ const Exceptions = {
     PF: <>If a page fault occurs.</>,
 
     // #MF
+    FpuDenormal: <><code>#D</code> - Denormal operand.</>,
+    FpuInvalid: <><code>#IA</code> - Invalid arithmetic operation.</>,
+    FpuStack: <><code>#IS</code> - Stack overflow or underflow.</>,
+    FpuOverflow: <><code>#O</code> - Numeric overflow.</>,
+    FpuPrecision: <><code>#P</code> - Inexact result.</>,
+    FpuUnderflow: <><code>#U</code> - Numeric underflow.</>,
+    FpuDivideBy0: <><code>#Z</code> - Divide-by-zero.</>,
     PendingFpuException: <>If an FPU exception is pending.</>,
 
     // #AC(0)

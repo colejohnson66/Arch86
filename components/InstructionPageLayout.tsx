@@ -97,15 +97,15 @@ type EncodingEntryEvex = Partial<Record<EncodingKeyNoEvex, EncodingTupleNonEvexA
     Partial<Record<`e${EncodingKeyNoEvex}`, EncodingTupleArrayType>>;
 
 type Flags = {
-    CF: React.ReactNode;
-    PF: React.ReactNode;
-    AF: React.ReactNode;
-    ZF: React.ReactNode;
-    SF: React.ReactNode;
+    CF?: React.ReactNode;
+    PF?: React.ReactNode;
+    AF?: React.ReactNode;
+    ZF?: React.ReactNode;
+    SF?: React.ReactNode;
     TF?: React.ReactNode;
     IF?: React.ReactNode;
     DF?: React.ReactNode;
-    OF: React.ReactNode;
+    OF?: React.ReactNode;
     // IOPL?: React.ReactNode;
     NT?: React.ReactNode;
     RF?: React.ReactNode;
@@ -114,6 +114,11 @@ type Flags = {
     VIF?: React.ReactNode;
     VIP?: React.ReactNode;
     ID?: React.ReactNode;
+    //
+    C0?: React.ReactNode;
+    C1?: React.ReactNode;
+    C2?: React.ReactNode;
+    C3?: React.ReactNode;
 };
 
 // NMI (2) and CSO (9) are left out; 15, 22-27, and 31 are reserved
@@ -136,6 +141,7 @@ type ExceptionsList = {
     compatibility?: ExceptionList | "none";
     long?: ExceptionList | "none";
     //
+    fpu?: ExceptionList | "none";
     simd?: ExceptionList | "none";
     other?: OtherExceptionList;
 }
@@ -214,12 +220,21 @@ function FormatCpuidListComma(list: string[]): React.ReactNode {
     return <>{ret}</>;
 }
 
-function FormatFlagEntry(name: string, description: string, line?: React.ReactNode): React.ReactNode | undefined {
+function FormatFlagEntry(name: string, description?: string, line?: React.ReactNode): React.ReactNode | undefined {
     if (!line)
         return undefined;
+
+    if (description) {
+        return (
+            <>
+                <dt><code>{name}</code> ({description})</dt>
+                <dd>{line}</dd>
+            </>);
+    }
+
     return (
         <>
-            <dt><code>{name}</code> ({description})</dt>
+            <dt><code>{name}</code></dt>
             <dd>{line}</dd>
         </>
     );
@@ -460,6 +475,10 @@ export default function InstructionPageLayout(props: InstructionPageLayoutProps)
                                 {FormatFlagEntry("VIF", "virtual interrupt flag", props.flags.VIF)}
                                 {FormatFlagEntry("VIP", "virtual interrupt pending", props.flags.VIP)}
                                 {FormatFlagEntry("ID", "identification flag", props.flags.ID)}
+                                {FormatFlagEntry("C0", undefined, props.flags.C0)}
+                                {FormatFlagEntry("C1", undefined, props.flags.C1)}
+                                {FormatFlagEntry("C2", undefined, props.flags.C2)}
+                                {FormatFlagEntry("C3", undefined, props.flags.C3)}
                             </dl>}
                     </>}
 
@@ -502,6 +521,11 @@ export default function InstructionPageLayout(props: InstructionPageLayoutProps)
                     <>
                         <h3 id="headingExceptionsLong">Long Mode</h3>
                         {FormatNormalExceptionsList(props.exceptions.long)}
+                    </>}
+                {props.exceptions.fpu &&
+                    <>
+                        <h3 id="headingExceptionsFpu">Legacy Floating-Point</h3>
+                        {FormatNormalExceptionsList(props.exceptions.fpu)}
                     </>}
                 {props.exceptions.simd &&
                     <>
