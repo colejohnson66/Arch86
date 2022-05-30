@@ -197,7 +197,7 @@ const InstructionTitles = {
     endbr64: <>Terminate an Indirect Branch in 64 bit Mode</>,
     enter: <>Make Stack Frame for Procedure Parameters</>,
     extractps: <>Extract {pspfp}</>,
-    extrq: <>Extract Field from Register</>,
+    extrq: <>Extract Quadword</>,
 
     f2xm1: <>Compute <code>2<sup>x</sup> - 1</code></>,
     fabs: <>Floating-Point Absolute Value</>,
