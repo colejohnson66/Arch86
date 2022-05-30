@@ -23,9 +23,7 @@
 
 import InstructionPageLayout, { InstructionPageLayoutProps } from "@components/InstructionPageLayout";
 
-import Canned from "@library/Canned";
 import Exceptions from "@library/Exceptions";
-import Instruction from "@components/Instruction";
 import Register from "@components/Register";
 
 const PageData: InstructionPageLayoutProps = {
