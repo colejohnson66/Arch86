@@ -66,7 +66,7 @@ const PageData: InstructionPageLayoutProps = {
 }`,
     flags: {
         C0: <>Undefined.</>,
-        C1: <>Aet if the result was rounded up. Cleared otherwise or if a stack overflow occurs.</>,
+        C1: <>Set if the result was rounded up. Cleared otherwise or if a stack overflow occurs.</>,
         C2: <>Undefined.</>,
         C3: <>Undefined.</>,
     },
