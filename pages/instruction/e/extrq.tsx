@@ -29,7 +29,7 @@ const PageData: InstructionPageLayoutProps = {
     titlePlain: "Extract Quadword",
     opcodes: [
         {
-            opcode: <>66 0F 78 /0 <i>ib</i> <i>ib</i></>,
+            opcode: <>66 0F 78 /0 <i>iw</i></>,
             mnemonic: <>EXTRQ <i>xmm1</i>, <i>imm16</i></>,
             encoding: "mi",
             validity: {
@@ -68,7 +68,7 @@ const PageData: InstructionPageLayoutProps = {
     description: (
         <>
             <p>
-                The <code>EXTRQ</code> extracts a quadword from the destination operand, and using the source operand, shifts and masks the value.
+                The <code>EXTRQ</code> extracts a quadword from the destination operand, and using the source operand as a control, shifts and masks the value.
                 The resulting value is then stored in the destination operand.
             </p>
         </>
