@@ -104,7 +104,7 @@ const PageData: InstructionPageLayoutProps = {
             </p>
             <p>
                 Of historical note, the infamous <A href="https://en.wikipedia.org/wiki/Pentium_F00F_bug">Pentium &quot;F00F&quot; bug</A> was a bug caused by this prefix.
-                Normally, when encountering the invalid encoding of the <Instruction name="cmpxchg8b" noTitle /> instruction (one useing a register operand), the processor would raise a <Exception name="UD" /> exception.
+                Normally, when encountering the invalid encoding of the <Instruction name="cmpxchg8b" noTitle /> instruction (one using a register operand), the processor would raise a <Exception name="UD" /> exception.
                 However, when prefixed with <code>LOCK</code>, the <code>LOCK#</code> pin would be asserted when reading the exception handler.
                 As locked reads must be paired with a write, the processor&apos;s bus interface would forbid all other memory access until the next write, but the paired write would not arrive.
                 This would ultimately lock up the processor&apos;s external bus and prevent any other memory access.
