@@ -56,7 +56,7 @@ const PageData: InstructionPageLayoutProps = {
             },
             description:
                 <>
-                    Assert the <code>LOCK#</code> during the duration of the instruction.
+                    Assert the <code>LOCK#</code> for the duration of the instruction.
                 </>,
         },
     ],
@@ -66,7 +66,7 @@ const PageData: InstructionPageLayoutProps = {
     description: (
         <>
             <p>
-                The <code>LOCK</code> prefix asserts the processor&apos; <code>LOCK#</code> pin during the duration of the prefixed instruction.
+                The <code>LOCK</code> prefix asserts the processor&apos;s <code>LOCK#</code> pin for the duration of the prefixed instruction.
                 This has the effect of making any memory accesses in the instruction atomic.
             </p>
             <p>
