@@ -46,7 +46,7 @@ const OpcodeValidityMap: Record<OpcodeValidityValues, React.ReactNode> = {
 };
 const OpcodeValidityMapString: Record<OpcodeValidityValues, React.ReactNode> = {
     "valid": "valid",
-    "valid1": "valid<sup>1</sup>",
+    "valid1": <>valid<sup>1</sup></>,
     "invalid": "invalid",
     "n/e": <abbr title="Not Encodable">N/E</abbr>,
     "n/p": <abbr title="Not Prefixable">N/P</abbr>,
