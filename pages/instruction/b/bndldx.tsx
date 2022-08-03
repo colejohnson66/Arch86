@@ -95,7 +95,7 @@ const PageData: InstructionPageLayoutProps = {
     }
 }
 
-public void BNDLDX((Bound dest, Sib addr)
+public void BNDLDX(Bound dest, Sib addr)
 {
     IntPtr @base = addr.Base + addr.Displacement;
     U64 ptr = GPR(addr.Index);
