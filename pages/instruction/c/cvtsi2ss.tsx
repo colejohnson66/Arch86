@@ -79,7 +79,7 @@ const PageData: InstructionPageLayoutProps = {
                 <>
                     Convert a doubleword integer value from <i>r/m32</i> into a scalar single-precision floating-point value.
                     Merge the upper bits of the result with those in <i>xmm2</i>.
-                    Store the result in <i>r32</i>.
+                    Store the result in <i>xmm1</i>.
                 </>,
         },
         {
@@ -96,7 +96,7 @@ const PageData: InstructionPageLayoutProps = {
                 <>
                     Convert a quadword integer from <i>r/m64</i> into a scalar single-precision floating-point value.
                     Merge the upper bits of the result with those in <i>xmm2</i>.
-                    Store the result in <i>r64</i>.
+                    Store the result in <i>xmm1</i>.
                 </>,
         },
         {
@@ -113,7 +113,7 @@ const PageData: InstructionPageLayoutProps = {
                 <>
                     Convert a doubleword integer from <i>r/m32</i> into a scalar single-precision floating-point value.
                     Merge the upper bits of the result with those in <i>xmm2</i>.
-                    Store the result in <i>r32</i>.
+                    Store the result in <i>xmm1</i>.
                 </>,
         },
         {
@@ -130,7 +130,7 @@ const PageData: InstructionPageLayoutProps = {
                 <>
                     Convert a quadword integer from <i>r/m64</i> into a scalar single-precision floating-point value.
                     Merge the upper bits of the result with those in <i>xmm2</i>.
-                    Store the result in <i>r64</i>.
+                    Store the result in <i>xmm1</i>.
                 </>,
         },
     ],
