@@ -22,7 +22,7 @@
  */
 
 import A from "@components/A";
-import { HomeIcon } from "@heroicons/react/outline";
+import { HomeIcon } from "@heroicons/react/24/outline";
 
 type BreadcrumbRootProps = {
     children: React.ReactNode;
