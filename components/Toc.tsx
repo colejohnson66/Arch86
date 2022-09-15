@@ -34,7 +34,7 @@ function TocRoot(props: TocRootProps): React.ReactElement {
     const newChildren: React.ReactNode[] = React.Children.map(props.children, (child) => {
         if (React.isValidElement(child)) {
             count++;
-            return React.cloneElement(child, { tocIndex: count.toString() });
+            return React.cloneElement(child as React.ReactElement<TocEntryProps>, { tocIndex: count.toString() });
         }
         return child;
     });
@@ -62,7 +62,7 @@ function TocEntry(props: TocEntryProps): React.ReactElement {
     const newChildren: React.ReactNode[] = React.Children.map(props.children, (child) => {
         if (React.isValidElement(child)) {
             count++;
-            return React.cloneElement(child, { tocIndex: count.toString() });
+            return React.cloneElement(child as React.ReactElement<TocEntryProps>, { tocIndex: count.toString() });
         }
         return child;
     });
