@@ -2,7 +2,7 @@
  * File:   Toc.tsx
  * Author: Cole Tobin
  * =============================================================================
- * Copyright (c) 2020-2021 Cole Tobin
+ * Copyright (c) 2020-2022 Cole Tobin
  *
  * This file is part of Arch86.
  *
@@ -22,10 +22,13 @@
  */
 
 import A from "@components/A";
+import { ChevronUpIcon } from "@heroicons/react/24/outline";
+import { Disclosure } from "@headlessui/react";
 import React from "react";
 
 type TocRootProps = {
     children: React.ReactNode;
+    collapsed?: boolean;
 };
 
 function TocRoot(props: TocRootProps): React.ReactElement {
@@ -40,11 +43,22 @@ function TocRoot(props: TocRootProps): React.ReactElement {
     });
 
     return (
-        <div className="shadow bg-white pl-4 pt-2 pr-4 pb-4 rounded-md mb-2 sm:float-left sm:mr-4" id="toc">
-            <div className="font-semibold pb-2">Contents</div>
-            <ul className="list-none ml-0">
-                {newChildren}
-            </ul>
+        <div className="shadow bg-white p-4 rounded-md mb-2 sm:float-left sm:mr-4" id="toc">
+            <Disclosure defaultOpen={!(props.collapsed ?? true)}>
+                {({ open }) => (
+                    <>
+                        <div className={`font-semibold text-lg ${open ? "pb-2" : ""}`}>
+                            <Disclosure.Button>
+                                {/* TODO: animate this; possible Headless UI <Transition>? */}
+                                <ChevronUpIcon
+                                    className={`float-left mr-1 ${open ? "transform rotate-180 translate-y-2" : ""} h-5 w-5 text-slate-600`} />
+                                Contents
+                            </Disclosure.Button>
+                        </div>
+                        {open && <ul className="list-none ml-0">{newChildren}</ul>}
+                    </>
+                )}
+            </Disclosure>
         </div>
     );
 }
