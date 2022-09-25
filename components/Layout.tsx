@@ -153,7 +153,7 @@ type LayoutTitleProps = {
 function LayoutTitle(props: LayoutTitleProps): React.ReactElement {
     return (
         <Head>
-            <title>{props.title} | Arch86</title>
+            <title>{`${props.title} | Arch86`}</title>
         </Head>
     );
 }
