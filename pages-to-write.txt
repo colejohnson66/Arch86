@@ -36,8 +36,6 @@
 /instruction
   /aesdecwide128kl
   /aesdecwide256kl
-  /aesenc128kl
-  /aesenc256kl
   /aesencwide128kl
   /aesencwide256kl
   /bextr      (need XOP intrinsics?)

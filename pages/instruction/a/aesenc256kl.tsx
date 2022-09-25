@@ -1,5 +1,5 @@
 /* =============================================================================
- * File:   aesdec256kl.tsx
+ * File:   aesenc256kl.tsx
  * Author: Cole Tobin
  * =============================================================================
  * Copyright (c) 2022 Cole Tobin
@@ -27,13 +27,13 @@ import Exceptions from "@library/Exceptions";
 import Register from "@components/Register";
 
 const PageData: InstructionPageLayoutProps = {
-    id: "aesdec256kl",
-    title: <>Perform 14 Rounds of AES-256 Decryption with Key Locker</>,
-    titlePlain: "Perform 14 Rounds of AES-256 Decryption with Key Locker",
+    id: "aesenc256kl",
+    title: <>Perform 14 Rounds of AES-256 Encryption with Key Locker</>,
+    titlePlain: "Perform 14 Rounds of AES-256 Encryption with Key Locker",
     opcodes: [
         {
-            opcode: <>F3 0F 38 DF !(11):rrr:bbb</>,
-            mnemonic: <>AESDEC256KL <i>xmm1</i>, <i>m512</i></>,
+            opcode: <>F3 0F 38 DE !(11):rrr:bbb</>,
+            mnemonic: <>AESENC256KL <i>xmm1</i>, <i>m512</i></>,
             encoding: "rm",
             validity: {
                 16: "invalid",
@@ -43,7 +43,7 @@ const PageData: InstructionPageLayoutProps = {
             cpuid: ["kl", "aeskle"],
             description:
                 <>
-                    Decrypt <i>xmm1</i> using a 256 bit AES key indicated by the handle in <i>m512</i>.
+                    Encrypt <i>xmm1</i> using a 256 bit AES key indicated by the handle in <i>m512</i>.
                     Store the result in <i>xmm1</i>.
                 </>,
         },
@@ -54,14 +54,14 @@ const PageData: InstructionPageLayoutProps = {
     description: (
         <>
             <p>
-                The <code>AESDEC256KL</code> instruction performs 14 rounds of AES-256 to decrypt the first operand.
+                The <code>AESENC256KL</code> instruction performs 14 rounds of AES-256 to encrypt the first operand.
                 The second operand points to a 512 bit key locker handle containing the key.
                 If the handle is legal and authentic, the result is stored in the first operand.
             </p>
         </>
     ),
     operation:
-        `public void AESDEC256KL(ref U128 dest, bit[] handle)
+        `public void AESENC256KL(ref U128 dest, bit[] handle)
 {
     bool illegal =
         HandleAnyReservedBitSet(handle) ||
@@ -82,7 +82,7 @@ const PageData: InstructionPageLayoutProps = {
         }
         else
         {
-            dest = AES256Decrypt(dest, key);
+            dest = AES256Encrypt(dest, key);
             EFLAGS.ZF = false;
         }
     }
@@ -103,7 +103,7 @@ const PageData: InstructionPageLayoutProps = {
         OF: <>Cleared.</>,
     },
     intrinsics: [
-        "unsigned char _mm_aesdec256kl_u8(__m128i* odata, __m128i idata, const void* h)",
+        "unsigned char _mm_aesenc256kl_u8(__m128i* odata, __m128i idata, const void* h)",
     ],
     exceptions: {
         real: {
