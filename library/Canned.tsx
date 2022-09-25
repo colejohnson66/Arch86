@@ -53,6 +53,7 @@ const Canned = {
             return <>{prefix} the VEX prefix.</>;
         return <>{prefix} <Instruction name={otherInstr} />.</>;
     },
+    Serializing: <>This instruction is serializing.</>,
     RexR8Encoding: <>This uses the <A href="/instruction/help#headingOverviewAlternateGpr8Encoding">alterate <code>gpr8</code> encoding</A>.</>,
     UndocumentedOpcode: <>Undocumented.</>, // TODO: link to a page about undocumented opcodes
     VvvvReserved: (arg: "vex" | "xop" | "evex" | "vex+xop" | "vex+evex" | "all") => {
