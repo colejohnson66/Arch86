@@ -105,17 +105,12 @@
 
 
     table th {
-        @apply border border-slate-600 bg-slate-200
+        @apply border border-slate-600 bg-slate-200 p-2;
     }
     table td {
-        @apply border border-slate-600 bg-slate-100
+        @apply border border-slate-600 bg-slate-100 p-2;
     }
 
-
-    table.instruction-overview th,
-    table.instruction-overview td {
-        @apply p-2;
-    }
     table.instruction-table th,
     table.instruction-table td {
         @apply p-1 text-center;

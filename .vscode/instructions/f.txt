@@ -1,6 +1,7 @@
 f2xm1
 fabs
 fadd
+faddp
 fbld
 fbstp
 fchs
@@ -13,6 +14,7 @@ fdecstp
 fdiv
 fdivr
 ffree
+fiadd
 ficom
 fild
 fincstp

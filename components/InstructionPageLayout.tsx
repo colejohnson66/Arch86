@@ -66,6 +66,7 @@ type OpcodeEntry = {
     description: React.ReactNode;
 };
 
+// 0: ST(0)
 // A: accumulator
 // B: imm8(4..7)
 // I: immediate
@@ -75,9 +76,9 @@ type OpcodeEntry = {
 // R: ModRM.reg
 // V: VEX.vvvv / XOP.vvvv / EVEX.vvvvv
 // ZO: none
-type EncodingKeyNoEvex = "ai" | "i" | "ii" | "m" | "mi" | "mr" | "mri" | "o"
-    | "p" | "rm" | "rmb" | "rmi" | "rmv" | "rvm" | "rvmb" | "rvmi" | "vm"
-    | "zo";
+type EncodingKeyNoEvex = "0m" | "ai" | "i" | "ii" | "m" | "m0" | "mi" | "mr"
+    | "mri" | "o" | "p" | "rm" | "rmb" | "rmi" | "rmv" | "rvm" | "rvmb" | "rvmi"
+    | "vm" | "zo";
 type EncodingEntryNoEvex = Partial<Record<EncodingKeyNoEvex, string[]>>;
 //
 type EncodingKey = EncodingKeyNoEvex | `e${EncodingKeyNoEvex}`;
