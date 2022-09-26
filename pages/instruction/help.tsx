@@ -177,7 +177,7 @@ export default function Page(): React.ReactElement {
                     <dd>
                         The EVEX encoding&apos;s tuple form.
                         {/* TODO: explain what it is */}
-                        This column is only present if an EVEX encoding for this instruction exists.
+                        {" "}This column is only present if an EVEX encoding for this instruction exists.
                         If present, any encoding that does not use an EVEX prefix will contain &quot;N/A&quot;.
                     </dd>
                     <dt>Operand(s)</dt>
@@ -212,25 +212,25 @@ export default function Page(): React.ReactElement {
                         Which portion is used depends on the operand size of the opcode.
                     </dd>
                     <dt><code>DS:SI</code></dt>
-                    <dl>
+                    <dd>
                         Memory addressed by the <code>DS:SI</code> register pair.
                         {" "}<code>DS:ESI</code> and <code>DS:RSI</code> may be used instead depending on the operand size attribute.
-                    </dl>
+                    </dd>
                     <dt><code>ES:DI</code></dt>
-                    <dl>
+                    <dd>
                         Memory addressed by the <code>ES:DI</code> register pair.
                         {" "}<code>ES:EDI</code> and <code>ES:RDI</code> may be used instead depending on the operand size attribute.
-                    </dl>
+                    </dd>
                     <dt><code>EVEX.vvvvv</code></dt>
-                    <dl>
+                    <dd>
                         The <code>vvvvv</code> bits of an EVEX prefix encode the register.
                         These bits are stored in <em>inverted</em> form.
                         For example, <code>ZMM26</code> would be stored as <code>00101b</code> (<code>11010b</code> inverted).
-                    </dl>
+                    </dd>
                     <dt><code>FLAGS</code></dt>
-                    <dl>
+                    <dd>
                         The <A href="/register/flags">FLAGS</A> register.
-                    </dl>
+                    </dd>
                     <dt><code>imm##</code></dt>
                     <dd>
                         An immediate value with <code>##</code> bits.
