@@ -22,7 +22,7 @@
  */
 
 type CpuidProps = {
-    featureID: string;
+    featureID?: string;
     eax: number;
     ecx?: number;
     output: "eax" | "ebx" | "ecx" | "edx";
@@ -31,19 +31,20 @@ type CpuidProps = {
 };
 
 export default function Cpuid(props: CpuidProps): React.ReactElement {
-    const eax = `EAX=${props.eax.toString(16).padStart(2, "0")}${props.eax !== 0 ? "h" : ""}`;
+    const eax = `EAX=${props.eax.toString(16)}${props.eax > 9 ? "h" : ""}`;
     const ecx = props.ecx
-        ? `,ECX=${props.ecx.toString(16).padStart(2, "0")}${props.ecx !== 0 ? "h" : ""}`
+        ? `,ECX=${props.ecx.toString(16)}${props.ecx > 9 ? "h" : ""}`
         : "";
-    const bits = props.bitEnd
+    const bits = props.bitEnd !== undefined
         ? `bits ${props.bit}:${props.bitEnd}`
         : `bit ${props.bit}`;
 
     // TODO: lookup the feature and provide a link
+    const featureID = props.featureID ? ` (${props.featureID.toUpperCase()})` : "";
     return (
-        <span className="whitespace-nowrap">
-            CPUID[{eax}{ecx}]:{props.output.toUpperCase()}[{bits} ({props.featureID.toUpperCase()})]
-        </span>
+        <code className="whitespace-nowrap">
+            CPUID[{eax}{ecx}]:{props.output.toUpperCase()}[{bits}{featureID}]
+        </code>
     );
 }
 
