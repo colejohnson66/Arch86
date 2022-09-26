@@ -76,16 +76,21 @@ const PageData: InstructionPageLayoutProps = {
     operation:
         `public void CPUID()
 {
-    bool extended = EAX > 0x8000_0000;
+    // "extended" leafs are ones with the MSB set
+    bool extended = (EAX & 0x8000_0000) != 0;
+
+    // only Pentium 4 and newer support extended leafs
+    extended &= ProcessorSupportsExtendedLeafs();
 
     if (ProcessorSupportsLeaf(EAX, ECX))
     {
         (EAX, EBX, ECX, EDX) = CPUIDCore(EAX, ECX);
     }
     else if ((extended && EAX < MAX_EXTENDED_LEAF) ||
-        (!extended && EAX < MAX_LEAF)
+        (!extended && EAX < MAX_LEAF))
     {
         // less than the maximum supported leaf, but this specific leaf is unsupported
+        // e.g. leaf 0x11 does not exist
         EAX = 0;
         EBX = 0;
         ECX = 0;
@@ -93,12 +98,76 @@ const PageData: InstructionPageLayoutProps = {
     }
     else
     {
-        // greater than the maximum supported leaf; return the maximum
+        // greater than the maximum supported leaf
+
+        // return the maximum
         U32 leaf = extended ? MAX_EXTENDED_LEAF : MAX_LEAF;
         (EAX, EBX, ECX, EDX) = CPUIDCore(leaf, ECX);
     }
 }`,
     examples: [
+        `; bool IsCpuidSupported();
+; Determine if the CPUID instruction is supported.
+;
+; Clobbers: EBX
+IsCpuidSupported:
+    pushfd              ; EAX = EFLAGS
+    pop eax
+    mov ebx, eax        ; save a copy
+    xor eax, 0x00200000 ; toggle bit 21
+    push eax            ; EFLAGS = EAX
+    popfd               ;   if CPUID is unsupported, the change to bit 21 is ignored
+    pushfd              ; EAX = EFLAGS
+    pop eax
+    cmp eax, ebx        ; has bit 21 changed?
+    jne .unsupported
+
+    mov eax, 1
+    ret
+
+.unsupported:
+    mov eax, 0
+    ret`,
+        `; bool IsCpuFromIntel();
+; Determine if the current CPU is from Intel.
+;
+; Clobbers: EBX, ECX, EDX
+IsCpuFromIntel:
+    mov eax, 0 ; CPUID leaf 0
+    cpuid
+    cmp ebx, 'Genu' ; in little endian; 'uneG' in big endian
+    jne .notIntel
+    cmp ecx, 'ineI' ; ditto
+    jne .notIntel
+    cmp edx, 'ntel' ; ditto
+    jne .notIntel
+
+    mov eax, 1
+    ret
+
+.notIntel:
+    mov eax, 0
+    ret`,
+        `; bool IsCpuFromAMD();
+; Determine if the current CPU is from AMD.
+;
+; Clobbers: EBX, ECX, EDX
+IsCpuFromAMD:
+    mov eax, 0 ; CPUID leaf 0
+    cpuid
+    cmp ebx, 'Auth' ; in little endian; 'htuA' in big endian
+    jne .notAMD
+    cmp ecx, 'enti' ; ditto
+    jne .notAMD
+    cmp edx, 'cAMD' ; ditto
+    jne .notAMD
+
+    mov eax, 1
+    ret
+
+.notAMD:
+    mov eax, 0
+    ret`,
     ],
     flags: "none",
     intrinsics: [
