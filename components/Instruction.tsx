@@ -68,6 +68,7 @@ export const TitleCaseMapping: Partial<Record<keyof typeof InstructionTitles, st
     "cbw-cwde-cdqe": "CBW/CWDE/CDQE",
     "cmpxchg8b-cmpxchg16b": "CMPXCHG8B/CMPXCHG16B",
     "cmovcc": "CMOVcc",
+    "fcmovcc": "FCMOVcc",
     // ...
 };
 
