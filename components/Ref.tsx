@@ -25,11 +25,16 @@ import A from "@components/A";
 import React from "react";
 
 type RefRootProps = {
+    noHeading?: boolean;
     children: React.ReactNode;
 };
 
 function RefRoot(props: RefRootProps): React.ReactElement {
     // TODO: support columns
+
+    if (props.noHeading)
+        return <ul>{props.children}</ul>;
+
     return (
         <>
             <h2 id="headingReferences">References</h2>
@@ -42,13 +47,15 @@ function RefRoot(props: RefRootProps): React.ReactElement {
 
 type RefEntryProps = {
     name: string;
+    title?: string;
     children: React.ReactNode;
 };
 
 function RefEntry(props: RefEntryProps): React.ReactElement {
     return (
         <li id={`reference-${props.name}`}>
-            {`[${props.name}] - `}
+            <code>[{props.title ?? props.name}]</code>
+            {" - "}
             {props.children}
         </li>
     );
@@ -56,13 +63,14 @@ function RefEntry(props: RefEntryProps): React.ReactElement {
 
 type RefLinkProps = {
     name: string;
+    title?: string;
 };
 
 function RefLink(props: RefLinkProps): React.ReactElement {
     return (
         <sup className="whitespace-nowrap">
             <A href={`#reference-${props.name}`}>
-                [{props.name}]
+                [{props.title ?? props.name}]
             </A>
         </sup>
     );
