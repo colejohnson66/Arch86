@@ -177,11 +177,11 @@ void VCVTPD2DQ_EvexMemory(SimdI32 dest, SimdF64 src, KMask k, int kl)
     }
     dest[kl..] = 0;
 }
-public void VCVTPD2DQ_Evex128(SimdI32 dest, SimdF64 src, KMask k) =>
+public void VCVTPD2DQ_Evex128Memory(SimdI32 dest, SimdF64 src, KMask k) =>
     VCVTPD2DQ_EvexMemory(dest, src, k, 2);
-public void VCVTPD2DQ_Evex256(SimdI32 dest, SimdF64 src, KMask k) =>
+public void VCVTPD2DQ_Evex256Memory(SimdI32 dest, SimdF64 src, KMask k) =>
     VCVTPD2DQ_EvexMemory(dest, src, k, 4);
-public void VCVTPD2DQ_Evex512(SimdI32 dest, SimdF64 src, KMask k) =>
+public void VCVTPD2DQ_Evex512Memory(SimdI32 dest, SimdF64 src, KMask k) =>
     VCVTPD2DQ_EvexMemory(dest, src, k, 8);
 
 void VCVTPD2DQ_EvexRegister(SimdI32 dest, SimdF64 src, KMask k, int kl)
@@ -198,7 +198,13 @@ void VCVTPD2DQ_EvexRegister(SimdI32 dest, SimdF64 src, KMask k, int kl)
         // otherwise unchanged
     }
     dest[kl..] = 0;
-}`,
+}
+public void VCVTPD2DQ_Evex128Register(SimdI32 dest, SimdF64 src, KMask k) =>
+    VCVTPD2DQ_EvexRegister(dest, src, k, 2);
+public void VCVTPD2DQ_Evex256Register(SimdI32 dest, SimdF64 src, KMask k) =>
+    VCVTPD2DQ_EvexRegister(dest, src, k, 4);
+public void VCVTPD2DQ_Evex512Register(SimdI32 dest, SimdF64 src, KMask k) =>
+    VCVTPD2DQ_EvexRegister(dest, src, k, 8);`,
     intrinsics: [
         "__m128i _mm_cvtpd_epi32(__m128d src)",
         "__m128i _mm_mask_cvtpd_epi32(__m128i s, __mmask8 k, __m128d a)",
