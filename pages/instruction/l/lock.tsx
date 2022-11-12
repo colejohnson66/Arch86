@@ -94,9 +94,9 @@ const PageData: InstructionPageLayoutProps = {
                 <li><Instruction name="or" useHyphen /></li>
                 <li><Instruction name="sbb" useHyphen /></li>
                 <li><Instruction name="sub" useHyphen /></li>
-                <li><Instruction name="xor" useHyphen /></li>
                 <li><Instruction name="xadd" useHyphen /></li>
                 <li><Instruction name="xchg" useHyphen /></li>
+                <li><Instruction name="xor" useHyphen /></li>
             </ul>
             <p className="pt-2">
                 Even then, those instructions may only be &quot;locked&quot; with a memory operand.
