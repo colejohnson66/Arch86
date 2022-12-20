@@ -36,23 +36,14 @@ export default function A(props: AProps): React.ReactElement {
     const classes = props.className ?? [];
 
     // local link?
-    if (props.href[0] === "#") {
-        return (
-            <Link href={props.href}>
-                <a className={classes.join(" ")}>{props.children}</a>
-            </Link>
-        );
-    }
+    if (props.href[0] === "#")
+        return <Link href={props.href} className={classes.join(" ")}>{props.children}</Link>;
 
     // internal link? (internal links without slash are invalid)
     if (props.href[0] === "/") {
         if (!PageList.includes(props.href.split("#")[0]))
             classes.push("text-red-500");
-        return (
-            <Link href={props.href}>
-                <a className={classes.join(" ")}>{props.children}</a>
-            </Link>
-        );
+        return <Link href={props.href} className={classes.join(" ")}>{props.children}</Link>;
     }
 
     // it's external
