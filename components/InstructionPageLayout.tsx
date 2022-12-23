@@ -127,13 +127,14 @@ type ExceptionAbbr = "DE" | "DB" | "BP" | "OF" | "BR" | "UD" | "NM" | "DF0"
     | "TSSel" | "NPSel" | "SS0" | "SSSel" | "GP0" | "GPSel" | "PF" | "MF"
     | "AC0" | "MC" | "XM" | "VE" | "CP" | "HV" | "VC" | "SX";
 type ExceptionList = Partial<Record<ExceptionAbbr, MaybeArray<React.ReactNode>>>;
-type VexExceptions = "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "11" | "12" | "13";
-type EvexExceptions = "e1" | "e1nf" | "e2" | "e3" | "e3nf" | "e4" | "e4nf"
+type VexException = "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "11" | "12"
+    | "13" | "k20" | "k21";
+type EvexException = "e1" | "e1nf" | "e2" | "e3" | "e3nf" | "e4" | "e4nf"
     | "e5" | "e5nf" | "e6" | "e6nf" | "e7nm" | "e9" | "e9nf" | "e10" | "e10nf"
-    | "e11" | "e12" | "e12np" | "k20" | "k21"; // TODO: Should K20 and K21 be here or elsewhere?
+    | "e11" | "e12" | "e12np";
 type OtherExceptionList = {
-    vex?: VexExceptions;
-    evex?: EvexExceptions;
+    vex?: VexException;
+    evex?: EvexException;
 } & ExceptionList;
 type ExceptionsList = {
     real?: ExceptionList | "none";
@@ -146,6 +147,15 @@ type ExceptionsList = {
     simd?: ExceptionList | "none";
     other?: OtherExceptionList;
 }
+
+type ExceptionsEntry = [string, React.ReactNode];
+type ExceptionsEntryGroup = Partial<Record<ExceptionAbbr, ExceptionsEntry[]>>;
+type Exceptions = {
+    modes: string[] | "all";
+    causes: ExceptionsEntryGroup;
+    vex?: VexException,
+    evex?: EvexException,
+};
 
 export type InstructionPageLayoutProps = {
     wip?: boolean;
@@ -161,7 +171,8 @@ export type InstructionPageLayoutProps = {
     examples?: MaybeArray<string>;
     flags?: Flags | "none";
     intrinsics?: string[] | "autogen";
-    exceptions: ExceptionsList;
+    exceptions?: ExceptionsList;
+    exceptions2?: Exceptions;
 };
 
 const ExceptionAbbrMap: Record<ExceptionAbbr, React.ReactNode> = {
@@ -281,6 +292,41 @@ function FormatOtherExceptionsList(list: OtherExceptionList): React.ReactNode {
                 FormatNormalExceptionsList(rest)}
         </>
     );
+}
+
+function FormatExceptions(groups: ExceptionsEntryGroup): React.ReactNode {
+    const ret: React.ReactNode[] = [];
+
+    // TODO: this code is horrifying (nested loops); pull out into functions
+    Object.entries(groups).forEach((group, idx) => {
+        const exception = group[0] as ExceptionAbbr;
+        const entries = group[1];
+
+        // first the exception name cell
+        let row: React.ReactNode[] = [
+            <th key={exception} rowSpan={entries.length}>{ExceptionAbbrMap[exception]}</th>,
+        ];
+
+        // then all the modes and contents; one row per entry
+        entries.forEach((entry, idx2) => {
+            const modes = entry[0];
+            const cause = entry[1];
+
+            // add the mode cells
+            modes.split("").forEach((mode, idx3) => {
+                row.push(<td key={`${exception}${idx2}-${idx3}`} className="align-middle text-center">{mode.toUpperCase()}</td>);
+            });
+
+            // and the cause cell
+            row.push(<td key={`${exception}${idx2}-cause`}>{cause}</td>);
+
+            // finally, after each entry, close out the row
+            ret.push(<tr key={exception + idx}>{row}</tr>);
+            row = []; // reset for next row
+        });
+    });
+
+    return <>{ret}</>;
 }
 
 export default function InstructionPageLayout(props: InstructionPageLayoutProps): React.ReactElement {
@@ -498,46 +544,73 @@ export default function InstructionPageLayout(props: InstructionPageLayoutProps)
                     </>}
 
                 <h2 id="headingExceptions">Exceptions</h2>
-                {props.exceptions.real &&
+                {props.exceptions?.real &&
                     <>
                         <h3 id="headingExceptionsReal">Real-Address Mode</h3>
                         {FormatNormalExceptionsList(props.exceptions.real)}
                     </>}
-                {props.exceptions.virtual &&
+                {props.exceptions?.virtual &&
                     <>
                         <h3 id="headingExceptionsVirtual">Virtual-8086 Mode</h3>
                         {FormatNormalExceptionsList(props.exceptions.virtual)}
                     </>}
-                {props.exceptions.protected &&
+                {props.exceptions?.protected &&
                     <>
                         <h3 id="headingExceptionsProtected">Protected Mode</h3>
                         {FormatNormalExceptionsList(props.exceptions.protected)}
                     </>}
-                {props.exceptions.compatibility &&
+                {props.exceptions?.compatibility &&
                     <>
                         <h3 id="headingExceptionsCompatibility">Compatibility Mode</h3>
                         {FormatNormalExceptionsList(props.exceptions.compatibility)}
                     </>}
-                {props.exceptions.long &&
+                {props.exceptions?.long &&
                     <>
                         <h3 id="headingExceptionsLong">Long Mode</h3>
                         {FormatNormalExceptionsList(props.exceptions.long)}
                     </>}
-                {props.exceptions.fpu &&
+                {props.exceptions?.fpu &&
                     <>
                         <h3 id="headingExceptionsFpu">Legacy Floating-Point</h3>
                         {FormatNormalExceptionsList(props.exceptions.fpu)}
                     </>}
-                {props.exceptions.simd &&
+                {props.exceptions?.simd &&
                     <>
                         <h3 id="headingExceptionsSimd">SIMD Floating-Point</h3>
                         {FormatNormalExceptionsList(props.exceptions.simd)}
                     </>}
-                {props.exceptions.other &&
+                {props.exceptions?.other &&
                     <>
                         <h3 id="headingExceptionsOther">Other Exceptions</h3>
                         {FormatOtherExceptionsList(props.exceptions.other)}
                     </>}
+                {props.exceptions2 &&
+                    <table className="w-full">
+                        <thead>
+                            <tr>
+                                <th rowSpan={2}>Exception</th>
+                                <th colSpan={props.exceptions2.modes === "all" ? 5 : props.exceptions2.modes.length}>Mode</th>
+                                {/* full width causes this column to take up as much space as it can */}
+                                <th rowSpan={2} className="w-full">Cause of Exception</th>
+                            </tr>
+                            <tr>
+                                {props.exceptions2.modes === "all"
+                                    ? <>
+                                        <th>Real</th>
+                                        <th>Virtual-8086</th>
+                                        <th>Protected</th>
+                                        <th>Compatibility</th>
+                                        <th>Long</th>
+                                    </>
+                                    : props.exceptions2.modes.map((mode, idx) => (
+                                        <th key={idx}>{mode}</th>
+                                    ))}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {FormatExceptions(props.exceptions2.causes)}
+                        </tbody>
+                    </table>}
             </Layout.Content>
         </Layout.Root>
     );

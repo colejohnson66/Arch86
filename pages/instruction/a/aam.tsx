@@ -93,25 +93,16 @@ const PageData: InstructionPageLayoutProps = {
         SF: <>Set according to the result.</>,
         OF: <>Undefined.</>,
     },
-    exceptions: {
-        real: {
-            DE: <>If an immediate value of 0 is used.</>,
-            UD: Exceptions.Lock,
-        },
-        virtual: {
-            DE: <>If an immediate value of 0 is used.</>,
-            UD: Exceptions.Lock,
-        },
-        protected: {
-            DE: <>If an immediate value of 0 is used.</>,
-            UD: Exceptions.Lock,
-        },
-        compatibility: {
-            DE: <>If an immediate value of 0 is used.</>,
-            UD: Exceptions.Lock,
-        },
-        long: {
-            UD: Exceptions.InLong,
+    exceptions2: {
+        modes: "all",
+        causes: {
+            DE: [
+                ["xxxx ", <>If an immediate value of <code>0</code> is used.</>],
+            ],
+            UD: [
+                ["xxxx ", Exceptions.Lock],
+                ["    x", Exceptions.InLong],
+            ],
         },
     },
 };

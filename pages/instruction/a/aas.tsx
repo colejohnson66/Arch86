@@ -83,21 +83,13 @@ const PageData: InstructionPageLayoutProps = {
         SF: <>Undefined.</>,
         OF: <>Undefined.</>,
     },
-    exceptions: {
-        real: {
-            UD: Exceptions.Lock,
-        },
-        virtual: {
-            UD: Exceptions.Lock,
-        },
-        protected: {
-            UD: Exceptions.Lock,
-        },
-        compatibility: {
-            UD: Exceptions.Lock,
-        },
-        long: {
-            UD: Exceptions.InLong,
+    exceptions2: {
+        modes: "all",
+        causes: {
+            UD: [
+                ["xxxx ", Exceptions.Lock],
+                ["    x", Exceptions.InLong],
+            ],
         },
     },
 };

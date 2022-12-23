@@ -94,21 +94,13 @@ aaa           ; AX == 0x202 (22 (decimal) in BCD)`,
         SF: <>Undefined.</>,
         OF: <>Undefined.</>,
     },
-    exceptions: {
-        real: {
-            UD: Exceptions.Lock,
-        },
-        virtual: {
-            UD: Exceptions.Lock,
-        },
-        protected: {
-            UD: Exceptions.Lock,
-        },
-        compatibility: {
-            UD: Exceptions.Lock,
-        },
-        long: {
-            UD: Exceptions.InLong,
+    exceptions2: {
+        modes: "all",
+        causes: {
+            UD: [
+                ["xxxx ", Exceptions.Lock],
+                ["    x", Exceptions.InLong],
+            ],
         },
     },
 };
