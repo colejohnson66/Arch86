@@ -72,7 +72,7 @@ const PageData: InstructionPageLayoutProps = {
     intrinsics: [
         "void _cldemote(const void *ptr)",
     ],
-    exceptions: {
+    exceptionsLegacy: {
         real: {
             UD: Exceptions.Lock,
         },

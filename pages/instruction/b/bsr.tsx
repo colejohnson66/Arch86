@@ -120,7 +120,7 @@ public void BSR(ref U64 dest, U64 src)
         SF: <>Undefined.</>,
         OF: <>Undefined.</>,
     },
-    exceptions: {
+    exceptionsLegacy: {
         real: {
             UD: Exceptions.Lock,
             SS0: Exceptions.SegLimitSS,

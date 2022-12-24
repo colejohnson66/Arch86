@@ -112,7 +112,7 @@ public void VAESKEYGENASSIST_Vex128(SimdU32 dest, SimdU32 src, byte roundConstan
     intrinsics: [
         "__m128i _mm_aeskeygenassist(__m128i data, const int roundConstant)",
     ],
-    exceptions: {
+    exceptionsLegacy: {
         simd: "none",
         other: {
             vex: "4",

@@ -89,7 +89,7 @@ public void BOUND(U32 index, IntPtr bounds)
 }`,
     flags: "none",
     intrinsics: "autogen",
-    exceptions: {
+    exceptionsLegacy: {
         real: {
             BR: "If the bounds test fails.",
             UD: Exceptions.Lock,

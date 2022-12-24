@@ -95,7 +95,7 @@ public void CDQE()
     RAX = SignExtend(EAX);
 }`,
     flags: "none",
-    exceptions: {
+    exceptionsLegacy: {
         real: {
             UD: Exceptions.Lock,
         },

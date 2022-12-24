@@ -359,7 +359,7 @@ public void VCMPSS_Evex(KMask dest, SimdF32 src1, SimdF32 src2, U8 predicate, KM
         "__mmask8 _mm_cmp_ss_mask(__m128d a, __m128d b, const int predicate)",
         "__mmask8 _mm_cmp_round_ss_mask(__m128d a, __m128d b, const int predicate, const in rounding)",
     ],
-    exceptions: {
+    exceptionsLegacy: {
         simd: {
             XM: [
                 Exceptions.SimdDenormal,

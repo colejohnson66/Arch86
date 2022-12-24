@@ -85,7 +85,7 @@ const PageData: InstructionPageLayoutProps = {
     intrinsics: [
         "void *_bnd_set_ptr_bounds(const void *address, size_t size)",
     ],
-    exceptions: {
+    exceptionsLegacy: {
         real: {
             UD: [
                 Exceptions.Lock,

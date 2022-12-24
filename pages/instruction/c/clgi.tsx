@@ -68,7 +68,7 @@ const PageData: InstructionPageLayoutProps = {
     GIF = 0;
 }`,
     flags: "none",
-    exceptions: {
+    exceptionsLegacy: {
         real: {
             UD: Exceptions.InReal,
         },

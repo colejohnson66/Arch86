@@ -138,7 +138,7 @@ public void BNDCN(Bound bnd, IntPtr addr)
     intrinsics: [
         "void _bnd_chk_ptr_ubounds(const void *address)",
     ],
-    exceptions: {
+    exceptionsLegacy: {
         real: {
             BR: "If the bounds test fails.",
             UD: [

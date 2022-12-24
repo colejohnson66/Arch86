@@ -153,7 +153,7 @@ const PageData: InstructionPageLayoutProps = {
         OF: <>Unmodified.</>,
         VIF: <>Cleared if in <code>VME</code> or <code>PVI</code> submodes and <Register name="EFLAGS.IF" /> is unmodified.</>,
     },
-    exceptions: {
+    exceptionsLegacy: {
         real: {
             UD: Exceptions.Lock,
         },

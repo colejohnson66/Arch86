@@ -111,7 +111,7 @@ public void BNDLDX((Bound dest, Sib addr)
         </>,
     flags: "none",
     intrinsics: "autogen",
-    exceptions: {
+    exceptionsLegacy: {
         real: {
             BR: <>If the Bound Directory Entry is invalid.</>,
             UD: [

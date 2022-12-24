@@ -165,7 +165,7 @@ const PageData: InstructionPageLayoutProps = {
         SF: <>Affected if a task switch occurs. Unmodified otherwise.</>,
         OF: <>Affected if a task switch occurs. Unmodified otherwise.</>,
     },
-    exceptions: {
+    exceptionsLegacy: {
         real: {
         },
         virtual: {

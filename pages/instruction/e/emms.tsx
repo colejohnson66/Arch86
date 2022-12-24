@@ -69,7 +69,7 @@ const PageData: InstructionPageLayoutProps = {
     intrinsics: [
         "void _mm_empty()",
     ],
-    exceptions: {
+    exceptionsLegacy: {
         real: {
             UD: [
                 Exceptions.Lock,

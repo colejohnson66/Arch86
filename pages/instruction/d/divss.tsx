@@ -151,7 +151,7 @@ public void VDIVSS_EvexRegister(SimdF32 dest, SimdF32 src1, SimdF32 src2, KMask 
         "__m128d _mm_maskz_div_ss(__mmask8 k, __m128d a, __m128d b)",
         "__m128d _mm_maskz_div_round_ss(__mmask8 k, __m128d a, __m128d b, int)",
     ],
-    exceptions: {
+    exceptionsLegacy: {
         simd: {
             XM: [
                 Exceptions.SimdDenormal,

@@ -71,7 +71,7 @@ const PageData: InstructionPageLayoutProps = {
     intrinsics: [
         "void _mm_clflush(const void *ptr)",
     ],
-    exceptions: {
+    exceptionsLegacy: {
         real: {
             UD: Exceptions.Lock,
         },

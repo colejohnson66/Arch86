@@ -121,7 +121,7 @@ public void ENTER_64(U16 imm16, U8 imm8)
     RSP -= imm16;
 }`,
     flags: "none",
-    exceptions: {
+    exceptionsLegacy: {
         real: {
             UD: Exceptions.Lock,
             SS0: <>If the new value of <Register name="SS" /> is outside the <Register name="SS" /> segment&apos; limit.</>,

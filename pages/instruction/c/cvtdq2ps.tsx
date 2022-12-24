@@ -223,7 +223,7 @@ public void VCVTDQ2PS_Evex512Register(SimdF32 dest, SimdI32 src, KMask k) =>
         "__m512 _mm512_maskz_cvtepi32_ps(__mmask16 k, __m512i a)",
         "__m512 _mm512_maskz_cvt_roundepi32_ps(__mmask16 k, __m512i a, const int rounding)",
     ],
-    exceptions: {
+    exceptionsLegacy: {
         simd: {
             XM: [
                 Exceptions.SimdPrecision,

@@ -90,7 +90,7 @@ public void BLSR(ref U64 dest, U64 src)
         "uint32_t _blsr_u32(uint32_t src)",
         "uint64_t _blsr_u64(uint64_t src)",
     ],
-    exceptions: {
+    exceptionsLegacy: {
         simd: "none",
         other: {
             vex: "13",

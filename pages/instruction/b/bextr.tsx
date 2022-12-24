@@ -150,7 +150,7 @@ public void BEXTR(ref U64 dest, U64 src1, U64 src2)
         "uint32_t _bextr_u32(uint32_t src, uint32_t start, uint32_t len)",
         "uint64_t _bextr_u64(uint64_t src, uint32_t start, uint32_t len)",
     ],
-    exceptions: {
+    exceptionsLegacy: {
         simd: "none",
         other: {
             vex: "13",

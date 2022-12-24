@@ -83,7 +83,7 @@ const PageData: InstructionPageLayoutProps = {
         SF: <>Undefined.</>,
         OF: <>Undefined.</>,
     },
-    exceptions2: {
+    exceptions: {
         modes: "all",
         causes: {
             UD: [

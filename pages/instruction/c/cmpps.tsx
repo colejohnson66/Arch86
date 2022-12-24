@@ -450,7 +450,7 @@ public void VCMPPS_Evex512Register(KMask dest, SimdF32 src1, SimdF32 src2, U8 pr
         "__mmask16 _mm512_mask_cmp_ps_mask(__mmask8 k1, __m512d a, __m512d b, const int predicate)",
         "__mmask16 _mm512_mask_cmp_round_ps_mask(__mmask8 k1, __m512d a, __m512d b, const int predicate, const int rounding)",
     ],
-    exceptions: {
+    exceptionsLegacy: {
         simd: {
             XM: [
                 Exceptions.SimdDenormal,

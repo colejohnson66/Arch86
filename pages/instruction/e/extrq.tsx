@@ -94,7 +94,7 @@ public void EXTRQ_Vector(SimdU64 dest, SimdU64 src)
     dest[0] = (dest[0] >> shift) & mask;
 }`,
     flags: "none",
-    exceptions: {
+    exceptionsLegacy: {
         simd: "none",
     },
 };

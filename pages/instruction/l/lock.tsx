@@ -118,7 +118,7 @@ const PageData: InstructionPageLayoutProps = {
     AssertLockThroughThisInstruction();
 }`,
     flags: "none",
-    exceptions: {
+    exceptionsLegacy: {
         real: {
             UD: exceptions,
         },

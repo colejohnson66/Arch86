@@ -100,7 +100,7 @@ public void BLSFILL(ref U64 dest, U64 src)
         // [A-Z1-3]+:?\s+([^ ]+) ([^ ]+) ?\(([^\)]+)\);?
         // "<1> <2>(<3>)",
     ],
-    exceptions: {
+    exceptionsLegacy: {
         simd: "none",
         other: {
             // xop: ???,

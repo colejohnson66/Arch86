@@ -66,7 +66,7 @@ const PageData: InstructionPageLayoutProps = {
     EFLAGS.TS = 0;
 }`,
     flags: "none",
-    exceptions: {
+    exceptionsLegacy: {
         real: {
             UD: Exceptions.InReal,
         },

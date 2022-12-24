@@ -73,7 +73,7 @@ const PageData: InstructionPageLayoutProps = {
         SF: <>Unmodified.</>,
         OF: <>Unmodified.</>,
     },
-    exceptions: {
+    exceptionsLegacy: {
         protected: {
             UD: Exceptions.Lock,
             SS0: Exceptions.SegLimitSS,

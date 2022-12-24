@@ -183,7 +183,7 @@ public void CRC32(ref U64 dest, U64 src)
         "uint32_t _mm_crc32_u32(uint32_t crc, uint32_t data)",
         "uint64_t _mm_crc32_u64(uint64_t crc, uint64_t data)",
     ],
-    exceptions: {
+    exceptionsLegacy: {
         real: {
             UD: Exceptions.Lock,
             SS0: Exceptions.SegLimitSS,

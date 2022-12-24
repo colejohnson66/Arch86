@@ -96,7 +96,7 @@ public void BSWAP(ref U64 arg)
     arg.Bit[56..63] = temp.Bit[0..7];
 }`,
     flags: "none",
-    exceptions: {
+    exceptionsLegacy: {
         real: {
             UD: Exceptions.Lock,
         },

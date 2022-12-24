@@ -77,7 +77,7 @@ const PageData: InstructionPageLayoutProps = {
         SF: <>Cleared.</>,
         OF: <>Cleared.</>,
     },
-    exceptions: {
+    exceptionsLegacy: {
         real: {
             UD: Exceptions.InReal,
         },

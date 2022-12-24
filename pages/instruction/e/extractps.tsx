@@ -106,7 +106,7 @@ public void VEXTRACTPS_Evex(ref U32 dest, SimdU32 src, byte imm8) =>
     intrinsics: [
         "int32_t _mm_extract_ps (__m128 a, const int idx)",
     ],
-    exceptions: {
+    exceptionsLegacy: {
         simd: "none",
         other: {
             vex: "5",

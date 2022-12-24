@@ -67,7 +67,7 @@ const PageData: InstructionPageLayoutProps = {
     intrinsics: [
         "__m64 _mm_cvtpi32_ps(__m128d a, __m64 b)",
     ],
-    exceptions: {
+    exceptionsLegacy: {
         simd: {
             XM: [
                 Exceptions.SimdPrecision,

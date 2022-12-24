@@ -148,10 +148,11 @@ type ExceptionsList = {
     other?: OtherExceptionList;
 }
 
+type ExceptionModeAbbr = "real" | "v8086" | "protected" | "compat" | "long";
 type ExceptionsEntry = [string, React.ReactNode];
 type ExceptionsEntryGroup = Partial<Record<ExceptionAbbr, ExceptionsEntry[]>>;
 type Exceptions = {
-    modes: string[] | "all";
+    modes: ExceptionModeAbbr[] | "all";
     causes: ExceptionsEntryGroup;
     vex?: VexException,
     evex?: EvexException,
@@ -171,8 +172,16 @@ export type InstructionPageLayoutProps = {
     examples?: MaybeArray<string>;
     flags?: Flags | "none";
     intrinsics?: string[] | "autogen";
-    exceptions?: ExceptionsList;
-    exceptions2?: Exceptions;
+    exceptionsLegacy?: ExceptionsList;
+    exceptions?: Exceptions;
+};
+
+const ExceptionModeAbbrMap: Record<ExceptionModeAbbr, React.ReactNode> = {
+    real: <>Real<br />Mode</>,
+    v8086: <>Virtual<br />8086</>,
+    protected: <>Protected</>,
+    compat: <>Compatibility</>,
+    long: <>Long<br />Mode</>,
 };
 
 const ExceptionAbbrMap: Record<ExceptionAbbr, React.ReactNode> = {
@@ -544,71 +553,71 @@ export default function InstructionPageLayout(props: InstructionPageLayoutProps)
                     </>}
 
                 <h2 id="headingExceptions">Exceptions</h2>
-                {props.exceptions?.real &&
+                {props.exceptionsLegacy?.real &&
                     <>
                         <h3 id="headingExceptionsReal">Real-Address Mode</h3>
-                        {FormatNormalExceptionsList(props.exceptions.real)}
+                        {FormatNormalExceptionsList(props.exceptionsLegacy.real)}
                     </>}
-                {props.exceptions?.virtual &&
+                {props.exceptionsLegacy?.virtual &&
                     <>
                         <h3 id="headingExceptionsVirtual">Virtual-8086 Mode</h3>
-                        {FormatNormalExceptionsList(props.exceptions.virtual)}
+                        {FormatNormalExceptionsList(props.exceptionsLegacy.virtual)}
                     </>}
-                {props.exceptions?.protected &&
+                {props.exceptionsLegacy?.protected &&
                     <>
                         <h3 id="headingExceptionsProtected">Protected Mode</h3>
-                        {FormatNormalExceptionsList(props.exceptions.protected)}
+                        {FormatNormalExceptionsList(props.exceptionsLegacy.protected)}
                     </>}
-                {props.exceptions?.compatibility &&
+                {props.exceptionsLegacy?.compatibility &&
                     <>
                         <h3 id="headingExceptionsCompatibility">Compatibility Mode</h3>
-                        {FormatNormalExceptionsList(props.exceptions.compatibility)}
+                        {FormatNormalExceptionsList(props.exceptionsLegacy.compatibility)}
                     </>}
-                {props.exceptions?.long &&
+                {props.exceptionsLegacy?.long &&
                     <>
                         <h3 id="headingExceptionsLong">Long Mode</h3>
-                        {FormatNormalExceptionsList(props.exceptions.long)}
+                        {FormatNormalExceptionsList(props.exceptionsLegacy.long)}
                     </>}
-                {props.exceptions?.fpu &&
+                {props.exceptionsLegacy?.fpu &&
                     <>
                         <h3 id="headingExceptionsFpu">Legacy Floating-Point</h3>
-                        {FormatNormalExceptionsList(props.exceptions.fpu)}
+                        {FormatNormalExceptionsList(props.exceptionsLegacy.fpu)}
                     </>}
-                {props.exceptions?.simd &&
+                {props.exceptionsLegacy?.simd &&
                     <>
                         <h3 id="headingExceptionsSimd">SIMD Floating-Point</h3>
-                        {FormatNormalExceptionsList(props.exceptions.simd)}
+                        {FormatNormalExceptionsList(props.exceptionsLegacy.simd)}
                     </>}
-                {props.exceptions?.other &&
+                {props.exceptionsLegacy?.other &&
                     <>
                         <h3 id="headingExceptionsOther">Other Exceptions</h3>
-                        {FormatOtherExceptionsList(props.exceptions.other)}
+                        {FormatOtherExceptionsList(props.exceptionsLegacy.other)}
                     </>}
-                {props.exceptions2 &&
+                {props.exceptions &&
                     <table className="w-full">
                         <thead>
                             <tr>
                                 <th rowSpan={2}>Exception</th>
-                                <th colSpan={props.exceptions2.modes === "all" ? 5 : props.exceptions2.modes.length}>Mode</th>
+                                <th colSpan={props.exceptions.modes === "all" ? 5 : props.exceptions.modes.length}>Mode</th>
                                 {/* full width causes this column to take up as much space as it can */}
                                 <th rowSpan={2} className="w-full">Cause of Exception</th>
                             </tr>
                             <tr>
-                                {props.exceptions2.modes === "all"
+                                {props.exceptions.modes === "all"
                                     ? <>
-                                        <th>Real</th>
-                                        <th>Virtual-8086</th>
-                                        <th>Protected</th>
-                                        <th>Compatibility</th>
-                                        <th>Long</th>
+                                        <th>{ExceptionModeAbbrMap.real}</th>
+                                        <th>{ExceptionModeAbbrMap.v8086}</th>
+                                        <th>{ExceptionModeAbbrMap.protected}</th>
+                                        <th>{ExceptionModeAbbrMap.compat}</th>
+                                        <th>{ExceptionModeAbbrMap.long}</th>
                                     </>
-                                    : props.exceptions2.modes.map((mode, idx) => (
-                                        <th key={idx}>{mode}</th>
+                                    : props.exceptions.modes.map((mode, idx) => (
+                                        <th key={idx}>{ExceptionModeAbbrMap[mode]}</th>
                                     ))}
                             </tr>
                         </thead>
                         <tbody>
-                            {FormatExceptions(props.exceptions2.causes)}
+                            {FormatExceptions(props.exceptions.causes)}
                         </tbody>
                     </table>}
             </Layout.Content>

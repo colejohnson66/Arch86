@@ -169,7 +169,7 @@ public void BTR(U64 src, U64 idx)
         OF: <>Undefined.</>,
     },
     intrinsics: "autogen",
-    exceptions: {
+    exceptionsLegacy: {
         real: {
             UD: Exceptions.Lock,
             SS0: Exceptions.SegLimitSS,

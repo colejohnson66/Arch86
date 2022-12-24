@@ -372,7 +372,7 @@ public void CMOVG(ref U64 dest, U64 src) =>
     CMOVcc(dest, src, EFLAGS.ZF && EFLAGS.SF == EFLAGS.OF);`,
     flags: "none",
     intrinsics: "autogen",
-    exceptions: {
+    exceptionsLegacy: {
         real: {
             UD: Exceptions.Lock,
             SS0: Exceptions.SegLimitSS,

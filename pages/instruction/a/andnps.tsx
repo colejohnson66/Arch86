@@ -220,7 +220,7 @@ public void VANDNPS_Evex512Register(SimdU32 dest, SimdU32 src1, SimdU32 src2, KM
         "__m512d _mm512_mask_andnot_ps(__m512d s, __mmask8 k, __m512d a, __m512d b)",
         "__m512d _mm512_maskz_andnot_ps(__mmask8 k, __m512d a, __m512d b)",
     ],
-    exceptions: {
+    exceptionsLegacy: {
         simd: "none",
         other: {
             vex: "4",

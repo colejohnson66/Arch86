@@ -112,7 +112,7 @@ const PageData: InstructionPageLayoutProps = {
     intrinsics: [
         "unsigned char _mm_aesencwide128kl_u8(__m128i odata[8], __m128i idata[8], const void* h)",
     ],
-    exceptions: {
+    exceptionsLegacy: {
         real: {
             // TODO is this correct?
             "UD": Exceptions.InReal,

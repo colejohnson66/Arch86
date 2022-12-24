@@ -154,7 +154,7 @@ public void VCVTSD2SS_EvexRegister(SimdF32 dest, SimdF32 src1, SimdF64 src2, KMa
         "__m128 _mm_maskz_cvtsd_ss(__mmask8 k, __m128 a,__m128d b)",
         "__m128 _mm_maskz_cvt_roundsd_ss(__mmask8 k, __m128 a,__m128d b, const int rounding)",
     ],
-    exceptions: {
+    exceptionsLegacy: {
         simd: {
             XM: [
                 Exceptions.SimdDenormal,

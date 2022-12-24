@@ -180,7 +180,7 @@ public void CMPXCHG(ref U64 dest, U64 src)
         OF: <>Set according to the temporary result.</>,
     },
     intrinsics: "autogen",
-    exceptions: {
+    exceptionsLegacy: {
         real: {
             UD: Exceptions.LockNoMem,
             SS0: Exceptions.SegLimitSS,

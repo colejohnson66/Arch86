@@ -224,7 +224,7 @@ public void VDIVPS_Evex512Register(SimdF32 dest, SimdF32 src1, SimdF32 src2, KMa
         "__m512d _mm512_maskz_div_ps(__mmask8 k, __m512d a, __m512d b)",
         "__m512d _mm512_maskz_div_round_ps(__mmask8 k, __m512d a, __m512d b, const int rounding)",
     ],
-    exceptions: {
+    exceptionsLegacy: {
         simd: {
             XM: [
                 Exceptions.SimdDenormal,

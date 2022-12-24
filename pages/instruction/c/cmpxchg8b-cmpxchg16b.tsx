@@ -122,7 +122,7 @@ public void CMPXCHG16B(ref IntPtr addr)
         OF: <>Set according to the temporary result.</>,
     },
     intrinsics: "autogen",
-    exceptions: {
+    exceptionsLegacy: {
         real: {
             SS0: Exceptions.SegLimitSS,
             GP0: Exceptions.SegLimit,

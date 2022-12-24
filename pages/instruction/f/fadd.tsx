@@ -285,7 +285,7 @@ public void FADD(I32 src)
         C2: <>Undefined.</>,
         C3: <>Undefined.</>,
     },
-    exceptions: {
+    exceptionsLegacy: {
         fpu: {
             MF: [
                 Exceptions.FpuDenormal,

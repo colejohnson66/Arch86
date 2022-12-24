@@ -352,7 +352,7 @@ public void ADC(ref U64 dest, U64 src)
         "uint8_t _addcarry_u32(uint8_t c_in, uint32_t src1, uint32_t src2, uint32_t *sum_out)",
         "uint8_t _addcarry_u64(uint8_t c_in, uint64_t src1, uint64_t src2, uint64_t *sum_out)",
     ],
-    exceptions: {
+    exceptionsLegacy: {
         real: {
             UD: Exceptions.LockNoMem,
             SS0: Exceptions.SegLimitSS,

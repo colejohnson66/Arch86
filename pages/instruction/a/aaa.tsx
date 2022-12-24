@@ -94,7 +94,7 @@ aaa           ; AX == 0x202 (22 (decimal) in BCD)`,
         SF: <>Undefined.</>,
         OF: <>Undefined.</>,
     },
-    exceptions2: {
+    exceptions: {
         modes: "all",
         causes: {
             UD: [

@@ -67,7 +67,7 @@ const PageData: InstructionPageLayoutProps = {
     intrinsics: [
         "void _mm_clwb(void const* p)",
     ],
-    exceptions: {
+    exceptionsLegacy: {
         real: {
             UD: Exceptions.Lock,
             SS0: Exceptions.SegLimitSS,

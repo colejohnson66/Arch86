@@ -234,7 +234,7 @@ public void VDPPS_Vex256(SimdF32 dest, SimdF32 src1, SimdF32 src2, byte imm8)
         "",
         "__m256 _mm256_dp_ps(__m256 a, __m256 b, const int mask)",
     ],
-    exceptions: {
+    exceptionsLegacy: {
         simd: {
             XM: [
                 Exceptions.SimdDenormal,

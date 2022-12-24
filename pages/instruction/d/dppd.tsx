@@ -163,7 +163,7 @@ public void VDPPD_Vex128(SimdF64 dest, SimdF64 src1, SimdF64 src2, byte imm8)
     intrinsics: [
         "__m128d _mm_dp_pd(__m128d a, __m128d b, const int mask)",
     ],
-    exceptions: {
+    exceptionsLegacy: {
         simd: {
             XM: [
                 Exceptions.SimdDenormal,

@@ -70,7 +70,7 @@ const PageData: InstructionPageLayoutProps = {
         C2: <>Undefined.</>,
         C3: <>Undefined.</>,
     },
-    exceptions: {
+    exceptionsLegacy: {
         real: {
             UD: Exceptions.Lock,
             NM: Exceptions.EMOrTSSet,

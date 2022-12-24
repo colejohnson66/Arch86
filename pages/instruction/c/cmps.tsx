@@ -172,7 +172,7 @@ public void CMPSQ()
         SF: <>Set according to the temporary result.</>,
         OF: <>Set according to the temporary result.</>,
     },
-    exceptions: {
+    exceptionsLegacy: {
         real: {
             UD: Exceptions.Lock,
             SS0: Exceptions.SegLimitSS,

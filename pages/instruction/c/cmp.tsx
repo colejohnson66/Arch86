@@ -428,7 +428,7 @@ public void ADD(ref U64 src1, U64 src2)
         SF: <>Set according to the temporary result.</>,
         OF: <>Set according to the temporary result.</>,
     },
-    exceptions: {
+    exceptionsLegacy: {
         real: {
             UD: Exceptions.Lock,
             SS0: Exceptions.SegLimitSS,

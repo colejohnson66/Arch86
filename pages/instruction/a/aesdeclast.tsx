@@ -188,7 +188,7 @@ public void VAESDECLAST_Evex512(SimdU128 dest, SimdU128 src1, SimdU128 src2) =>
         "",
         "__m512i _mm512_aesdeclast_epi128(__m512i state, __m512i key)",
     ],
-    exceptions: {
+    exceptionsLegacy: {
         simd: "none",
         other: {
             vex: "4",

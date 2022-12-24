@@ -185,7 +185,7 @@ public void DIV(U64 divisor)
         OF: <>Undefined.</>,
     },
     intrinsics: "autogen",
-    exceptions: {
+    exceptionsLegacy: {
         real: {
             DE: [
                 <>If the source operand (divisor) is <code>0</code>.</>,

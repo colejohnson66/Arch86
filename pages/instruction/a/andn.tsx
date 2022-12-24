@@ -97,7 +97,7 @@ public void ANDN(ref U64 dest, U64 src1, U64 src2)
         OF: <>Cleared.</>,
     },
     intrinsics: "autogen",
-    exceptions: {
+    exceptionsLegacy: {
         simd: "none",
         other: {
             vex: "13",

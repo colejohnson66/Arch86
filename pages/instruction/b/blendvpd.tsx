@@ -127,7 +127,7 @@ public void VBLENDVPD_Vex256(SimdF64 dest, SimdF64 src1, SimdF64 src2, SimdF64 m
         "",
         "__m256 _mm256_blendv_pd(__m256d a, __m256d b, __m256d mask)",
     ],
-    exceptions: {
+    exceptionsLegacy: {
         simd: "none",
         other: {
             vex: "4",

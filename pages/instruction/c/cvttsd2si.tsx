@@ -175,7 +175,7 @@ public void VCVTTSD2SI_Evex(ref I64 dest, SimdF64 src) =>
         "int64_t _mm_cvttsd_si64(__m128d a)",
         "int64_t _mm_cvtt_roundsd_i64(__m128d a, const int sae)",
     ],
-    exceptions: {
+    exceptionsLegacy: {
         simd: {
             XM: [
                 Exceptions.SimdInvalid,

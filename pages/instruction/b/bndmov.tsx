@@ -110,7 +110,7 @@ const PageData: InstructionPageLayoutProps = {
     intrinsics: [
         "void *_bnd_copy_ptr_bounds(const void *dest, const void *src)",
     ],
-    exceptions: {
+    exceptionsLegacy: {
         real: {
             UD: [
                 Exceptions.LockNoMem,

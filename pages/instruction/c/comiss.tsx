@@ -165,7 +165,7 @@ public void VCOMISS_Evex(SimdF32 src1, SimdF32 src2) =>
         "int _mm_comineq_ss(__m128 a, __m128 b)",
         "int _mm_comi_round_ss(__m128 a, __m128 b, int predicate, int sae)",
     ],
-    exceptions: {
+    exceptionsLegacy: {
         simd: {
             XM: [
                 Exceptions.SimdDenormal,

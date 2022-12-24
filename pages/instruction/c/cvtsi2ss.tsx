@@ -214,7 +214,7 @@ public void VCVTSI2SS_EvexRegister(SimdF32 dest, SimdF32 src1, I64 src2)
         "__m128 _mm_cvtsi64_ss(__m128 s, __int64 a)",
         "__m128 _mm_cvt_roundi64_ss(__m128 s, __int64 a, const int rounding)",
     ],
-    exceptions: {
+    exceptionsLegacy: {
         simd: {
             XM: [
                 Exceptions.SimdPrecision,

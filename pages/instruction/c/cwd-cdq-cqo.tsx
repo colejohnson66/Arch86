@@ -99,7 +99,7 @@ public void CQO()
     RDX = RAX.Bit[63] ? 0xFFFFFFFFFFFFFFFF : 0;
 }`,
     flags: "none",
-    exceptions: {
+    exceptionsLegacy: {
         real: {
             UD: Exceptions.Lock,
         },

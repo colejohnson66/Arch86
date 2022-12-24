@@ -152,7 +152,7 @@ public void VADDSS_EvexRegister(SimdF32 dest, SimdF32 src1, SimdF32 src2, KMask 
         "__m128d _mm_maskz_add_ss(__mmask8 k, __m128d a, __m128d b)",
         "__m128d _mm_maskz_add_round_ss(__mmask8 k, __m128d a, __m128d b, const int rounding)",
     ],
-    exceptions: {
+    exceptionsLegacy: {
         simd: {
             XM: [
                 Exceptions.SimdDenormal,

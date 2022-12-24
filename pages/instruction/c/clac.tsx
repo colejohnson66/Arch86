@@ -72,7 +72,7 @@ const PageData: InstructionPageLayoutProps = {
         OF: <>Unmodified.</>,
         AC: <>Cleared.</>,
     },
-    exceptions: {
+    exceptionsLegacy: {
         real: {
             UD: Exceptions.Lock,
         },

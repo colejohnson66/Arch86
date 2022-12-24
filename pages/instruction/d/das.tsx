@@ -90,7 +90,7 @@ das          ; AL == 0x56 with carry set (giving -0x44)`,
         SF: <>Set according to the result.</>,
         OF: <>Undefined.</>,
     },
-    exceptions: {
+    exceptionsLegacy: {
         real: {
             UD: Exceptions.Lock,
         },

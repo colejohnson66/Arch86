@@ -126,7 +126,7 @@ public void VADDSUBPD_Vex256(SimdF64 dest, SimdF64 src1, SimdF64 src2)
         "",
         "__m256d _mm256_addsub_pd(__m256d a, __m256d b)",
     ],
-    exceptions: {
+    exceptionsLegacy: {
         simd: {
             XM: [
                 Exceptions.SimdDenormal,

@@ -97,7 +97,7 @@ public void VAESIMC_Vex128(SimdU128 dest, SimdU128 src)
     intrinsics: [
         "__m128i _mm_aesimc(__m128i)",
     ],
-    exceptions: {
+    exceptionsLegacy: {
         simd: "none",
         other: {
             vex: "4",

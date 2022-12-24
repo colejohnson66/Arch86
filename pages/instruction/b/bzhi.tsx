@@ -112,7 +112,7 @@ public void BZHI(ref U64 dest, U64 src, U64 idx)
         "uint32_t _bzhi_u32(uint32_t src, uint32_t index)",
         "uint64_t _bzhi_u64(uint64_t src, uint64_t index)",
     ],
-    exceptions: {
+    exceptionsLegacy: {
         simd: "none",
         other: {
             vex: "13",

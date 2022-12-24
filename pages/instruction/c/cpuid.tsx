@@ -175,7 +175,7 @@ IsCpuFromAMD:
         "void __cpuid(int cpuInfo[4], int function_id)",
         "void __cpuindex(int cpuInfo[4], int function_id, int subfunction_id)",
     ],
-    exceptions: {
+    exceptionsLegacy: {
         real: {
             "UD": Exceptions.Lock,
         },

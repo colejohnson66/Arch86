@@ -159,7 +159,7 @@ public void DEC(ref U64 arg)
         SF: <>Set according to the result.</>,
         OF: <>Set according to the result.</>,
     },
-    exceptions: {
+    exceptionsLegacy: {
         real: {
             UD: Exceptions.LockNoMem,
             SS0: Exceptions.SegLimitSS,
