@@ -26,9 +26,13 @@ import InstructionTitles from "@data/InstructionTitles";
 
 // convert a link to an instruction (key) to the correct URL
 export const Aliases: Record<string, keyof typeof InstructionTitles> = {
+    bndcu: "bndcu-bndcn",
+    bndcn: "bndcu-bndcn",
+    //
     cbw: "cbw-cwde-cdqe",
     cwde: "cbw-cwde-cdqe",
     cdqe: "cbw-cwde-cdqe",
+    //
     cmova: "cmovcc",
     cmovae: "cmovcc",
     cmovb: "cmovcc",
@@ -58,8 +62,121 @@ export const Aliases: Record<string, keyof typeof InstructionTitles> = {
     cmovpo: "cmovcc",
     cmovs: "cmovcc",
     cmovz: "cmovcc",
+    //
     cmpxchg8b: "cmpxchg8b-cmpxchg16b",
     cmpxchg16b: "cmpxchg8b-cmpxchg16b",
+    //
+    incsspd: "incsspd-incsspq",
+    incsspq: "incsspd-incsspq",
+    //
+    ja: "jcc",
+    jae: "jcc",
+    jb: "jcc",
+    jbe: "jcc",
+    jc: "jcc",
+    je: "jcc",
+    jg: "jcc",
+    jge: "jcc",
+    jl: "jcc",
+    jle: "jcc",
+    jna: "jcc",
+    jnae: "jcc",
+    jnb: "jcc",
+    jnbe: "jcc",
+    jnc: "jcc",
+    jne: "jcc",
+    jng: "jcc",
+    jnge: "jcc",
+    jnl: "jcc",
+    jnle: "jcc",
+    jno: "jcc",
+    jnp: "jcc",
+    jns: "jcc",
+    jnz: "jcc",
+    jp: "jcc",
+    jpe: "jcc",
+    jpo: "jcc",
+    js: "jcc",
+    jz: "jcc",
+    //
+    kaddb: "kaddn",
+    kaddw: "kaddn",
+    kaddd: "kaddn",
+    kaddq: "kaddn",
+    //
+    kandb: "kandn",
+    kandw: "kandn",
+    kandd: "kandn",
+    kandq: "kandn",
+    //
+    kandnb: "kandnn",
+    kandnw: "kandnn",
+    kandnd: "kandnn",
+    kandnq: "kandnn",
+    //
+    kmovb: "kmovn",
+    kmovw: "kmovn",
+    kmovd: "kmovn",
+    kmovq: "kmovn",
+    //
+    knotb: "knotn",
+    knotw: "knotn",
+    knotd: "knotn",
+    knotq: "knotn",
+    //
+    korb: "korn",
+    korw: "korn",
+    kord: "korn",
+    korq: "korn",
+    //
+    kortestb: "kortestn",
+    kortestw: "kortestn",
+    kortestd: "kortestn",
+    kortestq: "kortestn",
+    //
+    kshiftlb: "kshiftln",
+    kshiftlw: "kshiftln",
+    kshiftld: "kshiftln",
+    kshiftlq: "kshiftln",
+    //
+    kshiftrb: "kshiftrn",
+    kshiftrw: "kshiftrn",
+    kshiftrd: "kshiftrn",
+    kshiftrq: "kshiftrn",
+    //
+    ktestb: "ktestn",
+    ktestw: "ktestn",
+    ktestd: "ktestn",
+    ktestq: "ktestn",
+    //
+    kunpckbw: "kunpcknn",
+    kunpckwd: "kunpcknn",
+    kunpckdq: "kunpcknn",
+    //
+    kxnorb: "kxnorn",
+    kxnorw: "kxnorn",
+    kxnord: "kxnorn",
+    kxnorq: "kxnorn",
+    //
+    kxorb: "kxorn",
+    kxorw: "kxorn",
+    kxord: "kxorn",
+    kxorq: "kxorn",
+    //
+    lds: "lds-les-lfs-lgs-lss",
+    les: "lds-les-lfs-lgs-lss",
+    lfs: "lds-les-lfs-lgs-lss",
+    lgs: "lds-les-lfs-lgs-lss",
+    lss: "lds-les-lfs-lgs-lss",
+    //
+    lgdt: "lgdt-lidt-lldt",
+    lidt: "lgdt-lidt-lldt",
+    lldt: "lgdt-lidt-lldt",
+    //
+    loop: "loop-loopcc",
+    loopcc: "loop-loopcc",
+    loope: "loop-loopcc",
+    loopne: "loop-loopcc",
 };
 
 // when simple capitalization isn't enough
@@ -69,6 +186,24 @@ export const TitleCaseMapping: Partial<Record<keyof typeof InstructionTitles, st
     "cmpxchg8b-cmpxchg16b": "CMPXCHG8B/CMPXCHG16B",
     "cmovcc": "CMOVcc",
     "fcmovcc": "FCMOVcc",
+    "incsspd-incsspq": "INCSSPD/INCSSPQ",
+    "jcc": "Jcc",
+    "kaddn": "KADDn",
+    "kandn": "KANDn",
+    "kandnn": "KANDNn",
+    "kmovn": "KMOVn",
+    "knotn": "KNOTn",
+    "korn": "KORn",
+    "kortestn": "KORTESTn",
+    "kshiftln": "KSHIFTLn",
+    "kshiftrn": "KSHIFTRn",
+    "ktestn": "KTESTn",
+    "kunpcknn": "KUNPCKnn",
+    "kxnorn": "KXNORn",
+    "kxorn": "KXORn",
+    "lds-les-lfs-lgs-lss": "LDS/LES/LFS/LGS/LSS",
+    "lgdt-lidt-lldt": "LGDT/LIDT/LLDT",
+    "loop-loopcc": "LOOP/LOOPcc",
     // ...
 };
 
