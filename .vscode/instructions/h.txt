@@ -1,0 +1,10 @@
+haddpd
+vhaddpd
+haddps
+vhaddps
+hlt
+hreset
+hsubpd
+vhsubpd
+hsubps
+vhsubps

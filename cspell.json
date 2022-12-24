@@ -37,6 +37,18 @@
         {
             "name": "instructions-g",
             "path": "./.vscode/instructions/g.txt"
+        },
+        {
+            "name": "instructions-h",
+            "path": "./.vscode/instructions/h.txt"
+        },
+        {
+            "name": "instructions-i",
+            "path": "./.vscode/instructions/i.txt"
+        },
+        {
+            "name": "instructions-j",
+            "path": "./.vscode/instructions/j.txt"
         }
     ],
     "dictionaries": [
@@ -48,7 +60,10 @@
         "instructions-d",
         "instructions-e",
         "instructions-f",
-        "instructions-g"
+        "instructions-g",
+        "instructions-h",
+        "instructions-i",
+        "instructions-j"
     ],
     "ignorePaths": [
         "**/node_modules/**",

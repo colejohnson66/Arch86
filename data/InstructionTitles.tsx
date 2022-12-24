@@ -268,7 +268,25 @@ const InstructionTitles = {
     hsubpd: <>Horizontal Subtract {pdpfp}</>,
     hsubps: <>Horizontal Subtract {pspfp}</>,
 
-    lock: <>Assert <code>LOCK#</code> Pin</>
+    idiv: <>Signed Divide</>,
+    imul: <>Signed Multiply</>,
+    in: <>Input from I/O Port</>,
+    inc: <>Increment by One</>,
+    incsspList: <>Increment Shadow Stack Pointer</>,
+    incsspd: <>Increment 32-bit Shadow Stack Pointer</>,
+    incsspq: <>Increment 64-bit Shadow Stack Pointer</>,
+    ins: <>Input String from I/O Port</>,
+    insertps: <>Insert {sspfp}.</>,
+    int: <>Interrupt</>,
+    invd: <>Invalidate Internal Caches</>,
+    invlpg: <>Invalidate TLB Entries</>,
+    invpcid: <>Invalidate Process-Context Identifier</>,
+    iret: <>Interrupt Return</>,
+
+    jcc: <>Conditional Jump</>,
+    jmp: <>Jump</>,
+
+    lock: <>Assert <code>LOCK#</code> Pin</>,
 };
 
 export default InstructionTitles;
