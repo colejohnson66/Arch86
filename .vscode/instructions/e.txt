@@ -4,6 +4,8 @@ encodekey256
 endbr32
 endbr64
 enter
+enqcmd
+enqcmds
 extractps
 vextractps
 extrq

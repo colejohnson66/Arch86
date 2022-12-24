@@ -48,6 +48,8 @@
   /cvttpd2pi
   /cvttps2dq
   /cvttps2pi
+  /enqcmd
+  /enqcmds
   /help#headingAlternateR8Encoding
   /help#headingExceptionOther
   ...

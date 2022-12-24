@@ -125,6 +125,7 @@ const InstructionTitles = {
     cli: <>Clear Interrupt Enable Flag</>,
     clrssbsy: <>Clear Busy Flag in a Supervisor Shadow Stack Token</>,
     clts: <>Clear Task-Switched Flag in <Register name="CR0" /></>,
+    clui: <>Clear User Interrupt Flag</>,
     clwb: <>Write Back Cache Line</>,
     cmc: <>Complement Carry Flag</>,
     cmovcc: <>Conditional Move</>,
@@ -196,6 +197,8 @@ const InstructionTitles = {
     endbr32: <>Terminate an Indirect Branch in 32 bit Mode</>,
     endbr64: <>Terminate an Indirect Branch in 64 bit Mode</>,
     enter: <>Make Stack Frame for Procedure Parameters</>,
+    enqcmd: <>Enqueue Command</>,
+    enqcmds: <>Enqueue Command Supervisor</>,
     extractps: <>Extract {pspfp}</>,
     extrq: <>Extract Quadword</>,
 
@@ -255,6 +258,15 @@ const InstructionTitles = {
     gf2p8affineqb: <>Galois Field Affine Transformation</>,
     gf2p8affineinvqb: <>Galois Field Affine Transformation Inverse</>,
     gf2p8mulb: <>Galois Field Multiplication</>,
+
+    haddList: <>Horizontal Add (Vector)</>,
+    haddpd: <>Horizontal Add {pdpfp}</>,
+    haddps: <>Horizontal Add {pspfp}</>,
+    hlt: <>Halt</>,
+    hreset: <>History Reset</>,
+    hsubList: <>Horizontal Subtract (Vector)</>,
+    hsubpd: <>Horizontal Subtract {pdpfp}</>,
+    hsubps: <>Horizontal Subtract {pspfp}</>,
 
     lock: <>Assert <code>LOCK#</code> Pin</>
 };

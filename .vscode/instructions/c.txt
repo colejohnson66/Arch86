@@ -12,6 +12,7 @@ clgi
 cli
 clrssbsy
 clts
+clui
 clwb
 cmc
 cmovcc
