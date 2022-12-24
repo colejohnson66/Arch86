@@ -62,8 +62,8 @@ const PageData: InstructionPageLayoutProps = {
     operation:
         `public void ARPL(U16 dest, U16 src)
 {
-    if (dest.Bit[0..1] < src.Bit[0..1])
-        dest.Bit[0..1] = src.Bit[0..1];
+    if (dest.Bit[0..=1] < src.Bit[0..=1])
+        dest.Bit[0..=1] = src.Bit[0..=1];
 }`,
     flags: {
         CF: <>Unmodified.</>,
@@ -73,29 +73,27 @@ const PageData: InstructionPageLayoutProps = {
         SF: <>Unmodified.</>,
         OF: <>Unmodified.</>,
     },
-    exceptionsLegacy: {
-        protected: {
-            UD: Exceptions.Lock,
-            SS0: Exceptions.SegLimitSS,
-            GP0: [
-                Exceptions.NonWritableSegment,
-                Exceptions.NullSelector,
-                Exceptions.SegLimit,
+    exceptions: {
+        modes: ["real", "v8086", "prot/compat"],
+        causes: {
+            UD: [
+                ["xx ", Exceptions.InRealOrVirtual8086],
+                ["  x", Exceptions.Lock],
             ],
-            PF: Exceptions.PF,
-            AC0: Exceptions.AC,
-        },
-        compatibility: {
-            // same as protected
-            UD: Exceptions.Lock,
-            SS0: Exceptions.SegLimitSS,
-            GP0: [
-                Exceptions.NonWritableSegment,
-                Exceptions.NullSelector,
-                Exceptions.SegLimit,
+            SS0: [
+                ["  x", Exceptions.SegLimitSS],
             ],
-            PF: Exceptions.PF,
-            AC0: Exceptions.AC,
+            GP0: [
+                ["  x", Exceptions.NonWritableSegment],
+                ["  x", Exceptions.NullSelector],
+                ["  x", Exceptions.SegLimit],
+            ],
+            PF: [
+                ["  x", Exceptions.PF],
+            ],
+            AC0: [
+                ["  x", Exceptions.AC],
+            ],
         },
     },
 };

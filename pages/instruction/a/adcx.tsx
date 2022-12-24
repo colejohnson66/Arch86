@@ -106,56 +106,28 @@ public void ADCX(ref U64 dest, U64 src)
         "uint8_t _addcarryx_u32(uint8_t c_in, uint32_t src1, uint32_t src2, uint32_t *sum_out)",
         "uint8_t _addcarryx_u64(uint8_t c_in, uint64_t src1, uint64_t src2, uint64_t *sum_out)",
     ],
-    exceptionsLegacy: {
-        real: {
-            UD: Exceptions.LockNoMem,
-            SS0: Exceptions.SegLimitSS,
-            GP0: Exceptions.SegLimit,
-        },
-        virtual: {
-            UD: Exceptions.LockNoMem,
-            SS0: Exceptions.SegLimitSS,
-            GP0: Exceptions.SegLimit,
-            PF: Exceptions.PF,
-            AC0: Exceptions.AC,
-        },
-        protected: {
-            UD: Exceptions.LockNoMem,
-            SS0: Exceptions.SegLimitSS,
-            GP0: [
-                Exceptions.NonWritableSegment,
-                Exceptions.NullSelector,
-                Exceptions.SegLimit,
+    exceptions: {
+        modes: ["real", "v8086", "prot/compat", "long"],
+        causes: {
+            UD: [
+                ["xxxx", Exceptions.Lock],
             ],
-            PF: Exceptions.PF,
-            AC0: Exceptions.AC,
-        },
-        compatibility: {
-            // same as protected
-            UD: Exceptions.LockNoMem,
-            SS0: Exceptions.SegLimitSS,
-            GP0: [
-                Exceptions.NonWritableSegment,
-                Exceptions.NullSelector,
-                Exceptions.SegLimit,
-            ],
-            PF: Exceptions.PF,
-            AC0: Exceptions.AC,
-        },
-        long: {
-            UD: Exceptions.LockNoMem,
             SS0: [
-                Exceptions.NonCanonSS,
-                Exceptions.SegLimitSS,
+                ["xxxx", Exceptions.SegLimitSS],
+                ["   x", Exceptions.NonCanonSS],
             ],
             GP0: [
-                Exceptions.NonCanon,
-                Exceptions.NonWritableSegment,
-                Exceptions.NullSelector,
-                Exceptions.SegLimit,
+                ["xxxx", Exceptions.SegLimit],
+                ["  xx", Exceptions.NonWritableSegment],
+                ["  xx", Exceptions.NullSelector],
+                ["   x", Exceptions.NonCanon],
             ],
-            PF: Exceptions.PF,
-            AC0: Exceptions.AC,
+            PF: [
+                [" xxx", Exceptions.PF],
+            ],
+            AC0: [
+                [" xxx", Exceptions.AC],
+            ],
         },
     },
 };

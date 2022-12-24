@@ -94,14 +94,14 @@ const PageData: InstructionPageLayoutProps = {
         OF: <>Undefined.</>,
     },
     exceptions: {
-        modes: "all",
+        modes: ["real", "v8086", "prot/compat", "long"],
         causes: {
             DE: [
-                ["xxxx ", <>If an immediate value of <code>0</code> is used.</>],
+                ["xxx ", <>If an immediate value of <code>0</code> is used.</>],
             ],
             UD: [
-                ["xxxx ", Exceptions.Lock],
-                ["    x", Exceptions.InLong],
+                ["xxx ", Exceptions.Lock],
+                ["   x", Exceptions.InLong],
             ],
         },
     },

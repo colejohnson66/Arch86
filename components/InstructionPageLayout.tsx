@@ -148,11 +148,11 @@ type ExceptionsList = {
     other?: OtherExceptionList;
 }
 
-type ExceptionModeAbbr = "real" | "v8086" | "protected" | "compat" | "long";
+type ExceptionModeAbbr = "real" | "v8086" | "protected" | "compat" | "prot/compat" | "long";
 type ExceptionsEntry = [string, React.ReactNode];
 type ExceptionsEntryGroup = Partial<Record<ExceptionAbbr, ExceptionsEntry[]>>;
 type Exceptions = {
-    modes: ExceptionModeAbbr[] | "all";
+    modes: ExceptionModeAbbr[];
     causes: ExceptionsEntryGroup;
     vex?: VexException,
     evex?: EvexException,
@@ -181,6 +181,7 @@ const ExceptionModeAbbrMap: Record<ExceptionModeAbbr, React.ReactNode> = {
     v8086: <>Virtual<br />8086</>,
     protected: <>Protected</>,
     compat: <>Compatibility</>,
+    "prot/compat": <>Protected <small>and</small> Compatibility</>,
     long: <>Long<br />Mode</>,
 };
 
@@ -598,22 +599,14 @@ export default function InstructionPageLayout(props: InstructionPageLayoutProps)
                         <thead>
                             <tr>
                                 <th rowSpan={2}>Exception</th>
-                                <th colSpan={props.exceptions.modes === "all" ? 5 : props.exceptions.modes.length}>Mode</th>
+                                <th colSpan={props.exceptions.modes.length}>Mode</th>
                                 {/* full width causes this column to take up as much space as it can */}
                                 <th rowSpan={2} className="w-full">Cause of Exception</th>
                             </tr>
                             <tr>
-                                {props.exceptions.modes === "all"
-                                    ? <>
-                                        <th>{ExceptionModeAbbrMap.real}</th>
-                                        <th>{ExceptionModeAbbrMap.v8086}</th>
-                                        <th>{ExceptionModeAbbrMap.protected}</th>
-                                        <th>{ExceptionModeAbbrMap.compat}</th>
-                                        <th>{ExceptionModeAbbrMap.long}</th>
-                                    </>
-                                    : props.exceptions.modes.map((mode, idx) => (
-                                        <th key={idx}>{ExceptionModeAbbrMap[mode]}</th>
-                                    ))}
+                                {props.exceptions.modes.map((mode, idx) => (
+                                    <th key={idx}>{ExceptionModeAbbrMap[mode]}</th>
+                                ))}
                             </tr>
                         </thead>
                         <tbody>

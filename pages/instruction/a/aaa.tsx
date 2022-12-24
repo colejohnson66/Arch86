@@ -95,11 +95,11 @@ aaa           ; AX == 0x202 (22 (decimal) in BCD)`,
         OF: <>Undefined.</>,
     },
     exceptions: {
-        modes: "all",
+        modes: ["real", "v8086", "prot/compat", "long"],
         causes: {
             UD: [
-                ["xxxx ", Exceptions.Lock],
-                ["    x", Exceptions.InLong],
+                ["xxx ", Exceptions.Lock],
+                ["   x", Exceptions.InLong],
             ],
         },
     },

@@ -36,6 +36,7 @@ const Exceptions = {
     EvexVvvvv: <>If <code>EVEX.vvvvv</code> is not <code>11111b</code>.</>,
     InCompatibility: <>If in Compatibility Mode.</>,
     InReal: <>If in Real Mode.</>,
+    InRealOrVirtual8086: <>If in Real or Virtual-8086 Mode.</>,
     InLong: <>If in Long Mode.</>,
     InProtected: <>If in Protected Mode.</>,
     InVirtual8086: <>If in Virtual-8086 Mode.</>,
