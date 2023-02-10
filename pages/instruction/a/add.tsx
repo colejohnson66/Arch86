@@ -357,13 +357,13 @@ public void ADD(ref U64 dest, U64 src)
             ],
             SS0: [
                 ["xxxx", Exceptions.SegLimitSS],
-                ["    x", Exceptions.NonCanonSS],
+                ["   x", Exceptions.NonCanonSS],
             ],
             GP0: [
                 ["xxxx", Exceptions.SegLimit],
                 ["  xx", Exceptions.NonWritableSegment],
                 ["  xx", Exceptions.NullSelector],
-                ["    x", Exceptions.NonCanon],
+                ["   x", Exceptions.NonCanon],
             ],
             PF: [
                 [" xxx", Exceptions.PF],
