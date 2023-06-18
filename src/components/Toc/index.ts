@@ -1,5 +1,5 @@
 /* =============================================================================
- * File:   layout.tsx
+ * File:   index.ts
  * Author: Cole Tobin
  * =============================================================================
  * Copyright (c) 2023 Cole Tobin
@@ -21,14 +21,10 @@
  * =============================================================================
  */
 
-import JustChildrenProps from "@/types/JustChildrenProps";
-import Navbar from "@/components/Navbar";
+import Entry from "./Entry";
+import Root from "./Root";
 
-export default function Layout(props: JustChildrenProps) {
-    return (
-        <>
-            <Navbar group="instruction" />
-            {props.children}
-        </>
-    );
-}
+export default {
+    Entry,
+    Root,
+};

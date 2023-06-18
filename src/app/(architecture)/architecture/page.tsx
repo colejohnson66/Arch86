@@ -20,14 +20,12 @@
  *   along with Arch86. If not, see <http://www.gnu.org/licenses/>.
  * =============================================================================
  */
-"use client";
 
 import A from "@/components/A";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import DateTime from "@/components/DateTime";
 import Layout from "@/components/Layout";
 import { Metadata } from "next";
-import Toc from "@/components/Toc";
 
 export const metadata: Metadata = {
     alternates: { canonical: "https://arch86.com/architecture" },

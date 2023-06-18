@@ -21,6 +21,7 @@
  * =============================================================================
  */
 "use client";
+// TODO: make this a server component; react-syntax-highlighter prevents that
 
 import MaybeArray, { CoerceToArray } from "@/types/MaybeArray";
 

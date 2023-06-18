@@ -1,5 +1,5 @@
 /* =============================================================================
- * File:   layout.tsx
+ * File:   Entry.tsx
  * Author: Cole Tobin
  * =============================================================================
  * Copyright (c) 2023 Cole Tobin
@@ -20,15 +20,27 @@
  *   along with Arch86. If not, see <http://www.gnu.org/licenses/>.
  * =============================================================================
  */
+"use client";
+// TODO: without "use client", the first level of TOC has `tocIndex` undefined
 
-import JustChildrenProps from "@/types/JustChildrenProps";
-import Navbar from "@/components/Navbar";
+import A from "@/components/A";
+import FixUpChildren from "./FixUpChildren";
 
-export default function Layout(props: JustChildrenProps) {
+export type EntryProps = {
+    href: string;
+    text: string;
+    tocIndex?: number;
+    children?: React.ReactNode;
+};
+
+export default function Entry(props: EntryProps): React.ReactElement {
+    const children = FixUpChildren(props.children);
+
     return (
-        <>
-            <Navbar group="instruction" />
-            {props.children}
-        </>
+        <li>
+            {props.tocIndex}. <A href={props.href}>{props.text}</A>
+            {children?.length !== 0 &&
+                <ul className="list-none ml-0 pl-4">{children}</ul>}
+        </li>
     );
 }

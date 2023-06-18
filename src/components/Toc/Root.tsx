@@ -1,8 +1,8 @@
 /* =============================================================================
- * File:   Toc.tsx
+ * File:   Root.tsx
  * Author: Cole Tobin
  * =============================================================================
- * Copyright (c) 2020-2023 Cole Tobin
+ * Copyright (c) 2023 Cole Tobin
  *
  * This file is part of Arch86.
  *
@@ -20,34 +20,18 @@
  *   along with Arch86. If not, see <http://www.gnu.org/licenses/>.
  * =============================================================================
  */
+"use client";
 
-import A from "@/components/A";
 import { ChevronUpIcon } from "@heroicons/react/24/outline";
 import { Disclosure } from "@headlessui/react";
-import React from "react";
-
-function FixUpChildren(children: React.ReactNode): React.ReactElement[] | undefined {
-    if (!children)
-        return undefined;
-
-    // Set `tocIndex`, but only on valid TOC entries (filter out nulls)
-    let count = 0;
-    return React.Children.map(children, (child) => {
-        if (!React.isValidElement(child))
-            return child; // map nothing to nothing; renderer will remove it
-        count++;
-        return React.cloneElement(child as React.ReactElement<TocEntryProps>, { tocIndex: count.toString() });
-    }) as React.ReactElement[];
-}
+import FixUpChildren from "./FixUpChildren";
 
 type TocRootProps = {
     children: React.ReactNode;
     collapsed?: boolean;
 };
 
-function TocRoot(props: TocRootProps): React.ReactElement {
-    "use client";
-
+export default function Root(props: TocRootProps): React.ReactElement {
     const children = FixUpChildren(props.children);
 
     return (
@@ -70,27 +54,3 @@ function TocRoot(props: TocRootProps): React.ReactElement {
         </div>
     );
 }
-
-type TocEntryProps = {
-    href: string;
-    text: string;
-    tocIndex?: string;
-    children?: React.ReactNode;
-};
-
-function TocEntry(props: TocEntryProps): React.ReactElement {
-    const children = FixUpChildren(props.children);
-
-    return (
-        <li>
-            {props.tocIndex}. <A href={props.href}>{props.text}</A>
-            {children?.length !== 0 &&
-                <ul className="list-none ml-0 pl-4">{children}</ul>}
-        </li>
-    );
-}
-
-export default {
-    Root: TocRoot,
-    Entry: TocEntry,
-};

@@ -20,7 +20,6 @@
  *   along with Arch86. If not, see <http://www.gnu.org/licenses/>.
  * =============================================================================
  */
-"use client";
 
 import A from "@/components/A";
 import BitField from "@/components/BitField";
