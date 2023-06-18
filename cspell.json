@@ -87,7 +87,6 @@
     ],
     "ignoreWords": [
         "coleharrisjohnson",
-        "globby",
         "gmail",
         "hljs",
         "libc",
@@ -129,6 +128,7 @@
         "scrollable",
         "significand",
         "simd",
+        "stringifying",
         "ulong",
         "unaliased",
         "ushort",

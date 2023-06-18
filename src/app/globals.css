@@ -1,0 +1,134 @@
+/* =============================================================================
+ * File:   global.css
+ * Author: Cole Tobin
+ * =============================================================================
+ * Copyright (c) 2021-2023 Cole Tobin
+ *
+ * This file is part of Arch86.
+ *
+ * Arch86 is free software: you can redistribute it and/or modify it under the
+ *   terms of the GNU Affero General Public License as published by the Free
+ *   Software Foundation, either version 3 of the License, or (at your option)
+ *   any later version.
+ *
+ * Arch86 is distributed in the hope that it will be useful, but WITHOUT ANY
+ *   WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ *   FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for
+ *   more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ *   along with Arch86. If not, see <http://www.gnu.org/licenses/>.
+ * =============================================================================
+ */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    html {
+        @apply h-full bg-gray-100;
+    }
+    #__next,
+    body {
+        @apply h-full;
+    }
+
+
+    /* basic setup that people expect a website to look like */
+    a {
+        @apply text-blue-500;
+    }
+    /* a:visited {
+        @apply text-purple-800;
+    } */
+    h1 {
+        @apply text-4xl;
+    }
+    h2 {
+        @apply text-3xl my-2 border-gray-400 border-b-2;
+    }
+    h3 {
+        @apply text-2xl my-2;
+    }
+    h4 {
+        @apply text-xl my-2;
+    }
+    h5 {
+        @apply text-lg my-2;
+    }
+    h6 {
+        @apply text-sm my-2;
+    }
+    ol {
+        @apply list-inside list-decimal;
+    }
+    ul {
+        @apply list-inside list-disc;
+    }
+    code {
+        @apply whitespace-nowrap;
+    }
+    hr {
+        /* border-t already applied by default */
+        @apply border-gray-400;
+    }
+
+
+    /* external links */
+    [rel=external] {
+        background: url(/img/external-ltr.png) center right no-repeat;
+        padding-right: 15px;
+    }
+
+
+    nav .nav-item {
+        @apply text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium
+    }
+    nav .nav-item-active {
+        @apply bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium;
+    }
+
+
+    #breadcrumbs li {
+        @apply inline align-baseline;
+    }
+    #breadcrumbs li+li::before {
+        @apply px-2 text-black;
+        content: "/";
+    }
+
+
+    p {
+        @apply mb-2;
+    }
+
+
+    table th {
+        @apply border border-slate-600 bg-slate-200 p-2;
+    }
+    table td {
+        @apply border border-slate-600 bg-slate-100 p-2;
+    }
+
+    table.instruction-table th,
+    table.instruction-table td {
+        @apply p-1 text-center;
+    }
+    table.instruction-table code {
+        @apply whitespace-pre;
+    }
+
+
+    dd {
+        /* definition list */
+    }
+    dt {
+        /* definition list term */
+        @apply font-bold;
+    }
+    dd {
+        /* definition list definition */
+        @apply pl-8;
+    }
+}

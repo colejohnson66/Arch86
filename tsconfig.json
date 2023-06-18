@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-        "target": "es6",
+        "target": "es5",
         "lib": [
             "dom",
             "dom.iterable",
@@ -8,7 +8,7 @@
         ],
         "allowJs": true,
         "skipLibCheck": true,
-        "strict": false,
+        "strict": true,
         "forceConsistentCasingInFileNames": true,
         "noEmit": true,
         "esModuleInterop": true,
@@ -18,33 +18,24 @@
         "isolatedModules": true,
         "jsx": "preserve",
         "incremental": true,
-        "baseUrl": ".",
+        "plugins": [
+            {
+                "name": "next"
+            }
+        ],
         "paths": {
-            "@components/*": [
-                "components/*",
-            ],
-            "@data/*": [
-                "data/*",
-            ],
-            "@library/*": [
-                "library/*",
-            ],
-            // tsc give TS6137 if this is called `@types`
-            "@myTypes/*": [
-                "types/*",
-            ],
-        },
+            "@/*": [
+                "./src/*"
+            ]
+        }
     },
     "include": [
         "next-env.d.ts",
         "**/*.ts",
         "**/*.tsx",
+        ".next/types/**/*.ts"
     ],
     "exclude": [
-        "80x86-old",
-        "node_modules",
-        "postcss.config.js",
-        "tailwind.config.js",
-        "tsconfig.json",
+        "node_modules"
     ]
 }

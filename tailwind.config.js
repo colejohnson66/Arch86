@@ -1,12 +1,13 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 // eslint-disable-next-line no-undef
 const defaultTheme = require("tailwindcss/defaultTheme");
+/** @type {import("tailwindcss").Config} */
 
 // eslint-disable-next-line no-undef
 module.exports = {
     content: [
-        "./pages/**/*.{ts,tsx}",
-        "./components/**/*.{ts,tsx}",
+        "./src/app/**/*.{ts,tsx}",
+        "./src/components/**/*.{ts,tsx}",
     ],
     darkMode: "media",
     theme: {

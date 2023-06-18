@@ -1,0 +1,35 @@
+/* =============================================================================
+ * File:   Body.tsx
+ * Author: Cole Tobin
+ * =============================================================================
+ * Copyright (c) 2023 Cole Tobin
+ *
+ * This file is part of Arch86.
+ *
+ * Arch86 is free software: you can redistribute it and/or modify it under the
+ *   terms of the GNU Affero General Public License as published by the Free
+ *   Software Foundation, either version 3 of the License, or (at your option)
+ *   any later version.
+ *
+ * Arch86 is distributed in the hope that it will be useful, but WITHOUT ANY
+ *   WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ *   FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for
+ *   more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ *   along with Arch86. If not, see <http://www.gnu.org/licenses/>.
+ * =============================================================================
+ */
+
+import JustChildrenProps from "@/types/JustChildrenProps";
+import React from "react";
+
+export default function Body(props: JustChildrenProps): React.ReactElement {
+    return (
+        <main className="flex-1">
+            <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
+                {props.children}
+            </div>
+        </main>
+    );
+}

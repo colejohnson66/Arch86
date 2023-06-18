@@ -2,7 +2,7 @@
  * File:   Prebuild.mts
  * Author: Cole Tobin
  * =============================================================================
- * Copyright (c) 2022 Cole Tobin
+ * Copyright (c) 2022-2023 Cole Tobin
  *
  * This file is part of Arch86.
  *
@@ -26,28 +26,42 @@ import fs from "fs";
 import path from "path";
 
 console.log("[SCRIPTS] Generating PageList.ts...");
-console.log("[SCRIPTS] Generating sitemap.xml...")
+console.log("[SCRIPTS] Generating sitemap.xml...");
 
 const list: string[] = [];
-const pagesDir = path.join(process.cwd(), "pages");
-dir.files(pagesDir, { sync: true }).forEach((entry) => {
-    // cleanup directory separator for Windows
+const pagesDir = path.join(process.cwd(), "src", "app");
+dir.files(pagesDir, { sync: true }).forEach(entry => {
+    // cleanup directory separator for Windows; replaceAll doesn't exist at Vercel
     entry = entry.replace(/\\/g, "/");
 
-    if (!entry.endsWith(".tsx"))
-        return;
+    if (!entry.endsWith(".tsx")) return;
 
-    // get just the URL part
+    // get just the URL part plus extension
     entry = entry.substring(pagesDir.length);
-    entry = entry.substring(0, entry.length - ".tsx".length)
 
-    // filter out
-    if (entry === "/_app" || entry === "/404")
+    // filter out non-page files
+    if (entry === "/favicon.ico" ||
+        entry === "/globals.css" ||
+        entry === "/sitemap.xml" ||
+        // (see <https://nextjs.org/docs/app/building-your-application/routing#file-conventions>)
+        entry.endsWith("/error.tsx") ||
+        entry.endsWith("/layout.tsx") ||
+        entry.endsWith("/route.tsx") ||
+        entry.endsWith("/template.tsx") ||
+        entry === "/loading.tsx" ||
+        entry === "/not-found.tsx" ||
+        entry === "/default.tsx")
         return;
+
+    // remove route groups (forward slash, open paren, text, close paren)
+    entry = entry.replace(/\/\([a-z]+\)/g, "");
+
+    // remove extension
+    entry = entry.substring(0, entry.length - ".tsx".length);
 
     // cleanup indexes
-    if (entry.endsWith("index")) {
-        entry = entry.substring(0, entry.length - "/index".length);
+    if (entry.endsWith("page")) {
+        entry = entry.substring(0, entry.length - "/page".length);
         if (entry === "")
             entry = "/"; // webroot fix
     }
@@ -62,25 +76,29 @@ const PageListLines = [
     "",
     "const List = [",
 ];
-PageListLines.push(...list.map((entry) => `    "${entry}",`));
+PageListLines.push(...list.map(entry => `    "${entry}",`));
 PageListLines.push(
     "] as const;",
     "",
+
+    "// this turns a const array into a string enum",
     "export type PageListType = typeof List[number];",
     "",
+    "// this \"untypes\" the array into a generic string one",
     "const PageList: readonly string[] = List;",
     "export default PageList;",
-    "");
-fs.writeFileSync("data/PageList.ts", PageListLines.join("\n"));
+    ""
+);
+fs.writeFileSync("src/data/PageList.ts", PageListLines.join("\n"));
 
 const SiteMapLines = [
-    "<?xml version=\"1.0\" encoding=\"UTF-8\"?>",
-    "<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">",
+    '<?xml version="1.0" encoding="UTF-8"?>',
+    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
 ];
-SiteMapLines.push(...list.map((entry) => `    <url><loc>https://arch86.com${entry}</loc></url>`));
 SiteMapLines.push(
-    "</urlset>",
-    "");
-fs.writeFileSync("public/sitemap.xml", SiteMapLines.join("\n"));
+    ...list.map(entry => `    <url><loc>https://arch86.com${entry}</loc></url>`)
+);
+SiteMapLines.push("</urlset>", "");
+fs.writeFileSync("src/app/sitemap.xml", SiteMapLines.join("\n"));
 
 console.log("          Done.");

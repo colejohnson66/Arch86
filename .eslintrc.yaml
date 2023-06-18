@@ -14,7 +14,7 @@ parser: "@typescript-eslint/parser"
 parserOptions:
   ecmaFeatures:
     jsx: true
-  ecmaVersion: 12
+  ecmaVersion: latest
   sourceType: module
 plugins:
   - react
@@ -29,12 +29,12 @@ ignorePatterns:
   - /public/**
   - /scripts/**
 rules:
-  array-bracket-spacing: error
-  arrow-parens: error
-  block-spacing: error
-  brace-style: error
+  array-bracket-spacing: warn
+  arrow-parens: "off"
+  block-spacing: warn
+  brace-style: warn
   comma-dangle:
-    - error
+    - warn
     - arrays: always-multiline
       objects: always-multiline
       imports: never
@@ -42,71 +42,69 @@ rules:
       functions: never
   comma-spacing: error
   curly:
-    - error
+    - warn
     - multi-or-nest
-  eol-last: error
+  eol-last: warn
   eqeqeq: error
-  func-call-spacing: error
+  func-call-spacing: warn
   generator-star-spacing:
-    - error
+    - warn
     - after
   id-match:
-    - error
+    - warn
     - ^[A-Za-z_][A-Za-z0-9]*$
   implicit-arrow-linebreak: error
   indent:
-    - error
+    - warn
     - 4
-  jsx-quotes: error
+  jsx-quotes: warn
   key-spacing:
-    - error
+    - warn
     - beforeColon: false
       afterColon: true
       mode: strict
-  keyword-spacing: error
-  no-confusing-arrow: error
+  keyword-spacing: warn
   no-eval: error
-  no-floating-decimal: error
+  no-floating-decimal: warn
   no-multi-assign: error
   no-multi-spaces: error
   no-multi-str: error
   no-octal-escape: error
   no-proto: error
   no-sequences: error
-  no-tabs: error
+  no-tabs: warn
   no-template-curly-in-string: error
-  no-trailing-spaces: error
+  no-trailing-spaces: warn
   no-unneeded-ternary: error
-  no-unreachable-loop: error
+  no-unreachable-loop: warn
   no-use-before-define: "off"
-  no-useless-return: error
+  no-useless-return: warn
   no-var: error
   no-whitespace-before-property: error
   nonblock-statement-body-position:
-    - error
+    - warn
     - below
-  object-property-newline: error
-  one-var-declaration-per-line: error
-  operator-assignment: error
+  object-property-newline: warn
+  one-var-declaration-per-line: warn
   padded-blocks:
     - error
     - never
-  prefer-arrow-callback: error
-  prefer-const: error
-  prefer-exponentiation-operator: error
-  prefer-template: error
+  prefer-arrow-callback: warn
+  prefer-const: warn
+  prefer-exponentiation-operator: warn
+  prefer-template: warn
   quotes: error
-  rest-spread-spacing: error
-  semi: error
-  semi-spacing: error
-  sort-imports: error
-  space-in-parens: error
-  space-infix-ops: error
-  spaced-comment: error
-  switch-colon-spacing: error
-  symbol-description: error
-  template-curly-spacing: error
-  template-tag-spacing: error
+  rest-spread-spacing: warn
+  semi: warn
+  semi-spacing: warn
+  sort-imports: warn
+  space-in-parens: warn
+  space-infix-ops: warn
+  spaced-comment: warn
+  switch-colon-spacing: warn
+  symbol-description: warn
+  template-curly-spacing: warn
+  template-tag-spacing: warn
   unicode-bom: error
   yoda: error
   "@next/next/no-img-element": "off"
