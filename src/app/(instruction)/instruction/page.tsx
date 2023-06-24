@@ -61,14 +61,6 @@ export default function Page(): React.ReactElement {
                     </Toc.Entry>
                 </Toc.Root>
                 <p>
-                    This is the Arch86 website;
-                    A website for all things x86 related.
-                </p>
-                <p>
-                    This website is designed to be a digital reference version of the x86 architecture family.
-                    This includes everything from the venerable <A href="/architecture/8086">8086</A> to the Intel Core and AMD Ryzen families of today.
-                </p>
-                <p>
                     x86 is home to a few hundred instructions with other 3,600 different encodings.
                     This page lists all of them.
                 </p>
