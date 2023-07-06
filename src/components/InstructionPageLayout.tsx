@@ -224,11 +224,13 @@ function FormatCpuidListBreaks(list: string[]): React.ReactNode {
     if (list.length === 1)
         return <code>{list[0]}</code>;
 
-    const ret: React.ReactNode[] = list.map((feature, idx) => {
-        if (idx === list.length - 1)
-            return <code key={idx}>{feature}</code>;
-        return <React.Fragment key={idx}><code>{feature}</code><br /></React.Fragment>;
+    const ret: React.ReactElement[] = [];
+    list.forEach((feature, idx) => {
+        ret.push(<code key={idx * 2}>{feature}</code>);
+        if (idx !== list.length - 1)
+            ret.push(<br key={idx * 2 + 1} />);
     });
+
     return <>{ret}</>;
 }
 
