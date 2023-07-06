@@ -63,7 +63,7 @@ const PageData: InstructionPageLayoutProps = {
     operation:
         `public void CLTS()
 {
-    EFLAGS.TS = 0;
+    CR0.TS = 0;
 }`,
     flags: "none",
     exceptionsLegacy: {
