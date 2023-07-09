@@ -214,27 +214,37 @@ type InstructionProps = {
      * For example, to link to `Jcc`, `"jcc"` would be put here.
      */
     name: string;
+
     /**
      * Suppress the creation of a link.
      *
      * Used if an instruction is named multiple times in the same region of text
      *   (generally the same paragraph).
+     *
+     * @default false
      */
     noLink?: boolean;
+
     /**
      * Suppress the display of a title.
      *
      * Used if an instruction is named multiple times in the same region of text
      *   (generally the same paragraph).
+     *
+     * @default false
      */
     noTitle?: boolean;
+
     /**
      * Use a hyphen instead of parenthesis for the instruction title.
      *
      * By default, the instruction will be formatted as: `{name} ({title})`.
      * This changes that to `{name} - {title}`.
+     *
+     * @default false
      */
     useHyphen?: boolean;
+
     /**
      * Use the aliased version for title case mapping.
      *
@@ -242,8 +252,17 @@ type InstructionProps = {
      * This overrides that.
      *
      * This is designed for use on `/instruction`.
+     *
+     * @default false
      */
     useAliasForTitleCaseMapping?: boolean;
+
+    /**
+     * Prefetch the target instruction's page.
+     *
+     * @default true
+     */
+    prefetch?: boolean;
 }
 
 /**
@@ -291,6 +310,6 @@ export default function Instruction(props: InstructionProps): React.ReactElement
     // instruction URLs are organized by the first letter
     const href = `/instruction/${aliasedName}`;
     if (props.noTitle)
-        return <A href={href}><code>{uppercased}</code></A>;
-    return <A href={href}><code>{uppercased}</code>{title}</A>;
+        return <A href={href} prefetch={props.prefetch}><code>{uppercased}</code></A>;
+    return <A href={href} prefetch={props.prefetch}><code>{uppercased}</code>{title}</A>;
 }

@@ -27,11 +27,11 @@ import Link from "next/link";
 import PageList from "@/data/PageList";
 import React from "react";
 
-// TODO: next uses 'url.UrlObject | string' for 'href'; is that needed here?
 type AProps = {
     href: string;
     className?: MaybeArray<string>;
     children: React.ReactNode;
+    prefetch?: boolean;
 };
 
 export default function A(props: AProps): React.ReactElement {
@@ -40,7 +40,7 @@ export default function A(props: AProps): React.ReactElement {
     // local link?
     if (props.href[0] === "#") {
         return (
-            <Link href={props.href} className={classes.join(" ")}>
+            <Link href={props.href} className={classes.join(" ")} prefetch={props.prefetch}>
                 {props.children}
             </Link>
         );
@@ -51,7 +51,7 @@ export default function A(props: AProps): React.ReactElement {
         if (!PageList.includes(props.href.split("#")[0]))
             classes.push("text-red-500");
         return (
-            <Link href={props.href} className={classes.join(" ")}>
+            <Link href={props.href} className={classes.join(" ")} prefetch={props.prefetch}>
                 {props.children}
             </Link>
         );

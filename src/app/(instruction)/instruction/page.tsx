@@ -34,7 +34,7 @@ import Toc from "@/components/Toc";
 function InstructionArrayEntry(title: keyof typeof InstructionTitles, list: string[]): React.ReactElement {
     const fragments = list.map((item, idx) => (
         <React.Fragment key={idx}>
-            <Instruction name={item} noTitle />
+            <Instruction name={item} noTitle prefetch={false} />
             {idx !== list.length - 1 && ", "}
         </React.Fragment>
     ));
@@ -76,7 +76,7 @@ export default function Page(): React.ReactElement {
                     {InstructionList.prefixes.map((entry) => (
                         Array.isArray(entry)
                             ? <li key={entry[0]}>{InstructionArrayEntry(entry[0], entry.slice(1))}</li>
-                            : <li key={entry}><Instruction name={entry} useHyphen useAliasForTitleCaseMapping /></li>
+                            : <li key={entry}><Instruction name={entry} useHyphen useAliasForTitleCaseMapping prefetch={false} /></li>
                     ))}
                 </ul>
                 {Object.entries(mnemonicLetters).map((outer) => (
@@ -86,7 +86,7 @@ export default function Page(): React.ReactElement {
                             {outer[1].map((inner) => (
                                 Array.isArray(inner)
                                     ? <li key={inner[0]}>{InstructionArrayEntry(inner[0], inner.slice(1))}</li>
-                                    : <li key={inner}><Instruction name={inner} useHyphen useAliasForTitleCaseMapping /></li>
+                                    : <li key={inner}><Instruction name={inner} useHyphen useAliasForTitleCaseMapping prefetch={false} /></li>
                             ))}
                         </ul>
                     </React.Fragment>))}
