@@ -36,7 +36,7 @@
         "eslint-plugin-react": "^7.32.2",
         "next": "^13.4.8",
         "node-dir": "^0.1.17",
-        "postcss": "^8.4.25",
+        "postcss": "^8.4.31",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
         "react-syntax-highlighter": "^15.5.0",
