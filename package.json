@@ -16,7 +16,7 @@
         "build": "next build",
         "dev": "next dev",
         "lint": "next lint",
-        "prebuild": "ts-node-esm ./scripts/Prebuild.mts",
+        "prebuild": "node --loader ts-node/esm ./scripts/Prebuild.mts",
         "start": "next start",
         "type-check": "tsc"
     },
