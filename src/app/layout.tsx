@@ -23,9 +23,10 @@
 
 import "./globals.css";
 
+import { Metadata, Viewport } from "next";
+
 import { Inter } from "next/font/google";
 import JustChildrenProps from "@/types/JustChildrenProps";
-import { Metadata } from "next";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -46,10 +47,11 @@ export const metadata: Metadata = {
         default: "Arch86",
         template: "%s | Arch86",
     },
-    viewport: {
-        width: "device-width",
-        initialScale: 1,
-    },
+};
+
+export const viewport: Viewport = {
+    width: "device-width",
+    initialScale: 1,
 };
 
 export default function Layout(props: JustChildrenProps): React.ReactElement {
